@@ -1,0 +1,10 @@
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\bin\Debug\Flexion.exe.config
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\bin\Debug\Flexion.exe
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\bin\Debug\Flexion.pdb
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.csproj.AssemblyReference.cache
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.Form1.resources
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.Properties.Resources.resources
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.csproj.GenerateResource.cache
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.csproj.CoreCompileInputs.cache
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.exe
+\\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.pdb
