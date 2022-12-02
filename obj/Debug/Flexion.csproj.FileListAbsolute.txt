@@ -8,3 +8,13 @@
 \\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.csproj.CoreCompileInputs.cache
 \\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.exe
 \\s2.rpn.ch\Home\CPNE\Eleves-TI\GouvernonSt\Git\flexion-tib\obj\Debug\Flexion.pdb
+M:\Git\flexion-tib\bin\Debug\Flexion.exe.config
+M:\Git\flexion-tib\bin\Debug\Flexion.exe
+M:\Git\flexion-tib\bin\Debug\Flexion.pdb
+M:\Git\flexion-tib\obj\Debug\Flexion.csproj.AssemblyReference.cache
+M:\Git\flexion-tib\obj\Debug\Flexion.Form1.resources
+M:\Git\flexion-tib\obj\Debug\Flexion.Properties.Resources.resources
+M:\Git\flexion-tib\obj\Debug\Flexion.csproj.GenerateResource.cache
+M:\Git\flexion-tib\obj\Debug\Flexion.csproj.CoreCompileInputs.cache
+M:\Git\flexion-tib\obj\Debug\Flexion.exe
+M:\Git\flexion-tib\obj\Debug\Flexion.pdb
