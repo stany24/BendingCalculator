@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MathNet.Numerics.Integration;
+using MathNet.Numerics.Integration; //pour les intégrales
 
 namespace Flexion
 {
@@ -30,6 +30,8 @@ namespace Flexion
             ListCouches.Add(new Couche(lbxMatiere.Items[3] as Matiere, 55, 4.5));
             ListCouches.Add(new Couche(lbxMatiere.Items[0] as Matiere, 56, 4.6));
             foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
+            Couche test = new Couche(lbxMatiere.Items[1] as Matiere, 53, 4.3);
+            lblTest.Text = Convert.ToString(test.EstimateVolumeFromX(1.5, 0.1, 1.5, 0.012, 0.006, 0.75,0.00001));
         }
 
         private void UpdateListBox()

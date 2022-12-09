@@ -18,3 +18,8 @@ M:\Git\flexion-tib\obj\Debug\Flexion.csproj.GenerateResource.cache
 M:\Git\flexion-tib\obj\Debug\Flexion.csproj.CoreCompileInputs.cache
 M:\Git\flexion-tib\obj\Debug\Flexion.exe
 M:\Git\flexion-tib\obj\Debug\Flexion.pdb
+M:\Git\flexion-tib\bin\Debug\MathNet.Numerics.dll
+M:\Git\flexion-tib\bin\Debug\System.ValueTuple.dll
+M:\Git\flexion-tib\bin\Debug\MathNet.Numerics.xml
+M:\Git\flexion-tib\bin\Debug\System.ValueTuple.xml
+M:\Git\flexion-tib\obj\Debug\Flexion.csproj.CopyComplete

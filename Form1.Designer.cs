@@ -60,6 +60,7 @@ namespace Flexion
             this.nudHauterSide = new System.Windows.Forms.NumericUpDown();
             this.lblLargeurSide = new System.Windows.Forms.Label();
             this.nudLargeurCoucheSide = new System.Windows.Forms.NumericUpDown();
+            this.lblTest = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
@@ -364,11 +365,21 @@ namespace Flexion
             this.nudLargeurCoucheSide.Size = new System.Drawing.Size(131, 20);
             this.nudLargeurCoucheSide.TabIndex = 18;
             // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.Location = new System.Drawing.Point(90, 143);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(38, 13);
+            this.lblTest.TabIndex = 23;
+            this.lblTest.Text = "lblTest";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 395);
+            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.lbxShowCouchePiece);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbxMatiere);
@@ -432,6 +443,7 @@ namespace Flexion
         private System.Windows.Forms.NumericUpDown nudHauterSide;
         private System.Windows.Forms.Label lblLargeurSide;
         private System.Windows.Forms.NumericUpDown nudLargeurCoucheSide;
+        private System.Windows.Forms.Label lblTest;
     }
 }
 
