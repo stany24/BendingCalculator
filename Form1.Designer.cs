@@ -31,41 +31,46 @@ namespace Flexion
         {
             this.lblForce = new System.Windows.Forms.Label();
             this.lblDeformation = new System.Windows.Forms.Label();
-            this.tbxFlexion = new System.Windows.Forms.TextBox();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
             this.nudDeformation = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
             this.lblLongueur = new System.Windows.Forms.Label();
-            this.nudHauteurCouche = new System.Windows.Forms.NumericUpDown();
-            this.lblHauteur = new System.Windows.Forms.Label();
-            this.nudLargeurCouche = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.nudHauteurCenter = new System.Windows.Forms.NumericUpDown();
+            this.lblHauteurCenter = new System.Windows.Forms.Label();
+            this.nudLargeurCoucheCenter = new System.Windows.Forms.NumericUpDown();
+            this.lblLargeurCenter = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbxCouche = new System.Windows.Forms.ListBox();
-            this.btnAjouterCouche = new System.Windows.Forms.Button();
+            this.btnCreerCouche = new System.Windows.Forms.Button();
             this.gbxMatiere = new System.Windows.Forms.GroupBox();
             this.tbxNomMatiere = new System.Windows.Forms.TextBox();
             this.lblNomMatiere = new System.Windows.Forms.Label();
             this.nudE = new System.Windows.Forms.NumericUpDown();
             this.lbxMatiere = new System.Windows.Forms.ListBox();
             this.lblE = new System.Windows.Forms.Label();
-            this.btnAjouterMatiere = new System.Windows.Forms.Button();
+            this.btnCreerMatiere = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tbxNomPiece = new System.Windows.Forms.TextBox();
+            this.lblNomPiece = new System.Windows.Forms.Label();
+            this.btnCreerPiece = new System.Windows.Forms.Button();
+            this.lbxPiece = new System.Windows.Forms.ListBox();
+            this.btnAjouterCouche = new System.Windows.Forms.Button();
+            this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
+            this.lblHauteurSide = new System.Windows.Forms.Label();
+            this.nudHauterSide = new System.Windows.Forms.NumericUpDown();
+            this.lblLargeurSide = new System.Windows.Forms.Label();
+            this.nudLargeurCoucheSide = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCouche)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCouche)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbxMatiere.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).BeginInit();
             this.SuspendLayout();
             // 
             // lblForce
@@ -80,19 +85,11 @@ namespace Flexion
             // lblDeformation
             // 
             this.lblDeformation.AutoSize = true;
-            this.lblDeformation.Location = new System.Drawing.Point(13, 72);
+            this.lblDeformation.Location = new System.Drawing.Point(12, 75);
             this.lblDeformation.Name = "lblDeformation";
             this.lblDeformation.Size = new System.Drawing.Size(87, 13);
             this.lblDeformation.TabIndex = 2;
             this.lblDeformation.Text = "Déformation (cm)";
-            // 
-            // tbxFlexion
-            // 
-            this.tbxFlexion.Location = new System.Drawing.Point(49, 362);
-            this.tbxFlexion.Name = "tbxFlexion";
-            this.tbxFlexion.ReadOnly = true;
-            this.tbxFlexion.Size = new System.Drawing.Size(155, 20);
-            this.tbxFlexion.TabIndex = 4;
             // 
             // nudForce
             // 
@@ -105,95 +102,75 @@ namespace Flexion
             // nudDeformation
             // 
             this.nudDeformation.DecimalPlaces = 1;
-            this.nudDeformation.Location = new System.Drawing.Point(126, 70);
+            this.nudDeformation.Location = new System.Drawing.Point(125, 73);
             this.nudDeformation.Name = "nudDeformation";
             this.nudDeformation.Size = new System.Drawing.Size(120, 20);
             this.nudDeformation.TabIndex = 6;
             // 
-            // numericUpDown1
+            // nudLongueurPiece
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Location = new System.Drawing.Point(126, 103);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 8;
+            this.nudLongueurPiece.DecimalPlaces = 1;
+            this.nudLongueurPiece.Location = new System.Drawing.Point(101, 30);
+            this.nudLongueurPiece.Name = "nudLongueurPiece";
+            this.nudLongueurPiece.Size = new System.Drawing.Size(120, 20);
+            this.nudLongueurPiece.TabIndex = 8;
             // 
             // lblLongueur
             // 
             this.lblLongueur.AutoSize = true;
-            this.lblLongueur.Location = new System.Drawing.Point(13, 105);
+            this.lblLongueur.Location = new System.Drawing.Point(6, 32);
             this.lblLongueur.Name = "lblLongueur";
             this.lblLongueur.Size = new System.Drawing.Size(75, 13);
             this.lblLongueur.TabIndex = 7;
             this.lblLongueur.Text = "Longueur (cm)";
             // 
-            // nudHauteurCouche
+            // nudHauteurCenter
             // 
-            this.nudHauteurCouche.DecimalPlaces = 1;
-            this.nudHauteurCouche.Location = new System.Drawing.Point(90, 33);
-            this.nudHauteurCouche.Name = "nudHauteurCouche";
-            this.nudHauteurCouche.Size = new System.Drawing.Size(131, 20);
-            this.nudHauteurCouche.TabIndex = 10;
+            this.nudHauteurCenter.DecimalPlaces = 1;
+            this.nudHauteurCenter.Location = new System.Drawing.Point(92, 79);
+            this.nudHauteurCenter.Name = "nudHauteurCenter";
+            this.nudHauteurCenter.Size = new System.Drawing.Size(131, 20);
+            this.nudHauteurCenter.TabIndex = 10;
             // 
-            // lblHauteur
+            // lblHauteurCenter
             // 
-            this.lblHauteur.AutoSize = true;
-            this.lblHauteur.Location = new System.Drawing.Point(6, 35);
-            this.lblHauteur.Name = "lblHauteur";
-            this.lblHauteur.Size = new System.Drawing.Size(68, 13);
-            this.lblHauteur.TabIndex = 9;
-            this.lblHauteur.Text = "Hauteur (cm)";
+            this.lblHauteurCenter.AutoSize = true;
+            this.lblHauteurCenter.Location = new System.Drawing.Point(8, 81);
+            this.lblHauteurCenter.Name = "lblHauteurCenter";
+            this.lblHauteurCenter.Size = new System.Drawing.Size(78, 13);
+            this.lblHauteurCenter.TabIndex = 9;
+            this.lblHauteurCenter.Text = "Hauteur centre";
             // 
-            // nudLargeurCouche
+            // nudLargeurCoucheCenter
             // 
-            this.nudLargeurCouche.DecimalPlaces = 1;
-            this.nudLargeurCouche.Location = new System.Drawing.Point(90, 63);
-            this.nudLargeurCouche.Name = "nudLargeurCouche";
-            this.nudLargeurCouche.Size = new System.Drawing.Size(131, 20);
-            this.nudLargeurCouche.TabIndex = 12;
+            this.nudLargeurCoucheCenter.DecimalPlaces = 1;
+            this.nudLargeurCoucheCenter.Location = new System.Drawing.Point(92, 26);
+            this.nudLargeurCoucheCenter.Name = "nudLargeurCoucheCenter";
+            this.nudLargeurCoucheCenter.Size = new System.Drawing.Size(131, 20);
+            this.nudLargeurCoucheCenter.TabIndex = 12;
             // 
-            // label3
+            // lblLargeurCenter
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Largeur (cm)";
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(125, 193);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown4.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 195);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Nombre de matériaux";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(49, 237);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 15;
+            this.lblLargeurCenter.AutoSize = true;
+            this.lblLargeurCenter.Location = new System.Drawing.Point(8, 28);
+            this.lblLargeurCenter.Name = "lblLargeurCenter";
+            this.lblLargeurCenter.Size = new System.Drawing.Size(76, 13);
+            this.lblLargeurCenter.TabIndex = 11;
+            this.lblLargeurCenter.Text = "Largeur centre";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblLargeurSide);
+            this.groupBox1.Controls.Add(this.nudLargeurCoucheSide);
+            this.groupBox1.Controls.Add(this.lblHauteurSide);
+            this.groupBox1.Controls.Add(this.nudHauterSide);
             this.groupBox1.Controls.Add(this.lbxCouche);
-            this.groupBox1.Controls.Add(this.btnAjouterCouche);
-            this.groupBox1.Controls.Add(this.lblHauteur);
-            this.groupBox1.Controls.Add(this.nudHauteurCouche);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.nudLargeurCouche);
-            this.groupBox1.Location = new System.Drawing.Point(641, 21);
+            this.groupBox1.Controls.Add(this.btnCreerCouche);
+            this.groupBox1.Controls.Add(this.lblHauteurCenter);
+            this.groupBox1.Controls.Add(this.nudHauteurCenter);
+            this.groupBox1.Controls.Add(this.lblLargeurCenter);
+            this.groupBox1.Controls.Add(this.nudLargeurCoucheCenter);
+            this.groupBox1.Location = new System.Drawing.Point(484, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(227, 375);
             this.groupBox1.TabIndex = 16;
@@ -203,20 +180,20 @@ namespace Flexion
             // lbxCouche
             // 
             this.lbxCouche.FormattingEnabled = true;
-            this.lbxCouche.Location = new System.Drawing.Point(9, 172);
+            this.lbxCouche.Location = new System.Drawing.Point(9, 196);
             this.lbxCouche.Name = "lbxCouche";
-            this.lbxCouche.Size = new System.Drawing.Size(176, 173);
+            this.lbxCouche.Size = new System.Drawing.Size(212, 173);
             this.lbxCouche.TabIndex = 14;
             // 
-            // btnAjouterCouche
+            // btnCreerCouche
             // 
-            this.btnAjouterCouche.Location = new System.Drawing.Point(81, 123);
-            this.btnAjouterCouche.Name = "btnAjouterCouche";
-            this.btnAjouterCouche.Size = new System.Drawing.Size(75, 23);
-            this.btnAjouterCouche.TabIndex = 13;
-            this.btnAjouterCouche.Text = "Ajouter couche";
-            this.btnAjouterCouche.UseVisualStyleBackColor = true;
-            this.btnAjouterCouche.Click += new System.EventHandler(this.btnAjouterCouche_Click);
+            this.btnCreerCouche.Location = new System.Drawing.Point(55, 167);
+            this.btnCreerCouche.Name = "btnCreerCouche";
+            this.btnCreerCouche.Size = new System.Drawing.Size(118, 23);
+            this.btnCreerCouche.TabIndex = 13;
+            this.btnCreerCouche.Text = "Créer couche";
+            this.btnCreerCouche.UseVisualStyleBackColor = true;
+            this.btnCreerCouche.Click += new System.EventHandler(this.CreerCouche);
             // 
             // gbxMatiere
             // 
@@ -225,8 +202,8 @@ namespace Flexion
             this.gbxMatiere.Controls.Add(this.nudE);
             this.gbxMatiere.Controls.Add(this.lbxMatiere);
             this.gbxMatiere.Controls.Add(this.lblE);
-            this.gbxMatiere.Controls.Add(this.btnAjouterMatiere);
-            this.gbxMatiere.Location = new System.Drawing.Point(361, 21);
+            this.gbxMatiere.Controls.Add(this.btnCreerMatiere);
+            this.gbxMatiere.Location = new System.Drawing.Point(717, 11);
             this.gbxMatiere.Name = "gbxMatiere";
             this.gbxMatiere.Size = new System.Drawing.Size(227, 375);
             this.gbxMatiere.TabIndex = 17;
@@ -260,9 +237,9 @@ namespace Flexion
             // lbxMatiere
             // 
             this.lbxMatiere.FormattingEnabled = true;
-            this.lbxMatiere.Location = new System.Drawing.Point(9, 172);
+            this.lbxMatiere.Location = new System.Drawing.Point(9, 196);
             this.lbxMatiere.Name = "lbxMatiere";
-            this.lbxMatiere.Size = new System.Drawing.Size(176, 173);
+            this.lbxMatiere.Size = new System.Drawing.Size(212, 173);
             this.lbxMatiere.TabIndex = 14;
             // 
             // lblE
@@ -274,59 +251,130 @@ namespace Flexion
             this.lblE.TabIndex = 18;
             this.lblE.Text = "E";
             // 
-            // btnAjouterMatiere
+            // btnCreerMatiere
             // 
-            this.btnAjouterMatiere.Location = new System.Drawing.Point(81, 123);
-            this.btnAjouterMatiere.Name = "btnAjouterMatiere";
-            this.btnAjouterMatiere.Size = new System.Drawing.Size(75, 23);
-            this.btnAjouterMatiere.TabIndex = 13;
-            this.btnAjouterMatiere.Text = "Ajouter couche";
-            this.btnAjouterMatiere.UseVisualStyleBackColor = true;
+            this.btnCreerMatiere.Location = new System.Drawing.Point(55, 167);
+            this.btnCreerMatiere.Name = "btnCreerMatiere";
+            this.btnCreerMatiere.Size = new System.Drawing.Size(120, 23);
+            this.btnCreerMatiere.TabIndex = 13;
+            this.btnCreerMatiere.Text = "Créer matière";
+            this.btnCreerMatiere.UseVisualStyleBackColor = true;
+            this.btnCreerMatiere.Click += new System.EventHandler(this.CreerMatiere);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Location = new System.Drawing.Point(915, 21);
+            this.groupBox2.Controls.Add(this.tbxNomPiece);
+            this.groupBox2.Controls.Add(this.lblNomPiece);
+            this.groupBox2.Controls.Add(this.btnCreerPiece);
+            this.groupBox2.Controls.Add(this.lbxPiece);
+            this.groupBox2.Controls.Add(this.btnAjouterCouche);
+            this.groupBox2.Controls.Add(this.lblLongueur);
+            this.groupBox2.Controls.Add(this.nudLongueurPiece);
+            this.groupBox2.Location = new System.Drawing.Point(251, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(227, 375);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Piece";
             // 
-            // listBox1
+            // tbxNomPiece
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(9, 172);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(176, 173);
-            this.listBox1.TabIndex = 14;
+            this.tbxNomPiece.Location = new System.Drawing.Point(101, 65);
+            this.tbxNomPiece.Name = "tbxNomPiece";
+            this.tbxNomPiece.Size = new System.Drawing.Size(120, 20);
+            this.tbxNomPiece.TabIndex = 22;
             // 
-            // button1
+            // lblNomPiece
             // 
-            this.button1.Location = new System.Drawing.Point(81, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Ajouter couche";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lblNomPiece.AutoSize = true;
+            this.lblNomPiece.Location = new System.Drawing.Point(6, 65);
+            this.lblNomPiece.Name = "lblNomPiece";
+            this.lblNomPiece.Size = new System.Drawing.Size(29, 13);
+            this.lblNomPiece.TabIndex = 16;
+            this.lblNomPiece.Text = "Nom";
+            // 
+            // btnCreerPiece
+            // 
+            this.btnCreerPiece.Location = new System.Drawing.Point(62, 90);
+            this.btnCreerPiece.Name = "btnCreerPiece";
+            this.btnCreerPiece.Size = new System.Drawing.Size(115, 23);
+            this.btnCreerPiece.TabIndex = 15;
+            this.btnCreerPiece.Text = "Créer une pièce";
+            this.btnCreerPiece.UseVisualStyleBackColor = true;
+            this.btnCreerPiece.Click += new System.EventHandler(this.CreerPiece);
+            // 
+            // lbxPiece
+            // 
+            this.lbxPiece.FormattingEnabled = true;
+            this.lbxPiece.Location = new System.Drawing.Point(9, 196);
+            this.lbxPiece.Name = "lbxPiece";
+            this.lbxPiece.Size = new System.Drawing.Size(212, 173);
+            this.lbxPiece.TabIndex = 14;
+            this.lbxPiece.SelectedIndexChanged += new System.EventHandler(this.ShowCoucheInPiece);
+            // 
+            // btnAjouterCouche
+            // 
+            this.btnAjouterCouche.Location = new System.Drawing.Point(62, 167);
+            this.btnAjouterCouche.Name = "btnAjouterCouche";
+            this.btnAjouterCouche.Size = new System.Drawing.Size(115, 23);
+            this.btnAjouterCouche.TabIndex = 13;
+            this.btnAjouterCouche.Text = "Ajouter couche";
+            this.btnAjouterCouche.UseVisualStyleBackColor = true;
+            this.btnAjouterCouche.Click += new System.EventHandler(this.AjouterCouche);
+            // 
+            // lbxShowCouchePiece
+            // 
+            this.lbxShowCouchePiece.FormattingEnabled = true;
+            this.lbxShowCouchePiece.Location = new System.Drawing.Point(12, 208);
+            this.lbxShowCouchePiece.Name = "lbxShowCouchePiece";
+            this.lbxShowCouchePiece.Size = new System.Drawing.Size(233, 173);
+            this.lbxShowCouchePiece.TabIndex = 23;
+            // 
+            // lblHauteurSide
+            // 
+            this.lblHauteurSide.AutoSize = true;
+            this.lblHauteurSide.Location = new System.Drawing.Point(8, 109);
+            this.lblHauteurSide.Name = "lblHauteurSide";
+            this.lblHauteurSide.Size = new System.Drawing.Size(69, 13);
+            this.lblHauteurSide.TabIndex = 15;
+            this.lblHauteurSide.Text = "Hauteur côté";
+            // 
+            // nudHauterSide
+            // 
+            this.nudHauterSide.DecimalPlaces = 1;
+            this.nudHauterSide.Location = new System.Drawing.Point(92, 107);
+            this.nudHauterSide.Name = "nudHauterSide";
+            this.nudHauterSide.Size = new System.Drawing.Size(131, 20);
+            this.nudHauterSide.TabIndex = 16;
+            // 
+            // lblLargeurSide
+            // 
+            this.lblLargeurSide.AutoSize = true;
+            this.lblLargeurSide.Location = new System.Drawing.Point(8, 54);
+            this.lblLargeurSide.Name = "lblLargeurSide";
+            this.lblLargeurSide.Size = new System.Drawing.Size(67, 13);
+            this.lblLargeurSide.TabIndex = 17;
+            this.lblLargeurSide.Text = "Largeur côté";
+            // 
+            // nudLargeurCoucheSide
+            // 
+            this.nudLargeurCoucheSide.DecimalPlaces = 1;
+            this.nudLargeurCoucheSide.Location = new System.Drawing.Point(92, 52);
+            this.nudLargeurCoucheSide.Name = "nudLargeurCoucheSide";
+            this.nudLargeurCoucheSide.Size = new System.Drawing.Size(131, 20);
+            this.nudLargeurCoucheSide.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1316, 450);
+            this.ClientSize = new System.Drawing.Size(952, 395);
+            this.Controls.Add(this.lbxShowCouchePiece);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbxMatiere);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.numericUpDown4);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.lblLongueur);
             this.Controls.Add(this.nudDeformation);
             this.Controls.Add(this.nudForce);
-            this.Controls.Add(this.tbxFlexion);
             this.Controls.Add(this.lblDeformation);
             this.Controls.Add(this.lblForce);
             this.MaximizeBox = false;
@@ -334,16 +382,18 @@ namespace Flexion
             this.Text = "Flexion TIP";
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCouche)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCouche)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbxMatiere.ResumeLayout(false);
             this.gbxMatiere.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -353,20 +403,16 @@ namespace Flexion
 
         private System.Windows.Forms.Label lblForce;
         private System.Windows.Forms.Label lblDeformation;
-        private System.Windows.Forms.TextBox tbxFlexion;
         private System.Windows.Forms.NumericUpDown nudForce;
         private System.Windows.Forms.NumericUpDown nudDeformation;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudLongueurPiece;
         private System.Windows.Forms.Label lblLongueur;
-        private System.Windows.Forms.NumericUpDown nudHauteurCouche;
-        private System.Windows.Forms.Label lblHauteur;
-        private System.Windows.Forms.NumericUpDown nudLargeurCouche;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown nudHauteurCenter;
+        private System.Windows.Forms.Label lblHauteurCenter;
+        private System.Windows.Forms.NumericUpDown nudLargeurCoucheCenter;
+        private System.Windows.Forms.Label lblLargeurCenter;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAjouterCouche;
+        private System.Windows.Forms.Button btnCreerCouche;
         private System.Windows.Forms.ListBox lbxCouche;
         private System.Windows.Forms.GroupBox gbxMatiere;
         private System.Windows.Forms.TextBox tbxNomMatiere;
@@ -374,10 +420,18 @@ namespace Flexion
         private System.Windows.Forms.NumericUpDown nudE;
         private System.Windows.Forms.ListBox lbxMatiere;
         private System.Windows.Forms.Label lblE;
-        private System.Windows.Forms.Button btnAjouterMatiere;
+        private System.Windows.Forms.Button btnCreerMatiere;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox lbxPiece;
+        private System.Windows.Forms.Button btnAjouterCouche;
+        private System.Windows.Forms.Button btnCreerPiece;
+        private System.Windows.Forms.TextBox tbxNomPiece;
+        private System.Windows.Forms.Label lblNomPiece;
+        private System.Windows.Forms.ListBox lbxShowCouchePiece;
+        private System.Windows.Forms.Label lblHauteurSide;
+        private System.Windows.Forms.NumericUpDown nudHauterSide;
+        private System.Windows.Forms.Label lblLargeurSide;
+        private System.Windows.Forms.NumericUpDown nudLargeurCoucheSide;
     }
 }
 

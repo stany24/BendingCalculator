@@ -8,21 +8,18 @@ namespace Flexion
 {
     public class Piece
     {
-        Couche[] Couches;
+        public List<Couche> Couches = new List<Couche>();
+        public readonly string Nom;
         public readonly double Longueur;
 
-        public Piece(double longueur)
+        public Piece(double longueur, string nom)
         {
             Longueur = longueur;
+            Nom = nom;
         }
-
         public override string ToString()
         {
-            string retourPiece = $"Piece de {Longueur} cm composé de: ";
-            foreach (Couche couche in Couches)
-            {
-                retourPiece += $"{couche}/";
-            }
+            string retourPiece = $"{Nom} de {Longueur} cm.";
             return retourPiece;
         }
     }
