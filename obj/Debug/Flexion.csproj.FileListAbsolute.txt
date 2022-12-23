@@ -23,3 +23,5 @@ M:\Git\flexion-tib\bin\Debug\System.ValueTuple.dll
 M:\Git\flexion-tib\bin\Debug\MathNet.Numerics.xml
 M:\Git\flexion-tib\bin\Debug\System.ValueTuple.xml
 M:\Git\flexion-tib\obj\Debug\Flexion.csproj.CopyComplete
+M:\Git\flexion-tib\bin\Debug\Newtonsoft.Json.dll
+M:\Git\flexion-tib\bin\Debug\Newtonsoft.Json.xml

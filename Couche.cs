@@ -20,7 +20,7 @@ namespace Flexion
             LargeurCenter = largeur;
             LargeurSide = largeur;
             HauteurCenter = hauteur;
-            HauteurCenter = hauteur;
+            HauteurSide = hauteur;
         }
         public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter ,double hauteurSide)
         {
@@ -28,7 +28,7 @@ namespace Flexion
             LargeurCenter = largeurCenter;
             LargeurSide = largeurSide;
             HauteurCenter = hauteurCenter;
-            HauteurCenter = hauteurSide;
+            HauteurSide = hauteurSide;
         }
 
         public override string ToString()
@@ -38,21 +38,20 @@ namespace Flexion
 
         public double EstimateVolumeFromX(double Lo,double Lp,double Le,double Ep,double Ee,double X,double Ecart)
         {
-            double Estimate = 0;
+            double Px = X * (X / Lo + Lo - 2);
             double P2 = ((8 + Lo) / 16) - Lo * Lo;
             double P31 = Ee - Ep;
             double P32 = (-2 * Lp - 2 * Le) * Lo;
             double P33 = Math.Pow(Lo, 3) * (Le + Lo * Lo / 2 - Ee - Ep - Lp);
             double P3 = P31 * P32 + P33;
-            double P23 = P2 * P3;
-            double X1 = 0;
-            for (double i = 0 ; i < X ; i += Ecart)
-            {
-                X1 = (i + X1) * i;
-                double Px = X * (X / Lo + Lo - 2);
-                Estimate += Px * P23;
-            }
-            return Estimate * Ecart;
+            double Estimate = Px * P2 * P3;
+            return Estimate;
+        }
+
+        public double I(double Longueur,double Z)
+        {
+            double Base = Longueur * LargeurCenter;
+            return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
     }
 }

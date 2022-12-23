@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.Integration; //pour les intégrales
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Flexion
 {
@@ -32,6 +34,50 @@ namespace Flexion
             foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
             Couche test = new Couche(lbxMatiere.Items[1] as Matiere, 53, 4.3);
             lblTest.Text = Convert.ToString(test.EstimateVolumeFromX(1.5, 0.1, 1.5, 0.012, 0.006, 0.75,0.00001));
+        }
+
+        public void SaveFile()
+        {
+            foreach(Matiere matiere in lbxMatiere.Items)
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.Nom+".json"))
+                {
+                    serializer.Serialize(file, matiere);
+                }
+            }
+            foreach (Couche couche in lbxCouche.Items)
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.Matiere.Nom+" de "+couche.LargeurCenter+"x"+couche.HauteurCenter+" "+couche.LargeurSide +"x"+couche.HauteurSide + ".json"))
+                {
+                    serializer.Serialize(file, couche);
+                }
+            }
+            foreach (Piece piece in lbxPiece.Items)
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.Nom+ ".json"))
+                {
+                    serializer.Serialize(file, piece);
+                }
+            }
+        }
+
+        public void LoadFile()
+        {
+            string savePath = "C:\\Users\\gouvernonst\\Downloads\\";
+            string[] Matières = Directory.GetFiles(savePath, "Matière-*.json");
+            JsonSerializer serializer = new JsonSerializer();
+            foreach (string matiere in Matières)
+            {
+                using (StreamReader file = new StreamReader(matiere))
+                {
+                    file.ReadLine;
+                }
+            }
+            string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
+            string[] Pieces = Directory.GetFiles(savePath, "Piece-*.json");
         }
 
         private void UpdateListBox()
@@ -76,6 +122,12 @@ namespace Flexion
             {
                 lbxShowCouchePiece.Items.Add(couche);
             }
+        }
+
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            LoadFile();
         }
     }
 }

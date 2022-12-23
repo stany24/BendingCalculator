@@ -40,6 +40,10 @@ namespace Flexion
             this.nudLargeurCoucheCenter = new System.Windows.Forms.NumericUpDown();
             this.lblLargeurCenter = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblLargeurSide = new System.Windows.Forms.Label();
+            this.nudLargeurCoucheSide = new System.Windows.Forms.NumericUpDown();
+            this.lblHauteurSide = new System.Windows.Forms.Label();
+            this.nudHauterSide = new System.Windows.Forms.NumericUpDown();
             this.lbxCouche = new System.Windows.Forms.ListBox();
             this.btnCreerCouche = new System.Windows.Forms.Button();
             this.gbxMatiere = new System.Windows.Forms.GroupBox();
@@ -56,22 +60,19 @@ namespace Flexion
             this.lbxPiece = new System.Windows.Forms.ListBox();
             this.btnAjouterCouche = new System.Windows.Forms.Button();
             this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
-            this.lblHauteurSide = new System.Windows.Forms.Label();
-            this.nudHauterSide = new System.Windows.Forms.NumericUpDown();
-            this.lblLargeurSide = new System.Windows.Forms.Label();
-            this.nudLargeurCoucheSide = new System.Windows.Forms.NumericUpDown();
             this.lblTest = new System.Windows.Forms.Label();
+            this.btnTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).BeginInit();
             this.gbxMatiere.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).BeginInit();
             this.SuspendLayout();
             // 
             // lblForce
@@ -177,6 +178,40 @@ namespace Flexion
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Couche";
+            // 
+            // lblLargeurSide
+            // 
+            this.lblLargeurSide.AutoSize = true;
+            this.lblLargeurSide.Location = new System.Drawing.Point(8, 54);
+            this.lblLargeurSide.Name = "lblLargeurSide";
+            this.lblLargeurSide.Size = new System.Drawing.Size(67, 13);
+            this.lblLargeurSide.TabIndex = 17;
+            this.lblLargeurSide.Text = "Largeur côté";
+            // 
+            // nudLargeurCoucheSide
+            // 
+            this.nudLargeurCoucheSide.DecimalPlaces = 1;
+            this.nudLargeurCoucheSide.Location = new System.Drawing.Point(92, 52);
+            this.nudLargeurCoucheSide.Name = "nudLargeurCoucheSide";
+            this.nudLargeurCoucheSide.Size = new System.Drawing.Size(131, 20);
+            this.nudLargeurCoucheSide.TabIndex = 18;
+            // 
+            // lblHauteurSide
+            // 
+            this.lblHauteurSide.AutoSize = true;
+            this.lblHauteurSide.Location = new System.Drawing.Point(8, 109);
+            this.lblHauteurSide.Name = "lblHauteurSide";
+            this.lblHauteurSide.Size = new System.Drawing.Size(69, 13);
+            this.lblHauteurSide.TabIndex = 15;
+            this.lblHauteurSide.Text = "Hauteur côté";
+            // 
+            // nudHauterSide
+            // 
+            this.nudHauterSide.DecimalPlaces = 1;
+            this.nudHauterSide.Location = new System.Drawing.Point(92, 107);
+            this.nudHauterSide.Name = "nudHauterSide";
+            this.nudHauterSide.Size = new System.Drawing.Size(131, 20);
+            this.nudHauterSide.TabIndex = 16;
             // 
             // lbxCouche
             // 
@@ -331,54 +366,31 @@ namespace Flexion
             this.lbxShowCouchePiece.Size = new System.Drawing.Size(233, 173);
             this.lbxShowCouchePiece.TabIndex = 23;
             // 
-            // lblHauteurSide
-            // 
-            this.lblHauteurSide.AutoSize = true;
-            this.lblHauteurSide.Location = new System.Drawing.Point(8, 109);
-            this.lblHauteurSide.Name = "lblHauteurSide";
-            this.lblHauteurSide.Size = new System.Drawing.Size(69, 13);
-            this.lblHauteurSide.TabIndex = 15;
-            this.lblHauteurSide.Text = "Hauteur côté";
-            // 
-            // nudHauterSide
-            // 
-            this.nudHauterSide.DecimalPlaces = 1;
-            this.nudHauterSide.Location = new System.Drawing.Point(92, 107);
-            this.nudHauterSide.Name = "nudHauterSide";
-            this.nudHauterSide.Size = new System.Drawing.Size(131, 20);
-            this.nudHauterSide.TabIndex = 16;
-            // 
-            // lblLargeurSide
-            // 
-            this.lblLargeurSide.AutoSize = true;
-            this.lblLargeurSide.Location = new System.Drawing.Point(8, 54);
-            this.lblLargeurSide.Name = "lblLargeurSide";
-            this.lblLargeurSide.Size = new System.Drawing.Size(67, 13);
-            this.lblLargeurSide.TabIndex = 17;
-            this.lblLargeurSide.Text = "Largeur côté";
-            // 
-            // nudLargeurCoucheSide
-            // 
-            this.nudLargeurCoucheSide.DecimalPlaces = 1;
-            this.nudLargeurCoucheSide.Location = new System.Drawing.Point(92, 52);
-            this.nudLargeurCoucheSide.Name = "nudLargeurCoucheSide";
-            this.nudLargeurCoucheSide.Size = new System.Drawing.Size(131, 20);
-            this.nudLargeurCoucheSide.TabIndex = 18;
-            // 
             // lblTest
             // 
             this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(90, 143);
+            this.lblTest.Location = new System.Drawing.Point(88, 121);
             this.lblTest.Name = "lblTest";
             this.lblTest.Size = new System.Drawing.Size(38, 13);
             this.lblTest.TabIndex = 23;
             this.lblTest.Text = "lblTest";
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(71, 152);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 23;
+            this.btnTest.Text = "button1";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 395);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblTest);
             this.Controls.Add(this.lbxShowCouchePiece);
             this.Controls.Add(this.groupBox2);
@@ -398,13 +410,13 @@ namespace Flexion
             ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).EndInit();
             this.gbxMatiere.ResumeLayout(false);
             this.gbxMatiere.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +456,7 @@ namespace Flexion
         private System.Windows.Forms.Label lblLargeurSide;
         private System.Windows.Forms.NumericUpDown nudLargeurCoucheSide;
         private System.Windows.Forms.Label lblTest;
+        private System.Windows.Forms.Button btnTest;
     }
 }
 

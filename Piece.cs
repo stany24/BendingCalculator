@@ -22,5 +22,20 @@ namespace Flexion
             string retourPiece = $"{Nom} de {Longueur} cm.";
             return retourPiece;
         }
+
+        public double Zf(double F, double E)
+        {
+            return -F * (Math.Pow(Longueur, 3) / (48 * E * IGeneral()));
+        }
+
+        public double IGeneral()
+        {
+            double I=0;
+            foreach (Couche couche in Couches)
+            {
+                I+= couche.I(Longueur,1);
+            }
+            return I;
+        }
     }
 }
