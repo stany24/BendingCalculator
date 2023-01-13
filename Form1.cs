@@ -57,7 +57,7 @@ namespace Flexion
             foreach (Piece piece in lbxPiece.Items)
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.Nom+ ".json"))
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.GetNom() + ".json"))
                 {
                     serializer.Serialize(file, piece);
                 }

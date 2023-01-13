@@ -8,8 +8,13 @@ namespace Flexion
 {
     public class Matiere
     {
-        public readonly string Nom;
-        public readonly double E;
+        private string Nom;
+        public string GetNom() { return Nom; }
+        public void SetNom(string value) { if (value != "") { Nom = value; } }
+
+        private double E;
+        public double GetE() { return E; }
+        public void SetE(double value) { if (value > 0) { E = value; } }
 
 
         public Matiere(string nom, double e)
