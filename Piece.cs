@@ -30,11 +30,21 @@ namespace Flexion
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
 
+        /// <summary>
+        /// Instancie une pièce avec une longueur et un nom
+        /// </summary>
+        /// <param name="longueur">Longueur de la pièce</param>
+        /// <param name="nom">Nom de la pièce</param>
         public Piece(double longueur, string nom)
         {
             SetLongueur(longueur);
             SetNom(nom);
         }
+
+        /// <summary>
+        /// Retourne le nom et la longueur de la pièce
+        /// </summary>
+        /// <returns></returns>
         public override string ToString(){return $"{GetNom()} de {Longueur} cm.";}
 
         public double Zf(double F, double E){return -F * (Math.Pow(Longueur, 3) / (48 * E * IGeneral()));}

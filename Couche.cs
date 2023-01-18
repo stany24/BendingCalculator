@@ -12,7 +12,6 @@ namespace Flexion
         public void SetLargeurCenter(double largeurCenter){if (largeurCenter > 0){LargeurCenter = largeurCenter; }}
         public double GetLargeurCenter() { return LargeurCenter; }
 
-
         private double LargeurSide; //le
         public void SetLargeurSide(double largeurSide) { if (largeurSide > 0) { LargeurSide = largeurSide; } }
         public double GetLargeurSide() { return LargeurSide; }
@@ -32,6 +31,12 @@ namespace Flexion
 
         Dictionary<string, double> values = new Dictionary<string, double>();
 
+        /// <summary>
+        /// Crée une nouvelle couche avec la matière donnée et une longueur et un largeur uniforme.
+        /// </summary>
+        /// <param name="matiere">Matière de la couche</param>
+        /// <param name="largeur">Largeur au centre et sur les côté de la couche</param>
+        /// <param name="hauteur">Hauteur au centre et sur les côté de la couche</param>
         public Couche(Matiere matiere,double largeur,double hauteur)
         {
             SetMatiere(matiere);
@@ -40,6 +45,15 @@ namespace Flexion
             SetHauteurCenter(hauteur);
             SetHauteurSide(hauteur);
         }
+
+        /// <summary>
+        /// Crée une nouvelle couche avec la matière donnée et une longueur et un largeur non-uniforme.
+        /// </summary>
+        /// <param name="matiere">Matière de la couche</param>
+        /// <param name="largeurCenter">Largeur au centre de la couche</param>
+        /// <param name="largeurSide">Largeur sur les côté de la couche</param>
+        /// <param name="hauteurCenter">Hauteur au centre  de la couche</param>
+        /// <param name="hauteurSide">Hauteur sur les côté de la couche</param>
         public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter ,double hauteurSide)
         {
             SetMatiere(matiere);
@@ -49,11 +63,26 @@ namespace Flexion
             SetHauteurSide(hauteurSide);
         }
 
+        /// <summary>
+        /// Retourne un résumé de la couche
+        /// </summary>
+        /// <returns>Le nom de la matière, la largeur au centre, la largeur sur les côtés, la hauteur au centre, la hauteur sur les côtés</returns>
         public override string ToString()
         {
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Lo"></param>
+        /// <param name="Lp"></param>
+        /// <param name="Le"></param>
+        /// <param name="Ep"></param>
+        /// <param name="Ee"></param>
+        /// <param name="X"></param>
+        /// <param name="Ecart"></param>
+        /// <returns></returns>
         public double EstimateVolumeFromX(double Lo,double Lp,double Le,double Ep,double Ee,double X,double Ecart)
         {
             double Px = X * (X / Lo + Lo - 2);
@@ -71,7 +100,6 @@ namespace Flexion
             double Base = Longueur * LargeurCenter;
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
-
         public void Surface()
         {
             double Sf = values["Lf"] * values["Ef"];
@@ -79,7 +107,7 @@ namespace Flexion
             values.Add("Sf", Sf);
             values.Add("Si", Si);
         }
-
+       
         public void Largeur(double lenght, double Xi)
         {
             double L1 = (4 * LargeurSide - 4 * LargeurCenter) / (lenght * lenght);

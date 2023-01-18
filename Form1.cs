@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.Integration; //pour les intégrales
 using System.IO;
@@ -15,9 +9,13 @@ namespace Flexion
 {
     public partial class Form1 : Form
     {
-        public  List<Couche> ListCouches = new List<Couche>();
+        public List<Couche> ListCouches = new List<Couche>();
         public List<Matiere> ListMatieres = new List<Matiere>();
         public List<Piece> ListPiece = new List<Piece>();
+
+        /// <summary>
+        /// Initialise la page avec des matières et des couches par défault
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -36,12 +34,15 @@ namespace Flexion
             lblTest.Text = Convert.ToString(test.EstimateVolumeFromX(1.5, 0.1, 1.5, 0.012, 0.006, 0.75,0.00001));
         }
 
+        /// <summary>
+        /// Sauvegarde les matières, les couches et les pièces en fichier json
+        /// </summary>
         public void SaveFile()
         {
             foreach(Matiere matiere in lbxMatiere.Items)
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.Nom+".json"))
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.GetNom()+".json"))
                 {
                     serializer.Serialize(file, matiere);
                 }
@@ -49,7 +50,7 @@ namespace Flexion
             foreach (Couche couche in lbxCouche.Items)
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.Matiere.Nom+" de "+couche.LargeurCenter+"x"+couche.HauteurCenter+" "+couche.LargeurSide +"x"+couche.HauteurSide + ".json"))
+                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.GetMatiere().GetNom() + " de "+ couche.GetLargeurCenter()+"x"+couche.GetHauteurCenter() + " "+couche.GetLargeurCenter() + "x"+couche.GetHauteurSide() + ".json"))
                 {
                     serializer.Serialize(file, couche);
                 }
@@ -64,6 +65,9 @@ namespace Flexion
             }
         }
 
+        /// <summary>
+        /// Charge les données sauvegardées par SaveFile()
+        /// </summary>
         public void LoadFile()
         {
             string savePath = "C:\\Users\\gouvernonst\\Downloads\\";
@@ -73,13 +77,16 @@ namespace Flexion
             {
                 using (StreamReader file = new StreamReader(matiere))
                 {
-                    file.ReadLine;
+                    file.ReadLine();
                 }
             }
             string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
             string[] Pieces = Directory.GetFiles(savePath, "Piece-*.json");
         }
 
+        /// <summary>
+        /// Met à jour les listbox des matières, des couches et des pièces
+        /// </summary>
         private void UpdateListBox()
         {
             lbxMatiere.Items.Clear();
@@ -90,30 +97,55 @@ namespace Flexion
             foreach (Piece piece in ListPiece){lbxPiece.Items.Add(piece);}
         }
 
+        /// <summary>
+        /// Crée un nouvelle couche avec les paramétres donnés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreerCouche(object sender, EventArgs e)
         {
             ListCouches.Add(new Couche(lbxMatiere.SelectedItem as Matiere, (double)nudLargeurCoucheCenter.Value,(double)nudLargeurCoucheSide.Value, (double)nudHauteurCenter.Value,(double)nudHauterSide.Value));
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Crée une nouvelle couche avec les paramétres donnés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreerMatiere(object sender, EventArgs e)
         {
             ListMatieres.Add(new Matiere(tbxNomMatiere.Text, (double) nudE.Value));
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Crée une nouvelle pièce avec les paramétres donnés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreerPiece(object sender, EventArgs e)
         {
             ListPiece.Add(new Piece((double)nudLongueurPiece.Value, tbxNomPiece.Text));
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Ajoute la couche séléctionnée à la pièce séléctionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AjouterCouche(object sender, EventArgs e)
         {
             ListPiece[lbxPiece.SelectedIndex].Couches.Add(lbxCouche.SelectedItem as Couche);
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Affiche toutes les couches dans la pièce séléctionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowCoucheInPiece(object sender, EventArgs e)
         {
             lbxShowCouchePiece.Items.Clear();
@@ -123,7 +155,6 @@ namespace Flexion
                 lbxShowCouchePiece.Items.Add(couche);
             }
         }
-
 
         private void btnTest_Click(object sender, EventArgs e)
         {

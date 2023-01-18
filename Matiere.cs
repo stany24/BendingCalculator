@@ -16,13 +16,21 @@ namespace Flexion
         public double GetE() { return E; }
         public void SetE(double value) { if (value > 0) { E = value; } }
 
-
+        /// <summary>
+        /// Instancie une nouvelle matière avec un nom et une valeur E
+        /// </summary>
+        /// <param name="nom">Le nom de la matière</param>
+        /// <param name="e">La valeur E de la matière</param>
         public Matiere(string nom, double e)
         {
             Nom = nom;
             E = e;
         }
 
+        /// <summary>
+        /// Retourne le nom de la matière avec sa valeur E 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{Nom} de constante {E}";
