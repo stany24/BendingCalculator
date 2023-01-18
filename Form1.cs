@@ -39,26 +39,26 @@ namespace Flexion
         /// </summary>
         public void SaveFile()
         {
-            foreach(Matiere matiere in lbxMatiere.Items)
+            JsonSerializer serializer = new JsonSerializer();
+            foreach (Matiere matiere in lbxMatiere.Items)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.GetNom()+".json"))
+                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.GetNom()+".json"))
                 {
                     serializer.Serialize(file, matiere);
                 }
             }
+
             foreach (Couche couche in lbxCouche.Items)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.GetMatiere().GetNom() + " de "+ couche.GetLargeurCenter()+"x"+couche.GetHauteurCenter() + " "+couche.GetLargeurCenter() + "x"+couche.GetHauteurSide() + ".json"))
+                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.GetMatiere().GetNom() + " de "+ couche.GetLargeurCenter()+"x"+couche.GetHauteurCenter() + " "+couche.GetLargeurCenter() + "x"+couche.GetHauteurSide() + ".json"))
                 {
                     serializer.Serialize(file, couche);
                 }
             }
+
             foreach (Piece piece in lbxPiece.Items)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.GetNom() + ".json"))
+                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.GetNom() + ".json"))
                 {
                     serializer.Serialize(file, piece);
                 }
@@ -77,7 +77,7 @@ namespace Flexion
             {
                 using (StreamReader file = new StreamReader(matiere))
                 {
-                    file.ReadLine();
+                    lblTest.Text=file.ReadLine();
                 }
             }
             string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
@@ -158,7 +158,7 @@ namespace Flexion
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            LoadFile();
+            SaveFile();
         }
     }
 }

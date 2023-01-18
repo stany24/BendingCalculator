@@ -72,17 +72,6 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Lo"></param>
-        /// <param name="Lp"></param>
-        /// <param name="Le"></param>
-        /// <param name="Ep"></param>
-        /// <param name="Ee"></param>
-        /// <param name="X"></param>
-        /// <param name="Ecart"></param>
-        /// <returns></returns>
         public double EstimateVolumeFromX(double Lo,double Lp,double Le,double Ep,double Ee,double X,double Ecart)
         {
             double Px = X * (X / Lo + Lo - 2);
@@ -100,6 +89,7 @@ namespace Flexion
             double Base = Longueur * LargeurCenter;
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
+
         public void Surface()
         {
             double Sf = values["Lf"] * values["Ef"];
