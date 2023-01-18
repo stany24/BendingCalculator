@@ -10,6 +10,7 @@ namespace Flexion
     {
         public List<Couche> Couches = new List<Couche>();
         private string Nom;
+
         public string GetNom(){return Nom;}
         public void SetNom(string value){ if (value != "") { Nom = value; }}
 
@@ -31,7 +32,7 @@ namespace Flexion
 
         public Piece(double longueur, string nom)
         {
-            Longueur = longueur;
+            SetLongueur(longueur);
             SetNom(nom);
         }
         public override string ToString(){return $"{GetNom()} de {Longueur} cm.";}

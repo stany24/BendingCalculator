@@ -8,34 +8,50 @@ namespace Flexion
 {
     public class Couche
     {
-        public readonly double LargeurCenter; //lp
-        public readonly double LargeurSide; //le
-        public readonly double HauteurCenter; //ep
-        public readonly double HauteurSide; // ee
-        public readonly Matiere Matiere;
+        private double LargeurCenter; //lp
+        public void SetLargeurCenter(double largeurCenter){if (largeurCenter > 0){LargeurCenter = largeurCenter; }}
+        public double GetLargeurCenter() { return LargeurCenter; }
+
+
+        private double LargeurSide; //le
+        public void SetLargeurSide(double largeurSide) { if (largeurSide > 0) { LargeurSide = largeurSide; } }
+        public double GetLargeurSide() { return LargeurSide; }
+
+        private double HauteurCenter; //ep
+        public void SetHauteurCenter(double hauteurCenter) { if (hauteurCenter > 0) { HauteurCenter = hauteurCenter; } }
+        public double GetHauteurCenter() { return HauteurCenter; }
+
+        private double HauteurSide; // ee
+        public void SetHauteurSide(double hauteurSide) { if (hauteurSide > 0) { HauteurSide = hauteurSide; } }
+        public double GetHauteurSide() { return HauteurSide; }
+
+        private Matiere MatiereCouche;
+        public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
+        public Matiere GetMatiere() { return MatiereCouche; }
+
 
         Dictionary<string, double> values = new Dictionary<string, double>();
 
         public Couche(Matiere matiere,double largeur,double hauteur)
         {
-            Matiere = matiere;
-            LargeurCenter = largeur;
-            LargeurSide = largeur;
-            HauteurCenter = hauteur;
-            HauteurSide = hauteur;
+            SetMatiere(matiere);
+            SetLargeurCenter(largeur);
+            SetLargeurSide(largeur);
+            SetHauteurCenter(hauteur);
+            SetHauteurSide(hauteur);
         }
         public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter ,double hauteurSide)
         {
-            Matiere = matiere;
-            LargeurCenter = largeurCenter;
-            LargeurSide = largeurSide;
-            HauteurCenter = hauteurCenter;
-            HauteurSide = hauteurSide;
+            SetMatiere(matiere);
+            SetLargeurCenter(largeurCenter);
+            SetLargeurSide(largeurSide);
+            SetHauteurCenter(hauteurCenter);
+            SetHauteurSide(hauteurSide);
         }
 
         public override string ToString()
         {
-            return $"C de {Matiere.Nom} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
+            return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
         public double EstimateVolumeFromX(double Lo,double Lp,double Le,double Ep,double Ee,double X,double Ecart)
@@ -88,17 +104,17 @@ namespace Flexion
 
         public double Integrale(bool temp, double lenght, double Xi, double Dep, double Eref)
         {
-            double X3 = (((4 * Matiere.E) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Xi, 3);
-            double X2 = (((2 * Matiere.E) - (2 * LargeurCenter)) / lenght) * (Xi * Xi);
-            double X1 = Matiere.E * Xi;
-            double X13 = (((4 * Matiere.E) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Dep, 3);
-            double X12 = (((2 * Matiere.E) - (2 * LargeurCenter)) / lenght) * (Dep * Dep);
-            double X11 = Matiere.E * Dep;
+            double X3 = (((4 * MatiereCouche.GetE()) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Xi, 3);
+            double X2 = (((2 * MatiereCouche.GetE()) - (2 * LargeurCenter)) / lenght) * (Xi * Xi);
+            double X1 = MatiereCouche.GetE() * Xi;
+            double X13 = (((4 * MatiereCouche.GetE()) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Dep, 3);
+            double X12 = (((2 * MatiereCouche.GetE()) - (2 * LargeurCenter)) / lenght) * (Dep * Dep);
+            double X11 = MatiereCouche.GetE() * Dep;
 
             double Int11 = (X3 - X2 + X1) - (X13 - X12 - X11);
             double B1 = Int11 / Xi;
             if(temp) { return B1; }
-            else { return B1 / Eref * Matiere.E; }
+            else { return B1 / Eref * MatiereCouche.GetE(); }
         }
     }
 }
