@@ -58,5 +58,54 @@ namespace Flexion
             }
             return I;
         }
+
+        public List<double> Ns()
+        {
+            List<double> Ns = new List<double>();
+            double[][] Nx = new double[Couches.Count][];
+            double[][] divise = new double[Couches.Count][];
+
+            //Calcule de tout les n1, n2, n3... dans le tableau Nx
+            for (int i = 0; i < Couches.Count; i++)
+            {
+                while(i< Couches.Count-1)
+                {
+                    for (int j = 0; j < Couches[i].Hauteur(Longueur).Count; j++)
+                    {
+                        Nx[i][j] = Couches[i].Hauteur(Longueur).ToArray()[j];
+                    }
+                }
+                for (int k = 0; k < Couches[i].Hauteur(Longueur).Count; k++)
+                {
+                    Nx[i][k] = Couches[i].Hauteur(Longueur).ToArray()[k]/2;
+                }
+            }
+
+            // Calcule de tout les divisé dans le tableau divise
+            for (int i = 0; i < Couches.Count; i++)
+            {
+                for (int j = 0; j < Couches[i].Surface(Longueur,Eref).Count; j++)
+                {
+                    divise[i][j] = Nx[i][j] * Couches[i].Surface(Longueur, Eref).ToArray()[j];
+                }
+            }
+
+            for (int i = 0; i < Nx[0].Length; i++)
+            {
+                double top = 0;
+                for(int j = 0;j < Nx.Length;j++)
+                {
+                    top += Nx[j][i];
+                }
+                double bottom = 0;
+                for (int k = 0;k < Couches.Count;k++)
+                {
+                    bottom += Couches[k].Surface(Longueur, Eref)[i];
+                }
+                Ns.Add(top / bottom);
+            }
+
+            return Ns;
+        }
     }
 }

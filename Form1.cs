@@ -19,19 +19,15 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            ListMatieres.Add(new Matiere("fer", 1));
-            ListMatieres.Add(new Matiere("aluminium", 2));
-            ListMatieres.Add(new Matiere("etain", 3));
-            ListMatieres.Add(new Matiere("carbon", 4));
-            foreach (Matiere matiere in ListMatieres){lbxMatiere.Items.Add(matiere);}
-
-            ListCouches.Add(new Couche(lbxMatiere.Items[1] as Matiere, 53, 4.3));
-            ListCouches.Add(new Couche(lbxMatiere.Items[2] as Matiere, 54, 4.4));
-            ListCouches.Add(new Couche(lbxMatiere.Items[3] as Matiere, 55, 4.5));
-            ListCouches.Add(new Couche(lbxMatiere.Items[0] as Matiere, 56, 4.6));
-            foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
-            Couche test = new Couche(lbxMatiere.Items[1] as Matiere, 53, 4.3);
-            lblTest.Text = Convert.ToString(test.EstimateVolumeFromX(1.5, 0.1, 1.5, 0.012, 0.006, 0.75,0.00001));
+            Couche couchetest = new Couche(new Matiere("chène", 12e9), 120, 50, 25, 10);
+            foreach (double x in couchetest.CalcutateX(1500))
+            {
+                lbxPiece.Items.Add(x);
+            }
+            foreach (double largeur in couchetest.Largeur(1500,69e9))
+            {
+                lbxShowCouchePiece.Items.Add(largeur);
+            }
         }
 
         /// <summary>

@@ -28,6 +28,10 @@ namespace Flexion
         public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
         public Matiere GetMatiere() { return MatiereCouche; }
 
+        private double Ecart = 1;
+        public double getEcart() { return Ecart; }
+        public void setEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
+
 
         Dictionary<string, double> values = new Dictionary<string, double>();
 
@@ -72,16 +76,14 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        public double EstimateVolumeFromX(double Lo,double Lp,double Le,double Ep,double Ee,double X,double Ecart)
+        public List<double> CalcutateX(double length)
         {
-            double Px = X * (X / Lo + Lo - 2);
-            double P2 = ((8 + Lo) / 16) - Lo * Lo;
-            double P31 = Ee - Ep;
-            double P32 = (-2 * Lp - 2 * Le) * Lo;
-            double P33 = Math.Pow(Lo, 3) * (Le + Lo * Lo / 2 - Ee - Ep - Lp);
-            double P3 = P31 * P32 + P33;
-            double Estimate = Px * P2 * P3;
-            return Estimate;
+            List<double> X = new List<double>();
+            for(double i = 0; i<= length; i+= Ecart)
+            {
+                X.Add(i);
+            }
+            return X;
         }
 
         public double I(double Longueur,double Z)
@@ -89,50 +91,59 @@ namespace Flexion
             double Base = Longueur * LargeurCenter;
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
-
-        public void Surface()
-        {
-            double Sf = values["Lf"] * values["Ef"];
-            double Si = values["Li"] * values["Ei"];
-            values.Add("Sf", Sf);
-            values.Add("Si", Si);
-        }
        
-        public void Largeur(double lenght, double Xi)
+        public List<double> Largeur(double lenght, double Eref)
         {
-            double L1 = (4 * LargeurSide - 4 * LargeurCenter) / (lenght * lenght);
-            double L2 = (x - lenght / 2) * (x - lenght / 2);
-            double L3 = (Xi - lenght / 2) * (Xi - lenght / 2);
-            double Lf = L1 * L2 + LargeurCenter;
-            double Li = L1 * L3 + LargeurCenter;
-            values.Add("Lf", Lf);
-            values.Add("Li", Li);
+            double L1 = (4*LargeurSide - 4*LargeurCenter)/Math.Pow(lenght,2);
+
+            List<double> L2 = new List<double>();
+            foreach (double x in CalcutateX(lenght))
+            {
+                L2.Add(Math.Pow(x - lenght / 2, 2));
+            }
+
+            List<double> Lf = new List<double>();
+            foreach (double l2 in L2)
+            {
+                Lf.Add(L1 * l2 + LargeurCenter);
+            }
+            
+            List<double> Largeur = new List<double>();
+            foreach (double lf in Lf)
+            {
+                Largeur.Add(lf / Eref * MatiereCouche.GetE());
+            }
+            return Largeur;
         }
 
-        public void Hauteur(double lenght, double Xi)
+        public List<double> Hauteur(double lenght)
         {
-            double E1 = (4 * HauteurSide - 4 * HauteurCenter) / (lenght * lenght);
-            double E2 = Math.Pow(x - lenght / 2,2);
-            double E3 = Math.Pow(Xi - lenght / 2,2);
-            double Ef = E1 * E2 + HauteurCenter;
-            double Ei = E1 * E3 + HauteurCenter;
-            values.Add("Ef", Ef);
-            values.Add("Ei", Ei);
+            double E1 = (4 * HauteurSide - 4 * HauteurCenter) / Math.Pow(lenght, 2);
+
+            List<double> E2 = new List<double>();
+            foreach (double x in CalcutateX(lenght))
+            {
+                E2.Add(Math.Pow(x - lenght / 2, 2));
+            }
+
+            List<double> Ef = new List<double>();
+            foreach (double l2 in E2)
+            {
+                Ef.Add(E1 * l2 + HauteurCenter);
+            }
+            return Ef;
         }
 
-        public double Integrale(bool temp, double lenght, double Xi, double Dep, double Eref)
+        public List<double> Surface(double lenght, double Eref)
         {
-            double X3 = (((4 * MatiereCouche.GetE()) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Xi, 3);
-            double X2 = (((2 * MatiereCouche.GetE()) - (2 * LargeurCenter)) / lenght) * (Xi * Xi);
-            double X1 = MatiereCouche.GetE() * Xi;
-            double X13 = (((4 * MatiereCouche.GetE()) - (4 * LargeurCenter)) / (3 * (lenght * lenght))) * Math.Pow(Dep, 3);
-            double X12 = (((2 * MatiereCouche.GetE()) - (2 * LargeurCenter)) / lenght) * (Dep * Dep);
-            double X11 = MatiereCouche.GetE() * Dep;
-
-            double Int11 = (X3 - X2 + X1) - (X13 - X12 - X11);
-            double B1 = Int11 / Xi;
-            if(temp) { return B1; }
-            else { return B1 / Eref * MatiereCouche.GetE(); }
+            List<double> Surfaces = new List<double>();
+            List<double> Largeurs = Largeur(lenght,Eref);
+            List<double> Hauteurs = Hauteur(lenght);
+            for (int i = 0; i < Largeurs.Count; i++)
+            {
+                Surfaces.Add(Largeurs[i] * Hauteurs[i]);
+            }
+            return Surfaces;
         }
     }
 }
