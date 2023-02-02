@@ -9,6 +9,7 @@ namespace Flexion
 {
     public partial class Form1 : Form
     {
+        
         public List<Couche> ListCouches = new List<Couche>();
         public List<Matiere> ListMatieres = new List<Matiere>();
         public List<Piece> ListPiece = new List<Piece>();

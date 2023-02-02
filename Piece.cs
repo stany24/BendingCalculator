@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Flexion;
 
 namespace Flexion
 {
     public class Piece
     {
+        AdditionalMath  math = new AdditionalMath();
         public List<Couche> Couches = new List<Couche>();
         private string Nom;
 
@@ -68,7 +70,7 @@ namespace Flexion
             //Calcule de tout les n1, n2, n3... dans le tableau Nx
             for (int i = 0; i < Couches.Count; i++)
             {
-                while(i< Couches.Count-1)
+                while(i < Couches.Count-1)
                 {
                     for (int j = 0; j < Couches[i].Hauteur(Longueur).Count; j++)
                     {
