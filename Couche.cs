@@ -76,10 +76,10 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        public List<double> CalcutateX(double length)
+        public List<double> CalcutateX(double longueur)
         {
             List<double> X = new List<double>();
-            for(double i = 0; i<= length; i+= Ecart)
+            for(double i = 0; i<= longueur; i+= Ecart)
             {
                 X.Add(i);
             }
@@ -92,14 +92,14 @@ namespace Flexion
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
        
-        public List<double> Largeur(double lenght, double Eref)
+        public List<double> Largeur(double longueur, double Eref)
         {
-            double L1 = (4*LargeurSide - 4*LargeurCenter)/Math.Pow(lenght,2);
+            double L1 = (4*LargeurSide - 4*LargeurCenter)/Math.Pow(longueur,2);
 
             List<double> L2 = new List<double>();
-            foreach (double x in CalcutateX(lenght))
+            foreach (double x in CalcutateX(longueur))
             {
-                L2.Add(Math.Pow(x - lenght / 2, 2));
+                L2.Add(Math.Pow(x - longueur / 2, 2));
             }
 
             List<double> Lf = new List<double>();
@@ -116,14 +116,14 @@ namespace Flexion
             return Largeur;
         }
 
-        public List<double> Hauteur(double lenght)
+        public List<double> Hauteur(double longueur)
         {
-            double E1 = (4 * HauteurSide - 4 * HauteurCenter) / Math.Pow(lenght, 2);
+            double E1 = (4 * HauteurSide - 4 * HauteurCenter) / Math.Pow(longueur, 2);
 
             List<double> E2 = new List<double>();
-            foreach (double x in CalcutateX(lenght))
+            foreach (double x in CalcutateX(longueur))
             {
-                E2.Add(Math.Pow(x - lenght / 2, 2));
+                E2.Add(Math.Pow(x - longueur / 2, 2));
             }
 
             List<double> Ef = new List<double>();
