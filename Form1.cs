@@ -162,7 +162,8 @@ namespace Flexion
             string array = " NEW ";
             foreach (double temp in piece.Ns())
             {
-                array += temp + " / ";
+                array += temp +" / ";
+                
             }
             tbxOutput.Text += array;
         }

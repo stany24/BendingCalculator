@@ -9,7 +9,7 @@ namespace Flexion
 {
     public class Piece
     {
-        AdditionalMath  math = new AdditionalMath();
+        readonly private AdditionalMath math = new AdditionalMath();
         public List<Couche> Couches = new List<Couche>();
         private string Nom;
 
@@ -31,6 +31,10 @@ namespace Flexion
         private double Eref = 69e9;
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
+
+        private double Ecart = 1e-2;
+        public double GetEcart() { return Ecart; }
+        public void SetEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
 
         /// <summary>
         /// Instancie une pièce avec une longueur et un nom
@@ -63,10 +67,11 @@ namespace Flexion
 
         public double[] Ns()
         {
-            int nbX = Couches[0].CalcutateX(Longueur).Count();
-            List<double> Ns = new List<double>();
+            int nbX = Couches[0].CalcutateX(Longueur,Ecart).Count();
+            double[] Ns = new double[nbX];
             double[][] Nx = new double[Couches.Count][];
             double[] divise = new double[nbX];
+            double[] divisant = new double[nbX];
 
             //initialise les arrays
             for (int i = 0; i < Nx.Length; i++)
@@ -81,47 +86,31 @@ namespace Flexion
                 {
                     if(j == i)
                     {
-                        double[] add = math.DivideArrayBydouble(Couches[j].Hauteur(Longueur).ToArray(), 2);
+                        double[] add = math.DivideArrayBydouble(Couches[j].Hauteur(Longueur,Ecart).ToArray(), 2);
                         Nx[i] = math.AddDoubleArray(Nx[i],add);
                     }
                     else
                     {
-                        Nx[i] = math.AddDoubleArray(Nx[i], Couches[j].Hauteur(Longueur).ToArray());
+                        Nx[i] = math.AddDoubleArray(Nx[i], Couches[j].Hauteur(Longueur,Ecart).ToArray());
                     }
                 }
             }
 
+            //calucule du divisé
             for (int i = 0; i < Couches.Count; i++)
             {
-                divise = math.AddDoubleArray(divise, Couches[i].Surface(Longueur,Eref).ToArray());
+                double[] ajout = math.MultiplyDoubleArray(Couches[i].Surface(Longueur, Eref, Ecart).ToArray(), Nx[i]);
+                divise = math.AddDoubleArray(divise, ajout);
             }
 
-            /*
-            // Calcule de tout les divisé dans le tableau divise
+            // calcule du divisant
             for (int i = 0; i < Couches.Count; i++)
             {
-                for (int j = 0; j < Couches[i].Surface(Longueur,Eref).Count; j++)
-                {
-                    divise[i][j] = Nx[i][j] * Couches[i].Surface(Longueur, Eref).ToArray()[j];
-                }
+                divisant = math.AddDoubleArray(divisant, Couches[i].Surface(Longueur,Eref,Ecart).ToArray());
             }
-
-            for (int i = 0; i < Nx[0].Length; i++)
-            {
-                double top = 0;
-                for(int j = 0;j < Nx.Length;j++)
-                {
-                    top += Nx[j][i];
-                }
-                double bottom = 0;
-                for (int k = 0;k < Couches.Count;k++)
-                {
-                    bottom += Couches[k].Surface(Longueur, Eref)[i];
-                }
-                Ns.Add(top / bottom);
-            }*/
-
-            return divise;
+            //calcule de Ns
+            Ns = math.DivideDoubleArrayByDoubleArray(divise, divisant);
+            return Ns;
         }
     }
 }

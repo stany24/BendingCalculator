@@ -28,11 +28,6 @@ namespace Flexion
         public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
         public Matiere GetMatiere() { return MatiereCouche; }
 
-        private double Ecart = 1e-2;
-        public double getEcart() { return Ecart; }
-        public void setEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
-
-
         Dictionary<string, double> values = new Dictionary<string, double>();
 
         /// <summary>
@@ -76,10 +71,10 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        public List<double> CalcutateX(double longueur)
+        public List<double> CalcutateX(double longueur,double ecart)
         {
             List<double> X = new List<double>();
-            for(double i = 0; i<= longueur; i+= Ecart)
+            for(double i = 0; i<= longueur+ecart; i+= ecart)
             {
                 X.Add(i);
             }
@@ -92,12 +87,12 @@ namespace Flexion
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
         }
        
-        public List<double> Largeur(double longueur, double Eref)
+        public List<double> Largeur(double longueur, double Eref,double ecart)
         {
             double L1 = (4*LargeurSide - 4*LargeurCenter)/Math.Pow(longueur,2);
 
             List<double> L2 = new List<double>();
-            foreach (double x in CalcutateX(longueur))
+            foreach (double x in CalcutateX(longueur,ecart))
             {
                 L2.Add(Math.Pow(x - longueur / 2, 2));
             }
@@ -116,12 +111,12 @@ namespace Flexion
             return Largeur;
         }
 
-        public List<double> Hauteur(double longueur)
+        public List<double> Hauteur(double longueur, double ecart)
         {
             double E1 = (4 * HauteurSide - 4 * HauteurCenter) / Math.Pow(longueur, 2);
 
             List<double> E2 = new List<double>();
-            foreach (double x in CalcutateX(longueur))
+            foreach (double x in CalcutateX(longueur,ecart))
             {
                 E2.Add(Math.Pow(x - longueur / 2, 2));
             }
@@ -134,11 +129,11 @@ namespace Flexion
             return Ef;
         }
 
-        public List<double> Surface(double lenght, double Eref)
+        public List<double> Surface(double lenght, double Eref,double ecart)
         {
             List<double> Surfaces = new List<double>();
-            List<double> Largeurs = Largeur(lenght,Eref);
-            List<double> Hauteurs = Hauteur(lenght);
+            List<double> Largeurs = Largeur(lenght,Eref,ecart);
+            List<double> Hauteurs = Hauteur(lenght,ecart);
             for (int i = 0; i < Largeurs.Count; i++)
             {
                 Surfaces.Add(Largeurs[i] * Hauteurs[i]);
