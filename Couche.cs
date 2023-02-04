@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flexion
 {
     public class Couche
     {
         private double LargeurCenter; //lp
-        public void SetLargeurCenter(double largeurCenter){if (largeurCenter > 0){LargeurCenter = largeurCenter; }}
+        public void SetLargeurCenter(double largeurCenter) { if (largeurCenter > 0) { LargeurCenter = largeurCenter; } }
         public double GetLargeurCenter() { return LargeurCenter; }
 
         private double LargeurSide; //le
@@ -36,7 +33,7 @@ namespace Flexion
         /// <param name="matiere">Matière de la couche</param>
         /// <param name="largeur">Largeur au centre et sur les côté de la couche</param>
         /// <param name="hauteur">Hauteur au centre et sur les côté de la couche</param>
-        public Couche(Matiere matiere,double largeur,double hauteur)
+        public Couche(Matiere matiere, double largeur, double hauteur)
         {
             SetMatiere(matiere);
             SetLargeurCenter(largeur);
@@ -53,7 +50,7 @@ namespace Flexion
         /// <param name="largeurSide">Largeur sur les côté de la couche</param>
         /// <param name="hauteurCenter">Hauteur au centre  de la couche</param>
         /// <param name="hauteurSide">Hauteur sur les côté de la couche</param>
-        public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter ,double hauteurSide)
+        public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter, double hauteurSide)
         {
             SetMatiere(matiere);
             SetLargeurCenter(largeurCenter);
@@ -71,20 +68,31 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        public List<double> CalcutateX(double longueur,double ecart)
+        public List<double> CalcutateX(double longueur, double ecart)
         {
             List<double> X = new List<double>();
-            for(double i = 0; i<= longueur+ecart; i+= ecart)
+            for (double i = 0; i <= longueur + ecart; i += ecart)
             {
                 X.Add(i);
             }
             return X;
         }
 
-        public double I(double Longueur,double Z)
+        public double I(double Longueur, double Z)
         {
             double Base = Longueur * LargeurCenter;
-            return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z*Z;
+            return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z * Z;
+        }
+
+        public double[] Base(double longueur,double ecart,double Eref)
+        {
+            AdditionalMath math = new AdditionalMath();
+            double L1 = (4*LargeurSide-4*LargeurCenter) / Math.Pow(longueur, 2);
+            double[] L2 = math.RemoveDoubleToArray(CalcutateX(longueur,ecart).ToArray(), longueur / 2);
+            double[] Base = math.MultiplyArrayBydouble(L2, L1);
+            Base = math.AddDoubleToArray(Base, LargeurCenter);
+            double divisant = Eref / GetMatiere().GetE();
+            return math.DivideArrayBydouble(Base, divisant);
         }
        
         public List<double> Largeur(double longueur, double Eref,double ecart)

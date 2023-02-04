@@ -1,8 +1,10 @@
-﻿namespace Flexion
+﻿using System;
+
+namespace Flexion
 {
     public class AdditionalMath
     {
-        public double[] AddDoubleArray(double[] array1, double[] array2)
+        public double[] Add2DoubleArray(double[] array1, double[] array2)
         {
             int length = array1.Length;
             if (array2.Length < length)
@@ -32,7 +34,7 @@
             return final;
         }
 
-        public double[] MultiplyDoubleArray(double[] array1, double[] array2)
+        public double[] MultiplyDoubleArrayByDoubleArray(double[] array1, double[] array2)
         {
             int length = array1.Length;
             if (array2.Length < length)
@@ -50,7 +52,43 @@
         public double[] DivideArrayBydouble(double[] array, double value) {
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = array[i]/2;
+                array[i] = array[i]/value;
+            }
+            return array;
+        }
+
+        public double[] MultiplyArrayBydouble(double[] array, double value)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = array[i] * value;
+            }
+            return array;
+        }
+
+        public double[] PowerArrayBydouble(double[] array, double value)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = Math.Pow(array[i], value);
+            }
+            return array;
+        }
+
+        public double[] RemoveDoubleToArray(double[] array, double value)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = array[i]-value;
+            }
+            return array;
+        }
+
+        public double[] AddDoubleToArray(double[] array, double value)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = array[i] + value;
             }
             return array;
         }
