@@ -62,6 +62,7 @@ namespace Flexion
             this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
             this.lblTest = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
+            this.tbxOutput = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
@@ -377,7 +378,7 @@ namespace Flexion
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(71, 152);
+            this.btnTest.Location = new System.Drawing.Point(66, 11);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 23;
@@ -385,11 +386,20 @@ namespace Flexion
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
+            // tbxOutput
+            // 
+            this.tbxOutput.Location = new System.Drawing.Point(15, 38);
+            this.tbxOutput.Multiline = true;
+            this.tbxOutput.Name = "tbxOutput";
+            this.tbxOutput.Size = new System.Drawing.Size(950, 838);
+            this.tbxOutput.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 395);
+            this.ClientSize = new System.Drawing.Size(994, 888);
+            this.Controls.Add(this.tbxOutput);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblTest);
             this.Controls.Add(this.lbxShowCouchePiece);
@@ -457,6 +467,7 @@ namespace Flexion
         private System.Windows.Forms.NumericUpDown nudLargeurCoucheSide;
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.TextBox tbxOutput;
     }
 }
 

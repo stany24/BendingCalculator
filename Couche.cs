@@ -28,7 +28,7 @@ namespace Flexion
         public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
         public Matiere GetMatiere() { return MatiereCouche; }
 
-        private double Ecart = 1;
+        private double Ecart = 1e-2;
         public double getEcart() { return Ecart; }
         public void setEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
 

@@ -20,7 +20,7 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            Couche couchetest = new Couche(new Matiere("chène", 12e9), 120, 50, 25, 10);
+            /*Couche couchetest = new Couche(new Matiere("chène", 12e9), 120, 50, 25, 10);
             foreach (double x in couchetest.CalcutateX(1500))
             {
                 lbxPiece.Items.Add(x);
@@ -28,7 +28,7 @@ namespace Flexion
             foreach (double largeur in couchetest.Largeur(1500,69e9))
             {
                 lbxShowCouchePiece.Items.Add(largeur);
-            }
+            }*/
         }
 
         /// <summary>
@@ -155,7 +155,16 @@ namespace Flexion
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            SaveFile();
+            Piece piece = new Piece(1500e-3, "test");
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 10e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
+            string array = " NEW ";
+            foreach (double temp in piece.Ns())
+            {
+                array += temp + " / ";
+            }
+            tbxOutput.Text += array;
         }
     }
 }

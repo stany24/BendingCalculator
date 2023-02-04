@@ -61,28 +61,42 @@ namespace Flexion
             return I;
         }
 
-        public List<double> Ns()
+        public double[] Ns()
         {
+            int nbX = Couches[0].CalcutateX(Longueur).Count();
             List<double> Ns = new List<double>();
             double[][] Nx = new double[Couches.Count][];
-            double[][] divise = new double[Couches.Count][];
+            double[] divise = new double[nbX];
 
-            //Calcule de tout les n1, n2, n3... dans le tableau Nx
+            //initialise les arrays
+            for (int i = 0; i < Nx.Length; i++)
+            {
+                Nx[i] = new double[nbX];
+            }
+
+            //calcule les Nx de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
-                while(i < Couches.Count-1)
+                for (int j = 0; j <= i; j++)
                 {
-                    for (int j = 0; j < Couches[i].Hauteur(Longueur).Count; j++)
+                    if(j == i)
                     {
-                        Nx[i][j] = Couches[i].Hauteur(Longueur).ToArray()[j];
+                        double[] add = math.DivideArrayBydouble(Couches[j].Hauteur(Longueur).ToArray(), 2);
+                        Nx[i] = math.AddDoubleArray(Nx[i],add);
                     }
-                }
-                for (int k = 0; k < Couches[i].Hauteur(Longueur).Count; k++)
-                {
-                    Nx[i][k] = Couches[i].Hauteur(Longueur).ToArray()[k]/2;
+                    else
+                    {
+                        Nx[i] = math.AddDoubleArray(Nx[i], Couches[j].Hauteur(Longueur).ToArray());
+                    }
                 }
             }
 
+            for (int i = 0; i < Couches.Count; i++)
+            {
+                divise = math.AddDoubleArray(divise, Couches[i].Surface(Longueur,Eref).ToArray());
+            }
+
+            /*
             // Calcule de tout les divisé dans le tableau divise
             for (int i = 0; i < Couches.Count; i++)
             {
@@ -105,9 +119,9 @@ namespace Flexion
                     bottom += Couches[k].Surface(Longueur, Eref)[i];
                 }
                 Ns.Add(top / bottom);
-            }
+            }*/
 
-            return Ns;
+            return divise;
         }
     }
 }
