@@ -64,7 +64,7 @@ namespace Flexion
             }
             return I;
         }
-
+        /*
         public double[][] MomentForce()
         {
             double F1 = 0;
@@ -84,7 +84,7 @@ namespace Flexion
                 }
             }
             return moments;
-        }
+        }*/
 
         public double[] CalculateI()
         {
@@ -92,17 +92,28 @@ namespace Flexion
             double[][] Ix = new double[Couches.Count][];
             double[] I = new double[nbX];
 
+            //initialise les arrays
             for (int i = 0; i < Ix.Length; i++)
             {
                 Ix[i] = new double[nbX];
             }
 
+            //calcule les Ix de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
                 double[] power = math.PowerArrayBydouble(Couches[i].Hauteur(Longueur,Ecart).ToArray(),3);
-                double[] divise = math.Add2DoubleArray(power, Couches[i].Base());
-
+                double[] divise = math.MultiplyDoubleArrayByDoubleArray(power, Couches[i].Base(Longueur,Ecart,Eref));
+                Ix[i] = math.DivideArrayBydouble(divise, 12);
             }
+
+            for (int i = 0; i < Couches.Count; i++)
+            {
+                double[] P1 = math.PowerArrayBydouble(Ns(), 2);
+                double[] P2 = math.RemoveDoubleArrayToDoubleArray(CalculateNx(i,nbX), P1);
+                double[] P3 = math.MultiplyDoubleArrayByDoubleArray(Couches[i].Surface(Longueur,Eref,Ecart).ToArray(), P2);
+                I = math.Add2DoubleArray(I, P3);
+            }
+            return I;
         }
 
         public double[] Ns()
@@ -122,18 +133,7 @@ namespace Flexion
             //calcule les Nx de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
-                for (int j = 0; j <= i; j++)
-                {
-                    if(j == i)
-                    {
-                        double[] add = math.DivideArrayBydouble(Couches[j].Hauteur(Longueur,Ecart).ToArray(), 2);
-                        Nx[i] = math.Add2DoubleArray(Nx[i],add);
-                    }
-                    else
-                    {
-                        Nx[i] = math.Add2DoubleArray(Nx[i], Couches[j].Hauteur(Longueur,Ecart).ToArray());
-                    }
-                }
+                Nx[i] = CalculateNx(i,nbX);
             }
 
             //calucule du divisé
@@ -151,6 +151,24 @@ namespace Flexion
             //calcule de Ns
             Ns = math.DivideDoubleArrayByDoubleArray(divise, divisant);
             return Ns;
+        }
+
+        public double[] CalculateNx(int i,int length)
+        {
+            double[] Nx= new double[length];
+            for (int j = 0; j <= i; j++)
+            {
+                if (j == i)
+                {
+                    double[] add = math.DivideArrayBydouble(Couches[j].Hauteur(Longueur, Ecart).ToArray(), 2);
+                    Nx = math.Add2DoubleArray(Nx, add);
+                }
+                else
+                {
+                    Nx = math.Add2DoubleArray(Nx, Couches[j].Hauteur(Longueur, Ecart).ToArray());
+                }
+            }
+            return Nx;
         }
     }
 }

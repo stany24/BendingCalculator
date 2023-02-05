@@ -159,8 +159,8 @@ namespace Flexion
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 10e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
-            string array = " NEW ";
-            foreach (double temp in piece.Ns())
+            string array = " I = ";
+            foreach (double temp in piece.CalculateI())
             {
                 array += temp +" / ";
                 
