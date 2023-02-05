@@ -108,10 +108,11 @@ namespace Flexion
 
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] P1 = math.PowerArrayBydouble(Ns(), 2);
-                double[] P2 = math.RemoveDoubleArrayToDoubleArray(CalculateNx(i,nbX), P1);
+                double[] P1 = math.RemoveDoubleArrayToDoubleArray(CalculateNx(i, nbX), Ns());
+                double[] P2 = math.PowerArrayBydouble(P1, 2);
                 double[] P3 = math.MultiplyDoubleArrayByDoubleArray(Couches[i].Surface(Longueur,Eref,Ecart).ToArray(), P2);
-                I = math.Add2DoubleArray(I, P3);
+                double[] P4 = math.Add2DoubleArray(Ix[i], P3);
+                I = math.Add2DoubleArray(I, P4);
             }
             return I;
         }

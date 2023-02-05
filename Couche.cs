@@ -89,6 +89,7 @@ namespace Flexion
             AdditionalMath math = new AdditionalMath();
             double L1 = (4*LargeurSide-4*LargeurCenter) / Math.Pow(longueur, 2);
             double[] L2 = math.RemoveDoubleToArray(CalcutateX(longueur,ecart).ToArray(), longueur / 2);
+            L2 = math.PowerArrayBydouble(L2, 2);
             double[] Base = math.MultiplyArrayBydouble(L2, L1);
             Base = math.AddDoubleToArray(Base, LargeurCenter);
             double divisant = Eref / GetMatiere().GetE();

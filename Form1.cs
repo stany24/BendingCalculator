@@ -20,15 +20,15 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            /*Couche couchetest = new Couche(new Matiere("chène", 12e9), 120, 50, 25, 10);
-            foreach (double x in couchetest.CalcutateX(1500))
-            {
-                lbxPiece.Items.Add(x);
-            }
-            foreach (double largeur in couchetest.Largeur(1500,69e9))
-            {
-                lbxShowCouchePiece.Items.Add(largeur);
-            }*/
+            Piece piece = new Piece(1500e-3, "Démo");
+            ListPiece.Add(piece);
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 10e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
+            ListCouches.Add(piece.Couches[0]);
+            ListCouches.Add(piece.Couches[1]);
+            ListMatieres.Add(piece.Couches[0].GetMatiere());
+            UpdateListBox();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Flexion
             {
                 using (StreamReader file = new StreamReader(matiere))
                 {
-                    lblTest.Text=file.ReadLine();
+                    lblError.Text=file.ReadLine();
                 }
             }
             string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
@@ -101,6 +101,41 @@ namespace Flexion
         /// <param name="e"></param>
         private void CreerCouche(object sender, EventArgs e)
         {
+            if (nudLargeurCoucheCenter.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à la largeur au centre";
+                return;
+            }
+
+            if (nudLargeurCoucheSide.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à la largeur sur les côté";
+                return;
+            }
+
+            if (nudHauteurCenter.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à la hauteur au centre";
+                return;
+            }
+
+            if (nudHauterSide.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à la hauteur sur les côté";
+                return;
+            }
+
+            if (lbxMatiere.SelectedItem == null)
+            {
+                lblError.Text = "Pas de matière sélétionnée";
+                return;
+            }
+
+            if (!(lbxMatiere.SelectedItem is Matiere))
+            {
+                lblError.Text = "L'objet sélécionné n'est pas une matière";
+                return;
+            }
             ListCouches.Add(new Couche(lbxMatiere.SelectedItem as Matiere, (double)nudLargeurCoucheCenter.Value,(double)nudLargeurCoucheSide.Value, (double)nudHauteurCenter.Value,(double)nudHauterSide.Value));
             UpdateListBox();
         }
@@ -112,6 +147,18 @@ namespace Flexion
         /// <param name="e"></param>
         private void CreerMatiere(object sender, EventArgs e)
         {
+            if(tbxNomMatiere.Text == string.Empty)
+            {
+                lblError.Text = "Pas de nom donné à la matière";
+                return;
+            }
+
+            if(nudE.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à E";
+                return;
+            }
+
             ListMatieres.Add(new Matiere(tbxNomMatiere.Text, (double) nudE.Value));
             UpdateListBox();
         }
@@ -123,6 +170,17 @@ namespace Flexion
         /// <param name="e"></param>
         private void CreerPiece(object sender, EventArgs e)
         {
+            if (tbxNomPiece.Text == string.Empty)
+            {
+                lblError.Text = "Pas de nom donné à la pièce";
+                return;
+            }
+
+            if (nudLongueurPiece.Value == 0)
+            {
+                lblError.Text = "Pas de valeur donnée à la longueur";
+                return;
+            }
             ListPiece.Add(new Piece((double)nudLongueurPiece.Value, tbxNomPiece.Text));
             UpdateListBox();
         }
@@ -134,6 +192,30 @@ namespace Flexion
         /// <param name="e"></param>
         private void AjouterCouche(object sender, EventArgs e)
         {
+            if (lbxCouche.SelectedItem == null)
+            {
+                lblError.Text = "Pas de couche sélétionnée";
+                return;
+            }
+
+            if (lbxPiece.SelectedItem == null)
+            {
+                lblError.Text = "Pas de piece sélétionnée";
+                return;
+            }
+
+            if (!(lbxCouche.SelectedItem is Couche))
+            {
+                lblError.Text = "L'objet sélécionné n'est pas une couche";
+                return;
+            }
+
+            if (!(lbxPiece.SelectedItem is Piece))
+            {
+                lblError.Text = "L'objet sélécionné n'est pas une pièce";
+                return;
+            }
+
             ListPiece[lbxPiece.SelectedIndex].Couches.Add(lbxCouche.SelectedItem as Couche);
             UpdateListBox();
         }
@@ -145,6 +227,12 @@ namespace Flexion
         /// <param name="e"></param>
         private void ShowCoucheInPiece(object sender, EventArgs e)
         {
+            if(!(lbxPiece.SelectedItem is Piece))
+            {
+                lblError.Text = "L'objet sélécionné n'est pas une pièce";
+                return;
+            }
+
             lbxShowCouchePiece.Items.Clear();
             Piece piece = lbxPiece.SelectedItem as Piece;
             foreach (Couche couche in piece.Couches)
@@ -155,17 +243,31 @@ namespace Flexion
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            Piece piece = new Piece(1500e-3, "test");
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 10e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
-            string array = " I = ";
-            foreach (double temp in piece.CalculateI())
+            if(lbxPiece.SelectedItem == null)
             {
-                array += temp +" / ";
+                lblError.Text = "Pas de pièce sélétionnée";
+                return;
                 
             }
-            tbxOutput.Text += array;
+
+            if (!(lbxPiece.SelectedItem is Piece))
+            {
+                lblError.Text = "L'objet sélécionné n'est pas une pièce";
+                return;
+            }
+
+            Piece piece = lbxPiece.SelectedItem as Piece;
+            lbxNs.Items.Clear();
+            lbxI.Items.Clear();
+            foreach (double n in piece.Ns())
+            {
+                lbxNs.Items.Add(n);
+            }
+
+            foreach (double i in piece.CalculateI())
+            {
+                lbxI.Items.Add(i);
+            }
         }
     }
 }
