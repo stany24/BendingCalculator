@@ -88,12 +88,12 @@ namespace Flexion
         {
             AdditionalMath math = new AdditionalMath();
             double L1 = (4*LargeurSide-4*LargeurCenter) / Math.Pow(longueur, 2);
-            double[] L2 = math.RemoveDoubleToArray(CalcutateX(longueur,ecart).ToArray(), longueur / 2);
-            L2 = math.PowerArrayBydouble(L2, 2);
-            double[] Base = math.MultiplyArrayBydouble(L2, L1);
-            Base = math.AddDoubleToArray(Base, LargeurCenter);
+            double[] L2 = math.OperationDoubleArrayDouble(CalcutateX(longueur,ecart).ToArray(), longueur / 2,AdditionalMath.Operation.Moins);
+            L2 = math.OperationDoubleArrayDouble(L2, 2,AdditionalMath.Operation.Puissance);
+            double[] Base = math.OperationDoubleArrayDouble(L2, L1,AdditionalMath.Operation.Fois);
+            Base = math.OperationDoubleArrayDouble(Base, LargeurCenter,AdditionalMath.Operation.Plus);
             double divisant = Eref / GetMatiere().GetE();
-            return math.DivideArrayBydouble(Base, divisant);
+            return math.OperationDoubleArrayDouble(Base, divisant,AdditionalMath.Operation.Divisé);
         }
        
         public List<double> Largeur(double longueur, double Eref,double ecart)

@@ -1,10 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace Flexion
 {
     public class AdditionalMath
     {
-        public double[] Add2DoubleArray(double[] array1, double[] array2)
+        public enum Operation: int
+        {
+            Plus = 0,
+            Moins = 1,
+            Fois = 2,
+            Divisé = 3,
+            Puissance = 4,
+        }
+        public double[] OperationDoubleArrayDoubleArray(double[] array1, double[] array2,Operation action)
         {
             int length = array1.Length;
             if (array2.Length < length)
@@ -12,100 +21,78 @@ namespace Flexion
                 length = array2.Length;
             }
             double[] final = new double[length];
-            for (int i = 0; i < length; i++)
+            switch (action)
             {
-                final[i] = array1[i] + array2[i];
+                case Operation.Plus:
+                    for (int i = 0; i < length; i++)
+                    {
+                        final[i] = array1[i] + array2[i];
+                    }
+                    break;
+                case Operation.Moins:
+                    for (int i = 0; i < length; i++)
+                    {
+                        final[i] = array1[i] - array2[i];
+                    }
+                    break;
+                case Operation.Fois:
+                    for (int i = 0; i < length; i++)
+                    {
+                        final[i] = array1[i] * array2[i];
+                    }
+                    break;
+                case Operation.Divisé:
+                    for (int i = 0; i < length; i++)
+                    {
+                        final[i] = array1[i] / array2[i];
+                    }
+                    break;
+                case Operation.Puissance:
+                    for (int i = 0; i < length; i++)
+                    {
+                        final[i] = Math.Pow(array1[i], array2[i]);
+                    }
+                    break;
             }
             return final;
         }
 
-        public double[] DivideDoubleArrayByDoubleArray(double[] array1, double[] array2)
+        public double[] OperationDoubleArrayDouble(double[] array, double value, Operation action)
         {
-            int length = array1.Length;
-            if (array2.Length < length)
+            switch (action)
             {
-                length = array2.Length;
-            }
-            double[] final = new double[length];
-            for (int i = 0; i < length; i++)
-            {
-                final[i] = array1[i] / array2[i];
-            }
-            return final;
-        }
-
-        public double[] MultiplyDoubleArrayByDoubleArray(double[] array1, double[] array2)
-        {
-            int length = array1.Length;
-            if (array2.Length < length)
-            {
-                length = array2.Length;
-            }
-            double[] final = new double[length];
-            for (int i = 0; i < length; i++)
-            {
-                final[i] = array1[i] * array2[i];
-            }
-            return final;
-        }
-        public double[] RemoveDoubleArrayToDoubleArray(double[] array1, double[] array2)
-        {
-            int length = array1.Length;
-            if (array2.Length < length)
-            {
-                length = array2.Length;
-            }
-            double[] final = new double[length];
-            for (int i = 0; i < length; i++)
-            {
-                final[i] = array1[i] - array2[i];
-            }
-            return final;
-        }
-
-        public double[] DivideArrayBydouble(double[] array, double value) {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = array[i]/value;
+                case Operation.Plus:
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        array[i] = array[i] + value;
+                    }
+                    break;
+                case Operation.Moins:
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        array[i] = array[i] - value;
+                    }
+                    break;
+                case Operation.Fois:
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        array[i] = array[i] * value;
+                    }
+                    break;
+                case Operation.Divisé:
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        array[i] = array[i] / value;
+                    }
+                    break;
+                case Operation.Puissance:
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        array[i] = Math.Pow(array[i], value);
+                    }
+                    break;
             }
             return array;
         }
-
-        public double[] MultiplyArrayBydouble(double[] array, double value)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = array[i] * value;
-            }
-            return array;
-        }
-
-        public double[] PowerArrayBydouble(double[] array, double value)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = Math.Pow(array[i], value);
-            }
-            return array;
-        }
-
-        public double[] RemoveDoubleToArray(double[] array, double value)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = array[i]-value;
-            }
-            return array;
-        }
-
-        public double[] AddDoubleToArray(double[] array, double value)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = array[i] + value;
-            }
-            return array;
-        }
-
     }
 }
