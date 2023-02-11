@@ -66,6 +66,9 @@ namespace Flexion
             this.lbxI = new System.Windows.Forms.ListBox();
             this.lblNs = new System.Windows.Forms.Label();
             this.lblI = new System.Windows.Forms.Label();
+            this.lblTest = new System.Windows.Forms.Label();
+            this.lbxMoment = new System.Windows.Forms.ListBox();
+            this.lblMoment = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
@@ -427,11 +430,40 @@ namespace Flexion
             this.lblI.TabIndex = 26;
             this.lblI.Text = "I";
             // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.Location = new System.Drawing.Point(105, 145);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(35, 13);
+            this.lblTest.TabIndex = 28;
+            this.lblTest.Text = "label2";
+            // 
+            // lbxMoment
+            // 
+            this.lbxMoment.FormattingEnabled = true;
+            this.lbxMoment.Location = new System.Drawing.Point(1312, 46);
+            this.lbxMoment.Name = "lbxMoment";
+            this.lbxMoment.Size = new System.Drawing.Size(164, 433);
+            this.lbxMoment.TabIndex = 29;
+            // 
+            // lblMoment
+            // 
+            this.lblMoment.AutoSize = true;
+            this.lblMoment.Location = new System.Drawing.Point(1370, 21);
+            this.lblMoment.Name = "lblMoment";
+            this.lblMoment.Size = new System.Drawing.Size(45, 13);
+            this.lblMoment.TabIndex = 30;
+            this.lblMoment.Text = "Moment";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1317, 491);
+            this.ClientSize = new System.Drawing.Size(1489, 491);
+            this.Controls.Add(this.lblMoment);
+            this.Controls.Add(this.lbxMoment);
+            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.lblI);
             this.Controls.Add(this.lblNs);
             this.Controls.Add(this.lbxI);
@@ -507,6 +539,9 @@ namespace Flexion
         private System.Windows.Forms.ListBox lbxI;
         private System.Windows.Forms.Label lblNs;
         private System.Windows.Forms.Label lblI;
+        private System.Windows.Forms.Label lblTest;
+        private System.Windows.Forms.ListBox lbxMoment;
+        private System.Windows.Forms.Label lblMoment;
     }
 }
 

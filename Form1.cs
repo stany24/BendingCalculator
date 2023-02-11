@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using MathNet.Numerics.Integration; //pour les intégrales
 using System.IO;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Flexion
 {
@@ -247,7 +248,6 @@ namespace Flexion
             {
                 lblError.Text = "Pas de pièce sélétionnée";
                 return;
-                
             }
 
             if (!(lbxPiece.SelectedItem is Piece))
@@ -268,6 +268,13 @@ namespace Flexion
             {
                 lbxI.Items.Add(i);
             }
+
+            foreach(double i in piece.MomentForce())
+            {
+                lbxMoment.Items.Add(i);
+            }
+
+            lblTest.Text = Convert.ToString(piece.MomentForce().Count());
         }
     }
 }

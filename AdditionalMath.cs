@@ -13,7 +13,7 @@ namespace Flexion
             Divisé = 3,
             Puissance = 4,
         }
-        public double[] OperationDoubleArrayDoubleArray(double[] array1, double[] array2,Operation action)
+        public double[] OperationDoubleArray(double[] array1, double[] array2,Operation action)
         {
             int length = array1.Length;
             if (array2.Length < length)
@@ -57,7 +57,7 @@ namespace Flexion
             return final;
         }
 
-        public double[] OperationDoubleArrayDouble(double[] array, double value, Operation action)
+        public double[] OperationDoubleArray(double[] array, double value, Operation action)
         {
             switch (action)
             {

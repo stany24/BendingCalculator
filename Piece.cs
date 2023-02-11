@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Flexion;
+using MathNet.Numerics;
 
 namespace Flexion
 {
@@ -64,27 +65,48 @@ namespace Flexion
             }
             return I;
         }
-        /*
-        public double[][] MomentForce()
+        public double[] MomentForce()
         {
-            double F1 = 0;
-            double b1 = 0;
-            int nbX = Couches[0].CalcutateX(Longueur, Ecart).Count();
-            double[][] moments = new double[nbX][];
-            foreach (double[] moment in moments)
+            double F = CalcuateF();
+            double b1 = Longueur/2;
+            double[] X = Couches[0].CalcutateX(Longueur, Ecart).ToArray();
+            int nbX = Couches[0].CalcutateX(Longueur,Ecart).Count();
+            double[] moments = new double[nbX];
+
+            double[] Mfa1 = math.OperationDoubleArray(Couches[0].CalcutateX(Longueur, Ecart).ToArray(), -F * b1, AdditionalMath.Operation.Fois);
+            Mfa1 = math.OperationDoubleArray(Mfa1, Longueur, AdditionalMath.Operation.Divisé);
+            
+            double[] Mfb1 = math.OperationDoubleArray(Couches[0].CalcutateX(Longueur, Ecart).ToArray(), Longueur - b1, AdditionalMath.Operation.Moins);
+            Mfb1 = math.OperationDoubleArray(Mfb1, F, AdditionalMath.Operation.Fois);
+            Mfb1 = math.OperationDoubleArray(Mfa1, Mfb1, AdditionalMath.Operation.Plus);
+
+            for (int i = 0; i < nbX; i++)
             {
-                if (< nbX / 2)
+                if (X[i] < b1)
                 {
-                    double[] divise = math.MultiplyArrayBydouble(Couches[0].CalcutateX(Longueur,Ecart).ToArray(), -F1 * b1);
-                    moment = math.DivideArrayBydouble(divise, Longueur);
+                    moments[i] = Mfa1[i];
                 }
                 else
                 {
-
+                    moments[i] = Mfb1[i];
                 }
             }
             return moments;
-        }*/
+        }
+
+        public int getNbMoment()
+        {
+            return MomentForce().Count();
+        }
+
+        public double CalcuateF()
+        {
+            double m = 70;
+            double r = 22;
+            double v = 60 / 3.6;
+            double g = 9.81;
+            return m*Math.Sqrt(Math.Pow(g,2) + (Math.Pow(v,4) / Math.Pow(r,2)));
+        }
 
         public double[] CalculateI()
         {
@@ -101,18 +123,18 @@ namespace Flexion
             //calcule les Ix de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] power = math.OperationDoubleArrayDouble(Couches[i].Hauteur(Longueur,Ecart).ToArray(),3,AdditionalMath.Operation.Puissance);
-                double[] divise = math.OperationDoubleArrayDoubleArray(power, Couches[i].Base(Longueur,Ecart,Eref),AdditionalMath.Operation.Fois);
-                Ix[i] = math.OperationDoubleArrayDouble(divise, 12,AdditionalMath.Operation.Divisé);
+                double[] power = math.OperationDoubleArray(Couches[i].Hauteur(Longueur,Ecart).ToArray(),3,AdditionalMath.Operation.Puissance);
+                double[] divise = math.OperationDoubleArray(power, Couches[i].Base(Longueur,Ecart,Eref),AdditionalMath.Operation.Fois);
+                Ix[i] = math.OperationDoubleArray(divise, 12,AdditionalMath.Operation.Divisé);
             }
 
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] P1 = math.OperationDoubleArrayDoubleArray(CalculateNx(i, nbX), Ns(),AdditionalMath.Operation.Moins);
-                double[] P2 = math.OperationDoubleArrayDouble(P1, 2,AdditionalMath.Operation.Puissance);
-                double[] P3 = math.OperationDoubleArrayDoubleArray(Couches[i].Surface(Longueur,Eref,Ecart).ToArray(), P2,AdditionalMath.Operation.Fois);
-                double[] P4 = math.OperationDoubleArrayDoubleArray(Ix[i], P3, AdditionalMath.Operation.Plus);
-                I = math.OperationDoubleArrayDoubleArray(I, P4,AdditionalMath.Operation.Plus);
+                double[] P1 = math.OperationDoubleArray(CalculateNx(i, nbX), Ns(),AdditionalMath.Operation.Moins);
+                double[] P2 = math.OperationDoubleArray(P1, 2,AdditionalMath.Operation.Puissance);
+                double[] P3 = math.OperationDoubleArray(Couches[i].Surface(Longueur,Eref,Ecart).ToArray(), P2,AdditionalMath.Operation.Fois);
+                double[] P4 = math.OperationDoubleArray(Ix[i], P3, AdditionalMath.Operation.Plus);
+                I = math.OperationDoubleArray(I, P4,AdditionalMath.Operation.Plus);
             }
             return I;
         }
@@ -139,17 +161,17 @@ namespace Flexion
             //calucule du divisé
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] ajout = math.OperationDoubleArrayDoubleArray(Couches[i].Surface(Longueur, Eref, Ecart).ToArray(), Nx[i], AdditionalMath.Operation.Fois);
-                divise = math.OperationDoubleArrayDoubleArray(divise, ajout,AdditionalMath.Operation.Plus);
+                double[] ajout = math.OperationDoubleArray(Couches[i].Surface(Longueur, Eref, Ecart).ToArray(), Nx[i], AdditionalMath.Operation.Fois);
+                divise = math.OperationDoubleArray(divise, ajout,AdditionalMath.Operation.Plus);
             }
 
             // calcule du divisant
             for (int i = 0; i < Couches.Count; i++)
             {
-                divisant = math.OperationDoubleArrayDoubleArray(divisant, Couches[i].Surface(Longueur,Eref,Ecart).ToArray(),AdditionalMath.Operation.Plus);
+                divisant = math.OperationDoubleArray(divisant, Couches[i].Surface(Longueur,Eref,Ecart).ToArray(),AdditionalMath.Operation.Plus);
             }
             //calcule de Ns
-            return math.OperationDoubleArrayDoubleArray(divise, divisant, AdditionalMath.Operation.Divisé); ;
+            return math.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divisé); ;
         }
 
         public double[] CalculateNx(int i,int length)
@@ -159,12 +181,12 @@ namespace Flexion
             {
                 if (j == i)
                 {
-                    double[] add = math.OperationDoubleArrayDouble(Couches[j].Hauteur(Longueur, Ecart).ToArray(), 2,AdditionalMath.Operation.Divisé);
-                    Nx = math.OperationDoubleArrayDoubleArray(Nx, add,AdditionalMath.Operation.Plus);
+                    double[] add = math.OperationDoubleArray(Couches[j].Hauteur(Longueur, Ecart).ToArray(), 2,AdditionalMath.Operation.Divisé);
+                    Nx = math.OperationDoubleArray(Nx, add,AdditionalMath.Operation.Plus);
                 }
                 else
                 {
-                    Nx = math.OperationDoubleArrayDoubleArray(Nx, Couches[j].Hauteur(Longueur, Ecart).ToArray(),AdditionalMath.Operation.Plus);
+                    Nx = math.OperationDoubleArray(Nx, Couches[j].Hauteur(Longueur, Ecart).ToArray(),AdditionalMath.Operation.Plus);
                 }
             }
             return Nx;
