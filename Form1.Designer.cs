@@ -136,6 +136,11 @@ namespace Flexion
             // 
             this.nudLongueurPiece.DecimalPlaces = 1;
             this.nudLongueurPiece.Location = new System.Drawing.Point(101, 30);
+            this.nudLongueurPiece.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
             this.nudLongueurPiece.Name = "nudLongueurPiece";
             this.nudLongueurPiece.Size = new System.Drawing.Size(120, 20);
             this.nudLongueurPiece.TabIndex = 8;
@@ -289,6 +294,11 @@ namespace Flexion
             // 
             this.nudE.DecimalPlaces = 1;
             this.nudE.Location = new System.Drawing.Point(101, 65);
+            this.nudE.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
             this.nudE.Name = "nudE";
             this.nudE.Size = new System.Drawing.Size(100, 20);
             this.nudE.TabIndex = 19;

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Flexion;
-using MathNet.Numerics;
 
 namespace Flexion
 {
@@ -141,7 +137,7 @@ namespace Flexion
             //
             for (int i = 0; i < integrale3.Count(); i++)
             {
-                integrale3[i] = integrale3[i] / Eref;
+                integrale3[i] = integrale3[i] / -Eref;
             }
 
             return integrale3;
