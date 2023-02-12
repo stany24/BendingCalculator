@@ -33,7 +33,7 @@ namespace Flexion
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
 
-        private double Ecart = 1e-2;
+        private double Ecart = 1e-4;
         public double GetEcart() { return Ecart; }
         public void SetEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
 
@@ -94,6 +94,59 @@ namespace Flexion
             return moments;
         }
 
+        public double[] Intégrale()
+        {
+            double[] integrale1 = new double[Couches[0].CalcutateX(Longueur,Ecart).Count()];
+            double[] integrale2 = new double[Couches[0].CalcutateX(Longueur,Ecart).Count()];
+            double[] integrale3 = new double[Couches[0].CalcutateX(Longueur,Ecart).Count()];
+            double[] moment = MomentForce();
+            double[] I = CalculateI();
+            // calcule
+            for (int i = 0; i < moment.Count(); i++)
+            {
+                integrale1[i] = moment[i] / I[i];
+            }
+            // première intégrale
+            for (int i = 0; i < moment.Count(); i++)
+            {
+                if(i-1 <0)
+                {
+                    integrale2[i] = integrale1[i] * Ecart;
+                }
+                else
+                {
+                    integrale2[i] = integrale2[i - 1] + integrale1[i] * Ecart;
+                }
+            }
+
+            // 
+            double offset = integrale2[Convert.ToInt32(integrale2.Count() / 2)];
+            for (int i = 0; i < integrale2.Count(); i++)
+            {
+                integrale2[i] -= offset;
+            }
+
+            // deuxième intégrale
+            for (int i = 0; i < integrale3.Count(); i++)
+            {
+                if (i - 1 < 0)
+                {
+                    integrale3[i] = integrale2[i] * Ecart;
+                }
+                else
+                {
+                    integrale3[i] = integrale3[i - 1] + integrale2[i] * Ecart;
+                }
+            }
+            //
+            for (int i = 0; i < integrale3.Count(); i++)
+            {
+                integrale3[i] = integrale3[i] / Eref;
+            }
+
+            return integrale3;
+        }
+
         public int getNbMoment()
         {
             return MomentForce().Count();
@@ -105,6 +158,7 @@ namespace Flexion
             double r = 22;
             double v = 60 / 3.6;
             double g = 9.81;
+            return 500;
             return m*Math.Sqrt(Math.Pow(g,2) + (Math.Pow(v,4) / Math.Pow(r,2)));
         }
 

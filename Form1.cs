@@ -5,6 +5,7 @@ using MathNet.Numerics.Integration; //pour les intégrales
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Flexion
 {
@@ -23,9 +24,9 @@ namespace Flexion
             InitializeComponent();
             Piece piece = new Piece(1500e-3, "Démo");
             ListPiece.Add(piece);
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 10e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 150e-3, 5e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
+            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             ListCouches.Add(piece.Couches[0]);
             ListCouches.Add(piece.Couches[1]);
             ListMatieres.Add(piece.Couches[0].GetMatiere());
@@ -259,7 +260,7 @@ namespace Flexion
             Piece piece = lbxPiece.SelectedItem as Piece;
             lbxNs.Items.Clear();
             lbxI.Items.Clear();
-            foreach (double n in piece.Ns())
+            /*foreach (double n in piece.Ns())
             {
                 lbxNs.Items.Add(n);
             }
@@ -272,6 +273,30 @@ namespace Flexion
             foreach(double i in piece.MomentForce())
             {
                 lbxMoment.Items.Add(i);
+            }
+            foreach (double i in intégrale)
+            {
+                lbxIntegrale.Items.Add(i);
+            }*/
+
+            double[] intégrale = piece.Intégrale();
+            double[] moment = piece.MomentForce();
+            
+            //Graphe de l'intégrale
+            chrIntegrale.Series.Clear();
+            Series serieI =  chrIntegrale.Series.Add("intégrale");
+            serieI.ChartType = SeriesChartType.Spline;
+            for (int i = 1;i < intégrale.Length+1;i++)
+            {
+                serieI.Points.AddXY(i, intégrale[i-1]);
+            }
+            //Graphe du moment de force
+            chrMomentForce.Series.Clear();
+            Series serieM = chrMomentForce.Series.Add("moment de force");
+            serieM.ChartType = SeriesChartType.Spline;
+            for (int i = 1; i < moment.Length+1; i++)
+            {
+                serieM.Points.AddXY(i, moment[i-1]);
             }
 
             lblTest.Text = Convert.ToString(piece.MomentForce().Count());

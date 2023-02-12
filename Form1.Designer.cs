@@ -29,6 +29,12 @@ namespace Flexion
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.lblDeformation = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
@@ -69,6 +75,10 @@ namespace Flexion
             this.lblTest = new System.Windows.Forms.Label();
             this.lbxMoment = new System.Windows.Forms.ListBox();
             this.lblMoment = new System.Windows.Forms.Label();
+            this.lbxIntegrale = new System.Windows.Forms.ListBox();
+            this.lblIntegrale = new System.Windows.Forms.Label();
+            this.chrIntegrale = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chrMomentForce = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
@@ -80,6 +90,8 @@ namespace Flexion
             this.gbxMatiere.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chrIntegrale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chrMomentForce)).BeginInit();
             this.SuspendLayout();
             // 
             // lblForce
@@ -456,11 +468,64 @@ namespace Flexion
             this.lblMoment.TabIndex = 30;
             this.lblMoment.Text = "Moment";
             // 
+            // lbxIntegrale
+            // 
+            this.lbxIntegrale.FormattingEnabled = true;
+            this.lbxIntegrale.Location = new System.Drawing.Point(1482, 46);
+            this.lbxIntegrale.Name = "lbxIntegrale";
+            this.lbxIntegrale.Size = new System.Drawing.Size(164, 433);
+            this.lbxIntegrale.TabIndex = 31;
+            // 
+            // lblIntegrale
+            // 
+            this.lblIntegrale.AutoSize = true;
+            this.lblIntegrale.Location = new System.Drawing.Point(1532, 21);
+            this.lblIntegrale.Name = "lblIntegrale";
+            this.lblIntegrale.Size = new System.Drawing.Size(48, 13);
+            this.lblIntegrale.TabIndex = 32;
+            this.lblIntegrale.Text = "Intégrale";
+            // 
+            // chrIntegrale
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chrIntegrale.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrIntegrale.Legends.Add(legend1);
+            this.chrIntegrale.Location = new System.Drawing.Point(15, 497);
+            this.chrIntegrale.Name = "chrIntegrale";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrIntegrale.Series.Add(series1);
+            this.chrIntegrale.Size = new System.Drawing.Size(1002, 300);
+            this.chrIntegrale.TabIndex = 34;
+            this.chrIntegrale.Text = "Graphe de l\'intégrale";
+            // 
+            // chrMomentForce
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chrMomentForce.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrMomentForce.Legends.Add(legend2);
+            this.chrMomentForce.Location = new System.Drawing.Point(15, 803);
+            this.chrMomentForce.Name = "chrMomentForce";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chrMomentForce.Series.Add(series2);
+            this.chrMomentForce.Size = new System.Drawing.Size(1002, 300);
+            this.chrMomentForce.TabIndex = 35;
+            this.chrMomentForce.Text = "Graphe de l\'intégrale";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1489, 491);
+            this.ClientSize = new System.Drawing.Size(1655, 1125);
+            this.Controls.Add(this.chrMomentForce);
+            this.Controls.Add(this.chrIntegrale);
+            this.Controls.Add(this.lblIntegrale);
+            this.Controls.Add(this.lbxIntegrale);
             this.Controls.Add(this.lblMoment);
             this.Controls.Add(this.lbxMoment);
             this.Controls.Add(this.lblTest);
@@ -495,6 +560,8 @@ namespace Flexion
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chrIntegrale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chrMomentForce)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -542,6 +609,10 @@ namespace Flexion
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.ListBox lbxMoment;
         private System.Windows.Forms.Label lblMoment;
+        private System.Windows.Forms.ListBox lbxIntegrale;
+        private System.Windows.Forms.Label lblIntegrale;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrIntegrale;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrMomentForce;
     }
 }
 
