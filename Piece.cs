@@ -17,14 +17,6 @@ namespace Flexion
         public double GetLongueur() { return Longueur; }
         public void SetLongueur(double value) {if (value > 0) { Longueur = value; }}
 
-        private double Xi = 1.5;
-        public double GetXi() { return Xi; }
-        public void SetXi(double value) {if (value > 0) { Xi = value; }}
-
-        private double Dep = 0;
-        public double GetDep() { return Dep; }
-        public void SetDep(double value) {if (value > 0) { Dep = value; }}
-
         private double Eref = 69e9;
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
@@ -42,6 +34,13 @@ namespace Flexion
         {
             SetLongueur(longueur);
             SetNom(nom);
+        }
+
+        public Piece(double longueur, string nom, double eref)
+        {
+            SetLongueur(longueur);
+            SetNom(nom);
+            SetEref(eref);
         }
 
         /// <summary>
