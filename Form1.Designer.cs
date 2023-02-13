@@ -79,6 +79,7 @@ namespace Flexion
             this.lblIntegrale = new System.Windows.Forms.Label();
             this.chrIntegrale = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chrMomentForce = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tbxOutput = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
@@ -527,11 +528,20 @@ namespace Flexion
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
             // 
+            // tbxOutput
+            // 
+            this.tbxOutput.Location = new System.Drawing.Point(1047, 557);
+            this.tbxOutput.Multiline = true;
+            this.tbxOutput.Name = "tbxOutput";
+            this.tbxOutput.Size = new System.Drawing.Size(577, 485);
+            this.tbxOutput.TabIndex = 36;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1655, 1125);
+            this.Controls.Add(this.tbxOutput);
             this.Controls.Add(this.chrMomentForce);
             this.Controls.Add(this.chrIntegrale);
             this.Controls.Add(this.lblIntegrale);
@@ -623,6 +633,7 @@ namespace Flexion
         private System.Windows.Forms.Label lblIntegrale;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrIntegrale;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrMomentForce;
+        private System.Windows.Forms.TextBox tbxOutput;
     }
 }
 

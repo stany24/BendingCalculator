@@ -59,40 +59,41 @@ namespace Flexion
 
         public double[] OperationDoubleArray(double[] array, double value, Operation action)
         {
+            double[] final = new double[array.Length];
             switch (action)
             {
                 case Operation.Plus:
                     for (int i = 0; i < array.Length; i++)
                     {
-                        array[i] = array[i] + value;
+                        final[i] = array[i] + value;
                     }
                     break;
                 case Operation.Moins:
                     for (int i = 0; i < array.Length; i++)
                     {
-                        array[i] = array[i] - value;
+                        final[i] = array[i] - value;
                     }
                     break;
                 case Operation.Fois:
                     for (int i = 0; i < array.Length; i++)
                     {
-                        array[i] = array[i] * value;
+                        final[i] = array[i] * value;
                     }
                     break;
                 case Operation.Divisé:
                     for (int i = 0; i < array.Length; i++)
                     {
-                        array[i] = array[i] / value;
+                        final[i] = array[i] / value;
                     }
                     break;
                 case Operation.Puissance:
                     for (int i = 0; i < array.Length; i++)
                     {
-                        array[i] = Math.Pow(array[i], value);
+                        final[i] = Math.Pow(array[i], value);
                     }
                     break;
             }
-            return array;
+            return final;
         }
     }
 }
