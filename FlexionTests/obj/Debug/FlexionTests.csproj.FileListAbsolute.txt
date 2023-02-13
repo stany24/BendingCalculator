@@ -40,3 +40,13 @@ C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.Vis
 C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\obj\Debug\FlexionTests.csproj.CopyComplete
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.TestPlatform.AdapterUtilities.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Administrateur\Desktop\flexion-tib\FlexionTests\bin\Debug\Microsoft.TestPlatform.AdapterUtilities.dll

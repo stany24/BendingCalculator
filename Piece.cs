@@ -90,15 +90,6 @@ namespace Flexion
         /// <returns></returns>
         public override string ToString(){return $"{GetNom()} de {Longueur} cm.";}
 
-        public double IGeneral()
-        {
-            double I=0;
-            foreach (Couche couche in Couches)
-            {
-                I+= couche.I(Longueur,1);
-            }
-            return I;
-        }
         public double[] MomentForce()
         {
             double F = CalcuateF();

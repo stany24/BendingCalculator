@@ -259,19 +259,15 @@ namespace Flexion
             }
 
             Piece piece = lbxPiece.SelectedItem as Piece;
+            double[] intégrale = piece.Intégrale();
+            double[] moment = piece.MomentForce();
+
+            //Affichage des valeurs dans les itemsbox
+            /*
             lbxNs.Items.Clear();
             lbxI.Items.Clear();
             lbxMoment.Items.Clear();
             lbxIntegrale.Items.Clear();
-
-            double[] moment1 = piece.MomentForce();
-            double[] moment2 = piece.MomentForce();
-            double[] iiii = piece.CalculateI();
-            double[] moment3 = piece.MomentForce();
-
-
-            double[] intégrale = piece.Intégrale();
-            double[] moment = piece.MomentForce();
             foreach (double n in piece.Ns())
             {
                 lbxNs.Items.Add(n);
@@ -289,7 +285,7 @@ namespace Flexion
             foreach (double i in intégrale)
             {
                 lbxIntegrale.Items.Add(i);
-            }
+            }*/
 
             //Graphe de l'intégrale
             chrIntegrale.Series.Clear();
