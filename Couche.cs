@@ -25,8 +25,6 @@ namespace Flexion
         public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
         public Matiere GetMatiere() { return MatiereCouche; }
 
-        Dictionary<string, double> values = new Dictionary<string, double>();
-
         /// <summary>
         /// Crée une nouvelle couche avec la matière donnée et une longueur et un largeur uniforme.
         /// </summary>
@@ -68,27 +66,17 @@ namespace Flexion
             return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
-        public List<double> CalcutateX(double longueur, double ecart)
-        {
-            List<double> X = new List<double>();
-            for (double i = 0; i <= longueur + ecart; i += ecart)
-            {
-                X.Add(i);
-            }
-            return X;
-        }
-
         public double I(double Longueur, double Z)
         {
             double Base = Longueur * LargeurCenter;
             return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z * Z;
         }
 
-        public double[] Base(double longueur,double ecart,double Eref)
+        public double[] Base(double longueur,double ecart,double Eref,double[] Xs)
         {
             AdditionalMath math = new AdditionalMath();
             double L1 = (4*LargeurSide-4*LargeurCenter) / Math.Pow(longueur, 2);
-            double[] L2 = math.OperationDoubleArray(CalcutateX(longueur,ecart).ToArray(), longueur / 2,AdditionalMath.Operation.Moins);
+            double[] L2 = math.OperationDoubleArray(Xs, longueur / 2,AdditionalMath.Operation.Moins);
             L2 = math.OperationDoubleArray(L2, 2,AdditionalMath.Operation.Puissance);
             double[] Base = math.OperationDoubleArray(L2, L1,AdditionalMath.Operation.Fois);
             Base = math.OperationDoubleArray(Base, LargeurCenter,AdditionalMath.Operation.Plus);
@@ -96,12 +84,12 @@ namespace Flexion
             return math.OperationDoubleArray(Base, divisant,AdditionalMath.Operation.Divisé);
         }
        
-        public List<double> Largeur(double longueur, double Eref,double ecart)
+        public List<double> Largeur(double longueur, double Eref,double ecart, double[] Xs)
         {
             double L1 = (4*LargeurSide - 4*LargeurCenter)/Math.Pow(longueur,2);
 
             List<double> L2 = new List<double>();
-            foreach (double x in CalcutateX(longueur,ecart))
+            foreach (double x in Xs)
             {
                 L2.Add(Math.Pow(x - longueur / 2, 2));
             }
@@ -120,12 +108,12 @@ namespace Flexion
             return Largeur;
         }
 
-        public List<double> Hauteur(double longueur, double ecart)
+        public List<double> Hauteur(double longueur, double ecart, double[] Xs)
         {
             double E1 = (4 * HauteurSide - 4 * HauteurCenter) / Math.Pow(longueur, 2);
 
             List<double> E2 = new List<double>();
-            foreach (double x in CalcutateX(longueur,ecart))
+            foreach (double x in Xs)
             {
                 E2.Add(Math.Pow(x - longueur / 2, 2));
             }
@@ -138,11 +126,11 @@ namespace Flexion
             return Ef;
         }
 
-        public List<double> Surface(double lenght, double Eref,double ecart)
+        public List<double> Surface(double lenght, double Eref,double ecart, double[] Xs)
         {
             List<double> Surfaces = new List<double>();
-            List<double> Largeurs = Largeur(lenght,Eref,ecart);
-            List<double> Hauteurs = Hauteur(lenght,ecart);
+            List<double> Largeurs = Largeur(lenght,Eref,ecart,Xs);
+            List<double> Hauteurs = Hauteur(lenght,ecart,Xs);
             for (int i = 0; i < Largeurs.Count; i++)
             {
                 Surfaces.Add(Largeurs[i] * Hauteurs[i]);
