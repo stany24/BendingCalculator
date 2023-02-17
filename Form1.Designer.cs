@@ -29,12 +29,12 @@ namespace Flexion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
             this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
@@ -433,7 +433,7 @@ namespace Flexion
             // lblErreurPiece
             // 
             this.lblErreurPiece.AutoSize = true;
-            this.lblErreurPiece.Location = new System.Drawing.Point(98, 142);
+            this.lblErreurPiece.Location = new System.Drawing.Point(6, 142);
             this.lblErreurPiece.Name = "lblErreurPiece";
             this.lblErreurPiece.Size = new System.Drawing.Size(40, 13);
             this.lblErreurPiece.TabIndex = 23;
@@ -447,7 +447,7 @@ namespace Flexion
             this.btnTest.TabIndex = 23;
             this.btnTest.Text = "Calculer la flexion";
             this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            this.btnTest.Click += new System.EventHandler(this.DisplayGraphForPiece);
             // 
             // lbxNs
             // 
@@ -519,32 +519,32 @@ namespace Flexion
             // 
             // chrIntegrale
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrIntegrale.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrIntegrale.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chrIntegrale.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chrIntegrale.Legends.Add(legend3);
             this.chrIntegrale.Location = new System.Drawing.Point(15, 422);
             this.chrIntegrale.Name = "chrIntegrale";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chrIntegrale.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chrIntegrale.Series.Add(series3);
             this.chrIntegrale.Size = new System.Drawing.Size(952, 300);
             this.chrIntegrale.TabIndex = 34;
             this.chrIntegrale.Text = "Graphe de l\'intégrale";
             // 
             // chrMomentForce
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrMomentForce.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrMomentForce.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chrMomentForce.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrMomentForce.Legends.Add(legend4);
             this.chrMomentForce.Location = new System.Drawing.Point(15, 728);
             this.chrMomentForce.Name = "chrMomentForce";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chrMomentForce.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chrMomentForce.Series.Add(series4);
             this.chrMomentForce.Size = new System.Drawing.Size(952, 300);
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
@@ -691,7 +691,7 @@ namespace Flexion
             // lblErreurCouche
             // 
             this.lblErreurCouche.AutoSize = true;
-            this.lblErreurCouche.Location = new System.Drawing.Point(96, 142);
+            this.lblErreurCouche.Location = new System.Drawing.Point(8, 142);
             this.lblErreurCouche.Name = "lblErreurCouche";
             this.lblErreurCouche.Size = new System.Drawing.Size(40, 13);
             this.lblErreurCouche.TabIndex = 24;
@@ -700,7 +700,7 @@ namespace Flexion
             // lblErreurMatiere
             // 
             this.lblErreurMatiere.AutoSize = true;
-            this.lblErreurMatiere.Location = new System.Drawing.Point(102, 143);
+            this.lblErreurMatiere.Location = new System.Drawing.Point(6, 143);
             this.lblErreurMatiere.Name = "lblErreurMatiere";
             this.lblErreurMatiere.Size = new System.Drawing.Size(40, 13);
             this.lblErreurMatiere.TabIndex = 25;

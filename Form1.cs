@@ -247,7 +247,7 @@ namespace Flexion
             }
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void DisplayGraphForPiece(object sender, EventArgs e)
         {
             lblErreurProcess.Text = string.Empty;
             if(lbxPiece.SelectedItem == null)

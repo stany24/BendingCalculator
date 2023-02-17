@@ -8,7 +8,7 @@ namespace FlexionTests
     [TestClass]
     public class AdditionalMathTests
     {
-        AdditionalMath math = new AdditionalMath();
+        //AdditionalMath math = new AdditionalMath();
 
         [TestMethod]
         public void TestMethod1()
