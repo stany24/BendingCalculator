@@ -149,6 +149,7 @@ namespace FlexionTests
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
+            piece.SetF(500);
             double[] resultat = piece.Intégrale();
             for (int i = 0; i < resultat.Length; i++)
             {

@@ -36,9 +36,7 @@ namespace Flexion
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
-            this.lblDeformation = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
-            this.nudDeformation = new System.Windows.Forms.NumericUpDown();
             this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
             this.lblLongueur = new System.Windows.Forms.Label();
             this.nudHauteurCenter = new System.Windows.Forms.NumericUpDown();
@@ -66,13 +64,12 @@ namespace Flexion
             this.lbxPiece = new System.Windows.Forms.ListBox();
             this.btnAjouterCouche = new System.Windows.Forms.Button();
             this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
-            this.lblError = new System.Windows.Forms.Label();
+            this.lblErreurPiece = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
             this.lbxNs = new System.Windows.Forms.ListBox();
             this.lbxI = new System.Windows.Forms.ListBox();
             this.lblNs = new System.Windows.Forms.Label();
             this.lblI = new System.Windows.Forms.Label();
-            this.lblTest = new System.Windows.Forms.Label();
             this.lbxMoment = new System.Windows.Forms.ListBox();
             this.lblMoment = new System.Windows.Forms.Label();
             this.lbxIntegrale = new System.Windows.Forms.ListBox();
@@ -80,8 +77,19 @@ namespace Flexion
             this.chrIntegrale = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chrMomentForce = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbxOutput = new System.Windows.Forms.TextBox();
+            this.nudGravite = new System.Windows.Forms.NumericUpDown();
+            this.lblGravité = new System.Windows.Forms.Label();
+            this.nudVitesse = new System.Windows.Forms.NumericUpDown();
+            this.lblVitesse = new System.Windows.Forms.Label();
+            this.nudRayon = new System.Windows.Forms.NumericUpDown();
+            this.lblRayon = new System.Windows.Forms.Label();
+            this.nudMasse = new System.Windows.Forms.NumericUpDown();
+            this.lblMasse = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblErreurCouche = new System.Windows.Forms.Label();
+            this.lblErreurMatiere = new System.Windows.Forms.Label();
+            this.lblErreurProcess = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).BeginInit();
@@ -93,45 +101,39 @@ namespace Flexion
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrIntegrale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrMomentForce)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGravite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVitesse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRayon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMasse)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblForce
             // 
             this.lblForce.AutoSize = true;
-            this.lblForce.Enabled = false;
-            this.lblForce.Location = new System.Drawing.Point(12, 42);
+            this.lblForce.Location = new System.Drawing.Point(15, 159);
             this.lblForce.Name = "lblForce";
             this.lblForce.Size = new System.Drawing.Size(51, 13);
             this.lblForce.TabIndex = 0;
             this.lblForce.Text = "Force (N)";
             // 
-            // lblDeformation
-            // 
-            this.lblDeformation.AutoSize = true;
-            this.lblDeformation.Enabled = false;
-            this.lblDeformation.Location = new System.Drawing.Point(12, 75);
-            this.lblDeformation.Name = "lblDeformation";
-            this.lblDeformation.Size = new System.Drawing.Size(87, 13);
-            this.lblDeformation.TabIndex = 2;
-            this.lblDeformation.Text = "Déformation (cm)";
-            // 
             // nudForce
             // 
             this.nudForce.DecimalPlaces = 1;
-            this.nudForce.Enabled = false;
-            this.nudForce.Location = new System.Drawing.Point(125, 40);
+            this.nudForce.Location = new System.Drawing.Point(128, 157);
+            this.nudForce.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.nudForce.Name = "nudForce";
             this.nudForce.Size = new System.Drawing.Size(120, 20);
             this.nudForce.TabIndex = 5;
-            // 
-            // nudDeformation
-            // 
-            this.nudDeformation.DecimalPlaces = 1;
-            this.nudDeformation.Enabled = false;
-            this.nudDeformation.Location = new System.Drawing.Point(125, 73);
-            this.nudDeformation.Name = "nudDeformation";
-            this.nudDeformation.Size = new System.Drawing.Size(120, 20);
-            this.nudDeformation.TabIndex = 6;
+            this.nudForce.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
             // nudLongueurPiece
             // 
@@ -145,22 +147,32 @@ namespace Flexion
             this.nudLongueurPiece.Name = "nudLongueurPiece";
             this.nudLongueurPiece.Size = new System.Drawing.Size(120, 20);
             this.nudLongueurPiece.TabIndex = 8;
+            this.nudLongueurPiece.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // lblLongueur
             // 
             this.lblLongueur.AutoSize = true;
             this.lblLongueur.Location = new System.Drawing.Point(6, 32);
             this.lblLongueur.Name = "lblLongueur";
-            this.lblLongueur.Size = new System.Drawing.Size(75, 13);
+            this.lblLongueur.Size = new System.Drawing.Size(77, 13);
             this.lblLongueur.TabIndex = 7;
-            this.lblLongueur.Text = "Longueur (cm)";
+            this.lblLongueur.Text = "Longueur (mm)";
             // 
             // nudHauteurCenter
             // 
             this.nudHauteurCenter.DecimalPlaces = 1;
-            this.nudHauteurCenter.Location = new System.Drawing.Point(92, 79);
+            this.nudHauteurCenter.Location = new System.Drawing.Point(111, 79);
+            this.nudHauteurCenter.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudHauteurCenter.Name = "nudHauteurCenter";
-            this.nudHauteurCenter.Size = new System.Drawing.Size(131, 20);
+            this.nudHauteurCenter.Size = new System.Drawing.Size(112, 20);
             this.nudHauteurCenter.TabIndex = 10;
             // 
             // lblHauteurCenter
@@ -168,16 +180,21 @@ namespace Flexion
             this.lblHauteurCenter.AutoSize = true;
             this.lblHauteurCenter.Location = new System.Drawing.Point(8, 81);
             this.lblHauteurCenter.Name = "lblHauteurCenter";
-            this.lblHauteurCenter.Size = new System.Drawing.Size(78, 13);
+            this.lblHauteurCenter.Size = new System.Drawing.Size(103, 13);
             this.lblHauteurCenter.TabIndex = 9;
-            this.lblHauteurCenter.Text = "Hauteur centre";
+            this.lblHauteurCenter.Text = "Hauteur centre (mm)";
             // 
             // nudLargeurCoucheCenter
             // 
             this.nudLargeurCoucheCenter.DecimalPlaces = 1;
-            this.nudLargeurCoucheCenter.Location = new System.Drawing.Point(92, 26);
+            this.nudLargeurCoucheCenter.Location = new System.Drawing.Point(111, 26);
+            this.nudLargeurCoucheCenter.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudLargeurCoucheCenter.Name = "nudLargeurCoucheCenter";
-            this.nudLargeurCoucheCenter.Size = new System.Drawing.Size(131, 20);
+            this.nudLargeurCoucheCenter.Size = new System.Drawing.Size(112, 20);
             this.nudLargeurCoucheCenter.TabIndex = 12;
             // 
             // lblLargeurCenter
@@ -185,12 +202,13 @@ namespace Flexion
             this.lblLargeurCenter.AutoSize = true;
             this.lblLargeurCenter.Location = new System.Drawing.Point(8, 28);
             this.lblLargeurCenter.Name = "lblLargeurCenter";
-            this.lblLargeurCenter.Size = new System.Drawing.Size(76, 13);
+            this.lblLargeurCenter.Size = new System.Drawing.Size(101, 13);
             this.lblLargeurCenter.TabIndex = 11;
-            this.lblLargeurCenter.Text = "Largeur centre";
+            this.lblLargeurCenter.Text = "Largeur centre (mm)";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblErreurCouche);
             this.groupBox1.Controls.Add(this.lblLargeurSide);
             this.groupBox1.Controls.Add(this.nudLargeurCoucheSide);
             this.groupBox1.Controls.Add(this.lblHauteurSide);
@@ -201,7 +219,7 @@ namespace Flexion
             this.groupBox1.Controls.Add(this.nudHauteurCenter);
             this.groupBox1.Controls.Add(this.lblLargeurCenter);
             this.groupBox1.Controls.Add(this.nudLargeurCoucheCenter);
-            this.groupBox1.Location = new System.Drawing.Point(484, 12);
+            this.groupBox1.Location = new System.Drawing.Point(507, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(227, 375);
             this.groupBox1.TabIndex = 16;
@@ -213,16 +231,21 @@ namespace Flexion
             this.lblLargeurSide.AutoSize = true;
             this.lblLargeurSide.Location = new System.Drawing.Point(8, 54);
             this.lblLargeurSide.Name = "lblLargeurSide";
-            this.lblLargeurSide.Size = new System.Drawing.Size(67, 13);
+            this.lblLargeurSide.Size = new System.Drawing.Size(92, 13);
             this.lblLargeurSide.TabIndex = 17;
-            this.lblLargeurSide.Text = "Largeur côté";
+            this.lblLargeurSide.Text = "Largeur côté (mm)";
             // 
             // nudLargeurCoucheSide
             // 
             this.nudLargeurCoucheSide.DecimalPlaces = 1;
-            this.nudLargeurCoucheSide.Location = new System.Drawing.Point(92, 52);
+            this.nudLargeurCoucheSide.Location = new System.Drawing.Point(111, 52);
+            this.nudLargeurCoucheSide.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudLargeurCoucheSide.Name = "nudLargeurCoucheSide";
-            this.nudLargeurCoucheSide.Size = new System.Drawing.Size(131, 20);
+            this.nudLargeurCoucheSide.Size = new System.Drawing.Size(112, 20);
             this.nudLargeurCoucheSide.TabIndex = 18;
             // 
             // lblHauteurSide
@@ -230,16 +253,21 @@ namespace Flexion
             this.lblHauteurSide.AutoSize = true;
             this.lblHauteurSide.Location = new System.Drawing.Point(8, 109);
             this.lblHauteurSide.Name = "lblHauteurSide";
-            this.lblHauteurSide.Size = new System.Drawing.Size(69, 13);
+            this.lblHauteurSide.Size = new System.Drawing.Size(94, 13);
             this.lblHauteurSide.TabIndex = 15;
-            this.lblHauteurSide.Text = "Hauteur côté";
+            this.lblHauteurSide.Text = "Hauteur côté (mm)";
             // 
             // nudHauterSide
             // 
             this.nudHauterSide.DecimalPlaces = 1;
-            this.nudHauterSide.Location = new System.Drawing.Point(92, 107);
+            this.nudHauterSide.Location = new System.Drawing.Point(111, 107);
+            this.nudHauterSide.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudHauterSide.Name = "nudHauterSide";
-            this.nudHauterSide.Size = new System.Drawing.Size(131, 20);
+            this.nudHauterSide.Size = new System.Drawing.Size(112, 20);
             this.nudHauterSide.TabIndex = 16;
             // 
             // lbxCouche
@@ -262,13 +290,14 @@ namespace Flexion
             // 
             // gbxMatiere
             // 
+            this.gbxMatiere.Controls.Add(this.lblErreurMatiere);
             this.gbxMatiere.Controls.Add(this.tbxNomMatiere);
             this.gbxMatiere.Controls.Add(this.lblNomMatiere);
             this.gbxMatiere.Controls.Add(this.nudE);
             this.gbxMatiere.Controls.Add(this.lbxMatiere);
             this.gbxMatiere.Controls.Add(this.lblE);
             this.gbxMatiere.Controls.Add(this.btnCreerMatiere);
-            this.gbxMatiere.Location = new System.Drawing.Point(717, 11);
+            this.gbxMatiere.Location = new System.Drawing.Point(740, 11);
             this.gbxMatiere.Name = "gbxMatiere";
             this.gbxMatiere.Size = new System.Drawing.Size(227, 375);
             this.gbxMatiere.TabIndex = 17;
@@ -277,9 +306,9 @@ namespace Flexion
             // 
             // tbxNomMatiere
             // 
-            this.tbxNomMatiere.Location = new System.Drawing.Point(101, 32);
+            this.tbxNomMatiere.Location = new System.Drawing.Point(136, 39);
             this.tbxNomMatiere.Name = "tbxNomMatiere";
-            this.tbxNomMatiere.Size = new System.Drawing.Size(100, 20);
+            this.tbxNomMatiere.Size = new System.Drawing.Size(85, 20);
             this.tbxNomMatiere.TabIndex = 21;
             // 
             // lblNomMatiere
@@ -294,14 +323,14 @@ namespace Flexion
             // nudE
             // 
             this.nudE.DecimalPlaces = 1;
-            this.nudE.Location = new System.Drawing.Point(101, 65);
+            this.nudE.Location = new System.Drawing.Point(136, 65);
             this.nudE.Maximum = new decimal(new int[] {
             1410065408,
             2,
             0,
             0});
             this.nudE.Name = "nudE";
-            this.nudE.Size = new System.Drawing.Size(100, 20);
+            this.nudE.Size = new System.Drawing.Size(85, 20);
             this.nudE.TabIndex = 19;
             // 
             // lbxMatiere
@@ -317,9 +346,9 @@ namespace Flexion
             this.lblE.AutoSize = true;
             this.lblE.Location = new System.Drawing.Point(6, 67);
             this.lblE.Name = "lblE";
-            this.lblE.Size = new System.Drawing.Size(14, 13);
+            this.lblE.Size = new System.Drawing.Size(124, 13);
             this.lblE.TabIndex = 18;
-            this.lblE.Text = "E";
+            this.lblE.Text = "Module d\'élasticité (GPa)";
             // 
             // btnCreerMatiere
             // 
@@ -340,7 +369,8 @@ namespace Flexion
             this.groupBox2.Controls.Add(this.btnAjouterCouche);
             this.groupBox2.Controls.Add(this.lblLongueur);
             this.groupBox2.Controls.Add(this.nudLongueurPiece);
-            this.groupBox2.Location = new System.Drawing.Point(251, 12);
+            this.groupBox2.Controls.Add(this.lblErreurPiece);
+            this.groupBox2.Location = new System.Drawing.Point(274, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(227, 375);
             this.groupBox2.TabIndex = 17;
@@ -395,34 +425,34 @@ namespace Flexion
             // lbxShowCouchePiece
             // 
             this.lbxShowCouchePiece.FormattingEnabled = true;
-            this.lbxShowCouchePiece.Location = new System.Drawing.Point(12, 208);
+            this.lbxShowCouchePiece.Location = new System.Drawing.Point(29, 208);
             this.lbxShowCouchePiece.Name = "lbxShowCouchePiece";
             this.lbxShowCouchePiece.Size = new System.Drawing.Size(233, 173);
             this.lbxShowCouchePiece.TabIndex = 23;
             // 
-            // lblError
+            // lblErreurPiece
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(455, 437);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(40, 13);
-            this.lblError.TabIndex = 23;
-            this.lblError.Text = "Erreurs";
+            this.lblErreurPiece.AutoSize = true;
+            this.lblErreurPiece.Location = new System.Drawing.Point(98, 142);
+            this.lblErreurPiece.Name = "lblErreurPiece";
+            this.lblErreurPiece.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurPiece.TabIndex = 23;
+            this.lblErreurPiece.Text = "Erreurs";
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(1079, 16);
+            this.btnTest.Location = new System.Drawing.Point(450, 393);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(104, 23);
             this.btnTest.TabIndex = 23;
-            this.btnTest.Text = "Calculer Ns et I";
+            this.btnTest.Text = "Calculer la flexion";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // lbxNs
             // 
             this.lbxNs.FormattingEnabled = true;
-            this.lbxNs.Location = new System.Drawing.Point(966, 46);
+            this.lbxNs.Location = new System.Drawing.Point(983, 46);
             this.lbxNs.Name = "lbxNs";
             this.lbxNs.Size = new System.Drawing.Size(170, 433);
             this.lbxNs.TabIndex = 24;
@@ -452,15 +482,6 @@ namespace Flexion
             this.lblI.Size = new System.Drawing.Size(10, 13);
             this.lblI.TabIndex = 26;
             this.lblI.Text = "I";
-            // 
-            // lblTest
-            // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(105, 145);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(35, 13);
-            this.lblTest.TabIndex = 28;
-            this.lblTest.Text = "label2";
             // 
             // lbxMoment
             // 
@@ -502,13 +523,13 @@ namespace Flexion
             this.chrIntegrale.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chrIntegrale.Legends.Add(legend1);
-            this.chrIntegrale.Location = new System.Drawing.Point(15, 497);
+            this.chrIntegrale.Location = new System.Drawing.Point(15, 422);
             this.chrIntegrale.Name = "chrIntegrale";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chrIntegrale.Series.Add(series1);
-            this.chrIntegrale.Size = new System.Drawing.Size(1002, 300);
+            this.chrIntegrale.Size = new System.Drawing.Size(952, 300);
             this.chrIntegrale.TabIndex = 34;
             this.chrIntegrale.Text = "Graphe de l\'intégrale";
             // 
@@ -518,13 +539,13 @@ namespace Flexion
             this.chrMomentForce.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chrMomentForce.Legends.Add(legend2);
-            this.chrMomentForce.Location = new System.Drawing.Point(15, 803);
+            this.chrMomentForce.Location = new System.Drawing.Point(15, 728);
             this.chrMomentForce.Name = "chrMomentForce";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chrMomentForce.Series.Add(series2);
-            this.chrMomentForce.Size = new System.Drawing.Size(1002, 300);
+            this.chrMomentForce.Size = new System.Drawing.Size(952, 300);
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
             // 
@@ -536,11 +557,171 @@ namespace Flexion
             this.tbxOutput.Size = new System.Drawing.Size(577, 485);
             this.tbxOutput.TabIndex = 36;
             // 
+            // nudGravite
+            // 
+            this.nudGravite.DecimalPlaces = 2;
+            this.nudGravite.Location = new System.Drawing.Point(128, 124);
+            this.nudGravite.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nudGravite.Name = "nudGravite";
+            this.nudGravite.Size = new System.Drawing.Size(120, 20);
+            this.nudGravite.TabIndex = 38;
+            this.nudGravite.Value = new decimal(new int[] {
+            981,
+            0,
+            0,
+            131072});
+            this.nudGravite.ValueChanged += new System.EventHandler(this.CalcuateF);
+            // 
+            // lblGravité
+            // 
+            this.lblGravité.AutoSize = true;
+            this.lblGravité.Location = new System.Drawing.Point(15, 126);
+            this.lblGravité.Name = "lblGravité";
+            this.lblGravité.Size = new System.Drawing.Size(58, 13);
+            this.lblGravité.TabIndex = 37;
+            this.lblGravité.Text = "Gravité (N)";
+            // 
+            // nudVitesse
+            // 
+            this.nudVitesse.DecimalPlaces = 2;
+            this.nudVitesse.Location = new System.Drawing.Point(128, 91);
+            this.nudVitesse.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nudVitesse.Name = "nudVitesse";
+            this.nudVitesse.Size = new System.Drawing.Size(120, 20);
+            this.nudVitesse.TabIndex = 40;
+            this.nudVitesse.Value = new decimal(new int[] {
+            1666,
+            0,
+            0,
+            131072});
+            this.nudVitesse.ValueChanged += new System.EventHandler(this.CalcuateF);
+            // 
+            // lblVitesse
+            // 
+            this.lblVitesse.AutoSize = true;
+            this.lblVitesse.Location = new System.Drawing.Point(15, 93);
+            this.lblVitesse.Name = "lblVitesse";
+            this.lblVitesse.Size = new System.Drawing.Size(68, 13);
+            this.lblVitesse.TabIndex = 39;
+            this.lblVitesse.Text = "Vitesse (m/s)";
+            // 
+            // nudRayon
+            // 
+            this.nudRayon.DecimalPlaces = 2;
+            this.nudRayon.Location = new System.Drawing.Point(128, 58);
+            this.nudRayon.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nudRayon.Name = "nudRayon";
+            this.nudRayon.Size = new System.Drawing.Size(120, 20);
+            this.nudRayon.TabIndex = 42;
+            this.nudRayon.Value = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.nudRayon.ValueChanged += new System.EventHandler(this.CalcuateF);
+            // 
+            // lblRayon
+            // 
+            this.lblRayon.AutoSize = true;
+            this.lblRayon.Location = new System.Drawing.Point(15, 60);
+            this.lblRayon.Name = "lblRayon";
+            this.lblRayon.Size = new System.Drawing.Size(55, 13);
+            this.lblRayon.TabIndex = 41;
+            this.lblRayon.Text = "Rayon (m)";
+            // 
+            // nudMasse
+            // 
+            this.nudMasse.DecimalPlaces = 2;
+            this.nudMasse.Location = new System.Drawing.Point(128, 25);
+            this.nudMasse.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nudMasse.Name = "nudMasse";
+            this.nudMasse.Size = new System.Drawing.Size(120, 20);
+            this.nudMasse.TabIndex = 44;
+            this.nudMasse.Value = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.nudMasse.ValueChanged += new System.EventHandler(this.CalcuateF);
+            // 
+            // lblMasse
+            // 
+            this.lblMasse.AutoSize = true;
+            this.lblMasse.Location = new System.Drawing.Point(15, 27);
+            this.lblMasse.Name = "lblMasse";
+            this.lblMasse.Size = new System.Drawing.Size(59, 13);
+            this.lblMasse.TabIndex = 43;
+            this.lblMasse.Text = "Masse (kg)";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.nudForce);
+            this.groupBox3.Controls.Add(this.nudMasse);
+            this.groupBox3.Controls.Add(this.lblForce);
+            this.groupBox3.Controls.Add(this.lblMasse);
+            this.groupBox3.Controls.Add(this.lblGravité);
+            this.groupBox3.Controls.Add(this.nudRayon);
+            this.groupBox3.Controls.Add(this.nudGravite);
+            this.groupBox3.Controls.Add(this.lblRayon);
+            this.groupBox3.Controls.Add(this.lblVitesse);
+            this.groupBox3.Controls.Add(this.nudVitesse);
+            this.groupBox3.Location = new System.Drawing.Point(11, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(257, 187);
+            this.groupBox3.TabIndex = 45;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Force appliquée";
+            // 
+            // lblErreurCouche
+            // 
+            this.lblErreurCouche.AutoSize = true;
+            this.lblErreurCouche.Location = new System.Drawing.Point(96, 142);
+            this.lblErreurCouche.Name = "lblErreurCouche";
+            this.lblErreurCouche.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurCouche.TabIndex = 24;
+            this.lblErreurCouche.Text = "Erreurs";
+            // 
+            // lblErreurMatiere
+            // 
+            this.lblErreurMatiere.AutoSize = true;
+            this.lblErreurMatiere.Location = new System.Drawing.Point(102, 143);
+            this.lblErreurMatiere.Name = "lblErreurMatiere";
+            this.lblErreurMatiere.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurMatiere.TabIndex = 25;
+            this.lblErreurMatiere.Text = "Erreurs";
+            // 
+            // lblErreurProcess
+            // 
+            this.lblErreurProcess.AutoSize = true;
+            this.lblErreurProcess.Location = new System.Drawing.Point(560, 398);
+            this.lblErreurProcess.Name = "lblErreurProcess";
+            this.lblErreurProcess.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurProcess.TabIndex = 24;
+            this.lblErreurProcess.Text = "Erreurs";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1655, 1125);
+            this.ClientSize = new System.Drawing.Size(976, 1035);
+            this.Controls.Add(this.lblErreurProcess);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.tbxOutput);
             this.Controls.Add(this.chrMomentForce);
             this.Controls.Add(this.chrIntegrale);
@@ -548,26 +729,19 @@ namespace Flexion
             this.Controls.Add(this.lbxIntegrale);
             this.Controls.Add(this.lblMoment);
             this.Controls.Add(this.lbxMoment);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.lblI);
             this.Controls.Add(this.lblNs);
             this.Controls.Add(this.lbxI);
             this.Controls.Add(this.lbxNs);
             this.Controls.Add(this.btnTest);
-            this.Controls.Add(this.lblError);
             this.Controls.Add(this.lbxShowCouchePiece);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbxMatiere);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.nudDeformation);
-            this.Controls.Add(this.nudForce);
-            this.Controls.Add(this.lblDeformation);
-            this.Controls.Add(this.lblForce);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Flexion TIP";
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudDeformation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheCenter)).EndInit();
@@ -582,6 +756,12 @@ namespace Flexion
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrIntegrale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrMomentForce)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGravite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVitesse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRayon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMasse)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -590,9 +770,7 @@ namespace Flexion
         #endregion
 
         private System.Windows.Forms.Label lblForce;
-        private System.Windows.Forms.Label lblDeformation;
         private System.Windows.Forms.NumericUpDown nudForce;
-        private System.Windows.Forms.NumericUpDown nudDeformation;
         private System.Windows.Forms.NumericUpDown nudLongueurPiece;
         private System.Windows.Forms.Label lblLongueur;
         private System.Windows.Forms.NumericUpDown nudHauteurCenter;
@@ -620,13 +798,12 @@ namespace Flexion
         private System.Windows.Forms.NumericUpDown nudHauterSide;
         private System.Windows.Forms.Label lblLargeurSide;
         private System.Windows.Forms.NumericUpDown nudLargeurCoucheSide;
-        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblErreurPiece;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ListBox lbxNs;
         private System.Windows.Forms.ListBox lbxI;
         private System.Windows.Forms.Label lblNs;
         private System.Windows.Forms.Label lblI;
-        private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.ListBox lbxMoment;
         private System.Windows.Forms.Label lblMoment;
         private System.Windows.Forms.ListBox lbxIntegrale;
@@ -634,6 +811,18 @@ namespace Flexion
         private System.Windows.Forms.DataVisualization.Charting.Chart chrIntegrale;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrMomentForce;
         private System.Windows.Forms.TextBox tbxOutput;
+        private System.Windows.Forms.NumericUpDown nudGravite;
+        private System.Windows.Forms.Label lblGravité;
+        private System.Windows.Forms.NumericUpDown nudVitesse;
+        private System.Windows.Forms.Label lblVitesse;
+        private System.Windows.Forms.NumericUpDown nudRayon;
+        private System.Windows.Forms.Label lblRayon;
+        private System.Windows.Forms.NumericUpDown nudMasse;
+        private System.Windows.Forms.Label lblMasse;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lblErreurCouche;
+        private System.Windows.Forms.Label lblErreurMatiere;
+        private System.Windows.Forms.Label lblErreurProcess;
     }
 }
 
