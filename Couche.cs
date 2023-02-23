@@ -63,7 +63,7 @@ namespace Flexion
         /// <returns>Le nom de la matière, la largeur au centre, la largeur sur les côtés, la hauteur au centre, la hauteur sur les côtés</returns>
         public override string ToString()
         {
-            return $"C de {MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
+            return $"{MatiereCouche.GetNom()} Lm={LargeurCenter} Lc={LargeurSide} Hm={HauteurCenter} Hc={HauteurSide}";
         }
 
         public double I(double Longueur, double Z)

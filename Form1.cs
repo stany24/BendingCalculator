@@ -36,6 +36,8 @@ namespace Flexion
             ListCouches.Add(piece.Couches[1]);
             ListMatieres.Add(piece.Couches[0].GetMatiere());
             UpdateListBox();
+            cbxMatiere.DataSource= ListMatieres;
+            cbxCouche.DataSource= ListCouches;
         }
 
         /// <summary>
@@ -93,6 +95,8 @@ namespace Flexion
         /// </summary>
         private void UpdateListBox()
         {
+            cbxMatiere.DataSource = null;
+            cbxMatiere.DataSource = ListMatieres;
             lbxMatiere.Items.Clear();
             foreach (Matiere matiere in ListMatieres){lbxMatiere.Items.Add(matiere);}
             lbxCouche.Items.Clear();
@@ -133,13 +137,13 @@ namespace Flexion
                 return;
             }
 
-            if (lbxMatiere.SelectedItem == null)
+            if (cbxMatiere.SelectedItem== null)
             {
                 lblErreurCouche.Text = "Pas de matière sélétionnée";
                 return;
             }
 
-            if (!(lbxMatiere.SelectedItem is Matiere))
+            if (!(cbxMatiere.SelectedItem is Matiere))
             {
                 lblErreurCouche.Text = "L'objet sélécionné n'est pas une matière";
                 return;

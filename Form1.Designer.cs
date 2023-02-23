@@ -29,12 +29,12 @@ namespace Flexion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
             this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
@@ -44,6 +44,9 @@ namespace Flexion
             this.nudLargeurCoucheCenter = new System.Windows.Forms.NumericUpDown();
             this.lblLargeurCenter = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxMatiere = new System.Windows.Forms.ComboBox();
+            this.lblErreurCouche = new System.Windows.Forms.Label();
             this.lblLargeurSide = new System.Windows.Forms.Label();
             this.nudLargeurCoucheSide = new System.Windows.Forms.NumericUpDown();
             this.lblHauteurSide = new System.Windows.Forms.Label();
@@ -51,6 +54,7 @@ namespace Flexion
             this.lbxCouche = new System.Windows.Forms.ListBox();
             this.btnCreerCouche = new System.Windows.Forms.Button();
             this.gbxMatiere = new System.Windows.Forms.GroupBox();
+            this.lblErreurMatiere = new System.Windows.Forms.Label();
             this.tbxNomMatiere = new System.Windows.Forms.TextBox();
             this.lblNomMatiere = new System.Windows.Forms.Label();
             this.nudE = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +67,8 @@ namespace Flexion
             this.btnCreerPiece = new System.Windows.Forms.Button();
             this.lbxPiece = new System.Windows.Forms.ListBox();
             this.btnAjouterCouche = new System.Windows.Forms.Button();
-            this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
             this.lblErreurPiece = new System.Windows.Forms.Label();
+            this.lbxShowCouchePiece = new System.Windows.Forms.ListBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.lbxNs = new System.Windows.Forms.ListBox();
             this.lbxI = new System.Windows.Forms.ListBox();
@@ -86,9 +90,8 @@ namespace Flexion
             this.nudMasse = new System.Windows.Forms.NumericUpDown();
             this.lblMasse = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblErreurCouche = new System.Windows.Forms.Label();
-            this.lblErreurMatiere = new System.Windows.Forms.Label();
             this.lblErreurProcess = new System.Windows.Forms.Label();
+            this.cbxCouche = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).BeginInit();
@@ -208,6 +211,8 @@ namespace Flexion
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cbxMatiere);
             this.groupBox1.Controls.Add(this.lblErreurCouche);
             this.groupBox1.Controls.Add(this.lblLargeurSide);
             this.groupBox1.Controls.Add(this.nudLargeurCoucheSide);
@@ -225,6 +230,32 @@ namespace Flexion
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Couche";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 136);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Matière";
+            // 
+            // cbxMatiere
+            // 
+            this.cbxMatiere.FormattingEnabled = true;
+            this.cbxMatiere.Location = new System.Drawing.Point(111, 134);
+            this.cbxMatiere.Name = "cbxMatiere";
+            this.cbxMatiere.Size = new System.Drawing.Size(112, 21);
+            this.cbxMatiere.TabIndex = 24;
+            // 
+            // lblErreurCouche
+            // 
+            this.lblErreurCouche.AutoSize = true;
+            this.lblErreurCouche.Location = new System.Drawing.Point(96, 171);
+            this.lblErreurCouche.Name = "lblErreurCouche";
+            this.lblErreurCouche.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurCouche.TabIndex = 24;
+            this.lblErreurCouche.Text = "Erreurs";
             // 
             // lblLargeurSide
             // 
@@ -273,14 +304,14 @@ namespace Flexion
             // lbxCouche
             // 
             this.lbxCouche.FormattingEnabled = true;
-            this.lbxCouche.Location = new System.Drawing.Point(9, 196);
+            this.lbxCouche.Location = new System.Drawing.Point(9, 235);
             this.lbxCouche.Name = "lbxCouche";
-            this.lbxCouche.Size = new System.Drawing.Size(212, 173);
+            this.lbxCouche.Size = new System.Drawing.Size(212, 134);
             this.lbxCouche.TabIndex = 14;
             // 
             // btnCreerCouche
             // 
-            this.btnCreerCouche.Location = new System.Drawing.Point(55, 167);
+            this.btnCreerCouche.Location = new System.Drawing.Point(56, 195);
             this.btnCreerCouche.Name = "btnCreerCouche";
             this.btnCreerCouche.Size = new System.Drawing.Size(118, 23);
             this.btnCreerCouche.TabIndex = 13;
@@ -303,6 +334,15 @@ namespace Flexion
             this.gbxMatiere.TabIndex = 17;
             this.gbxMatiere.TabStop = false;
             this.gbxMatiere.Text = "Matière";
+            // 
+            // lblErreurMatiere
+            // 
+            this.lblErreurMatiere.AutoSize = true;
+            this.lblErreurMatiere.Location = new System.Drawing.Point(6, 143);
+            this.lblErreurMatiere.Name = "lblErreurMatiere";
+            this.lblErreurMatiere.Size = new System.Drawing.Size(40, 13);
+            this.lblErreurMatiere.TabIndex = 25;
+            this.lblErreurMatiere.Text = "Erreurs";
             // 
             // tbxNomMatiere
             // 
@@ -336,9 +376,9 @@ namespace Flexion
             // lbxMatiere
             // 
             this.lbxMatiere.FormattingEnabled = true;
-            this.lbxMatiere.Location = new System.Drawing.Point(9, 196);
+            this.lbxMatiere.Location = new System.Drawing.Point(9, 235);
             this.lbxMatiere.Name = "lbxMatiere";
-            this.lbxMatiere.Size = new System.Drawing.Size(212, 173);
+            this.lbxMatiere.Size = new System.Drawing.Size(212, 134);
             this.lbxMatiere.TabIndex = 14;
             // 
             // lblE
@@ -362,6 +402,7 @@ namespace Flexion
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbxCouche);
             this.groupBox2.Controls.Add(this.tbxNomPiece);
             this.groupBox2.Controls.Add(this.lblNomPiece);
             this.groupBox2.Controls.Add(this.btnCreerPiece);
@@ -395,7 +436,7 @@ namespace Flexion
             // 
             // btnCreerPiece
             // 
-            this.btnCreerPiece.Location = new System.Drawing.Point(62, 90);
+            this.btnCreerPiece.Location = new System.Drawing.Point(52, 93);
             this.btnCreerPiece.Name = "btnCreerPiece";
             this.btnCreerPiece.Size = new System.Drawing.Size(115, 23);
             this.btnCreerPiece.TabIndex = 15;
@@ -406,38 +447,38 @@ namespace Flexion
             // lbxPiece
             // 
             this.lbxPiece.FormattingEnabled = true;
-            this.lbxPiece.Location = new System.Drawing.Point(9, 196);
+            this.lbxPiece.Location = new System.Drawing.Point(9, 235);
             this.lbxPiece.Name = "lbxPiece";
-            this.lbxPiece.Size = new System.Drawing.Size(212, 173);
+            this.lbxPiece.Size = new System.Drawing.Size(212, 134);
             this.lbxPiece.TabIndex = 14;
             this.lbxPiece.SelectedIndexChanged += new System.EventHandler(this.ShowCoucheInPiece);
             // 
             // btnAjouterCouche
             // 
-            this.btnAjouterCouche.Location = new System.Drawing.Point(62, 167);
+            this.btnAjouterCouche.Location = new System.Drawing.Point(9, 132);
             this.btnAjouterCouche.Name = "btnAjouterCouche";
-            this.btnAjouterCouche.Size = new System.Drawing.Size(115, 23);
+            this.btnAjouterCouche.Size = new System.Drawing.Size(83, 23);
             this.btnAjouterCouche.TabIndex = 13;
             this.btnAjouterCouche.Text = "Ajouter couche";
             this.btnAjouterCouche.UseVisualStyleBackColor = true;
             this.btnAjouterCouche.Click += new System.EventHandler(this.AjouterCouche);
             // 
-            // lbxShowCouchePiece
-            // 
-            this.lbxShowCouchePiece.FormattingEnabled = true;
-            this.lbxShowCouchePiece.Location = new System.Drawing.Point(29, 208);
-            this.lbxShowCouchePiece.Name = "lbxShowCouchePiece";
-            this.lbxShowCouchePiece.Size = new System.Drawing.Size(233, 173);
-            this.lbxShowCouchePiece.TabIndex = 23;
-            // 
             // lblErreurPiece
             // 
             this.lblErreurPiece.AutoSize = true;
-            this.lblErreurPiece.Location = new System.Drawing.Point(6, 142);
+            this.lblErreurPiece.Location = new System.Drawing.Point(98, 174);
             this.lblErreurPiece.Name = "lblErreurPiece";
             this.lblErreurPiece.Size = new System.Drawing.Size(40, 13);
             this.lblErreurPiece.TabIndex = 23;
             this.lblErreurPiece.Text = "Erreurs";
+            // 
+            // lbxShowCouchePiece
+            // 
+            this.lbxShowCouchePiece.FormattingEnabled = true;
+            this.lbxShowCouchePiece.Location = new System.Drawing.Point(29, 247);
+            this.lbxShowCouchePiece.Name = "lbxShowCouchePiece";
+            this.lbxShowCouchePiece.Size = new System.Drawing.Size(233, 134);
+            this.lbxShowCouchePiece.TabIndex = 23;
             // 
             // btnTest
             // 
@@ -519,32 +560,32 @@ namespace Flexion
             // 
             // chrIntegrale
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrIntegrale.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chrIntegrale.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chrIntegrale.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrIntegrale.Legends.Add(legend1);
             this.chrIntegrale.Location = new System.Drawing.Point(15, 422);
             this.chrIntegrale.Name = "chrIntegrale";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chrIntegrale.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrIntegrale.Series.Add(series1);
             this.chrIntegrale.Size = new System.Drawing.Size(952, 300);
             this.chrIntegrale.TabIndex = 34;
             this.chrIntegrale.Text = "Graphe de l\'intégrale";
             // 
             // chrMomentForce
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrMomentForce.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrMomentForce.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chrMomentForce.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrMomentForce.Legends.Add(legend2);
             this.chrMomentForce.Location = new System.Drawing.Point(15, 728);
             this.chrMomentForce.Name = "chrMomentForce";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chrMomentForce.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chrMomentForce.Series.Add(series2);
             this.chrMomentForce.Size = new System.Drawing.Size(952, 300);
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
@@ -688,24 +729,6 @@ namespace Flexion
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Force appliquée";
             // 
-            // lblErreurCouche
-            // 
-            this.lblErreurCouche.AutoSize = true;
-            this.lblErreurCouche.Location = new System.Drawing.Point(8, 142);
-            this.lblErreurCouche.Name = "lblErreurCouche";
-            this.lblErreurCouche.Size = new System.Drawing.Size(40, 13);
-            this.lblErreurCouche.TabIndex = 24;
-            this.lblErreurCouche.Text = "Erreurs";
-            // 
-            // lblErreurMatiere
-            // 
-            this.lblErreurMatiere.AutoSize = true;
-            this.lblErreurMatiere.Location = new System.Drawing.Point(6, 143);
-            this.lblErreurMatiere.Name = "lblErreurMatiere";
-            this.lblErreurMatiere.Size = new System.Drawing.Size(40, 13);
-            this.lblErreurMatiere.TabIndex = 25;
-            this.lblErreurMatiere.Text = "Erreurs";
-            // 
             // lblErreurProcess
             // 
             this.lblErreurProcess.AutoSize = true;
@@ -714,6 +737,14 @@ namespace Flexion
             this.lblErreurProcess.Size = new System.Drawing.Size(40, 13);
             this.lblErreurProcess.TabIndex = 24;
             this.lblErreurProcess.Text = "Erreurs";
+            // 
+            // cbxCouche
+            // 
+            this.cbxCouche.FormattingEnabled = true;
+            this.cbxCouche.Location = new System.Drawing.Point(101, 134);
+            this.cbxCouche.Name = "cbxCouche";
+            this.cbxCouche.Size = new System.Drawing.Size(122, 21);
+            this.cbxCouche.TabIndex = 26;
             // 
             // Form1
             // 
@@ -823,6 +854,9 @@ namespace Flexion
         private System.Windows.Forms.Label lblErreurCouche;
         private System.Windows.Forms.Label lblErreurMatiere;
         private System.Windows.Forms.Label lblErreurProcess;
+        private System.Windows.Forms.ComboBox cbxMatiere;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbxCouche;
     }
 }
 

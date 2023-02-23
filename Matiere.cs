@@ -33,7 +33,7 @@ namespace Flexion
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Nom} de constante {E}";
+            return $"{Nom}:{E}";
         }
     }
 }
