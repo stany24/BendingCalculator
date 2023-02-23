@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Flexion
@@ -172,7 +173,6 @@ namespace Flexion
             {
                 integrale3[i] = integrale3[i] / -Eref;
             }
-
             return integrale3;
         }
 

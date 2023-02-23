@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Diagnostics;
+using MathNet.Numerics;
+using System.Threading.Tasks;
 
 namespace Flexion
 {
@@ -261,54 +264,25 @@ namespace Flexion
                 lblErreurProcess.Text = "L'objet sélécionné n'est pas une pièce";
                 return;
             }
-
+            
             Piece piece = lbxPiece.SelectedItem as Piece;
             piece.SetF((double)nudForce.Value);
-            double[] intégrale = piece.Intégrale();
-            double[] moment = piece.MomentForce();
+            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(), Convert.ToInt32(1/piece.GetEcart())/100);
+            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(), Convert.ToInt32(1 / piece.GetEcart())/100);
+        }
 
-            //Affichage des valeurs dans les itemsbox
-            /*
-            lbxNs.Items.Clear();
-            lbxI.Items.Clear();
-            lbxMoment.Items.Clear();
-            lbxIntegrale.Items.Clear();
-            foreach (double n in piece.Ns())
+        public void FillGraph(Chart graph,string seriename, double[] data, int diviseur)
+        {
+            graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
+            System.Windows.Forms.DataVisualization.Charting.Series serie = new System.Windows.Forms.DataVisualization.Charting.Series(seriename)
             {
-                lbxNs.Items.Add(n);
+                ChartType = SeriesChartType.Spline
+            };
+            for (int i = diviseur; i < data.Length; i+=diviseur)
+            {
+                serie.Points.AddXY(i, data[i]);
             }
-
-            foreach (double i in piece.CalculateI())
-            {
-                lbxI.Items.Add(i);
-            }
-
-            foreach(double i in moment)
-            {
-                lbxMoment.Items.Add(i);
-            }
-            foreach (double i in intégrale)
-            {
-                lbxIntegrale.Items.Add(i);
-            }*/
-
-            //Graphe de l'intégrale
-            chrIntegrale.Series.Clear();
-            Series serieI =  chrIntegrale.Series.Add("intégrale");
-            serieI.ChartType = SeriesChartType.Spline;
-            for (int i = 1;i < intégrale.Length+1;i++)
-            {
-                serieI.Points.AddXY(i, intégrale[i-1]);
-            }
-            //Graphe du moment de force
-            chrMomentForce.Series.Clear();
-            Series serieM = chrMomentForce.Series.Add("moment de force");
-            serieM.ChartType = SeriesChartType.Spline;
-            for (int i = 1; i < moment.Length+1; i++)
-            {
-                serieM.Points.AddXY(i, moment[i-1]);
-            }
-
+            graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
         }
 
         public void CalcuateF(object sender, EventArgs e)
