@@ -4,9 +4,6 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Diagnostics;
-using MathNet.Numerics;
-using System.Threading.Tasks;
 
 namespace Flexion
 {
@@ -23,7 +20,6 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            lblErreurCouche.Text = string.Empty;
             lblErreurPiece.Text = string.Empty;
             lblErreurProcess.Text = string.Empty;
             Piece piece = new Piece(1500e-3, "Démo");
@@ -100,53 +96,6 @@ namespace Flexion
             foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
             lbxPiece.Items.Clear();
             foreach (Piece piece in ListPiece){lbxPiece.Items.Add(piece);}
-        }
-
-        /// <summary>
-        /// Crée un nouvelle couche avec les paramétres donnés
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreerCouche(object sender, EventArgs e)
-        {
-            lblErreurCouche.Text = String.Empty;
-            if (nudLargeurCoucheCenter.Value == 0)
-            {
-                lblErreurCouche.Text = "Pas de valeur donnée à la largeur au centre";
-                return;
-            }
-
-            if (nudLargeurCoucheSide.Value == 0)
-            {
-                lblErreurCouche.Text = "Pas de valeur donnée à la largeur sur les côté";
-                return;
-            }
-
-            if (nudHauteurCenter.Value == 0)
-            {
-                lblErreurCouche.Text = "Pas de valeur donnée à la hauteur au centre";
-                return;
-            }
-
-            if (nudHauterSide.Value == 0)
-            {
-                lblErreurCouche.Text = "Pas de valeur donnée à la hauteur sur les côté";
-                return;
-            }
-
-            if (cbxMatiere.SelectedItem== null)
-            {
-                lblErreurCouche.Text = "Pas de matière sélétionnée";
-                return;
-            }
-
-            if (!(cbxMatiere.SelectedItem is Matiere))
-            {
-                lblErreurCouche.Text = "L'objet sélécionné n'est pas une matière";
-                return;
-            }
-            //ListCouches.Add(new Couche(lbxMatiere.SelectedItem as Matiere, (double)nudLargeurCoucheCenter.Value/1000,(double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000));
-            UpdateListBox();
         }
 
         /// <summary>
@@ -273,7 +222,7 @@ namespace Flexion
 
         private void btnModiferMatiere_Click(object sender, EventArgs e)
         {
-            EditeurMatiere editor = new EditeurMatiere(ListMatieres,(Form1)ActiveForm);
+            EditeurMatiere editor = new EditeurMatiere(ListMatieres,this);
             editor.Show();
             this.Hide();
         }
@@ -284,12 +233,21 @@ namespace Flexion
             {
                 cbxMatiere.DataSource = null;
                 cbxMatiere.DataSource = ListMatieres;
+                cbxCouche.DataSource = null;
+                cbxCouche.DataSource = ListCouches;
             }
         }
 
         private void btnCreerMatiere_Click(object sender, EventArgs e)
         {
-            CreateurMatiere createur = new CreateurMatiere(ListMatieres, (Form1)ActiveForm);
+            CreateurMatiere createur = new CreateurMatiere(ListMatieres, this);
+            createur.Show();
+            this.Hide();
+        }
+
+        private void btnCreerCouche_Click(object sender, EventArgs e)
+        {
+            CreateurCouche createur = new CreateurCouche(ListCouches,ListMatieres,this);
             createur.Show();
             this.Hide();
         }

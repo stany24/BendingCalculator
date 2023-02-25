@@ -30,8 +30,6 @@ namespace Flexion
         public double GetF() { return F; }
         public void SetF(double f) { if (f > 0) { F = f; } }
 
-
-
         private double[] Xs;
         private int nbX;
 

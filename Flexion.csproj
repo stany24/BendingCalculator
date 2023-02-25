@@ -57,11 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalMath.cs" />
-    <Compile Include="Couche.cs" />
-    <Compile Include="CreateurMatiere.cs">
+    <Compile Include="DossierCouche\Couche.cs" />
+    <Compile Include="DossierCouche\CreateurCouche.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateurMatiere.Designer.cs">
+    <Compile Include="DossierCouche\CreateurCouche.Designer.cs">
+      <DependentUpon>CreateurCouche.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DossierMatiere\CreateurMatiere.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DossierMatiere\CreateurMatiere.Designer.cs">
       <DependentUpon>CreateurMatiere.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
@@ -70,20 +76,23 @@
     <Compile Include="Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditeurMatiere.cs">
+    <Compile Include="DossierMatiere\EditeurMatiere.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditeurMatiere.Designer.cs">
+    <Compile Include="DossierMatiere\EditeurMatiere.Designer.cs">
       <DependentUpon>EditeurMatiere.cs</DependentUpon>
     </Compile>
-    <Compile Include="Matiere.cs" />
+    <Compile Include="DossierMatiere\Matiere.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CreateurMatiere.resx">
+    <EmbeddedResource Include="DossierCouche\CreateurCouche.resx">
+      <DependentUpon>CreateurCouche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DossierMatiere\CreateurMatiere.resx">
       <DependentUpon>CreateurMatiere.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditeurMatiere.resx">
+    <EmbeddedResource Include="DossierMatiere\EditeurMatiere.resx">
       <DependentUpon>EditeurMatiere.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">

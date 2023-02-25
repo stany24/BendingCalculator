@@ -110,7 +110,7 @@
             this.Controls.Add(this.lblE);
             this.Controls.Add(this.cbxMatieres);
             this.Name = "EditeurMatiere";
-            this.Text = "Form2";
+            this.Text = "Modificateur de matières";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditeurMatiere_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.ResumeLayout(false);
