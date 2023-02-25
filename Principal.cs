@@ -25,7 +25,6 @@ namespace Flexion
             InitializeComponent();
             lblErreurCouche.Text = string.Empty;
             lblErreurPiece.Text = string.Empty;
-            lblErreurMatiere.Text = string.Empty;
             lblErreurProcess.Text = string.Empty;
             Piece piece = new Piece(1500e-3, "Démo");
             ListPiece.Add(piece);
@@ -46,7 +45,7 @@ namespace Flexion
         public void SaveFile()
         {
             JsonSerializer serializer = new JsonSerializer();
-            foreach (Matiere matiere in lbxMatiere.Items)
+            foreach (Matiere matiere in ListMatieres)
             {
                 using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.GetNom()+".json"))
                 {
@@ -97,8 +96,6 @@ namespace Flexion
         {
             cbxMatiere.DataSource = null;
             cbxMatiere.DataSource = ListMatieres;
-            lbxMatiere.Items.Clear();
-            foreach (Matiere matiere in ListMatieres){lbxMatiere.Items.Add(matiere);}
             lbxCouche.Items.Clear();
             foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
             lbxPiece.Items.Clear();
@@ -148,31 +145,7 @@ namespace Flexion
                 lblErreurCouche.Text = "L'objet sélécionné n'est pas une matière";
                 return;
             }
-            ListCouches.Add(new Couche(lbxMatiere.SelectedItem as Matiere, (double)nudLargeurCoucheCenter.Value/1000,(double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000));
-            UpdateListBox();
-        }
-
-        /// <summary>
-        /// Crée une nouvelle couche avec les paramétres donnés
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreerMatiere(object sender, EventArgs e)
-        {
-            lblErreurMatiere.Text = string.Empty;
-            if (tbxNomMatiere.Text == string.Empty)
-            {
-                lblErreurMatiere.Text = "Pas de nom donné à la matière";
-                return;
-            }
-
-            if(nudE.Value == 0)
-            {
-                lblErreurMatiere.Text = "Pas de valeur donnée à E";
-                return;
-            }
-
-            ListMatieres.Add(new Matiere(tbxNomMatiere.Text, (double) nudE.Value));
+            //ListCouches.Add(new Couche(lbxMatiere.SelectedItem as Matiere, (double)nudLargeurCoucheCenter.Value/1000,(double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000));
             UpdateListBox();
         }
 
@@ -296,6 +269,29 @@ namespace Flexion
             double v = (double)nudVitesse.Value;
             double g = (double)nudGravite.Value;
             nudForce.Value = Convert.ToInt32(m * Math.Sqrt(Math.Pow(g, 2) + (Math.Pow(v, 4) / Math.Pow(r, 2))));
+        }
+
+        private void btnModiferMatiere_Click(object sender, EventArgs e)
+        {
+            EditeurMatiere editor = new EditeurMatiere(ListMatieres,(Form1)ActiveForm);
+            editor.Show();
+            this.Hide();
+        }
+
+        private void Form1_VisibleChanged(object sender, EventArgs e)
+        {
+            if(Visible == true)
+            {
+                cbxMatiere.DataSource = null;
+                cbxMatiere.DataSource = ListMatieres;
+            }
+        }
+
+        private void btnCreerMatiere_Click(object sender, EventArgs e)
+        {
+            CreateurMatiere createur = new CreateurMatiere(ListMatieres, (Form1)ActiveForm);
+            createur.Show();
+            this.Hide();
         }
     }
 }
