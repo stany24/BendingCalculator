@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
+using Flexion.DossierCouche;
 
 namespace Flexion
 {
@@ -249,6 +250,13 @@ namespace Flexion
         {
             CreateurCouche createur = new CreateurCouche(ListCouches,ListMatieres,this);
             createur.Show();
+            this.Hide();
+        }
+
+        private void btnModifierCouche_Click(object sender, EventArgs e)
+        {
+            EditeurCouche editor = new EditeurCouche(ListCouches, ListMatieres, this);
+            editor.Show();
             this.Hide();
         }
     }

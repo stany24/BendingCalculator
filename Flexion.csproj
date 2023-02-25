@@ -64,6 +64,12 @@
     <Compile Include="DossierCouche\CreateurCouche.Designer.cs">
       <DependentUpon>CreateurCouche.cs</DependentUpon>
     </Compile>
+    <Compile Include="DossierCouche\EditeurCouche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DossierCouche\EditeurCouche.Designer.cs">
+      <DependentUpon>EditeurCouche.cs</DependentUpon>
+    </Compile>
     <Compile Include="DossierMatiere\CreateurMatiere.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DossierCouche\CreateurCouche.resx">
       <DependentUpon>CreateurCouche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DossierCouche\EditeurCouche.resx">
+      <DependentUpon>EditeurCouche.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DossierMatiere\CreateurMatiere.resx">
       <DependentUpon>CreateurMatiere.cs</DependentUpon>
