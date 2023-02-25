@@ -22,15 +22,14 @@ namespace Flexion
             cbxMatieres.DataSource = ListMatieres;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void AfficherMatiereSelectionne(object sender, EventArgs e)
         {
-            Matiere selected = cbxMatieres.SelectedItem as Matiere;
-            if (selected == null){ return; }
+            if (!(cbxMatieres.SelectedItem is Matiere selected)) { return; }
             tbxNomMatiere.Text = selected.GetNom();
             nudE.Value = (decimal)selected.GetE();
         }
 
-        private void btnModifier_Click(object sender, EventArgs e)
+        private void ModifierMatiere(object sender, EventArgs e)
         {
             Matiere selected = cbxMatieres.SelectedItem as Matiere;
             selected.SetNom(tbxNomMatiere.Text);

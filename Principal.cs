@@ -50,7 +50,7 @@ namespace Flexion
                 }
             }
 
-            foreach (Couche couche in lbxCouche.Items)
+            foreach (Couche couche in ListCouches)
             {
                 using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.GetMatiere().GetNom() + " de "+ couche.GetLargeurCenter()+"x"+couche.GetHauteurCenter() + " "+couche.GetLargeurCenter() + "x"+couche.GetHauteurSide() + ".json"))
                 {
@@ -93,8 +93,6 @@ namespace Flexion
         {
             cbxMatiere.DataSource = null;
             cbxMatiere.DataSource = ListMatieres;
-            lbxCouche.Items.Clear();
-            foreach (Couche couche in ListCouches){lbxCouche.Items.Add(couche);}
             lbxPiece.Items.Clear();
             foreach (Piece piece in ListPiece){lbxPiece.Items.Add(piece);}
         }
@@ -118,41 +116,6 @@ namespace Flexion
                 return;
             }
             ListPiece.Add(new Piece((double)nudLongueurPiece.Value/1000, tbxNomPiece.Text));
-            UpdateListBox();
-        }
-
-        /// <summary>
-        /// Ajoute la couche séléctionnée à la pièce séléctionnée
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AjouterCouche(object sender, EventArgs e)
-        {
-            if (lbxCouche.SelectedItem == null)
-            {
-                lblErreurPiece.Text = "Pas de couche sélétionnée";
-                return;
-            }
-
-            if (lbxPiece.SelectedItem == null)
-            {
-                lblErreurPiece.Text = "Pas de piece sélétionnée";
-                return;
-            }
-
-            if (!(lbxCouche.SelectedItem is Couche))
-            {
-                lblErreurPiece.Text = "L'objet sélécionné n'est pas une couche";
-                return;
-            }
-
-            if (!(lbxPiece.SelectedItem is Piece))
-            {
-                lblErreurPiece.Text = "L'objet sélécionné n'est pas une pièce";
-                return;
-            }
-
-            ListPiece[lbxPiece.SelectedIndex].Couches.Add(lbxCouche.SelectedItem as Couche);
             UpdateListBox();
         }
 
@@ -221,7 +184,7 @@ namespace Flexion
             nudForce.Value = Convert.ToInt32(m * Math.Sqrt(Math.Pow(g, 2) + (Math.Pow(v, 4) / Math.Pow(r, 2))));
         }
 
-        private void btnModiferMatiere_Click(object sender, EventArgs e)
+        private void ModiferMatiere(object sender, EventArgs e)
         {
             EditeurMatiere editor = new EditeurMatiere(ListMatieres,this);
             editor.Show();
@@ -239,21 +202,21 @@ namespace Flexion
             }
         }
 
-        private void btnCreerMatiere_Click(object sender, EventArgs e)
+        private void CreerMatiere(object sender, EventArgs e)
         {
             CreateurMatiere createur = new CreateurMatiere(ListMatieres, this);
             createur.Show();
             this.Hide();
         }
 
-        private void btnCreerCouche_Click(object sender, EventArgs e)
+        private void CreerCouche(object sender, EventArgs e)
         {
             CreateurCouche createur = new CreateurCouche(ListCouches,ListMatieres,this);
             createur.Show();
             this.Hide();
         }
 
-        private void btnModifierCouche_Click(object sender, EventArgs e)
+        private void ModifierCouche(object sender, EventArgs e)
         {
             EditeurCouche editor = new EditeurCouche(ListCouches, ListMatieres, this);
             editor.Show();

@@ -6,9 +6,9 @@ namespace Flexion
 {
     public partial class CreateurCouche : Form
     {
-        List<Couche> ListCouches;
-        List<Matiere> ListMatiere;
-        Form1 Main;
+        readonly List<Couche> ListCouches;
+        readonly List<Matiere> ListMatiere;
+        readonly Form1 Main;
         public CreateurCouche(List<Couche> couches, List<Matiere> matieres,Form1 main)
         {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace Flexion
             cbxMatiere.DataSource = ListMatiere;
         }
 
-        private void btnCreerCouche_Click(object sender, EventArgs e)
+        private void CreerCouche(object sender, EventArgs e)
         {
             Couche newcouche = new Couche((Matiere)cbxMatiere.SelectedItem,(double)nudLargeurCoucheCenter.Value, (double)nudLargeurCoucheSide.Value, (double)nudHauteurCenter.Value, (double)nudHauterSide.Value);
             if(newcouche != null)

@@ -177,7 +177,7 @@
             this.btnCreerCouche.TabIndex = 38;
             this.btnCreerCouche.Text = "Créer";
             this.btnCreerCouche.UseVisualStyleBackColor = true;
-            this.btnCreerCouche.Click += new System.EventHandler(this.btnCreerCouche_Click);
+            this.btnCreerCouche.Click += new System.EventHandler(this.CreerCouche);
             // 
             // CreateurCouche
             // 

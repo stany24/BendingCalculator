@@ -54,7 +54,7 @@
             this.btnModifierCouche.TabIndex = 50;
             this.btnModifierCouche.Text = "Modifier";
             this.btnModifierCouche.UseVisualStyleBackColor = true;
-            this.btnModifierCouche.Click += new System.EventHandler(this.btnModifierCouche_Click);
+            this.btnModifierCouche.Click += new System.EventHandler(this.ModifierCouche);
             // 
             // cbxCouche
             // 
@@ -63,7 +63,7 @@
             this.cbxCouche.Name = "cbxCouche";
             this.cbxCouche.Size = new System.Drawing.Size(325, 28);
             this.cbxCouche.TabIndex = 49;
-            this.cbxCouche.SelectedIndexChanged += new System.EventHandler(this.cbxCouche_SelectedIndexChanged);
+            this.cbxCouche.SelectedIndexChanged += new System.EventHandler(this.AfficherCoucheSelectionne);
             // 
             // cbxMatiere
             // 

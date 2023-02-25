@@ -44,7 +44,7 @@
             this.cbxMatieres.Name = "cbxMatieres";
             this.cbxMatieres.Size = new System.Drawing.Size(329, 28);
             this.cbxMatieres.TabIndex = 0;
-            this.cbxMatieres.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbxMatieres.SelectedIndexChanged += new System.EventHandler(this.AfficherMatiereSelectionne);
             // 
             // tbxNomMatiere
             // 
@@ -96,7 +96,7 @@
             this.btnModifier.TabIndex = 26;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
-            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
+            this.btnModifier.Click += new System.EventHandler(this.ModifierMatiere);
             // 
             // EditeurMatiere
             // 

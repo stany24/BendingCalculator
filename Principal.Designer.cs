@@ -171,7 +171,7 @@ namespace Flexion
             this.btnModifierCouche.TabIndex = 29;
             this.btnModifierCouche.Text = "Modifer";
             this.btnModifierCouche.UseVisualStyleBackColor = true;
-            this.btnModifierCouche.Click += new System.EventHandler(this.btnModifierCouche_Click);
+            this.btnModifierCouche.Click += new System.EventHandler(this.ModifierCouche);
             // 
             // cbxCouche
             // 
@@ -191,7 +191,7 @@ namespace Flexion
             this.btnCreerCouche.TabIndex = 27;
             this.btnCreerCouche.Text = "Créer";
             this.btnCreerCouche.UseVisualStyleBackColor = true;
-            this.btnCreerCouche.Click += new System.EventHandler(this.btnCreerCouche_Click);
+            this.btnCreerCouche.Click += new System.EventHandler(this.CreerCouche);
             // 
             // cbxMatiere
             // 
@@ -225,7 +225,7 @@ namespace Flexion
             this.btnModiferMatiere.TabIndex = 26;
             this.btnModiferMatiere.Text = "Modifer";
             this.btnModiferMatiere.UseVisualStyleBackColor = true;
-            this.btnModiferMatiere.Click += new System.EventHandler(this.btnModiferMatiere_Click);
+            this.btnModiferMatiere.Click += new System.EventHandler(this.ModiferMatiere);
             // 
             // btnCreerMatiere
             // 
@@ -236,7 +236,7 @@ namespace Flexion
             this.btnCreerMatiere.TabIndex = 13;
             this.btnCreerMatiere.Text = "Créer";
             this.btnCreerMatiere.UseVisualStyleBackColor = true;
-            this.btnCreerMatiere.Click += new System.EventHandler(this.btnCreerMatiere_Click);
+            this.btnCreerMatiere.Click += new System.EventHandler(this.CreerMatiere);
             // 
             // groupBox2
             // 

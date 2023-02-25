@@ -12,9 +12,9 @@ namespace Flexion.DossierCouche
 {
     public partial class EditeurCouche : Form
     {
-        List<Couche> ListCouches;
-        List<Matiere> ListMatiere;
-        Form1 Main;
+        readonly List<Couche> ListCouches;
+        readonly List<Matiere> ListMatiere;
+        readonly Form1 Main;
         public EditeurCouche(List<Couche> couches, List<Matiere> matieres, Form1 main)
         {
             InitializeComponent();
@@ -31,10 +31,9 @@ namespace Flexion.DossierCouche
             Main.Show();
         }
 
-        private void cbxCouche_SelectedIndexChanged(object sender, EventArgs e)
+        private void AfficherCoucheSelectionne(object sender, EventArgs e)
         {
-            Couche selected = cbxCouche.SelectedItem as Couche;
-            if (selected == null) { return; }
+            if (!(cbxCouche.SelectedItem is Couche selected)) { return; }
             nudLargeurCoucheCenter.Value = (decimal)selected.GetLargeurCenter();
             nudLargeurCoucheSide.Value = (decimal)selected.GetLargeurSide();
             nudHauteurSide.Value = (decimal)selected.GetHauteurSide();
@@ -42,7 +41,7 @@ namespace Flexion.DossierCouche
             cbxMatiere.SelectedItem = selected.GetMatiere();
         }
 
-        private void btnModifierCouche_Click(object sender, EventArgs e)
+        private void ModifierCouche(object sender, EventArgs e)
         {
             Couche modified = cbxCouche.SelectedItem as Couche;
             modified.SetMatiere(cbxMatiere.SelectedItem as Matiere);

@@ -45,7 +45,7 @@
             this.btnCreer.TabIndex = 34;
             this.btnCreer.Text = "Créer";
             this.btnCreer.UseVisualStyleBackColor = true;
-            this.btnCreer.Click += new System.EventHandler(this.btnCreer_Click);
+            this.btnCreer.Click += new System.EventHandler(this.CreerMatiere);
             // 
             // tbxNomMatiere
             // 

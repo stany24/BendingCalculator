@@ -28,7 +28,7 @@ namespace Flexion
             Main.Show();
         }
 
-        private void btnCreer_Click(object sender, EventArgs e)
+        private void CreerMatiere(object sender, EventArgs e)
         {
             Matiere newmatiere = new Matiere(tbxNomMatiere.Text,(double)nudE.Value);
             if(newmatiere != null)
