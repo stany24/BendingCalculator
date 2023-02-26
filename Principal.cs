@@ -14,6 +14,8 @@ namespace Flexion
         public List<Couche> ListCouches = new List<Couche>();
         public List<Matiere> ListMatieres = new List<Matiere>();
         public List<Piece> ListPiece = new List<Piece>();
+        public double Force = 500;
+        public double Ecart = 1e-4;
 
         /// <summary>
         /// Initialise la page avec des matières et des couches par défault
@@ -100,15 +102,14 @@ namespace Flexion
             }
             
             Piece piece = cbxPiece.SelectedItem as Piece;
-            piece.SetF((double)nudForce.Value);
-            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(), Convert.ToInt32(1/piece.GetEcart())/100);
-            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(), Convert.ToInt32(1 / piece.GetEcart())/100);
+            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force,Ecart), Convert.ToInt32(1/Ecart)/100);
+            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(1 / Ecart)/100);
         }
 
         public void FillGraph(Chart graph,string seriename, double[] data, int diviseur)
         {
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
-            System.Windows.Forms.DataVisualization.Charting.Series serie = new System.Windows.Forms.DataVisualization.Charting.Series(seriename)
+            Series serie = new Series(seriename)
             {
                 ChartType = SeriesChartType.Spline
             };
@@ -117,15 +118,6 @@ namespace Flexion
                 serie.Points.AddXY(i, data[i]);
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
-        }
-
-        public void CalcuateF(object sender, EventArgs e)
-        {
-            double m = (double)nudMasse.Value;
-            double r = (double)nudRayon.Value;
-            double v = (double)nudVitesse.Value;
-            double g = (double)nudGravite.Value;
-            nudForce.Value = Convert.ToInt32(m * Math.Sqrt(Math.Pow(g, 2) + (Math.Pow(v, 4) / Math.Pow(r, 2))));
         }
 
         private void ModiferMatiere(object sender, EventArgs e)
@@ -158,7 +150,7 @@ namespace Flexion
 
         private void Form1_EnabledChanged(object sender, EventArgs e)
         {
-            if (Visible == true)
+            if (Enabled == true)
             {
                 cbxMatiere.DataSource = null;
                 cbxMatiere.DataSource = ListMatieres;
@@ -180,6 +172,13 @@ namespace Flexion
         {
             EditeurPiece editor = new EditeurPiece(ListPiece,ListCouches,this);
             editor.Show();
+            this.Enabled = false;
+        }
+
+        private void CalculerForce(object sender, EventArgs e)
+        {
+            CalculeForce calculeForce = new CalculeForce(this);
+            calculeForce.Show();
             this.Enabled = false;
         }
     }

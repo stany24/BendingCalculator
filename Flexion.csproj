@@ -57,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalMath.cs" />
+    <Compile Include="CalculeForce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculeForce.Designer.cs">
+      <DependentUpon>CalculeForce.cs</DependentUpon>
+    </Compile>
     <Compile Include="DossierPiece\CreateurPiece.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     <Compile Include="DossierPiece\Piece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CalculeForce.resx">
+      <DependentUpon>CalculeForce.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DossierPiece\CreateurPiece.resx">
       <DependentUpon>CreateurPiece.cs</DependentUpon>
     </EmbeddedResource>

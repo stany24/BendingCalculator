@@ -22,52 +22,16 @@ namespace Flexion
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
 
-        private double Ecart = 1e-4;
-        public double GetEcart() { return Ecart; }
-        public void SetEcart(double ecart) { if (ecart > 0) { Ecart = ecart; } }
-
-        private double F;
-        public double GetF() { return F; }
-        public void SetF(double f) { if (f > 0) { F = f; } }
-
         private double[] Xs;
-        private int nbX;
 
-        public double[] GetX()
-        { 
-            if(Xs != null)
-            {
-                return Xs;
-            }
-            else
-            {
-                SetX();
-                return Xs;
-            }
-        }
-
-        public int GetnbX()
-        {
-            if (Xs != null)
-            {
-                return nbX;
-            }
-            else
-            {
-                SetX();
-                return nbX;
-            }
-        }
-
-        public void SetX()
+        public double[] SetX(double ecart)
         {
             List<double> X = new List<double>();
-            for (double i = 0; i <= Longueur + Ecart; i += Ecart)
+            for (double i = 0; i <= Longueur + ecart; i += ecart)
             {
                 X.Add(i);
             }
-            Xs = X.ToArray();
-            nbX= X.Count;
+            return X.ToArray();
         }
 
         /// <summary>
@@ -86,7 +50,6 @@ namespace Flexion
             SetLongueur(longueur);
             SetNom(nom);
             SetEref(eref);
-            SetEcart(ecart);
         }
 
         /// <summary>
@@ -95,20 +58,20 @@ namespace Flexion
         /// <returns></returns>
         public override string ToString(){return $"{GetNom()} de {Longueur} cm.";}
 
-        public double[] MomentForce()
+        public double[] MomentForce(double Force)
         {
             double b1 = Longueur/2;
-            double[] X = GetX().ToArray();
-            double[] moments = new double[GetnbX()];
+            double[] X = Xs;
+            double[] moments = new double[Xs.Length];
 
-            double[] Mfa1 = math.OperationDoubleArray(GetX().ToArray(), -F * b1, AdditionalMath.Operation.Fois);
+            double[] Mfa1 = math.OperationDoubleArray((double[])Xs.Clone(), -Force * b1, AdditionalMath.Operation.Fois);
             Mfa1 = math.OperationDoubleArray(Mfa1, Longueur, AdditionalMath.Operation.Divisé);
             
-            double[] Mfb1 = math.OperationDoubleArray(GetX().ToArray(), Longueur - b1, AdditionalMath.Operation.Moins);
-            Mfb1 = math.OperationDoubleArray(Mfb1, F, AdditionalMath.Operation.Fois);
+            double[] Mfb1 = math.OperationDoubleArray((double[])Xs.Clone(), Longueur - b1, AdditionalMath.Operation.Moins);
+            Mfb1 = math.OperationDoubleArray(Mfb1, Force, AdditionalMath.Operation.Fois);
             Mfb1 = math.OperationDoubleArray(Mfa1, Mfb1, AdditionalMath.Operation.Plus);
 
-            for (int i = 0; i < GetnbX(); i++)
+            for (int i = 0; i < Xs.Length; i++)
             {
                 if (X[i] < b1)
                 {
@@ -122,12 +85,13 @@ namespace Flexion
             return moments;
         }
 
-        public double[] Intégrale()
+        public double[] Intégrale(double Force,double ecart)
         {
-            double[] integrale1 = new double[GetnbX()];
-            double[] integrale2 = new double[GetnbX()];
-            double[] integrale3 = new double[GetnbX()];
-            double[] moment = MomentForce();
+            Xs = SetX(ecart);
+            double[] integrale1 = new double[Xs.Length];
+            double[] integrale2 = new double[Xs.Length];
+            double[] integrale3 = new double[Xs.Length];
+            double[] moment = MomentForce(Force);
             double[] I = CalculateI();
             // calcule
             for (int i = 0; i < moment.Count(); i++)
@@ -139,11 +103,11 @@ namespace Flexion
             {
                 if(i-1 <0)
                 {
-                    integrale2[i] = integrale1[i] * Ecart;
+                    integrale2[i] = integrale1[i] * ecart;
                 }
                 else
                 {
-                    integrale2[i] = integrale2[i - 1] + integrale1[i] * Ecart;
+                    integrale2[i] = integrale2[i - 1] + integrale1[i] * ecart;
                 }
             }
 
@@ -159,11 +123,11 @@ namespace Flexion
             {
                 if (i - 1 < 0)
                 {
-                    integrale3[i] = integrale2[i] * Ecart;
+                    integrale3[i] = integrale2[i] * ecart;
                 }
                 else
                 {
-                    integrale3[i] = integrale3[i - 1] + integrale2[i] * Ecart;
+                    integrale3[i] = integrale3[i - 1] + integrale2[i] * ecart;
                 }
             }
             //
@@ -177,27 +141,27 @@ namespace Flexion
         public double[] CalculateI()
         {
             double[][] Ix = new double[Couches.Count][];
-            double[] I = new double[GetnbX()];
+            double[] I = new double[Xs.Length];
 
             //initialise les arrays
             for (int i = 0; i < Ix.Length; i++)
             {
-                Ix[i] = new double[GetnbX()];
+                Ix[i] = new double[Xs.Length];
             }
 
             //calcule les Ix de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] power = math.OperationDoubleArray(Couches[i].Hauteur(Longueur, GetX()).ToArray(),3,AdditionalMath.Operation.Puissance);
-                double[] divise = math.OperationDoubleArray(power, Couches[i].Base(Longueur,Eref, GetX()),AdditionalMath.Operation.Fois);
+                double[] power = math.OperationDoubleArray(Couches[i].Hauteur(Longueur, (double[])Xs.Clone()).ToArray(),3,AdditionalMath.Operation.Puissance);
+                double[] divise = math.OperationDoubleArray(power, Couches[i].Base(Longueur,Eref, (double[])Xs.Clone()),AdditionalMath.Operation.Fois);
                 Ix[i] = math.OperationDoubleArray(divise, 12,AdditionalMath.Operation.Divisé);
             }
 
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] P1 = math.OperationDoubleArray(CalculateNx(i, GetnbX()), Ns(),AdditionalMath.Operation.Moins);
+                double[] P1 = math.OperationDoubleArray(CalculateNx(i, Xs.Length), Ns(),AdditionalMath.Operation.Moins);
                 double[] P2 = math.OperationDoubleArray(P1, 2,AdditionalMath.Operation.Puissance);
-                double[] P3 = math.OperationDoubleArray(Couches[i].Surface(Longueur,Eref, GetX()).ToArray(), P2,AdditionalMath.Operation.Fois);
+                double[] P3 = math.OperationDoubleArray(Couches[i].Surface(Longueur,Eref, (double[])Xs.Clone()).ToArray(), P2,AdditionalMath.Operation.Fois);
                 double[] P4 = math.OperationDoubleArray(Ix[i], P3, AdditionalMath.Operation.Plus);
                 I = math.OperationDoubleArray(I, P4,AdditionalMath.Operation.Plus);
             }
@@ -207,32 +171,32 @@ namespace Flexion
         public double[] Ns()
         {
             double[][] Nx = new double[Couches.Count][];
-            double[] divise = new double[GetnbX()];
-            double[] divisant = new double[GetnbX()];
+            double[] divise = new double[Xs.Length];
+            double[] divisant = new double[Xs.Length];
 
             //initialise les arrays
             for (int i = 0; i < Nx.Length; i++)
             {
-                Nx[i] = new double[GetnbX()];
+                Nx[i] = new double[Xs.Length];
             }
 
             //calcule les Nx de manière généralisé.
             for (int i = 0; i < Couches.Count; i++)
             {
-                Nx[i] = CalculateNx(i,GetnbX());
+                Nx[i] = CalculateNx(i, Xs.Length);
             }
 
             //calucule du divisé
             for (int i = 0; i < Couches.Count; i++)
             {
-                double[] ajout = math.OperationDoubleArray(Couches[i].Surface(Longueur, Eref, GetX()).ToArray(), Nx[i], AdditionalMath.Operation.Fois);
+                double[] ajout = math.OperationDoubleArray(Couches[i].Surface(Longueur, Eref, (double[])Xs.Clone()).ToArray(), Nx[i], AdditionalMath.Operation.Fois);
                 divise = math.OperationDoubleArray(divise, ajout,AdditionalMath.Operation.Plus);
             }
 
             // calcule du divisant
             for (int i = 0; i < Couches.Count; i++)
             {
-                divisant = math.OperationDoubleArray(divisant, Couches[i].Surface(Longueur,Eref, GetX()).ToArray(),AdditionalMath.Operation.Plus);
+                divisant = math.OperationDoubleArray(divisant, Couches[i].Surface(Longueur,Eref, (double[])Xs.Clone()).ToArray(),AdditionalMath.Operation.Plus);
             }
             //calcule de Ns
             return math.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divisé); ;
@@ -245,12 +209,12 @@ namespace Flexion
             {
                 if (j == i)
                 {
-                    double[] add = math.OperationDoubleArray(Couches[j].Hauteur(Longueur, GetX()).ToArray(), 2,AdditionalMath.Operation.Divisé);
+                    double[] add = math.OperationDoubleArray(Couches[j].Hauteur(Longueur, (double[])Xs.Clone()).ToArray(), 2,AdditionalMath.Operation.Divisé);
                     Nx = math.OperationDoubleArray(Nx, add,AdditionalMath.Operation.Plus);
                 }
                 else
                 {
-                    Nx = math.OperationDoubleArray(Nx, Couches[j].Hauteur(Longueur, GetX()).ToArray(),AdditionalMath.Operation.Plus);
+                    Nx = math.OperationDoubleArray(Nx, Couches[j].Hauteur(Longueur, (double[])Xs.Clone()).ToArray(),AdditionalMath.Operation.Plus);
                 }
             }
             return Nx;

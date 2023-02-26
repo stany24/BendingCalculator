@@ -124,7 +124,6 @@ namespace FlexionTests
             Assert.AreEqual(piece.GetLongueur(),1.5);
             Assert.AreEqual(piece.GetNom(),"test");
             Assert.AreEqual(piece.GetEref(),69e9);
-            Assert.AreEqual(piece.GetEcart(), 1e-4);
         }
 
         [TestMethod]
@@ -134,11 +133,9 @@ namespace FlexionTests
             piece.SetLongueur(3.5);
             piece.SetNom("new");
             piece.SetEref(54e6);
-            piece.SetEcart(1e-6);
             Assert.AreEqual(piece.GetLongueur(), 3.5);
             Assert.AreEqual(piece.GetNom(), "new");
             Assert.AreEqual(piece.GetEref(), 54e6);
-            Assert.AreEqual(piece.GetEcart(), 1e-6);
         }
 
         [TestMethod]
@@ -149,8 +146,7 @@ namespace FlexionTests
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
-            piece.SetF(500);
-            double[] resultat = piece.Intégrale();
+            double[] resultat = piece.Intégrale(500,1e-4);
             for (int i = 0; i < resultat.Length; i++)
             {
                 Assert.AreEqual(correcte[i], resultat[i],0.000001);
