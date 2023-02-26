@@ -82,6 +82,12 @@
     <Compile Include="DossierMatiere\CreateurMatiere.Designer.cs">
       <DependentUpon>CreateurMatiere.cs</DependentUpon>
     </Compile>
+    <Compile Include="DossierPiece\EditeurPiece.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DossierPiece\EditeurPiece.Designer.cs">
+      <DependentUpon>EditeurPiece.cs</DependentUpon>
+    </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DossierMatiere\EditeurMatiere.resx">
       <DependentUpon>EditeurMatiere.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DossierPiece\EditeurPiece.resx">
+      <DependentUpon>EditeurPiece.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

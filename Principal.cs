@@ -21,19 +21,16 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            lblErreurPiece.Text = string.Empty;
-            lblErreurProcess.Text = string.Empty;
             Piece piece = new Piece(1500e-3, "Démo");
             ListPiece.Add(piece);
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             ListCouches.Add(piece.Couches[0]);
-            ListCouches.Add(piece.Couches[1]);
             ListMatieres.Add(piece.Couches[0].GetMatiere());
-            UpdateListBox();
             cbxMatiere.DataSource= ListMatieres;
             cbxCouche.DataSource= ListCouches;
+            cbxPiece.DataSource= ListPiece;
         }
 
         /// <summary>
@@ -58,7 +55,7 @@ namespace Flexion
                 }
             }
 
-            foreach (Piece piece in lbxPiece.Items)
+            foreach (Piece piece in ListPiece)
             {
                 using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.GetNom() + ".json"))
                 {
@@ -79,61 +76,30 @@ namespace Flexion
             {
                 using (StreamReader file = new StreamReader(matiere))
                 {
-                    lblErreurPiece.Text=file.ReadLine();
+                    lblErreur.Text=file.ReadLine();
                 }
             }
             string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
             string[] Pieces = Directory.GetFiles(savePath, "Piece-*.json");
         }
 
-        /// <summary>
-        /// Met à jour les listbox des matières, des couches et des pièces
-        /// </summary>
-        private void UpdateListBox()
-        {
-            cbxMatiere.DataSource = null;
-            cbxMatiere.DataSource = ListMatieres;
-            lbxPiece.Items.Clear();
-            foreach (Piece piece in ListPiece){lbxPiece.Items.Add(piece);}
-        }
-
-        /// <summary>
-        /// Affiche toutes les couches dans la pièce séléctionnée
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowCoucheInPiece(object sender, EventArgs e)
-        {
-            if(!(lbxPiece.SelectedItem is Piece))
-            {
-                lblErreurPiece.Text = "L'objet sélécionné n'est pas une pièce";
-                return;
-            }
-
-            lbxShowCouchePiece.Items.Clear();
-            Piece piece = lbxPiece.SelectedItem as Piece;
-            foreach (Couche couche in piece.Couches)
-            {
-                lbxShowCouchePiece.Items.Add(couche);
-            }
-        }
 
         private void DisplayGraphForPiece(object sender, EventArgs e)
         {
-            lblErreurProcess.Text = string.Empty;
-            if(lbxPiece.SelectedItem == null)
+            lblErreur.Text = string.Empty;
+            if(cbxPiece.SelectedItem == null)
             {
-                lblErreurProcess.Text = "Pas de pièce sélétionnée";
+                lblErreur.Text = "Pas de pièce sélétionnée";
                 return;
             }
 
-            if (!(lbxPiece.SelectedItem is Piece))
+            if (!(cbxPiece.SelectedItem is Piece))
             {
-                lblErreurProcess.Text = "L'objet sélécionné n'est pas une pièce";
+                lblErreur.Text = "L'objet sélécionné n'est pas une pièce";
                 return;
             }
             
-            Piece piece = lbxPiece.SelectedItem as Piece;
+            Piece piece = cbxPiece.SelectedItem as Piece;
             piece.SetF((double)nudForce.Value);
             FillGraph(chrIntegrale, "intégrale", piece.Intégrale(), Convert.ToInt32(1/piece.GetEcart())/100);
             FillGraph(chrMomentForce, "moment de force", piece.MomentForce(), Convert.ToInt32(1 / piece.GetEcart())/100);
@@ -207,6 +173,13 @@ namespace Flexion
         {
             CreateurPiece creator = new CreateurPiece(ListPiece, this);
             creator.Show();
+            this.Enabled = false;
+        }
+
+        private void ModifierPiece(object sender, EventArgs e)
+        {
+            EditeurPiece editor = new EditeurPiece(ListPiece,ListCouches,this);
+            editor.Show();
             this.Enabled = false;
         }
     }

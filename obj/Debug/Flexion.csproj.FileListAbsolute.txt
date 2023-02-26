@@ -137,3 +137,4 @@ C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.CreateurMatiere.resources
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.CreateurCouche.resources
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.DossierCouche.EditeurCouche.resources
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.CreateurPiece.resources
+C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.EditeurPiece.resources
