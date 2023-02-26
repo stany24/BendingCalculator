@@ -57,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalMath.cs" />
+    <Compile Include="DossierPiece\CreateurPiece.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DossierPiece\CreateurPiece.Designer.cs">
+      <DependentUpon>CreateurPiece.cs</DependentUpon>
+    </Compile>
     <Compile Include="DossierCouche\Couche.cs" />
     <Compile Include="DossierCouche\CreateurCouche.cs">
       <SubType>Form</SubType>
@@ -89,9 +95,12 @@
       <DependentUpon>EditeurMatiere.cs</DependentUpon>
     </Compile>
     <Compile Include="DossierMatiere\Matiere.cs" />
-    <Compile Include="Piece.cs" />
+    <Compile Include="DossierPiece\Piece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DossierPiece\CreateurPiece.resx">
+      <DependentUpon>CreateurPiece.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DossierCouche\CreateurCouche.resx">
       <DependentUpon>CreateurCouche.cs</DependentUpon>
     </EmbeddedResource>

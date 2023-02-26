@@ -98,28 +98,6 @@ namespace Flexion
         }
 
         /// <summary>
-        /// Crée une nouvelle pièce avec les paramétres donnés
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreerPiece(object sender, EventArgs e)
-        {
-            if (tbxNomPiece.Text == string.Empty)
-            {
-                lblErreurPiece.Text = "Pas de nom donné à la pièce";
-                return;
-            }
-
-            if (nudLongueurPiece.Value == 0)
-            {
-                lblErreurPiece.Text = "Pas de valeur donnée à la longueur";
-                return;
-            }
-            ListPiece.Add(new Piece((double)nudLongueurPiece.Value/1000, tbxNomPiece.Text));
-            UpdateListBox();
-        }
-
-        /// <summary>
         /// Affiche toutes les couches dans la pièce séléctionnée
         /// </summary>
         /// <param name="sender"></param>
@@ -220,7 +198,16 @@ namespace Flexion
                 cbxMatiere.DataSource = ListMatieres;
                 cbxCouche.DataSource = null;
                 cbxCouche.DataSource = ListCouches;
+                cbxPiece.DataSource = null;
+                cbxPiece.DataSource = ListPiece;
             }
+        }
+
+        private void CreerPiece(object sender, EventArgs e)
+        {
+            CreateurPiece creator = new CreateurPiece(ListPiece, this);
+            creator.Show();
+            this.Enabled = false;
         }
     }
 }

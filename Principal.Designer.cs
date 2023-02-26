@@ -37,8 +37,6 @@ namespace Flexion
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
-            this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
-            this.lblLongueur = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnModifierCouche = new System.Windows.Forms.Button();
             this.cbxCouche = new System.Windows.Forms.ComboBox();
@@ -48,8 +46,6 @@ namespace Flexion
             this.btnModiferMatiere = new System.Windows.Forms.Button();
             this.btnCreerMatiere = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tbxNomPiece = new System.Windows.Forms.TextBox();
-            this.lblNomPiece = new System.Windows.Forms.Label();
             this.btnCreerPiece = new System.Windows.Forms.Button();
             this.lbxPiece = new System.Windows.Forms.ListBox();
             this.lblErreurPiece = new System.Windows.Forms.Label();
@@ -76,8 +72,8 @@ namespace Flexion
             this.lblMasse = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblErreurProcess = new System.Windows.Forms.Label();
+            this.cbxPiece = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbxMatiere.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -118,35 +114,6 @@ namespace Flexion
             0,
             0,
             0});
-            // 
-            // nudLongueurPiece
-            // 
-            this.nudLongueurPiece.DecimalPlaces = 1;
-            this.nudLongueurPiece.Location = new System.Drawing.Point(152, 46);
-            this.nudLongueurPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.nudLongueurPiece.Maximum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.nudLongueurPiece.Name = "nudLongueurPiece";
-            this.nudLongueurPiece.Size = new System.Drawing.Size(180, 26);
-            this.nudLongueurPiece.TabIndex = 8;
-            this.nudLongueurPiece.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            // 
-            // lblLongueur
-            // 
-            this.lblLongueur.AutoSize = true;
-            this.lblLongueur.Location = new System.Drawing.Point(9, 49);
-            this.lblLongueur.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLongueur.Name = "lblLongueur";
-            this.lblLongueur.Size = new System.Drawing.Size(117, 20);
-            this.lblLongueur.TabIndex = 7;
-            this.lblLongueur.Text = "Longueur (mm)";
             // 
             // groupBox1
             // 
@@ -240,12 +207,9 @@ namespace Flexion
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tbxNomPiece);
-            this.groupBox2.Controls.Add(this.lblNomPiece);
+            this.groupBox2.Controls.Add(this.cbxPiece);
             this.groupBox2.Controls.Add(this.btnCreerPiece);
             this.groupBox2.Controls.Add(this.lbxPiece);
-            this.groupBox2.Controls.Add(this.lblLongueur);
-            this.groupBox2.Controls.Add(this.nudLongueurPiece);
             this.groupBox2.Controls.Add(this.lblErreurPiece);
             this.groupBox2.Location = new System.Drawing.Point(411, 18);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -256,32 +220,14 @@ namespace Flexion
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Piece";
             // 
-            // tbxNomPiece
-            // 
-            this.tbxNomPiece.Location = new System.Drawing.Point(152, 100);
-            this.tbxNomPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbxNomPiece.Name = "tbxNomPiece";
-            this.tbxNomPiece.Size = new System.Drawing.Size(178, 26);
-            this.tbxNomPiece.TabIndex = 22;
-            // 
-            // lblNomPiece
-            // 
-            this.lblNomPiece.AutoSize = true;
-            this.lblNomPiece.Location = new System.Drawing.Point(9, 100);
-            this.lblNomPiece.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNomPiece.Name = "lblNomPiece";
-            this.lblNomPiece.Size = new System.Drawing.Size(42, 20);
-            this.lblNomPiece.TabIndex = 16;
-            this.lblNomPiece.Text = "Nom";
-            // 
             // btnCreerPiece
             // 
-            this.btnCreerPiece.Location = new System.Drawing.Point(78, 143);
+            this.btnCreerPiece.Location = new System.Drawing.Point(144, 65);
             this.btnCreerPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreerPiece.Name = "btnCreerPiece";
-            this.btnCreerPiece.Size = new System.Drawing.Size(172, 35);
+            this.btnCreerPiece.Size = new System.Drawing.Size(108, 35);
             this.btnCreerPiece.TabIndex = 15;
-            this.btnCreerPiece.Text = "Créer une pièce";
+            this.btnCreerPiece.Text = "Créer";
             this.btnCreerPiece.UseVisualStyleBackColor = true;
             this.btnCreerPiece.Click += new System.EventHandler(this.CreerPiece);
             // 
@@ -601,6 +547,14 @@ namespace Flexion
             this.lblErreurProcess.TabIndex = 24;
             this.lblErreurProcess.Text = "Erreurs";
             // 
+            // cbxPiece
+            // 
+            this.cbxPiece.FormattingEnabled = true;
+            this.cbxPiece.Location = new System.Drawing.Point(14, 29);
+            this.cbxPiece.Name = "cbxPiece";
+            this.cbxPiece.Size = new System.Drawing.Size(238, 28);
+            this.cbxPiece.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -630,7 +584,6 @@ namespace Flexion
             this.Text = "Flexion TIP";
             this.EnabledChanged += new System.EventHandler(this.Form1_EnabledChanged);
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.gbxMatiere.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -652,16 +605,12 @@ namespace Flexion
 
         private System.Windows.Forms.Label lblForce;
         private System.Windows.Forms.NumericUpDown nudForce;
-        private System.Windows.Forms.NumericUpDown nudLongueurPiece;
-        private System.Windows.Forms.Label lblLongueur;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox gbxMatiere;
         private System.Windows.Forms.Button btnCreerMatiere;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lbxPiece;
         private System.Windows.Forms.Button btnCreerPiece;
-        private System.Windows.Forms.TextBox tbxNomPiece;
-        private System.Windows.Forms.Label lblNomPiece;
         private System.Windows.Forms.ListBox lbxShowCouchePiece;
         private System.Windows.Forms.Label lblErreurPiece;
         private System.Windows.Forms.Button btnTest;
@@ -691,6 +640,7 @@ namespace Flexion
         private System.Windows.Forms.Button btnModifierCouche;
         private System.Windows.Forms.ComboBox cbxCouche;
         private System.Windows.Forms.Button btnCreerCouche;
+        private System.Windows.Forms.ComboBox cbxPiece;
     }
 }
 
