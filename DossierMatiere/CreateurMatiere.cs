@@ -25,7 +25,7 @@ namespace Flexion
         private void CreateurMatiere_FormClosing(object sender, FormClosingEventArgs e)
         {
             Main.ListMatieres = ListMatieres;
-            Main.Show();
+            Main.Enabled = true;
         }
 
         private void CreerMatiere(object sender, EventArgs e)

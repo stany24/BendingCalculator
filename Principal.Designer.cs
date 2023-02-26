@@ -29,12 +29,12 @@ namespace Flexion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
             this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
@@ -409,34 +409,34 @@ namespace Flexion
             // 
             // chrIntegrale
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrIntegrale.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chrIntegrale.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chrIntegrale.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrIntegrale.Legends.Add(legend1);
             this.chrIntegrale.Location = new System.Drawing.Point(22, 649);
             this.chrIntegrale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chrIntegrale.Name = "chrIntegrale";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chrIntegrale.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chrIntegrale.Series.Add(series1);
             this.chrIntegrale.Size = new System.Drawing.Size(1428, 462);
             this.chrIntegrale.TabIndex = 34;
             this.chrIntegrale.Text = "Graphe de l\'intégrale";
             // 
             // chrMomentForce
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrMomentForce.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrMomentForce.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chrMomentForce.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrMomentForce.Legends.Add(legend2);
             this.chrMomentForce.Location = new System.Drawing.Point(22, 1120);
             this.chrMomentForce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chrMomentForce.Name = "chrMomentForce";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chrMomentForce.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chrMomentForce.Series.Add(series2);
             this.chrMomentForce.Size = new System.Drawing.Size(1428, 462);
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
@@ -628,7 +628,7 @@ namespace Flexion
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Flexion TIP";
-            this.VisibleChanged += new System.EventHandler(this.Form1_VisibleChanged);
+            this.EnabledChanged += new System.EventHandler(this.Form1_EnabledChanged);
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).EndInit();
             this.groupBox1.ResumeLayout(false);

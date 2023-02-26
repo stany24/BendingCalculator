@@ -41,7 +41,7 @@ namespace Flexion
         private void EditeurMatiere_FormClosing(object sender, FormClosingEventArgs e)
         {
             Main.ListMatieres = ListMatieres;
-            Main.Show();
+            Main.Enabled = true;
         }
     }
 }

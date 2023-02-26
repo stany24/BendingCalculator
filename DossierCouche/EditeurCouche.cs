@@ -28,7 +28,7 @@ namespace Flexion.DossierCouche
         private void EditorCouche_FormClosing(object sender, FormClosingEventArgs e)
         {
             Main.ListCouches = ListCouches;
-            Main.Show();
+            Main.Enabled = true;
         }
 
         private void AfficherCoucheSelectionne(object sender, EventArgs e)

@@ -188,39 +188,39 @@ namespace Flexion
         {
             EditeurMatiere editor = new EditeurMatiere(ListMatieres,this);
             editor.Show();
-            this.Hide();
-        }
-
-        private void Form1_VisibleChanged(object sender, EventArgs e)
-        {
-            if(Visible == true)
-            {
-                cbxMatiere.DataSource = null;
-                cbxMatiere.DataSource = ListMatieres;
-                cbxCouche.DataSource = null;
-                cbxCouche.DataSource = ListCouches;
-            }
+            this.Enabled = false;
         }
 
         private void CreerMatiere(object sender, EventArgs e)
         {
             CreateurMatiere createur = new CreateurMatiere(ListMatieres, this);
             createur.Show();
-            this.Hide();
+            this.Enabled = false;
         }
 
         private void CreerCouche(object sender, EventArgs e)
         {
             CreateurCouche createur = new CreateurCouche(ListCouches,ListMatieres,this);
             createur.Show();
-            this.Hide();
+            this.Enabled = false;
         }
 
         private void ModifierCouche(object sender, EventArgs e)
         {
             EditeurCouche editor = new EditeurCouche(ListCouches, ListMatieres, this);
             editor.Show();
-            this.Hide();
+            this.Enabled = false;
+        }
+
+        private void Form1_EnabledChanged(object sender, EventArgs e)
+        {
+            if (Visible == true)
+            {
+                cbxMatiere.DataSource = null;
+                cbxMatiere.DataSource = ListMatieres;
+                cbxCouche.DataSource = null;
+                cbxCouche.DataSource = ListCouches;
+            }
         }
     }
 }

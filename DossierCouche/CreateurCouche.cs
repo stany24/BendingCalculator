@@ -33,7 +33,7 @@ namespace Flexion
         private void CreateurCouche_FormClosing(object sender, FormClosingEventArgs e)
         {
             Main.ListCouches = ListCouches;
-            Main.Show();
+            Main.Enabled = true;
         }
     }
 }
