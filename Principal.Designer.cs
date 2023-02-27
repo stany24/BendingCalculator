@@ -29,12 +29,12 @@ namespace Flexion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblForce = new System.Windows.Forms.Label();
             this.nudForce = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -74,47 +74,53 @@ namespace Flexion
             // lblForce
             // 
             this.lblForce.AutoSize = true;
-            this.lblForce.Location = new System.Drawing.Point(5, 54);
+            this.lblForce.Location = new System.Drawing.Point(8, 83);
+            this.lblForce.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblForce.Name = "lblForce";
-            this.lblForce.Size = new System.Drawing.Size(51, 13);
+            this.lblForce.Size = new System.Drawing.Size(75, 20);
             this.lblForce.TabIndex = 0;
             this.lblForce.Text = "Force (N)";
             // 
             // nudForce
             // 
             this.nudForce.DecimalPlaces = 1;
-            this.nudForce.Location = new System.Drawing.Point(67, 53);
+            this.nudForce.Location = new System.Drawing.Point(100, 82);
+            this.nudForce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudForce.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.nudForce.Name = "nudForce";
-            this.nudForce.Size = new System.Drawing.Size(87, 20);
+            this.nudForce.Size = new System.Drawing.Size(130, 26);
             this.nudForce.TabIndex = 5;
             this.nudForce.Value = new decimal(new int[] {
             500,
             0,
             0,
             0});
+            this.nudForce.ValueChanged += new System.EventHandler(this.nudForce_ValueChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnModifierCouche);
             this.groupBox1.Controls.Add(this.cbxCouche);
             this.groupBox1.Controls.Add(this.btnCreerCouche);
-            this.groupBox1.Location = new System.Drawing.Point(417, 9);
+            this.groupBox1.Location = new System.Drawing.Point(626, 14);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(184, 75);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(276, 115);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Couche";
             // 
             // btnModifierCouche
             // 
-            this.btnModifierCouche.Location = new System.Drawing.Point(9, 44);
+            this.btnModifierCouche.Location = new System.Drawing.Point(14, 68);
+            this.btnModifierCouche.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnModifierCouche.Name = "btnModifierCouche";
-            this.btnModifierCouche.Size = new System.Drawing.Size(81, 23);
+            this.btnModifierCouche.Size = new System.Drawing.Size(122, 35);
             this.btnModifierCouche.TabIndex = 29;
             this.btnModifierCouche.Text = "Modifer";
             this.btnModifierCouche.UseVisualStyleBackColor = true;
@@ -123,16 +129,18 @@ namespace Flexion
             // cbxCouche
             // 
             this.cbxCouche.FormattingEnabled = true;
-            this.cbxCouche.Location = new System.Drawing.Point(9, 18);
+            this.cbxCouche.Location = new System.Drawing.Point(14, 28);
+            this.cbxCouche.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxCouche.Name = "cbxCouche";
-            this.cbxCouche.Size = new System.Drawing.Size(168, 21);
+            this.cbxCouche.Size = new System.Drawing.Size(250, 28);
             this.cbxCouche.TabIndex = 28;
             // 
             // btnCreerCouche
             // 
-            this.btnCreerCouche.Location = new System.Drawing.Point(95, 44);
+            this.btnCreerCouche.Location = new System.Drawing.Point(142, 68);
+            this.btnCreerCouche.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreerCouche.Name = "btnCreerCouche";
-            this.btnCreerCouche.Size = new System.Drawing.Size(81, 23);
+            this.btnCreerCouche.Size = new System.Drawing.Size(122, 35);
             this.btnCreerCouche.TabIndex = 27;
             this.btnCreerCouche.Text = "Créer";
             this.btnCreerCouche.UseVisualStyleBackColor = true;
@@ -141,9 +149,10 @@ namespace Flexion
             // cbxMatiere
             // 
             this.cbxMatiere.FormattingEnabled = true;
-            this.cbxMatiere.Location = new System.Drawing.Point(9, 19);
+            this.cbxMatiere.Location = new System.Drawing.Point(14, 29);
+            this.cbxMatiere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxMatiere.Name = "cbxMatiere";
-            this.cbxMatiere.Size = new System.Drawing.Size(168, 21);
+            this.cbxMatiere.Size = new System.Drawing.Size(250, 28);
             this.cbxMatiere.TabIndex = 24;
             // 
             // gbxMatiere
@@ -151,18 +160,21 @@ namespace Flexion
             this.gbxMatiere.Controls.Add(this.btnModiferMatiere);
             this.gbxMatiere.Controls.Add(this.cbxMatiere);
             this.gbxMatiere.Controls.Add(this.btnCreerMatiere);
-            this.gbxMatiere.Location = new System.Drawing.Point(606, 9);
+            this.gbxMatiere.Location = new System.Drawing.Point(909, 14);
+            this.gbxMatiere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxMatiere.Name = "gbxMatiere";
-            this.gbxMatiere.Size = new System.Drawing.Size(185, 75);
+            this.gbxMatiere.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxMatiere.Size = new System.Drawing.Size(278, 115);
             this.gbxMatiere.TabIndex = 17;
             this.gbxMatiere.TabStop = false;
             this.gbxMatiere.Text = "Matières";
             // 
             // btnModiferMatiere
             // 
-            this.btnModiferMatiere.Location = new System.Drawing.Point(9, 45);
+            this.btnModiferMatiere.Location = new System.Drawing.Point(14, 69);
+            this.btnModiferMatiere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnModiferMatiere.Name = "btnModiferMatiere";
-            this.btnModiferMatiere.Size = new System.Drawing.Size(81, 23);
+            this.btnModiferMatiere.Size = new System.Drawing.Size(122, 35);
             this.btnModiferMatiere.TabIndex = 26;
             this.btnModiferMatiere.Text = "Modifer";
             this.btnModiferMatiere.UseVisualStyleBackColor = true;
@@ -170,9 +182,10 @@ namespace Flexion
             // 
             // btnCreerMatiere
             // 
-            this.btnCreerMatiere.Location = new System.Drawing.Point(95, 45);
+            this.btnCreerMatiere.Location = new System.Drawing.Point(142, 69);
+            this.btnCreerMatiere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreerMatiere.Name = "btnCreerMatiere";
-            this.btnCreerMatiere.Size = new System.Drawing.Size(81, 23);
+            this.btnCreerMatiere.Size = new System.Drawing.Size(122, 35);
             this.btnCreerMatiere.TabIndex = 13;
             this.btnCreerMatiere.Text = "Créer";
             this.btnCreerMatiere.UseVisualStyleBackColor = true;
@@ -184,18 +197,21 @@ namespace Flexion
             this.groupBox2.Controls.Add(this.cbxPiece);
             this.groupBox2.Controls.Add(this.btnCreerPiece);
             this.groupBox2.Controls.Add(this.btnTest);
-            this.groupBox2.Location = new System.Drawing.Point(234, 9);
+            this.groupBox2.Location = new System.Drawing.Point(351, 14);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(177, 106);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(266, 163);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Piece";
             // 
             // btnModifierPiece
             // 
-            this.btnModifierPiece.Location = new System.Drawing.Point(9, 42);
+            this.btnModifierPiece.Location = new System.Drawing.Point(14, 65);
+            this.btnModifierPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnModifierPiece.Name = "btnModifierPiece";
-            this.btnModifierPiece.Size = new System.Drawing.Size(72, 23);
+            this.btnModifierPiece.Size = new System.Drawing.Size(108, 35);
             this.btnModifierPiece.TabIndex = 25;
             this.btnModifierPiece.Text = "Modifier";
             this.btnModifierPiece.UseVisualStyleBackColor = true;
@@ -204,17 +220,17 @@ namespace Flexion
             // cbxPiece
             // 
             this.cbxPiece.FormattingEnabled = true;
-            this.cbxPiece.Location = new System.Drawing.Point(9, 19);
-            this.cbxPiece.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxPiece.Location = new System.Drawing.Point(14, 29);
             this.cbxPiece.Name = "cbxPiece";
-            this.cbxPiece.Size = new System.Drawing.Size(160, 21);
+            this.cbxPiece.Size = new System.Drawing.Size(238, 28);
             this.cbxPiece.TabIndex = 24;
             // 
             // btnCreerPiece
             // 
-            this.btnCreerPiece.Location = new System.Drawing.Point(96, 42);
+            this.btnCreerPiece.Location = new System.Drawing.Point(144, 65);
+            this.btnCreerPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreerPiece.Name = "btnCreerPiece";
-            this.btnCreerPiece.Size = new System.Drawing.Size(72, 23);
+            this.btnCreerPiece.Size = new System.Drawing.Size(108, 35);
             this.btnCreerPiece.TabIndex = 15;
             this.btnCreerPiece.Text = "Créer";
             this.btnCreerPiece.UseVisualStyleBackColor = true;
@@ -222,9 +238,10 @@ namespace Flexion
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(9, 72);
+            this.btnTest.Location = new System.Drawing.Point(14, 111);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(159, 23);
+            this.btnTest.Size = new System.Drawing.Size(238, 35);
             this.btnTest.TabIndex = 23;
             this.btnTest.Text = "Calculer la flexion";
             this.btnTest.UseVisualStyleBackColor = true;
@@ -233,93 +250,104 @@ namespace Flexion
             // lbxMoment
             // 
             this.lbxMoment.FormattingEnabled = true;
-            this.lbxMoment.Location = new System.Drawing.Point(1312, 46);
+            this.lbxMoment.ItemHeight = 20;
+            this.lbxMoment.Location = new System.Drawing.Point(1968, 71);
+            this.lbxMoment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lbxMoment.Name = "lbxMoment";
-            this.lbxMoment.Size = new System.Drawing.Size(164, 433);
+            this.lbxMoment.Size = new System.Drawing.Size(244, 664);
             this.lbxMoment.TabIndex = 29;
             // 
             // lblMoment
             // 
             this.lblMoment.AutoSize = true;
-            this.lblMoment.Location = new System.Drawing.Point(1370, 21);
+            this.lblMoment.Location = new System.Drawing.Point(2055, 32);
+            this.lblMoment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMoment.Name = "lblMoment";
-            this.lblMoment.Size = new System.Drawing.Size(45, 13);
+            this.lblMoment.Size = new System.Drawing.Size(67, 20);
             this.lblMoment.TabIndex = 30;
             this.lblMoment.Text = "Moment";
             // 
             // lbxIntegrale
             // 
             this.lbxIntegrale.FormattingEnabled = true;
-            this.lbxIntegrale.Location = new System.Drawing.Point(1482, 46);
+            this.lbxIntegrale.ItemHeight = 20;
+            this.lbxIntegrale.Location = new System.Drawing.Point(2223, 71);
+            this.lbxIntegrale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lbxIntegrale.Name = "lbxIntegrale";
-            this.lbxIntegrale.Size = new System.Drawing.Size(164, 433);
+            this.lbxIntegrale.Size = new System.Drawing.Size(244, 664);
             this.lbxIntegrale.TabIndex = 31;
             // 
             // lblIntegrale
             // 
             this.lblIntegrale.AutoSize = true;
-            this.lblIntegrale.Location = new System.Drawing.Point(1532, 21);
+            this.lblIntegrale.Location = new System.Drawing.Point(2298, 32);
+            this.lblIntegrale.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIntegrale.Name = "lblIntegrale";
-            this.lblIntegrale.Size = new System.Drawing.Size(48, 13);
+            this.lblIntegrale.Size = new System.Drawing.Size(72, 20);
             this.lblIntegrale.TabIndex = 32;
             this.lblIntegrale.Text = "Intégrale";
             // 
             // chrIntegrale
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrIntegrale.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrIntegrale.Legends.Add(legend1);
-            this.chrIntegrale.Location = new System.Drawing.Point(9, 122);
+            chartArea3.Name = "ChartArea1";
+            this.chrIntegrale.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chrIntegrale.Legends.Add(legend3);
+            this.chrIntegrale.Location = new System.Drawing.Point(14, 188);
+            this.chrIntegrale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chrIntegrale.Name = "chrIntegrale";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chrIntegrale.Series.Add(series1);
-            this.chrIntegrale.Size = new System.Drawing.Size(783, 300);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chrIntegrale.Series.Add(series3);
+            this.chrIntegrale.Size = new System.Drawing.Size(1174, 462);
             this.chrIntegrale.TabIndex = 34;
             this.chrIntegrale.Text = "Graphe de l\'intégrale";
             // 
             // chrMomentForce
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrMomentForce.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrMomentForce.Legends.Add(legend2);
-            this.chrMomentForce.Location = new System.Drawing.Point(15, 728);
+            chartArea4.Name = "ChartArea1";
+            this.chrMomentForce.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrMomentForce.Legends.Add(legend4);
+            this.chrMomentForce.Location = new System.Drawing.Point(22, 1120);
+            this.chrMomentForce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chrMomentForce.Name = "chrMomentForce";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chrMomentForce.Series.Add(series2);
-            this.chrMomentForce.Size = new System.Drawing.Size(952, 300);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chrMomentForce.Series.Add(series4);
+            this.chrMomentForce.Size = new System.Drawing.Size(1428, 462);
             this.chrMomentForce.TabIndex = 35;
             this.chrMomentForce.Text = "Graphe de l\'intégrale";
             // 
             // nudGravite
             // 
             this.nudGravite.DecimalPlaces = 2;
-            this.nudGravite.Location = new System.Drawing.Point(67, 20);
+            this.nudGravite.Location = new System.Drawing.Point(100, 31);
+            this.nudGravite.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudGravite.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.nudGravite.Name = "nudGravite";
-            this.nudGravite.Size = new System.Drawing.Size(87, 20);
+            this.nudGravite.Size = new System.Drawing.Size(130, 26);
             this.nudGravite.TabIndex = 38;
             this.nudGravite.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.nudGravite.ValueChanged += new System.EventHandler(this.nudGravite_ValueChanged);
             // 
             // lblGravité
             // 
             this.lblGravité.AutoSize = true;
-            this.lblGravité.Location = new System.Drawing.Point(5, 21);
+            this.lblGravité.Location = new System.Drawing.Point(8, 32);
+            this.lblGravité.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGravité.Name = "lblGravité";
-            this.lblGravité.Size = new System.Drawing.Size(32, 13);
+            this.lblGravité.Size = new System.Drawing.Size(47, 20);
             this.lblGravité.TabIndex = 37;
             this.lblGravité.Text = "Ecart";
             // 
@@ -330,18 +358,21 @@ namespace Flexion
             this.groupBox3.Controls.Add(this.lblForce);
             this.groupBox3.Controls.Add(this.lblGravité);
             this.groupBox3.Controls.Add(this.nudGravite);
-            this.groupBox3.Location = new System.Drawing.Point(11, 9);
+            this.groupBox3.Location = new System.Drawing.Point(16, 14);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(218, 81);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Size = new System.Drawing.Size(327, 125);
             this.groupBox3.TabIndex = 45;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Paramètres";
             // 
             // btnCalculerForce
             // 
-            this.btnCalculerForce.Location = new System.Drawing.Point(159, 53);
+            this.btnCalculerForce.Location = new System.Drawing.Point(238, 82);
+            this.btnCalculerForce.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCalculerForce.Name = "btnCalculerForce";
-            this.btnCalculerForce.Size = new System.Drawing.Size(53, 22);
+            this.btnCalculerForce.Size = new System.Drawing.Size(80, 34);
             this.btnCalculerForce.TabIndex = 26;
             this.btnCalculerForce.Text = "Calculer";
             this.btnCalculerForce.UseVisualStyleBackColor = true;
@@ -350,17 +381,16 @@ namespace Flexion
             // lblErreur
             // 
             this.lblErreur.AutoSize = true;
-            this.lblErreur.Location = new System.Drawing.Point(501, 173);
-            this.lblErreur.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblErreur.Location = new System.Drawing.Point(752, 266);
             this.lblErreur.Name = "lblErreur";
-            this.lblErreur.Size = new System.Drawing.Size(0, 13);
+            this.lblErreur.Size = new System.Drawing.Size(0, 20);
             this.lblErreur.TabIndex = 46;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 426);
+            this.ClientSize = new System.Drawing.Size(1203, 655);
             this.Controls.Add(this.lblErreur);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.chrMomentForce);
@@ -372,6 +402,7 @@ namespace Flexion
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbxMatiere);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Flexion TIP";

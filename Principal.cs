@@ -115,7 +115,7 @@ namespace Flexion
             };
             for (int i = diviseur; i < data.Length; i+=diviseur)
             {
-                serie.Points.AddXY(i, data[i]);
+                serie.Points.AddXY(i/10, data[i]*1000);
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
         }
@@ -158,6 +158,7 @@ namespace Flexion
                 cbxCouche.DataSource = ListCouches;
                 cbxPiece.DataSource = null;
                 cbxPiece.DataSource = ListPiece;
+                nudForce.Value = (decimal)Force;
             }
         }
 
@@ -180,6 +181,16 @@ namespace Flexion
             CalculeForce calculeForce = new CalculeForce(this);
             calculeForce.Show();
             this.Enabled = false;
+        }
+
+        private void nudGravite_ValueChanged(object sender, EventArgs e)
+        {
+            Ecart = (double)nudGravite.Value/10000;
+        }
+
+        private void nudForce_ValueChanged(object sender, EventArgs e)
+        {
+            Force = (double)nudForce.Value;
         }
     }
 }

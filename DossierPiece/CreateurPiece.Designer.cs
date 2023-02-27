@@ -65,7 +65,7 @@
             // 
             // btnCreerPiece
             // 
-            this.btnCreerPiece.Location = new System.Drawing.Point(77, 160);
+            this.btnCreerPiece.Location = new System.Drawing.Point(87, 160);
             this.btnCreerPiece.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCreerPiece.Name = "btnCreerPiece";
             this.btnCreerPiece.Size = new System.Drawing.Size(105, 35);

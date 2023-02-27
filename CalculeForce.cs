@@ -31,5 +31,10 @@ namespace Flexion
         {
             Main.Force = (double)nudForce.Value;
         }
+
+        private void CalculerForce_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Main.Enabled = true;
+        }
     }
 }

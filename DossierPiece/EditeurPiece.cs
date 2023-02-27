@@ -37,6 +37,7 @@ namespace Flexion
             {
                 selected.Couches.Add(couche);
             }
+            lblInfo.Text = "Modifications effectuées";
         }
 
         private void AfficherPieceSelectionee(object sender, EventArgs e)
