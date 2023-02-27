@@ -30,13 +30,24 @@ namespace Flexion
 
         private void CreerPiece(object sender, EventArgs e)
         {
-            Piece newmatiere = new Piece((double)nudLongueurPiece.Value,tbxNomPiece.Text);
+            if (tbxNomPiece.Text == string.Empty)
+            {
+                lblInfo.Text = "pas de nom donné";
+                return;
+            }
+            Piece newmatiere = new Piece((double)nudLongueurPiece.Value/1000,tbxNomPiece.Text);
             if (newmatiere != null)
             {
                 ListPieces.Add(newmatiere);
                 cbxPieces.DataSource = null;
                 cbxPieces.DataSource = ListPieces;
             }
+            lblInfo.Text = "Création effectuée";
+        }
+
+        private void RemoveText(object sender, EventArgs e)
+        {
+            lblInfo.Text = string.Empty;
         }
     }
 }

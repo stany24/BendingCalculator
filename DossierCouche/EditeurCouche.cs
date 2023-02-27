@@ -34,10 +34,10 @@ namespace Flexion.DossierCouche
         private void AfficherCoucheSelectionne(object sender, EventArgs e)
         {
             if (!(cbxCouche.SelectedItem is Couche selected)) { return; }
-            nudLargeurCoucheCenter.Value = (decimal)selected.GetLargeurCenter();
-            nudLargeurCoucheSide.Value = (decimal)selected.GetLargeurSide();
-            nudHauteurSide.Value = (decimal)selected.GetHauteurSide();
-            nudHauteurCenter.Value = (decimal)selected.GetHauteurCenter();
+            nudLargeurCoucheCenter.Value = (decimal)selected.GetLargeurCenter()*1000;
+            nudLargeurCoucheSide.Value = (decimal)selected.GetLargeurSide() * 1000;
+            nudHauteurSide.Value = (decimal)selected.GetHauteurSide() * 1000;
+            nudHauteurCenter.Value = (decimal)selected.GetHauteurCenter() * 1000;
             cbxMatiere.SelectedItem = selected.GetMatiere();
         }
 
@@ -45,12 +45,18 @@ namespace Flexion.DossierCouche
         {
             Couche modified = cbxCouche.SelectedItem as Couche;
             modified.SetMatiere(cbxMatiere.SelectedItem as Matiere);
-            modified.SetLargeurCenter((double)nudLargeurCoucheCenter.Value);
-            modified.SetLargeurSide((double)nudLargeurCoucheSide.Value);
-            modified.SetHauteurCenter((double)nudHauteurCenter.Value);
-            modified.SetHauteurSide((double)nudHauteurSide.Value);
+            modified.SetLargeurCenter((double)nudLargeurCoucheCenter.Value/1000);
+            modified.SetLargeurSide((double)nudLargeurCoucheSide.Value / 1000);
+            modified.SetHauteurCenter((double)nudHauteurCenter.Value / 1000);
+            modified.SetHauteurSide((double)nudHauteurSide.Value / 1000);
             cbxCouche.DataSource = null;
             cbxCouche.DataSource = ListCouches;
+            lblInfo.Text = "Modification effectuée";
+        }
+
+        private void RemoveText(object sender, EventArgs e)
+        {
+            lblInfo.Text = string.Empty;
         }
     }
 }

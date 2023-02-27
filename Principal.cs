@@ -102,22 +102,28 @@ namespace Flexion
             }
             
             Piece piece = cbxPiece.SelectedItem as Piece;
-            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force,Ecart), Convert.ToInt32(1/Ecart)/100);
-            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(1 / Ecart)/100);
+            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force,Ecart), Convert.ToInt32(piece.GetLongueur()/Ecart)/100, piece.GetLongueur());
+            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(piece.GetLongueur()/Ecart)/100,piece.GetLongueur());
         }
 
-        public void FillGraph(Chart graph,string seriename, double[] data, int diviseur)
+        public void FillGraph(Chart graph,string seriename, double[] data, int diviseur,double longueur)
         {
+            graph.Invoke(new MethodInvoker(delegate { graph.Series[0].Points.Clear(); }));
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
             Series serie = new Series(seriename)
             {
-                ChartType = SeriesChartType.Spline
+                ChartType = SeriesChartType.Spline,
             };
-            for (int i = diviseur; i < data.Length; i+=diviseur)
+
+            for (int i = 0; i <= 100; i+=1)
             {
-                serie.Points.AddXY(i/10, data[i]*1000);
+                serie.Points.AddXY(i*longueur*10, data[i* diviseur] *1000);
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
+            graph.ChartAreas[0].AxisX.Minimum = 0;
+            //graph.ChartAreas[0].AxisX.AxisName = "Deformation (mm)";
+            //graph.ChartAreas[0].AxisY.AxisName = "Longueur (mm)";
+
         }
 
         private void ModiferMatiere(object sender, EventArgs e)
@@ -183,12 +189,12 @@ namespace Flexion
             this.Enabled = false;
         }
 
-        private void nudGravite_ValueChanged(object sender, EventArgs e)
+        private void EcartChanged(object sender, EventArgs e)
         {
-            Ecart = (double)nudGravite.Value/10000;
+            Ecart = (double)nudEcart.Value/10000;
         }
 
-        private void nudForce_ValueChanged(object sender, EventArgs e)
+        private void ForceChanged(object sender, EventArgs e)
         {
             Force = (double)nudForce.Value;
         }

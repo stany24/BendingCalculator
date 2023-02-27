@@ -40,6 +40,7 @@
             this.nudLargeurCoucheCenter = new System.Windows.Forms.NumericUpDown();
             this.cbxCouche = new System.Windows.Forms.ComboBox();
             this.btnCreerCouche = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudLargeurCoucheSide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauterSide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHauteurCenter)).BeginInit();
@@ -54,6 +55,7 @@
             this.cbxMatiere.Name = "cbxMatiere";
             this.cbxMatiere.Size = new System.Drawing.Size(168, 28);
             this.cbxMatiere.TabIndex = 36;
+            this.cbxMatiere.SelectedIndexChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblMatiere
             // 
@@ -88,6 +90,7 @@
             this.nudLargeurCoucheSide.Name = "nudLargeurCoucheSide";
             this.nudLargeurCoucheSide.Size = new System.Drawing.Size(168, 26);
             this.nudLargeurCoucheSide.TabIndex = 34;
+            this.nudLargeurCoucheSide.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblHauteurSide
             // 
@@ -112,6 +115,7 @@
             this.nudHauterSide.Name = "nudHauterSide";
             this.nudHauterSide.Size = new System.Drawing.Size(168, 26);
             this.nudHauterSide.TabIndex = 32;
+            this.nudHauterSide.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblHauteurCenter
             // 
@@ -136,6 +140,7 @@
             this.nudHauteurCenter.Name = "nudHauteurCenter";
             this.nudHauteurCenter.Size = new System.Drawing.Size(168, 26);
             this.nudHauteurCenter.TabIndex = 28;
+            this.nudHauteurCenter.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblLargeurCenter
             // 
@@ -160,6 +165,7 @@
             this.nudLargeurCoucheCenter.Name = "nudLargeurCoucheCenter";
             this.nudLargeurCoucheCenter.Size = new System.Drawing.Size(168, 26);
             this.nudLargeurCoucheCenter.TabIndex = 30;
+            this.nudLargeurCoucheCenter.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // cbxCouche
             // 
@@ -179,11 +185,20 @@
             this.btnCreerCouche.UseVisualStyleBackColor = true;
             this.btnCreerCouche.Click += new System.EventHandler(this.CreerCouche);
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(118, 290);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 20);
+            this.lblInfo.TabIndex = 52;
+            // 
             // CreateurCouche
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 300);
+            this.ClientSize = new System.Drawing.Size(350, 326);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnCreerCouche);
             this.Controls.Add(this.cbxCouche);
             this.Controls.Add(this.cbxMatiere);
@@ -196,6 +211,9 @@
             this.Controls.Add(this.nudHauteurCenter);
             this.Controls.Add(this.lblLargeurCenter);
             this.Controls.Add(this.nudLargeurCoucheCenter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateurCouche";
             this.Text = "CreateurCouche";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateurCouche_FormClosing);
@@ -222,5 +240,6 @@
         private System.Windows.Forms.NumericUpDown nudLargeurCoucheCenter;
         private System.Windows.Forms.ComboBox cbxCouche;
         private System.Windows.Forms.Button btnCreerCouche;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

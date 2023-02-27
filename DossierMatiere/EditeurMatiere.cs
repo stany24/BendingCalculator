@@ -26,22 +26,33 @@ namespace Flexion
         {
             if (!(cbxMatieres.SelectedItem is Matiere selected)) { return; }
             tbxNomMatiere.Text = selected.GetNom();
-            nudE.Value = (decimal)selected.GetE();
+            nudE.Value = Convert.ToDecimal(selected.GetE()/1e9);
         }
 
         private void ModifierMatiere(object sender, EventArgs e)
         {
+            if (tbxNomMatiere.Text == string.Empty)
+            {
+                lblInfo.Text = "pas de nom donné";
+                return;
+            }
             Matiere selected = cbxMatieres.SelectedItem as Matiere;
             selected.SetNom(tbxNomMatiere.Text);
-            selected.SetE((double)nudE.Value);
+            selected.SetE((double)nudE.Value*1e9);
             cbxMatieres.DataSource = null;
             cbxMatieres.DataSource = ListMatieres;
+            lblInfo.Text = "Modification effectuée";
         }
 
         private void EditeurMatiere_FormClosing(object sender, FormClosingEventArgs e)
         {
             Main.ListMatieres = ListMatieres;
             Main.Enabled = true;
+        }
+
+        private void RemoveText(object sender, EventArgs e)
+        {
+            lblInfo.Text = string.Empty;
         }
     }
 }

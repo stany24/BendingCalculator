@@ -30,13 +30,23 @@ namespace Flexion
 
         private void CreerMatiere(object sender, EventArgs e)
         {
-            Matiere newmatiere = new Matiere(tbxNomMatiere.Text,(double)nudE.Value);
+            if (tbxNomMatiere.Text == string.Empty)
+            {
+                lblInfo.Text = "pas de nom donné";
+                return;
+            }
+            Matiere newmatiere = new Matiere(tbxNomMatiere.Text,(double)nudE.Value*1e9);
             if(newmatiere != null)
             {
                 ListMatieres.Add(newmatiere);
                 cbxMatieres.DataSource = null;
                 cbxMatieres.DataSource = ListMatieres;
             }
+            lblInfo.Text = "Création effectuée";
+        }
+        private void RemoveText(object sender, EventArgs e)
+        {
+            lblInfo.Text = string.Empty;
         }
     }
 }

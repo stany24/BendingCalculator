@@ -51,6 +51,7 @@
             this.tbxNomPiece.Name = "tbxNomPiece";
             this.tbxNomPiece.Size = new System.Drawing.Size(149, 26);
             this.tbxNomPiece.TabIndex = 33;
+            this.tbxNomPiece.TextChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblNomPiece
             // 
@@ -69,7 +70,7 @@
             this.btnModiferPiece.Name = "btnModiferPiece";
             this.btnModiferPiece.Size = new System.Drawing.Size(105, 35);
             this.btnModiferPiece.TabIndex = 31;
-            this.btnModiferPiece.Text = "-->";
+            this.btnModiferPiece.Text = "Retirer -->";
             this.btnModiferPiece.UseVisualStyleBackColor = true;
             this.btnModiferPiece.Click += new System.EventHandler(this.DeplacerADroite);
             // 
@@ -101,6 +102,7 @@
             0,
             0,
             0});
+            this.nudLongueurPiece.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // cbxPieces
             // 
@@ -136,7 +138,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 35);
             this.button1.TabIndex = 36;
-            this.button1.Text = "<--";
+            this.button1.Text = "<-- Ajouter";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.DeplacerAGauche);
             // 
@@ -147,7 +149,7 @@
             this.btnCoucheDown.Name = "btnCoucheDown";
             this.btnCoucheDown.Size = new System.Drawing.Size(105, 35);
             this.btnCoucheDown.TabIndex = 38;
-            this.btnCoucheDown.Text = "Down";
+            this.btnCoucheDown.Text = "Descendre";
             this.btnCoucheDown.UseVisualStyleBackColor = true;
             this.btnCoucheDown.Click += new System.EventHandler(this.DeplacerCoucheBas);
             // 
@@ -158,7 +160,7 @@
             this.btnCoucheUp.Name = "btnCoucheUp";
             this.btnCoucheUp.Size = new System.Drawing.Size(105, 35);
             this.btnCoucheUp.TabIndex = 37;
-            this.btnCoucheUp.Text = "Up";
+            this.btnCoucheUp.Text = "Monter";
             this.btnCoucheUp.UseVisualStyleBackColor = true;
             this.btnCoucheUp.Click += new System.EventHandler(this.DeplacerCoucheHaut);
             // 
@@ -199,6 +201,9 @@
             this.Controls.Add(this.lblLongueur);
             this.Controls.Add(this.nudLongueurPiece);
             this.Controls.Add(this.cbxPieces);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditeurPiece";
             this.Text = "EditeurPiece";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditeurPiece_FormClosing);

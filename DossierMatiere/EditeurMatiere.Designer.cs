@@ -34,6 +34,7 @@
             this.nudE = new System.Windows.Forms.NumericUpDown();
             this.lblE = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@
             this.tbxNomMatiere.Name = "tbxNomMatiere";
             this.tbxNomMatiere.Size = new System.Drawing.Size(126, 26);
             this.tbxNomMatiere.TabIndex = 25;
+            this.tbxNomMatiere.TextChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblNomMatiere
             // 
@@ -66,17 +68,23 @@
             // 
             // nudE
             // 
-            this.nudE.DecimalPlaces = 1;
+            this.nudE.DecimalPlaces = 3;
             this.nudE.Location = new System.Drawing.Point(213, 106);
             this.nudE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.nudE.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
+            this.nudE.Minimum = new decimal(new int[] {
+            1,
             0,
-            0});
+            0,
+            196608});
             this.nudE.Name = "nudE";
             this.nudE.Size = new System.Drawing.Size(128, 26);
             this.nudE.TabIndex = 23;
+            this.nudE.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudE.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblE
             // 
@@ -98,19 +106,31 @@
             this.btnModifier.UseVisualStyleBackColor = true;
             this.btnModifier.Click += new System.EventHandler(this.ModifierMatiere);
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(124, 204);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 20);
+            this.lblInfo.TabIndex = 27;
+            // 
             // EditeurMatiere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 204);
+            this.ClientSize = new System.Drawing.Size(350, 233);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.tbxNomMatiere);
             this.Controls.Add(this.lblNomMatiere);
             this.Controls.Add(this.nudE);
             this.Controls.Add(this.lblE);
             this.Controls.Add(this.cbxMatieres);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditeurMatiere";
-            this.Text = "Modificateur de matières";
+            this.Text = "§";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditeurMatiere_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.ResumeLayout(false);
@@ -126,5 +146,6 @@
         private System.Windows.Forms.NumericUpDown nudE;
         private System.Windows.Forms.Label lblE;
         private System.Windows.Forms.Button btnModifier;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

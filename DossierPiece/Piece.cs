@@ -56,7 +56,7 @@ namespace Flexion
         /// Retourne le nom et la longueur de la pièce
         /// </summary>
         /// <returns></returns>
-        public override string ToString(){return $"{GetNom()} de {Longueur} cm.";}
+        public override string ToString(){return $"{GetNom()} de {Longueur} m.";}
 
         public double[] MomentForce(double Force)
         {

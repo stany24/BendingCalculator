@@ -34,6 +34,7 @@
             this.btnCreerPiece = new System.Windows.Forms.Button();
             this.lblLongueur = new System.Windows.Forms.Label();
             this.nudLongueurPiece = new System.Windows.Forms.NumericUpDown();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongueurPiece)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.tbxNomPiece.Name = "tbxNomPiece";
             this.tbxNomPiece.Size = new System.Drawing.Size(149, 26);
             this.tbxNomPiece.TabIndex = 27;
+            this.tbxNomPiece.TextChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblNomPiece
             // 
@@ -102,18 +104,31 @@
             0,
             0,
             0});
+            this.nudLongueurPiece.ValueChanged += new System.EventHandler(this.RemoveText);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(83, 200);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 20);
+            this.lblInfo.TabIndex = 41;
             // 
             // CreateurPiece
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 209);
+            this.ClientSize = new System.Drawing.Size(313, 238);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.tbxNomPiece);
             this.Controls.Add(this.lblNomPiece);
             this.Controls.Add(this.btnCreerPiece);
             this.Controls.Add(this.lblLongueur);
             this.Controls.Add(this.nudLongueurPiece);
             this.Controls.Add(this.cbxPieces);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateurPiece";
             this.Text = "CreateurPiece";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateurPiece_FormClosing);
@@ -131,5 +146,6 @@
         private System.Windows.Forms.Button btnCreerPiece;
         private System.Windows.Forms.Label lblLongueur;
         private System.Windows.Forms.NumericUpDown nudLongueurPiece;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

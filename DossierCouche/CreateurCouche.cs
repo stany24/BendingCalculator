@@ -21,7 +21,7 @@ namespace Flexion
 
         private void CreerCouche(object sender, EventArgs e)
         {
-            Couche newcouche = new Couche((Matiere)cbxMatiere.SelectedItem,(double)nudLargeurCoucheCenter.Value, (double)nudLargeurCoucheSide.Value, (double)nudHauteurCenter.Value, (double)nudHauterSide.Value);
+            Couche newcouche = new Couche((Matiere)cbxMatiere.SelectedItem,(double)nudLargeurCoucheCenter.Value / 1000, (double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000);
             if(newcouche != null)
             {
                 ListCouches.Add(newcouche);
@@ -34,6 +34,10 @@ namespace Flexion
         {
             Main.ListCouches = ListCouches;
             Main.Enabled = true;
+        }
+        private void RemoveText(object sender, EventArgs e)
+        {
+            lblInfo.Text = string.Empty;
         }
     }
 }

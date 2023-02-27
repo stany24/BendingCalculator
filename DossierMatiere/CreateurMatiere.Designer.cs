@@ -34,6 +34,7 @@
             this.nudE = new System.Windows.Forms.NumericUpDown();
             this.lblE = new System.Windows.Forms.Label();
             this.cbxMatieres = new System.Windows.Forms.ComboBox();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,6 +55,7 @@
             this.tbxNomMatiere.Name = "tbxNomMatiere";
             this.tbxNomMatiere.Size = new System.Drawing.Size(126, 26);
             this.tbxNomMatiere.TabIndex = 32;
+            this.tbxNomMatiere.TextChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblNomMatiere
             // 
@@ -70,14 +72,20 @@
             this.nudE.DecimalPlaces = 1;
             this.nudE.Location = new System.Drawing.Point(213, 106);
             this.nudE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.nudE.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
+            this.nudE.Minimum = new decimal(new int[] {
+            1,
+            0,
             0,
             0});
             this.nudE.Name = "nudE";
             this.nudE.Size = new System.Drawing.Size(128, 26);
             this.nudE.TabIndex = 30;
+            this.nudE.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudE.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblE
             // 
@@ -97,17 +105,29 @@
             this.cbxMatieres.Size = new System.Drawing.Size(329, 28);
             this.cbxMatieres.TabIndex = 28;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(124, 184);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 20);
+            this.lblInfo.TabIndex = 35;
+            // 
             // CreateurMatiere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 192);
+            this.ClientSize = new System.Drawing.Size(352, 228);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnCreer);
             this.Controls.Add(this.tbxNomMatiere);
             this.Controls.Add(this.lblNomMatiere);
             this.Controls.Add(this.nudE);
             this.Controls.Add(this.lblE);
             this.Controls.Add(this.cbxMatieres);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateurMatiere";
             this.Text = "Création de matières";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateurMatiere_FormClosing);
@@ -125,5 +145,6 @@
         private System.Windows.Forms.NumericUpDown nudE;
         private System.Windows.Forms.Label lblE;
         private System.Windows.Forms.ComboBox cbxMatieres;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

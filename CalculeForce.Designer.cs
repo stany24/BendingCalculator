@@ -221,6 +221,9 @@
             this.Controls.Add(this.lblRayon);
             this.Controls.Add(this.lblVitesse);
             this.Controls.Add(this.nudVitesse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CalculeForce";
             this.Text = "CalculeForce";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CalculerForce_FormClosing);
