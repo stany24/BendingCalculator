@@ -5,12 +5,14 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using Flexion.DossierCouche;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Flexion
 {
     public partial class Form1 : Form
     {
-        
+        Task calculator;
         public List<Couche> ListCouches = new List<Couche>();
         public List<Matiere> ListMatieres = new List<Matiere>();
         public List<Piece> ListPiece = new List<Piece>();
@@ -89,7 +91,7 @@ namespace Flexion
         private void DisplayGraphForPiece(object sender, EventArgs e)
         {
             lblErreur.Text = string.Empty;
-            if(cbxPiece.SelectedItem == null)
+            if (cbxPiece.SelectedItem == null)
             {
                 lblErreur.Text = "Pas de pièce sélétionnée";
                 return;
@@ -100,17 +102,39 @@ namespace Flexion
                 lblErreur.Text = "L'objet sélécionné n'est pas une pièce";
                 return;
             }
-            
-            Piece piece = cbxPiece.SelectedItem as Piece;
-            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force,Ecart), Convert.ToInt32(piece.GetLongueur()/Ecart)/100, piece.GetLongueur());
-            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(piece.GetLongueur()/Ecart)/100,piece.GetLongueur());
+            if(calculator == null)
+            {
+                calculator = new Task(CalculateFlexion);
+                calculator.Start();
+            }
+            else
+            {
+                if (calculator.IsCompleted)
+                {
+                    calculator = new Task(CalculateFlexion);
+                    calculator.Start();
+                }
+                else
+                {
+                    lblErreur.Text = "Une calcul est déjà en cours";
+                    return;
+                }
+            }
+        }
+
+        public void CalculateFlexion()
+        {
+            Piece piece = null;
+            cbxPiece.Invoke(new MethodInvoker(delegate {  piece = cbxPiece.SelectedItem as Piece; }));
+            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force, Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
+            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
         }
 
         public void FillGraph(Chart graph,string seriename, double[] data, int diviseur,double longueur)
         {
             graph.Invoke(new MethodInvoker(delegate { graph.Series[0].Points.Clear(); }));
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
-            Series serie = new Series(seriename)
+            Series serie = new Series(seriename+ $" Min {data.Min() * 1000:F2} mm")
             {
                 ChartType = SeriesChartType.Spline,
             };
@@ -120,9 +144,9 @@ namespace Flexion
                 serie.Points.AddXY(i*longueur*10, data[i* diviseur] *1000);
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
-            graph.ChartAreas[0].AxisX.Minimum = 0;
-            //graph.ChartAreas[0].AxisX.AxisName = "Deformation (mm)";
-            //graph.ChartAreas[0].AxisY.AxisName = "Longueur (mm)";
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Minimum = 0;}));
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Title = "Deformation (mm)";}));
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisY.Title = "Longueur (mm)";}));
 
         }
 
