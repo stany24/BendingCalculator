@@ -66,12 +66,6 @@ namespace Flexion
             return $"{MatiereCouche.GetNom()} M={LargeurCenter*1000}x{HauteurCenter * 1000} C={LargeurSide * 1000}x{HauteurSide * 1000}";
         }
 
-        public double I(double Longueur, double Z)
-        {
-            double Base = Longueur * LargeurCenter;
-            return (Base * Math.Pow(HauteurCenter, 3)) / 12 + HauteurCenter * Base * Z * Z;
-        }
-
         public double[] Base(double longueur,double Eref,double[] Xs)
         {
             AdditionalMath math = new AdditionalMath();

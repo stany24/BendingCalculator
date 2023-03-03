@@ -18,7 +18,6 @@ namespace Flexion
             cbxPieces.DataSource = ListPieces;
             lbxCoucheOut.DataSource = listcouche;
             Piece selected = cbxPieces.SelectedItem as Piece;
-            foreach(Couche couche in selected.Couches) { lbxCoucheIn.Items.Add(couche); }
         }
 
         private void EditeurPiece_FormClosing(object sender, FormClosingEventArgs e)
@@ -50,6 +49,8 @@ namespace Flexion
             if (!(cbxPieces.SelectedItem is Piece selected)) { return; }
             tbxNomPiece.Text = selected.GetNom();
             nudLongueurPiece.Value = (decimal)selected.GetLongueur()*1000;
+            lbxCoucheIn.DataSource = null;
+            lbxCoucheIn.DataSource = selected.Couches;
         }
 
         private void DeplacerADroite(object sender, EventArgs e)

@@ -56,7 +56,11 @@ namespace Flexion
         /// Retourne le nom et la longueur de la pièce
         /// </summary>
         /// <returns></returns>
-        public override string ToString(){return $"{GetNom()} de {Longueur} m.";}
+        public override string ToString(){
+            if(Couches.Count == 0){return $"{GetNom()} / {Longueur}m";}
+            if(Couches.Count == 1){return $"{GetNom()} / {Longueur}m / 1 couche";}
+            return $"{GetNom()} / {Longueur}m / {Couches.Count} couches";
+        }
 
         public double[] MomentForce(double Force)
         {
@@ -111,7 +115,6 @@ namespace Flexion
                 }
             }
 
-            // 
             double offset = integrale2[Convert.ToInt32(integrale2.Count() / 2)];
             for (int i = 0; i < integrale2.Count(); i++)
             {
@@ -130,7 +133,6 @@ namespace Flexion
                     integrale3[i] = integrale3[i - 1] + integrale2[i] * ecart;
                 }
             }
-            //
             for (int i = 0; i < integrale3.Count(); i++)
             {
                 integrale3[i] = integrale3[i] / -Eref;

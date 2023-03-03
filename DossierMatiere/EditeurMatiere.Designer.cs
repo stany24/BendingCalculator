@@ -83,7 +83,7 @@
             1,
             0,
             0,
-            65536});
+            0});
             this.nudE.ValueChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblE
@@ -130,7 +130,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditeurMatiere";
-            this.Text = "§";
+            this.Text = "Editeur matière";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditeurMatiere_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.ResumeLayout(false);

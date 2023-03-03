@@ -127,14 +127,13 @@ namespace Flexion
             Piece piece = null;
             cbxPiece.Invoke(new MethodInvoker(delegate {  piece = cbxPiece.SelectedItem as Piece; }));
             FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force, Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
-            FillGraph(chrMomentForce, "moment de force", piece.MomentForce(Force), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
         }
 
         public void FillGraph(Chart graph,string seriename, double[] data, int diviseur,double longueur)
         {
             graph.Invoke(new MethodInvoker(delegate { graph.Series[0].Points.Clear(); }));
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
-            Series serie = new Series(seriename+ $" Min {data.Min() * 1000:F2} mm")
+            Series serie = new Series($" Min {data.Min() * 1000:F2} mm")
             {
                 ChartType = SeriesChartType.Spline,
             };

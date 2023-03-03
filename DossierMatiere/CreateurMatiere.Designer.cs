@@ -69,14 +69,14 @@
             // 
             // nudE
             // 
-            this.nudE.DecimalPlaces = 1;
+            this.nudE.DecimalPlaces = 3;
             this.nudE.Location = new System.Drawing.Point(213, 106);
             this.nudE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudE.Minimum = new decimal(new int[] {
             1,
             0,
             0,
-            0});
+            131072});
             this.nudE.Name = "nudE";
             this.nudE.Size = new System.Drawing.Size(128, 26);
             this.nudE.TabIndex = 30;
