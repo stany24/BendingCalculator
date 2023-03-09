@@ -56,7 +56,10 @@ namespace Flexion
         private void DeplacerADroite(object sender, EventArgs e)
         {
             int id = lbxCoucheIn.SelectedIndex;
-            lbxCoucheIn.Items.RemoveAt(id);
+            Piece piece = cbxPieces.SelectedItem as Piece;
+            piece.Couches.RemoveAt(id);
+            lbxCoucheIn.DataSource = null;
+            lbxCoucheIn.DataSource = piece.Couches;
             try{lbxCoucheIn.SelectedItem = lbxCoucheIn.Items[id];}
             catch
             {
@@ -67,7 +70,10 @@ namespace Flexion
 
         private void DeplacerAGauche(object sender, EventArgs e)
         {
-            lbxCoucheIn.Items.Add(lbxCoucheOut.SelectedItem);
+            Piece piece = cbxPieces.SelectedItem as Piece;
+            piece.Couches.Add(lbxCoucheOut.SelectedItem as Couche);
+            lbxCoucheIn.DataSource = null;
+            lbxCoucheIn.DataSource = piece.Couches;
             lblInfo.Text = string.Empty;
         }
 
@@ -90,10 +96,13 @@ namespace Flexion
             if (newIndex < 0 || newIndex >= lbxCoucheIn.Items.Count)
                 return;
             int id = lbxCoucheIn.SelectedIndex;
+            Piece piece = cbxPieces.SelectedItem as Piece;
             Couche selected = lbxCoucheIn.Items[id] as Couche;
-            lbxCoucheIn.Items.RemoveAt(id);
-            lbxCoucheIn.Items.Insert(newIndex, selected);
+            piece.Couches.RemoveAt(id);
+            piece.Couches.Insert(newIndex, selected);
             lbxCoucheIn.SetSelected(newIndex, true);
+            lbxCoucheIn.DataSource = null;
+            lbxCoucheIn.DataSource = piece.Couches;
         }
 
         private void RemoveText(object sender, EventArgs e)

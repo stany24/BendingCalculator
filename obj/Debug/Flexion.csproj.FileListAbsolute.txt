@@ -139,3 +139,10 @@ C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.DossierCouche.EditeurCouch
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.CreateurPiece.resources
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.EditeurPiece.resources
 C:\Users\stan\Downloads\flexion-tib\obj\Debug\Flexion.CalculeForce.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.CalculeForce.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.CreateurPiece.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.CreateurCouche.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.DossierCouche.EditeurCouche.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.CreateurMatiere.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.EditeurMatiere.resources
+C:\Users\Administrateur\Desktop\flexion-tib\obj\Debug\Flexion.EditeurPiece.resources
