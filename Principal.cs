@@ -14,7 +14,6 @@ namespace Flexion
         private List<Couche> ListCouches;
         private List<Matiere> ListMatieres;
         private List<Piece> ListPiece;
-        public double Force { get; set; }
         private double Ecart = 1e-4;
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace Flexion
             cbxMatiere.DataSource= ListMatieres;
             cbxCouche.DataSource= ListCouches;
             cbxPiece.DataSource= ListPiece;
-            Force = 500;
+            nudForce.Value = Sauvegarde.GetForce();
         }
 
         private void DisplayGraphForPiece(object sender, EventArgs e)
@@ -69,7 +68,7 @@ namespace Flexion
         {
             Piece piece = null;
             cbxPiece.Invoke(new MethodInvoker(delegate {  piece = cbxPiece.SelectedItem as Piece; }));
-            FillGraph(chrIntegrale, piece.Intégrale(Force, Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
+            FillGraph(chrIntegrale, piece.Intégrale(Sauvegarde.GetForce(), Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
         }
 
         public void FillGraph(Chart graph, double[] data, int diviseur,double longueur)
@@ -146,7 +145,7 @@ namespace Flexion
                 cbxCouche.DataSource = ListCouches;
                 cbxPiece.DataSource = null;
                 cbxPiece.DataSource = ListPiece;
-                nudForce.Value = (decimal)Force;
+                nudForce.Value = Sauvegarde.GetForce();
             }
         }
 
@@ -174,9 +173,16 @@ namespace Flexion
 
         private void CalculerForce(object sender, EventArgs e)
         {
-            CalculeForce calculeForce = new CalculeForce(this);
+            CalculeForce calculeForce = new CalculeForce();
+            calculeForce.FormClosed += new FormClosedEventHandler(UpdateForce);
             calculeForce.Show();
             this.Enabled = false;
+        }
+
+        private void UpdateForce(object sender, EventArgs e)
+        {
+            this.Enabled = true;
+            nudForce.Value = Sauvegarde.GetForce();
         }
 
         private void EcartChanged(object sender, EventArgs e)
@@ -186,7 +192,7 @@ namespace Flexion
 
         private void ForceChanged(object sender, EventArgs e)
         {
-            Force = (double)nudForce.Value;
+            Sauvegarde.SetForce((int)nudForce.Value);
         }
     }
 }

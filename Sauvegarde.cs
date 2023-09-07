@@ -40,5 +40,20 @@ namespace Flexion
             Properties.Settings.Default.Pièces = JsonSerializer.Serialize(pieces);
             Properties.Settings.Default.Save();
         }
+
+        public static int GetForce()
+        {
+            try { return Properties.Settings.Default.Force; }
+            catch{
+                SetForce(500);
+                return Properties.Settings.Default.Force;
+            }
+        }
+
+        public static void SetForce(int force) 
+        {
+            Properties.Settings.Default.Force = force;
+            Properties.Settings.Default.Save();
+        }
     }
 }

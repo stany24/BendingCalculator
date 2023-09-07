@@ -5,11 +5,9 @@ namespace Flexion
 {
     public partial class CalculeForce : Form
     {
-        private readonly Form1 Main;
-        public CalculeForce(Form1 form)
+        public CalculeForce()
         {
             InitializeComponent();
-            Main = form;
         }
         public void CalcuateF(object sender, EventArgs e)
         {
@@ -22,12 +20,7 @@ namespace Flexion
 
         private void ModifierForce(object sender, EventArgs e)
         {
-            Main.Force = (double)nudForce.Value;
-        }
-
-        private void CalculerForce_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Main.Enabled = true;
+            Sauvegarde.SetForce((int)nudForce.Value);
         }
     }
 }

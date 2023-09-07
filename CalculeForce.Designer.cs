@@ -226,7 +226,6 @@
             this.MinimizeBox = false;
             this.Name = "CalculeForce";
             this.Text = "CalculeForce";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CalculerForce_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudForce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMasse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRayon)).EndInit();

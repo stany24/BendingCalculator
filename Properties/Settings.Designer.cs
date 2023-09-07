@@ -58,5 +58,17 @@ namespace Flexion.Properties {
                 this["Pièces"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Force {
+            get {
+                return ((int)(this["Force"]));
+            }
+            set {
+                this["Force"] = value;
+            }
+        }
     }
 }
