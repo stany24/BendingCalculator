@@ -7,7 +7,6 @@ namespace Flexion
 {
     public class Piece
     {
-        readonly private AdditionalMath math = new AdditionalMath();
         [JsonInclude]
         public List<Couche> Couches { get; set; }
 
@@ -78,12 +77,12 @@ namespace Flexion
             double[] X = Xs;
             double[] moments = new double[Xs.Length];
 
-            double[] Mfa1 = math.OperationDoubleArray((double[])Xs.Clone(), -Force * b1, AdditionalMath.Operation.Fois);
-            Mfa1 = math.OperationDoubleArray(Mfa1, Longueur, AdditionalMath.Operation.Divisé);
+            double[] Mfa1 = AdditionalMath.OperationDoubleArray((double[])Xs.Clone(), -Force * b1, AdditionalMath.Operation.Fois);
+            Mfa1 = AdditionalMath.OperationDoubleArray(Mfa1, Longueur, AdditionalMath.Operation.Divisé);
             
-            double[] Mfb1 = math.OperationDoubleArray((double[])Xs.Clone(), Longueur - b1, AdditionalMath.Operation.Moins);
-            Mfb1 = math.OperationDoubleArray(Mfb1, Force, AdditionalMath.Operation.Fois);
-            Mfb1 = math.OperationDoubleArray(Mfa1, Mfb1, AdditionalMath.Operation.Plus);
+            double[] Mfb1 = AdditionalMath.OperationDoubleArray((double[])Xs.Clone(), Longueur - b1, AdditionalMath.Operation.Moins);
+            Mfb1 = AdditionalMath.OperationDoubleArray(Mfb1, Force, AdditionalMath.Operation.Fois);
+            Mfb1 = AdditionalMath.OperationDoubleArray(Mfa1, Mfb1, AdditionalMath.Operation.Plus);
 
             for (int i = 0; i < Xs.Length; i++)
             {
