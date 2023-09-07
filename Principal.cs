@@ -144,8 +144,8 @@ namespace Flexion
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
             graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Minimum = 0;}));
-            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Title = "Deformation (mm)";}));
-            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisY.Title = "Longueur (mm)";}));
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Title = "Longueur (mm)"; }));
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisY.Title = "Deformation (mm)"; }));
 
         }
 
