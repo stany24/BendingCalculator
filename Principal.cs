@@ -28,7 +28,7 @@ namespace Flexion
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
-            ListCouches.Add(piece.Couches[0]);
+            ListCouches = Sauvegarde.GetCouches();
             ListMatieres = Sauvegarde.GetMatières();
             cbxMatiere.DataSource= ListMatieres;
             cbxCouche.DataSource= ListCouches;
@@ -99,7 +99,7 @@ namespace Flexion
         private void ModiferMatiere(object sender, EventArgs e)
         {
             EditeurMatiere editor = new EditeurMatiere();
-            editor.FormClosed += new FormClosedEventHandler(UpdateMatiere);
+            editor.FormClosed += new FormClosedEventHandler(UpdateMatieres);
             editor.Show();
             this.Enabled = false;
         }
@@ -108,11 +108,11 @@ namespace Flexion
         private void CreerMatiere(object sender, EventArgs e)
         {
             CreateurMatiere createur = new CreateurMatiere();
-            createur.FormClosed += new FormClosedEventHandler(UpdateMatiere);
+            createur.FormClosed += new FormClosedEventHandler(UpdateMatieres);
             createur.Show();
             this.Enabled = false;
         }
-        private void UpdateMatiere(object sender, EventArgs e)
+        private void UpdateMatieres(object sender, EventArgs e)
         {
             ListMatieres = Sauvegarde.GetMatières();
             this.Enabled = true;
@@ -120,16 +120,24 @@ namespace Flexion
 
         private void CreerCouche(object sender, EventArgs e)
         {
-            CreateurCouche createur = new CreateurCouche(ListCouches,ListMatieres,this);
+            CreateurCouche createur = new CreateurCouche();
+            createur.FormClosed += new FormClosedEventHandler(UpdateCouches);
             createur.Show();
             this.Enabled = false;
         }
 
         private void ModifierCouche(object sender, EventArgs e)
         {
-            EditeurCouche editor = new EditeurCouche(ListCouches, ListMatieres, this);
+            EditeurCouche editor = new EditeurCouche();
+            editor.FormClosed += new FormClosedEventHandler(UpdateCouches);
             editor.Show();
             this.Enabled = false;
+        }
+
+        private void UpdateCouches(Object sender, EventArgs e)
+        {
+            ListCouches = Sauvegarde.GetCouches();
+            this.Enabled = true;
         }
 
         private void Form1_EnabledChanged(object sender, EventArgs e)

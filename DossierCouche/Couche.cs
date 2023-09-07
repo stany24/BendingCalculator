@@ -1,27 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Flexion
 {
     public class Couche
     {
-        private double LargeurCenter; //lp
+        [JsonInclude]
+        public double LargeurCenter; //lp
         public void SetLargeurCenter(double largeurCenter) { if (largeurCenter > 0) { LargeurCenter = largeurCenter; } }
         public double GetLargeurCenter() { return LargeurCenter; }
 
-        private double LargeurSide; //le
+        [JsonInclude]
+        public double LargeurSide; //le
         public void SetLargeurSide(double largeurSide) { if (largeurSide > 0) { LargeurSide = largeurSide; } }
         public double GetLargeurSide() { return LargeurSide; }
 
-        private double HauteurCenter; //ep
+        [JsonInclude]
+        public double HauteurCenter; //ep
         public void SetHauteurCenter(double hauteurCenter) { if (hauteurCenter > 0) { HauteurCenter = hauteurCenter; } }
         public double GetHauteurCenter() { return HauteurCenter; }
 
-        private double HauteurSide; // ee
+        [JsonInclude]
+        public double HauteurSide; // ee
         public void SetHauteurSide(double hauteurSide) { if (hauteurSide > 0) { HauteurSide = hauteurSide; } }
         public double GetHauteurSide() { return HauteurSide; }
 
-        private Matiere MatiereCouche;
+        [JsonInclude]
+        public Matiere MatiereCouche;
         public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
         public Matiere GetMatiere() { return MatiereCouche; }
 
@@ -56,6 +62,9 @@ namespace Flexion
             SetHauteurCenter(hauteurCenter);
             SetHauteurSide(hauteurSide);
         }
+
+        [JsonConstructor]
+        public Couche() { }
 
         /// <summary>
         /// Retourne un résumé de la couche

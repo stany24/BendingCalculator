@@ -14,21 +14,18 @@ namespace Flexion.DossierCouche
     {
         readonly List<Couche> ListCouches;
         readonly List<Matiere> ListMatiere;
-        readonly Form1 Main;
-        public EditeurCouche(List<Couche> couches, List<Matiere> matieres, Form1 main)
+        public EditeurCouche()
         {
             InitializeComponent();
-            Main = main;
-            ListCouches = couches;
+            ListCouches = Sauvegarde.GetCouches();
             cbxCouche.DataSource = ListCouches;
-            ListMatiere = matieres;
+            ListMatiere = Sauvegarde.GetMatières();
             cbxMatiere.DataSource = ListMatiere;
         }
 
         private void EditorCouche_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListCouches = ListCouches;
-            Main.Enabled = true;
+            Sauvegarde.SetCouches(ListCouches);
         }
 
         private void AfficherCoucheSelectionne(object sender, EventArgs e)

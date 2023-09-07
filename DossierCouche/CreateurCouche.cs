@@ -8,14 +8,12 @@ namespace Flexion
     {
         readonly List<Couche> ListCouches;
         readonly List<Matiere> ListMatiere;
-        readonly Form1 Main;
-        public CreateurCouche(List<Couche> couches, List<Matiere> matieres,Form1 main)
+        public CreateurCouche()
         {
             InitializeComponent();
-            Main = main;
-            ListCouches = couches;
+            ListCouches = Sauvegarde.GetCouches();
             cbxCouche.DataSource = ListCouches;
-            ListMatiere = matieres;
+            ListMatiere = Sauvegarde.GetMatières();
             cbxMatiere.DataSource = ListMatiere;
         }
 
@@ -32,8 +30,7 @@ namespace Flexion
 
         private void CreateurCouche_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListCouches = ListCouches;
-            Main.Enabled = true;
+            Sauvegarde.SetCouches(ListCouches);
         }
         private void RemoveText(object sender, EventArgs e)
         {
