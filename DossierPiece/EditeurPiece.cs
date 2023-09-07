@@ -6,8 +6,8 @@ namespace Flexion
 {
     public partial class EditeurPiece : Form
     {
-        public List<Piece> ListPieces;
-        public List<Couche> ListCouches;
+        readonly private List<Piece> ListPieces;
+        readonly private List<Couche> ListCouches;
         public EditeurPiece()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Flexion
                 return;
             }
             Piece selected = cbxPieces.SelectedItem as Piece;
-            selected.SetNom(tbxNomPiece.Text);
+            selected.Nom = tbxNomPiece.Text;
             selected.SetLongueur((double)nudLongueurPiece.Value / 1000);
             selected.Couches = new List<Couche>();
             foreach(Couche couche in lbxCoucheIn.Items)
@@ -43,7 +43,7 @@ namespace Flexion
         private void AfficherPieceSelectionee(object sender, EventArgs e)
         {
             if (!(cbxPieces.SelectedItem is Piece selected)) { return; }
-            tbxNomPiece.Text = selected.GetNom();
+            tbxNomPiece.Text = selected.Nom;
             nudLongueurPiece.Value = (decimal)selected.GetLongueur()*1000;
             lbxCoucheIn.DataSource = null;
             lbxCoucheIn.DataSource = selected.Couches;

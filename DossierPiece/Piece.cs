@@ -9,12 +9,13 @@ namespace Flexion
     {
         readonly private AdditionalMath math = new AdditionalMath();
         [JsonInclude]
-        public List<Couche> Couches = new List<Couche>();
+        public List<Couche> Couches { get; set; }
 
         [JsonInclude]
         public string Nom;
-        public string GetNom(){return Nom;}
-        public void SetNom(string value){ if (value != "") { Nom = value; }}
+        public string GetNom() { return Nom; }
+        public void SetNom(string value) {if (value != "") { Nom = value; }
+}
 
         [JsonInclude]
         public double Longueur = 1;//lo
@@ -45,14 +46,16 @@ namespace Flexion
         /// <param name="nom">Nom de la pièce</param>
         public Piece(double longueur, string nom)
         {
+            Couches = new List<Couche>();
             SetLongueur(longueur);
-            SetNom(nom);
+            Nom = nom;
         }
 
         public Piece(double longueur, string nom, double eref)
         {
+            Couches = new List<Couche>();
             SetLongueur(longueur);
-            SetNom(nom);
+            Nom=nom;
             SetEref(eref);
         }
 
@@ -64,9 +67,9 @@ namespace Flexion
         /// </summary>
         /// <returns></returns>
         public override string ToString(){
-            if(Couches.Count == 0){return $"{GetNom()} / {Longueur}m";}
-            if(Couches.Count == 1){return $"{GetNom()} / {Longueur}m / 1 couche";}
-            return $"{GetNom()} / {Longueur}m / {Couches.Count} couches";
+            if(Couches.Count == 0){return $"{Nom} / {Longueur}m";}
+            if(Couches.Count == 1){return $"{Nom} / {Longueur}m / 1 couche";}
+            return $"{Nom} / {Longueur}m / {Couches.Count} couches";
         }
 
         public double[] MomentForce(double Force)

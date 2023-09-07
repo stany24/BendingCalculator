@@ -11,11 +11,11 @@ namespace Flexion
     public partial class Form1 : Form
     {
         Task calculator;
-        public List<Couche> ListCouches;
-        public List<Matiere> ListMatieres;
-        public List<Piece> ListPiece;
-        public double Force = 500;
-        public double Ecart = 1e-4;
+        private List<Couche> ListCouches;
+        private List<Matiere> ListMatieres;
+        private List<Piece> ListPiece;
+        public double Force { get; set; }
+        private double Ecart = 1e-4;
 
         /// <summary>
         /// Initialise la page avec des matières et des couches par défault
@@ -29,6 +29,7 @@ namespace Flexion
             cbxMatiere.DataSource= ListMatieres;
             cbxCouche.DataSource= ListCouches;
             cbxPiece.DataSource= ListPiece;
+            Force = 500;
         }
 
         private void DisplayGraphForPiece(object sender, EventArgs e)

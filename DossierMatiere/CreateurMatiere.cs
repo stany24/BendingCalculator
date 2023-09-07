@@ -6,7 +6,7 @@ namespace Flexion
 {
     public partial class CreateurMatiere : Form
     {
-        public List<Matiere> ListMatieres;
+        readonly private List<Matiere> ListMatieres;
         public CreateurMatiere()
         {
             InitializeComponent();

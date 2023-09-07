@@ -35,13 +35,13 @@ namespace Flexion.DossierCouche
             nudLargeurCoucheSide.Value = (decimal)selected.GetLargeurSide() * 1000;
             nudHauteurSide.Value = (decimal)selected.GetHauteurSide() * 1000;
             nudHauteurCenter.Value = (decimal)selected.GetHauteurCenter() * 1000;
-            cbxMatiere.SelectedItem = selected.GetMatiere();
+            cbxMatiere.SelectedItem = selected.MatiereCouche;
         }
 
         private void ModifierCouche(object sender, EventArgs e)
         {
             Couche modified = cbxCouche.SelectedItem as Couche;
-            modified.SetMatiere(cbxMatiere.SelectedItem as Matiere);
+            modified.MatiereCouche = cbxMatiere.SelectedItem as Matiere;
             modified.SetLargeurCenter((double)nudLargeurCoucheCenter.Value/1000);
             modified.SetLargeurSide((double)nudLargeurCoucheSide.Value / 1000);
             modified.SetHauteurCenter((double)nudHauteurCenter.Value / 1000);

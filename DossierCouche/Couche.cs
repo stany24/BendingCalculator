@@ -27,9 +27,7 @@ namespace Flexion
         public double GetHauteurSide() { return HauteurSide; }
 
         [JsonInclude]
-        public Matiere MatiereCouche;
-        public void SetMatiere(Matiere matiere) { MatiereCouche = matiere; }
-        public Matiere GetMatiere() { return MatiereCouche; }
+        public Matiere MatiereCouche { get; set; }
 
         /// <summary>
         /// Crée une nouvelle couche avec la matière donnée et une longueur et un largeur uniforme.
@@ -39,7 +37,7 @@ namespace Flexion
         /// <param name="hauteur">Hauteur au centre et sur les côté de la couche</param>
         public Couche(Matiere matiere, double largeur, double hauteur)
         {
-            SetMatiere(matiere);
+            MatiereCouche = matiere;
             SetLargeurCenter(largeur);
             SetLargeurSide(largeur);
             SetHauteurCenter(hauteur);
@@ -56,7 +54,7 @@ namespace Flexion
         /// <param name="hauteurSide">Hauteur sur les côté de la couche</param>
         public Couche(Matiere matiere, double largeurCenter, double largeurSide, double hauteurCenter, double hauteurSide)
         {
-            SetMatiere(matiere);
+            MatiereCouche = matiere;
             SetLargeurCenter(largeurCenter);
             SetLargeurSide(largeurSide);
             SetHauteurCenter(hauteurCenter);
@@ -83,7 +81,7 @@ namespace Flexion
             L2 = math.OperationDoubleArray(L2, 2,AdditionalMath.Operation.Puissance);
             double[] Base = math.OperationDoubleArray(L2, L1,AdditionalMath.Operation.Fois);
             Base = math.OperationDoubleArray(Base, LargeurCenter,AdditionalMath.Operation.Plus);
-            double divisant = Eref / GetMatiere().GetE();
+            double divisant = Eref / MatiereCouche.GetE();
             return math.OperationDoubleArray(Base, divisant,AdditionalMath.Operation.Divisé);
         }
        
