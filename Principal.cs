@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
-using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using Flexion.DossierCouche;
 using System.Linq;
@@ -36,57 +34,6 @@ namespace Flexion
             cbxCouche.DataSource= ListCouches;
             cbxPiece.DataSource= ListPiece;
         }
-
-        /// <summary>
-        /// Sauvegarde les matières, les couches et les pièces en fichier json
-        /// </summary>
-        public void SaveFile()
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            foreach (Matiere matiere in ListMatieres)
-            {
-                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Matière-"+matiere.GetNom()+".json"))
-                {
-                    serializer.Serialize(file, matiere);
-                }
-            }
-
-            foreach (Couche couche in ListCouches)
-            {
-                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Couche-" + couche.GetMatiere().GetNom() + " de "+ couche.GetLargeurCenter()+"x"+couche.GetHauteurCenter() + " "+couche.GetLargeurCenter() + "x"+couche.GetHauteurSide() + ".json"))
-                {
-                    serializer.Serialize(file, couche);
-                }
-            }
-
-            foreach (Piece piece in ListPiece)
-            {
-                using (TextWriter file = File.CreateText("C:\\Users\\gouvernonst\\Downloads\\Piece-" +piece.GetNom() + ".json"))
-                {
-                    serializer.Serialize(file, piece);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Charge les données sauvegardées par SaveFile()
-        /// </summary>
-        public void LoadFile()
-        {
-            string savePath = "C:\\Users\\gouvernonst\\Downloads\\";
-            string[] Matières = Directory.GetFiles(savePath, "Matière-*.json");
-            JsonSerializer serializer = new JsonSerializer();
-            foreach (string matiere in Matières)
-            {
-                using (StreamReader file = new StreamReader(matiere))
-                {
-                    lblErreur.Text=file.ReadLine();
-                }
-            }
-            string[] Couches = Directory.GetFiles(savePath, "Couche-*.json");
-            string[] Pieces = Directory.GetFiles(savePath, "Piece-*.json");
-        }
-
 
         private void DisplayGraphForPiece(object sender, EventArgs e)
         {
