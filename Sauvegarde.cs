@@ -28,5 +28,17 @@ namespace Flexion
             Properties.Settings.Default.Couches = JsonSerializer.Serialize(couches);
             Properties.Settings.Default.Save();
         }
+
+        public static List<Piece> GetPieces()
+        {
+            if (Properties.Settings.Default.Pièces.Equals(string.Empty)) { SetPieces(new List<Piece>()); }
+            return JsonSerializer.Deserialize<List<Piece>>(Properties.Settings.Default.Pièces) ?? new List<Piece>();
+        }
+
+        public static void SetPieces(List<Piece> pieces)
+        {
+            Properties.Settings.Default.Pièces = JsonSerializer.Serialize(pieces);
+            Properties.Settings.Default.Save();
+        }
     }
 }

@@ -8,22 +8,19 @@ namespace Flexion
     {
         public List<Piece> ListPieces;
         public List<Couche> ListCouches;
-        public Form1 Main;
-        public EditeurPiece(List<Piece> listpiece,List<Couche> listcouche, Form1 main)
+        public EditeurPiece()
         {
             InitializeComponent();
-            Main = main;
-            ListPieces = listpiece;
-            ListCouches = listcouche;
+            ListPieces = Sauvegarde.GetPieces();
+            ListCouches = Sauvegarde.GetCouches();
             cbxPieces.DataSource = ListPieces;
-            lbxCoucheOut.DataSource = listcouche;
+            lbxCoucheOut.DataSource = ListCouches;
             Piece selected = cbxPieces.SelectedItem as Piece;
         }
 
         private void EditeurPiece_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListPiece = ListPieces;
-            Main.Enabled = true;
+            Sauvegarde.SetPieces(ListPieces);
         }
 
         private void ModifierPiece(object sender, EventArgs e)

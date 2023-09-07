@@ -23,11 +23,7 @@ namespace Flexion
         public Form1()
         {
             InitializeComponent();
-            Piece piece = new Piece(1500e-3, "Démo");
-            ListPiece.Add(piece);
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
-            piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
+            ListPiece = Sauvegarde.GetPieces();
             ListCouches = Sauvegarde.GetCouches();
             ListMatieres = Sauvegarde.GetMatières();
             cbxMatiere.DataSource= ListMatieres;
@@ -156,16 +152,24 @@ namespace Flexion
 
         private void CreerPiece(object sender, EventArgs e)
         {
-            CreateurPiece creator = new CreateurPiece(ListPiece, this);
+            CreateurPiece creator = new CreateurPiece();
+            creator.FormClosed += new FormClosedEventHandler(UpdatePieces);
             creator.Show();
             this.Enabled = false;
         }
 
         private void ModifierPiece(object sender, EventArgs e)
         {
-            EditeurPiece editor = new EditeurPiece(ListPiece,ListCouches,this);
+            EditeurPiece editor = new EditeurPiece();
+            editor.FormClosed += new FormClosedEventHandler(UpdatePieces);
             editor.Show();
             this.Enabled = false;
+        }
+
+        private void UpdatePieces(Object sender, EventArgs e)
+        {
+            ListPiece = Sauvegarde.GetPieces();
+            this.Enabled = true;
         }
 
         private void CalculerForce(object sender, EventArgs e)

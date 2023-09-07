@@ -13,19 +13,16 @@ namespace Flexion
     public partial class CreateurPiece : Form
     {
         public List<Piece> ListPieces;
-        public Form1 Main;
-        public CreateurPiece(List<Piece> listpiece, Form1 main)
+        public CreateurPiece()
         {
             InitializeComponent();
-            Main = main;
-            ListPieces = listpiece;
+            ListPieces = Sauvegarde.GetPieces();
             cbxPieces.DataSource = ListPieces;
         }
 
         private void CreateurPiece_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListPiece = ListPieces;
-            Main.Enabled = true;
+            Sauvegarde.SetPieces(ListPieces);
         }
 
         private void CreerPiece(object sender, EventArgs e)

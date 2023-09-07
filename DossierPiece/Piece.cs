@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Flexion
 {
     public class Piece
     {
         readonly private AdditionalMath math = new AdditionalMath();
+        [JsonInclude]
         public List<Couche> Couches = new List<Couche>();
-        private string Nom;
 
+        [JsonInclude]
+        public string Nom;
         public string GetNom(){return Nom;}
         public void SetNom(string value){ if (value != "") { Nom = value; }}
 
-        private double Longueur = 1;//lo
+        [JsonInclude]
+        public double Longueur = 1;//lo
         public double GetLongueur() { return Longueur; }
         public void SetLongueur(double value) {if (value > 0) { Longueur = value; }}
 
-        private double Eref = 69e9;
+        [JsonInclude]
+        public double Eref = 69e9;
         public double GetEref() { return Eref; }
         public void SetEref(double value) {if (value > 0) { Eref = value; }}
 
@@ -51,6 +56,9 @@ namespace Flexion
             SetNom(nom);
             SetEref(eref);
         }
+
+        [JsonConstructor]
+        public Piece() { }
 
         /// <summary>
         /// Retourne le nom et la longueur de la pièce
