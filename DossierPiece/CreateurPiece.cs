@@ -33,12 +33,9 @@ namespace Flexion
                 return;
             }
             Piece newmatiere = new Piece((double)nudLongueurPiece.Value/1000,tbxNomPiece.Text);
-            if (newmatiere != null)
-            {
-                ListPieces.Add(newmatiere);
-                cbxPieces.DataSource = null;
-                cbxPieces.DataSource = ListPieces;
-            }
+            ListPieces.Add(newmatiere);
+            cbxPieces.DataSource = null;
+            cbxPieces.DataSource = ListPieces;
             lblInfo.Text = "Création effectuée";
         }
 

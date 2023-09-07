@@ -11,9 +11,9 @@ namespace Flexion
     public partial class Form1 : Form
     {
         Task calculator;
-        public List<Couche> ListCouches = new List<Couche>();
-        public List<Matiere> ListMatieres = new List<Matiere>();
-        public List<Piece> ListPiece = new List<Piece>();
+        public List<Couche> ListCouches;
+        public List<Matiere> ListMatieres;
+        public List<Piece> ListPiece;
         public double Force = 500;
         public double Ecart = 1e-4;
 
@@ -60,7 +60,6 @@ namespace Flexion
                 else
                 {
                     lblErreur.Text = "Une calcul est déjà en cours";
-                    return;
                 }
             }
         }
@@ -69,10 +68,10 @@ namespace Flexion
         {
             Piece piece = null;
             cbxPiece.Invoke(new MethodInvoker(delegate {  piece = cbxPiece.SelectedItem as Piece; }));
-            FillGraph(chrIntegrale, "intégrale", piece.Intégrale(Force, Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
+            FillGraph(chrIntegrale, piece.Intégrale(Force, Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
         }
 
-        public void FillGraph(Chart graph,string seriename, double[] data, int diviseur,double longueur)
+        public void FillGraph(Chart graph, double[] data, int diviseur,double longueur)
         {
             graph.Invoke(new MethodInvoker(delegate { graph.Series[0].Points.Clear(); }));
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
@@ -138,7 +137,7 @@ namespace Flexion
 
         private void Form1_EnabledChanged(object sender, EventArgs e)
         {
-            if (Enabled == true)
+            if (Enabled)
             {
                 cbxMatiere.DataSource = null;
                 cbxMatiere.DataSource = ListMatieres;

@@ -4,7 +4,7 @@ namespace Flexion
 {
     public class AdditionalMath
     {
-        public enum Operation: int
+        public enum Operation
         {
             Plus = 0,
             Moins = 1,

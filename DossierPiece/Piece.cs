@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.Json.Serialization;
 
@@ -50,7 +49,7 @@ namespace Flexion
             SetNom(nom);
         }
 
-        public Piece(double longueur, string nom, double eref,double ecart)
+        public Piece(double longueur, string nom, double eref)
         {
             SetLongueur(longueur);
             SetNom(nom);
@@ -209,7 +208,7 @@ namespace Flexion
                 divisant = math.OperationDoubleArray(divisant, Couches[i].Surface(Longueur,Eref, (double[])Xs.Clone()).ToArray(),AdditionalMath.Operation.Plus);
             }
             //calcule de Ns
-            return math.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divisé); ;
+            return math.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divisé);
         }
 
         public double[] CalculateNx(int i,int length)

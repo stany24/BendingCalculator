@@ -6,7 +6,7 @@ namespace Flexion
 {
     public partial class CreateurMatiere : Form
     {
-        public List<Matiere> ListMatieres = new List<Matiere>();
+        public List<Matiere> ListMatieres;
         public CreateurMatiere()
         {
             InitializeComponent();
@@ -27,12 +27,9 @@ namespace Flexion
                 return;
             }
             Matiere newmatiere = new Matiere(tbxNomMatiere.Text,(double)nudE.Value*1e9);
-            if(newmatiere != null)
-            {
-                ListMatieres.Add(newmatiere);
-                cbxMatieres.DataSource = null;
-                cbxMatieres.DataSource = ListMatieres;
-            }
+            ListMatieres.Add(newmatiere);
+            cbxMatieres.DataSource = null;
+            cbxMatieres.DataSource = ListMatieres;
             lblInfo.Text = "Création effectuée";
         }
         private void RemoveText(object sender, EventArgs e)

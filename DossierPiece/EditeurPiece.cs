@@ -15,7 +15,6 @@ namespace Flexion
             ListCouches = Sauvegarde.GetCouches();
             cbxPieces.DataSource = ListPieces;
             lbxCoucheOut.DataSource = ListCouches;
-            Piece selected = cbxPieces.SelectedItem as Piece;
         }
 
         private void EditeurPiece_FormClosing(object sender, FormClosingEventArgs e)
