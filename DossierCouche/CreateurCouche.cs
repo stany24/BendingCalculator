@@ -19,7 +19,7 @@ namespace Flexion
 
         private void CreerCouche(object sender, EventArgs e)
         {
-            Couche newcouche = new Couche((Matiere)cbxMatiere.SelectedItem,(double)nudLargeurCoucheCenter.Value / 1000, (double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000);
+            Couche newcouche = new Couche((Matiere)cbxMatiere.SelectedItem, (double)nudLargeurCoucheCenter.Value / 1000, (double)nudLargeurCoucheSide.Value / 1000, (double)nudHauteurCenter.Value / 1000, (double)nudHauterSide.Value / 1000);
             ListCouches.Add(newcouche);
             cbxCouche.DataSource = null;
             cbxCouche.DataSource = ListCouches;

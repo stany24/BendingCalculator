@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Flexion.DossierCouche;
+using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using Flexion.DossierCouche;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Flexion
 {
@@ -25,9 +25,9 @@ namespace Flexion
             ListPiece = Sauvegarde.GetPieces();
             ListCouches = Sauvegarde.GetCouches();
             ListMatieres = Sauvegarde.GetMatières();
-            cbxMatiere.DataSource= ListMatieres;
-            cbxCouche.DataSource= ListCouches;
-            cbxPiece.DataSource= ListPiece;
+            cbxMatiere.DataSource = ListMatieres;
+            cbxCouche.DataSource = ListCouches;
+            cbxPiece.DataSource = ListPiece;
             nudForce.Value = Sauvegarde.GetForce();
         }
 
@@ -45,7 +45,7 @@ namespace Flexion
                 lblErreur.Text = "L'objet sélécionné n'est pas une pièce";
                 return;
             }
-            if(calculator == null)
+            if (calculator == null)
             {
                 calculator = new Task(CalculateFlexion);
                 calculator.Start();
@@ -67,11 +67,11 @@ namespace Flexion
         public void CalculateFlexion()
         {
             Piece piece = null;
-            cbxPiece.Invoke(new MethodInvoker(delegate {  piece = cbxPiece.SelectedItem as Piece; }));
+            cbxPiece.Invoke(new MethodInvoker(delegate { piece = cbxPiece.SelectedItem as Piece; }));
             FillGraph(chrIntegrale, piece.Intégrale(Sauvegarde.GetForce(), Ecart), Convert.ToInt32(piece.GetLongueur() / Ecart) / 100, piece.GetLongueur());
         }
 
-        public void FillGraph(Chart graph, double[] data, int diviseur,double longueur)
+        public void FillGraph(Chart graph, double[] data, int diviseur, double longueur)
         {
             graph.Invoke(new MethodInvoker(delegate { graph.Series[0].Points.Clear(); }));
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Clear(); }));
@@ -80,12 +80,12 @@ namespace Flexion
                 ChartType = SeriesChartType.Spline,
             };
 
-            for (int i = 0; i <= 100; i+=1)
+            for (int i = 0; i <= 100; i += 1)
             {
-                serie.Points.AddXY(i*longueur*10, data[i* diviseur] *1000);
+                serie.Points.AddXY(i * longueur * 10, data[i * diviseur] * 1000);
             }
             graph.Invoke(new MethodInvoker(delegate { graph.Series.Add(serie); }));
-            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Minimum = 0;}));
+            graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Minimum = 0; }));
             graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisX.Title = "Longueur (mm)"; }));
             graph.Invoke(new MethodInvoker(delegate { graph.ChartAreas[0].AxisY.Title = "Deformation (mm)"; }));
 
@@ -187,7 +187,7 @@ namespace Flexion
 
         private void EcartChanged(object sender, EventArgs e)
         {
-            Ecart = (double)nudEcart.Value/10000;
+            Ecart = (double)nudEcart.Value / 10000;
         }
 
         private void ForceChanged(object sender, EventArgs e)

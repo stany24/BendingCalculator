@@ -18,7 +18,7 @@ namespace Flexion
         {
             if (!(cbxMatieres.SelectedItem is Matiere selected)) { return; }
             tbxNomMatiere.Text = selected.GetNom();
-            nudE.Value = Convert.ToDecimal(selected.GetE()/1e9);
+            nudE.Value = Convert.ToDecimal(selected.GetE() / 1e9);
         }
 
         private void ModifierMatiere(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace Flexion
             }
             Matiere selected = cbxMatieres.SelectedItem as Matiere;
             selected.SetNom(tbxNomMatiere.Text);
-            selected.SetE((double)nudE.Value*1e9);
+            selected.SetE((double)nudE.Value * 1e9);
             cbxMatieres.DataSource = null;
             cbxMatieres.DataSource = ListMatieres;
             lblInfo.Text = "Modification effectuée";

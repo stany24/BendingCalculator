@@ -26,7 +26,7 @@ namespace Flexion
                 lblInfo.Text = "pas de nom donné";
                 return;
             }
-            Piece newmatiere = new Piece((double)nudLongueurPiece.Value/1000,tbxNomPiece.Text);
+            Piece newmatiere = new Piece((double)nudLongueurPiece.Value / 1000, tbxNomPiece.Text);
             ListPieces.Add(newmatiere);
             cbxPieces.DataSource = null;
             cbxPieces.DataSource = ListPieces;

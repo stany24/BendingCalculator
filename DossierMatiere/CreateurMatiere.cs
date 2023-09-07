@@ -26,7 +26,7 @@ namespace Flexion
                 lblInfo.Text = "pas de nom donné";
                 return;
             }
-            Matiere newmatiere = new Matiere(tbxNomMatiere.Text,(double)nudE.Value*1e9);
+            Matiere newmatiere = new Matiere(tbxNomMatiere.Text, (double)nudE.Value * 1e9);
             ListMatieres.Add(newmatiere);
             cbxMatieres.DataSource = null;
             cbxMatieres.DataSource = ListMatieres;

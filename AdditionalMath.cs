@@ -12,7 +12,7 @@ namespace Flexion
             Divisé = 3,
             Puissance = 4,
         }
-        public static double[] OperationDoubleArray(double[] array1, double[] array2,Operation action)
+        public static double[] OperationDoubleArray(double[] array1, double[] array2, Operation action)
         {
             int length = array1.Length;
             if (array2.Length < length)

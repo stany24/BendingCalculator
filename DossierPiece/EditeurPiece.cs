@@ -33,7 +33,7 @@ namespace Flexion
             selected.Nom = tbxNomPiece.Text;
             selected.SetLongueur((double)nudLongueurPiece.Value / 1000);
             selected.Couches = new List<Couche>();
-            foreach(Couche couche in lbxCoucheIn.Items)
+            foreach (Couche couche in lbxCoucheIn.Items)
             {
                 selected.Couches.Add(couche);
             }
@@ -44,7 +44,7 @@ namespace Flexion
         {
             if (!(cbxPieces.SelectedItem is Piece selected)) { return; }
             tbxNomPiece.Text = selected.Nom;
-            nudLongueurPiece.Value = (decimal)selected.GetLongueur()*1000;
+            nudLongueurPiece.Value = (decimal)selected.GetLongueur() * 1000;
             lbxCoucheIn.DataSource = null;
             lbxCoucheIn.DataSource = selected.Couches;
         }
@@ -56,10 +56,10 @@ namespace Flexion
             piece.Couches.RemoveAt(id);
             lbxCoucheIn.DataSource = null;
             lbxCoucheIn.DataSource = piece.Couches;
-            try{lbxCoucheIn.SelectedItem = lbxCoucheIn.Items[id];}
+            try { lbxCoucheIn.SelectedItem = lbxCoucheIn.Items[id]; }
             catch
             {
-                if(lbxCoucheIn.Items.Count > 0){ lbxCoucheIn.SelectedItem = lbxCoucheIn.Items[id - 1]; }
+                if (lbxCoucheIn.Items.Count > 0) { lbxCoucheIn.SelectedItem = lbxCoucheIn.Items[id - 1]; }
             }
             lblInfo.Text = string.Empty;
         }

@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flexion.DossierCouche
@@ -31,7 +25,7 @@ namespace Flexion.DossierCouche
         private void AfficherCoucheSelectionne(object sender, EventArgs e)
         {
             if (!(cbxCouche.SelectedItem is Couche selected)) { return; }
-            nudLargeurCoucheCenter.Value = (decimal)selected.GetLargeurCenter()*1000;
+            nudLargeurCoucheCenter.Value = (decimal)selected.GetLargeurCenter() * 1000;
             nudLargeurCoucheSide.Value = (decimal)selected.GetLargeurSide() * 1000;
             nudHauteurSide.Value = (decimal)selected.GetHauteurSide() * 1000;
             nudHauteurCenter.Value = (decimal)selected.GetHauteurCenter() * 1000;
@@ -42,7 +36,7 @@ namespace Flexion.DossierCouche
         {
             Couche modified = cbxCouche.SelectedItem as Couche;
             modified.MatiereCouche = cbxMatiere.SelectedItem as Matiere;
-            modified.SetLargeurCenter((double)nudLargeurCoucheCenter.Value/1000);
+            modified.SetLargeurCenter((double)nudLargeurCoucheCenter.Value / 1000);
             modified.SetLargeurSide((double)nudLargeurCoucheSide.Value / 1000);
             modified.SetHauteurCenter((double)nudHauteurCenter.Value / 1000);
             modified.SetHauteurSide((double)nudHauteurSide.Value / 1000);

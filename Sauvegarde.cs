@@ -7,7 +7,7 @@ namespace Flexion
     {
         public static List<Matiere> GetMatières()
         {
-            if(Properties.Settings.Default.Matières.Equals(string.Empty)) { SetMatières(new List<Matiere>()); }
+            if (Properties.Settings.Default.Matières.Equals(string.Empty)) { SetMatières(new List<Matiere>()); }
             return JsonSerializer.Deserialize<List<Matiere>>(Properties.Settings.Default.Matières) ?? new List<Matiere>();
         }
 
@@ -19,7 +19,7 @@ namespace Flexion
 
         public static List<Couche> GetCouches()
         {
-            if(Properties.Settings.Default.Couches.Equals(string.Empty)) { SetCouches(new List<Couche>()); }
+            if (Properties.Settings.Default.Couches.Equals(string.Empty)) { SetCouches(new List<Couche>()); }
             return JsonSerializer.Deserialize<List<Couche>>(Properties.Settings.Default.Couches) ?? new List<Couche>();
         }
 
@@ -44,13 +44,14 @@ namespace Flexion
         public static int GetForce()
         {
             try { return Properties.Settings.Default.Force; }
-            catch{
+            catch
+            {
                 SetForce(500);
                 return Properties.Settings.Default.Force;
             }
         }
 
-        public static void SetForce(int force) 
+        public static void SetForce(int force)
         {
             Properties.Settings.Default.Force = force;
             Properties.Settings.Default.Save();
