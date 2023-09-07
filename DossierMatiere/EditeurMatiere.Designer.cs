@@ -41,43 +41,44 @@
             // cbxMatieres
             // 
             this.cbxMatieres.FormattingEnabled = true;
-            this.cbxMatieres.Location = new System.Drawing.Point(12, 12);
+            this.cbxMatieres.Location = new System.Drawing.Point(11, 10);
+            this.cbxMatieres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxMatieres.Name = "cbxMatieres";
-            this.cbxMatieres.Size = new System.Drawing.Size(329, 28);
+            this.cbxMatieres.Size = new System.Drawing.Size(293, 24);
             this.cbxMatieres.TabIndex = 0;
             this.cbxMatieres.SelectedIndexChanged += new System.EventHandler(this.AfficherMatiereSelectionne);
             // 
             // tbxNomMatiere
             // 
-            this.tbxNomMatiere.Location = new System.Drawing.Point(213, 66);
-            this.tbxNomMatiere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbxNomMatiere.Location = new System.Drawing.Point(189, 53);
+            this.tbxNomMatiere.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbxNomMatiere.Name = "tbxNomMatiere";
-            this.tbxNomMatiere.Size = new System.Drawing.Size(126, 26);
+            this.tbxNomMatiere.Size = new System.Drawing.Size(112, 22);
             this.tbxNomMatiere.TabIndex = 25;
             this.tbxNomMatiere.TextChanged += new System.EventHandler(this.RemoveText);
             // 
             // lblNomMatiere
             // 
             this.lblNomMatiere.AutoSize = true;
-            this.lblNomMatiere.Location = new System.Drawing.Point(18, 60);
+            this.lblNomMatiere.Location = new System.Drawing.Point(16, 48);
             this.lblNomMatiere.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomMatiere.Name = "lblNomMatiere";
-            this.lblNomMatiere.Size = new System.Drawing.Size(42, 20);
+            this.lblNomMatiere.Size = new System.Drawing.Size(36, 16);
             this.lblNomMatiere.TabIndex = 24;
             this.lblNomMatiere.Text = "Nom";
             // 
             // nudE
             // 
             this.nudE.DecimalPlaces = 3;
-            this.nudE.Location = new System.Drawing.Point(213, 106);
-            this.nudE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nudE.Location = new System.Drawing.Point(189, 85);
+            this.nudE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudE.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             196608});
             this.nudE.Name = "nudE";
-            this.nudE.Size = new System.Drawing.Size(128, 26);
+            this.nudE.Size = new System.Drawing.Size(114, 22);
             this.nudE.TabIndex = 23;
             this.nudE.Value = new decimal(new int[] {
             1,
@@ -89,18 +90,19 @@
             // lblE
             // 
             this.lblE.AutoSize = true;
-            this.lblE.Location = new System.Drawing.Point(18, 109);
+            this.lblE.Location = new System.Drawing.Point(16, 87);
             this.lblE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblE.Name = "lblE";
-            this.lblE.Size = new System.Drawing.Size(185, 20);
+            this.lblE.Size = new System.Drawing.Size(157, 16);
             this.lblE.TabIndex = 22;
             this.lblE.Text = "Module d\'élasticité (GPa)";
             // 
             // btnModifier
             // 
-            this.btnModifier.Location = new System.Drawing.Point(128, 161);
+            this.btnModifier.Location = new System.Drawing.Point(114, 129);
+            this.btnModifier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(85, 32);
+            this.btnModifier.Size = new System.Drawing.Size(76, 26);
             this.btnModifier.TabIndex = 26;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
@@ -109,16 +111,16 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(124, 204);
+            this.lblInfo.Location = new System.Drawing.Point(110, 163);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 20);
+            this.lblInfo.Size = new System.Drawing.Size(0, 16);
             this.lblInfo.TabIndex = 27;
             // 
             // EditeurMatiere
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 233);
+            this.ClientSize = new System.Drawing.Size(311, 186);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.tbxNomMatiere);
@@ -127,10 +129,11 @@
             this.Controls.Add(this.lblE);
             this.Controls.Add(this.cbxMatieres);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditeurMatiere";
-            this.Text = "Editeur matière";
+            this.Text = "7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditeurMatiere_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudE)).EndInit();
             this.ResumeLayout(false);

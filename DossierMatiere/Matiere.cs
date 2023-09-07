@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Flexion
 {
     public class Matiere
     {
-        private string Nom;
+        [JsonInclude]
+        public string Nom;
         public string GetNom() { return Nom; }
         public void SetNom(string value) { if (value != "") { Nom = value; } }
 
-        private double E;
+        [JsonInclude]
+        public double E;
         public double GetE() { return E; }
         public void SetE(double value) { if (value > 0) { E = value; } }
 
@@ -26,6 +24,9 @@ namespace Flexion
             Nom = nom;
             E = e;
         }
+
+        [JsonConstructor]
+        public Matiere() { }
 
         /// <summary>
         /// Retourne le nom de la matière avec sa valeur E 

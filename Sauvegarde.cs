@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Flexion
 {
     public static class Sauvegarde
     {
-        public static string GetMatières()
+        public static List<Matiere> GetMatières()
         {
-            try { return }
+            return JsonSerializer.Deserialize<List<Matiere>>(Properties.Settings.Default.Matières) ?? new List<Matiere>();
+        }
+
+        public static void SetMatières(List<Matiere> matieres)
+        {
+            string str = JsonSerializer.Serialize(matieres);
+            Properties.Settings.Default.Matières = str;
+            Properties.Settings.Default.Save();
         }
     }
 }

@@ -13,12 +13,10 @@ namespace Flexion
     public partial class EditeurMatiere : Form
     {
         public List<Matiere> ListMatieres;
-        public Form1 Main;
-        public EditeurMatiere(List<Matiere> listmatiere, Form1 main)
+        public EditeurMatiere()
         {
             InitializeComponent();
-            Main = main;
-            ListMatieres = listmatiere;
+            ListMatieres = Sauvegarde.GetMatières();
             cbxMatieres.DataSource = ListMatieres;
         }
 
@@ -46,8 +44,7 @@ namespace Flexion
 
         private void EditeurMatiere_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListMatieres = ListMatieres;
-            Main.Enabled = true;
+            Sauvegarde.SetMatières(ListMatieres);
         }
 
         private void RemoveText(object sender, EventArgs e)

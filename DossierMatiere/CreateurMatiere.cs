@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flexion
 {
     public partial class CreateurMatiere : Form
     {
-        public List<Matiere> ListMatieres;
-        public Form1 Main;
-        public CreateurMatiere(List<Matiere> listmatiere,Form1 main)
+        public List<Matiere> ListMatieres = new List<Matiere>();
+        public CreateurMatiere()
         {
             InitializeComponent();
-            Main = main;
-            ListMatieres = listmatiere;
+            ListMatieres = Sauvegarde.GetMatières();
             cbxMatieres.DataSource = ListMatieres;
         }
 
         private void CreateurMatiere_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Main.ListMatieres = ListMatieres;
-            Main.Enabled = true;
+            Sauvegarde.SetMatières(ListMatieres);
         }
 
         private void CreerMatiere(object sender, EventArgs e)

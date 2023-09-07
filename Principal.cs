@@ -29,7 +29,7 @@ namespace Flexion
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             piece.Couches.Add(new Couche(new Matiere("alu", 69e9), 100e-3, 100e-3, 5e-3, 5e-3));
             ListCouches.Add(piece.Couches[0]);
-            ListMatieres.Add(piece.Couches[0].GetMatiere());
+            ListMatieres = Sauvegarde.GetMatières();
             cbxMatiere.DataSource= ListMatieres;
             cbxCouche.DataSource= ListCouches;
             cbxPiece.DataSource= ListPiece;
@@ -98,16 +98,24 @@ namespace Flexion
 
         private void ModiferMatiere(object sender, EventArgs e)
         {
-            EditeurMatiere editor = new EditeurMatiere(ListMatieres,this);
+            EditeurMatiere editor = new EditeurMatiere();
+            editor.FormClosed += new FormClosedEventHandler(UpdateMatiere);
             editor.Show();
             this.Enabled = false;
         }
 
+
         private void CreerMatiere(object sender, EventArgs e)
         {
-            CreateurMatiere createur = new CreateurMatiere(ListMatieres, this);
+            CreateurMatiere createur = new CreateurMatiere();
+            createur.FormClosed += new FormClosedEventHandler(UpdateMatiere);
             createur.Show();
             this.Enabled = false;
+        }
+        private void UpdateMatiere(object sender, EventArgs e)
+        {
+            ListMatieres = Sauvegarde.GetMatières();
+            this.Enabled = true;
         }
 
         private void CreerCouche(object sender, EventArgs e)
