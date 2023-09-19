@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -193,6 +194,50 @@ namespace Flexion
         private void ForceChanged(object sender, EventArgs e)
         {
             Sauvegarde.SetForce((int)nudForce.Value);
+        }
+
+        private void LoadFromJson(object sender, EventArgs e)
+        {
+            FileDialogJson.Filter = "Fichiers json (*.json)|*.json";
+            FileDialogJson.Title = "Ficher json à charcher";
+            FileDialogJson.Multiselect = false;
+            FileDialogJson.ShowDialog();
+            try{
+                List<Piece> pieces  = JsonSerializer.Deserialize<List<Piece>>(FileDialogJson.OpenFile());
+                pieces.AddRange(Sauvegarde.GetPieces());
+                Sauvegarde.SetPieces(pieces);
+                return;
+            }catch{}
+            try{
+                List<Couche> couches = JsonSerializer.Deserialize<List<Couche>>(FileDialogJson.OpenFile());
+                couches.AddRange(Sauvegarde.GetCouches());
+                Sauvegarde.SetCouches(couches);
+            }catch { }
+            try{
+                List<Matiere> matieres = JsonSerializer.Deserialize<List<Matiere>>(FileDialogJson.OpenFile());
+                matieres.AddRange(Sauvegarde.GetMatières());
+                Sauvegarde.SetMatières(matieres);
+            }catch { }
+            try{
+                Piece piece = JsonSerializer.Deserialize<Piece>(FileDialogJson.OpenFile());
+                List<Piece> pieces = Sauvegarde.GetPieces();
+                pieces.Add(piece);
+                Sauvegarde.SetPieces(pieces);
+            }catch { }
+            try{
+                Couche couche = JsonSerializer.Deserialize<Couche>(FileDialogJson.OpenFile());
+                List<Couche> couches = Sauvegarde.GetCouches();
+                couches.Add(couche);
+                Sauvegarde.SetCouches(couches);
+            }
+            catch { }
+            try{
+                Piece piece = JsonSerializer.Deserialize<Piece>(FileDialogJson.OpenFile());
+                List<Piece> pieces = Sauvegarde.GetPieces();
+                pieces.Add(piece);
+                Sauvegarde.SetPieces(pieces);
+            }
+            catch { }
         }
     }
 }
