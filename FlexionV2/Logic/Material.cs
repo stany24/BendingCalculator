@@ -4,15 +4,22 @@ namespace FlexionV2.Logic
 {
     public class Material
     {
-        [JsonInclude]
-        public string Nom;
-        public string GetNom() { return Nom; }
-        public void SetNom(string value) { if (value != "") { Nom = value; } }
+        private string _nom;
 
         [JsonInclude]
-        public double E;
-        public double GetE() { return E; }
-        public void SetE(double value) { if (value > 0) { E = value; } }
+        public string Nom
+        {
+            get => _nom;
+            set {if (value != "") { _nom = value; }}
+        }
+
+        private double _e;
+        [JsonInclude]
+        public double E
+        {
+            get => _e;
+            set { if (value > 0) { _e = value; } }
+        }
 
         /// <summary>
         /// Instancie une nouvelle matière avec un nom et une valeur E

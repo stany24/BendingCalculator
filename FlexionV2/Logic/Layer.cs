@@ -83,7 +83,7 @@ namespace FlexionV2.Logic
         /// <returns>Le nom de la mati�re, la largeur au centre, la largeur sur les c�t�s, la hauteur au centre, la hauteur sur les c�t�s</returns>
         public override string ToString()
         {
-            return $"{Material.GetNom()} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";
+            return $"{Material.Nom} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";
         }
 
         public double[] Base(double longueur, double eref, double[] xs)
@@ -93,7 +93,7 @@ namespace FlexionV2.Logic
             l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
             double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
             baseArea = AdditionalMath.OperationDoubleArray(baseArea, WidthAtCenter, AdditionalMath.Operation.Plus);
-            double divider = eref / Material.GetE();
+            double divider = eref / Material.E;
             return AdditionalMath.OperationDoubleArray(baseArea, divider, AdditionalMath.Operation.Divided);
         }
 
@@ -105,7 +105,7 @@ namespace FlexionV2.Logic
 
             List<double> Lf = L2.Select(l2 => l1 * l2 + WidthAtCenter).ToList();
 
-            return Lf.Select(lf => lf / eref * Material.GetE()).ToList();
+            return Lf.Select(lf => lf / eref * Material.E).ToList();
         }
 
         public List<double> Height(double longueur, IEnumerable<double> xs)
