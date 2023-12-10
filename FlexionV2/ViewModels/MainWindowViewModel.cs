@@ -1,4 +1,5 @@
-﻿using LiveChartsCore;
+﻿using System.Collections.Generic;
+using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 
@@ -10,7 +11,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         new LineSeries<ObservablePoint>
         {
-            Values = new ObservablePoint[]
+            Values = new List<ObservablePoint>
             {
                 new(0, 4),
                 new(1, 3),

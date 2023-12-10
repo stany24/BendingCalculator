@@ -25,26 +25,30 @@
         RowDefinitions="Auto,10,*">
         <Grid 
             Name="GridForce"
-            ColumnDefinitions="Auto"
+            ColumnDefinitions="Auto,10,Auto"
             RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
             Column="0"
             Row="0"></Grid>
         <Grid 
             Name="GridPiece"
-            ColumnDefinitions="Auto"
+            ColumnDefinitions="Auto,10,Auto"
             RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
             Column="2"
             Row="0"></Grid>
         <Grid 
             Name="GridLayer"
-            ColumnDefinitions="Auto"
+            ColumnDefinitions="Auto,10,Auto"
             RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
             Column="4"
             Row="0"></Grid>
         <Grid 
             Name="GridMaterial"
-            ColumnDefinitions="Auto"
+            ColumnDefinitions="Auto,10,Auto"
             RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
             Column="6"
             Row="0"></Grid>
         <lvc:CartesianChart 

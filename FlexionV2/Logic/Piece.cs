@@ -8,7 +8,7 @@ namespace FlexionV2.Logic
     public class Piece
     {
         [JsonInclude]
-        public List<Layer> Couches { get; set; }
+        public List<Layer> Layers { get; set; }
 
         private string _name;
         [JsonInclude]
@@ -54,14 +54,14 @@ namespace FlexionV2.Logic
         public Piece(double length, string name)
         {
             Eref = 69e9;
-            Couches = new List<Layer>();
+            Layers = new List<Layer>();
             Length = length;
             Name = name;
         }
 
         public Piece(double length, string name, double eref)
         {
-            Couches = new List<Layer>();
+            Layers = new List<Layer>();
             Length = length;
             Name = name;
             Eref = eref;
@@ -76,11 +76,11 @@ namespace FlexionV2.Logic
         /// <returns></returns>
         public override string ToString()
         {
-            return Couches.Count switch
+            return Layers.Count switch
             {
                 0 => $"{Name} / {Length}m",
                 1 => $"{Name} / {Length}m / 1 couche",
-                _ => $"{Name} / {Length}m / {Couches.Count} couches"
+                _ => $"{Name} / {Length}m / {Layers.Count} couches"
             };
         }
 
@@ -164,7 +164,7 @@ namespace FlexionV2.Logic
 
         private double[] CalculateI()
         {
-            double[][] ix = new double[Couches.Count][];
+            double[][] ix = new double[Layers.Count][];
             double[] I = new double[Xs.Length];
 
             //initialise les arrays
@@ -174,18 +174,18 @@ namespace FlexionV2.Logic
             }
 
             //calcule les Ix de manière généralisé.
-            for (int i = 0; i < Couches.Count; i++)
+            for (int i = 0; i < Layers.Count; i++)
             {
-                double[] power = AdditionalMath.OperationDoubleArray(Couches[i].Height(Length, (double[])Xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
-                double[] divise = AdditionalMath.OperationDoubleArray(power, Couches[i].Base(Length, Eref, (double[])Xs.Clone()), AdditionalMath.Operation.Multiplication);
+                double[] power = AdditionalMath.OperationDoubleArray(Layers[i].Height(Length, (double[])Xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
+                double[] divise = AdditionalMath.OperationDoubleArray(power, Layers[i].Base(Length, Eref, (double[])Xs.Clone()), AdditionalMath.Operation.Multiplication);
                 ix[i] = AdditionalMath.OperationDoubleArray(divise, 12, AdditionalMath.Operation.Divided);
             }
 
-            for (int i = 0; i < Couches.Count; i++)
+            for (int i = 0; i < Layers.Count; i++)
             {
                 double[] p1 = AdditionalMath.OperationDoubleArray(CalculateNx(i, Xs.Length), Ns(), AdditionalMath.Operation.Minus);
                 double[] p2 = AdditionalMath.OperationDoubleArray(p1, 2, AdditionalMath.Operation.Power);
-                double[] p3 = AdditionalMath.OperationDoubleArray(Couches[i].Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), p2, AdditionalMath.Operation.Multiplication);
+                double[] p3 = AdditionalMath.OperationDoubleArray(Layers[i].Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), p2, AdditionalMath.Operation.Multiplication);
                 double[] p4 = AdditionalMath.OperationDoubleArray(ix[i], p3, AdditionalMath.Operation.Plus);
                 I = AdditionalMath.OperationDoubleArray(I, p4, AdditionalMath.Operation.Plus);
             }
@@ -194,7 +194,7 @@ namespace FlexionV2.Logic
 
         private double[] Ns()
         {
-            double[][] nx = new double[Couches.Count][];
+            double[][] nx = new double[Layers.Count][];
             double[] divise = new double[Xs.Length];
             double[] divisant = new double[Xs.Length];
 
@@ -205,16 +205,16 @@ namespace FlexionV2.Logic
             }
 
             //calcule les Nx de manière généralisé.
-            for (int i = 0; i < Couches.Count; i++)
+            for (int i = 0; i < Layers.Count; i++)
             {
                 nx[i] = CalculateNx(i, Xs.Length);
             }
 
             //calucule du divisé
-            divise = Couches.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divise, (current, ajout) => AdditionalMath.OperationDoubleArray(current, ajout, AdditionalMath.Operation.Plus));
+            divise = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divise, (current, ajout) => AdditionalMath.OperationDoubleArray(current, ajout, AdditionalMath.Operation.Plus));
 
             // calcule du divisant
-            divisant = Couches.Aggregate(divisant, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
+            divisant = Layers.Aggregate(divisant, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
             //calcule de Ns
             return AdditionalMath.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divided);
         }
@@ -226,12 +226,12 @@ namespace FlexionV2.Logic
             {
                 if (j == i)
                 {
-                    double[] add = AdditionalMath.OperationDoubleArray(Couches[j].Height(Length, (double[])Xs.Clone()).ToArray(), 2, AdditionalMath.Operation.Divided);
+                    double[] add = AdditionalMath.OperationDoubleArray(Layers[j].Height(Length, (double[])Xs.Clone()).ToArray(), 2, AdditionalMath.Operation.Divided);
                     nx = AdditionalMath.OperationDoubleArray(nx, add, AdditionalMath.Operation.Plus);
                 }
                 else
                 {
-                    nx = AdditionalMath.OperationDoubleArray(nx, Couches[j].Height(Length, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus);
+                    nx = AdditionalMath.OperationDoubleArray(nx, Layers[j].Height(Length, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus);
                 }
             }
             return nx;
