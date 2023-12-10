@@ -1,8 +1,23 @@
-﻿namespace FlexionV2.ViewModels;
+﻿using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+
+namespace FlexionV2.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    public ISeries[] Series { get; set; } =
+    {
+        new LineSeries<ObservablePoint>
+        {
+            Values = new ObservablePoint[]
+            {
+                new(0, 4),
+                new(1, 3),
+                new(3, 8),
+                new(18, 6),
+                new(20, 12)
+            }
+        }
+    };
 }

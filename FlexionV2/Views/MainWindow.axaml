@@ -3,6 +3,7 @@
         xmlns:vm="using:FlexionV2.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -14,7 +15,45 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <Grid
+        
+        Name="MainGrid"
+        Margin="10"
+        ShowGridLines="True"
+        ColumnDefinitions="*,10,*,10,*,10,*"
+        RowDefinitions="Auto,10,*">
+        <Grid 
+            Name="GridForce"
+            ColumnDefinitions="Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            Column="0"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridPiece"
+            ColumnDefinitions="Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            Column="2"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridLayer"
+            ColumnDefinitions="Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            Column="4"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridMaterial"
+            ColumnDefinitions="Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            Column="6"
+            Row="0"></Grid>
+        <lvc:CartesianChart 
+            Name="ChartResult"
+            Series="{Binding Series}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="7"></lvc:CartesianChart>
+    </Grid>
 </Window>
