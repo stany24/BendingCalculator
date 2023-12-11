@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FlexionV2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FlexionV2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="FlexionV2">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Grid
+        
+        Name="MainGrid"
+        Margin="10"
+        ShowGridLines="True"
+        ColumnDefinitions="*,10,*,10,*,10,*"
+        RowDefinitions="Auto,10,*">
+        <Grid 
+            Name="GridForce"
+            ColumnDefinitions="Auto,10,Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
+            Column="0"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridPiece"
+            ColumnDefinitions="Auto,10,Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
+            Column="2"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridLayer"
+            ColumnDefinitions="Auto,10,Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
+            Column="4"
+            Row="0"></Grid>
+        <Grid 
+            Name="GridMaterial"
+            ColumnDefinitions="Auto,10,Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
+            MinHeight="150"
+            Column="6"
+            Row="0"></Grid>
+        <lvc:CartesianChart 
+            Name="ChartResult"
+            Series="{Binding Series}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="7"></lvc:CartesianChart>
+    </Grid>
+</Window>
