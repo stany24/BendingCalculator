@@ -224,8 +224,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdditionalMath.cs" />
-    <Compile Include="DossierCouche\Couche.cs" />
     <Compile Include="DossierCouche\CreateurCouche.cs" />
     <Compile Include="DossierCouche\CreateurCouche.Designer.cs">
       <DependentUpon>CreateurCouche.cs</DependentUpon>
@@ -242,7 +240,6 @@
     <Compile Include="DossierMatiere\EditeurMatiere.Designer.cs">
       <DependentUpon>EditeurMatiere.cs</DependentUpon>
     </Compile>
-    <Compile Include="DossierMatiere\Matiere.cs" />
     <Compile Include="DossierPiece\CreateurPiece.cs" />
     <Compile Include="DossierPiece\CreateurPiece.Designer.cs">
       <DependentUpon>CreateurPiece.cs</DependentUpon>
@@ -251,7 +248,6 @@
     <Compile Include="DossierPiece\EditeurPiece.Designer.cs">
       <DependentUpon>EditeurPiece.cs</DependentUpon>
     </Compile>
-    <Compile Include="DossierPiece\Piece.cs" />
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
