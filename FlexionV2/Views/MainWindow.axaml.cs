@@ -18,7 +18,9 @@ public partial class MainWindow : Window
 {
     private double Ecart = 1e-4;
     private double _force = 100;
-    private CalculateForce? _calculateForce = null;
+    private readonly List<Material> _materials = new();
+    private CalculateForce? _calculateForce;
+    private MaterialEditor? _materialEditor;
     public MainWindow()
     {
         InitializeComponent();
@@ -116,6 +118,7 @@ public partial class MainWindow : Window
         Grid.SetRow(lbxMaterial,2);
         GridMaterial.Children.Add(lbxMaterial);
         Button btnMaterial = new() { Content = "Modifier" };
+        btnMaterial.Click += OpenMaterialEditorWindow;
         Grid.SetColumn(btnMaterial,2);
         Grid.SetRow(btnMaterial,0);
         GridMaterial.Children.Add(btnMaterial);
@@ -150,5 +153,24 @@ public partial class MainWindow : Window
         _calculateForce.Closing += (_, _) => { _force = (double)_calculateForce.NudForce.Value; };
         _calculateForce.Closed += (_, _) => { _calculateForce = null; };
         _calculateForce.Show();
+    }
+    
+    private void OpenMaterialEditorWindow(object? sender, RoutedEventArgs routedEventArgs)
+    {
+        if(_materialEditor !=null){return;}
+        _materialEditor = new MaterialEditor(_materials);
+        _materialEditor.Closing += (_, _) =>
+        {
+            _materials.Clear();
+            foreach (object? obj in _materialEditor.LbxMaterial.Items)
+            {
+                if (obj is Material material)
+                {
+                    _materials.Add(material);
+                }
+            }
+        };
+        _materialEditor.Closed += (_, _) => { _materialEditor = null; };
+        _materialEditor.Show();
     }
 }

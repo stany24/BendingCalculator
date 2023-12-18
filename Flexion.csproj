@@ -232,14 +232,6 @@
     <Compile Include="DossierCouche\EditeurCouche.Designer.cs">
       <DependentUpon>EditeurCouche.cs</DependentUpon>
     </Compile>
-    <Compile Include="DossierMatiere\CreateurMatiere.cs" />
-    <Compile Include="DossierMatiere\CreateurMatiere.Designer.cs">
-      <DependentUpon>CreateurMatiere.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierMatiere\EditeurMatiere.cs" />
-    <Compile Include="DossierMatiere\EditeurMatiere.Designer.cs">
-      <DependentUpon>EditeurMatiere.cs</DependentUpon>
-    </Compile>
     <Compile Include="DossierPiece\CreateurPiece.cs" />
     <Compile Include="DossierPiece\CreateurPiece.Designer.cs">
       <DependentUpon>CreateurPiece.cs</DependentUpon>
@@ -261,12 +253,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DossierCouche\EditeurCouche.resx">
       <DependentUpon>EditeurCouche.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierMatiere\CreateurMatiere.resx">
-      <DependentUpon>CreateurMatiere.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierMatiere\EditeurMatiere.resx">
-      <DependentUpon>EditeurMatiere.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DossierPiece\CreateurPiece.resx">
       <DependentUpon>CreateurPiece.cs</DependentUpon>
