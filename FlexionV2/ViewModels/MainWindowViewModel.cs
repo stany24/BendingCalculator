@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FlexionV2.Logic;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
@@ -21,4 +22,8 @@ public class MainWindowViewModel : ViewModelBase
             }
         }
     };
+
+    public List<Piece> Pieces { get; set; } = new();
+    public List<Layer> Layers { get; set; } = new();
+    public List<Material> Materials { get; set; } = new();
 }

@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
-using DynamicData;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
-using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
@@ -18,6 +17,8 @@ namespace FlexionV2.Views;
 public partial class MainWindow : Window
 {
     private double Ecart = 1e-4;
+    private double _force = 100;
+    private CalculateForce? _calculateForce = null;
     public MainWindow()
     {
         InitializeComponent();
@@ -26,6 +27,10 @@ public partial class MainWindow : Window
 
     private void InitializeUi()
     {
+        if (DataContext is MainWindowViewModel model)
+        {
+            model.Pieces.Add(new Piece(5,"test"));
+        }
         InitializeForceArea();
         InitializePieceArea();
         InitializeLayerArea();
@@ -43,6 +48,7 @@ public partial class MainWindow : Window
         Grid.SetRow(nudForce,2);
         GridForce.Children.Add(nudForce);
         Button btnForce = new() { Content = "Modifier" };
+        btnForce.Click += OpenCalculateForceWindow;
         Grid.SetColumn(btnForce,2);
         Grid.SetRow(btnForce,0);
         GridForce.Children.Add(btnForce);
@@ -59,7 +65,21 @@ public partial class MainWindow : Window
         Grid.SetColumn(lblPiece,0);
         Grid.SetRow(lblPiece,0);
         GridPiece.Children.Add(lblPiece);
-        ListBox lbxPiece = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        ListBox lbxPiece = new()
+        {
+            VerticalAlignment = VerticalAlignment.Stretch,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+        };
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            if (DataContext is not MainWindowViewModel model) return;
+            Binding binding = new()
+            { 
+                Source = model, 
+                Path = nameof(model.Pieces)
+            }; 
+            lbxPiece.Bind(ItemsControl.ItemsSourceProperty, binding);
+        });
         Grid.SetColumn(lbxPiece,0);
         Grid.SetRow(lbxPiece,2);
         GridPiece.Children.Add(lbxPiece);
@@ -121,5 +141,14 @@ public partial class MainWindow : Window
             model.Series[0]=line ;
         });
         ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
+    }
+
+    private void OpenCalculateForceWindow(object? sender, RoutedEventArgs routedEventArgs)
+    {
+        if(_calculateForce !=null){return;}
+        _calculateForce = new CalculateForce();
+        _calculateForce.Closing += (_, _) => { _force = (double)_calculateForce.NudForce.Value; };
+        _calculateForce.Closed += (_, _) => { _calculateForce = null; };
+        _calculateForce.Show();
     }
 }
