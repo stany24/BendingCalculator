@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
+using FlexionV2.Views.Editors.Force;
+using FlexionV2.Views.Editors.Material;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
@@ -14,8 +15,11 @@ namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
+    private double Force = 100;
     private const double Gap = 1e-4;
-    private Editors.Material.MaterialEditor? editor;
+    private MaterialEditor? _materialEditor;
+    private ForceEditor? _forceEditor;
+    private NumericUpDown nudForce;
     private ListBox lbxMaterial;
 
     public Main()
@@ -38,11 +42,12 @@ public partial class Main : Window
         Grid.SetColumn(lblForce,0);
         Grid.SetRow(lblForce,0);
         GridForce.Children.Add(lblForce);
-        NumericUpDown nudForce = new() { Value = 5 };
+        nudForce = new NumericUpDown { Value = 5 };
         Grid.SetColumn(nudForce,0);
         Grid.SetRow(nudForce,2);
         GridForce.Children.Add(nudForce);
         Button btnForce = new() { Content = "Modifier" };
+        btnForce.Click += (_, _) => OpenForceEditor();
         Grid.SetColumn(btnForce,2);
         Grid.SetRow(btnForce,0);
         GridForce.Children.Add(btnForce);
@@ -99,23 +104,39 @@ public partial class Main : Window
         Grid.SetRow(lbxMaterial,2);
         GridMaterial.Children.Add(lbxMaterial);
         Button btnMaterial = new() { Content = "Modifier" };
-        btnMaterial.Click += (_, _) =>
-        {
-            if(editor != null){return;}
-            editor = new Editors.Material.MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
-            editor.Closing += (_, _) => MaterialEditorClosing();
-            editor.Closed += (_, _) => editor = null;
-            editor.Show();
-        };
+        btnMaterial.Click += (_, _) => OpenMaterialEditor();
         Grid.SetColumn(btnMaterial,2);
         Grid.SetRow(btnMaterial,0);
         GridMaterial.Children.Add(btnMaterial);
     }
 
+    private void OpenForceEditor()
+    {
+        if(_forceEditor != null){return;}
+        _forceEditor = new ForceEditor(nudForce.Value);
+        _forceEditor.Closing += (_, _) => ForceEditorClosing();
+        _forceEditor.Closed += (_, _) => _forceEditor = null;
+        _forceEditor.Show();
+    }
+    
+    private void ForceEditorClosing()
+    {
+        nudForce.Value = _forceEditor.CalculateForce();
+    }
+    
+    private void OpenMaterialEditor()
+    {
+        if(_materialEditor != null){return;}
+        _materialEditor = new MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
+        _materialEditor.Closing += (_, _) => MaterialEditorClosing();
+        _materialEditor.Closed += (_, _) => _materialEditor = null;
+        _materialEditor.Show();
+    }
+    
     private void MaterialEditorClosing()
     {
         lbxMaterial.Items.Clear();
-        foreach (Material? material in editor.LbxItems.Items.Cast<Material>())
+        foreach (Material? material in _materialEditor.LbxItems.Items.Cast<Material>())
         {
             lbxMaterial.Items.Add(material);
         }
