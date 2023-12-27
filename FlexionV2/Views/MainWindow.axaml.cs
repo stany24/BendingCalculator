@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
-using DynamicData;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
-using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
@@ -17,7 +13,8 @@ namespace FlexionV2.Views;
 
 public partial class MainWindow : Window
 {
-    private double Ecart = 1e-4;
+    private const double Gap = 1e-4;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -61,6 +58,7 @@ public partial class MainWindow : Window
         GridPiece.Children.Add(lblPiece);
         ListBox lbxPiece = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
         Grid.SetColumn(lbxPiece,0);
+        Grid.SetColumnSpan(lbxPiece,4);
         Grid.SetRow(lbxPiece,2);
         GridPiece.Children.Add(lbxPiece);
         Button btnPiece = new() { Content = "Modifier" };
@@ -77,6 +75,7 @@ public partial class MainWindow : Window
         GridLayer.Children.Add(lblLayer);
         ListBox lbxLayer = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
         Grid.SetColumn(lbxLayer,0);
+        Grid.SetColumnSpan(lbxLayer,4);
         Grid.SetRow(lbxLayer,2);
         GridLayer.Children.Add(lbxLayer);
         Button btnLayer = new() { Content = "Modifier" };
@@ -93,9 +92,15 @@ public partial class MainWindow : Window
         GridMaterial.Children.Add(lblMaterial);
         ListBox lbxMaterial = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
         Grid.SetColumn(lbxMaterial,0);
+        Grid.SetColumnSpan(lbxMaterial,4);
         Grid.SetRow(lbxMaterial,2);
         GridMaterial.Children.Add(lbxMaterial);
         Button btnMaterial = new() { Content = "Modifier" };
+        btnMaterial.Click += (_, _) =>
+        {
+            MaterialEditor editor = new();
+            editor.Show();
+        };
         Grid.SetColumn(btnMaterial,2);
         Grid.SetRow(btnMaterial,0);
         GridMaterial.Children.Add(btnMaterial);
@@ -106,7 +111,7 @@ public partial class MainWindow : Window
         Piece piece = new(1,"test");
         Material material = new("test",69e9);
         piece.Layers.Add(new Layer(material,5,5));
-        FillGraph(piece.Intégrale(500, Ecart));
+        FillGraph(piece.Intégrale(500, Gap));
     }
 
     private void FillGraph(double[] data)
