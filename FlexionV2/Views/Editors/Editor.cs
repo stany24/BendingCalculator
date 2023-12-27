@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 
-namespace FlexionV2.Views;
+namespace FlexionV2.Views.Editors;
 
 public abstract class Editor : Window
 {
-    internal ListBox LbxItems = new();
-    internal Button BtnRemove= new();
-    internal Button BtnAdd= new();
+    internal readonly ListBox LbxItems = new();
+    internal readonly Button BtnRemove= new();
+    internal readonly Button BtnAdd= new();
     internal Task LoadTask = null!;
     internal Task SaveTask = null!;
 
-    internal Editor()
+    private protected Editor()
     {
         LbxItems.SelectionMode = SelectionMode.Multiple;
         BtnRemove.Click +=(_,_) => RemoveItems();
@@ -118,7 +118,7 @@ public abstract class Editor : Window
     /// Generalized function used to update UI of the listbox
     /// </summary>
     /// <typeparam name="TItem">The class contained in the listbox</typeparam>
-    internal void UpdateListBox<TItem>()
+    private void UpdateListBox<TItem>()
     {
         List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         List<TItem> selected = new();
@@ -180,7 +180,7 @@ public abstract class Editor : Window
     /// <summary>
     /// Function used to remove all selected items from the listbox
     /// </summary>
-    internal void RemoveItems()
+    private void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;

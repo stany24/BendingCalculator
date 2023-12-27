@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
-using FlexionV2.Logic;
 
-namespace FlexionV2.Views;
+namespace FlexionV2.Views.Editors.Material;
 
 public partial class MaterialEditor : Editor
 {
-    public MaterialEditor(List<Material> materials)
+    public MaterialEditor(List<Logic.Material> materials)
     {
         InitializeComponent();
         InitializeUi();
-        NudE.ValueChanged += (_, e) => NumericChanged<Material>(e,"E");
-        TbxName.TextChanged += (_, _) => TextChanged<Material>(TbxName, "Nom");
-        foreach (Material material in materials) { LbxItems.Items.Add(material); }
+        NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
+        TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Nom");
+        foreach (Logic.Material material in materials) { LbxItems.Items.Add(material); }
     }
 
     private void InitializeUi()
@@ -27,6 +26,6 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,4);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Material("new", 69e9));
+        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Material("new", 69e9));
     }
 }

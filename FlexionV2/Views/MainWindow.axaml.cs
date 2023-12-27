@@ -12,13 +12,13 @@ using LiveChartsCore.SkiaSharpView;
 
 namespace FlexionV2.Views;
 
-public partial class MainWindow : Window
+public partial class Main : Window
 {
     private const double Gap = 1e-4;
-    private MaterialEditor? editor;
+    private Editors.Material.MaterialEditor? editor;
     private ListBox lbxMaterial;
 
-    public MainWindow()
+    public Main()
     {
         InitializeComponent();
         InitializeUi();
@@ -102,7 +102,7 @@ public partial class MainWindow : Window
         btnMaterial.Click += (_, _) =>
         {
             if(editor != null){return;}
-            editor = new MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
+            editor = new Editors.Material.MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
             editor.Closing += (_, _) => MaterialEditorClosing();
             editor.Closed += (_, _) => editor = null;
             editor.Show();
@@ -132,7 +132,7 @@ public partial class MainWindow : Window
     private void FillGraph(double[] data)
     {
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(DataContext is not MainWindowViewModel model)  {return;}
+            if(DataContext is not MainViewModel model)  {return;}
 
             LineSeries<ObservablePoint> line = new();
             List<ObservablePoint> values = data.Select((t, i) => new ObservablePoint(i, t)).ToList();

@@ -224,107 +224,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdditionalMath.cs" />
     <Compile Include="CalculeForce.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CalculeForce.Designer.cs">
-      <DependentUpon>CalculeForce.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierPiece\CreateurPiece.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierPiece\CreateurPiece.Designer.cs">
-      <DependentUpon>CreateurPiece.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierCouche\Couche.cs" />
-    <Compile Include="DossierCouche\CreateurCouche.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierCouche\CreateurCouche.Designer.cs">
-      <DependentUpon>CreateurCouche.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierCouche\EditeurCouche.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierCouche\EditeurCouche.Designer.cs">
-      <DependentUpon>EditeurCouche.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierMatiere\CreateurMatiere.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierMatiere\CreateurMatiere.Designer.cs">
-      <DependentUpon>CreateurMatiere.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierPiece\EditeurPiece.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierPiece\EditeurPiece.Designer.cs">
-      <DependentUpon>EditeurPiece.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Principal.Designer.cs">
-      <DependentUpon>Principal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierMatiere\EditeurMatiere.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DossierMatiere\EditeurMatiere.Designer.cs">
-      <DependentUpon>EditeurMatiere.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DossierMatiere\Matiere.cs" />
-    <Compile Include="DossierPiece\Piece.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sauvegarde.cs" />
-    <EmbeddedResource Include="CalculeForce.resx">
-      <DependentUpon>CalculeForce.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierPiece\CreateurPiece.resx">
-      <DependentUpon>CreateurPiece.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierCouche\CreateurCouche.resx">
-      <DependentUpon>CreateurCouche.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierCouche\EditeurCouche.resx">
-      <DependentUpon>EditeurCouche.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierMatiere\CreateurMatiere.resx">
-      <DependentUpon>CreateurMatiere.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierMatiere\EditeurMatiere.resx">
-      <DependentUpon>EditeurMatiere.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DossierPiece\EditeurPiece.resx">
-      <DependentUpon>EditeurPiece.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Principal.resx">
-      <DependentUpon>Principal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

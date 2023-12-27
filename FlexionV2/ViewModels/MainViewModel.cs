@@ -5,7 +5,7 @@ using LiveChartsCore.SkiaSharpView;
 
 namespace FlexionV2.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase
 {
     public ISeries[] Series { get; set; } =
     {

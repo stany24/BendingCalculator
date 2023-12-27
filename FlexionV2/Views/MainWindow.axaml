@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FlexionV2.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:Class="FlexionV2.Views.Main"
+        x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="FlexionV2">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainViewModel/>
     </Design.DataContext>
     
     <Grid

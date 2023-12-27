@@ -23,4 +23,12 @@
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5"/>
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
     </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="Views\Editors\Material\MaterialEditor.axaml.cs">
+        <DependentUpon>MaterialEditor.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>
