@@ -6,6 +6,7 @@ using Avalonia.Layout;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
 using FlexionV2.Views.Editors.Force;
+using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
@@ -17,10 +18,15 @@ public partial class Main : Window
 {
     private double Force = 100;
     private const double Gap = 1e-4;
-    private MaterialEditor? _materialEditor;
+    
     private ForceEditor? _forceEditor;
     private NumericUpDown nudForce;
+    
+    private MaterialEditor? _materialEditor;
     private ListBox lbxMaterial;
+    
+    private LayerEditor? _layerEditor;
+    private ListBox lbxLayer;
 
     public Main()
     {
@@ -81,12 +87,13 @@ public partial class Main : Window
         Grid.SetColumn(lblLayer,0);
         Grid.SetRow(lblLayer,0);
         GridLayer.Children.Add(lblLayer);
-        ListBox lbxLayer = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        lbxLayer = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
         Grid.SetColumn(lbxLayer,0);
         Grid.SetColumnSpan(lbxLayer,4);
         Grid.SetRow(lbxLayer,2);
         GridLayer.Children.Add(lbxLayer);
         Button btnLayer = new() { Content = "Modifier" };
+        btnLayer.Click += (_, _) => OpenLayerEditor();
         Grid.SetColumn(btnLayer,2);
         Grid.SetRow(btnLayer,0);
         GridLayer.Children.Add(btnLayer);
@@ -139,6 +146,24 @@ public partial class Main : Window
         foreach (Material? material in _materialEditor.LbxItems.Items.Cast<Material>())
         {
             lbxMaterial.Items.Add(material);
+        }
+    }
+    
+    private void OpenLayerEditor()
+    {
+        if(_layerEditor != null){return;}
+        _layerEditor = new LayerEditor(lbxLayer.Items.Cast<Layer>().ToList(),lbxMaterial.Items.Cast<Material>().ToList());
+        _layerEditor.Closing += (_, _) => LayerEditorClosing();
+        _layerEditor.Closed += (_, _) => _layerEditor = null;
+        _layerEditor.Show();
+    }
+    
+    private void LayerEditorClosing()
+    {
+        lbxLayer.Items.Clear();
+        foreach (Layer? material in _layerEditor.LbxItems.Items.Cast<Layer>())
+        {
+            lbxLayer.Items.Add(material);
         }
     }
 

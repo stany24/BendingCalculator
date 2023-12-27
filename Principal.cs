@@ -1,13 +1,4 @@
-﻿using Flexion.DossierCouche;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-
-namespace Flexion
+﻿namespace Flexion
 {
     public partial class Form1 : Form
     {
@@ -92,50 +83,6 @@ namespace Flexion
 
         }
 
-        private void ModiferMatiere(object sender, EventArgs e)
-        {
-            EditeurMatiere editor = new EditeurMatiere();
-            editor.FormClosed += new FormClosedEventHandler(UpdateMatieres);
-            editor.Show();
-            this.Enabled = false;
-        }
-
-
-        private void CreerMatiere(object sender, EventArgs e)
-        {
-            CreateurMatiere createur = new CreateurMatiere();
-            createur.FormClosed += new FormClosedEventHandler(UpdateMatieres);
-            createur.Show();
-            this.Enabled = false;
-        }
-        private void UpdateMatieres(object sender, EventArgs e)
-        {
-            ListMatieres = Sauvegarde.GetMatières();
-            this.Enabled = true;
-        }
-
-        private void CreerCouche(object sender, EventArgs e)
-        {
-            CreateurCouche createur = new CreateurCouche();
-            createur.FormClosed += new FormClosedEventHandler(UpdateCouches);
-            createur.Show();
-            this.Enabled = false;
-        }
-
-        private void ModifierCouche(object sender, EventArgs e)
-        {
-            EditeurCouche editor = new EditeurCouche();
-            editor.FormClosed += new FormClosedEventHandler(UpdateCouches);
-            editor.Show();
-            this.Enabled = false;
-        }
-
-        private void UpdateCouches(Object sender, EventArgs e)
-        {
-            ListCouches = Sauvegarde.GetCouches();
-            this.Enabled = true;
-        }
-
         private void Form1_EnabledChanged(object sender, EventArgs e)
         {
             if (Enabled)
@@ -148,28 +95,6 @@ namespace Flexion
                 cbxPiece.DataSource = ListPiece;
                 nudForce.Value = Sauvegarde.GetForce();
             }
-        }
-
-        private void CreerPiece(object sender, EventArgs e)
-        {
-            CreateurPiece creator = new CreateurPiece();
-            creator.FormClosed += new FormClosedEventHandler(UpdatePieces);
-            creator.Show();
-            this.Enabled = false;
-        }
-
-        private void ModifierPiece(object sender, EventArgs e)
-        {
-            EditeurPiece editor = new EditeurPiece();
-            editor.FormClosed += new FormClosedEventHandler(UpdatePieces);
-            editor.Show();
-            this.Enabled = false;
-        }
-
-        private void UpdatePieces(Object sender, EventArgs e)
-        {
-            ListPiece = Sauvegarde.GetPieces();
-            this.Enabled = true;
         }
 
         private void CalculerForce(object sender, EventArgs e)

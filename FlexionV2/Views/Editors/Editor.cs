@@ -178,6 +178,22 @@ public abstract class Editor : Window
     }
     
     /// <summary>
+    /// Generalized function used to modified one enum property of selected items in the listbox with the value of a combobox
+    /// </summary>
+    /// <param name="listBox">The listbox you want the items to be changed</param>
+    /// <param name="e">The event with the changed variable</param>
+    /// <param name="propertyName">The property you want to change</param>
+    /// <typeparam name="TItem">The class of item you want to change</typeparam>
+    internal void ComboboxChanged<TItem,TType>(SelectionChangedEventArgs e, string propertyName)
+    {
+        if (LbxItems.SelectedItems == null) return;
+        if (e.AddedItems[0] == null) return;
+        foreach (TItem item in LbxItems.SelectedItems)
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (TType)e.AddedItems[0]!);
+        UpdateListBox<TItem>();
+    }
+    
+    /// <summary>
     /// Function used to remove all selected items from the listbox
     /// </summary>
     private void RemoveItems()

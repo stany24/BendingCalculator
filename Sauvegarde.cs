@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json;
-
-namespace Flexion
+﻿namespace Flexion
 {
     public static class Sauvegarde
     {
