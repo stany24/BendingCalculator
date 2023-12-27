@@ -176,21 +176,21 @@ public abstract class Editor : Window
             item.GetType().GetProperty(propertyName)?.SetValue(item, (bool)checkBox.IsChecked);
         UpdateListBox<TItem>();
     }
-    
+
     /// <summary>
     /// Generalized function used to modified one enum property of selected items in the listbox with the value of a combobox
     /// </summary>
-    /// <param name="listBox">The listbox you want the items to be changed</param>
     /// <param name="e">The event with the changed variable</param>
     /// <param name="propertyName">The property you want to change</param>
-    /// <typeparam name="TItem">The class of item you want to change</typeparam>
-    internal void ComboboxChanged<TItem,TType>(SelectionChangedEventArgs e, string propertyName)
+    /// <typeparam name="TClass">The class of item you want to change</typeparam>
+    /// <typeparam name="TProperty">The class of the property you want to change</typeparam>
+    internal void ComboboxChanged<TClass,TProperty>(SelectionChangedEventArgs e, string propertyName)
     {
         if (LbxItems.SelectedItems == null) return;
         if (e.AddedItems[0] == null) return;
-        foreach (TItem item in LbxItems.SelectedItems)
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (TType)e.AddedItems[0]!);
-        UpdateListBox<TItem>();
+        foreach (TClass item in LbxItems.SelectedItems)
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (TProperty)e.AddedItems[0]!);
+        UpdateListBox<TClass>();
     }
     
     /// <summary>

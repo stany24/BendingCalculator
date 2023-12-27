@@ -44,13 +44,7 @@ namespace FlexionV2.Logic
         
         [JsonConstructor]
         public Layer() { }
-
-        /// <summary>
-        /// Cr�e une nouvelle couche avec la mati�re donn�e et une longueur et un largeur uniforme.
-        /// </summary>
-        /// <param name="material">Mati�re de la couche</param>
-        /// <param name="width">Largeur au centre et sur les c�t� de la couche</param>
-        /// <param name="height">Hauteur au centre et sur les c�t� de la couche</param>
+        
         public Layer(Material material, double width, double height)
         {
             Material = material;
@@ -59,15 +53,7 @@ namespace FlexionV2.Logic
             HeightAtCenter=height;
             HeightOnSide = height;
         }
-
-        /// <summary>
-        /// Cr�e une nouvelle couche avec la mati�re donn�e et une longueur et un largeur non-uniforme.
-        /// </summary>
-        /// <param name="material">Mati�re de la couche</param>
-        /// <param name="widthCenter">Largeur au centre de la couche</param>
-        /// <param name="widthSide">Largeur sur les c�t� de la couche</param>
-        /// <param name="heightCenter">Hauteur au centre  de la couche</param>
-        /// <param name="heightSide">Hauteur sur les c�t� de la couche</param>
+        
         public Layer(Material material, double widthCenter, double widthSide, double heightCenter, double heightSide)
         {
             Material = material;
@@ -76,11 +62,7 @@ namespace FlexionV2.Logic
             HeightAtCenter=heightCenter;
             HeightOnSide=heightSide;
         }
-
-        /// <summary>
-        /// Retourne un r�sum� de la couche
-        /// </summary>
-        /// <returns>Le nom de la mati�re, la largeur au centre, la largeur sur les c�t�s, la hauteur au centre, la hauteur sur les c�t�s</returns>
+        
         public override string ToString()
         {
             return $"{Material.Nom} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";

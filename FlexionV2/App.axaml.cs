@@ -6,7 +6,7 @@ using FlexionV2.Views;
 
 namespace FlexionV2;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -19,7 +19,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new Main
             {
-                DataContext = new MainViewModel(),
+                DataContext = new MainViewModel()
             };
         }
 

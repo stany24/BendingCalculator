@@ -5,7 +5,7 @@ namespace FlexionV2.Views.Editors.Force;
 
 public partial class ForceEditor : Window
 {
-    public ForceEditor(decimal? value)
+    public ForceEditor()
     {
         InitializeComponent();
         NudGravity.ValueChanged += (_, _) => CalculateForce();

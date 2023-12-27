@@ -20,13 +20,13 @@ public partial class Main : Window
     private const double Gap = 1e-4;
     
     private ForceEditor? _forceEditor;
-    private NumericUpDown nudForce;
+    private NumericUpDown _nudForce;
     
     private MaterialEditor? _materialEditor;
-    private ListBox lbxMaterial;
+    private ListBox _lbxMaterial;
     
     private LayerEditor? _layerEditor;
-    private ListBox lbxLayer;
+    private ListBox _lbxLayer;
 
     public Main()
     {
@@ -48,10 +48,10 @@ public partial class Main : Window
         Grid.SetColumn(lblForce,0);
         Grid.SetRow(lblForce,0);
         GridForce.Children.Add(lblForce);
-        nudForce = new NumericUpDown { Value = 5 };
-        Grid.SetColumn(nudForce,0);
-        Grid.SetRow(nudForce,2);
-        GridForce.Children.Add(nudForce);
+        _nudForce = new NumericUpDown { Value = 5 };
+        Grid.SetColumn(_nudForce,0);
+        Grid.SetRow(_nudForce,2);
+        GridForce.Children.Add(_nudForce);
         Button btnForce = new() { Content = "Modifier" };
         btnForce.Click += (_, _) => OpenForceEditor();
         Grid.SetColumn(btnForce,2);
@@ -87,11 +87,11 @@ public partial class Main : Window
         Grid.SetColumn(lblLayer,0);
         Grid.SetRow(lblLayer,0);
         GridLayer.Children.Add(lblLayer);
-        lbxLayer = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(lbxLayer,0);
-        Grid.SetColumnSpan(lbxLayer,4);
-        Grid.SetRow(lbxLayer,2);
-        GridLayer.Children.Add(lbxLayer);
+        _lbxLayer = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        Grid.SetColumn(_lbxLayer,0);
+        Grid.SetColumnSpan(_lbxLayer,4);
+        Grid.SetRow(_lbxLayer,2);
+        GridLayer.Children.Add(_lbxLayer);
         Button btnLayer = new() { Content = "Modifier" };
         btnLayer.Click += (_, _) => OpenLayerEditor();
         Grid.SetColumn(btnLayer,2);
@@ -105,11 +105,11 @@ public partial class Main : Window
         Grid.SetColumn(lblMaterial,0);
         Grid.SetRow(lblMaterial,0);
         GridMaterial.Children.Add(lblMaterial);
-        lbxMaterial = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(lbxMaterial,0);
-        Grid.SetColumnSpan(lbxMaterial,4);
-        Grid.SetRow(lbxMaterial,2);
-        GridMaterial.Children.Add(lbxMaterial);
+        _lbxMaterial = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        Grid.SetColumn(_lbxMaterial,0);
+        Grid.SetColumnSpan(_lbxMaterial,4);
+        Grid.SetRow(_lbxMaterial,2);
+        GridMaterial.Children.Add(_lbxMaterial);
         Button btnMaterial = new() { Content = "Modifier" };
         btnMaterial.Click += (_, _) => OpenMaterialEditor();
         Grid.SetColumn(btnMaterial,2);
@@ -120,7 +120,7 @@ public partial class Main : Window
     private void OpenForceEditor()
     {
         if(_forceEditor != null){return;}
-        _forceEditor = new ForceEditor(nudForce.Value);
+        _forceEditor = new ForceEditor();
         _forceEditor.Closing += (_, _) => ForceEditorClosing();
         _forceEditor.Closed += (_, _) => _forceEditor = null;
         _forceEditor.Show();
@@ -128,13 +128,13 @@ public partial class Main : Window
     
     private void ForceEditorClosing()
     {
-        nudForce.Value = _forceEditor.CalculateForce();
+        _nudForce.Value = _forceEditor.CalculateForce();
     }
     
     private void OpenMaterialEditor()
     {
         if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
+        _materialEditor = new MaterialEditor(_lbxMaterial.Items.Cast<Material>().ToList());
         _materialEditor.Closing += (_, _) => MaterialEditorClosing();
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
@@ -142,17 +142,17 @@ public partial class Main : Window
     
     private void MaterialEditorClosing()
     {
-        lbxMaterial.Items.Clear();
+        _lbxMaterial.Items.Clear();
         foreach (Material? material in _materialEditor.LbxItems.Items.Cast<Material>())
         {
-            lbxMaterial.Items.Add(material);
+            _lbxMaterial.Items.Add(material);
         }
     }
     
     private void OpenLayerEditor()
     {
         if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor(lbxLayer.Items.Cast<Layer>().ToList(),lbxMaterial.Items.Cast<Material>().ToList());
+        _layerEditor = new LayerEditor(_lbxLayer.Items.Cast<Layer>().ToList(),_lbxMaterial.Items.Cast<Material>().ToList());
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
@@ -160,10 +160,10 @@ public partial class Main : Window
     
     private void LayerEditorClosing()
     {
-        lbxLayer.Items.Clear();
+        _lbxLayer.Items.Clear();
         foreach (Layer? material in _layerEditor.LbxItems.Items.Cast<Layer>())
         {
-            lbxLayer.Items.Add(material);
+            _lbxLayer.Items.Add(material);
         }
     }
 
