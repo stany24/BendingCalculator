@@ -7,14 +7,8 @@
         Title="MaterialEditor">
         <Grid 
             Name="Grid"
-            RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,*"
+            RowDefinitions="Auto,10,Auto,10,Auto,*"
             ColumnDefinitions="Auto,10,Auto,10,Auto">
-            <ListBox 
-                Name="LbxMaterials"
-                Grid.Column="0"
-                Grid.Row="0"
-                Grid.RowSpan="8"
-                MinWidth="100"></ListBox>
             <TextBlock 
                 Name="LblName"
                 VerticalAlignment="Center"

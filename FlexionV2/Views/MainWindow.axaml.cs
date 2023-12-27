@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
@@ -14,6 +15,8 @@ namespace FlexionV2.Views;
 public partial class MainWindow : Window
 {
     private const double Gap = 1e-4;
+    private MaterialEditor? editor;
+    private ListBox lbxMaterial;
 
     public MainWindow()
     {
@@ -69,7 +72,7 @@ public partial class MainWindow : Window
 
     private void InitializeLayerArea()
     {
-        TextBlock lblLayer = new() { Text = "Layer:",VerticalAlignment = VerticalAlignment.Center};
+        TextBlock lblLayer = new() { Text = "Couche:",VerticalAlignment = VerticalAlignment.Center};
         Grid.SetColumn(lblLayer,0);
         Grid.SetRow(lblLayer,0);
         GridLayer.Children.Add(lblLayer);
@@ -90,7 +93,7 @@ public partial class MainWindow : Window
         Grid.SetColumn(lblMaterial,0);
         Grid.SetRow(lblMaterial,0);
         GridMaterial.Children.Add(lblMaterial);
-        ListBox lbxMaterial = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        lbxMaterial = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
         Grid.SetColumn(lbxMaterial,0);
         Grid.SetColumnSpan(lbxMaterial,4);
         Grid.SetRow(lbxMaterial,2);
@@ -98,12 +101,24 @@ public partial class MainWindow : Window
         Button btnMaterial = new() { Content = "Modifier" };
         btnMaterial.Click += (_, _) =>
         {
-            MaterialEditor editor = new();
+            if(editor != null){return;}
+            editor = new MaterialEditor(lbxMaterial.Items.Cast<Material>().ToList());
+            editor.Closing += (_, _) => MaterialEditorClosing();
+            editor.Closed += (_, _) => editor = null;
             editor.Show();
         };
         Grid.SetColumn(btnMaterial,2);
         Grid.SetRow(btnMaterial,0);
         GridMaterial.Children.Add(btnMaterial);
+    }
+
+    private void MaterialEditorClosing()
+    {
+        lbxMaterial.Items.Clear();
+        foreach (Material? material in editor.LbxItems.Items.Cast<Material>())
+        {
+            lbxMaterial.Items.Add(material);
+        }
     }
 
     private void CalculateFlexion()
