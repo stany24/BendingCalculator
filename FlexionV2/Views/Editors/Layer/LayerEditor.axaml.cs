@@ -23,6 +23,7 @@ public partial class LayerEditor : Editor
         Grid.SetColumn(LbxItems,0);
         Grid.SetRow(LbxItems,0);
         Grid.SetRowSpan(LbxItems,12);
+        LbxItems.MinWidth = 200;
         Grid.Children.Add(LbxItems);
         Grid.SetColumn(BtnAdd,2);
         Grid.SetRow(BtnAdd,10);

@@ -4,11 +4,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Force.ForceEditor"
-        Title="ForceEditor">
+        Title="ForceEditor"
+        SizeToContent="WidthAndHeight"
+        CanResize="False">
     <Grid
         ColumnDefinitions="Auto,10,Auto"
         RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto"
-        Margin="10">
+        Margin="5">
         <TextBlock 
             Name="LblMass"
             Text="Masse:"

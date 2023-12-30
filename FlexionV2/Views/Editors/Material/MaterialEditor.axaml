@@ -4,11 +4,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Material.MaterialEditor"
-        Title="MaterialEditor">
+        Title="MaterialEditor"
+        SizeToContent="WidthAndHeight"
+        CanResize="False">
         <Grid 
             Name="Grid"
             RowDefinitions="Auto,10,Auto,10,Auto,*"
-            ColumnDefinitions="Auto,10,Auto,10,Auto">
+            ColumnDefinitions="Auto,10,Auto,10,Auto"
+            Margin="5">
             <TextBlock 
                 Name="LblName"
                 VerticalAlignment="Center"

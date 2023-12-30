@@ -17,10 +17,8 @@
     </Design.DataContext>
     
     <Grid
-        
         Name="MainGrid"
         Margin="10"
-        ShowGridLines="True"
         ColumnDefinitions="*,10,*,10,*,10,*"
         RowDefinitions="Auto,10,*">
         <Grid 

@@ -19,6 +19,7 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(LbxItems,0);
         Grid.SetRow(LbxItems,0);
         Grid.SetRowSpan(LbxItems,6);
+        LbxItems.MinWidth = 200;
         Grid.Children.Add(LbxItems);
         Grid.SetColumn(BtnAdd,2);
         Grid.SetRow(BtnAdd,4);

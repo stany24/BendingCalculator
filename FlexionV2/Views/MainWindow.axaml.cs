@@ -179,12 +179,7 @@ public partial class Main : Window
     {
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
             if(DataContext is not MainViewModel model)  {return;}
-
-            LineSeries<ObservablePoint> line = new();
-            List<ObservablePoint> values = data.Select((t, i) => new ObservablePoint(i, t)).ToList();
-
-            line.Values = values;
-            model.Series[0]=line ;
+            model.Series[0].Values=data.Select((t, i) => new ObservablePoint(i, t)).ToList();
         });
         ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
     }
