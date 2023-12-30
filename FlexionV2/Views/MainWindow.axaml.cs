@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
+using FlexionV2.Views.Editors;
 using FlexionV2.Views.Editors.Force;
 using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
