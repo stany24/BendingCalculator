@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -10,13 +9,11 @@ using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
-using LiveChartsCore.SkiaSharpView;
 
 namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
-    private double Force = 100;
     private const double Gap = 1e-4;
     
     private ForceEditor? _forceEditor;
@@ -27,6 +24,9 @@ public partial class Main : Window
     
     private LayerEditor? _layerEditor;
     private ListBox _lbxLayer;
+    
+    private PieceEditor? _pieceEditor;
+    private ListBox _lbxpiece;
 
     public Main()
     {
@@ -40,6 +40,7 @@ public partial class Main : Window
         InitializePieceArea();
         InitializeLayerArea();
         InitializeMaterialArea();
+        BtnStart.Click += (_, _) => Task.Run(CalculateFlexion);
     }
 
     private void InitializeForceArea()
@@ -49,19 +50,14 @@ public partial class Main : Window
         Grid.SetRow(lblForce,0);
         GridForce.Children.Add(lblForce);
         _nudForce = new NumericUpDown { Value = 5 };
-        Grid.SetColumn(_nudForce,0);
-        Grid.SetRow(_nudForce,2);
+        Grid.SetColumn(_nudForce,2);
+        Grid.SetRow(_nudForce,0);
         GridForce.Children.Add(_nudForce);
         Button btnForce = new() { Content = "Modifier" };
         btnForce.Click += (_, _) => OpenForceEditor();
-        Grid.SetColumn(btnForce,2);
-        Grid.SetRow(btnForce,0);
+        Grid.SetColumn(btnForce,0);
+        Grid.SetRow(btnForce,2);
         GridForce.Children.Add(btnForce);
-        Button btnStart = new() { Content = "Commencer" };
-        btnStart.Click += (_, _) => Task.Run(CalculateFlexion);
-        Grid.SetColumn(btnStart,0);
-        Grid.SetRow(btnStart,4);
-        GridForce.Children.Add(btnStart);
     }
 
     private void InitializePieceArea()
@@ -169,10 +165,9 @@ public partial class Main : Window
 
     private void CalculateFlexion()
     {
-        Piece piece = new(1,"test");
-        Material material = new("test",69e9);
-        piece.Layers.Add(new Layer(material,5,5));
-        FillGraph(piece.Intégrale(500, Gap));
+        if(_lbxpiece.SelectedItems?[0] is not Piece piece){return;}
+        if(_nudForce.Value == null){return;}
+        FillGraph(piece.Intégrale((int)_nudForce.Value, Gap));
     }
 
     private void FillGraph(double[] data)
