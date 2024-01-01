@@ -20,7 +20,7 @@
         Name="MainGrid"
         Margin="10"
         ColumnDefinitions="*,10,*,10,*,10,*"
-        RowDefinitions="Auto,10,*,10,Auto">
+        RowDefinitions="1*,10,3*,10,Auto">
         <Grid 
             Name="GridForce"
             ColumnDefinitions="Auto,10,Auto"
