@@ -10,6 +10,7 @@ using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
+using PieceEditor = FlexionV2.Views.Editors.Piece.PieceEditor;
 
 namespace FlexionV2.Views;
 
@@ -163,6 +164,8 @@ public partial class Main : Window
         {
             _lbxLayer.Items.Add(material);
         }
+
+        _pieceEditor?.UpdateAvailableLayers(_layerEditor.LbxItems.Items.Cast<Layer>().ToList());
     }
     
     private void OpenPieceEditor()

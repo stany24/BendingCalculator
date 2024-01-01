@@ -30,5 +30,9 @@
         <DependentUpon>MaterialEditor.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\Editors\Piece\PieceEditor.axaml.cs">
+        <DependentUpon>PieceEditor.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>
