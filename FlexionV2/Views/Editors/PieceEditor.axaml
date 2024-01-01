@@ -4,6 +4,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.PieceEditor"
-        Title="PieceEditor">
-    Welcome to Avalonia!
+        Title="PieceEditor"
+        SizeToContent="WidthAndHeight"
+        CanResize="False">
+    <Grid
+        Name="Grid"
+        Margin="5"
+        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+        RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,*">
+        <TextBlock 
+            Name="LblName"
+            VerticalAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="0">Name:</TextBlock>
+        <TextBox 
+            Name="TbxName"
+            Grid.Column="4"
+            Grid.Row="0"></TextBox>
+        <TextBlock 
+            Name="LblLength"
+            VerticalAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="2">Length:</TextBlock>
+        <NumericUpDown 
+            Name="NudLength"
+            Grid.Column="4"
+            Grid.Row="2"></NumericUpDown>
+        <Button
+            Name="BtnChangeLayers"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Grid.Row="4"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center">Changer les couches</Button>
+        <ListBox
+            Name="LbxLayers"
+            Grid.Column="6"
+            Grid.Row="0"
+            Grid.RowSpan="8"
+            MinWidth="200"></ListBox>
+    </Grid>
 </Window>

@@ -27,7 +27,7 @@ public partial class Main : Window
     private ListBox _lbxLayer;
     
     private PieceEditor? _pieceEditor;
-    private ListBox _lbxpiece;
+    private ListBox _lbxPiece;
 
     public Main()
     {
@@ -67,12 +67,13 @@ public partial class Main : Window
         Grid.SetColumn(lblPiece,0);
         Grid.SetRow(lblPiece,0);
         GridPiece.Children.Add(lblPiece);
-        ListBox lbxPiece = new(){VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(lbxPiece,0);
-        Grid.SetColumnSpan(lbxPiece,4);
-        Grid.SetRow(lbxPiece,2);
-        GridPiece.Children.Add(lbxPiece);
+        _lbxPiece = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
+        Grid.SetColumn(_lbxPiece,0);
+        Grid.SetColumnSpan(_lbxPiece,4);
+        Grid.SetRow(_lbxPiece,2);
+        GridPiece.Children.Add(_lbxPiece);
         Button btnPiece = new() { Content = "Modifier" };
+        btnPiece.Click += (_,_) => OpenPieceEditor();
         Grid.SetColumn(btnPiece,2);
         Grid.SetRow(btnPiece,0);
         GridPiece.Children.Add(btnPiece);
@@ -163,10 +164,28 @@ public partial class Main : Window
             _lbxLayer.Items.Add(material);
         }
     }
+    
+    private void OpenPieceEditor()
+    {
+        if(_pieceEditor != null){return;}
+        _pieceEditor = new PieceEditor(_lbxPiece.Items.Cast<Piece>().ToList(),_lbxLayer.Items.Cast<Layer>().ToList());
+        _pieceEditor.Closing += (_, _) => PieceEditorClosing();
+        _pieceEditor.Closed += (_, _) => _pieceEditor = null;
+        _pieceEditor.Show();
+    }
+    
+    private void PieceEditorClosing()
+    {
+        _lbxPiece.Items.Clear();
+        foreach (Piece? material in _pieceEditor.LbxItems.Items.Cast<Piece>())
+        {
+            _lbxPiece.Items.Add(material);
+        }
+    }
 
     private void CalculateFlexion()
     {
-        if(_lbxpiece.SelectedItems?[0] is not Piece piece){return;}
+        if(_lbxPiece.SelectedItems?[0] is not Piece piece){return;}
         if(_nudForce.Value == null){return;}
         FillGraph(piece.Intégrale((int)_nudForce.Value, Gap));
     }
