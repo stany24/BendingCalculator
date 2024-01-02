@@ -4,6 +4,8 @@ namespace FlexionV2.Logic
 {
     public class Material
     {
+        public int Id { get; set; }
+        
         private string _nom;
 
         [JsonInclude]

@@ -37,8 +37,8 @@ public partial class PieceEditor : Editor
     private void PieceEditorClosing()
     {
         IsEnabled = true;
-        (LbxItems.SelectedItems[0] as Logic.Piece).Layers =
-            _listLayersEditor.LbxInPiece.Items.Cast<Logic.Layer>().ToList();
+        (LbxItems.SelectedItems?[0] as Logic.Piece).Layers =
+            _listLayersEditor?.LbxInPiece.Items.Cast<Logic.Layer>().ToList();
     }
 
     private void UpdateListLayer()
