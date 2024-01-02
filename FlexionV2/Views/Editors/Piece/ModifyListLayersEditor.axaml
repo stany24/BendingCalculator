@@ -27,13 +27,15 @@
             Grid.Column="0"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Monter</Button>
+            HorizontalContentAlignment="Center"
+            IsEnabled="False">Monter</Button>
         <Button
             Name="BtnMoveDown"
             Grid.Column="2"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Descendre</Button>
+            HorizontalContentAlignment="Center"
+            IsEnabled="False">Descendre</Button>
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
@@ -48,12 +50,14 @@
             Grid.Column="4"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Ajouter</Button>
+            HorizontalContentAlignment="Center"
+            IsEnabled="False">Ajouter</Button>
         <Button
             Name="BtnRemove"
             Grid.Column="6"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Retirer</Button>
+            HorizontalContentAlignment="Center"
+            IsEnabled="False">Retirer</Button>
     </Grid>
 </Window>
