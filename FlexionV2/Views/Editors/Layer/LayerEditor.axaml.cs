@@ -18,6 +18,15 @@ public partial class LayerEditor : Editor
         foreach (Logic.Layer material in layers) { LbxItems.Items.Add(material); }
         foreach (Logic.Material material in materials) { CbxMaterial.Items.Add(material); }
     }
+
+    public void UpdateMaterialList(List<Logic.Material>materials)
+    {
+        CbxMaterial.Items.Clear();
+        foreach (Logic.Material material in materials)
+        {
+            CbxMaterial.Items.Add(material);
+        }
+    }
     private void InitializeUi()
     {
         Grid.SetColumn(LbxItems,0);

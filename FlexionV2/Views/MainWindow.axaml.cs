@@ -1,10 +1,10 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
-using FlexionV2.Views.Editors;
 using FlexionV2.Views.Editors.Force;
 using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
@@ -29,6 +29,9 @@ public partial class Main : Window
     
     private PieceEditor? _pieceEditor;
     private ListBox _lbxPiece;
+
+    private EventHandler<MaterialsChangedEventArgs>? _materialsChanged;
+    private EventHandler<LayersChangedEventArgs>? _layersChanged;
 
     public Main()
     {
@@ -127,7 +130,7 @@ public partial class Main : Window
     
     private void ForceEditorClosing()
     {
-        _nudForce.Value = _forceEditor.CalculateForce();
+        _nudForce.Value = _forceEditor?.CalculateForce();
     }
     
     private void OpenMaterialEditor()
@@ -142,10 +145,11 @@ public partial class Main : Window
     private void MaterialEditorClosing()
     {
         _lbxMaterial.Items.Clear();
-        foreach (Material? material in _materialEditor.LbxItems.Items.Cast<Material>())
+        foreach (Material? material in _materialEditor?.LbxItems.Items.Cast<Material>())
         {
             _lbxMaterial.Items.Add(material);
         }
+        _materialsChanged?.Invoke(this,new MaterialsChangedEventArgs(_lbxMaterial.Items.Cast<Material>().ToList()));
     }
     
     private void OpenLayerEditor()
@@ -154,18 +158,18 @@ public partial class Main : Window
         _layerEditor = new LayerEditor(_lbxLayer.Items.Cast<Layer>().ToList(),_lbxMaterial.Items.Cast<Material>().ToList());
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
+        _materialsChanged +=(_,e)=> _layerEditor.UpdateMaterialList(e.Materials);
         _layerEditor.Show();
     }
     
     private void LayerEditorClosing()
     {
         _lbxLayer.Items.Clear();
-        foreach (Layer? material in _layerEditor.LbxItems.Items.Cast<Layer>())
+        foreach (Layer? material in _layerEditor?.LbxItems.Items.Cast<Layer>())
         {
             _lbxLayer.Items.Add(material);
         }
-
-        _pieceEditor?.UpdateAvailableLayers(_layerEditor.LbxItems.Items.Cast<Layer>().ToList());
+        _layersChanged?.Invoke(this,new LayersChangedEventArgs(_lbxLayer.Items.Cast<Layer>().ToList()));
     }
     
     private void OpenPieceEditor()
@@ -174,13 +178,14 @@ public partial class Main : Window
         _pieceEditor = new PieceEditor(_lbxPiece.Items.Cast<Piece>().ToList(),_lbxLayer.Items.Cast<Layer>().ToList());
         _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
+        _layersChanged += (_, e) => _pieceEditor.LayersChanged?.Invoke(_pieceEditor, e);
         _pieceEditor.Show();
     }
     
     private void PieceEditorClosing()
     {
         _lbxPiece.Items.Clear();
-        foreach (Piece? material in _pieceEditor.LbxItems.Items.Cast<Piece>())
+        foreach (Piece? material in _pieceEditor?.LbxItems.Items.Cast<Piece>())
         {
             _lbxPiece.Items.Add(material);
         }

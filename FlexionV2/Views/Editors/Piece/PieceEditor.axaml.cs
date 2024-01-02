@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
@@ -6,12 +7,14 @@ namespace FlexionV2.Views.Editors.Piece;
 
 public partial class PieceEditor : Editor
 {
+    public EventHandler<LayersChangedEventArgs> LayersChanged;
     private ListLayersEditor? _listLayersEditor;
     private List<Logic.Layer> _availableLayers;
     public PieceEditor(List<Logic.Piece> pieces,List<Logic.Layer> layers)
     {
         InitializeComponent();
         InitializeUi();
+        LayersChanged += (_, e) => _availableLayers = e.Layers;
         NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
@@ -28,6 +31,7 @@ public partial class PieceEditor : Editor
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
         IsEnabled = false;
+        LayersChanged += (_, e) => _listLayersEditor.UpdateAvailableLayers(e.Layers);
     }
     
     private void PieceEditorClosing()
@@ -35,12 +39,6 @@ public partial class PieceEditor : Editor
         IsEnabled = true;
         (LbxItems.SelectedItems[0] as Logic.Piece).Layers =
             _listLayersEditor.LbxInPiece.Items.Cast<Logic.Layer>().ToList();
-    }
-
-    public void UpdateAvailableLayers(List<Logic.Layer> layers)
-    {
-        _availableLayers = layers;
-        _listLayersEditor?.UpdateAvailableLayers(layers);
     }
 
     private void UpdateListLayer()
