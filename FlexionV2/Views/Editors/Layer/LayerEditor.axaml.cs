@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Avalonia.Controls;
@@ -40,6 +41,6 @@ public partial class LayerEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,10);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Layer(new Logic.Material("alu",69e9),1,0.1));
+        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Layer(new Logic.Material("alu",Convert.ToInt64(69e9)),1,0.1));
     }
 }

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
 using Avalonia.Controls;
-using Dapper;
 
 namespace FlexionV2.Views.Editors.Material;
 
@@ -14,7 +11,7 @@ public partial class MaterialEditor : Editor
         InitializeComponent();
         InitializeUi();
         NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
-        TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Nom");
+        TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Name");
         foreach (Logic.Material material in materials) { LbxItems.Items.Add(material); }
     }
 
@@ -31,6 +28,6 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,4);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Material("new", 69e9));
+        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Material("new", Convert.ToInt64(69e9)));
     }
 }

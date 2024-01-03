@@ -65,7 +65,7 @@ namespace FlexionV2.Logic
         
         public override string ToString()
         {
-            return $"{Material.Nom} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";
+            return $"{Material.Name} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";
         }
 
         public double[] Base(double longueur, double eref, double[] xs)

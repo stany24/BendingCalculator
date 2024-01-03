@@ -53,7 +53,6 @@ public partial class Main : Window
         {
             _connection = new SQLiteConnection(connectionString);
             _connection.Open();
-            _connection.Execute("INSERT INTO Material (Name,E) VALUES ('alu',69000000000); ");
         }
         catch (Exception ex)
         {
@@ -67,11 +66,11 @@ public partial class Main : Window
         {
             if (material.Id != null)
             {
-                _connection.Execute("UPDATE table_name SET Name = "+material.Nom+", E = "+material.E+", WHERE Id = "+material.Id+"; ");
+                _connection.Execute($"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.Id}; ");
             }
             else
             {
-                _connection.Execute($"INSERT INTO Material (Name,E) VALUES ('{material.Nom}',{Convert.ToInt32(material.E)});");
+                _connection.Execute($"INSERT INTO Material (Name,E) VALUES ('{material.Name}',{material.E});");
             }
         }
     }
@@ -197,7 +196,7 @@ public partial class Main : Window
         _layerEditor = new LayerEditor(_lbxLayer.Items.Cast<Layer>().ToList(),_lbxMaterial.Items.Cast<Material>().ToList());
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
-        _materialsChanged +=(_,e)=> _layerEditor.UpdateMaterialList(e.Materials);
+        _materialsChanged +=(_,e)=> _layerEditor?.UpdateMaterialList(e.Materials);
         _layerEditor.Show();
     }
     

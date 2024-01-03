@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace FlexionV2.Logic
 {
@@ -6,26 +7,26 @@ namespace FlexionV2.Logic
     {
         public int? Id { get; set; }
         
-        private string _nom;
+        private string _name;
 
         [JsonInclude]
-        public string Nom
+        public string Name
         {
-            get => _nom;
-            set {if (value != "") { _nom = value; }}
+            get => _name;
+            set {if (value != "") { _name = value; }}
         }
 
-        private double _e;
+        private long _e;
         [JsonInclude]
-        public double E
+        public long E
         {
             get => _e;
             set { if (value > 0) { _e = value; } }
         }
         
-        public Material(string nom, double e)
+        public Material(string name, long e)
         {
-            Nom = nom;
+            Name = name;
             E = e;
         }
 
@@ -34,7 +35,7 @@ namespace FlexionV2.Logic
         
         public override string ToString()
         {
-            return $"{Nom}:{E / 1e9}";
+            return $"{Name}:{E / 1e9}";
         }
     }
 }

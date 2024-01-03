@@ -158,7 +158,7 @@ public abstract class Editor : Window
         if (LbxItems.SelectedItems == null) return;
         if (e.NewValue == null) return;
         foreach (TItem item in LbxItems.SelectedItems)
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue);
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (long)e.NewValue);
         UpdateListBox<TItem>();
     }
     
