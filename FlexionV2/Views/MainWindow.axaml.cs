@@ -60,21 +60,6 @@ public partial class Main : Window
         }
     }
 
-    private void AddMaterialsToDatabase(List<Material> materials)
-    {
-        foreach (Material material in materials)
-        {
-            if (material.Id != null)
-            {
-                _connection.Execute($"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.Id}; ");
-            }
-            else
-            {
-                _connection.Execute($"INSERT INTO Material (Name,E) VALUES ('{material.Name}',{material.E});");
-            }
-        }
-    }
-
     private void InitializeUi()
     {
         InitializeForceArea();
@@ -172,8 +157,7 @@ public partial class Main : Window
     private void OpenMaterialEditor()
     {
         if(_materialEditor != null){return;}
-        List<Material> materials = _connection.QueryAsync<Material>("SELECT * FROM Material;").Result.ToList();
-        _materialEditor = new MaterialEditor(materials);
+        _materialEditor = new MaterialEditor(_connection);
         _materialEditor.Closing += (_, _) => MaterialEditorClosing();
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
@@ -182,11 +166,16 @@ public partial class Main : Window
     private void MaterialEditorClosing()
     {
         _lbxMaterial.Items.Clear();
-        foreach (Material? material in _materialEditor?.LbxItems.Items.Cast<Material>())
+        foreach (Material material in _materialEditor.LbxItems.Items)
+        {
+            _connection.Execute(material.Id != null
+                ? $"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.Id}; "
+                : $"INSERT INTO Material (Name,E,IsRemoved) VALUES ('{material.Name}',{material.E},0);");
+        }
+        foreach (Material? material in _connection.QueryAsync<Material>("SELECT * FROM Material WHERE IsRemoved=0;").Result)
         {
             _lbxMaterial.Items.Add(material);
         }
-        AddMaterialsToDatabase(_lbxMaterial.Items.Cast<Material>().ToList());
         _materialsChanged?.Invoke(this,new MaterialsChangedEventArgs(_lbxMaterial.Items.Cast<Material>().ToList()));
     }
     

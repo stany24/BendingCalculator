@@ -196,7 +196,7 @@ public abstract class Editor : Window
     /// <summary>
     /// Function used to remove all selected items from the listbox
     /// </summary>
-    private void RemoveItems()
+    protected virtual void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
