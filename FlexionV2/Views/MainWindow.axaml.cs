@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Dapper;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
 using FlexionV2.Views.Editors.Force;
@@ -33,10 +36,44 @@ public partial class Main : Window
     private EventHandler<MaterialsChangedEventArgs>? _materialsChanged;
     private EventHandler<LayersChangedEventArgs>? _layersChanged;
 
+    private SQLiteConnection _connection;
+
     public Main()
     {
         InitializeComponent();
         InitializeUi();
+        InitializeDatabaseConnection();
+    }
+    
+    private void InitializeDatabaseConnection()
+    {
+        const string fileName = "/home/stan/Git/Flexion/FlexionV2/Database/Database.db";
+        const string connectionString = $"Data Source={fileName};";
+        try
+        {
+            _connection = new SQLiteConnection(connectionString);
+            _connection.Open();
+            _connection.Execute("INSERT INTO Material (Name,E) VALUES ('alu',69000000000); ");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error connecting to the database: {ex.Message}");
+        }
+    }
+
+    private void AddMaterialsToDatabase(List<Material> materials)
+    {
+        foreach (Material material in materials)
+        {
+            if (material.Id != null)
+            {
+                _connection.Execute("UPDATE table_name SET Name = "+material.Nom+", E = "+material.E+", WHERE Id = "+material.Id+"; ");
+            }
+            else
+            {
+                _connection.Execute($"INSERT INTO Material (Name,E) VALUES ('{material.Nom}',{Convert.ToInt32(material.E)});");
+            }
+        }
     }
 
     private void InitializeUi()
@@ -136,7 +173,8 @@ public partial class Main : Window
     private void OpenMaterialEditor()
     {
         if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor(_lbxMaterial.Items.Cast<Material>().ToList());
+        List<Material> materials = _connection.QueryAsync<Material>("SELECT * FROM Material;").Result.ToList();
+        _materialEditor = new MaterialEditor(materials);
         _materialEditor.Closing += (_, _) => MaterialEditorClosing();
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
@@ -149,6 +187,7 @@ public partial class Main : Window
         {
             _lbxMaterial.Items.Add(material);
         }
+        AddMaterialsToDatabase(_lbxMaterial.Items.Cast<Material>().ToList());
         _materialsChanged?.Invoke(this,new MaterialsChangedEventArgs(_lbxMaterial.Items.Cast<Material>().ToList()));
     }
     
