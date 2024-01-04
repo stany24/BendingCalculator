@@ -101,11 +101,24 @@ public partial class LayerEditor : Editor
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
     }
     
-    public void UpdateMaterialList(List<Logic.Material>materials)
+    public void UpdateMaterialList()
     {
         CbxMaterial.Items.Clear();
-        foreach (Logic.Material material in materials)
+        using SQLiteCommand cmd = new(
+            @"SELECT Material.*
+          FROM Material
+          WHERE Material.IsRemoved = 0;", _connection);
+        
+        using SQLiteDataReader reader = cmd.ExecuteReader();
+        
+        while (reader.Read())
         {
+            Logic.Material material = new()
+            {
+                MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                E=Convert.ToInt64(reader["E"]),
+                Name = Convert.ToString(reader["Name"])
+            };
             CbxMaterial.Items.Add(material);
         }
     }

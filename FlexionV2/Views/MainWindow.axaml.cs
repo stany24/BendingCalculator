@@ -33,8 +33,8 @@ public partial class Main : Window
     private PieceEditor? _pieceEditor;
     private ListBox _lbxPiece;
 
-    private EventHandler<MaterialsChangedEventArgs>? _materialsChanged;
-    private EventHandler<LayersChangedEventArgs>? _layersChanged;
+    private EventHandler<EventArgs>? _materialsChanged;
+    private EventHandler<EventArgs>? _layersChanged;
 
     private SQLiteConnection _connection;
 
@@ -170,7 +170,7 @@ public partial class Main : Window
         {
             _lbxMaterial.Items.Add(material);
         }
-        _materialsChanged?.Invoke(this,new MaterialsChangedEventArgs(_lbxMaterial.Items.Cast<Material>().ToList()));
+        _materialsChanged?.Invoke(this,EventArgs.Empty);
     }
     
     private void OpenLayerEditor()
@@ -179,7 +179,7 @@ public partial class Main : Window
         _layerEditor = new LayerEditor(_connection);
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
-        _materialsChanged +=(_,e)=> _layerEditor?.UpdateMaterialList(e.Materials);
+        _materialsChanged +=(_,_)=> _layerEditor?.UpdateMaterialList();
         _layerEditor.Show();
     }
     
@@ -190,7 +190,7 @@ public partial class Main : Window
         {
             _lbxLayer.Items.Add(material);
         }
-        _layersChanged?.Invoke(this,new LayersChangedEventArgs(_lbxLayer.Items.Cast<Layer>().ToList()));
+        _layersChanged?.Invoke(this,EventArgs.Empty);
     }
     
     private void OpenPieceEditor()
@@ -199,7 +199,7 @@ public partial class Main : Window
         _pieceEditor = new PieceEditor(_lbxPiece.Items.Cast<Piece>().ToList(),_lbxLayer.Items.Cast<Layer>().ToList());
         _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
-        _layersChanged += (_, e) => _pieceEditor.LayersChanged?.Invoke(_pieceEditor, e);
+        _layersChanged += (_, e) => _pieceEditor.LoadLayersFromDatabase();
         _pieceEditor.Show();
     }
     

@@ -7,23 +7,26 @@ namespace FlexionV2.Views.Editors.Piece;
 
 public partial class PieceEditor : Editor
 {
-    public EventHandler<LayersChangedEventArgs> LayersChanged;
     private ListLayersEditor? _listLayersEditor;
     private List<Logic.Layer> _availableLayers;
     public PieceEditor(List<Logic.Piece> pieces,List<Logic.Layer> layers)
     {
         InitializeComponent();
         InitializeUi();
-        LayersChanged += (_, e) => _availableLayers = e.Layers;
         NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
-        BtnChangeLayers.Click += (_, _) => OpenPieceEditor();
+        BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
         foreach (Logic.Piece piece in pieces) { LbxItems.Items.Add(piece); }
         _availableLayers = layers;
     }
+
+    public void LoadLayersFromDatabase()
+    {
+        //don't forget to load in the layer editor
+    }
     
-    private void OpenPieceEditor()
+    private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
         _listLayersEditor = new ListLayersEditor(LbxLayers.Items.Cast<Logic.Layer>().ToList(),_availableLayers);
@@ -31,7 +34,6 @@ public partial class PieceEditor : Editor
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
         IsEnabled = false;
-        LayersChanged += (_, e) => _listLayersEditor.UpdateAvailableLayers(e.Layers);
     }
     
     private void PieceEditorClosing()
