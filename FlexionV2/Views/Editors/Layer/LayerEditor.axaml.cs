@@ -52,7 +52,7 @@ public partial class LayerEditor : Editor
                 {
                     MaterialId = Convert.ToInt32(reader["MaterialId"]),
                     E=Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"])
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
                 };
             }
 
@@ -66,7 +66,7 @@ public partial class LayerEditor : Editor
         int index = LbxItems.SelectedIndex;
         while (LbxItems.SelectedItems.Count > 0)
         {
-            Logic.Layer layer = LbxItems.SelectedItems[0] as Logic.Layer;
+            if(LbxItems.SelectedItems[0] is not Logic.Layer layer){continue;}
             using SQLiteCommand cmd = new(
                 "UPDATE Layer SET IsRemoved = 1 WHERE LayerId=@Id; ", _connection);
             cmd.Parameters.AddWithValue("@Id",layer.LayerId);
@@ -81,11 +81,11 @@ public partial class LayerEditor : Editor
     protected override void UpdateListBox<TItem>()
     {
         List<TItem> selected = new();
-        List<TItem> items = new();
+        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        if (LbxItems.Items != null) { items = LbxItems.Items.Cast<TItem>().ToList(); }
-        foreach (Logic.Layer layer in LbxItems.Items)
+        foreach (Logic.Layer? layer in LbxItems.Items)
         {
+            if(layer == null){continue;}
             using SQLiteCommand cmd = new(
                 "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;", _connection);
             cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
@@ -98,6 +98,7 @@ public partial class LayerEditor : Editor
         }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);
+        LbxItems.SelectedItems = new List<TItem>();
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
     }
     
@@ -117,7 +118,7 @@ public partial class LayerEditor : Editor
             {
                 MaterialId = Convert.ToInt32(reader["MaterialId"]),
                 E=Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"])
+                Name = Convert.ToString(reader["Name"]) ?? string.Empty
             };
             CbxMaterial.Items.Add(material);
         }
@@ -154,7 +155,7 @@ public partial class LayerEditor : Editor
         if (CbxMaterial.SelectedItem != null)
         {
             layer.Material = CbxMaterial.SelectedItem as Logic.Material;
-            cmd.Parameters.AddWithValue("@MaterialId",layer.Material.MaterialId);
+            cmd.Parameters.AddWithValue("@MaterialId",layer.Material!.MaterialId);
         }
         else
         {

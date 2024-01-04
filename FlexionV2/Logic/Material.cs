@@ -1,41 +1,39 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace FlexionV2.Logic
+namespace FlexionV2.Logic;
+
+public class Material
 {
-    public class Material
+    public long? MaterialId { get; set; }
+        
+    private string _name;
+
+    [JsonInclude]
+    public string Name
     {
-        public long? MaterialId { get; set; }
-        
-        private string _name;
+        get => _name;
+        set {if (value != "") { _name = value; }}
+    }
 
-        [JsonInclude]
-        public string Name
-        {
-            get => _name;
-            set {if (value != "") { _name = value; }}
-        }
-
-        private long _e;
-        [JsonInclude]
-        public long E
-        {
-            get => _e;
-            set { if (value > 0) { _e = value; } }
-        }
+    private long _e;
+    [JsonInclude]
+    public long E
+    {
+        get => _e;
+        set { if (value > 0) { _e = value; } }
+    }
         
-        public Material(string name, long e)
-        {
-            Name = name;
-            E = e;
-        }
+    public Material(string name, long e)
+    {
+        Name = name;
+        E = e;
+    }
 
-        [JsonConstructor]
-        public Material() { }
+    [JsonConstructor]
+    public Material() { }
         
-        public override string ToString()
-        {
-            return $"{Name}:{E / 1e9}";
-        }
+    public override string ToString()
+    {
+        return $"{Name}:{E / 1e9}";
     }
 }

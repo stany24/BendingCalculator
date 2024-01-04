@@ -25,63 +25,12 @@ public abstract class Editor : Window
         BtnRemove.Content = "Retirer";
     }
 
-    internal DockPanel GetPanelJson<TClass>(ListBox listBox) where TClass : new()
-    {
-        DockPanel panel = new();
-        Menu menu = new();
-        DockPanel.SetDock(menu,Dock.Top);
-        panel.Children.Add(menu);
-        MenuItem jsonItem = new()
-        {
-            Header = "Json"
-        };
-        menu.Items.Add(jsonItem);
-        MenuItem load = new(){ Header = "Load" };
-        load.Click +=(_, _) => LoadTask =  LoadJson<TClass>(listBox);
-        jsonItem.Items.Add(load);
-        MenuItem save = new(){ Header = "Save" };
-        save.Click +=(_, _) => SaveTask =  SaveJson<TClass>(listBox);
-        jsonItem.Items.Add(save);
-        return panel;
-    }
-
     #region Json
     
     private static FilePickerFileType Json { get; } = new("Json file")
     {
         Patterns = new[] { "*.json" }
     };
-    
-    /// <summary>
-    /// Generalized function used to load a list of T from a json file.
-    /// </summary>
-    /// <param name="listBox">The listbox you want to load into</param>
-    /// <typeparam name="TClass">The class of T</typeparam>
-    private async Task LoadJson<TClass>(ItemsControl listBox) where TClass : new()
-    {
-        Task<IReadOnlyList<IStorageFile>> task = StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-        {
-            Title = "Choose file to import from",
-            AllowMultiple = false,
-            FileTypeFilter = new[] { Json }
-        });
-        IReadOnlyList<IStorageFile> files = await task;
-        if (!files.Any()) return;
-        IStorageFile file = files[0];
-        Stream stream = await file.OpenReadAsync();
-        try
-        {
-            StreamReader reader = new(stream);
-            string json = await reader.ReadToEndAsync();
-            List<TClass> items = JsonSerializer.Deserialize<List<TClass>>(json) ?? new List<TClass>();
-            listBox.Items.Clear();
-            foreach (TClass item in items) listBox.Items.Add(item);
-        }
-        catch (Exception error)
-        {
-            Console.WriteLine(error);
-        }
-    }
     
     /// <summary>
     /// Generalized function used to save a list of T to a json file

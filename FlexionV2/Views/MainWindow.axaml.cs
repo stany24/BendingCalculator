@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
@@ -186,9 +185,9 @@ public partial class Main : Window
     private void LayerEditorClosing()
     {
         _lbxLayer.Items.Clear();
-        foreach (Layer? material in _layerEditor?.LbxItems.Items.Cast<Layer>())
+        foreach (Layer? layer in _layerEditor?.LbxItems.Items.Cast<Layer>())
         {
-            _lbxLayer.Items.Add(material);
+            _lbxLayer.Items.Add(layer);
         }
         _layersChanged?.Invoke(this,EventArgs.Empty);
     }
@@ -199,7 +198,7 @@ public partial class Main : Window
         _pieceEditor = new PieceEditor(_lbxPiece.Items.Cast<Piece>().ToList(),_lbxLayer.Items.Cast<Layer>().ToList());
         _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
-        _layersChanged += (_, e) => _pieceEditor.LoadLayersFromDatabase();
+        _layersChanged += (_, _) => _pieceEditor.LoadLayersFromDatabase();
         _pieceEditor.Show();
     }
     

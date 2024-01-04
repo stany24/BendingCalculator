@@ -31,7 +31,7 @@ public partial class ListLayersEditor : Window
     {
         int indexToMove = LbxInPiece.SelectedIndex;
         if (indexToMove == 0) return;
-        Logic.Layer layer = LbxInPiece.Items[indexToMove] as Logic.Layer;
+        if(LbxInPiece.Items[indexToMove] is not Logic.Layer layer){return;}
         LbxInPiece.Items[indexToMove] = LbxInPiece.Items[indexToMove - 1];
         LbxInPiece.Items[indexToMove - 1] = layer;
     }
@@ -40,14 +40,8 @@ public partial class ListLayersEditor : Window
     {
         int indexToMove = LbxInPiece.SelectedIndex;
         if (indexToMove == LbxInPiece.Items.Count-1) return;
-        Logic.Layer layer = LbxInPiece.Items[indexToMove] as Logic.Layer;
+        if(LbxInPiece.Items[indexToMove] is not Logic.Layer layer){return;}
         LbxInPiece.Items[indexToMove] = LbxInPiece.Items[indexToMove + 1];
         LbxInPiece.Items[indexToMove + 1] = layer;
-    }
-    
-    public void UpdateAvailableLayers(List<Logic.Layer> layers)
-    {
-        LbxAvailable.Items.Clear();
-        foreach (Logic.Layer layer in layers) {LbxAvailable.Items.Add(layer); }
     }
 }

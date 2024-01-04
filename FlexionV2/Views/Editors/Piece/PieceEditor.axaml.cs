@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
@@ -8,7 +7,7 @@ namespace FlexionV2.Views.Editors.Piece;
 public partial class PieceEditor : Editor
 {
     private ListLayersEditor? _listLayersEditor;
-    private List<Logic.Layer> _availableLayers;
+    private readonly List<Logic.Layer> _availableLayers;
     public PieceEditor(List<Logic.Piece> pieces,List<Logic.Layer> layers)
     {
         InitializeComponent();
@@ -39,8 +38,8 @@ public partial class PieceEditor : Editor
     private void PieceEditorClosing()
     {
         IsEnabled = true;
-        (LbxItems.SelectedItems?[0] as Logic.Piece).Layers =
-            _listLayersEditor?.LbxInPiece.Items.Cast<Logic.Layer>().ToList();
+        if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
+        piece.Layers =_listLayersEditor?.LbxInPiece.Items.Cast<Logic.Layer>().ToList() ?? new List<Logic.Layer>();
     }
 
     private void UpdateListLayer()

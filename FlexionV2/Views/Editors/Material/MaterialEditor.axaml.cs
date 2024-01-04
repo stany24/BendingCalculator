@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
-using Dapper;
 
 namespace FlexionV2.Views.Editors.Material;
 
@@ -36,7 +34,7 @@ public partial class MaterialEditor : Editor
             {
                 MaterialId = Convert.ToInt32(reader["MaterialId"]),
                 E=Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"])
+                Name = Convert.ToString(reader["Name"]) ?? string.Empty
             };
             LbxItems.Items.Add(material);
         }
@@ -48,7 +46,7 @@ public partial class MaterialEditor : Editor
         int index = LbxItems.SelectedIndex;
         while (LbxItems.SelectedItems.Count > 0)
         {
-            Logic.Material material = LbxItems.SelectedItems[0] as Logic.Material;
+            if(LbxItems.SelectedItems[0] is not Logic.Material material){return;}
             using SQLiteCommand cmd = new(
                 "UPDATE Material SET IsRemoved = 1 WHERE MaterialId=@Id; ", _connection);
             cmd.Parameters.AddWithValue("@Id",material.MaterialId);
@@ -63,11 +61,11 @@ public partial class MaterialEditor : Editor
     protected override void UpdateListBox<TItem>()
     {
         List<TItem> selected = new();
-        List<TItem> items = new();
+        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        if (LbxItems.Items != null) { items = LbxItems.Items.Cast<TItem>().ToList(); }
-        foreach (Logic.Material layer in LbxItems.Items)
+        foreach (Logic.Material? layer in LbxItems.Items)
         {
+            if(layer == null){continue;}
             using SQLiteCommand cmd = new(
                 "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", _connection);
             cmd.Parameters.AddWithValue("@WidthAtCenter",layer.Name);
@@ -77,6 +75,7 @@ public partial class MaterialEditor : Editor
         }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);
+        LbxItems.SelectedItems = new List<TItem>();
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
     }
 
