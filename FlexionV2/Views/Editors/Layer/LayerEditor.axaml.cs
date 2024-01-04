@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
@@ -29,8 +27,6 @@ public partial class LayerEditor : Editor
 
     private void LoadFromDatabase()
     {
-        List<Logic.Layer> layers = new List<Logic.Layer>();
-
         using SQLiteCommand cmd = new(
             @"SELECT Layer.*, Material.*
           FROM Layer
@@ -60,10 +56,8 @@ public partial class LayerEditor : Editor
                 };
             }
 
-            layers.Add(layer);
+            LbxItems.Items.Add(layer);
         }
-        LbxItems.Items.Clear();
-        foreach (Logic.Layer material in layers) { LbxItems.Items.Add(material); }
     }
 
     protected override void RemoveItems()
@@ -115,6 +109,7 @@ public partial class LayerEditor : Editor
             CbxMaterial.Items.Add(material);
         }
     }
+    
     private void InitializeUi()
     {
         Grid.SetColumn(LbxItems,0);

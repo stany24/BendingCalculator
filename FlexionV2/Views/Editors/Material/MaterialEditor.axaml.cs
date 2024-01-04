@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
 using Dapper;
@@ -9,16 +10,36 @@ namespace FlexionV2.Views.Editors.Material;
 
 public partial class MaterialEditor : Editor
 {
-    private readonly IDbConnection _connection;
-    public MaterialEditor(IDbConnection connection)
+    private readonly SQLiteConnection _connection;
+    public MaterialEditor(SQLiteConnection connection)
     {
         _connection = connection;
         InitializeComponent();
         InitializeUi();
         NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Name");
-        IEnumerable<Logic.Material> materials = _connection.QueryAsync<Logic.Material>("SELECT * FROM Material WHERE IsRemoved=0;").Result;
-        foreach (Logic.Material material in materials) { LbxItems.Items.Add(material); }
+        LoadFromDatabase();
+    }
+    
+    private void LoadFromDatabase()
+    {
+        using SQLiteCommand cmd = new(
+            @"SELECT Material.*
+          FROM Material
+          WHERE Material.IsRemoved = 0;", _connection);
+        
+        using SQLiteDataReader reader = cmd.ExecuteReader();
+        
+        while (reader.Read())
+        {
+            Logic.Material material = new()
+            {
+                MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                E=Convert.ToInt64(reader["E"]),
+                Name = Convert.ToString(reader["Name"])
+            };
+            LbxItems.Items.Add(material);
+        }
     }
 
     protected override void RemoveItems()
@@ -28,7 +49,10 @@ public partial class MaterialEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             Logic.Material material = LbxItems.SelectedItems[0] as Logic.Material;
-            _connection.Execute($"UPDATE Material SET IsRemoved = 1 WHERE Id={material.MaterialId}; ");
+            using SQLiteCommand cmd = new(
+                "UPDATE Material SET IsRemoved = 1 WHERE MaterialId=@Id; ", _connection);
+            cmd.Parameters.AddWithValue("@Id",material.MaterialId);
+            cmd.ExecuteNonQuery();
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
 
@@ -38,22 +62,22 @@ public partial class MaterialEditor : Editor
     
     protected override void UpdateListBox<TItem>()
     {
-        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         List<TItem> selected = new();
-        if (LbxItems.SelectedItems != null)
+        List<TItem> items = new();
+        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
+        if (LbxItems.Items != null) { items = LbxItems.Items.Cast<TItem>().ToList(); }
+        foreach (Logic.Material layer in LbxItems.Items)
         {
-            selected = LbxItems.SelectedItems.Cast<TItem>().ToList();
+            using SQLiteCommand cmd = new(
+                "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", _connection);
+            cmd.Parameters.AddWithValue("@WidthAtCenter",layer.Name);
+            cmd.Parameters.AddWithValue("@WidthOnSides",layer.E);
+            cmd.Parameters.AddWithValue("@Id",layer.MaterialId);
+            cmd.ExecuteNonQuery();
         }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);
-        if (LbxItems.SelectedItems == null) return;
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
-        foreach (Logic.Material material in LbxItems.Items)
-        {
-            _connection.Execute(material.MaterialId != null
-                ? $"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.MaterialId}; "
-                : $"INSERT INTO Material (Name,E,IsRemoved) VALUES ('{material.Name}',{material.E},0);");
-        }
     }
 
     private void InitializeUi()
@@ -69,6 +93,19 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,4);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Material("new", Convert.ToInt64(69e9)));
+        BtnAdd.Click += (_, _) => NewMaterial();
+    }
+    
+    private void NewMaterial()
+    {
+        Logic.Material material = new("nouveau",69000000000);
+        using SQLiteCommand cmd = new(
+            @"INSERT INTO Material (Name,E,IsRemoved) 
+                                VALUES (@Name, @E, @IsRemoved);SELECT LAST_INSERT_ROWID();", _connection);
+        cmd.Parameters.AddWithValue("@Name",material.Name);
+        cmd.Parameters.AddWithValue("@E",material.E);
+        cmd.Parameters.AddWithValue("@IsRemoved",0);
+        material.MaterialId = (long)cmd.ExecuteScalar();
+        LbxItems.Items.Add(material);
     }
 }
