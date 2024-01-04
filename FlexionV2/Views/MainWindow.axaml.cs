@@ -166,12 +166,6 @@ public partial class Main : Window
     private void MaterialEditorClosing()
     {
         _lbxMaterial.Items.Clear();
-        foreach (Material material in _materialEditor.LbxItems.Items)
-        {
-            _connection.Execute(material.Id != null
-                ? $"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.Id}; "
-                : $"INSERT INTO Material (Name,E,IsRemoved) VALUES ('{material.Name}',{material.E},0);");
-        }
         foreach (Material? material in _connection.QueryAsync<Material>("SELECT * FROM Material WHERE IsRemoved=0;").Result)
         {
             _lbxMaterial.Items.Add(material);
@@ -182,7 +176,7 @@ public partial class Main : Window
     private void OpenLayerEditor()
     {
         if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor(_lbxLayer.Items.Cast<Layer>().ToList(),_lbxMaterial.Items.Cast<Material>().ToList());
+        _layerEditor = new LayerEditor(_connection);
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _materialsChanged +=(_,e)=> _layerEditor?.UpdateMaterialList(e.Materials);

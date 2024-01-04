@@ -7,6 +7,8 @@ namespace FlexionV2.Logic
 {
     public class Layer
     {
+        public long LayerId { get; set; }
+
         private double _widthAtCenter;
         [JsonInclude]
         public double WidthAtCenter
@@ -15,12 +17,12 @@ namespace FlexionV2.Logic
             set { if (value > 0) { _widthAtCenter = value; } }
         }
 
-        private double _widthOnSide;
+        private double _widthOnSides;
         [JsonInclude]
-        public double WidthOnSide
+        public double WidthOnSides
         {
-            get =>_widthOnSide;
-            set { if (value > 0) { _widthOnSide = value; } }
+            get =>_widthOnSides;
+            set { if (value > 0) { _widthOnSides = value; } }
         }
 
         private double _heightAtCenter;
@@ -31,46 +33,56 @@ namespace FlexionV2.Logic
             set { if (value > 0) { _heightAtCenter = value; } }
         }
 
-        private double _heightOnSide;
+        private double _heightOnSides;
         [JsonInclude]
-        public double HeightOnSide
+        public double HeightOnSides
         {
-            get =>_heightOnSide;
-            set { if (value > 0) { _heightOnSide = value; } }
+            get =>_heightOnSides;
+            set { if (value > 0) { _heightOnSides = value; } }
         }
 
         [JsonInclude]
-        public Material Material { get; set; }
+        public Material? Material { get; set; }
         
         [JsonConstructor]
         public Layer() { }
+        
+        public Layer(double width, double height)
+        {
+            WidthAtCenter=width;
+            WidthOnSides=width;
+            HeightAtCenter=height;
+            HeightOnSides = height;
+        }
         
         public Layer(Material material, double width, double height)
         {
             Material = material;
             WidthAtCenter=width;
-            WidthOnSide=width;
+            WidthOnSides=width;
             HeightAtCenter=height;
-            HeightOnSide = height;
+            HeightOnSides = height;
         }
         
-        public Layer(Material material, double widthCenter, double widthSide, double heightCenter, double heightSide)
+        public Layer(Material material, double widthCenter, double widthSides, double heightCenter, double heightSides)
         {
             Material = material;
             WidthAtCenter = widthCenter;
-            WidthOnSide=widthSide;
+            WidthOnSides=widthSides;
             HeightAtCenter=heightCenter;
-            HeightOnSide=heightSide;
+            HeightOnSides=heightSides;
         }
         
         public override string ToString()
         {
-            return $"{Material.Name} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSide * 1000}x{HeightOnSide * 1000}";
+            return Material != null 
+                ? $"{Material.Name} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSides * 1000}x{HeightOnSides * 1000}" 
+                : $"Pas de matière M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSides * 1000}x{HeightOnSides * 1000}";
         }
 
         public double[] Base(double longueur, double eref, double[] xs)
         {
-            double l1 = (4 * WidthOnSide - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
+            double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
             double[] l2 = AdditionalMath.OperationDoubleArray(xs, longueur / 2, AdditionalMath.Operation.Minus);
             l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
             double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
@@ -81,7 +93,7 @@ namespace FlexionV2.Logic
 
         private IEnumerable<double> Width(double longueur, double eref, IEnumerable<double> xs)
         {
-            double l1 = (4 * WidthOnSide - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
+            double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
 
             List<double> L2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
 
@@ -92,7 +104,7 @@ namespace FlexionV2.Logic
 
         public List<double> Height(double longueur, IEnumerable<double> xs)
         {
-            double e1 = (4 * HeightOnSide - 4 * HeightAtCenter) / Math.Pow(longueur, 2);
+            double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / Math.Pow(longueur, 2);
 
             List<double> e2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
 

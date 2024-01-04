@@ -5,7 +5,7 @@ namespace FlexionV2.Logic
 {
     public class Material
     {
-        public int? Id { get; set; }
+        public long? MaterialId { get; set; }
         
         private string _name;
 

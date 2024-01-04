@@ -118,7 +118,7 @@ public abstract class Editor : Window
     /// Generalized function used to update UI of the listbox
     /// </summary>
     /// <typeparam name="TItem">The class contained in the listbox</typeparam>
-    private void UpdateListBox<TItem>()
+    protected virtual void UpdateListBox<TItem>()
     {
         List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         List<TItem> selected = new();

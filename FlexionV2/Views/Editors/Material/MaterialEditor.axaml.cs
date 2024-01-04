@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Avalonia.Controls;
 using Dapper;
 
@@ -27,12 +28,32 @@ public partial class MaterialEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             Logic.Material material = LbxItems.SelectedItems[0] as Logic.Material;
-            _connection.Execute($"UPDATE Material SET IsRemoved = 1 WHERE Id={material.Id}; ");
+            _connection.Execute($"UPDATE Material SET IsRemoved = 1 WHERE Id={material.MaterialId}; ");
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
 
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+    }
+    
+    protected override void UpdateListBox<TItem>()
+    {
+        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
+        List<TItem> selected = new();
+        if (LbxItems.SelectedItems != null)
+        {
+            selected = LbxItems.SelectedItems.Cast<TItem>().ToList();
+        }
+        LbxItems.Items.Clear();
+        foreach (TItem item in items) LbxItems.Items.Add(item);
+        if (LbxItems.SelectedItems == null) return;
+        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+        foreach (Logic.Material material in LbxItems.Items)
+        {
+            _connection.Execute(material.MaterialId != null
+                ? $"UPDATE Material SET Name = '{material.Name}', E = {material.E} WHERE Id={material.MaterialId}; "
+                : $"INSERT INTO Material (Name,E,IsRemoved) VALUES ('{material.Name}',{material.E},0);");
+        }
     }
 
     private void InitializeUi()
