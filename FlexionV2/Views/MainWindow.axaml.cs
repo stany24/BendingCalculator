@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using Dapper;
 using FlexionV2.Logic;
+using FlexionV2.Logic.Database;
 using FlexionV2.ViewModels;
 using FlexionV2.Views.Editors.Force;
 using FlexionV2.Views.Editors.Layer;
@@ -39,6 +40,36 @@ public partial class Main : Window
         InitializeComponent();
         InitializeUi();
         InitializeDatabaseConnection();
+        DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
+        DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
+        DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
+    }
+
+    private void ReloadLayers()
+    {
+        _lbxLayer.Items.Clear();
+        foreach (Layer layer in DataBaseLoader.LoadLayers(_connection))
+        {
+            _lbxLayer.Items.Add(layer);
+        }
+    }
+    
+    private void ReloadPieces()
+    {
+        _lbxPiece.Items.Clear();
+        foreach (Piece piece in DataBaseLoader.LoadPieces(_connection))
+        {
+            _lbxPiece.Items.Add(piece);
+        }
+    }
+    
+    private void ReloadMaterials()
+    {
+        _lbxMaterial.Items.Clear();
+        foreach (Material material in DataBaseLoader.LoadMaterials(_connection))
+        {
+            _lbxMaterial.Items.Add(material);
+        }
     }
     
     private void InitializeDatabaseConnection()
@@ -54,6 +85,9 @@ public partial class Main : Window
         {
             Console.WriteLine($"Error connecting to the database: {ex.Message}");
         }
+        ReloadMaterials();
+        ReloadLayers();
+        ReloadPieces();
     }
 
     private void InitializeUi()

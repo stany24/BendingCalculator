@@ -23,6 +23,7 @@ public partial class LayerEditor : Editor
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
         CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
         DataBaseEvents.MaterialsChanged += UpdateMaterials;
+        UpdateMaterials(null,EventArgs.Empty);
         foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
             LbxItems.Items.Add(layer);
@@ -50,10 +51,7 @@ public partial class LayerEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             if(LbxItems.SelectedItems[0] is not Logic.Layer layer){continue;}
-            using SQLiteCommand cmd = new(
-                "UPDATE Layer SET IsRemoved = 1 WHERE LayerId=@Id; ", _connection);
-            cmd.Parameters.AddWithValue("@Id",layer.LayerId);
-            cmd.ExecuteNonQuery();
+            DataBaseRemover.RemoveLayer(_connection,layer.LayerId);
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
 

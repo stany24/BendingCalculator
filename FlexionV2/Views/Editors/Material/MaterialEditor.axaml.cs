@@ -31,29 +31,22 @@ public partial class MaterialEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             if(LbxItems.SelectedItems[0] is not Logic.Material material){return;}
-            using SQLiteCommand cmd = new(
-                "UPDATE Material SET IsRemoved = 1 WHERE MaterialId=@Id; ", _connection);
-            cmd.Parameters.AddWithValue("@Id",material.MaterialId);
-            cmd.ExecuteNonQuery();
+            DataBaseRemover.RemoveMaterial(_connection,material.MaterialId);
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
-
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
     }
     
     protected override void UpdateListBox<TItem>()
     {
-        List<TItem> selected = new();
         List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
+        List<TItem> selected = new();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        foreach (Logic.Material? material in LbxItems.Items)
-        {
-            DataBaseUpdater.UpdateMaterial(_connection,material);
-        }
+        foreach (Logic.Material? material in LbxItems.Items) { DataBaseUpdater.UpdateMaterial(_connection,material); }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);
-        LbxItems.SelectedItems = new List<TItem>();
+        if (LbxItems.SelectedItems == null) return;
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
     }
 
