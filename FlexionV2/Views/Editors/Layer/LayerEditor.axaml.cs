@@ -23,7 +23,7 @@ public partial class LayerEditor : Editor
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
         CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
         UpdateMaterials();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
             LbxItems.Items.Add(layer);
         }
@@ -32,7 +32,7 @@ public partial class LayerEditor : Editor
     public void UpdateMaterials()
     {
         CbxMaterial.Items.Clear();
-        foreach (Logic.Material material in DataBaseLoader.LoadMaterialsFromDatabase(_connection))
+        foreach (Logic.Material material in DataBaseLoader.LoadMaterials(_connection))
         {
             CbxMaterial.Items.Add(material);
         }
@@ -93,31 +93,6 @@ public partial class LayerEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,10);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => NewLayer();
-    }
-
-    private void NewLayer()
-    {
-        Logic.Layer layer = new(1,1);
-        using SQLiteCommand cmd = new(
-            @"INSERT INTO Layer (WidthAtCenter,WidthOnSides,HeightAtCenter,HeightOnSides,MaterialId,IsRemoved) 
-                                VALUES (@WidthAtCenter, @WidthOnSides, @HeightAtCenter, @HeightOnSides ,@MaterialId, @IsRemoved);SELECT LAST_INSERT_ROWID();", _connection);
-        cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
-        cmd.Parameters.AddWithValue("@WidthOnSides",layer.WidthOnSides);
-        cmd.Parameters.AddWithValue("@HeightAtCenter",layer.HeightAtCenter);
-        cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
-        cmd.Parameters.AddWithValue("@IsRemoved",0);
-        
-        if (CbxMaterial.SelectedItem != null)
-        {
-            layer.Material = CbxMaterial.SelectedItem as Logic.Material;
-            cmd.Parameters.AddWithValue("@MaterialId",layer.Material!.MaterialId);
-        }
-        else
-        {
-            cmd.Parameters.AddWithValue("@MaterialId",null);
-        }
-        layer.LayerId = (long)cmd.ExecuteScalar();
-        LbxItems.Items.Add(layer);
+        BtnAdd.Click += (_, _) =>LbxItems.Items.Add(DataBaseCreator.NewLayer(_connection,CbxMaterial.SelectedItem as Logic.Material));
     }
 }

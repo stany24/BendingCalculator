@@ -18,7 +18,7 @@ public static class DataBaseLoader
         cmd.Parameters.AddWithValue("@PieceId", pieceId);
 
         using SQLiteDataReader reader = cmd.ExecuteReader();
-        Piece currentPiece = null;
+        Piece? currentPiece = null;
         
         while (reader.Read())
         {
@@ -49,10 +49,10 @@ public static class DataBaseLoader
             currentPiece.Layers.Add(layer);
         }
 
-        return currentPiece.Layers;
+        return currentPiece?.Layers ?? new List<Layer>();
     }
     
-    public static List<Piece> LoadPiecesFromDatabase(SQLiteConnection connection)
+    public static List<Piece> LoadPieces(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
             @"SELECT *
@@ -65,7 +65,7 @@ public static class DataBaseLoader
         
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Piece> pieces = new List<Piece>();
-        Piece currentPiece = null;
+        Piece? currentPiece = null;
         
         while (reader.Read())
         {
@@ -73,10 +73,10 @@ public static class DataBaseLoader
             
             if (currentPiece == null || currentPiece.PieceId != pieceId)
             {
-                currentPiece = new Logic.Piece
+                currentPiece = new Piece
                 {
                     PieceId = pieceId,
-                    Name = Convert.ToString(reader["Name"]),
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"]),
                     Eref = Convert.ToInt64(reader["Eref"]),
                     Layers = new List<Layer>()
@@ -110,7 +110,7 @@ public static class DataBaseLoader
         return pieces;
     }
     
-    public static List<Layer> LoadLayersFromDatabase(SQLiteConnection connection)
+    public static List<Layer> LoadLayers(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
             @"SELECT Layer.*, Material.*
@@ -146,7 +146,7 @@ public static class DataBaseLoader
         return layers;
     }
     
-    public static List<Material> LoadMaterialsFromDatabase(SQLiteConnection connection)
+    public static List<Material> LoadMaterials(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
             @"SELECT Material.*

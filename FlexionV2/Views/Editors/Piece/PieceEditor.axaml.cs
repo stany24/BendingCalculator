@@ -20,7 +20,7 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        foreach (Logic.Piece piece in DataBaseLoader.LoadPiecesFromDatabase(_connection))
+        foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
             LbxItems.Items.Add(piece);
         }
@@ -29,7 +29,7 @@ public partial class PieceEditor : Editor
     public void UpdateLayers()
     {
         _availableLayers.Clear();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
             _availableLayers.Add(layer);
         }
@@ -100,7 +100,7 @@ public partial class PieceEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,6);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(new Logic.Piece(1,"nouveau"));
+        BtnAdd.Click += (_, _) => LbxItems.Items.Add(DataBaseCreator.NewPiece(_connection));
         BtnChangeLayers.IsEnabled = false;
     }
 }

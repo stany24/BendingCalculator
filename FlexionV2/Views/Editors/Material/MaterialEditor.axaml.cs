@@ -18,7 +18,7 @@ public partial class MaterialEditor : Editor
         InitializeUi();
         NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Name");
-        foreach (Logic.Material material in DataBaseLoader.LoadMaterialsFromDatabase(_connection))
+        foreach (Logic.Material material in DataBaseLoader.LoadMaterials(_connection))
         {
             LbxItems.Items.Add(material);
         }
@@ -76,19 +76,6 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,4);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => NewMaterial();
-    }
-    
-    private void NewMaterial()
-    {
-        Logic.Material material = new("nouveau",69000000000);
-        using SQLiteCommand cmd = new(
-            @"INSERT INTO Material (Name,E,IsRemoved) 
-                                VALUES (@Name, @E, @IsRemoved);SELECT LAST_INSERT_ROWID();", _connection);
-        cmd.Parameters.AddWithValue("@Name",material.Name);
-        cmd.Parameters.AddWithValue("@E",material.E);
-        cmd.Parameters.AddWithValue("@IsRemoved",0);
-        material.MaterialId = (long)cmd.ExecuteScalar();
-        LbxItems.Items.Add(material);
+        BtnAdd.Click += (_, _) => LbxItems.Items.Add(DataBaseCreator.NewMaterial(_connection));
     }
 }

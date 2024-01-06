@@ -27,7 +27,7 @@ public partial class ListLayersEditor : Window
     public void UpdateLayers()
     {
         LbxAvailable.Items.Clear();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
             LbxAvailable.Items.Add(layer);
         }
