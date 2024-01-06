@@ -218,17 +218,13 @@ public partial class Main : Window
 
     private void CalculateFlexion()
     {
-        if(_lbxPiece.SelectedItems?[0] is not Piece piece){return;}
-        if(_nudForce.Value == null){return;}
-        FillGraph(piece.Intégrale((int)_nudForce.Value, Gap));
-    }
-
-    private void FillGraph(double[] data)
-    {
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(DataContext is not MainViewModel model)  {return;}
-            model.Series[0].Values=data.Select((t, i) => new ObservablePoint(i, t)).ToList();
+            if(_lbxPiece.SelectedItems is { Count: 0 }){return;}
+            if(_lbxPiece.SelectedItems?[0] is not Piece piece){return;}
+            if(_nudForce.Value == null){return;}
+            if(DataContext is not MainViewModel model){return;}
+            model.Series[0].Values=piece.Intégrale((int)_nudForce.Value, Gap).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
-        ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
     }
 }
