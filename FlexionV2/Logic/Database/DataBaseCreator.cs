@@ -1,3 +1,4 @@
+using System;
 using System.Data.SQLite;
 
 namespace FlexionV2.Logic.Database;
@@ -15,6 +16,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@Eref",piece.Eref);
         cmd.Parameters.AddWithValue("@IsRemoved",0);
         piece.PieceId = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaisePiecesChangedEvent();
         return piece;
     }
     
@@ -40,6 +42,7 @@ public static class DataBaseCreator
             cmd.Parameters.AddWithValue("@MaterialId",null);
         }
         layer.LayerId = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaiseLayersChangedEvent();
         return layer;
     }
     
@@ -53,6 +56,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@E",material.E);
         cmd.Parameters.AddWithValue("@IsRemoved",0);
         material.MaterialId = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaiseMaterialsChangedEvent();
         return material;
     }
 }

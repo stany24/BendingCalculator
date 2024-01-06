@@ -1,3 +1,4 @@
+using System;
 using System.Data.SQLite;
 
 namespace FlexionV2.Logic.Database;
@@ -13,6 +14,7 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@WidthOnSides",material.E);
         cmd.Parameters.AddWithValue("@Id",material.MaterialId);
         cmd.ExecuteNonQuery();
+        DataBaseEvents.RaiseMaterialsChangedEvent();
     }
     
     public static void UpdateLayer(SQLiteConnection connection,Layer? layer)
@@ -27,6 +29,7 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.MaterialId);
         cmd.Parameters.AddWithValue("@Id",layer.LayerId);
         cmd.ExecuteNonQuery();
+        DataBaseEvents.RaiseLayersChangedEvent();
     }
     
     public static void UpdatePiece(SQLiteConnection connection,Piece? piece)
@@ -50,5 +53,6 @@ public static class DataBaseUpdater
             cmd3.Parameters.AddWithValue("@LayerOrder",i);
             cmd3.ExecuteNonQuery();
         }
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 }

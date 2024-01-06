@@ -22,14 +22,19 @@ public partial class LayerEditor : Editor
         NudWidthCenter.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthAtCenter");
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
         CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
-        UpdateMaterials();
+        DataBaseEvents.MaterialsChanged += UpdateMaterials;
         foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
             LbxItems.Items.Add(layer);
         }
     }
+    
+    ~LayerEditor()
+    {
+        DataBaseEvents.MaterialsChanged -= UpdateMaterials;
+    }
 
-    public void UpdateMaterials()
+    private void UpdateMaterials(object? s, EventArgs e)
     {
         CbxMaterial.Items.Clear();
         foreach (Logic.Material material in DataBaseLoader.LoadMaterials(_connection))

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -20,13 +21,19 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
+        DataBaseEvents.LayersChanged += UpdateLayers;
         foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
             LbxItems.Items.Add(piece);
         }
     }
+    
+    ~PieceEditor()
+    {
+        DataBaseEvents.MaterialsChanged -= UpdateLayers;
+    }
 
-    public void UpdateLayers()
+    private void UpdateLayers(object? sender, EventArgs eventArgs)
     {
         _availableLayers.Clear();
         foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
