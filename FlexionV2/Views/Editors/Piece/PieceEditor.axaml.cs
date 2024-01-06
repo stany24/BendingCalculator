@@ -10,7 +10,6 @@ namespace FlexionV2.Views.Editors.Piece;
 public partial class PieceEditor : Editor
 {
     private ListLayersEditor? _listLayersEditor;
-    private readonly List<Logic.Layer> _availableLayers;
     private readonly SQLiteConnection _connection;
     public PieceEditor(SQLiteConnection connection)
     {
@@ -21,7 +20,7 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        DataBaseEvents.LayersChanged += UpdateLayers;
+        DataBaseEvents.PiecesChanged += UpdatePieces;
         foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
             LbxItems.Items.Add(piece);
@@ -31,7 +30,7 @@ public partial class PieceEditor : Editor
     
     ~PieceEditor()
     {
-        DataBaseEvents.MaterialsChanged -= UpdateLayers;
+        DataBaseEvents.PiecesChanged -= UpdatePieces;
     }
     
     protected override void UpdateListBox<TItem>()
@@ -63,33 +62,25 @@ public partial class PieceEditor : Editor
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
     }
-
-    private void UpdateLayers(object? sender, EventArgs eventArgs)
+    
+    private void UpdatePieces(object? sender, EventArgs eventArgs)
     {
-        _availableLayers.Clear();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
+        LbxItems.Items.Clear();
+        foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
-            _availableLayers.Add(layer);
+            LbxItems.Items.Add(piece);
         }
-        _listLayersEditor?.UpdateLayers();
     }
     
     private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
-        if(LbxItems.SelectedItems?[0] == null){return;}
-        _listLayersEditor = new ListLayersEditor(_connection,(LbxItems.SelectedItems[0] as Logic.Piece).PieceId);
-        _listLayersEditor.Closing += (_, _) => PieceEditorClosing();
+        if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
+        _listLayersEditor = new ListLayersEditor(_connection,piece.PieceId);
+        _listLayersEditor.Closing += (_, _) => IsEnabled = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
         IsEnabled = false;
-    }
-    
-    private void PieceEditorClosing()
-    {
-        IsEnabled = true;
-        if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
-        piece.Layers =_listLayersEditor?.LbxInPiece.Items.Cast<Logic.Layer>().ToList() ?? new List<Logic.Layer>();
     }
 
     private void UpdateListLayer()

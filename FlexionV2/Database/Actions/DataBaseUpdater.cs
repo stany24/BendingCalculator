@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data.SQLite;
 using FlexionV2.Logic;
 
@@ -42,16 +43,21 @@ public static class DataBaseUpdater
         cmd1.Parameters.AddWithValue("@Eref",piece.Eref);
         cmd1.Parameters.AddWithValue("@Id",piece.PieceId);
         cmd1.ExecuteNonQuery();
-        using SQLiteCommand cmd2 = new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId", connection);
-        cmd2.Parameters.AddWithValue("@PieceId",piece.PieceId);
-        cmd2.ExecuteNonQuery();
-        for (int i = 0; i < piece.Layers.Count; i++)
+        DataBaseEvents.RaisePiecesChangedEvent();
+    }
+
+    public static void UpdateLayersInPiece(SQLiteConnection connection, long pieceId, List<Layer> layers)
+    {
+        using SQLiteCommand cmd1 = new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId", connection);
+        cmd1.Parameters.AddWithValue("@PieceId",pieceId);
+        cmd1.ExecuteNonQuery();
+        for (int i = 0; i < layers.Count; i++)
         {
-            using SQLiteCommand cmd3 = new("INSERT INTO PieceToLayer (PieceId,LayerId,LayerOrder) VALUES (@PieceId, @LayerId, @LayerOrder);", connection);
-            cmd3.Parameters.AddWithValue("@PieceId",piece.PieceId);
-            cmd3.Parameters.AddWithValue("@LayerId",piece.Layers[i].LayerId);
-            cmd3.Parameters.AddWithValue("@LayerOrder",i);
-            cmd3.ExecuteNonQuery();
+            using SQLiteCommand cmd2 = new("INSERT INTO PieceToLayer (PieceId,LayerId,LayerOrder) VALUES (@PieceId, @LayerId, @LayerOrder);", connection);
+            cmd2.Parameters.AddWithValue("@PieceId",pieceId);
+            cmd2.Parameters.AddWithValue("@LayerId",layers[i].LayerId);
+            cmd2.Parameters.AddWithValue("@LayerOrder",i);
+            cmd2.ExecuteNonQuery();
         }
         DataBaseEvents.RaisePiecesChangedEvent();
     }
