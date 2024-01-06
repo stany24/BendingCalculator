@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
-using Dapper;
-using FlexionV2.Logic;
 using FlexionV2.Logic.Database;
 
 namespace FlexionV2.Views.Editors.Layer;

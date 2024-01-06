@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
-using Dapper;
 using FlexionV2.Logic;
 using FlexionV2.Logic.Database;
 using FlexionV2.ViewModels;
@@ -188,54 +187,24 @@ public partial class Main : Window
     {
         if(_materialEditor != null){return;}
         _materialEditor = new MaterialEditor(_connection);
-        _materialEditor.Closing += (_, _) => MaterialEditorClosing();
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
-    }
-    
-    private void MaterialEditorClosing()
-    {
-        _lbxMaterial.Items.Clear();
-        foreach (Material? material in _connection.QueryAsync<Material>("SELECT * FROM Material WHERE IsRemoved=0;").Result)
-        {
-            _lbxMaterial.Items.Add(material);
-        }
     }
     
     private void OpenLayerEditor()
     {
         if(_layerEditor != null){return;}
         _layerEditor = new LayerEditor(_connection);
-        _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
-    }
-    
-    private void LayerEditorClosing()
-    {
-        _lbxLayer.Items.Clear();
-        foreach (Layer? layer in _layerEditor?.LbxItems.Items.Cast<Layer>())
-        {
-            _lbxLayer.Items.Add(layer);
-        }
     }
     
     private void OpenPieceEditor()
     {
         if(_pieceEditor != null){return;}
         _pieceEditor = new PieceEditor(_connection);
-        _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _pieceEditor.Show();
-    }
-    
-    private void PieceEditorClosing()
-    {
-        _lbxPiece.Items.Clear();
-        foreach (Piece? material in _pieceEditor?.LbxItems.Items.Cast<Piece>())
-        {
-            _lbxPiece.Items.Add(material);
-        }
     }
 
     private void CalculateFlexion()
