@@ -26,6 +26,7 @@ public partial class PieceEditor : Editor
         {
             LbxItems.Items.Add(piece);
         }
+        Closing += (_, _) => _listLayersEditor?.Close();
     }
     
     ~PieceEditor()

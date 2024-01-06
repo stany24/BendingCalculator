@@ -39,9 +39,15 @@ public partial class Main : Window
         InitializeComponent();
         InitializeUi();
         InitializeDatabaseConnection();
-        DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
-        DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
-        DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
+        Closing += (_, _) => CloseAllWindows();
+    }
+
+    private void CloseAllWindows()
+    {
+        _materialEditor?.Close();
+        _layerEditor?.Close();
+        _pieceEditor?.Close();
+        _forceEditor?.Close();
     }
 
     private void ReloadLayers()
@@ -84,6 +90,9 @@ public partial class Main : Window
         {
             Console.WriteLine($"Error connecting to the database: {ex.Message}");
         }
+        DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
+        DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
+        DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
         ReloadMaterials();
         ReloadLayers();
         ReloadPieces();
