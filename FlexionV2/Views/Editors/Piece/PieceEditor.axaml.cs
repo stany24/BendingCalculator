@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
+using FlexionV2.Logic.Database;
 
 namespace FlexionV2.Views.Editors.Piece;
 
@@ -20,107 +20,29 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        LoadPiecesFromDatabase();
-    }
-
-    public void LoadLayersFromDatabase()
-    {
-        using SQLiteCommand cmd = new(
-            @"SELECT Layer.*, Material.*
-          FROM Layer
-          LEFT JOIN Material ON Layer.MaterialId = Material.MaterialId
-          WHERE Layer.IsRemoved = 0;", _connection);
-        
-        using SQLiteDataReader reader = cmd.ExecuteReader();
-        
-        while (reader.Read())
+        foreach (Logic.Piece piece in DataBaseLoader.LoadPiecesFromDatabase(_connection))
         {
-            Logic.Layer layer = new()
-            {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
-            
-            if (reader["MaterialId"] != DBNull.Value)
-            {
-                layer.Material = new Logic.Material
-                {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
-                };
-            }
-
-            LbxLayers.Items.Add(layer);
+            LbxItems.Items.Add(piece);
         }
     }
 
-    private void LoadPiecesFromDatabase()
+    public void UpdateLayers()
     {
-        LbxLayers.Items.Clear();
-        using SQLiteCommand cmd = new(
-            @"SELECT *
-            FROM Piece p
-            LEFT JOIN PieceToLayer pl ON p.PieceId = pl.PieceId
-            LEFT JOIN Layer l ON pl.LayerId = l.LayerId
-            LEFT JOIN Material m on l.MaterialId = m.MaterialId
-            WHERE p.IsRemoved = 0
-            ORDER BY p.PieceId, pl.LayerOrder;", _connection);
-        
-        using SQLiteDataReader reader = cmd.ExecuteReader();
-        List<Logic.Piece> pieces = new List<Logic.Piece>();
-        Logic.Piece currentPiece = null;
-        
-        while (reader.Read())
+        _availableLayers.Clear();
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
         {
-            int pieceId = Convert.ToInt32(reader["PieceId"]);
-            
-            if (currentPiece == null || currentPiece.PieceId != pieceId)
-            {
-                currentPiece = new Logic.Piece
-                {
-                    PieceId = pieceId,
-                    Name = Convert.ToString(reader["Name"]),
-                    Length = Convert.ToDouble(reader["Length"]),
-                    Eref = Convert.ToInt64(reader["Eref"]),
-                    Layers = new List<Logic.Layer>()
-                };
-                pieces.Add(currentPiece);
-            }
-            
-            if (reader["LayerId"] == DBNull.Value) continue;
-            Logic.Layer layer = new()
-            {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
-            
-            if (reader["MaterialId"] != DBNull.Value)
-            {
-                layer.Material = new Logic.Material
-                {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
-                };
-            }
-
-            currentPiece.Layers.Add(layer);
+            _availableLayers.Add(layer);
         }
-                
-        foreach (Logic.Piece piece in pieces) { LbxItems.Items.Add(piece); }
+        _listLayersEditor?.UpdateLayers();
     }
+
+    
     
     private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
-        _listLayersEditor = new ListLayersEditor(LbxLayers.Items.Cast<Logic.Layer>().ToList(),_availableLayers);
+        if(LbxItems.SelectedItems?[0] == null){return;}
+        _listLayersEditor = new ListLayersEditor(_connection,(LbxItems.SelectedItems[0] as Logic.Piece).PieceId);
         _listLayersEditor.Closing += (_, _) => PieceEditorClosing();
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();

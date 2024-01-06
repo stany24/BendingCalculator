@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
+using FlexionV2.Logic;
+using FlexionV2.Logic.Database;
 
 namespace FlexionV2.Views.Editors.Material;
 
@@ -16,26 +18,8 @@ public partial class MaterialEditor : Editor
         InitializeUi();
         NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Name");
-        LoadFromDatabase();
-    }
-    
-    private void LoadFromDatabase()
-    {
-        using SQLiteCommand cmd = new(
-            @"SELECT Material.*
-          FROM Material
-          WHERE Material.IsRemoved = 0;", _connection);
-        
-        using SQLiteDataReader reader = cmd.ExecuteReader();
-        
-        while (reader.Read())
+        foreach (Logic.Material material in DataBaseLoader.LoadMaterialsFromDatabase(_connection))
         {
-            Logic.Material material = new()
-            {
-                MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                E=Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"]) ?? string.Empty
-            };
             LbxItems.Items.Add(material);
         }
     }

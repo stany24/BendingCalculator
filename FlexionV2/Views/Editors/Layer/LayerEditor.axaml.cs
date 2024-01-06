@@ -4,6 +4,8 @@ using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
 using Dapper;
+using FlexionV2.Logic;
+using FlexionV2.Logic.Database;
 
 namespace FlexionV2.Views.Editors.Layer;
 
@@ -20,43 +22,19 @@ public partial class LayerEditor : Editor
         NudWidthCenter.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthAtCenter");
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
         CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
-        IEnumerable<Logic.Material> materials = _connection.QueryAsync<Logic.Material>("SELECT * FROM Material WHERE IsRemoved=0;").Result;
-        foreach (Logic.Material material in materials) { CbxMaterial.Items.Add(material); }
-        LoadFromDatabase();
+        UpdateMaterials();
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
+        {
+            LbxItems.Items.Add(layer);
+        }
     }
 
-    private void LoadFromDatabase()
+    public void UpdateMaterials()
     {
-        using SQLiteCommand cmd = new(
-            @"SELECT Layer.*, Material.*
-          FROM Layer
-          LEFT JOIN Material ON Layer.MaterialId = Material.MaterialId
-          WHERE Layer.IsRemoved = 0;", _connection);
-        
-        using SQLiteDataReader reader = cmd.ExecuteReader();
-        
-        while (reader.Read())
+        CbxMaterial.Items.Clear();
+        foreach (Logic.Material material in DataBaseLoader.LoadMaterialsFromDatabase(_connection))
         {
-            Logic.Layer layer = new()
-            {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
-            
-            if (reader["MaterialId"] != DBNull.Value)
-            {
-                layer.Material = new Logic.Material
-                {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
-                };
-            }
-
-            LbxItems.Items.Add(layer);
+            CbxMaterial.Items.Add(material);
         }
     }
 
@@ -100,28 +78,6 @@ public partial class LayerEditor : Editor
         foreach (TItem item in items) LbxItems.Items.Add(item);
         LbxItems.SelectedItems = new List<TItem>();
         foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
-    }
-    
-    public void UpdateMaterialList()
-    {
-        CbxMaterial.Items.Clear();
-        using SQLiteCommand cmd = new(
-            @"SELECT Material.*
-          FROM Material
-          WHERE Material.IsRemoved = 0;", _connection);
-        
-        using SQLiteDataReader reader = cmd.ExecuteReader();
-        
-        while (reader.Read())
-        {
-            Logic.Material material = new()
-            {
-                MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                E=Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"]) ?? string.Empty
-            };
-            CbxMaterial.Items.Add(material);
-        }
     }
     
     private void InitializeUi()

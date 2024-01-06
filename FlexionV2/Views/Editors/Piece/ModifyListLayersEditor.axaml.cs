@@ -1,22 +1,36 @@
-using System.Collections.Generic;
+using System.Data.SQLite;
 using Avalonia.Controls;
+using FlexionV2.Logic.Database;
 
 namespace FlexionV2.Views.Editors.Piece;
 
 public partial class ListLayersEditor : Window
 {
-    public ListLayersEditor(List<Logic.Layer> layersInPiece,List<Logic.Layer> layersAvailable)
+    private readonly SQLiteConnection _connection;
+    public ListLayersEditor(SQLiteConnection connection, long pieceId)
     {
+        _connection = connection;
         InitializeComponent();
-        foreach (Logic.Layer layer in layersInPiece) { LbxInPiece.Items.Add(layer); }
-        foreach (Logic.Layer layer in layersAvailable) {LbxAvailable.Items.Add(layer); }
-
         LbxAvailable.SelectionChanged += (_, _) => { if (LbxAvailable.SelectedItems != null) BtnAdd.IsEnabled = LbxAvailable.SelectedItems.Count == 1; };
         LbxInPiece.SelectionChanged += (_, _) => SelectedLayerChanged();
         BtnAdd.Click += (_, _) => LbxInPiece.Items.Add(LbxAvailable.SelectedItems?[0]);
         BtnRemove.Click += (_, _) => LbxInPiece.Items.Remove(LbxInPiece.SelectedItems?[0]);
         BtnMoveUp.Click += (_, _) =>MoveUp();
         BtnMoveDown.Click += (_, _) =>MoveDown();
+        UpdateLayers();
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection, pieceId))
+        {
+            LbxInPiece.Items.Add(layer);
+        }
+    }
+
+    public void UpdateLayers()
+    {
+        LbxAvailable.Items.Clear();
+        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersFromDatabase(_connection))
+        {
+            LbxAvailable.Items.Add(layer);
+        }
     }
 
     private void SelectedLayerChanged()

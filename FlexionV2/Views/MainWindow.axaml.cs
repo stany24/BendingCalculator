@@ -178,7 +178,7 @@ public partial class Main : Window
         _layerEditor = new LayerEditor(_connection);
         _layerEditor.Closing += (_, _) => LayerEditorClosing();
         _layerEditor.Closed += (_, _) => _layerEditor = null;
-        _materialsChanged +=(_,_)=> _layerEditor?.UpdateMaterialList();
+        _materialsChanged +=(_,_)=> _layerEditor?.UpdateMaterials();
         _layerEditor.Show();
     }
     
@@ -198,7 +198,7 @@ public partial class Main : Window
         _pieceEditor = new PieceEditor(_connection);
         _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
-        _layersChanged += (_, _) => _pieceEditor.LoadLayersFromDatabase();
+        _layersChanged += (_, _) => _pieceEditor.UpdateLayers();
         _pieceEditor.Show();
     }
     
