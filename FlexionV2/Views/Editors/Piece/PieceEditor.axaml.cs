@@ -33,6 +33,36 @@ public partial class PieceEditor : Editor
     {
         DataBaseEvents.MaterialsChanged -= UpdateLayers;
     }
+    
+    protected override void UpdateListBox<TItem>()
+    {
+        List<TItem> selected = new();
+        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
+        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
+        foreach (Logic.Piece? piece in LbxItems.Items)
+        {
+            DataBaseUpdater.UpdatePiece(_connection,piece);
+        }
+        LbxItems.Items.Clear();
+        foreach (TItem item in items) LbxItems.Items.Add(item);
+        LbxItems.SelectedItems = new List<TItem>();
+        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+    }
+    
+    protected override void RemoveItems()
+    {
+        if (LbxItems.SelectedItems == null) return;
+        int index = LbxItems.SelectedIndex;
+        while (LbxItems.SelectedItems.Count > 0)
+        {
+            if(LbxItems.SelectedItems[0] is not Logic.Piece piece){continue;}
+            DataBaseRemover.RemovePiece(_connection,piece.PieceId);
+            LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
+        }
+
+        if (index <= 0) return;
+        LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+    }
 
     private void UpdateLayers(object? sender, EventArgs eventArgs)
     {
@@ -43,8 +73,6 @@ public partial class PieceEditor : Editor
         }
         _listLayersEditor?.UpdateLayers();
     }
-
-    
     
     private void OpenLayerEditor()
     {

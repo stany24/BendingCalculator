@@ -19,5 +19,15 @@ public static class DataBaseRemover
             "UPDATE Layer SET IsRemoved = 1 WHERE LayerId=@Id; ", connection);
         cmd.Parameters.AddWithValue("@Id",layerId);
         cmd.ExecuteNonQuery();
+        DataBaseEvents.RaiseLayersChangedEvent();
+    }
+    
+    public static void RemovePiece(SQLiteConnection connection, long pieceId)
+    {
+        using SQLiteCommand cmd = new(
+            "UPDATE Piece SET IsRemoved = 1 WHERE PieceId=@Id; ", connection);
+        cmd.Parameters.AddWithValue("@Id",pieceId);
+        cmd.ExecuteNonQuery();
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 }
