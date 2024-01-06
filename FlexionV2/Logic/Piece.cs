@@ -7,6 +7,8 @@ namespace FlexionV2.Logic;
 
 public class Piece
 {
+    public long? PieceId { get; set; }
+    
     [JsonInclude]
     public List<Layer> Layers { get; set; }
 

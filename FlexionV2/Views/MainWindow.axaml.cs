@@ -195,7 +195,7 @@ public partial class Main : Window
     private void OpenPieceEditor()
     {
         if(_pieceEditor != null){return;}
-        _pieceEditor = new PieceEditor(_lbxPiece.Items.Cast<Piece>().ToList(),_lbxLayer.Items.Cast<Layer>().ToList());
+        _pieceEditor = new PieceEditor(_connection);
         _pieceEditor.Closing += (_, _) => PieceEditorClosing();
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _layersChanged += (_, _) => _pieceEditor.LoadLayersFromDatabase();

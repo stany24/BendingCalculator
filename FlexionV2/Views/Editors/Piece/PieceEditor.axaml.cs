@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
 
@@ -8,21 +10,111 @@ public partial class PieceEditor : Editor
 {
     private ListLayersEditor? _listLayersEditor;
     private readonly List<Logic.Layer> _availableLayers;
-    public PieceEditor(List<Logic.Piece> pieces,List<Logic.Layer> layers)
+    private readonly SQLiteConnection _connection;
+    public PieceEditor(SQLiteConnection connection)
     {
         InitializeComponent();
         InitializeUi();
+        _connection = connection;
         NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        foreach (Logic.Piece piece in pieces) { LbxItems.Items.Add(piece); }
-        _availableLayers = layers;
+        LoadPiecesFromDatabase();
     }
 
     public void LoadLayersFromDatabase()
     {
-        //don't forget to load in the layer editor
+        using SQLiteCommand cmd = new(
+            @"SELECT Layer.*, Material.*
+          FROM Layer
+          LEFT JOIN Material ON Layer.MaterialId = Material.MaterialId
+          WHERE Layer.IsRemoved = 0;", _connection);
+        
+        using SQLiteDataReader reader = cmd.ExecuteReader();
+        
+        while (reader.Read())
+        {
+            Logic.Layer layer = new()
+            {
+                LayerId = Convert.ToInt32(reader["LayerId"]),
+                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
+                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
+                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
+                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
+            };
+            
+            if (reader["MaterialId"] != DBNull.Value)
+            {
+                layer.Material = new Logic.Material
+                {
+                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                    E=Convert.ToInt64(reader["E"]),
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                };
+            }
+
+            LbxLayers.Items.Add(layer);
+        }
+    }
+
+    private void LoadPiecesFromDatabase()
+    {
+        LbxLayers.Items.Clear();
+        using SQLiteCommand cmd = new(
+            @"SELECT *
+            FROM Piece p
+            LEFT JOIN PieceToLayer pl ON p.PieceId = pl.PieceId
+            LEFT JOIN Layer l ON pl.LayerId = l.LayerId
+            LEFT JOIN Material m on l.MaterialId = m.MaterialId
+            WHERE p.IsRemoved = 0
+            ORDER BY p.PieceId, pl.LayerOrder;", _connection);
+        
+        using SQLiteDataReader reader = cmd.ExecuteReader();
+        List<Logic.Piece> pieces = new List<Logic.Piece>();
+        Logic.Piece currentPiece = null;
+        
+        while (reader.Read())
+        {
+            int pieceId = Convert.ToInt32(reader["PieceId"]);
+            
+            if (currentPiece == null || currentPiece.PieceId != pieceId)
+            {
+                currentPiece = new Logic.Piece
+                {
+                    PieceId = pieceId,
+                    Name = Convert.ToString(reader["Name"]),
+                    Length = Convert.ToDouble(reader["Length"]),
+                    Eref = Convert.ToInt64(reader["Eref"]),
+                    Layers = new List<Logic.Layer>()
+                };
+                pieces.Add(currentPiece);
+            }
+            
+            if (reader["LayerId"] == DBNull.Value) continue;
+            Logic.Layer layer = new()
+            {
+                LayerId = Convert.ToInt32(reader["LayerId"]),
+                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
+                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
+                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
+                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
+            };
+            
+            if (reader["MaterialId"] != DBNull.Value)
+            {
+                layer.Material = new Logic.Material
+                {
+                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                    E=Convert.ToInt64(reader["E"]),
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                };
+            }
+
+            currentPiece.Layers.Add(layer);
+        }
+                
+        foreach (Logic.Piece piece in pieces) { LbxItems.Items.Add(piece); }
     }
     
     private void OpenLayerEditor()
