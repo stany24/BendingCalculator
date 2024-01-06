@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
-using FlexionV2.Logic.Database;
+using FlexionV2.Database.Actions;
 
 namespace FlexionV2.Views.Editors.Piece;
 

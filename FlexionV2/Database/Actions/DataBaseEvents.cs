@@ -1,6 +1,6 @@
 using System;
 
-namespace FlexionV2.Logic.Database;
+namespace FlexionV2.Database.Actions;
 
 public static class DataBaseEvents
 {

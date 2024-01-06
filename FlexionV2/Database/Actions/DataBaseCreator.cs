@@ -1,7 +1,7 @@
-using System;
 using System.Data.SQLite;
+using FlexionV2.Logic;
 
-namespace FlexionV2.Logic.Database;
+namespace FlexionV2.Database.Actions;
 
 public static class DataBaseCreator
 {
