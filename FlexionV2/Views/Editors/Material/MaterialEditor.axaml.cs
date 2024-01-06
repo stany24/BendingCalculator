@@ -47,15 +47,9 @@ public partial class MaterialEditor : Editor
         List<TItem> selected = new();
         List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        foreach (Logic.Material? layer in LbxItems.Items)
+        foreach (Logic.Material? material in LbxItems.Items)
         {
-            if(layer == null){continue;}
-            using SQLiteCommand cmd = new(
-                "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", _connection);
-            cmd.Parameters.AddWithValue("@WidthAtCenter",layer.Name);
-            cmd.Parameters.AddWithValue("@WidthOnSides",layer.E);
-            cmd.Parameters.AddWithValue("@Id",layer.MaterialId);
-            cmd.ExecuteNonQuery();
+            DataBaseUpdater.UpdateMaterial(_connection,material);
         }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);

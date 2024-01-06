@@ -63,16 +63,7 @@ public partial class LayerEditor : Editor
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
         foreach (Logic.Layer? layer in LbxItems.Items)
         {
-            if(layer == null){continue;}
-            using SQLiteCommand cmd = new(
-                "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;", _connection);
-            cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
-            cmd.Parameters.AddWithValue("@WidthOnSides",layer.WidthOnSides);
-            cmd.Parameters.AddWithValue("@HeightAtCenter",layer.HeightAtCenter);
-            cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
-            cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.MaterialId);
-            cmd.Parameters.AddWithValue("@Id",layer.LayerId);
-            cmd.ExecuteNonQuery();
+            DataBaseUpdater.UpdateLayer(_connection,layer);
         }
         LbxItems.Items.Clear();
         foreach (TItem item in items) LbxItems.Items.Add(item);
