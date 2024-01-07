@@ -1,6 +1,7 @@
 using System;
 using System.Data.SQLite;
 using System.Linq;
+using System.Runtime;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
@@ -40,6 +41,12 @@ public partial class Main : Window
         InitializeUi();
         InitializeDatabaseConnection();
         Closing += (_, _) => CloseAllWindows();
+        for (int i = 0;; i++)
+        {
+            _pieceEditor = new PieceEditor(_connection);
+            _pieceEditor.Close();
+            Console.WriteLine(i);
+        }
     }
 
     private void CloseAllWindows()
