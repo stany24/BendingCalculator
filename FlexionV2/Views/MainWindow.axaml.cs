@@ -1,7 +1,7 @@
 using System;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
-using System.Runtime;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
@@ -41,12 +41,6 @@ public partial class Main : Window
         InitializeUi();
         InitializeDatabaseConnection();
         Closing += (_, _) => CloseAllWindows();
-        for (int i = 0;; i++)
-        {
-            _pieceEditor = new PieceEditor(_connection);
-            _pieceEditor.Close();
-            Console.WriteLine(i);
-        }
     }
 
     private void CloseAllWindows()
@@ -86,8 +80,10 @@ public partial class Main : Window
     
     private void InitializeDatabaseConnection()
     {
-        const string fileName = "/home/stan/Git/Flexion/FlexionV2/Database/Database.db";
-        const string connectionString = $"Data Source={fileName};";
+        string project = Directory.GetCurrentDirectory();
+        const string filePath = "Database/Database.db";
+        string databasePath = Path.Combine(project, filePath);
+        string connectionString = $"Data Source={databasePath};";
         try
         {
             _connection = new SQLiteConnection(connectionString);
