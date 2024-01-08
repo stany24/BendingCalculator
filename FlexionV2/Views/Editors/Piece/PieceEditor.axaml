@@ -28,6 +28,8 @@
             Grid.Row="2">Length:</TextBlock>
         <NumericUpDown 
             Name="NudLength"
+            Value="1"
+            Minimum="0.1"
             Grid.Column="4"
             Grid.Row="2"></NumericUpDown>
         <Button

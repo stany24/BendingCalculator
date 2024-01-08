@@ -19,6 +19,7 @@
             ></TextBlock>
         <NumericUpDown 
             Name="NudMasse"
+            Minimum="0.1"
             Grid.Column="2"
             Grid.Row="0"
             ></NumericUpDown>
@@ -30,6 +31,7 @@
         ></TextBlock>
         <NumericUpDown 
             Name="NudRayon"
+            Minimum="0.1"
             Grid.Column="2"
             Grid.Row="2"
         ></NumericUpDown>
@@ -41,6 +43,7 @@
         ></TextBlock>
         <NumericUpDown 
             Name="NudSpeed"
+            Minimum="0.1"
             Grid.Column="2"
             Grid.Row="4"
         ></NumericUpDown>
@@ -52,6 +55,7 @@
         ></TextBlock>
         <NumericUpDown 
             Name="NudGravity"
+            Minimum="0.1"
             Grid.Column="2"
             Grid.Row="6"
         ></NumericUpDown>
@@ -63,6 +67,7 @@
         ></TextBlock>
         <NumericUpDown 
             Name="NudForce"
+            Minimum="0.1"
             Grid.Column="2"
             Grid.Row="8"
         ></NumericUpDown>

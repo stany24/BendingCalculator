@@ -28,6 +28,9 @@
                 Grid.Row="2">E:</TextBlock>
             <NumericUpDown 
                 Name="NudE"
+                Value="69000000000"
+                Increment="1000000000"
+                Minimum="0.1"
                 Grid.Column="4"
                 Grid.Row="2"></NumericUpDown>
         </Grid>

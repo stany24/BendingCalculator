@@ -38,7 +38,7 @@
             <NumericUpDown
                 Name="NudForce"
                 Value="5"
-                Minimum="1"
+                Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="0"></NumericUpDown>
             <Button

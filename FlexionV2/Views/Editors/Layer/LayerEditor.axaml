@@ -19,6 +19,8 @@
             Grid.Row="0">WidthCenter:</TextBlock>
         <NumericUpDown 
             Name="NudWidthCenter"
+            Value="1"
+            Minimum="0.1"
             Grid.Column="4"
             Grid.Row="0"></NumericUpDown>
         <TextBlock 
@@ -28,6 +30,8 @@
             Grid.Row="2">WidthSide:</TextBlock>
         <NumericUpDown 
             Name="NudWidthSide"
+            Value="1"
+            Minimum="0.1"
             Grid.Column="4"
             Grid.Row="2"></NumericUpDown>
         <TextBlock 
@@ -37,6 +41,8 @@
             Grid.Row="4">HeightCenter:</TextBlock>
         <NumericUpDown 
             Name="NudHeightCenter"
+            Value="1"
+            Minimum="0.1"
             Grid.Column="4"
             Grid.Row="4"></NumericUpDown>
         <TextBlock 
@@ -46,6 +52,8 @@
             Grid.Row="6">HeightSide:</TextBlock>
         <NumericUpDown 
             Name="NudHeightSide"
+            Value="1"
+            Minimum="0.1"
             Grid.Column="4"
             Grid.Row="6"></NumericUpDown>
         <TextBlock 
