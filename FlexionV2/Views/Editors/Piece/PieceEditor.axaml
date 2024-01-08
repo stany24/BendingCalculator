@@ -16,7 +16,7 @@
             Name="LblName"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="0">Name:</TextBlock>
+            Grid.Row="0">Nom:</TextBlock>
         <TextBox 
             Name="TbxName"
             Grid.Column="4"
@@ -25,7 +25,7 @@
             Name="LblLength"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="2">Length:</TextBlock>
+            Grid.Row="2">Longueur:</TextBlock>
         <NumericUpDown 
             Name="NudLength"
             Value="1"

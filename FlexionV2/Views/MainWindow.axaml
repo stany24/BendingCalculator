@@ -58,7 +58,7 @@
                 Name="LblPiece"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Piece:"
+                Text="Pièces:"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnPiece"
@@ -85,7 +85,7 @@
                 Name="LblLayer"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Layer:"
+                Text="Couches:"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnLayer"
@@ -112,7 +112,7 @@
                 Name="LblMaterial"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Material:"
+                Text="Matières:"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnMaterial"
