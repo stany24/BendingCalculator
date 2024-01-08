@@ -85,7 +85,7 @@ public partial class Main : Window
         string connectionString = $"Data Source={databasePath};";
         try
         {
-            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // bug with the last version of sqlite
+            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // used to correct an issue with the last version of sqlite
             _connection = new SQLiteConnection(connectionString);
             _connection.Open();
         }

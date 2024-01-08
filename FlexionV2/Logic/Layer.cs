@@ -76,8 +76,8 @@ public class Layer
     public override string ToString()
     {
         return Material != null 
-            ? $"{Material.Name} M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSides * 1000}x{HeightOnSides * 1000}" 
-            : $"Pas de matière M={WidthAtCenter * 1000}x{HeightAtCenter * 1000} C={WidthOnSides * 1000}x{HeightOnSides * 1000}";
+            ? $"{Material.Name} M={WidthAtCenter}x{HeightAtCenter} C={WidthOnSides}x{HeightOnSides}" 
+            : $"Pas de matière M={WidthAtCenter}x{HeightAtCenter} C={WidthOnSides}x{HeightOnSides}";
     }
 
     public double[] Base(double longueur, double eref, double[] xs)

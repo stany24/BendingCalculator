@@ -20,7 +20,7 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        DataBaseEvents.PiecesChanged += UpdatePieces;
+        DataBaseEvents.LayerOfPieceChanged += UpdatePieces;
         foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
             LbxItems.Items.Add(piece);
@@ -30,22 +30,19 @@ public partial class PieceEditor : Editor
     
     ~PieceEditor()
     {
-        DataBaseEvents.PiecesChanged -= UpdatePieces;
+        DataBaseEvents.LayerOfPieceChanged -= UpdatePieces;
     }
     
     protected override void UpdateListBox<TItem>()
     {
-        List<TItem> selected = new();
-        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
-        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        foreach (Logic.Piece? piece in LbxItems.Items)
-        {
-            DataBaseUpdater.UpdatePiece(_connection,piece);
-        }
+        List<Logic.Piece> selected = new();
+        List<Logic.Piece> items = LbxItems.Items.Cast<Logic.Piece>().ToList();
+        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList(); }
+        DataBaseUpdater.UpdatePiece(_connection,items);
         LbxItems.Items.Clear();
-        foreach (TItem item in items) LbxItems.Items.Add(item);
-        LbxItems.SelectedItems = new List<TItem>();
-        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+        foreach (Logic.Piece item in items) LbxItems.Items.Add(item);
+        if (LbxItems.SelectedItems == null) return;
+        foreach (Logic.Piece item in selected) LbxItems.SelectedItems.Add(item);
     }
     
     protected override void RemoveItems()
@@ -65,11 +62,11 @@ public partial class PieceEditor : Editor
     
     private void UpdatePieces(object? sender, EventArgs eventArgs)
     {
-        LbxItems.Items.Clear();
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => { LbxItems.Items.Clear(); 
         foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
             LbxItems.Items.Add(piece);
-        }
+        }});
     }
     
     private void OpenLayerEditor()
@@ -102,9 +99,7 @@ public partial class PieceEditor : Editor
                 break;
             default:
             {
-                List<Logic.Layer>? layers = (LbxItems.SelectedItems[0] as Logic.Piece)?.Layers;
-                if (layers == null) return;
-                foreach (Logic.Layer layer in layers)
+                foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,(LbxItems.SelectedItems[0] as Logic.Piece).PieceId))
                 {
                     LbxLayers.Items.Add(layer);
                 }

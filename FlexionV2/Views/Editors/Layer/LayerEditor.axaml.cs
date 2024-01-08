@@ -59,14 +59,14 @@ public partial class LayerEditor : Editor
     
     protected override void UpdateListBox<TItem>()
     {
-        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
-        List<TItem> selected = new();
-        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        foreach (Logic.Layer? layer in LbxItems.Items) { DataBaseUpdater.UpdateLayer(_connection,layer); }
+        List<Logic.Layer> items = LbxItems.Items.Cast<Logic.Layer>().ToList();
+        List<Logic.Layer> selected = new();
+        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Layer>().ToList(); }
+        DataBaseUpdater.UpdateLayers(_connection,items);
         LbxItems.Items.Clear();
-        foreach (TItem item in items) LbxItems.Items.Add(item);
+        foreach (Logic.Layer item in items) LbxItems.Items.Add(item);
         if (LbxItems.SelectedItems == null) return;
-        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+        foreach (Logic.Layer item in selected) LbxItems.SelectedItems.Add(item);
     }
     
     private void InitializeUi()

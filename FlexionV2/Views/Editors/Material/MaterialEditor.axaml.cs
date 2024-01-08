@@ -40,14 +40,14 @@ public partial class MaterialEditor : Editor
     
     protected override void UpdateListBox<TItem>()
     {
-        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
-        List<TItem> selected = new();
-        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<TItem>().ToList(); }
-        foreach (Logic.Material? material in LbxItems.Items) { DataBaseUpdater.UpdateMaterial(_connection,material); }
+        List<Logic.Material> items = LbxItems.Items.Cast<Logic.Material>().ToList();
+        List<Logic.Material> selected = new();
+        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Material>().ToList(); }
+        DataBaseUpdater.UpdateMaterials(_connection,items);
         LbxItems.Items.Clear();
-        foreach (TItem item in items) LbxItems.Items.Add(item);
+        foreach (Logic.Material item in items) LbxItems.Items.Add(item);
         if (LbxItems.SelectedItems == null) return;
-        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+        foreach (Logic.Material item in selected) LbxItems.SelectedItems.Add(item);
     }
 
     private void InitializeUi()
