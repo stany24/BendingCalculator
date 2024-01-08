@@ -2,6 +2,7 @@ using System;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
@@ -80,18 +81,18 @@ public partial class Main : Window
     
     private void InitializeDatabaseConnection()
     {
-        string project = Directory.GetCurrentDirectory();
-        const string filePath = "Database/Database.db";
-        string databasePath = Path.Combine(project, filePath);
+        string databasePath = Path.Combine(Directory.GetCurrentDirectory(), "Database/Database.db");
         string connectionString = $"Data Source={databasePath};";
         try
         {
+            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // bug with the last version of sqlite
             _connection = new SQLiteConnection(connectionString);
             _connection.Open();
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error connecting to the database: {ex.Message}");
+            Close();
         }
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
@@ -99,7 +100,7 @@ public partial class Main : Window
         ReloadMaterials();
         ReloadLayers();
         ReloadPieces();
-    }
+    }   
 
     private void InitializeUi()
     {
