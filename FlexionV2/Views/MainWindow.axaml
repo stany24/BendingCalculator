@@ -29,6 +29,23 @@
             MinHeight="150"
             Column="0"
             Row="0">
+            <TextBlock
+                Name="LblForce"
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Force:"
+                VerticalAlignment="Center"></TextBlock>
+            <NumericUpDown
+                Name="NudForce"
+                Value="5"
+                Minimum="1"
+                Grid.Column="2"
+                Grid.Row="0"></NumericUpDown>
+            <Button
+                Name="BtnForce"
+                Content="Modifier"
+                Grid.Row="2"
+                Grid.Column="0"></Button>
         </Grid>
         <Grid 
             Name="GridPiece"

@@ -23,7 +23,6 @@ public partial class Main : Window
     private const double Gap = 1e-4;
     
     private ForceEditor? _forceEditor;
-    private NumericUpDown _nudForce;
     
     private MaterialEditor? _materialEditor;
     
@@ -36,7 +35,7 @@ public partial class Main : Window
     public Main()
     {
         InitializeComponent();
-        InitializeUi();
+        UiEvents();
         InitializeDatabaseConnection();
         Closing += (_, _) => CloseAllWindows();
     }
@@ -99,45 +98,13 @@ public partial class Main : Window
         ReloadPieces();
     }   
 
-    private void InitializeUi()
+    private void UiEvents()
     {
-        InitializeForceArea();
-        InitializePieceArea();
-        InitializeLayerArea();
-        InitializeMaterialArea();
-        BtnStart.Click += (_, _) => Task.Run(CalculateFlexion);
-    }
-
-    private void InitializeForceArea()
-    {
-        TextBlock lblForce = new() { Text = "Force:",VerticalAlignment = VerticalAlignment.Center };
-        Grid.SetColumn(lblForce,0);
-        Grid.SetRow(lblForce,0);
-        GridForce.Children.Add(lblForce);
-        _nudForce = new NumericUpDown { Value = 5 };
-        Grid.SetColumn(_nudForce,2);
-        Grid.SetRow(_nudForce,0);
-        GridForce.Children.Add(_nudForce);
-        Button btnForce = new() { Content = "Modifier" };
-        btnForce.Click += (_, _) => OpenForceEditor();
-        Grid.SetColumn(btnForce,0);
-        Grid.SetRow(btnForce,2);
-        GridForce.Children.Add(btnForce);
-    }
-
-    private void InitializePieceArea()
-    {
-        BtnPiece.Click += (_,_) => OpenPieceEditor();
-    }
-
-    private void InitializeLayerArea()
-    {
-        BtnLayer.Click += (_, _) => OpenLayerEditor();
-    }
-
-    private void InitializeMaterialArea()
-    {
+        BtnForce.Click += (_, _) => OpenForceEditor();
         BtnMaterial.Click += (_, _) => OpenMaterialEditor();
+        BtnLayer.Click += (_, _) => OpenLayerEditor();
+        BtnPiece.Click += (_,_) => OpenPieceEditor();
+        BtnStart.Click += (_, _) => Task.Run(CalculateFlexion);
     }
 
     private void OpenForceEditor()
@@ -151,7 +118,7 @@ public partial class Main : Window
     
     private void ForceEditorClosing()
     {
-        _nudForce.Value = _forceEditor?.CalculateForce();
+        NudForce.Value = _forceEditor?.CalculateForce();
     }
     
     private void OpenMaterialEditor()
@@ -183,9 +150,9 @@ public partial class Main : Window
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
             if(LbxPiece.SelectedItems is { Count: 0 }){return;}
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
-            if(_nudForce.Value == null){return;}
+            if(NudForce.Value == null){return;}
             if(DataContext is not MainViewModel model){return;}
-            model.Series[0].Values=piece.Intégrale((int)_nudForce.Value, Gap).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, Gap).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }
