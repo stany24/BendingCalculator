@@ -26,13 +26,10 @@ public partial class Main : Window
     private NumericUpDown _nudForce;
     
     private MaterialEditor? _materialEditor;
-    private ListBox _lbxMaterial;
     
     private LayerEditor? _layerEditor;
-    private ListBox _lbxLayer;
     
     private PieceEditor? _pieceEditor;
-    private ListBox _lbxPiece;
 
     private SQLiteConnection _connection;
 
@@ -54,28 +51,28 @@ public partial class Main : Window
 
     private void ReloadLayers()
     {
-        _lbxLayer.Items.Clear();
+        LbxLayer.Items.Clear();
         foreach (Layer layer in DataBaseLoader.LoadLayers(_connection))
         {
-            _lbxLayer.Items.Add(layer);
+            LbxLayer.Items.Add(layer);
         }
     }
     
     private void ReloadPieces()
     {
-        _lbxPiece.Items.Clear();
+        LbxPiece.Items.Clear();
         foreach (Piece piece in DataBaseLoader.LoadPieces(_connection))
         {
-            _lbxPiece.Items.Add(piece);
+            LbxPiece.Items.Add(piece);
         }
     }
     
     private void ReloadMaterials()
     {
-        _lbxMaterial.Items.Clear();
+        LbxMaterial.Items.Clear();
         foreach (Material material in DataBaseLoader.LoadMaterials(_connection))
         {
-            _lbxMaterial.Items.Add(material);
+            LbxMaterial.Items.Add(material);
         }
     }
     
@@ -130,56 +127,17 @@ public partial class Main : Window
 
     private void InitializePieceArea()
     {
-        TextBlock lblPiece = new() { Text = "Piece:",VerticalAlignment = VerticalAlignment.Center };
-        Grid.SetColumn(lblPiece,0);
-        Grid.SetRow(lblPiece,0);
-        GridPiece.Children.Add(lblPiece);
-        _lbxPiece = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(_lbxPiece,0);
-        Grid.SetColumnSpan(_lbxPiece,4);
-        Grid.SetRow(_lbxPiece,2);
-        GridPiece.Children.Add(_lbxPiece);
-        Button btnPiece = new() { Content = "Modifier" };
-        btnPiece.Click += (_,_) => OpenPieceEditor();
-        Grid.SetColumn(btnPiece,2);
-        Grid.SetRow(btnPiece,0);
-        GridPiece.Children.Add(btnPiece);
+        BtnPiece.Click += (_,_) => OpenPieceEditor();
     }
 
     private void InitializeLayerArea()
     {
-        TextBlock lblLayer = new() { Text = "Couche:",VerticalAlignment = VerticalAlignment.Center};
-        Grid.SetColumn(lblLayer,0);
-        Grid.SetRow(lblLayer,0);
-        GridLayer.Children.Add(lblLayer);
-        _lbxLayer = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(_lbxLayer,0);
-        Grid.SetColumnSpan(_lbxLayer,4);
-        Grid.SetRow(_lbxLayer,2);
-        GridLayer.Children.Add(_lbxLayer);
-        Button btnLayer = new() { Content = "Modifier" };
-        btnLayer.Click += (_, _) => OpenLayerEditor();
-        Grid.SetColumn(btnLayer,2);
-        Grid.SetRow(btnLayer,0);
-        GridLayer.Children.Add(btnLayer);
+        BtnLayer.Click += (_, _) => OpenLayerEditor();
     }
 
     private void InitializeMaterialArea()
     {
-        TextBlock lblMaterial = new() { Text = "Material:",VerticalAlignment = VerticalAlignment.Center };
-        Grid.SetColumn(lblMaterial,0);
-        Grid.SetRow(lblMaterial,0);
-        GridMaterial.Children.Add(lblMaterial);
-        _lbxMaterial = new ListBox {VerticalAlignment = VerticalAlignment.Stretch,HorizontalAlignment = HorizontalAlignment.Stretch};
-        Grid.SetColumn(_lbxMaterial,0);
-        Grid.SetColumnSpan(_lbxMaterial,4);
-        Grid.SetRow(_lbxMaterial,2);
-        GridMaterial.Children.Add(_lbxMaterial);
-        Button btnMaterial = new() { Content = "Modifier" };
-        btnMaterial.Click += (_, _) => OpenMaterialEditor();
-        Grid.SetColumn(btnMaterial,2);
-        Grid.SetRow(btnMaterial,0);
-        GridMaterial.Children.Add(btnMaterial);
+        BtnMaterial.Click += (_, _) => OpenMaterialEditor();
     }
 
     private void OpenForceEditor()
@@ -223,8 +181,8 @@ public partial class Main : Window
     private void CalculateFlexion()
     {
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(_lbxPiece.SelectedItems is { Count: 0 }){return;}
-            if(_lbxPiece.SelectedItems?[0] is not Piece piece){return;}
+            if(LbxPiece.SelectedItems is { Count: 0 }){return;}
+            if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(_nudForce.Value == null){return;}
             if(DataContext is not MainViewModel model){return;}
             model.Series[0].Values=piece.Intégrale((int)_nudForce.Value, Gap).Select((t, i) => new ObservablePoint(i, t)).ToList();
