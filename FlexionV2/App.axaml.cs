@@ -6,7 +6,7 @@ using FlexionV2.Views;
 
 namespace FlexionV2;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -17,9 +17,9 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
+            desktop.MainWindow = new Main
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainViewModel()
             };
         }
 

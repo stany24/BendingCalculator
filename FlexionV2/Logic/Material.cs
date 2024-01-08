@@ -1,47 +1,39 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FlexionV2.Logic
+namespace FlexionV2.Logic;
+
+public class Material
 {
-    public class Material
+    public long MaterialId { get; set; }
+        
+    private string _name;
+
+    [JsonInclude]
+    public string Name
     {
-        private string _nom;
+        get => _name;
+        set {if (value != "") { _name = value; }}
+    }
 
-        [JsonInclude]
-        public string Nom
-        {
-            get => _nom;
-            set {if (value != "") { _nom = value; }}
-        }
+    private long _e;
+    [JsonInclude]
+    public long E
+    {
+        get => _e;
+        set { if (value > 0) { _e = value; } }
+    }
+        
+    public Material(string name, long e)
+    {
+        Name = name;
+        E = e;
+    }
 
-        private double _e;
-        [JsonInclude]
-        public double E
-        {
-            get => _e;
-            set { if (value > 0) { _e = value; } }
-        }
-
-        /// <summary>
-        /// Instancie une nouvelle matière avec un nom et une valeur E
-        /// </summary>
-        /// <param name="nom">Le nom de la matière</param>
-        /// <param name="e">La valeur E de la matière</param>
-        public Material(string nom, double e)
-        {
-            Nom = nom;
-            E = e;
-        }
-
-        [JsonConstructor]
-        public Material() { }
-
-        /// <summary>
-        /// Retourne le nom de la matière avec sa valeur E 
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return $"{Nom}:{E / 1e9}";
-        }
+    [JsonConstructor]
+    public Material() { }
+        
+    public override string ToString()
+    {
+        return $"{Name}:{E / 1e9}";
     }
 }

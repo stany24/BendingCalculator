@@ -21,6 +21,28 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5"/>
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5"/>
+        <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
+        <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="Views\Editors\Material\MaterialEditor.axaml.cs">
+        <DependentUpon>MaterialEditor.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Editors\Piece\PieceEditor.axaml.cs">
+        <DependentUpon>PieceEditor.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Database\" />
     </ItemGroup>
 </Project>
