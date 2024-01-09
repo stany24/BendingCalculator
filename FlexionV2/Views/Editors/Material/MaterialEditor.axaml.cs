@@ -22,6 +22,30 @@ public partial class MaterialEditor : Editor
         {
             LbxItems.Items.Add(material);
         }
+
+
+        CbxUnits.Items.Add("GPa");
+        CbxUnits.SelectedItem = "GPa";
+        CbxUnits.Items.Add("MPa");
+    }
+    
+    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    {
+        if (LbxItems.SelectedItems == null) return;
+        if (e.NewValue == null) return;
+        int multiplication;
+        switch (CbxUnits.SelectedItem)
+        {
+            case "GPa" : multiplication = 1000000000;
+                break;
+            case "MPa" : multiplication = 1000000;
+                break;
+            default: return;
+        }
+        foreach (TItem item in LbxItems.SelectedItems)
+            
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (long)e.NewValue*multiplication);
+        UpdateListBox<TItem>();
     }
 
     protected override void RemoveItems()
@@ -68,7 +92,16 @@ public partial class MaterialEditor : Editor
 
     private void CreateNewMaterial()
     {
-        Logic.Material material = new(TbxName.Text ?? "nouveau",Convert.ToInt64(NudE.Value ?? 69000000000));
+        int multiplication;
+        switch (CbxUnits.SelectedItem)
+        {
+            case "GPa" : multiplication = 1000000000;
+                break;
+            case "MPa" : multiplication = 1000000;
+                break;
+            default: return;
+        }
+        Logic.Material material = new(TbxName.Text ?? "nouveau",Convert.ToInt64(NudE.Value*multiplication ?? 69000000000));
         LbxItems.Items.Add(DataBaseCreator.NewMaterial(_connection,material));
     }
 }
