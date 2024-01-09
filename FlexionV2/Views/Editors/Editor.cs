@@ -102,7 +102,7 @@ public abstract class Editor : Window
     /// <param name="e">The event with the changed variable</param>
     /// <param name="propertyName">The property you want to change</param>
     /// <typeparam name="TItem">The class of item you want to change</typeparam>
-    internal void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    protected virtual void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
     {
         if (LbxItems.SelectedItems == null) return;
         if (e.NewValue == null) return;

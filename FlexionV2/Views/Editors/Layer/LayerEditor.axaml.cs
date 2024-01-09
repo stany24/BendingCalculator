@@ -32,6 +32,15 @@ public partial class LayerEditor : Editor
     {
         DataBaseEvents.MaterialsChanged -= UpdateMaterials;
     }
+    
+    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    {
+        if (LbxItems.SelectedItems == null) return;
+        if (e.NewValue == null) return;
+        foreach (TItem item in LbxItems.SelectedItems)
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue/1000);
+        UpdateListBox<TItem>();
+    }
 
     private void UpdateMaterials(object? s, EventArgs e)
     {
@@ -87,9 +96,9 @@ public partial class LayerEditor : Editor
 
     private void CreateNewLayer()
     {
-        Logic.Layer layer = new(CbxMaterial.SelectedItem as Logic.Material , Convert.ToDouble(NudWidthCenter.Value ?? 1),
-            Convert.ToDouble(NudWidthSide.Value ?? 1), Convert.ToDouble(NudHeightCenter.Value ?? 1),
-            Convert.ToDouble(NudHeightSide.Value ?? 1));
+        Logic.Layer layer = new(CbxMaterial.SelectedItem as Logic.Material , Convert.ToDouble(NudWidthCenter.Value/1000 ?? 1),
+            Convert.ToDouble(NudWidthSide.Value/1000 ?? 1), Convert.ToDouble(NudHeightCenter.Value/1000 ?? 1),
+            Convert.ToDouble(NudHeightSide.Value/1000 ?? 1));
         LbxItems.Items.Add(DataBaseCreator.NewLayer(_connection,layer ));
     }
 }

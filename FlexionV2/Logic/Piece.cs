@@ -80,9 +80,8 @@ public class Piece
     {
         return Layers.Count switch
         {
-            0 => $"{Name} / {Length}m",
-            1 => $"{Name} / {Length}m / 1 couche",
-            _ => $"{Name} / {Length}m / {Layers.Count} couches"
+            0 => $"{Name} / {Length*1000}mm",
+            _ => $"{Name} / {Length*1000}mm / {Layers.Count} couches"
         };
     }
 

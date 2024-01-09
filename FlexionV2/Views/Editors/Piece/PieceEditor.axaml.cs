@@ -33,6 +33,15 @@ public partial class PieceEditor : Editor
         DataBaseEvents.LayerOfPieceChanged -= UpdatePieces;
     }
     
+    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    {
+        if (LbxItems.SelectedItems == null) return;
+        if (e.NewValue == null) return;
+        foreach (TItem item in LbxItems.SelectedItems)
+            item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue/1000);
+        UpdateListBox<TItem>();
+    }
+    
     protected override void UpdateListBox<TItem>()
     {
         List<Logic.Piece> selected = new();
@@ -128,7 +137,7 @@ public partial class PieceEditor : Editor
 
     private void CreateNewPiece()
     {
-        Logic.Piece piece = new(Convert.ToDouble(NudLength.Value ?? 1), TbxName.Text ?? "nouveau", 69e9);
+        Logic.Piece piece = new(Convert.ToDouble(NudLength.Value/1000 ?? 1), TbxName.Text ?? "nouveau", 69e9);
         LbxItems.Items.Add(DataBaseCreator.NewPiece(_connection, piece));
     }
 }
