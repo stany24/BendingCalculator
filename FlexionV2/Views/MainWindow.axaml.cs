@@ -18,8 +18,6 @@ namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
-    private const double Gap = 1e-4;
-    
     private ForceEditor? _forceEditor;
     
     private MaterialEditor? _materialEditor;
@@ -145,7 +143,7 @@ public partial class Main : Window
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(NudForce.Value == null){return;}
             if(DataContext is not MainViewModel model){return;}
-            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, Gap).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }

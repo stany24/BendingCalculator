@@ -63,6 +63,12 @@ public partial class MaterialEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,4);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(DataBaseCreator.NewMaterial(_connection));
+        BtnAdd.Click += (_, _) => CreateNewMaterial();
+    }
+
+    private void CreateNewMaterial()
+    {
+        Logic.Material material = new(TbxName.Text ?? "nouveau",Convert.ToInt64(NudE.Value ?? 69000000000));
+        LbxItems.Items.Add(DataBaseCreator.NewMaterial(_connection,material));
     }
 }

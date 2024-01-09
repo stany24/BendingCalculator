@@ -82,6 +82,14 @@ public partial class LayerEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,10);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) =>LbxItems.Items.Add(DataBaseCreator.NewLayer(_connection,CbxMaterial.SelectedItem as Logic.Material));
+        BtnAdd.Click += (_, _) =>CreateNewLayer();
+    }
+
+    private void CreateNewLayer()
+    {
+        Logic.Layer layer = new(CbxMaterial.SelectedItem as Logic.Material , Convert.ToDouble(NudWidthCenter.Value ?? 1),
+            Convert.ToDouble(NudWidthSide.Value ?? 1), Convert.ToDouble(NudHeightCenter.Value ?? 1),
+            Convert.ToDouble(NudHeightSide.Value ?? 1));
+        LbxItems.Items.Add(DataBaseCreator.NewLayer(_connection,layer ));
     }
 }

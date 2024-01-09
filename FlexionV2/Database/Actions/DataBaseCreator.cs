@@ -5,9 +5,8 @@ namespace FlexionV2.Database.Actions;
 
 public static class DataBaseCreator
 {
-    public static Piece NewPiece(SQLiteConnection connection)
+    public static Piece NewPiece(SQLiteConnection connection,Piece piece)
     {
-        Piece piece = new(1, "nouveau", 69e9);
         using SQLiteCommand cmd = new(
             @"INSERT INTO Piece (Name,Length,Eref,IsRemoved) 
                                 VALUES (@Name, @Length, @Eref, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
@@ -20,9 +19,8 @@ public static class DataBaseCreator
         return piece;
     }
     
-    public static Layer NewLayer(SQLiteConnection connection,Material? material)
+    public static Layer NewLayer(SQLiteConnection connection,Layer layer)
     {
-        Layer layer = new(1,1);
         using SQLiteCommand cmd = new(
             @"INSERT INTO Layer (WidthAtCenter,WidthOnSides,HeightAtCenter,HeightOnSides,MaterialId,IsRemoved) 
                                 VALUES (@WidthAtCenter, @WidthOnSides, @HeightAtCenter, @HeightOnSides ,@MaterialId, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
@@ -32,9 +30,8 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
         cmd.Parameters.AddWithValue("@IsRemoved",0);
         
-        if (material != null)
+        if (layer.Material != null)
         {
-            layer.Material =material;
             cmd.Parameters.AddWithValue("@MaterialId",layer.Material!.MaterialId);
         }
         else
@@ -46,9 +43,8 @@ public static class DataBaseCreator
         return layer;
     }
     
-    public static Material NewMaterial(SQLiteConnection connection)
+    public static Material NewMaterial(SQLiteConnection connection,Material material)
     {
-        Material material = new("nouveau",69000000000);
         using SQLiteCommand cmd = new(
             @"INSERT INTO Material (Name,E,IsRemoved) 
                                 VALUES (@Name, @E, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);

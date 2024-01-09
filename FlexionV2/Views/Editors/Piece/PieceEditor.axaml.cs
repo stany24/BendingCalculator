@@ -122,7 +122,13 @@ public partial class PieceEditor : Editor
         Grid.SetColumn(BtnRemove,4);
         Grid.SetRow(BtnRemove,6);
         Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => LbxItems.Items.Add(DataBaseCreator.NewPiece(_connection));
+        BtnAdd.Click += (_, _) => CreateNewPiece();
         BtnChangeLayers.IsEnabled = false;
+    }
+
+    private void CreateNewPiece()
+    {
+        Logic.Piece piece = new(Convert.ToDouble(NudLength.Value ?? 1), TbxName.Text ?? "nouveau", 69e9);
+        LbxItems.Items.Add(DataBaseCreator.NewPiece(_connection, piece));
     }
 }

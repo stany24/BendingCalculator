@@ -55,7 +55,7 @@ public class Layer
         HeightOnSides = height;
     }
         
-    public Layer(Material material, double width, double height)
+    public Layer(Material? material, double width, double height)
     {
         Material = material;
         WidthAtCenter=width;
@@ -64,7 +64,7 @@ public class Layer
         HeightOnSides = height;
     }
         
-    public Layer(Material material, double widthCenter, double widthSides, double heightCenter, double heightSides)
+    public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
     {
         Material = material;
         WidthAtCenter = widthCenter;
