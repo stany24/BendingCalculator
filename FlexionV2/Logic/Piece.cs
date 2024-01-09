@@ -40,7 +40,7 @@ public class Piece
 
     private double[] SetX(double gap)
     {
-        List<double> X = new List<double>();
+        List<double> X = new();
         for (double i = 0; i <= Length + gap; i += gap)
         {
             X.Add(i);
@@ -112,7 +112,7 @@ public class Piece
         return moments;
     }
 
-    public double[] Intégrale(double force, double gap)
+    public IEnumerable<double> Intégrale(double force, double gap)
     {
         Xs = SetX(gap);
         double[] integrale1 = new double[Xs.Length];

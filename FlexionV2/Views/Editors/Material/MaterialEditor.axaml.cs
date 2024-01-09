@@ -4,7 +4,6 @@ using System.Data.SQLite;
 using System.Linq;
 using Avalonia.Controls;
 using FlexionV2.Database.Actions;
-using FlexionV2.Logic;
 
 namespace FlexionV2.Views.Editors.Material;
 
@@ -29,7 +28,7 @@ public partial class MaterialEditor : Editor
         CbxUnits.Items.Add("MPa");
     }
     
-    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
     {
         if (LbxItems.SelectedItems == null) return;
         if (e.NewValue == null) return;

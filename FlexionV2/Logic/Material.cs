@@ -34,13 +34,6 @@ public class Material
         
     public override string ToString()
     {
-        if (E > 1e9 - 1)
-        {
-            return $"{Name}:{E / 1e9} GPa";
-        }
-        else
-        {
-            return $"{Name}:{E / 1e6} MPa";
-        }
+        return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";
     }
 }

@@ -95,36 +95,6 @@ public abstract class Editor : Window
             item.GetType().GetProperty(propertyName)?.SetValue(item, textBox.Text);
         UpdateListBox<TItem>();
     }
-    
-    /// <summary>
-    /// Generalized function used to modified one numerical property of selected items in the listbox from a numeric up down
-    /// </summary>
-    /// <param name="e">The event with the changed variable</param>
-    /// <param name="propertyName">The property you want to change</param>
-    /// <typeparam name="TItem">The class of item you want to change</typeparam>
-    protected virtual void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
-    {
-        if (LbxItems.SelectedItems == null) return;
-        if (e.NewValue == null) return;
-        foreach (TItem item in LbxItems.SelectedItems)
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (long)e.NewValue);
-        UpdateListBox<TItem>();
-    }
-    
-    /// <summary>
-    /// Generalized function used to modified one boolean property of selected items in the listbox from a checkbox
-    /// </summary>
-    /// <param name="checkBox">The input for the changed variable</param>
-    /// <param name="propertyName">The property you want to change</param>
-    /// <typeparam name="TItem">The class of item you want to change</typeparam>
-    internal void CheckBoxChanged<TItem>( CheckBox checkBox, string propertyName)
-    {
-        if (LbxItems.SelectedItems == null) return;
-        if (checkBox.IsChecked == null) return;
-        foreach (TItem item in LbxItems.SelectedItems)
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (bool)checkBox.IsChecked);
-        UpdateListBox<TItem>();
-    }
 
     /// <summary>
     /// Generalized function used to modified one enum property of selected items in the listbox with the value of a combobox

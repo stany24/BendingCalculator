@@ -32,8 +32,8 @@ public partial class PieceEditor : Editor
     {
         DataBaseEvents.LayerOfPieceChanged -= UpdatePieces;
     }
-    
-    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+
+    private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
     {
         if (LbxItems.SelectedItems == null) return;
         if (e.NewValue == null) return;
@@ -108,7 +108,7 @@ public partial class PieceEditor : Editor
                 break;
             default:
             {
-                foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,(LbxItems.SelectedItems[0] as Logic.Piece).PieceId))
+                foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,(LbxItems.SelectedItems[0] as Logic.Piece)!.PieceId))
                 {
                     LbxLayers.Items.Add(layer);
                 }

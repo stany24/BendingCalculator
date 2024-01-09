@@ -10,7 +10,6 @@ public static class DataBaseUpdater
     {
         foreach (Material? material in materials)
         {
-            if(material == null){return;}
             using SQLiteCommand cmd = new(
                 "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", connection);
             cmd.Parameters.AddWithValue("@WidthAtCenter",material.Name);
@@ -25,7 +24,6 @@ public static class DataBaseUpdater
     {
         foreach (Layer? layer in layers)
         {
-            if(layer == null){return;}
             using SQLiteCommand cmd = new(
                 "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;", connection);
             cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
@@ -43,7 +41,6 @@ public static class DataBaseUpdater
     {
         foreach (Piece? piece in pieces)
         {
-            if(piece == null){return;}
             using SQLiteCommand cmd1 = new(
                 "UPDATE Piece SET Name = @Name, Length = @Length, Eref = @Eref WHERE PieceId= @Id;", connection);
             cmd1.Parameters.AddWithValue("@Name",piece.Name);

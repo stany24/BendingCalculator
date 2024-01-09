@@ -65,7 +65,7 @@ public static class DataBaseLoader
             ORDER BY p.PieceId, pl.LayerOrder;", connection);
         
         using SQLiteDataReader reader = cmd.ExecuteReader();
-        List<Piece> pieces = new List<Piece>();
+        List<Piece> pieces = new();
         Piece? currentPiece = null;
         
         while (reader.Read())
@@ -120,7 +120,7 @@ public static class DataBaseLoader
           WHERE Layer.IsRemoved = 0;", connection);
         
         using SQLiteDataReader reader = cmd.ExecuteReader();
-        List<Layer> layers = new List<Layer>();
+        List<Layer> layers = new();
         while (reader.Read())
         {
             Layer layer = new()

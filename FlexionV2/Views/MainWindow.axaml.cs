@@ -27,7 +27,7 @@ public partial class Main : Window
     
     private PieceEditor? _pieceEditor;
 
-    private SQLiteConnection _connection;
+    private SQLiteConnection _connection = null!;
 
     public Main()
     {

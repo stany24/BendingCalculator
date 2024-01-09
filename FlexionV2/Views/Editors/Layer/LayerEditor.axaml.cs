@@ -33,7 +33,7 @@ public partial class LayerEditor : Editor
         DataBaseEvents.MaterialsChanged -= UpdateMaterials;
     }
     
-    protected override void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
     {
         if (LbxItems.SelectedItems == null) return;
         if (e.NewValue == null) return;
