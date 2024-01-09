@@ -72,7 +72,8 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"></ListBox>
+                MinWidth="200"
+                ItemsSource="{Binding Pieces}"></ListBox>
         </Grid>
         <Grid 
             Name="GridLayer"
@@ -99,7 +100,8 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"></ListBox>
+                MinWidth="200"
+                ItemsSource="{Binding Layers}"></ListBox>
         </Grid>
         <Grid 
             Name="GridMaterial"
@@ -126,7 +128,8 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"></ListBox>
+                MinWidth="200"
+                ItemsSource="{Binding Materials}"></ListBox>
         </Grid>
         <lvc:CartesianChart 
             Name="ChartResult"

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using FlexionV2.Logic;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
@@ -23,7 +24,33 @@ public class MainViewModel : ViewModelBase
         }
     };
 
-    public List<Piece> Pieces { get; set; } = new();
-    public List<Layer> Layers { get; set; } = new();
-    public List<Material> Materials { get; set; } = new();
+    private ObservableCollection<Piece> _pieces = new();
+    public ObservableCollection<Piece> Pieces { 
+        get => _pieces;
+        set
+        {
+            _pieces = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private ObservableCollection<Layer> _layers = new();
+    public ObservableCollection<Layer> Layers { 
+        get => _layers;
+        set
+        {
+            _layers = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private ObservableCollection<Material> _materials = new();
+    public ObservableCollection<Material> Materials { 
+        get => _materials;
+        set
+        {
+            _materials = value;
+            OnPropertyChanged();
+        }
+    }
 }

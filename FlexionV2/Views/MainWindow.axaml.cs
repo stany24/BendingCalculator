@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -75,32 +76,31 @@ public partial class Main : Window
         _pieceEditor?.Close();
         _forceEditor?.Close();
     }
-
+    
+    private void ReloadMaterials()
+    {
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+            if(DataContext is not MainViewModel model){return;}
+            model.Materials = new ObservableCollection<Material>(DataBaseLoader.LoadMaterials(_connection));
+        });
+        
+    }
+    
     private void ReloadLayers()
     {
-        LbxLayer.Items.Clear();
-        foreach (Layer layer in DataBaseLoader.LoadLayers(_connection))
-        {
-            LbxLayer.Items.Add(layer);
-        }
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+            if(DataContext is not MainViewModel model){return;}
+            model.Layers = new ObservableCollection<Layer>(DataBaseLoader.LoadLayers(_connection));
+        }); 
     }
     
     private void ReloadPieces()
     {
-        LbxPiece.Items.Clear();
-        foreach (Piece piece in DataBaseLoader.LoadPieces(_connection))
-        {
-            LbxPiece.Items.Add(piece);
-        }
-    }
-    
-    private void ReloadMaterials()
-    {
-        LbxMaterial.Items.Clear();
-        foreach (Material material in DataBaseLoader.LoadMaterials(_connection))
-        {
-            LbxMaterial.Items.Add(material);
-        }
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
+            if(DataContext is not MainViewModel model){return;}
+            model.Pieces = new ObservableCollection<Piece>(DataBaseLoader.LoadPieces(_connection));
+        });
+        
     }
 
     private void OpenForceEditor()
