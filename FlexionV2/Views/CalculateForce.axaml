@@ -5,7 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.CalculateForce"
         SizeToContent="WidthAndHeight"
-        Title="CalculateForce">
+        Title="Calculateur de forces">
     <Grid 
         Name="Grid"
         ColumnDefinitions="Auto,10,Auto"

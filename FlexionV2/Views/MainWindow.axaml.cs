@@ -141,6 +141,7 @@ public partial class Main : Window
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
             if(LbxPiece.SelectedItems is { Count: 0 }){return;}
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
+            if(piece.Layers.Count == 0){return;}
             if(NudForce.Value == null){return;}
             if(DataContext is not MainViewModel model){return;}
             model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();

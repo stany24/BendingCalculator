@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Layer.LayerEditor"
-        Title="LayerEditor"
+        Title="Éditeur de couches"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 
@@ -16,7 +16,7 @@
             Name="LblWidthCenter"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="0">Largeur au centre:</TextBlock>
+            Grid.Row="0">Largeur au centre (mm):</TextBlock>
         <NumericUpDown 
             Name="NudWidthCenter"
             Value="1"
@@ -27,7 +27,7 @@
             Name="LblWidthSide"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="2">Largeur sur les cotés:</TextBlock>
+            Grid.Row="2">Largeur sur les cotés (mm):</TextBlock>
         <NumericUpDown 
             Name="NudWidthSide"
             Value="1"
@@ -38,7 +38,7 @@
             Name="LblHeightCenter"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="4">Hauteur au centre:</TextBlock>
+            Grid.Row="4">Hauteur au centre (mm):</TextBlock>
         <NumericUpDown 
             Name="NudHeightCenter"
             Value="1"
@@ -49,7 +49,7 @@
             Name="LblHeightSide"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="6">Hauteur sur les cotés:</TextBlock>
+            Grid.Row="6">Hauteur sur les cotés (mm):</TextBlock>
         <NumericUpDown 
             Name="NudHeightSide"
             Value="1"

@@ -21,8 +21,8 @@ public abstract class Editor : Window
     {
         LbxItems.SelectionMode = SelectionMode.Multiple;
         BtnRemove.Click +=(_,_) => RemoveItems();
-        BtnAdd.Content = "Ajouter";
-        BtnRemove.Content = "Retirer";
+        BtnAdd.Content = "Nouveau";
+        BtnRemove.Content = "Supprimer";
     }
 
     #region Json
