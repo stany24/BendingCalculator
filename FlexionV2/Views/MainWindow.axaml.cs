@@ -1,11 +1,8 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Data.SQLite;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
-using FlexionV2.Database.Actions;
+using Avalonia.Data;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
 using FlexionV2.Views.Editors.Force;
@@ -32,11 +29,25 @@ public partial class Main : Window
     {
         _model = model;
         InitializeComponent();
+        Binding binding1 = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Materials)
+        }; 
+        LbxMaterial.Bind(ItemsControl.ItemsSourceProperty,binding1 );
+        Binding binding2 = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Layers)
+        }; 
+        LbxLayer.Bind(ItemsControl.ItemsSourceProperty,binding2 );
+        Binding binding3 = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Pieces)
+        }; 
+        LbxPiece.Bind(ItemsControl.ItemsSourceProperty,binding3 );
         UiEvents();
-        Closing += (_, _) => CloseAllWindows();
-        _model.ReloadMaterials();
-        _model.ReloadLayers();
-        _model.ReloadPieces();
     }
 
     private void UiEvents()
@@ -46,6 +57,7 @@ public partial class Main : Window
         BtnLayer.Click += (_, _) => OpenLayerEditor();
         BtnPiece.Click += (_,_) => OpenPieceEditor();
         BtnStart.Click += (_, _) => Task.Run(CalculateFlexion);
+        Closing += (_, _) => CloseAllWindows();
     }
 
     private void CloseAllWindows()

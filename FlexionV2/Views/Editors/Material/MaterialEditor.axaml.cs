@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using FlexionV2.Database.Actions;
 using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Material;
 
 public partial class MaterialEditor : Editor
 {
-    private MainViewModel _model;
+    private readonly MainViewModel _model;
     public MaterialEditor(MainViewModel model)
     {
         _model = model;
@@ -55,11 +53,10 @@ public partial class MaterialEditor : Editor
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
-        while (LbxItems.SelectedItems.Count > 0)
+        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Material>().Select(x => x.MaterialId).ToList();
+        foreach (long id in selected)
         {
-            if(LbxItems.SelectedItems[0] is not Logic.Material material){return;}
-            _model.RemoveMaterial(material.MaterialId);
-            LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
+            _model.RemoveMaterial(id);
         }
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;

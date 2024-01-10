@@ -11,7 +11,7 @@ namespace FlexionV2.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private SQLiteConnection _connection;
+    private readonly SQLiteConnection _connection;
 
     public MainViewModel(SQLiteConnection connection)
     {
@@ -19,6 +19,10 @@ public class MainViewModel : ViewModelBase
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
+        DataBaseEvents.LayerOfPieceChanged += (_, _) => LoadLayersOfPiece(_selectedPieceId);
+        ReloadMaterials();
+        ReloadLayers();
+        ReloadPieces();
     }
     
     public ISeries[] Series { get; set; } =
@@ -35,8 +39,8 @@ public class MainViewModel : ViewModelBase
             }
         }
     };
-    
-    public ObservableCollection<Layer> LayersOfSelectedPiece { get; set; }
+
+    public ObservableCollection<Layer> LayersOfSelectedPiece { get; set; } = new();
 
     private ObservableCollection<Piece> _pieces = new();
     public ObservableCollection<Piece> Pieces { 
@@ -67,8 +71,8 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
-    
-    public void ReloadMaterials()
+
+    private void ReloadMaterials()
     {
         Materials = new ObservableCollection<Material>(DataBaseLoader.LoadMaterials(_connection));
     }
@@ -87,8 +91,8 @@ public class MainViewModel : ViewModelBase
     {
         DataBaseRemover.RemoveMaterial(_connection,id);
     }
-    
-    public void ReloadLayers()
+
+    private void ReloadLayers()
     {
         Layers = new ObservableCollection<Layer>(DataBaseLoader.LoadLayers(_connection));
     }
@@ -107,8 +111,8 @@ public class MainViewModel : ViewModelBase
     {
         DataBaseRemover.RemoveLayer(_connection,id);
     }
-    
-    public void ReloadPieces()
+
+    private void ReloadPieces()
     {
         Pieces = new ObservableCollection<Piece>(DataBaseLoader.LoadPieces(_connection));
     }
@@ -128,9 +132,13 @@ public class MainViewModel : ViewModelBase
         DataBaseRemover.RemovePiece(_connection,id);
     }
 
-    public void LoadLayersOfPiece(long id)
+    private long _selectedPieceId;
+    public void LoadLayersOfPiece(long? id)
     {
-        foreach (Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,id))
+        LayersOfSelectedPiece.Clear();
+        if(id is not { } id2){return;}
+        _selectedPieceId = id2;
+        foreach (Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,id2))
         {
             LayersOfSelectedPiece.Add(layer);
         }

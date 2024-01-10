@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using FlexionV2.Database.Actions;
 using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Piece;
@@ -23,12 +21,18 @@ public partial class PieceEditor : Editor
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        Binding binding = new()
+        Binding binding1 = new()
         { 
             Source = _model, 
             Path = nameof(_model.Pieces)
         }; 
-        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding );
+        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding1 );
+        Binding binding2 = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.LayersOfSelectedPiece)
+        }; 
+        LbxLayers.Bind(ItemsControl.ItemsSourceProperty,binding2 );
         Closing += (_, _) => _listLayersEditor?.Close();
     }
 
@@ -57,11 +61,10 @@ public partial class PieceEditor : Editor
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
-        while (LbxItems.SelectedItems.Count > 0)
+        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Piece>().Select(x => x.PieceId).ToList();
+        foreach (long id in selected)
         {
-            if(LbxItems.SelectedItems[0] is not Logic.Piece piece){continue;}
-            _model.RemovePiece(piece.PieceId);
-            LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
+            _model.RemovePiece(id);
         }
 
         if (index <= 0) return;
@@ -81,10 +84,11 @@ public partial class PieceEditor : Editor
 
     private void UpdateListLayer()
     {
-        LbxLayers.Items.Clear();
+        long? pieceId = null;
         if (LbxItems.SelectedItems == null)
         {
             BtnChangeLayers.IsEnabled = false;
+            _model.LoadLayersOfPiece(pieceId);
             return;
         }
         switch (LbxItems.SelectedItems.Count)
@@ -99,12 +103,14 @@ public partial class PieceEditor : Editor
             default:
             {
                 if(LbxItems.SelectedItems[0] is not Logic.Piece piece){return;}
-                _model.LoadLayersOfPiece(piece.PieceId);
+                pieceId = piece.PieceId;
                 BtnChangeLayers.IsEnabled = true;
                 break;
             }
         }
+        _model.LoadLayersOfPiece(pieceId);
     }
+    
     private void InitializeUi()
     {
         Grid.SetColumn(LbxItems,0);

@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using FlexionV2.Database.Actions;
 using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Layer;
 
 public partial class LayerEditor : Editor
 {
-    private MainViewModel _model;
+    private readonly MainViewModel _model;
     public LayerEditor(MainViewModel model)
     {
         _model = model;
@@ -44,13 +42,11 @@ public partial class LayerEditor : Editor
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
-        while (LbxItems.SelectedItems.Count > 0)
+        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Layer>().Select(x => x.LayerId).ToList();
+        foreach (long id in selected)
         {
-            if(LbxItems.SelectedItems[0] is not Logic.Layer layer){continue;}
-            _model.RemoveLayer(layer.LayerId);
-            LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
+            _model.RemoveLayer(id);
         }
-
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
     }
