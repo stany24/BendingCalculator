@@ -2,26 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using FlexionV2.Database.Actions;
+using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Material;
 
 public partial class MaterialEditor : Editor
 {
-    private readonly SQLiteConnection _connection;
-    public MaterialEditor(SQLiteConnection connection)
+    private MainViewModel _model;
+    public MaterialEditor(MainViewModel model)
     {
-        _connection = connection;
+        _model = model;
         InitializeComponent();
         InitializeUi();
         NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Material>(TbxName, "Name");
-        foreach (Logic.Material material in DataBaseLoader.LoadMaterials(_connection))
-        {
-            LbxItems.Items.Add(material);
-        }
-
+        Binding binding = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Materials)
+        }; 
+        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding );
 
         CbxUnits.Items.Add("GPa");
         CbxUnits.SelectedItem = "GPa";
@@ -54,7 +58,7 @@ public partial class MaterialEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             if(LbxItems.SelectedItems[0] is not Logic.Material material){return;}
-            DataBaseRemover.RemoveMaterial(_connection,material.MaterialId);
+            _model.RemoveMaterial(material.MaterialId);
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
         if (index <= 0) return;
@@ -66,7 +70,7 @@ public partial class MaterialEditor : Editor
         List<Logic.Material> items = LbxItems.Items.Cast<Logic.Material>().ToList();
         List<Logic.Material> selected = new();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Material>().ToList(); }
-        DataBaseUpdater.UpdateMaterials(_connection,items);
+        _model.UpdateMaterials(items);
         LbxItems.Items.Clear();
         foreach (Logic.Material item in items) LbxItems.Items.Add(item);
         if (LbxItems.SelectedItems == null) return;
@@ -101,6 +105,6 @@ public partial class MaterialEditor : Editor
             default: return;
         }
         Logic.Material material = new(TbxName.Text ?? "nouveau",Convert.ToInt64(NudE.Value*multiplication ?? 69000000000));
-        LbxItems.Items.Add(DataBaseCreator.NewMaterial(_connection,material));
+        _model.NewMaterial(material);
     }
 }

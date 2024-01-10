@@ -2,17 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using FlexionV2.Database.Actions;
+using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Layer;
 
 public partial class LayerEditor : Editor
 {
-    private readonly SQLiteConnection _connection;
-    public LayerEditor(SQLiteConnection connection)
+    private MainViewModel _model;
+    public LayerEditor(MainViewModel model)
     {
-        _connection = connection;
+        _model = model;
         InitializeComponent();
         InitializeUi();
         NudHeightCenter.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"HeightAtCenter");
@@ -20,17 +23,12 @@ public partial class LayerEditor : Editor
         NudWidthCenter.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthAtCenter");
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
         CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
-        DataBaseEvents.MaterialsChanged += UpdateMaterials;
-        UpdateMaterials(null,EventArgs.Empty);
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
-        {
-            LbxItems.Items.Add(layer);
-        }
-    }
-    
-    ~LayerEditor()
-    {
-        DataBaseEvents.MaterialsChanged -= UpdateMaterials;
+        Binding binding = new()
+        { 
+            Source = _model,
+            Path = nameof(_model.Layers)
+        }; 
+        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding );
     }
     
     private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
@@ -42,15 +40,6 @@ public partial class LayerEditor : Editor
         UpdateListBox<TItem>();
     }
 
-    private void UpdateMaterials(object? s, EventArgs e)
-    {
-        CbxMaterial.Items.Clear();
-        foreach (Logic.Material material in DataBaseLoader.LoadMaterials(_connection))
-        {
-            CbxMaterial.Items.Add(material);
-        }
-    }
-
     protected override void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
@@ -58,7 +47,7 @@ public partial class LayerEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             if(LbxItems.SelectedItems[0] is not Logic.Layer layer){continue;}
-            DataBaseRemover.RemoveLayer(_connection,layer.LayerId);
+            _model.RemoveLayer(layer.LayerId);
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
 
@@ -71,7 +60,7 @@ public partial class LayerEditor : Editor
         List<Logic.Layer> items = LbxItems.Items.Cast<Logic.Layer>().ToList();
         List<Logic.Layer> selected = new();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Layer>().ToList(); }
-        DataBaseUpdater.UpdateLayers(_connection,items);
+        _model.UpdateLayers(items);
         LbxItems.Items.Clear();
         foreach (Logic.Layer item in items) LbxItems.Items.Add(item);
         if (LbxItems.SelectedItems == null) return;
@@ -99,6 +88,6 @@ public partial class LayerEditor : Editor
         Logic.Layer layer = new(CbxMaterial.SelectedItem as Logic.Material , Convert.ToDouble(NudWidthCenter.Value/1000 ?? 1),
             Convert.ToDouble(NudWidthSide.Value/1000 ?? 1), Convert.ToDouble(NudHeightCenter.Value/1000 ?? 1),
             Convert.ToDouble(NudHeightSide.Value/1000 ?? 1));
-        LbxItems.Items.Add(DataBaseCreator.NewLayer(_connection,layer ));
+        _model.NewLayer(layer);
     }
 }

@@ -37,7 +37,7 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseLayersChangedEvent();
     }
     
-    public static void UpdatePiece(SQLiteConnection connection,List<Piece> pieces)
+    public static void UpdatePieces(SQLiteConnection connection,List<Piece> pieces)
     {
         foreach (Piece? piece in pieces)
         {

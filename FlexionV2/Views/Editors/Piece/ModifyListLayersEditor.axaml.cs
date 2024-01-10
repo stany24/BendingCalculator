@@ -1,18 +1,20 @@
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using FlexionV2.Database.Actions;
+using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Piece;
 
 public partial class ListLayersEditor : Window
 {
-    private readonly SQLiteConnection _connection;
+    private readonly MainViewModel _model;
     private readonly long _pieceId;
-    public ListLayersEditor(SQLiteConnection connection, long pieceId)
+    public ListLayersEditor(MainViewModel model, long pieceId)
     {
-        _connection = connection;
+        _model = model;
         _pieceId = pieceId;
         InitializeComponent();
         LbxAvailable.SelectionChanged += (_, _) => { if (LbxAvailable.SelectedItems != null) BtnAdd.IsEnabled = LbxAvailable.SelectedItems.Count == 1; };
@@ -29,12 +31,15 @@ public partial class ListLayersEditor : Window
         };
         BtnMoveUp.Click += (_, _) =>MoveUp();
         BtnMoveDown.Click += (_, _) =>MoveDown();
-        UpdateAvailableLayers();
-        DataBaseEvents.LayersChanged += (_,_) => UpdateAvailableLayers();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection, _pieceId))
-        {
-            LbxInPiece.Items.Add(layer);
-        }
+        
+        Binding binding = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Layers)
+        }; 
+        LbxAvailable.Bind(ItemsControl.ItemsSourceProperty,binding );
+        
+        _model.LoadLayersOfPiece(pieceId);
     }
     
     private void UpdateListBox()
@@ -42,20 +47,11 @@ public partial class ListLayersEditor : Window
         List<Logic.Layer> selected = new();
         List<Logic.Layer> items = LbxInPiece.Items.Cast<Logic.Layer>().ToList();
         if (LbxInPiece.SelectedItems != null) { selected = LbxInPiece.SelectedItems.Cast<Logic.Layer>().ToList(); }
-        DataBaseUpdater.UpdateLayersInPiece(_connection,_pieceId,items);
+        _model.UpdateLayersInPiece(_pieceId, items);
         LbxInPiece.Items.Clear();
         foreach (Logic.Layer item in items) LbxInPiece.Items.Add(item);
         LbxInPiece.SelectedItems = new List<Logic.Layer>();
         foreach (Logic.Layer item in selected) LbxInPiece.SelectedItems.Add(item);
-    }
-
-    private void UpdateAvailableLayers()
-    {
-        LbxAvailable.Items.Clear();
-        foreach (Logic.Layer layer in DataBaseLoader.LoadLayers(_connection))
-        {
-            LbxAvailable.Items.Add(layer);
-        }
     }
 
     private void SelectedLayerChanged()

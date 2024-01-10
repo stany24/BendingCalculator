@@ -19,6 +19,7 @@ namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
+    private readonly MainViewModel _model;
     private ForceEditor? _forceEditor;
     
     private MaterialEditor? _materialEditor;
@@ -27,38 +28,16 @@ public partial class Main : Window
     
     private PieceEditor? _pieceEditor;
 
-    private SQLiteConnection _connection = null!;
-
-    public Main()
+    public Main(MainViewModel model)
     {
+        _model = model;
         InitializeComponent();
         UiEvents();
-        InitializeDatabaseConnection();
         Closing += (_, _) => CloseAllWindows();
+        _model.ReloadMaterials();
+        _model.ReloadLayers();
+        _model.ReloadPieces();
     }
-    
-    private void InitializeDatabaseConnection()
-    {
-        string databasePath = Path.Combine(Directory.GetCurrentDirectory(), "Database/Database.db");
-        string connectionString = $"Data Source={databasePath};";
-        try
-        {
-            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // used to correct an issue with the last version of sqlite
-            _connection = new SQLiteConnection(connectionString);
-            _connection.Open();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error connecting to the database: {ex.Message}");
-            Close();
-        }
-        DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
-        DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
-        DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
-        ReloadMaterials();
-        ReloadLayers();
-        ReloadPieces();
-    }   
 
     private void UiEvents()
     {
@@ -76,32 +55,6 @@ public partial class Main : Window
         _pieceEditor?.Close();
         _forceEditor?.Close();
     }
-    
-    private void ReloadMaterials()
-    {
-        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(DataContext is not MainViewModel model){return;}
-            model.Materials = new ObservableCollection<Material>(DataBaseLoader.LoadMaterials(_connection));
-        });
-        
-    }
-    
-    private void ReloadLayers()
-    {
-        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(DataContext is not MainViewModel model){return;}
-            model.Layers = new ObservableCollection<Layer>(DataBaseLoader.LoadLayers(_connection));
-        }); 
-    }
-    
-    private void ReloadPieces()
-    {
-        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
-            if(DataContext is not MainViewModel model){return;}
-            model.Pieces = new ObservableCollection<Piece>(DataBaseLoader.LoadPieces(_connection));
-        });
-        
-    }
 
     private void OpenForceEditor()
     {
@@ -115,7 +68,7 @@ public partial class Main : Window
     private void OpenMaterialEditor()
     {
         if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor(_connection);
+        _materialEditor = new MaterialEditor(_model);
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
     }
@@ -123,7 +76,7 @@ public partial class Main : Window
     private void OpenLayerEditor()
     {
         if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor(_connection);
+        _layerEditor = new LayerEditor(_model);
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
     }
@@ -131,7 +84,7 @@ public partial class Main : Window
     private void OpenPieceEditor()
     {
         if(_pieceEditor != null){return;}
-        _pieceEditor = new PieceEditor(_connection);
+        _pieceEditor = new PieceEditor(_model);
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _pieceEditor.Show();
     }
@@ -143,8 +96,7 @@ public partial class Main : Window
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(piece.Layers.Count == 0){return;}
             if(NudForce.Value == null){return;}
-            if(DataContext is not MainViewModel model){return;}
-            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            _model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }

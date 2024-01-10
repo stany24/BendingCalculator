@@ -2,35 +2,34 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using FlexionV2.Database.Actions;
+using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Piece;
 
 public partial class PieceEditor : Editor
 {
     private ListLayersEditor? _listLayersEditor;
-    private readonly SQLiteConnection _connection;
-    public PieceEditor(SQLiteConnection connection)
+    private readonly MainViewModel _model;
+    public PieceEditor(MainViewModel model)
     {
+        _model = model;
         InitializeComponent();
         InitializeUi();
-        _connection = connection;
         NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
         TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        DataBaseEvents.LayerOfPieceChanged += UpdatePieces;
-        foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
-        {
-            LbxItems.Items.Add(piece);
-        }
+        Binding binding = new()
+        { 
+            Source = _model, 
+            Path = nameof(_model.Pieces)
+        }; 
+        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding );
         Closing += (_, _) => _listLayersEditor?.Close();
-    }
-    
-    ~PieceEditor()
-    {
-        DataBaseEvents.LayerOfPieceChanged -= UpdatePieces;
     }
 
     private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
@@ -47,7 +46,7 @@ public partial class PieceEditor : Editor
         List<Logic.Piece> selected = new();
         List<Logic.Piece> items = LbxItems.Items.Cast<Logic.Piece>().ToList();
         if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList(); }
-        DataBaseUpdater.UpdatePiece(_connection,items);
+        _model.UpdatePieces(items);
         LbxItems.Items.Clear();
         foreach (Logic.Piece item in items) LbxItems.Items.Add(item);
         if (LbxItems.SelectedItems == null) return;
@@ -61,7 +60,7 @@ public partial class PieceEditor : Editor
         while (LbxItems.SelectedItems.Count > 0)
         {
             if(LbxItems.SelectedItems[0] is not Logic.Piece piece){continue;}
-            DataBaseRemover.RemovePiece(_connection,piece.PieceId);
+            _model.RemovePiece(piece.PieceId);
             LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
         }
 
@@ -69,20 +68,11 @@ public partial class PieceEditor : Editor
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
     }
     
-    private void UpdatePieces(object? sender, EventArgs eventArgs)
-    {
-        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => { LbxItems.Items.Clear(); 
-        foreach (Logic.Piece piece in DataBaseLoader.LoadPieces(_connection))
-        {
-            LbxItems.Items.Add(piece);
-        }});
-    }
-    
     private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
         if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
-        _listLayersEditor = new ListLayersEditor(_connection,piece.PieceId);
+        _listLayersEditor = new ListLayersEditor(_model,piece.PieceId);
         _listLayersEditor.Closing += (_, _) => IsEnabled = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
@@ -108,11 +98,8 @@ public partial class PieceEditor : Editor
                 break;
             default:
             {
-                foreach (Logic.Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,(LbxItems.SelectedItems[0] as Logic.Piece)!.PieceId))
-                {
-                    LbxLayers.Items.Add(layer);
-                }
-
+                if(LbxItems.SelectedItems[0] is not Logic.Piece piece){return;}
+                _model.LoadLayersOfPiece(piece.PieceId);
                 BtnChangeLayers.IsEnabled = true;
                 break;
             }
@@ -138,6 +125,6 @@ public partial class PieceEditor : Editor
     private void CreateNewPiece()
     {
         Logic.Piece piece = new(Convert.ToDouble(NudLength.Value/1000 ?? 1), TbxName.Text ?? "nouveau", 69e9);
-        LbxItems.Items.Add(DataBaseCreator.NewPiece(_connection, piece));
+        _model.NewPiece(piece);
     }
 }
