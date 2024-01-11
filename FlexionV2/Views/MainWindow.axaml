@@ -131,8 +131,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
-                            <TextBlock Text="{Binding E}"/>
+                            <TextBlock Text="{Binding Display}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>

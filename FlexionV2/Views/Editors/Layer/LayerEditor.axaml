@@ -71,20 +71,26 @@
             Name="LbxItems"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.RowSpan="6"
+            Grid.RowSpan="12"
             MinWidth="200"
             ItemsSource="{Binding Layers}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Material}" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding WidthAtCenter}"/>
-                        <TextBlock Text="{Binding WidthOnSides}"/>
-                        <TextBlock Text="{Binding HeightAtCenter}"/>
-                        <TextBlock Text="{Binding HeightOnSides}"/>
+                        <TextBlock Text="{Binding }"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button
+            Name="BtnAdd"
+            Content="Ajouter"
+            Grid.Row="10"
+            Grid.Column="2"></Button>
+        <Button
+            Name="BtnRemove"
+            Content="Retirer"
+            Grid.Row="10"
+            Grid.Column="4"></Button>
     </Grid>
 </Window>

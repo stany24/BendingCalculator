@@ -39,8 +39,10 @@ public partial class MaterialEditor: Window
     private void NumericChanged()
     {
         if (LbxItems.SelectedItems == null) return;
+        if(DataContext is not MainViewModel model){return;}
         if (NudE.Value == null) return;
         int multiplication;
+        
         switch (CbxUnits.SelectedItem)
         {
             case "GPa" : multiplication = 1000000000;
@@ -50,10 +52,12 @@ public partial class MaterialEditor: Window
             default: return;
         }
 
-        foreach (Logic.Material item in LbxItems.SelectedItems)
+        List<Logic.Material> materials = LbxItems.SelectedItems.Cast<Logic.Material>().ToList();
+        foreach (Logic.Material material in materials)
         {
-            item.E = (long)NudE.Value * multiplication;
+            material.E = (long)NudE.Value*multiplication;
         }
+        model.UpdateMaterials(materials);
     }
 
     private void RemoveItems()

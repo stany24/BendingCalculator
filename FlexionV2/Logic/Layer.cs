@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FlexionV2.Logic;
 
-public class Layer
+public class Layer:ObservableObject
 {
     public long LayerId { get; set; }
 
@@ -43,6 +44,17 @@ public class Layer
 
     [JsonInclude]
     public Material? Material { get; set; }
+    
+    private string _display;
+    public string Display
+    {
+        get => _display;
+        set
+        {
+            _display = value;
+            SetProperty(ref _display, ToString());
+        }
+    }
         
     [JsonConstructor]
     public Layer() { }
