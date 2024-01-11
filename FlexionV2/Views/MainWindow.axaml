@@ -72,7 +72,15 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"></ListBox>
+                MinWidth="200"
+                ItemsSource="{Binding Pieces}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Display}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate></ListBox>
         </Grid>
         <Grid 
             Name="GridLayer"

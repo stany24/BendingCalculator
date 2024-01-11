@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FlexionV2.Logic;
 
-public class Piece
+public class Piece:ObservableObject
 {
     public long PieceId { get; set; }
     
@@ -17,7 +18,12 @@ public class Piece
     public string Name
     {
         get => _name;
-        set{if (value != "") { _name = value; }}
+        set{
+            if (value != "")
+            {
+                _name = value;
+                Display = ToString();
+            }}
     }
 
     private double _length;
@@ -25,7 +31,12 @@ public class Piece
     public double Length
     {
         get => _length;
-        set {if (value > 0) { _length = value; }}
+        set {
+            if (value > 0)
+            {
+                _length = value;
+                Display = ToString();
+            }}
     }
 
     private double _eref;
@@ -46,6 +57,13 @@ public class Piece
             X.Add(i);
         }
         return X.ToArray();
+    }
+    
+    private string _display;
+    public string Display
+    {
+        get => _display;
+        set => SetProperty(ref _display, ToString());
     }
 
     /// <summary>
@@ -78,6 +96,7 @@ public class Piece
     /// <returns></returns>
     public override string ToString()
     {
+        if (Layers == null) { return $"{Name} / {Length * 1000}mm";}
         return Layers.Count switch
         {
             0 => $"{Name} / {Length*1000}mm",

@@ -1,71 +1,62 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
 using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Piece;
 
-public partial class PieceEditor : Editor
+public partial class PieceEditor : Window
 {
     private ListLayersEditor? _listLayersEditor;
-    private readonly MainViewModel _model;
     public PieceEditor(MainViewModel model)
     {
-        _model = model;
+        DataContext = model;
         InitializeComponent();
-        InitializeUi();
-        NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
-        TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(LbxItems,TbxName, "Name");
+        NudLength.ValueChanged += (_,_) => NumericChanged();
+        TbxName.TextChanged += (_, _) => TextChanged();
         BtnRemove.Click +=(_,_) => RemoveItems();
+        BtnAdd.Click += (_, _) => CreateNewPiece();
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
-        Binding binding1 = new()
-        { 
-            Source = _model, 
-            Path = nameof(_model.Pieces)
-        }; 
-        LbxItems.Bind(ItemsControl.ItemsSourceProperty,binding1 );
-        Binding binding2 = new()
-        { 
-            Source = _model, 
-            Path = nameof(_model.LayersOfSelectedPiece)
-        }; 
-        LbxLayers.Bind(ItemsControl.ItemsSourceProperty,binding2 );
         Closing += (_, _) => _listLayersEditor?.Close();
     }
 
-    private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    private void NumericChanged()
     {
-        if (LbxItems.SelectedItems == null) return;
-        if (e.NewValue == null) return;
-        foreach (TItem item in LbxItems.SelectedItems)
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue/1000);
-        UpdateListBox();
+        if(LbxItems.SelectedItems == null){return;}
+        if(NudLength.Value == null){return;}
+        if(DataContext is not MainViewModel model){return;}
+        List<Logic.Piece> pieces = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList();
+        foreach (Logic.Piece piece in pieces)
+        {
+            piece.Length = (double)NudLength.Value/1000;
+        }
+        model.UpdatePieces(pieces);
     }
 
-    private void UpdateListBox()
+    private void TextChanged()
     {
-        List<Logic.Piece> selected = new();
-        List<Logic.Piece> items = LbxItems.Items.Cast<Logic.Piece>().ToList();
-        if (LbxItems.SelectedItems != null) { selected = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList(); }
-        _model.UpdatePieces(items);
-        LbxItems.Items.Clear();
-        foreach (Logic.Piece item in items) LbxItems.Items.Add(item);
-        if (LbxItems.SelectedItems == null) return;
-        foreach (Logic.Piece item in selected) LbxItems.SelectedItems.Add(item);
+        if(LbxItems.SelectedItems == null){return;}
+        if(TbxName.Text == null){return;}
+        if(DataContext is not MainViewModel model){return;}
+        List<Logic.Piece> pieces = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList();
+        foreach (Logic.Piece piece in pieces)
+        {
+            piece.Name = TbxName.Text;
+        }
+        model.UpdatePieces(pieces);
     }
 
     private void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
+        if(DataContext is not MainViewModel model){return;}
         int index = LbxItems.SelectedIndex;
         List<long> selected = LbxItems.SelectedItems.Cast<Logic.Piece>().Select(x => x.PieceId).ToList();
         foreach (long id in selected)
         {
-            _model.RemovePiece(id);
+            model.RemovePiece(id);
         }
 
         if (index <= 0) return;
@@ -75,8 +66,9 @@ public partial class PieceEditor : Editor
     private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
+        if(DataContext is not MainViewModel model){return;}
         if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
-        _listLayersEditor = new ListLayersEditor(_model,piece.PieceId);
+        _listLayersEditor = new ListLayersEditor(model,piece.PieceId);
         _listLayersEditor.Closing += (_, _) => IsEnabled = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
@@ -85,11 +77,12 @@ public partial class PieceEditor : Editor
 
     private void UpdateListLayer()
     {
+        if(DataContext is not MainViewModel model){return;}
         long? pieceId = null;
         if (LbxItems.SelectedItems == null)
         {
             BtnChangeLayers.IsEnabled = false;
-            _model.LoadLayersOfPiece(pieceId);
+            model.LoadLayersOfPiece(pieceId);
             return;
         }
         switch (LbxItems.SelectedItems.Count)
@@ -109,24 +102,13 @@ public partial class PieceEditor : Editor
                 break;
             }
         }
-        _model.LoadLayersOfPiece(pieceId);
-    }
-    
-    private void InitializeUi()
-    {
-        Grid.SetColumn(BtnAdd,2);
-        Grid.SetRow(BtnAdd,6);
-        Grid.Children.Add(BtnAdd);
-        Grid.SetColumn(BtnRemove,4);
-        Grid.SetRow(BtnRemove,6);
-        Grid.Children.Add(BtnRemove);
-        BtnAdd.Click += (_, _) => CreateNewPiece();
-        BtnChangeLayers.IsEnabled = false;
+        model.LoadLayersOfPiece(pieceId);
     }
 
     private void CreateNewPiece()
     {
+        if(DataContext is not MainViewModel model){return;}
         Logic.Piece piece = new(Convert.ToDouble(NudLength.Value/1000 ?? 1), TbxName.Text ?? "nouveau", 69e9);
-        _model.NewPiece(piece);
+        model.NewPiece(piece);
     }
 }

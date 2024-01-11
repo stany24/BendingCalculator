@@ -152,12 +152,31 @@ public class MainViewModel : ObservableObject
 
     private void ReloadPieces()
     {
-        Pieces = new ObservableCollection<Piece>(DataBaseLoader.LoadPieces(_connection));
+        List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);
+        while (pieces.Count != Pieces.Count)
+        {
+            if (pieces.Count < Pieces.Count)
+            {
+                Pieces.RemoveAt(0);
+            }
+            else
+            {
+                Pieces.Add(new Piece());
+            }
+        }
+
+        for (int i = 0; i < pieces.Count; i++)
+        {
+            Pieces[i].PieceId = pieces[i].PieceId;
+            Pieces[i].Name = pieces[i].Name;
+            Pieces[i].Length = pieces[i].Length;
+            Pieces[i].Layers = pieces[i].Layers;
+        }
     }
     
     public void NewPiece(Piece piece)
     {
-        Pieces.Add(DataBaseCreator.NewPiece(_connection,piece));
+        DataBaseCreator.NewPiece(_connection,piece);
     }
 
     public void UpdatePieces(List<Piece> piece)

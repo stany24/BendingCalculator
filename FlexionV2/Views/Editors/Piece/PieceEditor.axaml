@@ -39,6 +39,7 @@
             Grid.Column="2"
             Grid.ColumnSpan="3"
             Grid.Row="4"
+            IsEnabled="False"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center">Changer les couches</Button>
         <ListBox
@@ -51,17 +52,27 @@
             Name="LbxItems"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.RowSpan="6"
+            Grid.RowSpan="7"
+            SelectionMode="Multiple"
             MinWidth="200"
             ItemsSource="{Binding Pieces}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Layers.Count}"/>
+                        <TextBlock Text="{Binding Display}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button
+            Name="BtnAdd"
+            Content="Ajouter"
+            Grid.Row="6"
+            Grid.Column="2"></Button>
+        <Button
+            Name="BtnRemove"
+            Content="Retirer"
+            Grid.Row="6"
+            Grid.Column="4"></Button>
     </Grid>
 </Window>
