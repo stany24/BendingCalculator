@@ -2,8 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:FlexionV2.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Piece.PieceEditor"
+        x:DataType="viewModels:MainViewModel"
         Title="Éditeur de pièces"
         SizeToContent="WidthAndHeight"
         CanResize="False">
@@ -45,5 +47,21 @@
             Grid.Row="0"
             Grid.RowSpan="8"
             MinWidth="200"></ListBox>
+        <ListBox
+            Name="LbxItems"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="6"
+            MinWidth="200"
+            ItemsSource="{Binding Pieces}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding Layers.Count}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

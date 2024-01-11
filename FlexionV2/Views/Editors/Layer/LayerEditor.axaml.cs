@@ -20,7 +20,8 @@ public partial class LayerEditor : Editor
         NudHeightSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"HeightOnSides");
         NudWidthCenter.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthAtCenter");
         NudWidthSide.ValueChanged += (_, e) => NumericChanged<Logic.Layer>(e,"WidthOnSides");
-        CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(e,"Material");
+        CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged<Logic.Layer,Logic.Material>(LbxItems,e,"Material");
+        BtnRemove.Click +=(_,_) => RemoveItems();
         Binding binding = new()
         { 
             Source = _model,
@@ -35,10 +36,10 @@ public partial class LayerEditor : Editor
         if (e.NewValue == null) return;
         foreach (TItem item in LbxItems.SelectedItems)
             item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue/1000);
-        UpdateListBox<TItem>();
+        UpdateListBox();
     }
 
-    protected override void RemoveItems()
+    private void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
@@ -50,8 +51,8 @@ public partial class LayerEditor : Editor
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
     }
-    
-    protected override void UpdateListBox<TItem>()
+
+    private void UpdateListBox()
     {
         List<Logic.Layer> items = LbxItems.Items.Cast<Logic.Layer>().ToList();
         List<Logic.Layer> selected = new();
@@ -65,11 +66,6 @@ public partial class LayerEditor : Editor
     
     private void InitializeUi()
     {
-        Grid.SetColumn(LbxItems,0);
-        Grid.SetRow(LbxItems,0);
-        Grid.SetRowSpan(LbxItems,12);
-        LbxItems.MinWidth = 200;
-        Grid.Children.Add(LbxItems);
         Grid.SetColumn(BtnAdd,2);
         Grid.SetRow(BtnAdd,10);
         Grid.Children.Add(BtnAdd);

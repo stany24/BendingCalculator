@@ -16,7 +16,6 @@ namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
-    private readonly MainViewModel _model;
     private ForceEditor? _forceEditor;
     
     private MaterialEditor? _materialEditor;
@@ -27,24 +26,18 @@ public partial class Main : Window
 
     public Main(MainViewModel model)
     {
-        _model = model;
+        DataContext = model;
         InitializeComponent();
-        Binding binding1 = new()
-        { 
-            Source = _model, 
-            Path = nameof(_model.Materials)
-        }; 
-        LbxMaterial.Bind(ItemsControl.ItemsSourceProperty,binding1 );
         Binding binding2 = new()
         { 
-            Source = _model, 
-            Path = nameof(_model.Layers)
+            Source = (DataContext as MainViewModel), 
+            Path = nameof(model.Layers)
         }; 
         LbxLayer.Bind(ItemsControl.ItemsSourceProperty,binding2 );
         Binding binding3 = new()
         { 
-            Source = _model, 
-            Path = nameof(_model.Pieces)
+            Source = (DataContext as MainViewModel), 
+            Path = nameof(model.Pieces)
         }; 
         LbxPiece.Bind(ItemsControl.ItemsSourceProperty,binding3 );
         UiEvents();
@@ -80,7 +73,7 @@ public partial class Main : Window
     private void OpenMaterialEditor()
     {
         if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor(_model);
+        _materialEditor = new MaterialEditor((DataContext as MainViewModel));
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
     }
@@ -88,7 +81,7 @@ public partial class Main : Window
     private void OpenLayerEditor()
     {
         if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor(_model);
+        _layerEditor = new LayerEditor((DataContext as MainViewModel));
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
     }
@@ -96,7 +89,7 @@ public partial class Main : Window
     private void OpenPieceEditor()
     {
         if(_pieceEditor != null){return;}
-        _pieceEditor = new PieceEditor(_model);
+        _pieceEditor = new PieceEditor((DataContext as MainViewModel));
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _pieceEditor.Show();
     }
@@ -108,7 +101,7 @@ public partial class Main : Window
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(piece.Layers.Count == 0){return;}
             if(NudForce.Value == null){return;}
-            _model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            (DataContext as MainViewModel).Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }

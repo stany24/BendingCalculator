@@ -18,7 +18,8 @@ public partial class PieceEditor : Editor
         InitializeComponent();
         InitializeUi();
         NudLength.ValueChanged += (_,e) => NumericChanged<Logic.Piece>(e,"Length");
-        TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(TbxName, "Name");
+        TbxName.TextChanged += (_, _) => TextChanged<Logic.Piece>(LbxItems,TbxName, "Name");
+        BtnRemove.Click +=(_,_) => RemoveItems();
         LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
         Binding binding1 = new()
@@ -42,10 +43,10 @@ public partial class PieceEditor : Editor
         if (e.NewValue == null) return;
         foreach (TItem item in LbxItems.SelectedItems)
             item.GetType().GetProperty(propertyName)?.SetValue(item, (double)e.NewValue/1000);
-        UpdateListBox<TItem>();
+        UpdateListBox();
     }
-    
-    protected override void UpdateListBox<TItem>()
+
+    private void UpdateListBox()
     {
         List<Logic.Piece> selected = new();
         List<Logic.Piece> items = LbxItems.Items.Cast<Logic.Piece>().ToList();
@@ -56,8 +57,8 @@ public partial class PieceEditor : Editor
         if (LbxItems.SelectedItems == null) return;
         foreach (Logic.Piece item in selected) LbxItems.SelectedItems.Add(item);
     }
-    
-    protected override void RemoveItems()
+
+    private void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
         int index = LbxItems.SelectedIndex;
@@ -113,11 +114,6 @@ public partial class PieceEditor : Editor
     
     private void InitializeUi()
     {
-        Grid.SetColumn(LbxItems,0);
-        Grid.SetRow(LbxItems,0);
-        Grid.SetRowSpan(LbxItems,8);
-        LbxItems.MinWidth = 200;
-        Grid.Children.Add(LbxItems);
         Grid.SetColumn(BtnAdd,2);
         Grid.SetRow(BtnAdd,6);
         Grid.Children.Add(BtnAdd);

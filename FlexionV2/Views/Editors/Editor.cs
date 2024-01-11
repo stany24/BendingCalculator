@@ -11,7 +11,6 @@ namespace FlexionV2.Views.Editors;
 
 public abstract class Editor : Window
 {
-    internal readonly ListBox LbxItems = new();
     internal readonly Button BtnRemove= new();
     internal readonly Button BtnAdd= new();
     internal Task LoadTask = null!;
@@ -19,8 +18,6 @@ public abstract class Editor : Window
 
     private protected Editor()
     {
-        LbxItems.SelectionMode = SelectionMode.Multiple;
-        BtnRemove.Click +=(_,_) => RemoveItems();
         BtnAdd.Content = "Nouveau";
         BtnRemove.Content = "Supprimer";
     }
@@ -67,18 +64,17 @@ public abstract class Editor : Window
     /// Generalized function used to update UI of the listbox
     /// </summary>
     /// <typeparam name="TItem">The class contained in the listbox</typeparam>
-    protected virtual void UpdateListBox<TItem>()
+    protected virtual void UpdateListBox<TItem>(ListBox lbxItems)
     {
-        List<TItem> items = LbxItems.Items.Cast<TItem>().ToList();
+        List<TItem> items = lbxItems.Items.Cast<TItem>().ToList();
         List<TItem> selected = new();
-        if (LbxItems.SelectedItems != null)
+        if (lbxItems.SelectedItems != null)
         {
-            selected = LbxItems.SelectedItems.Cast<TItem>().ToList();
+            selected = lbxItems.SelectedItems.Cast<TItem>().ToList();
         }
-        LbxItems.Items.Clear();
-        foreach (TItem item in items) LbxItems.Items.Add(item);
-        if (LbxItems.SelectedItems == null) return;
-        foreach (TItem item in selected) LbxItems.SelectedItems.Add(item);
+        foreach (TItem item in items) lbxItems.Items.Add(item);
+        if (lbxItems.SelectedItems == null) return;
+        foreach (TItem item in selected) lbxItems.SelectedItems.Add(item);
     }
     
     /// <summary>
@@ -87,13 +83,13 @@ public abstract class Editor : Window
     /// <param name="textBox">The input for the changed variable</param>
     /// <param name="propertyName">The property you want to change</param>
     /// <typeparam name="TItem">The class of item you want to change</typeparam>
-    internal void TextChanged<TItem>(TextBox textBox, string propertyName)
+    internal void TextChanged<TItem>(ListBox lbxItems,TextBox textBox, string propertyName)
     {
-        if (LbxItems.SelectedItems == null) return;
+        if (lbxItems.SelectedItems == null) return;
         if (textBox.Text == null) return;
-        foreach (TItem item in LbxItems.SelectedItems)
+        foreach (TItem item in lbxItems.SelectedItems)
             item.GetType().GetProperty(propertyName)?.SetValue(item, textBox.Text);
-        UpdateListBox<TItem>();
+        UpdateListBox<TItem>(lbxItems);
     }
 
     /// <summary>
@@ -103,26 +99,26 @@ public abstract class Editor : Window
     /// <param name="propertyName">The property you want to change</param>
     /// <typeparam name="TClass">The class of item you want to change</typeparam>
     /// <typeparam name="TProperty">The class of the property you want to change</typeparam>
-    internal void ComboboxChanged<TClass,TProperty>(SelectionChangedEventArgs e, string propertyName)
+    internal void ComboboxChanged<TClass,TProperty>(ListBox lbxItems,SelectionChangedEventArgs e, string propertyName)
     {
-        if (LbxItems.SelectedItems == null) return;
+        if (lbxItems.SelectedItems == null) return;
         if (e.AddedItems[0] == null) return;
-        foreach (TClass item in LbxItems.SelectedItems)
+        foreach (TClass item in lbxItems.SelectedItems)
             item.GetType().GetProperty(propertyName)?.SetValue(item, (TProperty)e.AddedItems[0]!);
-        UpdateListBox<TClass>();
+        UpdateListBox<TClass>(lbxItems);
     }
     
     /// <summary>
     /// Function used to remove all selected items from the listbox
     /// </summary>
-    protected virtual void RemoveItems()
+    protected virtual void RemoveItems(ListBox lbxItems)
     {
-        if (LbxItems.SelectedItems == null) return;
-        int index = LbxItems.SelectedIndex;
-        while (LbxItems.SelectedItems.Count > 0) LbxItems.Items.Remove(LbxItems.SelectedItems[0]);
+        if (lbxItems.SelectedItems == null) return;
+        int index = lbxItems.SelectedIndex;
+        while (lbxItems.SelectedItems.Count > 0) lbxItems.Items.Remove(lbxItems.SelectedItems[0]);
 
         if (index <= 0) return;
-        LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+        lbxItems.SelectedIndex = lbxItems.Items.Count > index ? index : lbxItems.Items.Count;
     }
 
     #endregion

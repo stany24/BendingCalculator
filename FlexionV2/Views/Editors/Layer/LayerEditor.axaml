@@ -2,8 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:FlexionV2.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Layer.LayerEditor"
+        x:DataType="viewModels:MainViewModel"
         Title="Éditeur de couches"
         SizeToContent="WidthAndHeight"
         CanResize="False">
@@ -65,5 +67,24 @@
             Name="CbxMaterial"
             Grid.Column="4"
             Grid.Row="8"></ComboBox>
+        <ListBox
+            Name="LbxItems"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="6"
+            MinWidth="200"
+            ItemsSource="{Binding Layers}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Material}" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding WidthAtCenter}"/>
+                        <TextBlock Text="{Binding WidthOnSides}"/>
+                        <TextBlock Text="{Binding HeightAtCenter}"/>
+                        <TextBlock Text="{Binding HeightOnSides}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -126,7 +126,16 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"></ListBox>
+                MinWidth="200"
+                ItemsSource="{Binding Materials}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding E}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate></ListBox>
         </Grid>
         <lvc:CartesianChart 
             Name="ChartResult"

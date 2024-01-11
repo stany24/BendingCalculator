@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using ReactiveUI;
 
 namespace FlexionV2.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class MainViewModel : ObservableObject
 {
     private readonly SQLiteConnection _connection;
 
@@ -47,8 +49,7 @@ public class MainViewModel : ViewModelBase
         get => _pieces;
         set
         {
-            _pieces = value;
-            OnPropertyChanged();
+            SetProperty(ref _pieces, value);
         }
     }
     
@@ -57,8 +58,7 @@ public class MainViewModel : ViewModelBase
         get => _layers;
         set
         {
-            _layers = value;
-            OnPropertyChanged();
+            SetProperty(ref _layers, value);
         }
     }
     
@@ -67,19 +67,36 @@ public class MainViewModel : ViewModelBase
         get => _materials;
         set
         {
-            _materials = value;
-            OnPropertyChanged();
+            SetProperty(ref _materials, value);
         }
     }
 
     private void ReloadMaterials()
     {
-        Materials = new ObservableCollection<Material>(DataBaseLoader.LoadMaterials(_connection));
+        List<Material> materials = DataBaseLoader.LoadMaterials(_connection);
+        while (materials.Count != Materials.Count)
+        {
+            if (materials.Count < Materials.Count)
+            {
+                Materials.RemoveAt(0);
+            }
+            else
+            {
+                Materials.Add(new Material());
+            }
+        }
+
+        for (int i = 0; i < materials.Count; i++)
+        {
+            Materials[i].MaterialId = materials[i].MaterialId;
+            Materials[i].Name = materials[i].Name;
+            Materials[i].E = materials[i].E;
+        }
     }
 
     public void NewMaterial(Material material)
     {
-        Materials.Add(DataBaseCreator.NewMaterial(_connection,material));
+        DataBaseCreator.NewMaterial(_connection,material);
     }
 
     public void UpdateMaterials(List<Material> materials)
