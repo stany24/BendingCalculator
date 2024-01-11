@@ -13,7 +13,7 @@ public partial class MaterialEditor: Window
         DataContext = model;
         InitializeComponent();
         
-        NudE.ValueChanged += (_, e) => NumericChanged<Logic.Material>(e,"E");
+        NudE.ValueChanged += (_, _) => NumericChanged();
         TbxName.TextChanged += (_, _) => TextChanged();
         BtnRemove.Click +=(_,_) => RemoveItems();
         BtnAdd.Click += (_, _) => CreateNewMaterial();
@@ -25,18 +25,21 @@ public partial class MaterialEditor: Window
 
     private void TextChanged()
     {
+        if(TbxName.Text == null){return;}
+        if(LbxItems.SelectedItems == null){return;}
+        if(DataContext is not MainViewModel model){return;}
         List<Logic.Material> materials = LbxItems.SelectedItems.Cast<Logic.Material>().ToList();
         foreach (Logic.Material material in materials)
         {
             material.Name = TbxName.Text;
         }
-        (DataContext as MainViewModel).UpdateMaterials(materials);
+        model.UpdateMaterials(materials);
     }
     
-    private void NumericChanged<TItem>(NumericUpDownValueChangedEventArgs e, string propertyName)
+    private void NumericChanged()
     {
         if (LbxItems.SelectedItems == null) return;
-        if (e.NewValue == null) return;
+        if (NudE.Value == null) return;
         int multiplication;
         switch (CbxUnits.SelectedItem)
         {
@@ -46,19 +49,22 @@ public partial class MaterialEditor: Window
                 break;
             default: return;
         }
-        foreach (TItem item in LbxItems.SelectedItems)
-            
-            item.GetType().GetProperty(propertyName)?.SetValue(item, (long)e.NewValue*multiplication);
+
+        foreach (Logic.Material item in LbxItems.SelectedItems)
+        {
+            item.E = (long)NudE.Value * multiplication;
+        }
     }
 
     private void RemoveItems()
     {
         if (LbxItems.SelectedItems == null) return;
+        if(DataContext is not MainViewModel model){return;}
         int index = LbxItems.SelectedIndex;
         List<long> selected = LbxItems.SelectedItems.Cast<Logic.Material>().Select(x => x.MaterialId).ToList();
         foreach (long id in selected)
         {
-            (DataContext as MainViewModel).RemoveMaterial(id);
+            model.RemoveMaterial(id);
         }
         if (index <= 0) return;
         LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
