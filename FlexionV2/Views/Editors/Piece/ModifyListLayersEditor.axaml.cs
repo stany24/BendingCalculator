@@ -3,7 +3,6 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using FlexionV2.Database.Actions;
 using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Piece;

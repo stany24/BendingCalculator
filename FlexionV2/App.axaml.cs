@@ -1,13 +1,9 @@
-using System;
-using System.Data.SQLite;
-using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using FlexionV2.Database.Actions;
 using FlexionV2.ViewModels;
 using FlexionV2.Views;
-using Path = Avalonia.Controls.Shapes.Path;
 
 namespace FlexionV2;
 

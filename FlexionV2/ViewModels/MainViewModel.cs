@@ -7,7 +7,6 @@ using FlexionV2.Logic;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
-using ReactiveUI;
 
 namespace FlexionV2.ViewModels;
 
@@ -47,28 +46,19 @@ public class MainViewModel : ObservableObject
     private ObservableCollection<Piece> _pieces = new();
     public ObservableCollection<Piece> Pieces { 
         get => _pieces;
-        set
-        {
-            SetProperty(ref _pieces, value);
-        }
+        set => SetProperty(ref _pieces, value);
     }
     
     private ObservableCollection<Layer> _layers = new();
     public ObservableCollection<Layer> Layers { 
         get => _layers;
-        set
-        {
-            SetProperty(ref _layers, value);
-        }
+        set => SetProperty(ref _layers, value);
     }
     
     private ObservableCollection<Material> _materials = new();
     public ObservableCollection<Material> Materials { 
         get => _materials;
-        set
-        {
-            SetProperty(ref _materials, value);
-        }
+        set => SetProperty(ref _materials, value);
     }
 
     private void ReloadMaterials()

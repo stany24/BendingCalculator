@@ -1,8 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
 using FlexionV2.Views.Editors.Force;
@@ -28,18 +26,6 @@ public partial class Main : Window
     {
         DataContext = model;
         InitializeComponent();
-        Binding binding2 = new()
-        { 
-            Source = (DataContext as MainViewModel), 
-            Path = nameof(model.Layers)
-        }; 
-        LbxLayer.Bind(ItemsControl.ItemsSourceProperty,binding2 );
-        Binding binding3 = new()
-        { 
-            Source = (DataContext as MainViewModel), 
-            Path = nameof(model.Pieces)
-        }; 
-        LbxPiece.Bind(ItemsControl.ItemsSourceProperty,binding3 );
         UiEvents();
     }
 
@@ -72,36 +58,40 @@ public partial class Main : Window
     
     private void OpenMaterialEditor()
     {
+        if(DataContext is not MainViewModel model){return;}
         if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor((DataContext as MainViewModel));
+        _materialEditor = new MaterialEditor(model);
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
     }
     
     private void OpenLayerEditor()
     {
+        if(DataContext is not MainViewModel model){return;}
         if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor((DataContext as MainViewModel));
+        _layerEditor = new LayerEditor(model);
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
     }
     
     private void OpenPieceEditor()
     {
+        if(DataContext is not MainViewModel model){return;}
         if(_pieceEditor != null){return;}
-        _pieceEditor = new PieceEditor((DataContext as MainViewModel));
+        _pieceEditor = new PieceEditor(model);
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _pieceEditor.Show();
     }
 
     private void CalculateFlexion()
     {
+        if(DataContext is not MainViewModel model){return;}
         Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {
             if(LbxPiece.SelectedItems is { Count: 0 }){return;}
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(piece.Layers.Count == 0){return;}
             if(NudForce.Value == null){return;}
-            (DataContext as MainViewModel).Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }

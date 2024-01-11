@@ -5,7 +5,7 @@ namespace FlexionV2.Database.Actions;
 
 public static class DataBaseCreator
 {
-    public static Piece NewPiece(SQLiteConnection connection,Piece piece)
+    public static void NewPiece(SQLiteConnection connection,Piece piece)
     {
         using SQLiteCommand cmd = new(
             @"INSERT INTO Piece (Name,Length,Eref,IsRemoved) 
@@ -16,7 +16,6 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@IsRemoved",0);
         piece.PieceId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaisePiecesChangedEvent();
-        return piece;
     }
     
     public static void NewLayer(SQLiteConnection connection,Layer layer)

@@ -18,12 +18,12 @@ public class Piece:ObservableObject
     public string Name
     {
         get => _name;
-        set{
-            if (value != "")
-            {
-                _name = value;
-                Display = ToString();
-            }}
+        set
+        {
+            if (value == "") return;
+            _name = value;
+            Display = ToString();
+        }
     }
 
     private double _length;
@@ -31,12 +31,12 @@ public class Piece:ObservableObject
     public double Length
     {
         get => _length;
-        set {
-            if (value > 0)
-            {
-                _length = value;
-                Display = ToString();
-            }}
+        set
+        {
+            if (!(value > 0)) return;
+            _length = value;
+            Display = ToString();
+        }
     }
 
     private double _eref;

@@ -16,7 +16,7 @@ public partial class LayerEditor: Window
         NudHeightSide.ValueChanged += (_, e) => NumericChanged(e,"HeightOnSides");
         NudWidthCenter.ValueChanged += (_, e) => NumericChanged(e,"WidthAtCenter");
         NudWidthSide.ValueChanged += (_, e) => NumericChanged(e,"WidthOnSides");
-        CbxMaterial.SelectionChanged += (_, e) => ComboboxChanged();
+        CbxMaterial.SelectionChanged += (_, _) => ComboboxChanged();
         BtnRemove.Click +=(_,_) => RemoveItems();
         BtnAdd.Click += (_, _) =>CreateNewLayer();
     }

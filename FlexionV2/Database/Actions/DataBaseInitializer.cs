@@ -8,13 +8,12 @@ public static class DataBaseInitializer
 {
     public static SQLiteConnection InitializeDatabaseConnection()
     {
-        SQLiteConnection connection;
         string databasePath = Path.Combine(Directory.GetCurrentDirectory(), "Database/Database.db");
         string connectionString = $"Data Source={databasePath};";
         try
         {
             Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // used to correct an issue with the last version of sqlite
-            connection = new SQLiteConnection(connectionString);
+            SQLiteConnection connection = new(connectionString);
             connection.Open();
             return connection;
         }
