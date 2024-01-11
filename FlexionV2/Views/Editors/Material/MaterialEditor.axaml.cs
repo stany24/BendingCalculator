@@ -77,6 +77,7 @@ public partial class MaterialEditor: Window
     private void CreateNewMaterial()
     {
         int multiplication;
+        if(DataContext is not MainViewModel model){return;}
         switch (CbxUnits.SelectedItem)
         {
             case "GPa" : multiplication = 1000000000;
@@ -86,6 +87,6 @@ public partial class MaterialEditor: Window
             default: return;
         }
         Logic.Material material = new(TbxName.Text ?? "nouveau",Convert.ToInt64(NudE.Value*multiplication ?? 69000000000));
-        (DataContext as MainViewModel).NewMaterial(material);
+        model.NewMaterial(material);
     }
 }

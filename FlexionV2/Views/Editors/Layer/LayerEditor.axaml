@@ -66,18 +66,28 @@
         <ComboBox 
             Name="CbxMaterial"
             Grid.Column="4"
-            Grid.Row="8"></ComboBox>
+            Grid.Row="8"
+            ItemsSource="{Binding Materials}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <ListBox
             Name="LbxItems"
             Grid.Row="0"
             Grid.Column="0"
             Grid.RowSpan="12"
             MinWidth="200"
+            SelectionMode="Multiple"
             ItemsSource="{Binding Layers}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding }"/>
+                        <TextBlock Text="{Binding Display}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

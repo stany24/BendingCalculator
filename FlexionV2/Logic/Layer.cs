@@ -15,7 +15,12 @@ public class Layer:ObservableObject
     public double WidthAtCenter
     {
         get =>_widthAtCenter;
-        set { if (value > 0) { _widthAtCenter = value; } }
+        set
+        {
+            if (value <= 0) return;
+            _widthAtCenter = value;
+            Display = ToString();
+        }
     }
 
     private double _widthOnSides;
@@ -23,7 +28,12 @@ public class Layer:ObservableObject
     public double WidthOnSides
     {
         get =>_widthOnSides;
-        set { if (value > 0) { _widthOnSides = value; } }
+        set
+        {
+            if (value <= 0) return;
+            _widthOnSides = value;
+            Display = ToString();
+        }
     }
 
     private double _heightAtCenter;
@@ -31,7 +41,12 @@ public class Layer:ObservableObject
     public double HeightAtCenter
     {
         get =>_heightAtCenter;
-        set { if (value > 0) { _heightAtCenter = value; } }
+        set
+        {
+            if (value <= 0) return;
+            _heightAtCenter = value;
+            Display = ToString();
+        }
     }
 
     private double _heightOnSides;
@@ -39,21 +54,30 @@ public class Layer:ObservableObject
     public double HeightOnSides
     {
         get =>_heightOnSides;
-        set { if (value > 0) { _heightOnSides = value; } }
+        set
+        {
+            if (value <= 0) return;
+            _heightOnSides = value;
+            Display = ToString();
+        }
     }
 
+    private Material? _material;
     [JsonInclude]
-    public Material? Material { get; set; }
+    public Material? Material { get => _material;
+        set
+        {
+            _material = value;
+            Display = ToString();
+        }
+        
+    }
     
     private string _display;
     public string Display
     {
         get => _display;
-        set
-        {
-            _display = value;
-            SetProperty(ref _display, ToString());
-        }
+        set => SetProperty(ref _display, ToString());
     }
         
     [JsonConstructor]

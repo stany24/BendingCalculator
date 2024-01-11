@@ -19,7 +19,7 @@ public static class DataBaseCreator
         return piece;
     }
     
-    public static Layer NewLayer(SQLiteConnection connection,Layer layer)
+    public static void NewLayer(SQLiteConnection connection,Layer layer)
     {
         using SQLiteCommand cmd = new(
             @"INSERT INTO Layer (WidthAtCenter,WidthOnSides,HeightAtCenter,HeightOnSides,MaterialId,IsRemoved) 
@@ -40,10 +40,9 @@ public static class DataBaseCreator
         }
         layer.LayerId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseLayersChangedEvent();
-        return layer;
     }
     
-    public static Material NewMaterial(SQLiteConnection connection,Material material)
+    public static void NewMaterial(SQLiteConnection connection,Material material)
     {
         using SQLiteCommand cmd = new(
             @"INSERT INTO Material (Name,E,IsRemoved) 
@@ -53,6 +52,5 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@IsRemoved",0);
         material.MaterialId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseMaterialsChangedEvent();
-        return material;
     }
 }

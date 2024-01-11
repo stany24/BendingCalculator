@@ -111,12 +111,33 @@ public class MainViewModel : ObservableObject
 
     private void ReloadLayers()
     {
-        Layers = new ObservableCollection<Layer>(DataBaseLoader.LoadLayers(_connection));
+        List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
+        while (layers.Count != Layers.Count)
+        {
+            if (layers.Count < Layers.Count)
+            {
+                Layers.RemoveAt(0);
+            }
+            else
+            {
+                Layers.Add(new Layer());
+            }
+        }
+
+        for (int i = 0; i < layers.Count; i++)
+        {
+            Layers[i].LayerId = layers[i].LayerId;
+            Layers[i].Material = layers[i].Material;
+            Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
+            Layers[i].HeightOnSides = layers[i].HeightOnSides;
+            Layers[i].WidthAtCenter = layers[i].WidthAtCenter;
+            Layers[i].WidthOnSides = layers[i].WidthOnSides;
+        }
     }
     
     public void NewLayer(Layer layer)
     {
-        Layers.Add(DataBaseCreator.NewLayer(_connection,layer));
+        DataBaseCreator.NewLayer(_connection,layer);
     }
 
     public void UpdateLayers(List<Layer> layers)
