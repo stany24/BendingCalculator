@@ -41,8 +41,6 @@ public class MainViewModel : ObservableObject
         }
     };
 
-    public ObservableCollection<Layer> LayersOfSelectedPiece { get; set; } = new();
-
     private ObservableCollection<Piece> _pieces = new();
     public ObservableCollection<Piece> Pieces { 
         get => _pieces;
@@ -59,6 +57,14 @@ public class MainViewModel : ObservableObject
     public ObservableCollection<Material> Materials { 
         get => _materials;
         set => SetProperty(ref _materials, value);
+    }
+
+    private ObservableCollection<Layer> _layersOfSelectedPiece= new();
+
+    public ObservableCollection<Layer> LayersOfSelectedPiece
+    {
+        get => _layersOfSelectedPiece;
+        set => SetProperty(ref _layersOfSelectedPiece, value);
     }
 
     private void ReloadMaterials()
@@ -182,17 +188,45 @@ public class MainViewModel : ObservableObject
     private long _selectedPieceId;
     public void LoadLayersOfPiece(long? id)
     {
-        LayersOfSelectedPiece.Clear();
         if(id is not { } id2){return;}
         _selectedPieceId = id2;
-        foreach (Layer layer in DataBaseLoader.LoadLayersOfPiece(_connection,id2))
+        
+        List<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id2);
+        while (layers.Count != LayersOfSelectedPiece.Count)
         {
-            LayersOfSelectedPiece.Add(layer);
+            if (layers.Count < LayersOfSelectedPiece.Count)
+            {
+                LayersOfSelectedPiece.RemoveAt(0);
+            }
+            else
+            {
+                LayersOfSelectedPiece.Add(new Layer());
+            }
+        }
+
+        for (int i = 0; i < layers.Count; i++)
+        {
+            LayersOfSelectedPiece[i].LayerId = layers[i].LayerId;
+            LayersOfSelectedPiece[i].Material = layers[i].Material;
+            LayersOfSelectedPiece[i].HeightAtCenter = layers[i].HeightAtCenter;
+            LayersOfSelectedPiece[i].HeightOnSides = layers[i].HeightOnSides;
+            LayersOfSelectedPiece[i].WidthAtCenter = layers[i].WidthAtCenter;
+            LayersOfSelectedPiece[i].WidthOnSides = layers[i].WidthOnSides;
         }
     }
 
     public void UpdateLayersInPiece(long id,List<Layer> layers)
     {
         DataBaseUpdater.UpdateLayersInPiece(_connection,id,layers);
+    }
+
+    public void AddLayerToPiece(long id, Layer layer)
+    {
+        DataBaseUpdater.AddLayerToPiece(_connection,id,layer);
+    }
+
+    public void RemoveLayerToPiece(long id, long order)
+    {
+        DataBaseUpdater.RemoveLayerToPiece(_connection,id,order);
     }
 }

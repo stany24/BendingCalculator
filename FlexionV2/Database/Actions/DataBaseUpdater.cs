@@ -68,4 +68,47 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseLayerOfPieceChanged();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
+    
+    public static void AddLayerToPiece(SQLiteConnection connection, long pieceId, Layer layer)
+    {
+        using SQLiteCommand cmd1 = new("SELECT * FROM PieceToLayer WHERE PieceId = @PieceId", connection);
+        cmd1.Parameters.AddWithValue("@PieceId",pieceId);
+        using SQLiteDataReader reader = cmd1.ExecuteReader();
+        int id = 0;
+        while (reader.Read()) { id++; }
+        using SQLiteCommand cmd2 = new("INSERT INTO PieceToLayer (PieceId,LayerId,LayerOrder) VALUES (@PieceId, @LayerId, @LayerOrder);", connection);
+        cmd2.Parameters.AddWithValue("@PieceId",pieceId);
+        cmd2.Parameters.AddWithValue("@LayerId",layer.LayerId);
+        cmd2.Parameters.AddWithValue("@LayerOrder",id);
+        cmd2.ExecuteNonQuery();
+        DataBaseEvents.RaiseLayerOfPieceChanged();
+        DataBaseEvents.RaisePiecesChangedEvent();
+    }
+    
+    public static void RemoveLayerToPiece(SQLiteConnection connection, long pieceId, long order)
+    {
+        using SQLiteCommand remove = new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId and LayerOrder = @LayerOrder", connection);
+        remove.Parameters.AddWithValue("@PieceId",pieceId);
+        remove.Parameters.AddWithValue("@LayerOrder",order);
+        remove.ExecuteNonQuery();
+        
+        
+        using SQLiteCommand allLayers = new("SELECT * FROM PieceToLayer WHERE PieceId = @PieceId", connection);
+        allLayers.Parameters.AddWithValue("@PieceId",pieceId);
+        using SQLiteDataReader reader = allLayers.ExecuteReader();
+        int id = 0;
+        while (reader.Read())
+        {
+            if(id<order){continue;}
+            using SQLiteCommand changeOrder = new(
+                "UPDATE PieceToLayer SET LayerOrder = @NewLayerOrder WHERE PieceId= @Id And LayerOrder = @OldLayerOrder;", connection);
+            changeOrder.Parameters.AddWithValue("@NewLayerOrder",order);
+            changeOrder.Parameters.AddWithValue("@OldLayerOrder",order+1);
+            changeOrder.Parameters.AddWithValue("@Id",id);
+            changeOrder.ExecuteNonQuery();
+            id++;
+        }
+        DataBaseEvents.RaiseLayerOfPieceChanged();
+        DataBaseEvents.RaisePiecesChangedEvent();
+    }
 }

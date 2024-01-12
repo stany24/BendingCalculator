@@ -2,8 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:FlexionV2.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Piece.ListLayersEditor"
+        x:DataType="viewModels:MainViewModel"
         Title="Éditeur de pièces"
         SizeToContent="WidthAndHeight"
         CanResize="False">
@@ -21,7 +23,16 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.Row="2"
-            MinHeight="200"></ListBox>
+            MinHeight="200"
+            SelectionMode="Multiple"
+            ItemsSource="{Binding LayersOfSelectedPiece}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate></ListBox>
         <Button
             Name="BtnMoveUp"
             Grid.Column="0"
@@ -44,7 +55,16 @@
             Name="LbxAvailable"
             Grid.Column="4"
             Grid.ColumnSpan="3"
-            Grid.Row="2"></ListBox>
+            Grid.Row="2"
+            SelectionMode="Multiple"
+            ItemsSource="{Binding Layers}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate></ListBox>
         <Button
             Name="BtnAdd"
             Grid.Column="4"
