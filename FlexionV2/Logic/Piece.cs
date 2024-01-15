@@ -66,21 +66,13 @@ public class Piece:ObservableObject
         get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
-    
-    public Piece(double length, string name)
-    {
-        ERef = 69e9;
-        Layers = new List<Layer>();
-        Length = length;
-        Name = name;
-    }
 
-    public Piece(double length, string name, double eRef)
+    public Piece(double length, string name, double? eRef)
     {
         Layers = new List<Layer>();
         Length = length;
         Name = name;
-        ERef = eRef;
+        ERef = eRef ?? 69e9;
     }
 
     [JsonConstructor]

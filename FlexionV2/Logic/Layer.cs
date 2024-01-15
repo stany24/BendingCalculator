@@ -84,23 +84,6 @@ public class Layer:ObservableObject
     [JsonConstructor]
     public Layer() { }
         
-    public Layer(double width, double height)
-    {
-        WidthAtCenter=width;
-        WidthOnSides=width;
-        HeightAtCenter=height;
-        HeightOnSides = height;
-    }
-        
-    public Layer(Material? material, double width, double height)
-    {
-        Material = material;
-        WidthAtCenter=width;
-        WidthOnSides=width;
-        HeightAtCenter=height;
-        HeightOnSides = height;
-    }
-        
     public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
     {
         Material = material;
