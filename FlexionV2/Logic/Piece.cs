@@ -34,7 +34,7 @@ public class Piece:ObservableObject
         get => _length;
         set
         {
-            if (!(value > 0)) return;
+            if (value <= 0) return;
             _length = value;
             Display = ToString();
         }
@@ -66,12 +66,7 @@ public class Piece:ObservableObject
         get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
-
-    /// <summary>
-    /// Instancie une pièce avec une longueur et un nom
-    /// </summary>
-    /// <param name="length">Longueur de la pièce</param>
-    /// <param name="name">Nom de la pièce</param>
+    
     public Piece(double length, string name)
     {
         ERef = 69e9;
@@ -90,11 +85,7 @@ public class Piece:ObservableObject
 
     [JsonConstructor]
     public Piece() { }
-
-    /// <summary>
-    /// Retourne le nom et la longueur de la pièce
-    /// </summary>
-    /// <returns></returns>
+    
     public override string ToString()
     {
         return Layers.Count switch
@@ -104,6 +95,11 @@ public class Piece:ObservableObject
         };
     }
 
+    /// <summary>
+    /// Function used to calculate the torque
+    /// </summary>
+    /// <param name="force">The force applied to the piece</param>
+    /// <returns></returns>
     private double[] MomentForce(double force)
     {
         double b1 = Length / 2;
@@ -130,8 +126,14 @@ public class Piece:ObservableObject
         }
         return moments;
     }
-
-    public IEnumerable<double> Integral(double force, double gap)
+    
+    /// <summary>
+    /// Function used to calculate the flexion of a piece
+    /// </summary>
+    /// <param name="force">The force applied to a piece</param>
+    /// <param name="gap">The gap between measurements</param>
+    /// <returns></returns>
+    public IEnumerable<double> CalculateFlexion(double force, double gap)
     {
         _xs = SetX(gap);
         double[] integral1 = new double[_xs.Length];
@@ -139,7 +141,6 @@ public class Piece:ObservableObject
         double[] integral3 = new double[_xs.Length];
         double[] moment = MomentForce(force);
         double[] I = CalculateI();
-        // calcule
         for (int i = 0; i < moment.Length; i++)
         {
             integral1[i] = moment[i] / I[i];
@@ -187,13 +188,13 @@ public class Piece:ObservableObject
         double[][] ix = new double[Layers.Count][];
         double[] I = new double[_xs.Length];
 
-        //initialise les arrays
+        //initialize the arrays
         for (int i = 0; i < ix.Length; i++)
         {
             ix[i] = new double[_xs.Length];
         }
 
-        //calcule les Ix de manière généralisé.
+        //calculate the Ix in a generalized way.
         for (int i = 0; i < Layers.Count; i++)
         {
             double[] power = AdditionalMath.OperationDoubleArray(Layers[i].Height(Length, (double[])_xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
@@ -218,24 +219,24 @@ public class Piece:ObservableObject
         double[] divided = new double[_xs.Length];
         double[] divider = new double[_xs.Length];
 
-        //initialise les arrays
+        //initialize the arrays
         for (int i = 0; i < nx.Length; i++)
         {
             nx[i] = new double[_xs.Length];
         }
 
-        //calcule les Nx de manière généralisé.
+        //calculate Nx in a generalized way.
         for (int i = 0; i < Layers.Count; i++)
         {
             nx[i] = CalculateNx(i, _xs.Length);
         }
 
-        //calucule du divisé
-        divided = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divided, (current, ajout) => AdditionalMath.OperationDoubleArray(current, ajout, AdditionalMath.Operation.Plus));
+        //calculation of the divided
+        divided = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divided, (current, added) => AdditionalMath.OperationDoubleArray(current, added, AdditionalMath.Operation.Plus));
 
-        // calcule du divisant
+        // calculation of dividing
         divider = Layers.Aggregate(divider, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
-        //calcule de Ns
+        //calculation of Ns
         return AdditionalMath.OperationDoubleArray(divided, divider, AdditionalMath.Operation.Divided);
     }
 

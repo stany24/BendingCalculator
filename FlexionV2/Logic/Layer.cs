@@ -148,9 +148,9 @@ public class Layer:ObservableObject
         return e2.Select(l2 => e1 * l2 + HeightAtCenter).ToList();
     }
 
-    public List<double> Surface(double length, double eref, double[] xs)
+    public List<double> Surface(double length, double eRef, double[] xs)
     {
-        IEnumerable<double> widths = Width(length, eref, xs);
+        IEnumerable<double> widths = Width(length, eRef, xs);
         List<double> heights = Height(length, xs);
         return widths.Select((t, i) => t * heights[i]).ToList();
     }

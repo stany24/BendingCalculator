@@ -148,7 +148,7 @@
         </Grid>
         <lvc:CartesianChart 
             Name="ChartResult"
-            Series="{Binding Series}"
+            Series="{Binding SeriesGraphFlexion}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Grid.Column="0"
