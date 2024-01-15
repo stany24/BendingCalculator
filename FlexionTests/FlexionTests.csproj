@@ -22,4 +22,13 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Database\" />
+      <Folder Include="ViewModel\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FlexionV2\FlexionV2.csproj" />
+    </ItemGroup>
+
 </Project>
