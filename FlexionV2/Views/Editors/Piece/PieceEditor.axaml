@@ -47,13 +47,20 @@
             Grid.Column="6"
             Grid.Row="0"
             Grid.RowSpan="8"
-            MinWidth="200"></ListBox>
+            MinWidth="200"
+            ItemsSource="{Binding LayersOfSelectedPiece}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate></ListBox>
         <ListBox
             Name="LbxItems"
             Grid.Row="0"
             Grid.Column="0"
             Grid.RowSpan="7"
-            SelectionMode="Multiple"
             MinWidth="200"
             ItemsSource="{Binding Pieces}">
             <ListBox.ItemTemplate>

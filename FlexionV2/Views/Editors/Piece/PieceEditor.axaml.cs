@@ -79,29 +79,16 @@ public partial class PieceEditor : Window
     {
         if(DataContext is not MainViewModel model){return;}
         long? pieceId = null;
-        if (LbxItems.SelectedItems == null)
+        bool enabled = false;
+        if (LbxItems.SelectedItems is { Count: 1 })
         {
-            BtnChangeLayers.IsEnabled = false;
-            model.LoadLayersOfPiece(pieceId);
-            return;
+            if(LbxItems.SelectedItems[0] is not Logic.Piece piece){return;}
+            pieceId = piece.PieceId;
+            enabled = true;
+            BtnChangeLayers.IsEnabled = true;
         }
-        switch (LbxItems.SelectedItems.Count)
-        {
-            case 0:
-                BtnChangeLayers.IsEnabled = false;
-                return;
-            case > 1:
-                LbxLayers.Items.Add("Plus que 1 pièce selectionnée");
-                BtnChangeLayers.IsEnabled = false;
-                break;
-            default:
-            {
-                if(LbxItems.SelectedItems[0] is not Logic.Piece piece){return;}
-                pieceId = piece.PieceId;
-                BtnChangeLayers.IsEnabled = true;
-                break;
-            }
-        }
+        
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {BtnChangeLayers.IsEnabled = enabled; });
         model.LoadLayersOfPiece(pieceId);
     }
 

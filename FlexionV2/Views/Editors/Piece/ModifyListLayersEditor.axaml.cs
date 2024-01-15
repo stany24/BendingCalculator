@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Controls;
 using FlexionV2.ViewModels;
 
@@ -39,20 +40,24 @@ public partial class ListLayersEditor : Window
     
     private void MoveUp()
     {
+        if(DataContext is not MainViewModel model){return;}
+        List<Logic.Layer> layers =  new(model.LayersOfSelectedPiece);
         int indexToMove = LbxInPiece.SelectedIndex;
         if (indexToMove == 0) return;
-        if(LbxInPiece.Items[indexToMove] is not Logic.Layer layer){return;}
-        LbxInPiece.Items[indexToMove] = LbxInPiece.Items[indexToMove - 1];
-        LbxInPiece.Items[indexToMove - 1] = layer;
+        (layers[indexToMove], layers[indexToMove - 1]) = (layers[indexToMove - 1], layers[indexToMove]);
+        model.UpdateLayersInPiece(_pieceId,layers);
+        LbxInPiece.SelectedIndex -= 1;
     }
     
     private void MoveDown()
     {
+        if(DataContext is not MainViewModel model){return;}
+        List<Logic.Layer> layers =  new(model.LayersOfSelectedPiece);
         int indexToMove = LbxInPiece.SelectedIndex;
         if (indexToMove == LbxInPiece.Items.Count-1) return;
-        if(LbxInPiece.Items[indexToMove] is not Logic.Layer layer){return;}
-        LbxInPiece.Items[indexToMove] = LbxInPiece.Items[indexToMove + 1];
-        LbxInPiece.Items[indexToMove + 1] = layer;
+        (layers[indexToMove], layers[indexToMove + 1]) = (layers[indexToMove + 1], layers[indexToMove]);
+        model.UpdateLayersInPiece(_pieceId,layers);
+        LbxInPiece.SelectedIndex += 1;
     }
 
     private void Remove()

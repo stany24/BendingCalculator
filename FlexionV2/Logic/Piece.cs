@@ -96,7 +96,6 @@ public class Piece:ObservableObject
     /// <returns></returns>
     public override string ToString()
     {
-        if (Layers == null) { return $"{Name} / {Length * 1000}mm";}
         return Layers.Count switch
         {
             0 => $"{Name} / {Length*1000}mm",

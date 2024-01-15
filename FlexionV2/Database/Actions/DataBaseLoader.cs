@@ -76,11 +76,11 @@ public static class DataBaseLoader
             {
                 currentPiece = new Piece
                 {
+                    Layers = new List<Layer>(),
                     PieceId = pieceId,
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"]),
-                    Eref = Convert.ToInt64(reader["Eref"]),
-                    Layers = new List<Layer>()
+                    Eref = Convert.ToInt64(reader["Eref"])
                 };
                 pieces.Add(currentPiece);
             }

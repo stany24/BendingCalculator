@@ -163,10 +163,10 @@ public class MainViewModel : ObservableObject
 
         for (int i = 0; i < pieces.Count; i++)
         {
+            Pieces[i].Layers = pieces[i].Layers;
             Pieces[i].PieceId = pieces[i].PieceId;
             Pieces[i].Name = pieces[i].Name;
             Pieces[i].Length = pieces[i].Length;
-            Pieces[i].Layers = pieces[i].Layers;
         }
     }
     
