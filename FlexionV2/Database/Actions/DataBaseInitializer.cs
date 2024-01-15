@@ -6,7 +6,7 @@ namespace FlexionV2.Database.Actions;
 
 public static class DataBaseInitializer
 {
-    public static SQLiteConnection InitializeDatabaseConnection()
+    public static SQLiteConnection? InitializeDatabaseConnection()
     {
         string databasePath = Path.Combine(Directory.GetCurrentDirectory(), "Database/Database.db");
         string connectionString = $"Data Source={databasePath};";

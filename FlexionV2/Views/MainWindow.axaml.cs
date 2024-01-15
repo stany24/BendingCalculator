@@ -91,7 +91,7 @@ public partial class Main : Window
             if(LbxPiece.SelectedItems?[0] is not Piece piece){return;}
             if(piece.Layers.Count == 0){return;}
             if(NudForce.Value == null){return;}
-            model.Series[0].Values=piece.Intégrale((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            model.Series[0].Values=piece.Integral((int)NudForce.Value, piece.Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
             ChartResult.CoreChart.Update(new ChartUpdateParams { IsAutomaticUpdate = false, Throttling = false });
         });
     }

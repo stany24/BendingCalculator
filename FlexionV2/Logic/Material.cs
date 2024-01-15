@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+// ReSharper disable ValueParameterNotUsed
 
 namespace FlexionV2.Logic;
 
@@ -34,10 +35,10 @@ public class Material:ObservableObject
         }
     }
     
-    private string _display;
+    private string? _display;
     public string Display
     {
-        get => _display;
+        get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
         

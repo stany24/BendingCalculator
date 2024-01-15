@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+// ReSharper disable ValueParameterNotUsed
 
 namespace FlexionV2.Logic;
 
@@ -73,10 +74,10 @@ public class Layer:ObservableObject
         
     }
     
-    private string _display;
+    private string? _display;
     public string Display
     {
-        get => _display;
+        get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
         
@@ -109,33 +110,33 @@ public class Layer:ObservableObject
         HeightOnSides=heightSides;
     }
         
-    public override string ToString()
+    public sealed override string ToString()
     {
         return Material != null 
             ? $"{Material.Name} Centre(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} Coté(mm)={WidthOnSides*1000}x{HeightOnSides*1000}" 
             : $"Pas de matière Centre(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} Coté(mm)={WidthOnSides*1000}x{HeightOnSides*1000}";
     }
 
-    public double[] Base(double longueur, double eref, double[] xs)
+    public double[] Base(double longueur, double eRef, double[] xs)
     {
         double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
         double[] l2 = AdditionalMath.OperationDoubleArray(xs, longueur / 2, AdditionalMath.Operation.Minus);
         l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
         double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
         baseArea = AdditionalMath.OperationDoubleArray(baseArea, WidthAtCenter, AdditionalMath.Operation.Plus);
-        double divider = eref / Material.E;
+        double divider = eRef / Material.E;
         return AdditionalMath.OperationDoubleArray(baseArea, divider, AdditionalMath.Operation.Divided);
     }
 
-    private IEnumerable<double> Width(double longueur, double eref, IEnumerable<double> xs)
+    private IEnumerable<double> Width(double longueur, double eRef, IEnumerable<double> xs)
     {
         double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
 
-        List<double> L2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
+        List<double> l2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
 
-        List<double> Lf = L2.Select(l2 => l1 * l2 + WidthAtCenter).ToList();
+        List<double> lf = l2.Select(l => l1 * l + WidthAtCenter).ToList();
 
-        return Lf.Select(lf => lf / eref * Material.E).ToList();
+        return lf.Select(l => l / eRef * (Material ?? new Material("",69000000000)).E).ToList();
     }
 
     public List<double> Height(double longueur, IEnumerable<double> xs)

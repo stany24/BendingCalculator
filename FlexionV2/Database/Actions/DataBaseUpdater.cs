@@ -42,10 +42,10 @@ public static class DataBaseUpdater
         foreach (Piece? piece in pieces)
         {
             using SQLiteCommand cmd1 = new(
-                "UPDATE Piece SET Name = @Name, Length = @Length, Eref = @Eref WHERE PieceId= @Id;", connection);
+                "UPDATE Piece SET Name = @Name, Length = @Length, ERef = @ERef WHERE PieceId= @Id;", connection);
             cmd1.Parameters.AddWithValue("@Name",piece.Name);
             cmd1.Parameters.AddWithValue("@Length",piece.Length);
-            cmd1.Parameters.AddWithValue("@Eref",piece.Eref);
+            cmd1.Parameters.AddWithValue("@ERef",piece.ERef);
             cmd1.Parameters.AddWithValue("@Id",piece.PieceId);
             cmd1.ExecuteNonQuery();
         }

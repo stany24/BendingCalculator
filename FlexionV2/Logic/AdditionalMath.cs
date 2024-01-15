@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable SwitchStatementHandlesSomeKnownEnumValuesWithDefault
 
 namespace FlexionV2.Logic;
 
@@ -20,78 +21,39 @@ public static class AdditionalMath
             length = array2.Length;
         }
         double[] final = new double[length];
-        switch (action)
+        
+        for (int i = 0; i < length; i++)
         {
-            case Operation.Plus:
-                for (int i = 0; i < length; i++)
-                {
-                    final[i] = array1[i] + array2[i];
-                }
-                break;
-            case Operation.Minus:
-                for (int i = 0; i < length; i++)
-                {
-                    final[i] = array1[i] - array2[i];
-                }
-                break;
-            case Operation.Multiplication:
-                for (int i = 0; i < length; i++)
-                {
-                    final[i] = array1[i] * array2[i];
-                }
-                break;
-            case Operation.Divided:
-                for (int i = 0; i < length; i++)
-                {
-                    final[i] = array1[i] / array2[i];
-                }
-                break;
-            case Operation.Power:
-                for (int i = 0; i < length; i++)
-                {
-                    final[i] = Math.Pow(array1[i], array2[i]);
-                }
-                break;
+            final[i] = action switch
+            {
+                Operation.Plus => array1[i] + array2[i],
+                Operation.Minus => array1[i] - array2[i],
+                Operation.Multiplication => array1[i] * array2[i],
+                Operation.Divided => array1[i] / array2[i],
+                Operation.Power => Math.Pow(array1[i], array2[i]),
+                _ => final[i]
+            };
         }
+        
         return final;
     }
 
     public static double[] OperationDoubleArray(double[] array, double value, Operation action)
     {
         double[] final = new double[array.Length];
-        switch (action)
+        for (int i = 0; i < array.Length; i++)
         {
-            case Operation.Plus:
-                for (int i = 0; i < array.Length; i++)
-                {
-                    final[i] = array[i] + value;
-                }
-                break;
-            case Operation.Minus:
-                for (int i = 0; i < array.Length; i++)
-                {
-                    final[i] = array[i] - value;
-                }
-                break;
-            case Operation.Multiplication:
-                for (int i = 0; i < array.Length; i++)
-                {
-                    final[i] = array[i] * value;
-                }
-                break;
-            case Operation.Divided:
-                for (int i = 0; i < array.Length; i++)
-                {
-                    final[i] = array[i] / value;
-                }
-                break;
-            case Operation.Power:
-                for (int i = 0; i < array.Length; i++)
-                {
-                    final[i] = Math.Pow(array[i], value);
-                }
-                break;
+            final[i] = action switch
+            {
+                Operation.Plus => array[i] + value,
+                Operation.Minus => array[i] - value,
+                Operation.Multiplication => array[i] * value,
+                Operation.Divided => array[i] / value,
+                Operation.Power => Math.Pow(array[i], value),
+                _ => final[i]
+            };
         }
+        
         return final;
     }
 }

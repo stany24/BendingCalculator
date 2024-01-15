@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+// ReSharper disable ValueParameterNotUsed
 
 namespace FlexionV2.Logic;
 
@@ -39,30 +40,30 @@ public class Piece:ObservableObject
         }
     }
 
-    private double _eref;
+    private double _eRef;
     [JsonInclude]
-    public double Eref
+    public double ERef
     {
-        get => _eref;
-        set { if (value > 0) { _eref = value; }}
+        get => _eRef;
+        set { if (value > 0) { _eRef = value; }}
     }
         
-    private double[] Xs;
+    private double[] _xs;
 
     private double[] SetX(double gap)
     {
-        List<double> X = new();
+        List<double> x = new();
         for (double i = 0; i <= Length + gap; i += gap)
         {
-            X.Add(i);
+            x.Add(i);
         }
-        return X.ToArray();
+        return x.ToArray();
     }
     
-    private string _display;
+    private string? _display;
     public string Display
     {
-        get => _display;
+        get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
 
@@ -73,18 +74,18 @@ public class Piece:ObservableObject
     /// <param name="name">Nom de la pièce</param>
     public Piece(double length, string name)
     {
-        Eref = 69e9;
+        ERef = 69e9;
         Layers = new List<Layer>();
         Length = length;
         Name = name;
     }
 
-    public Piece(double length, string name, double eref)
+    public Piece(double length, string name, double eRef)
     {
         Layers = new List<Layer>();
         Length = length;
         Name = name;
-        Eref = eref;
+        ERef = eRef;
     }
 
     [JsonConstructor]
@@ -106,105 +107,105 @@ public class Piece:ObservableObject
     private double[] MomentForce(double force)
     {
         double b1 = Length / 2;
-        double[] x = Xs;
-        double[] moments = new double[Xs.Length];
+        double[] x = _xs;
+        double[] moments = new double[_xs.Length];
 
-        double[] Mfa1 = AdditionalMath.OperationDoubleArray((double[])Xs.Clone(), -force * b1, AdditionalMath.Operation.Multiplication);
-        Mfa1 = AdditionalMath.OperationDoubleArray(Mfa1, Length, AdditionalMath.Operation.Divided);
+        double[] mfa1 = AdditionalMath.OperationDoubleArray((double[])_xs.Clone(), -force * b1, AdditionalMath.Operation.Multiplication);
+        mfa1 = AdditionalMath.OperationDoubleArray(mfa1, Length, AdditionalMath.Operation.Divided);
 
-        double[] Mfb1 = AdditionalMath.OperationDoubleArray((double[])Xs.Clone(), Length - b1, AdditionalMath.Operation.Minus);
-        Mfb1 = AdditionalMath.OperationDoubleArray(Mfb1, force, AdditionalMath.Operation.Multiplication);
-        Mfb1 = AdditionalMath.OperationDoubleArray(Mfa1, Mfb1, AdditionalMath.Operation.Plus);
+        double[] mfb1 = AdditionalMath.OperationDoubleArray((double[])_xs.Clone(), Length - b1, AdditionalMath.Operation.Minus);
+        mfb1 = AdditionalMath.OperationDoubleArray(mfb1, force, AdditionalMath.Operation.Multiplication);
+        mfb1 = AdditionalMath.OperationDoubleArray(mfa1, mfb1, AdditionalMath.Operation.Plus);
 
-        for (int i = 0; i < Xs.Length; i++)
+        for (int i = 0; i < _xs.Length; i++)
         {
             if (x[i] < b1)
             {
-                moments[i] = Mfa1[i];
+                moments[i] = mfa1[i];
             }
             else
             {
-                moments[i] = Mfb1[i];
+                moments[i] = mfb1[i];
             }
         }
         return moments;
     }
 
-    public IEnumerable<double> Intégrale(double force, double gap)
+    public IEnumerable<double> Integral(double force, double gap)
     {
-        Xs = SetX(gap);
-        double[] integrale1 = new double[Xs.Length];
-        double[] integrale2 = new double[Xs.Length];
-        double[] integrale3 = new double[Xs.Length];
+        _xs = SetX(gap);
+        double[] integral1 = new double[_xs.Length];
+        double[] integral2 = new double[_xs.Length];
+        double[] integral3 = new double[_xs.Length];
         double[] moment = MomentForce(force);
         double[] I = CalculateI();
         // calcule
         for (int i = 0; i < moment.Length; i++)
         {
-            integrale1[i] = moment[i] / I[i];
+            integral1[i] = moment[i] / I[i];
         }
-        // première intégrale
+        // first integral
         for (int i = 0; i < moment.Length; i++)
         {
             if (i - 1 < 0)
             {
-                integrale2[i] = integrale1[i] * gap;
+                integral2[i] = integral1[i] * gap;
             }
             else
             {
-                integrale2[i] = integrale2[i - 1] + integrale1[i] * gap;
+                integral2[i] = integral2[i - 1] + integral1[i] * gap;
             }
         }
 
-        double offset = integrale2[Convert.ToInt32(integrale2.Length / 2)];
-        for (int i = 0; i < integrale2.Length; i++)
+        double offset = integral2[Convert.ToInt32(integral2.Length / 2)];
+        for (int i = 0; i < integral2.Length; i++)
         {
-            integrale2[i] -= offset;
+            integral2[i] -= offset;
         }
 
-        // deuxième intégrale
-        for (int i = 0; i < integrale3.Length; i++)
+        // second integral
+        for (int i = 0; i < integral3.Length; i++)
         {
             if (i - 1 < 0)
             {
-                integrale3[i] = integrale2[i] * gap;
+                integral3[i] = integral2[i] * gap;
             }
             else
             {
-                integrale3[i] = integrale3[i - 1] + integrale2[i] * gap;
+                integral3[i] = integral3[i - 1] + integral2[i] * gap;
             }
         }
-        for (int i = 0; i < integrale3.Length; i++)
+        for (int i = 0; i < integral3.Length; i++)
         {
-            integrale3[i] /= -Eref;
+            integral3[i] /= -ERef;
         }
-        return integrale3;
+        return integral3;
     }
 
     private double[] CalculateI()
     {
         double[][] ix = new double[Layers.Count][];
-        double[] I = new double[Xs.Length];
+        double[] I = new double[_xs.Length];
 
         //initialise les arrays
         for (int i = 0; i < ix.Length; i++)
         {
-            ix[i] = new double[Xs.Length];
+            ix[i] = new double[_xs.Length];
         }
 
         //calcule les Ix de manière généralisé.
         for (int i = 0; i < Layers.Count; i++)
         {
-            double[] power = AdditionalMath.OperationDoubleArray(Layers[i].Height(Length, (double[])Xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
-            double[] divise = AdditionalMath.OperationDoubleArray(power, Layers[i].Base(Length, Eref, (double[])Xs.Clone()), AdditionalMath.Operation.Multiplication);
-            ix[i] = AdditionalMath.OperationDoubleArray(divise, 12, AdditionalMath.Operation.Divided);
+            double[] power = AdditionalMath.OperationDoubleArray(Layers[i].Height(Length, (double[])_xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
+            double[] divider = AdditionalMath.OperationDoubleArray(power, Layers[i].Base(Length, ERef, (double[])_xs.Clone()), AdditionalMath.Operation.Multiplication);
+            ix[i] = AdditionalMath.OperationDoubleArray(divider, 12, AdditionalMath.Operation.Divided);
         }
 
         for (int i = 0; i < Layers.Count; i++)
         {
-            double[] p1 = AdditionalMath.OperationDoubleArray(CalculateNx(i, Xs.Length), Ns(), AdditionalMath.Operation.Minus);
+            double[] p1 = AdditionalMath.OperationDoubleArray(CalculateNx(i, _xs.Length), Ns(), AdditionalMath.Operation.Minus);
             double[] p2 = AdditionalMath.OperationDoubleArray(p1, 2, AdditionalMath.Operation.Power);
-            double[] p3 = AdditionalMath.OperationDoubleArray(Layers[i].Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), p2, AdditionalMath.Operation.Multiplication);
+            double[] p3 = AdditionalMath.OperationDoubleArray(Layers[i].Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), p2, AdditionalMath.Operation.Multiplication);
             double[] p4 = AdditionalMath.OperationDoubleArray(ix[i], p3, AdditionalMath.Operation.Plus);
             I = AdditionalMath.OperationDoubleArray(I, p4, AdditionalMath.Operation.Plus);
         }
@@ -214,28 +215,28 @@ public class Piece:ObservableObject
     private double[] Ns()
     {
         double[][] nx = new double[Layers.Count][];
-        double[] divise = new double[Xs.Length];
-        double[] divisant = new double[Xs.Length];
+        double[] divided = new double[_xs.Length];
+        double[] divider = new double[_xs.Length];
 
         //initialise les arrays
         for (int i = 0; i < nx.Length; i++)
         {
-            nx[i] = new double[Xs.Length];
+            nx[i] = new double[_xs.Length];
         }
 
         //calcule les Nx de manière généralisé.
         for (int i = 0; i < Layers.Count; i++)
         {
-            nx[i] = CalculateNx(i, Xs.Length);
+            nx[i] = CalculateNx(i, _xs.Length);
         }
 
         //calucule du divisé
-        divise = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divise, (current, ajout) => AdditionalMath.OperationDoubleArray(current, ajout, AdditionalMath.Operation.Plus));
+        divided = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divided, (current, ajout) => AdditionalMath.OperationDoubleArray(current, ajout, AdditionalMath.Operation.Plus));
 
         // calcule du divisant
-        divisant = Layers.Aggregate(divisant, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, Eref, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
+        divider = Layers.Aggregate(divider, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
         //calcule de Ns
-        return AdditionalMath.OperationDoubleArray(divise, divisant, AdditionalMath.Operation.Divided);
+        return AdditionalMath.OperationDoubleArray(divided, divider, AdditionalMath.Operation.Divided);
     }
 
     private double[] CalculateNx(int i, int length)
@@ -245,12 +246,12 @@ public class Piece:ObservableObject
         {
             if (j == i)
             {
-                double[] add = AdditionalMath.OperationDoubleArray(Layers[j].Height(Length, (double[])Xs.Clone()).ToArray(), 2, AdditionalMath.Operation.Divided);
+                double[] add = AdditionalMath.OperationDoubleArray(Layers[j].Height(Length, (double[])_xs.Clone()).ToArray(), 2, AdditionalMath.Operation.Divided);
                 nx = AdditionalMath.OperationDoubleArray(nx, add, AdditionalMath.Operation.Plus);
             }
             else
             {
-                nx = AdditionalMath.OperationDoubleArray(nx, Layers[j].Height(Length, (double[])Xs.Clone()).ToArray(), AdditionalMath.Operation.Plus);
+                nx = AdditionalMath.OperationDoubleArray(nx, Layers[j].Height(Length, (double[])_xs.Clone()).ToArray(), AdditionalMath.Operation.Plus);
             }
         }
         return nx;
