@@ -80,7 +80,6 @@ public static class DataBaseLoader
                     PieceId = pieceId,
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"]),
-                    ERef = Convert.ToInt64(reader["Eref"])
                 };
                 pieces.Add(currentPiece);
             }

@@ -39,14 +39,8 @@ public class Piece:ObservableObject
             Display = ToString();
         }
     }
-
-    private double _eRef;
-    [JsonInclude]
-    public double ERef
-    {
-        get => _eRef;
-        set { if (value > 0) { _eRef = value; }}
-    }
+    
+    private const double ERef = 69e9;
         
     private double[] _xs;
 
@@ -67,12 +61,11 @@ public class Piece:ObservableObject
         set => SetProperty(ref _display, ToString());
     }
 
-    public Piece(double length, string name, double? eRef)
+    public Piece(double length, string name)
     {
         Layers = new List<Layer>();
         Length = length;
         Name = name;
-        ERef = eRef ?? 69e9;
     }
 
     [JsonConstructor]

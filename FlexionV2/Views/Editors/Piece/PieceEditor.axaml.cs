@@ -95,7 +95,7 @@ public partial class PieceEditor : Window
     private void CreateNewPiece()
     {
         if(DataContext is not MainViewModel model){return;}
-        Logic.Piece piece = new(Convert.ToDouble(NudLength.Value/1000 ?? 1), TbxName.Text ?? "nouveau", 69e9);
+        Logic.Piece piece = new(Convert.ToDouble(NudLength.Value/1000 ?? 1), TbxName.Text ?? "nouveau");
         model.NewPiece(piece);
     }
 }
