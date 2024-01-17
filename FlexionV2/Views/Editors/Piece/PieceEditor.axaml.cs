@@ -17,17 +17,17 @@ public partial class PieceEditor : Window
         TbxName.TextChanged += (_, _) => TextChanged();
         BtnRemove.Click +=(_,_) => RemoveItems();
         BtnAdd.Click += (_, _) => CreateNewPiece();
-        LbxItems.SelectionChanged += (_,_) => UpdateListLayer();
+        LbxPieces.SelectionChanged += (_,_) => UpdateListLayer();
         BtnChangeLayers.Click += (_, _) => OpenLayerEditor();
         Closing += (_, _) => _listLayersEditor?.Close();
     }
 
     private void NumericChanged()
     {
-        if(LbxItems.SelectedItems == null){return;}
+        if(LbxPieces.SelectedItems == null){return;}
         if(NudLength.Value == null){return;}
         if(DataContext is not MainViewModel model){return;}
-        List<Logic.Piece> pieces = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList();
+        List<Logic.Piece> pieces = LbxPieces.SelectedItems.Cast<Logic.Piece>().ToList();
         foreach (Logic.Piece piece in pieces)
         {
             piece.Length = (double)NudLength.Value/1000;
@@ -37,10 +37,10 @@ public partial class PieceEditor : Window
 
     private void TextChanged()
     {
-        if(LbxItems.SelectedItems == null){return;}
+        if(LbxPieces.SelectedItems == null){return;}
         if(TbxName.Text == null){return;}
         if(DataContext is not MainViewModel model){return;}
-        List<Logic.Piece> pieces = LbxItems.SelectedItems.Cast<Logic.Piece>().ToList();
+        List<Logic.Piece> pieces = LbxPieces.SelectedItems.Cast<Logic.Piece>().ToList();
         foreach (Logic.Piece piece in pieces)
         {
             piece.Name = TbxName.Text;
@@ -50,24 +50,24 @@ public partial class PieceEditor : Window
 
     private void RemoveItems()
     {
-        if (LbxItems.SelectedItems == null) return;
+        if (LbxPieces.SelectedItems == null) return;
         if(DataContext is not MainViewModel model){return;}
-        int index = LbxItems.SelectedIndex;
-        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Piece>().Select(x => x.PieceId).ToList();
+        int index = LbxPieces.SelectedIndex;
+        List<long> selected = LbxPieces.SelectedItems.Cast<Logic.Piece>().Select(x => x.PieceId).ToList();
         foreach (long id in selected)
         {
             model.RemovePiece(id);
         }
 
         if (index <= 0) return;
-        LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+        LbxPieces.SelectedIndex = LbxPieces.Items.Count > index ? index : LbxPieces.Items.Count;
     }
     
     private void OpenLayerEditor()
     {
         if(_listLayersEditor != null){return;}
         if(DataContext is not MainViewModel model){return;}
-        if(LbxItems.SelectedItems?[0] is not Logic.Piece piece){return;}
+        if(LbxPieces.SelectedItems?[0] is not Logic.Piece piece){return;}
         _listLayersEditor = new ListLayersEditor(model,piece.PieceId);
         _listLayersEditor.Closing += (_, _) => IsEnabled = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
@@ -80,9 +80,9 @@ public partial class PieceEditor : Window
         if(DataContext is not MainViewModel model){return;}
         long? pieceId = null;
         bool enabled = false;
-        if (LbxItems.SelectedItems is { Count: 1 })
+        if (LbxPieces.SelectedItems is { Count: 1 })
         {
-            if(LbxItems.SelectedItems[0] is not Logic.Piece piece){return;}
+            if(LbxPieces.SelectedItems[0] is not Logic.Piece piece){return;}
             pieceId = piece.PieceId;
             enabled = true;
             BtnChangeLayers.IsEnabled = true;

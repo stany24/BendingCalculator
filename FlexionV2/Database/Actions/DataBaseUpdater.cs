@@ -95,15 +95,16 @@ public static class DataBaseUpdater
         using SQLiteCommand allLayers = new("SELECT * FROM PieceToLayer WHERE PieceId = @PieceId", connection);
         allLayers.Parameters.AddWithValue("@PieceId",pieceId);
         using SQLiteDataReader reader = allLayers.ExecuteReader();
+        
         int id = 0;
         while (reader.Read())
         {
-            if(id<order){continue;}
+            if(id<=order){id++;continue;}
             using SQLiteCommand changeOrder = new(
                 "UPDATE PieceToLayer SET LayerOrder = @NewLayerOrder WHERE PieceId= @Id And LayerOrder = @OldLayerOrder;", connection);
-            changeOrder.Parameters.AddWithValue("@NewLayerOrder",order);
-            changeOrder.Parameters.AddWithValue("@OldLayerOrder",order+1);
-            changeOrder.Parameters.AddWithValue("@Id",id);
+            changeOrder.Parameters.AddWithValue("@NewLayerOrder",id);
+            changeOrder.Parameters.AddWithValue("@OldLayerOrder",id+1);
+            changeOrder.Parameters.AddWithValue("@Id",pieceId);
             changeOrder.ExecuteNonQuery();
             id++;
         }

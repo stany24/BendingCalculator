@@ -23,11 +23,11 @@ public partial class LayerEditor: Window
     
     private void NumericChanged(NumericUpDownValueChangedEventArgs e, string propertyName)
     {
-        if (LbxItems.SelectedItems == null) {return;}
+        if (LbxLayers.SelectedItems == null) {return;}
         if(DataContext is not MainViewModel model){return;}
         if (e.NewValue == null) return;
         
-        List<Logic.Layer> layers = LbxItems.SelectedItems.Cast<Logic.Layer>().ToList();
+        List<Logic.Layer> layers = LbxLayers.SelectedItems.Cast<Logic.Layer>().ToList();
         foreach (Logic.Layer layer in layers)
         {
             layer.GetType().GetProperty(propertyName)?.SetValue(layer, (double)e.NewValue/1000);
@@ -37,11 +37,11 @@ public partial class LayerEditor: Window
 
     private void ComboboxChanged()
     {
-        if (LbxItems.SelectedItems == null) {return;}
+        if (LbxLayers.SelectedItems == null) {return;}
         if (CbxMaterial.SelectedItem == null) {return;}
         if(DataContext is not MainViewModel model){return;}
         if(CbxMaterial.SelectedItem is not Logic.Material material){return;}
-        List<Logic.Layer> layers = LbxItems.SelectedItems.Cast<Logic.Layer>().ToList();
+        List<Logic.Layer> layers = LbxLayers.SelectedItems.Cast<Logic.Layer>().ToList();
         foreach (Logic.Layer layer in layers)
         {
             layer.Material = material;
@@ -51,16 +51,16 @@ public partial class LayerEditor: Window
 
     private void RemoveItems()
     {
-        if (LbxItems.SelectedItems == null) return;
-        int index = LbxItems.SelectedIndex;
+        if (LbxLayers.SelectedItems == null) return;
+        int index = LbxLayers.SelectedIndex;
         if(DataContext is not MainViewModel model){return;}
-        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Layer>().Select(x => x.LayerId).ToList();
+        List<long> selected = LbxLayers.SelectedItems.Cast<Logic.Layer>().Select(x => x.LayerId).ToList();
         foreach (long id in selected)
         {
             model.RemoveLayer(id);
         }
         if (index <= 0) return;
-        LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+        LbxLayers.SelectedIndex = LbxLayers.Items.Count > index ? index : LbxLayers.Items.Count;
     }
 
     private void CreateNewLayer()

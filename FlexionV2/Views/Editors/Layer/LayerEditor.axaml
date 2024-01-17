@@ -77,7 +77,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ListBox
-            Name="LbxItems"
+            Name="LbxLayers"
             Grid.Row="0"
             Grid.Column="0"
             Grid.RowSpan="12"

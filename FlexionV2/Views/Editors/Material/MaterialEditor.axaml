@@ -41,7 +41,7 @@
                 Grid.Column="5"
                 Grid.Row="2"></NumericUpDown>
             <ListBox
-                Name="LbxItems"
+                Name="LbxMaterials"
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.RowSpan="6"

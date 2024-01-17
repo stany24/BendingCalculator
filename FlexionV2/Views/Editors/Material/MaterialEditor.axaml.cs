@@ -26,9 +26,9 @@ public partial class MaterialEditor: Window
     private void TextChanged()
     {
         if(TbxName.Text == null){return;}
-        if(LbxItems.SelectedItems == null){return;}
+        if(LbxMaterials.SelectedItems == null){return;}
         if(DataContext is not MainViewModel model){return;}
-        List<Logic.Material> materials = LbxItems.SelectedItems.Cast<Logic.Material>().ToList();
+        List<Logic.Material> materials = LbxMaterials.SelectedItems.Cast<Logic.Material>().ToList();
         foreach (Logic.Material material in materials)
         {
             material.Name = TbxName.Text;
@@ -38,7 +38,7 @@ public partial class MaterialEditor: Window
     
     private void NumericChanged()
     {
-        if (LbxItems.SelectedItems == null) return;
+        if (LbxMaterials.SelectedItems == null) return;
         if(DataContext is not MainViewModel model){return;}
         if (NudE.Value == null) return;
         int multiplication;
@@ -52,7 +52,7 @@ public partial class MaterialEditor: Window
             default: return;
         }
 
-        List<Logic.Material> materials = LbxItems.SelectedItems.Cast<Logic.Material>().ToList();
+        List<Logic.Material> materials = LbxMaterials.SelectedItems.Cast<Logic.Material>().ToList();
         foreach (Logic.Material material in materials)
         {
             material.E = (long)NudE.Value*multiplication;
@@ -62,16 +62,16 @@ public partial class MaterialEditor: Window
 
     private void RemoveItems()
     {
-        if (LbxItems.SelectedItems == null) return;
+        if (LbxMaterials.SelectedItems == null) return;
         if(DataContext is not MainViewModel model){return;}
-        int index = LbxItems.SelectedIndex;
-        List<long> selected = LbxItems.SelectedItems.Cast<Logic.Material>().Select(x => x.MaterialId).ToList();
+        int index = LbxMaterials.SelectedIndex;
+        List<long> selected = LbxMaterials.SelectedItems.Cast<Logic.Material>().Select(x => x.MaterialId).ToList();
         foreach (long id in selected)
         {
             model.RemoveMaterial(id);
         }
         if (index <= 0) return;
-        LbxItems.SelectedIndex = LbxItems.Items.Count > index ? index : LbxItems.Items.Count;
+        LbxMaterials.SelectedIndex = LbxMaterials.Items.Count > index ? index : LbxMaterials.Items.Count;
     }
 
     private void CreateNewMaterial()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
 using FlexionV2.ViewModels;
 
@@ -62,12 +63,17 @@ public partial class ListLayersEditor : Window
 
     private void Remove()
     {
-        if (LbxInPiece.SelectedItems is null) { return; }
-        if(DataContext is not MainViewModel model){return;}
-        for (int i = 0; i < LbxInPiece.SelectedItems.Count; i++)
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
         {
-            model.RemoveLayerToPiece(_pieceId,i);
-        }
+            if (LbxInPiece.SelectedItems is null) { return; }
+            if(DataContext is not MainViewModel model){return;}
+
+            while (LbxInPiece.SelectedItems.Count > 0)
+            {
+                int id = LbxInPiece.Items.IndexOf(LbxInPiece.SelectedItems[0]);
+                model.RemoveLayerToPiece(_pieceId,id);
+            }
+        });
     }
 
     private void Add()
