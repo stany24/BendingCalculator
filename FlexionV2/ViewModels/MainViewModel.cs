@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
+using FlexionV2.Views.Editors.Force;
+using FlexionV2.Views.Editors.Layer;
+using FlexionV2.Views.Editors.Material;
+using FlexionV2.Views.Editors.Piece;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
@@ -23,6 +28,14 @@ public partial class MainViewModel : ObservableObject
         ReloadLayers();
         ReloadPieces();
     }
+
+    public void CloseAllWindow()
+    {
+        _materialEditor?.Close();
+        _layerEditor?.Close();
+        _pieceEditor?.Close();
+        _forceEditor?.Close();
+    }
     
     public ISeries[] SeriesGraphFlexion { get; set; } =
     {
@@ -38,4 +51,41 @@ public partial class MainViewModel : ObservableObject
             }
         }
     };
+    
+    private MaterialEditor? _materialEditor;
+    public void OpenMaterialEditor()
+    {
+        if(_materialEditor != null){return;}
+        _materialEditor = new MaterialEditor(this);
+        _materialEditor.Closed += (_, _) => _materialEditor = null;
+        _materialEditor.Show();
+    }
+    
+    private LayerEditor? _layerEditor;
+    public void OpenLayerEditor()
+    {
+        if(_layerEditor != null){return;}
+        _layerEditor = new LayerEditor(this);
+        _layerEditor.Closed += (_, _) => _layerEditor = null;
+        _layerEditor.Show();
+    }
+    
+    private PieceEditor? _pieceEditor;
+    public void OpenPieceEditor()
+    {
+        if(_pieceEditor != null){return;}
+        _pieceEditor = new PieceEditor(this);
+        _pieceEditor.Closed += (_, _) => _pieceEditor = null;
+        _pieceEditor.Show();
+    }
+    
+    private ForceEditor? _forceEditor;
+    public void OpenForceEditor(NumericUpDown nudForce)
+    {
+        if(_forceEditor != null){return;}
+        _forceEditor = new ForceEditor();
+        _forceEditor.Closing += (_, _) => nudForce.Value = _forceEditor?.CalculateForce();
+        _forceEditor.Closed += (_, _) => _forceEditor = null;
+        _forceEditor.Show();
+    }
 }

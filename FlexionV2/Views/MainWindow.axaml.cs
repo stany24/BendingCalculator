@@ -3,10 +3,6 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using FlexionV2.Logic;
 using FlexionV2.ViewModels;
-using FlexionV2.Views.Editors.Force;
-using FlexionV2.Views.Editors.Material;
-using FlexionV2.Views.Editors.Layer;
-using FlexionV2.Views.Editors.Piece;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.Kernel;
 
@@ -14,14 +10,6 @@ namespace FlexionV2.Views;
 
 public partial class Main : Window
 {
-    private ForceEditor? _forceEditor;
-    
-    private MaterialEditor? _materialEditor;
-    
-    private LayerEditor? _layerEditor;
-    
-    private PieceEditor? _pieceEditor;
-
     public Main(MainViewModel model)
     {
         DataContext = model;
@@ -31,56 +19,14 @@ public partial class Main : Window
 
     private void UiEvents()
     {
-        BtnForce.Click += (_, _) => OpenForceEditor();
-        BtnMaterial.Click += (_, _) => OpenMaterialEditor();
-        BtnLayer.Click += (_, _) => OpenLayerEditor();
-        BtnPiece.Click += (_,_) => OpenPieceEditor();
         BtnStart.Click += (_, _) => Task.Run(CalculateFlexion);
         Closing += (_, _) => CloseAllWindows();
     }
 
     private void CloseAllWindows()
     {
-        _materialEditor?.Close();
-        _layerEditor?.Close();
-        _pieceEditor?.Close();
-        _forceEditor?.Close();
-    }
-
-    private void OpenForceEditor()
-    {
-        if(_forceEditor != null){return;}
-        _forceEditor = new ForceEditor();
-        _forceEditor.Closing += (_, _) => NudForce.Value = _forceEditor?.CalculateForce();
-        _forceEditor.Closed += (_, _) => _forceEditor = null;
-        _forceEditor.Show();
-    }
-    
-    private void OpenMaterialEditor()
-    {
         if(DataContext is not MainViewModel model){return;}
-        if(_materialEditor != null){return;}
-        _materialEditor = new MaterialEditor(model);
-        _materialEditor.Closed += (_, _) => _materialEditor = null;
-        _materialEditor.Show();
-    }
-    
-    private void OpenLayerEditor()
-    {
-        if(DataContext is not MainViewModel model){return;}
-        if(_layerEditor != null){return;}
-        _layerEditor = new LayerEditor(model);
-        _layerEditor.Closed += (_, _) => _layerEditor = null;
-        _layerEditor.Show();
-    }
-    
-    private void OpenPieceEditor()
-    {
-        if(DataContext is not MainViewModel model){return;}
-        if(_pieceEditor != null){return;}
-        _pieceEditor = new PieceEditor(model);
-        _pieceEditor.Closed += (_, _) => _pieceEditor = null;
-        _pieceEditor.Show();
+        model.CloseAllWindow();
     }
 
     private void CalculateFlexion()

@@ -39,7 +39,9 @@
                 Name="BtnForce"
                 Content="Modifier"
                 Grid.Row="2"
-                Grid.Column="0"></Button>
+                Grid.Column="0"
+                Command="{Binding OpenForceEditor}"
+                CommandParameter="{Binding #NudForce}"></Button>
         </Grid>
         <Grid 
             Name="GridPiece"
@@ -58,7 +60,8 @@
                 Name="BtnPiece"
                 Content="Modifier"
                 Grid.Row="0"
-                Grid.Column="2"></Button>
+                Grid.Column="2"
+                Command="{Binding OpenPieceEditor}"></Button>
             <ListBox
                 Name="LbxPiece"
                 Grid.Row="2"
@@ -93,7 +96,8 @@
                 Name="BtnLayer"
                 Content="Modifier"
                 Grid.Row="0"
-                Grid.Column="2"></Button>
+                Grid.Column="2"
+                Command="{Binding OpenLayerEditor}"></Button>
             <ListBox
                 Name="LbxLayer"
                 Grid.Row="2"
@@ -128,7 +132,8 @@
                 Name="BtnMaterial"
                 Content="Modifier"
                 Grid.Row="0"
-                Grid.Column="2"></Button>
+                Grid.Column="2"
+                Command="{Binding OpenMaterialEditor}"></Button>
             <ListBox
                 Name="LbxMaterial"
                 Grid.Row="2"
