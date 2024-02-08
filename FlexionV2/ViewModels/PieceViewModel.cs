@@ -13,6 +13,12 @@ public partial class MainViewModel
         set => SetProperty(ref _pieces, value);
     }
     
+    private ObservableCollection<Piece> _selectedPieces = new();
+    public ObservableCollection<Piece> SelectedPieces { 
+        get => _selectedPieces;
+        set => SetProperty(ref _selectedPieces, value);
+    }
+    
     private void ReloadPieces()
     {
         List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);

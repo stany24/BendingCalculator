@@ -31,7 +31,7 @@
                 VerticalAlignment="Center"></TextBlock>
             <NumericUpDown
                 Name="NudForce"
-                Value="5"
+                Value="{Binding Force}"
                 Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="0"></NumericUpDown>
@@ -70,6 +70,7 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 MinWidth="200"
+                SelectedItems="{Binding SelectedPieces}"
                 ItemsSource="{Binding Pieces}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -165,6 +166,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="7"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Commencer</Button>
+            HorizontalContentAlignment="Center"
+            Command="{Binding CalculateFlexion}">Commencer</Button>
     </Grid>
 </Window>

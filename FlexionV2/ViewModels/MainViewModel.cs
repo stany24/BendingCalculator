@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
@@ -16,6 +18,7 @@ namespace FlexionV2.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly SQLiteConnection _connection;
+    public decimal Force { get; set; }
 
     public MainViewModel(SQLiteConnection connection)
     {
@@ -52,6 +55,16 @@ public partial class MainViewModel : ObservableObject
         }
     };
     
+    public void CalculateFlexion()
+    {
+        Task.Run(() =>
+        {
+            if(SelectedPieces is { Count: 0 }){return;}
+            if(SelectedPieces[0].Layers.Count == 0){return;}
+            SeriesGraphFlexion[0].Values=SelectedPieces[0].CalculateFlexion((int)Force, SelectedPieces[0].Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+        });
+    }
+    
     private MaterialEditor? _materialEditor;
     public void OpenMaterialEditor()
     {
@@ -80,11 +93,11 @@ public partial class MainViewModel : ObservableObject
     }
     
     private ForceEditor? _forceEditor;
-    public void OpenForceEditor(NumericUpDown nudForce)
+    public void OpenForceEditor()
     {
         if(_forceEditor != null){return;}
         _forceEditor = new ForceEditor();
-        _forceEditor.Closing += (_, _) => nudForce.Value = _forceEditor?.CalculateForce();
+        _forceEditor.Closing += (_, _) => Force = _forceEditor?.CalculateForce() ?? 100;
         _forceEditor.Closed += (_, _) => _forceEditor = null;
         _forceEditor.Show();
     }
