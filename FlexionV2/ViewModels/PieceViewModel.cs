@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Controls;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 using FlexionV2.Views.Editors.Piece;
@@ -25,9 +26,28 @@ public partial class MainViewModel
         }
     }
 
-    public double PieceLength { get; set; } = 1;
-    public string PieceName { get; set; } = string.Empty;
-    public bool BtnChangeLayerEnabled { get; set; }
+    private double _pieceLength = 1;
+
+    public double PieceLength
+    {
+        get => _pieceLength;
+        set
+        {
+            _pieceLength = value;
+            PieceLengthChanged();
+        }
+    }
+
+    private string _pieceName = string.Empty;
+    public string PieceName { get => _pieceName;
+        set
+        {
+            _pieceName = value;
+            PieceNameChanged();
+        }
+    }
+
+    public bool BtnChangeLayerEnabled { get; set; } = false;
     
     private ListLayersEditor? _listLayersEditor;
 
@@ -59,8 +79,8 @@ public partial class MainViewModel
             Pieces[i].Length = pieces[i].Length;
         }
     }
-    
-    public void PieceLengthChanged()
+
+    private void PieceLengthChanged()
     {
         foreach (Piece piece in SelectedPieces)
         {
@@ -69,7 +89,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
     }
 
-    public void PieceNameChanged()
+    private void PieceNameChanged()
     {
         foreach (Piece piece in SelectedPieces)
         {
@@ -104,22 +124,19 @@ public partial class MainViewModel
 
     private void UpdateListLayer()
     {
-        long? pieceId = null;
-        bool enabled = false;
-        if (SelectedPieces is { Count: 1 })
+        if(_selectedPieces.Count == 0)
         {
-            pieceId = SelectedPieces[0].PieceId;
-            enabled = true;
-            BtnChangeLayerEnabled = true;
+            BtnChangeLayerEnabled = false;
+            return;
         }
-        
-        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {BtnChangeLayerEnabled = enabled; });
+        long pieceId = SelectedPieces[0].PieceId;
+        BtnChangeLayerEnabled = true;
         LoadLayersOfPiece(pieceId);
     }
 
     public void CreateNewPiece()
     {
-        Piece piece = new(PieceLength/1000, PieceName, 69e9);
+        Piece piece = new(PieceLength/1000, "nouveau", 69e9);
         DataBaseCreator.NewPiece(_connection,piece);
     }
 }

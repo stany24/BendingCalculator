@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
+using Avalonia.Controls;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 
@@ -57,8 +57,16 @@ public partial class MainViewModel
         }
     }
     
-    public string Name { get; set; } = string.Empty;
-    public bool MaterialNameChanged()
+    private string _materialName = string.Empty;
+    public string Name { get => _materialName;
+        set
+        {
+            _materialName = value;
+            MaterialNameChanged();
+        }
+    }
+
+    private void MaterialNameChanged()
     {
         List<Material> materials = new(SelectedMaterials);
         foreach (Material material in materials)
@@ -66,11 +74,21 @@ public partial class MainViewModel
             material.Name = Name;
         }
         DataBaseUpdater.UpdateMaterials(_connection,materials);
-        return true;
     }
 
-    public double EValue { get; set; } = 69;
-    public bool MaterialEChanged()
+    private double _eValue = 69;
+
+    public double EValue
+    {
+        get => _eValue;
+        set
+        {
+            _eValue = value;
+            MaterialEChanged();
+        }
+    }
+
+    private void MaterialEChanged()
     {
         int multiplication;
         switch (SelectedUnit)
@@ -79,7 +97,7 @@ public partial class MainViewModel
                 break;
             case "MPa" : multiplication = 1000000;
                 break;
-            default: return true;
+            default: return;
         }
 
         List<Material> materials = new(SelectedMaterials);
@@ -88,10 +106,9 @@ public partial class MainViewModel
             material.E = (long)EValue*multiplication;
         }
         DataBaseUpdater.UpdateMaterials(_connection,materials);
-        return true;
     }
 
-    private int SelectedMaterialIndex { get; set; }
+    public int SelectedMaterialIndex { get; set; }
     public void RemoveMaterials()
     {
         int index = SelectedMaterialIndex;

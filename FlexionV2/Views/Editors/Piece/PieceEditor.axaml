@@ -23,13 +23,7 @@
             Name="TbxName"
             Text="{Binding PieceName}"
             Grid.Column="4"
-            Grid.Row="0">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static TextBox.TextChangedEvent}">
-                    <InvokeCommandAction Command="{Binding PieceNameChanged}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </TextBox>
+            Grid.Row="0"></TextBox>
         <TextBlock 
             Name="LblLength"
             VerticalAlignment="Center"
@@ -40,22 +34,15 @@
             Value="{Binding PieceLength}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="2">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                    <InvokeCommandAction Command="{Binding PieceLengthChanged}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </NumericUpDown>
+            Grid.Row="2"></NumericUpDown>
         <Button
             Name="BtnChangeLayers"
             Grid.Column="2"
             Grid.ColumnSpan="3"
             Grid.Row="4"
-            IsEnabled="False"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            IsEffectivelyEnabled="{Binding BtnChangeLayerEnabled}"
+            IsEnabled="{Binding BtnChangeLayerEnabled}"
             Command="{Binding OpenLayerOfPieceEditor}">Changer les couches</Button>
         <ListBox
             Name="LbxLayers"

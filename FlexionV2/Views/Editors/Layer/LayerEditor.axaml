@@ -24,13 +24,7 @@
             Value="{Binding WidthCenter}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="0">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                    <InvokeCommandAction Command="{Binding ChangeWidthCenter}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </NumericUpDown>
+            Grid.Row="0"></NumericUpDown>
         <TextBlock 
             Name="LblWidthSide"
             VerticalAlignment="Center"
@@ -41,13 +35,7 @@
             Value="{Binding WidthSide}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="2">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                    <InvokeCommandAction Command="{Binding ChangeWidthSide}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </NumericUpDown>
+            Grid.Row="2"></NumericUpDown>
         <TextBlock 
             Name="LblHeightCenter"
             VerticalAlignment="Center"
@@ -58,13 +46,7 @@
             Value="{Binding HeightCenter}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="4">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                    <InvokeCommandAction Command="{Binding ChangeHeightCenter}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </NumericUpDown>
+            Grid.Row="4"></NumericUpDown>
         <TextBlock 
             Name="LblHeightSide"
             VerticalAlignment="Center"
@@ -75,13 +57,7 @@
             Value="{Binding HeightSide}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="6">
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                    <InvokeCommandAction Command="{Binding ChangeHeightSide}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
-        </NumericUpDown>
+            Grid.Row="6"></NumericUpDown>
         <TextBlock 
             Name="LblMaterial"
             VerticalAlignment="Center"

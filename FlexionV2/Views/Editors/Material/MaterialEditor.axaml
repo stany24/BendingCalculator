@@ -22,11 +22,6 @@
                 Grid.Column="5"
                 Grid.Row="0"
                 Text="{Binding Name}">
-                <Interaction.Behaviors>
-                    <RoutedEventTriggerBehavior RoutedEvent="{x:Static TextBox.TextChangedEvent}">
-                        <InvokeCommandAction Command="{Binding MaterialNameChanged}" />
-                    </RoutedEventTriggerBehavior>
-                </Interaction.Behaviors>
             </TextBox>
             <TextBlock 
                 Name="LblE"
@@ -46,13 +41,7 @@
                 Minimum="1"
                 Maximum="999"
                 Grid.Column="5"
-                Grid.Row="2">
-                <Interaction.Behaviors>
-                    <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                        <InvokeCommandAction Command="{Binding MaterialEChanged}" />
-                    </RoutedEventTriggerBehavior>
-                </Interaction.Behaviors>
-            </NumericUpDown>
+                Grid.Row="2"></NumericUpDown>
             <ListBox
                 Name="LbxItems"
                 Grid.Row="0"
@@ -60,7 +49,7 @@
                 Grid.RowSpan="6"
                 SelectionMode="Multiple"
                 MinWidth="200"
-                SelectedIndex="{Binding SelectedLayerIndex}"
+                SelectedIndex="{Binding SelectedMaterialIndex}"
                 SelectedItems="{Binding SelectedMaterials}"
                 ItemsSource="{Binding Materials}">
                 <ListBox.ItemTemplate>

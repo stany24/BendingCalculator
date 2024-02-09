@@ -7,8 +7,6 @@ namespace FlexionV2.ViewModels;
 
 public partial class MainViewModel
 {
-    private long _selectedPieceId;
-    
     private ObservableCollection<Layer> _layersOfSelectedPiece= new();
 
     public ObservableCollection<Layer> LayersOfSelectedPiece
@@ -17,12 +15,9 @@ public partial class MainViewModel
         set => SetProperty(ref _layersOfSelectedPiece, value);
     }
 
-    public void LoadLayersOfPiece(long? id)
+    public void LoadLayersOfPiece(long id)
     {
-        if(id is not { } id2){return;}
-        _selectedPieceId = id2;
-        
-        List<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id2);
+        List<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id);
         while (layers.Count != LayersOfSelectedPiece.Count)
         {
             if (layers.Count < LayersOfSelectedPiece.Count)

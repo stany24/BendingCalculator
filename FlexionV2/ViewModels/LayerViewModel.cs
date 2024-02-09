@@ -21,10 +21,53 @@ public partial class MainViewModel
         set => SetProperty(ref _selectedLayers, value);
     }
 
-    public double WidthSide { get; set; }
-    public double WidthCenter { get; set; }
-    public double HeightSide { get; set; }
-    public double HeightCenter { get; set; }
+    private double _widthSide;
+
+    public double WidthSide
+    {
+        get => _widthSide;
+        set
+        {
+            _widthSide = value;
+            ChangeWidthSide();
+        }
+    }
+    
+    private double _widthCenter;
+
+    public double WidthCenter
+    {
+        get => _widthCenter;
+        set
+        {
+            _widthCenter = value;
+            ChangeWidthCenter();
+        }
+    }
+    
+    private double _heightSide;
+
+    public double HeightSide
+    {
+        get => _heightSide;
+        set
+        {
+            _heightSide = value;
+            ChangeHeightSide();
+        }
+    }
+    
+    private double _heightCenter;
+
+    public double HeightCenter
+    {
+        get => _heightCenter;
+        set
+        {
+            _heightCenter = value;
+            ChangeHeightCenter();
+        }
+    }
 
     private Material _selectedMaterial;
     public Material SelectedMaterial
@@ -63,7 +106,7 @@ public partial class MainViewModel
         }
     }
 
-    public void ChangeWidthSide()
+    private void ChangeWidthSide()
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
@@ -71,7 +114,8 @@ public partial class MainViewModel
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
-    public void ChangeWidthCenter()
+
+    private void ChangeWidthCenter()
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
@@ -79,7 +123,8 @@ public partial class MainViewModel
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
-    public void ChangeHeightSide()
+
+    private void ChangeHeightSide()
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
@@ -87,7 +132,8 @@ public partial class MainViewModel
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
-    public void ChangeHeightCenter()
+
+    private void ChangeHeightCenter()
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
@@ -105,7 +151,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
 
-    public int SelectedLayerIndex { get; set; }
+    private int SelectedLayerIndex { get; set; }
     public void RemoveLayers()
     {
         int index = SelectedLayerIndex;
