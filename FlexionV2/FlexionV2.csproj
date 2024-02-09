@@ -21,6 +21,7 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5"/>
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.6" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
           <PrivateAssets>all</PrivateAssets>

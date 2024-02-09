@@ -2,7 +2,6 @@
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
 using FlexionV2.Views.Editors.Force;
@@ -18,7 +17,7 @@ namespace FlexionV2.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly SQLiteConnection _connection;
-    public decimal Force { get; set; }
+    public decimal Force { get; set; } = 100;
 
     public MainViewModel(SQLiteConnection connection)
     {
@@ -61,7 +60,10 @@ public partial class MainViewModel : ObservableObject
         {
             if(SelectedPieces is { Count: 0 }){return;}
             if(SelectedPieces[0].Layers.Count == 0){return;}
-            SeriesGraphFlexion[0].Values=SelectedPieces[0].CalculateFlexion((int)Force, SelectedPieces[0].Length/10000).Select((t, i) => new ObservablePoint(i, t)).ToList();
+            double gap = SelectedPieces[0].Length / 10000;
+            IEnumerable<double> values = SelectedPieces[0].CalculateFlexion((int)Force,gap); //returns only NaN caused by CalculateI() in Piece class
+            List<ObservablePoint> points = values.Select((t, i) => new ObservablePoint(i, t)).ToList();
+            SeriesGraphFlexion[0].Values = points;
         });
     }
     
