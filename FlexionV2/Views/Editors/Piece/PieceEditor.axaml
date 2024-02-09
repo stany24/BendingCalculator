@@ -21,8 +21,15 @@
             Grid.Row="0">Nom:</TextBlock>
         <TextBox 
             Name="TbxName"
+            Text="{Binding PieceName}"
             Grid.Column="4"
-            Grid.Row="0"></TextBox>
+            Grid.Row="0">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static TextBox.TextChangedEvent}">
+                    <InvokeCommandAction Command="{Binding PieceNameChanged}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </TextBox>
         <TextBlock 
             Name="LblLength"
             VerticalAlignment="Center"
@@ -30,10 +37,16 @@
             Grid.Row="2">Longueur (mm):</TextBlock>
         <NumericUpDown 
             Name="NudLength"
-            Value="1"
+            Value="{Binding PieceLength}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="2"></NumericUpDown>
+            Grid.Row="2">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
+                    <InvokeCommandAction Command="{Binding PieceLengthChanged}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </NumericUpDown>
         <Button
             Name="BtnChangeLayers"
             Grid.Column="2"
@@ -41,7 +54,9 @@
             Grid.Row="4"
             IsEnabled="False"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center">Changer les couches</Button>
+            HorizontalContentAlignment="Center"
+            IsEffectivelyEnabled="{Binding BtnChangeLayerEnabled}"
+            Command="{Binding OpenLayerOfPieceEditor}">Changer les couches</Button>
         <ListBox
             Name="LbxLayers"
             Grid.Column="6"
@@ -70,16 +85,23 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static ListBox.SelectionChangedEvent}">
+                    <InvokeCommandAction Command="{Binding UpdateListLayer}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
         </ListBox>
         <Button
             Name="BtnAdd"
             Content="Ajouter"
             Grid.Row="6"
-            Grid.Column="2"></Button>
+            Grid.Column="2"
+            Command="{Binding CreateNewPiece}"></Button>
         <Button
             Name="BtnRemove"
             Content="Retirer"
             Grid.Row="6"
-            Grid.Column="4"></Button>
+            Grid.Column="4"
+            Command="{Binding RemovePiece}"></Button>
     </Grid>
 </Window>

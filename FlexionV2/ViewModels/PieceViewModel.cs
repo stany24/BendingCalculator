@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
+using FlexionV2.Views.Editors.Piece;
 
 namespace FlexionV2.ViewModels;
 
@@ -17,6 +19,17 @@ public partial class MainViewModel
     public ObservableCollection<Piece> SelectedPieces { 
         get => _selectedPieces;
         set => SetProperty(ref _selectedPieces, value);
+    }
+    
+    public double PieceLength { get; set; }
+    public string PieceName { get; set; }
+    public bool BtnChangeLayerEnabled { get; set; }
+    
+    private ListLayersEditor? _listLayersEditor;
+
+    public void CloseLayerOfPieceEditor()
+    {
+        _listLayersEditor?.Close();
     }
     
     private void ReloadPieces()
@@ -43,18 +56,66 @@ public partial class MainViewModel
         }
     }
     
-    public void NewPiece(Piece piece)
+    public void PieceLengthChanged()
     {
+        foreach (Piece piece in SelectedPieces)
+        {
+            piece.Length = PieceLength/1000;
+        }
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
+    }
+
+    public void PieceNameChanged()
+    {
+        foreach (Piece piece in SelectedPieces)
+        {
+            piece.Name = PieceName;
+        }
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
+    }
+
+    private int SelectedPieceIndex { get; set; }
+    public void RemovePiece()
+    {
+        int index = SelectedPieceIndex;
+        List<long> selected = SelectedPieces.Select(x => x.PieceId).ToList();
+        foreach (long id in selected)
+        {
+            DataBaseRemover.RemovePiece(_connection,id);
+        }
+
+        if (index <= 0) return;
+        SelectedPieceIndex = SelectedPieces.Count > index ? index : SelectedPieces.Count;
+    }
+    
+    public void OpenLayerOfPieceEditor()
+    {
+        if(_listLayersEditor != null){return;}
+        _listLayersEditor = new ListLayersEditor(this,SelectedPieces[0].PieceId);
+        _listLayersEditor.Closing += (_, _) => BtnChangeLayerEnabled = true;
+        _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
+        _listLayersEditor.Show();
+        BtnChangeLayerEnabled = false;
+    }
+
+    public void UpdateListLayer()
+    {
+        long? pieceId = null;
+        bool enabled = false;
+        if (SelectedPieces is { Count: 1 })
+        {
+            pieceId = SelectedPieces[0].PieceId;
+            enabled = true;
+            BtnChangeLayerEnabled = true;
+        }
+        
+        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => {BtnChangeLayerEnabled = enabled; });
+        LoadLayersOfPiece(pieceId);
+    }
+
+    public void CreateNewPiece()
+    {
+        Piece piece = new(PieceLength/1000, PieceName, 69e9);
         DataBaseCreator.NewPiece(_connection,piece);
-    }
-
-    public void UpdatePieces(List<Piece> piece)
-    {
-        DataBaseUpdater.UpdatePieces(_connection,piece);
-    }
-
-    public void RemovePiece(long id)
-    {
-        DataBaseRemover.RemovePiece(_connection,id);
     }
 }
