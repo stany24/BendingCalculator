@@ -59,7 +59,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate></ListBox>
         <ListBox
-            Name="LbxItems"
+            Name="LbxPieces"
             Grid.Row="0"
             Grid.Column="0"
             Grid.RowSpan="7"

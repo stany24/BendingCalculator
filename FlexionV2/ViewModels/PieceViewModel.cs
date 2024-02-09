@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Avalonia.Controls;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 using FlexionV2.Views.Editors.Piece;
@@ -19,11 +18,7 @@ public partial class MainViewModel
     private ObservableCollection<Piece> _selectedPieces = new();
     public ObservableCollection<Piece> SelectedPieces { 
         get => _selectedPieces;
-        set
-        {
-            SetProperty(ref _selectedPieces, value);
-            UpdateListLayer();
-        }
+        set => SetProperty(ref _selectedPieces, value);
     }
 
     private double _pieceLength = 1;

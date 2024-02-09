@@ -22,6 +22,7 @@ public partial class MainViewModel : ObservableObject
     public MainViewModel(SQLiteConnection connection)
     {
         _connection = connection;
+        SelectedPieces.CollectionChanged += (_,_) => UpdateListLayer();
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
