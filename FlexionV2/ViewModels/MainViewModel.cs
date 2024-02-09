@@ -29,6 +29,7 @@ public partial class MainViewModel : ObservableObject
         ReloadMaterials();
         ReloadLayers();
         ReloadPieces();
+        SelectedMaterial = Materials[0];
     }
 
     public void CloseAllWindow()

@@ -91,7 +91,7 @@
             Name="CbxMaterial"
             Grid.Column="4"
             Grid.Row="8"
-            SelectedItem="{Binding SelectedMaterials}"
+            SelectedItem="{Binding SelectedMaterial}"
             ItemsSource="{Binding Materials}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -100,11 +100,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static ComboBox.SelectionChangedEvent}">
-                    <InvokeCommandAction Command="{Binding ComboboxChanged}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
         </ComboBox>
         <ListBox
             Name="LbxItems"

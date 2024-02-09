@@ -18,11 +18,15 @@ public partial class MainViewModel
     private ObservableCollection<Piece> _selectedPieces = new();
     public ObservableCollection<Piece> SelectedPieces { 
         get => _selectedPieces;
-        set => SetProperty(ref _selectedPieces, value);
+        set
+        {
+            SetProperty(ref _selectedPieces, value);
+            UpdateListLayer();
+        }
     }
-    
-    public double PieceLength { get; set; }
-    public string PieceName { get; set; }
+
+    public double PieceLength { get; set; } = 1;
+    public string PieceName { get; set; } = string.Empty;
     public bool BtnChangeLayerEnabled { get; set; }
     
     private ListLayersEditor? _listLayersEditor;
@@ -98,7 +102,7 @@ public partial class MainViewModel
         BtnChangeLayerEnabled = false;
     }
 
-    public void UpdateListLayer()
+    private void UpdateListLayer()
     {
         long? pieceId = null;
         bool enabled = false;

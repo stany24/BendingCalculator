@@ -77,7 +77,8 @@
             Grid.Column="0"
             Grid.RowSpan="7"
             MinWidth="200"
-            ItemsSource="{Binding Pieces}">
+            ItemsSource="{Binding Pieces}"
+            SelectedItems="{Binding SelectedPieces}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -85,11 +86,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <Interaction.Behaviors>
-                <RoutedEventTriggerBehavior RoutedEvent="{x:Static ListBox.SelectionChangedEvent}">
-                    <InvokeCommandAction Command="{Binding UpdateListLayer}"/>
-                </RoutedEventTriggerBehavior>
-            </Interaction.Behaviors>
         </ListBox>
         <Button
             Name="BtnAdd"

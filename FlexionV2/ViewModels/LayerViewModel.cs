@@ -25,8 +25,18 @@ public partial class MainViewModel
     public double WidthCenter { get; set; }
     public double HeightSide { get; set; }
     public double HeightCenter { get; set; }
-    public Material SelectedMaterial { get; set; }
-    
+
+    private Material _selectedMaterial;
+    public Material SelectedMaterial
+    {
+        get => _selectedMaterial;
+        set
+        {
+            _selectedMaterial = value;
+            MaterialChanged();
+        }
+    }
+
     private void ReloadLayers()
     {
         List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
@@ -86,7 +96,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
 
-    public void ComboboxChanged()
+    private void MaterialChanged()
     {
         foreach (Layer layer in SelectedLayers)
         {

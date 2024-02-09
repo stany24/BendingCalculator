@@ -57,7 +57,7 @@ public partial class MainViewModel
         }
     }
     
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public bool MaterialNameChanged()
     {
         List<Material> materials = new(SelectedMaterials);
