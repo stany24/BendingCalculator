@@ -58,7 +58,7 @@ public partial class MainViewModel
     }
     
     public string Name { get; set; }
-    public bool TextChanged()
+    public bool MaterialNameChanged()
     {
         List<Material> materials = new(SelectedMaterials);
         foreach (Material material in materials)
@@ -70,7 +70,7 @@ public partial class MainViewModel
     }
 
     public double EValue { get; set; } = 69;
-    public bool NumericChanged()
+    public bool MaterialEChanged()
     {
         int multiplication;
         switch (SelectedUnit)
@@ -91,17 +91,17 @@ public partial class MainViewModel
         return true;
     }
 
-    public int SelectedIndex { get; set; }
-    public void RemoveItems()
+    private int SelectedMaterialIndex { get; set; }
+    public void RemoveMaterials()
     {
-        int index = SelectedIndex;
+        int index = SelectedMaterialIndex;
         List<long> selected = SelectedMaterials.Select(x => x.MaterialId).ToList();
         foreach (long id in selected)
         {
             DataBaseRemover.RemoveMaterial(_connection,id);
         }
         if (index <= 0) return;
-        SelectedIndex = _materials.Count > index ? index : _materials.Count;
+        SelectedMaterialIndex = _materials.Count > index ? index : _materials.Count;
     }
 
     public void CreateNewMaterial()
@@ -115,7 +115,7 @@ public partial class MainViewModel
                 break;
             default: return;
         }
-        Logic.Material material = new(Name,Convert.ToInt64(EValue*multiplication));
+        Material material = new(Name,Convert.ToInt64(EValue*multiplication));
         DataBaseCreator.NewMaterial(_connection,material);
     }
 }

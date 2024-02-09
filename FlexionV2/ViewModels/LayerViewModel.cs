@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 
@@ -12,6 +14,18 @@ public partial class MainViewModel
         get => _layers;
         set => SetProperty(ref _layers, value);
     }
+    
+    private ObservableCollection<Layer> _selectedLayers = new();
+    public ObservableCollection<Layer> SelectedLayers { 
+        get => _selectedLayers;
+        set => SetProperty(ref _selectedLayers, value);
+    }
+
+    public double WidthSide { get; set; }
+    public double WidthCenter { get; set; }
+    public double HeightSide { get; set; }
+    public double HeightCenter { get; set; }
+    public Material SelectedMaterial { get; set; }
     
     private void ReloadLayers()
     {
@@ -38,19 +52,65 @@ public partial class MainViewModel
             Layers[i].WidthOnSides = layers[i].WidthOnSides;
         }
     }
-    
-    public void NewLayer(Layer layer)
+
+    public void ChangeWidthSide()
     {
+        foreach (Layer selectedLayer in SelectedLayers)
+        {
+            selectedLayer.WidthOnSides = WidthSide;
+        }
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+    }
+    public void ChangeWidthCenter()
+    {
+        foreach (Layer selectedLayer in SelectedLayers)
+        {
+            selectedLayer.WidthAtCenter = WidthCenter;
+        }
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+    }
+    public void ChangeHeightSide()
+    {
+        foreach (Layer selectedLayer in SelectedLayers)
+        {
+            selectedLayer.HeightOnSides = HeightSide;
+        }
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+    }
+    public void ChangeHeightCenter()
+    {
+        foreach (Layer selectedLayer in SelectedLayers)
+        {
+            selectedLayer.HeightAtCenter = HeightCenter;
+        }
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+    }
+
+    public void ComboboxChanged()
+    {
+        foreach (Layer layer in SelectedLayers)
+        {
+            layer.Material = SelectedMaterial;
+        }
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+    }
+
+    public int SelectedLayerIndex { get; set; }
+    public void RemoveLayers()
+    {
+        int index = SelectedLayerIndex;
+        List<long> selected = SelectedLayers.Select(x => x.LayerId).ToList();
+        foreach (long id in selected)
+        {
+            DataBaseRemover.RemoveLayer(_connection,id);
+        }
+        if (index <= 0) return;
+        SelectedLayerIndex = Layers.Count > index ? index : Layers.Count;
+    }
+
+    public void CreateNewLayer()
+    {
+        Layer layer = new(SelectedMaterial , WidthCenter/1000,WidthSide/1000, HeightCenter/1000, HeightSide/1000);
         DataBaseCreator.NewLayer(_connection,layer);
-    }
-
-    public void UpdateLayers(List<Layer> layers)
-    {
-        DataBaseUpdater.UpdateLayers(_connection,layers);
-    }
-
-    public void RemoveLayer(long id)
-    {
-        DataBaseRemover.RemoveLayer(_connection,id);
     }
 }

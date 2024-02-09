@@ -21,10 +21,16 @@
             Grid.Row="0">Largeur au centre (mm):</TextBlock>
         <NumericUpDown 
             Name="NudWidthCenter"
-            Value="1"
+            Value="{Binding WidthCenter}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="0"></NumericUpDown>
+            Grid.Row="0">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
+                    <InvokeCommandAction Command="{Binding ChangeWidthCenter}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </NumericUpDown>
         <TextBlock 
             Name="LblWidthSide"
             VerticalAlignment="Center"
@@ -32,10 +38,16 @@
             Grid.Row="2">Largeur sur les cotés (mm):</TextBlock>
         <NumericUpDown 
             Name="NudWidthSide"
-            Value="1"
+            Value="{Binding WidthSide}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="2"></NumericUpDown>
+            Grid.Row="2">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
+                    <InvokeCommandAction Command="{Binding ChangeWidthSide}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </NumericUpDown>
         <TextBlock 
             Name="LblHeightCenter"
             VerticalAlignment="Center"
@@ -43,10 +55,16 @@
             Grid.Row="4">Hauteur au centre (mm):</TextBlock>
         <NumericUpDown 
             Name="NudHeightCenter"
-            Value="1"
+            Value="{Binding HeightCenter}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="4"></NumericUpDown>
+            Grid.Row="4">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
+                    <InvokeCommandAction Command="{Binding ChangeHeightCenter}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </NumericUpDown>
         <TextBlock 
             Name="LblHeightSide"
             VerticalAlignment="Center"
@@ -54,10 +72,16 @@
             Grid.Row="6">Hauteur sur les cotés (mm):</TextBlock>
         <NumericUpDown 
             Name="NudHeightSide"
-            Value="1"
+            Value="{Binding HeightSide}"
             Minimum="0.1"
             Grid.Column="4"
-            Grid.Row="6"></NumericUpDown>
+            Grid.Row="6">
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
+                    <InvokeCommandAction Command="{Binding ChangeHeightSide}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
+        </NumericUpDown>
         <TextBlock 
             Name="LblMaterial"
             VerticalAlignment="Center"
@@ -67,6 +91,7 @@
             Name="CbxMaterial"
             Grid.Column="4"
             Grid.Row="8"
+            SelectedItem="{Binding SelectedMaterials}"
             ItemsSource="{Binding Materials}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -75,6 +100,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
+            <Interaction.Behaviors>
+                <RoutedEventTriggerBehavior RoutedEvent="{x:Static ComboBox.SelectionChangedEvent}">
+                    <InvokeCommandAction Command="{Binding ComboboxChanged}"/>
+                </RoutedEventTriggerBehavior>
+            </Interaction.Behaviors>
         </ComboBox>
         <ListBox
             Name="LbxItems"
@@ -83,6 +113,7 @@
             Grid.RowSpan="12"
             MinWidth="200"
             SelectionMode="Multiple"
+            SelectedItems="{Binding SelectedLayers}"
             ItemsSource="{Binding Layers}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -96,11 +127,13 @@
             Name="BtnAdd"
             Content="Ajouter"
             Grid.Row="10"
-            Grid.Column="2"></Button>
+            Grid.Column="2"
+            Command="{Binding CreateNewLayer}"></Button>
         <Button
             Name="BtnRemove"
             Content="Retirer"
             Grid.Row="10"
-            Grid.Column="4"></Button>
+            Grid.Column="4"
+            Command="{Binding RemoveLayers}"></Button>
     </Grid>
 </Window>

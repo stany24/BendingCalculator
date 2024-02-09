@@ -24,7 +24,7 @@
                 Text="{Binding Name}">
                 <Interaction.Behaviors>
                     <RoutedEventTriggerBehavior RoutedEvent="{x:Static TextBox.TextChangedEvent}">
-                        <InvokeCommandAction Command="{Binding TextChanged}" />
+                        <InvokeCommandAction Command="{Binding MaterialNameChanged}" />
                     </RoutedEventTriggerBehavior>
                 </Interaction.Behaviors>
             </TextBox>
@@ -49,7 +49,7 @@
                 Grid.Row="2">
                 <Interaction.Behaviors>
                     <RoutedEventTriggerBehavior RoutedEvent="{x:Static NumericUpDown.ValueChangedEvent}">
-                        <InvokeCommandAction Command="{Binding NumericChanged}" />
+                        <InvokeCommandAction Command="{Binding MaterialEChanged}" />
                     </RoutedEventTriggerBehavior>
                 </Interaction.Behaviors>
             </NumericUpDown>
@@ -60,7 +60,7 @@
                 Grid.RowSpan="6"
                 SelectionMode="Multiple"
                 MinWidth="200"
-                SelectedIndex="{Binding SelectedIndex}"
+                SelectedIndex="{Binding SelectedLayerIndex}"
                 SelectedItems="{Binding SelectedMaterials}"
                 ItemsSource="{Binding Materials}">
                 <ListBox.ItemTemplate>
@@ -82,6 +82,6 @@
                 Content="Retirer"
                 Grid.Row="4"
                 Grid.Column="4"
-                Command="{Binding RemoveItems}"></Button>
+                Command="{Binding RemoveMaterials}"></Button>
         </Grid>
 </Window>
