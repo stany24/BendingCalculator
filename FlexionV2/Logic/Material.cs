@@ -44,8 +44,8 @@ public class Material:ObservableObject
         
     public Material(string name, long e)
     {
-        Name = name;
-        E = e;
+        _name = name;
+        _e = e;
     }
 
     [JsonConstructor]

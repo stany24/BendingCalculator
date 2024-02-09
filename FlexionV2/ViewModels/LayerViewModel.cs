@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using FlexionV2.Database.Actions;
@@ -69,8 +68,8 @@ public partial class MainViewModel
         }
     }
 
-    private Material _selectedMaterial;
-    public Material SelectedMaterial
+    private Material? _selectedMaterial;
+    public Material? SelectedMaterial
     {
         get => _selectedMaterial;
         set

@@ -42,7 +42,7 @@ public partial class MainViewModel
         }
     }
 
-    public bool BtnChangeLayerEnabled { get; set; } = false;
+    public bool BtnChangeLayerEnabled { get; set; }
     
     private ListLayersEditor? _listLayersEditor;
 

@@ -70,9 +70,9 @@ public class Piece:ObservableObject
     public Piece(double length, string name, double? eRef)
     {
         Layers = new List<Layer>();
-        Length = length;
-        Name = name;
-        ERef = eRef ?? 69e9;
+        _length = length;
+        _name = name;
+        _eRef = eRef ?? 69e9;
     }
 
     [JsonConstructor]

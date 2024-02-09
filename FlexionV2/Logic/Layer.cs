@@ -107,7 +107,7 @@ public class Layer:ObservableObject
         l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
         double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
         baseArea = AdditionalMath.OperationDoubleArray(baseArea, WidthAtCenter, AdditionalMath.Operation.Plus);
-        double divider = eRef / Material.E;
+        double divider = eRef / (Material ?? new Material("",69000000000)).E;
         return AdditionalMath.OperationDoubleArray(baseArea, divider, AdditionalMath.Operation.Divided);
     }
 

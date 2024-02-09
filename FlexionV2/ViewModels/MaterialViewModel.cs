@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Avalonia.Controls;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 
