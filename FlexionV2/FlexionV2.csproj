@@ -54,4 +54,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Editors\Material2\MaterialEditor.axaml" />
+    </ItemGroup>
 </Project>

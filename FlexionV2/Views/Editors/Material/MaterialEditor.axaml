@@ -1,15 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:FlexionV2.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:FlexionV2.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FlexionV2.Views.Editors.Layer.MaterialEditor"
+        x:Class="FlexionV2.Views.Editors.Material.MaterialEditor"
         x:DataType="vm:MainViewModel"
-        Title="Éditeur de matériaux"
-        SizeToContent="WidthAndHeight"
-        CanResize="False">
-        <Grid 
+        Title="MaterialEditor">
+    <Grid 
             Name="Grid"
             RowDefinitions="Auto,10,Auto,10,Auto,*"
             ColumnDefinitions="Auto,10,Auto,Auto,10,Auto"

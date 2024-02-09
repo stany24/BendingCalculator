@@ -58,7 +58,7 @@ public partial class MainViewModel
     }
     
     public string Name { get; set; }
-    private bool TextChanged()
+    public bool TextChanged()
     {
         List<Material> materials = new(SelectedMaterials);
         foreach (Material material in materials)
@@ -70,7 +70,7 @@ public partial class MainViewModel
     }
 
     public double EValue { get; set; } = 69;
-    private bool NumericChanged()
+    public bool NumericChanged()
     {
         int multiplication;
         switch (SelectedUnit)

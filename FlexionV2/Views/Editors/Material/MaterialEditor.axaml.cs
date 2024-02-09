@@ -3,7 +3,7 @@ using FlexionV2.ViewModels;
 
 namespace FlexionV2.Views.Editors.Material;
 
-public partial class MaterialEditor: Window
+public partial class MaterialEditor : Window
 {
     public MaterialEditor(MainViewModel model)
     {
