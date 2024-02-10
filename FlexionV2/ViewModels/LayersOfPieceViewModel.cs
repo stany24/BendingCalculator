@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
 
@@ -25,11 +26,39 @@ public partial class MainViewModel
             LoadLayersOfPiece(_pieceCurrentlyModifiedId);
         }
     }
+
+    private bool _btnMoveUpEnabled;
+
+    public bool BtnMoveUpEnabled
+    {
+        get => _btnMoveUpEnabled;
+        set => SetProperty(ref _btnMoveUpEnabled, value);
+    }
     
-    public bool BtnMoveUpEnabled { get; set; }
-    public bool BtnMoveDownEnabled { get; set; }
-    public bool BtnRemoveEnabled { get; set; }
-    public bool BtnAddEnabled { get; set; }
+    private bool _btnMoveDownEnabled;
+
+    public bool BtnMoveDownEnabled
+    {
+        get => _btnMoveDownEnabled;
+        set => SetProperty(ref _btnMoveDownEnabled, value);
+    }
+    
+    private bool _btnAddEnabled;
+
+    public bool BtnAddEnabled
+    {
+        get => _btnAddEnabled;
+        set => SetProperty(ref _btnAddEnabled, value);
+    }
+    
+    private bool _btnRemoveEnabled;
+
+    public bool BtnRemoveEnabled
+    {
+        get => _btnRemoveEnabled;
+        set => SetProperty(ref _btnRemoveEnabled, value);
+    }
+    
     public int SelectedIndexOfLayerInPiece { get; set; }
 
     private void LoadLayersOfPiece(long id)
@@ -72,29 +101,36 @@ public partial class MainViewModel
     
     public void MoveLayerUpInPiece()
     {
-        List<Layer> layers =  new(LayersOfSelectedPiece);
-        int indexToMove = SelectedIndexOfLayerInPiece;
-        if (indexToMove == 0) return;
-        (layers[indexToMove], layers[indexToMove - 1]) = (layers[indexToMove - 1], layers[indexToMove]);
-        DataBaseUpdater.UpdateLayersInPiece(_connection,_pieceCurrentlyModifiedId,layers);
-        SelectedIndexOfLayerInPiece -= 1;
+        for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
+        {
+            Layer selectedItem = SelectedLayersOfSelectedPiece[i];
+            int index = LayersOfSelectedPiece.IndexOf(selectedItem);
+            if (index <= 0) continue;
+            LayersOfSelectedPiece.RemoveAt(index);
+            LayersOfSelectedPiece.Insert(index - 1, selectedItem);
+            SelectedLayersOfSelectedPiece.Add(selectedItem);
+        }
     }
     
     public void MoveLayerDownInPiece()
     {
-        List<Layer> layers =  new(LayersOfSelectedPiece);
-        int indexToMove = SelectedIndexOfLayerInPiece;
-        if (indexToMove == LayersOfSelectedPiece.Count-1) return;
-        (layers[indexToMove], layers[indexToMove + 1]) = (layers[indexToMove + 1], layers[indexToMove]);
-        DataBaseUpdater.UpdateLayersInPiece(_connection,_pieceCurrentlyModifiedId,layers);
-        SelectedIndexOfLayerInPiece += 1;
+        for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
+        {
+            Layer selectedItem = SelectedLayersOfSelectedPiece[i];
+            int index = LayersOfSelectedPiece.IndexOf(selectedItem);
+            if (index == LayersOfSelectedPiece.Count - 1) continue;
+            LayersOfSelectedPiece.RemoveAt(index);
+            LayersOfSelectedPiece.Insert(index + 1, selectedItem);
+            SelectedLayersOfSelectedPiece.Add(selectedItem);
+        }
     }
-
+    
     public void RemoveLayersToPiece()
     {
-        for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
+        List<int> idToRemove = SelectedLayersOfSelectedPiece.Select(layer => LayersOfSelectedPiece.IndexOf(layer)).ToList();
+        for (int i = idToRemove.Count-1; i >= 0 ; i--)
         {
-            DataBaseUpdater.RemoveLayerToPiece(_connection,_pieceCurrentlyModifiedId,i);
+            DataBaseUpdater.RemoveLayerToPiece(_connection,_pieceCurrentlyModifiedId,idToRemove[i]);
         }
     }
 
