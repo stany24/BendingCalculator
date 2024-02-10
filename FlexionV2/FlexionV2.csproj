@@ -41,6 +41,16 @@
         <DependentUpon>PieceEditor.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Assets\Localization\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Resources.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.en.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 
@@ -58,5 +68,17 @@
 
     <ItemGroup>
       <UpToDateCheckInput Remove="Views\Editors\Material2\MaterialEditor.axaml" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <EmbeddedResource Update="Assets\Localization\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Assets\Localization\Resources.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
