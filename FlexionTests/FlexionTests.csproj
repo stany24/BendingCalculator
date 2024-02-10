@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FlexionV2\FlexionV2.csproj" />
+      <ProjectReference Include="..\Flexion\Flexion.csproj" />
     </ItemGroup>
 
 </Project>

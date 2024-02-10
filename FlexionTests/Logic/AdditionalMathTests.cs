@@ -1,4 +1,4 @@
-using FlexionV2.Logic;
+using Flexion.Logic;
 using Xunit;
 
 namespace FlexionTests.Logic;

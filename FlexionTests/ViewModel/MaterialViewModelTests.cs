@@ -1,6 +1,6 @@
-﻿using FlexionV2.Database.Actions;
-using FlexionV2.Logic;
-using FlexionV2.ViewModels;
+﻿using Flexion.Database.Actions;
+using Flexion.Logic;
+using Flexion.ViewModels;
 using Xunit;
 
 namespace FlexionTests.ViewModel;
@@ -14,7 +14,7 @@ public class MaterialViewModelTests
     {
         while (_model.Materials.Count> 0)
         {
-            _model.RemoveMaterial(_model.Materials[0].MaterialId);
+            _model.RemoveMaterials(_model.Materials[0].MaterialId);
         }
         Assert.Empty(_model.Materials);
     }
@@ -25,7 +25,7 @@ public class MaterialViewModelTests
         const string name = "test";
         const long e = 55000000000;
         int id = _model.Materials.Count;
-        _model.NewMaterial(new Material(name,e));
+        _model.CreateNewMaterial();(new Material(name,e));
         Assert.Equal(id+1,_model.Materials.Count);
         Assert.Equal(name,_model.Materials[id].Name);
         Assert.Equal(e,_model.Materials[id].E);

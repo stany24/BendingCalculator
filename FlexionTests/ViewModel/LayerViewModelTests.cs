@@ -1,6 +1,6 @@
-﻿using FlexionV2.Database.Actions;
-using FlexionV2.Logic;
-using FlexionV2.ViewModels;
+﻿using Flexion.Database.Actions;
+using Flexion.Logic;
+using Flexion.ViewModels;
 using Xunit;
 
 namespace FlexionTests.ViewModel;
@@ -31,10 +31,10 @@ public class LayerViewModelTests
         const double widthSides = 0.3;
         const double heightCenter = 0.01;
         const double heightSides = 0.01;
-        _model.NewMaterial(new Material("test",69000000000));
+        _model.CreateNewMaterial(new Material("test",69000000000));
         Material material = _model.Materials[^1];
         int id = _model.Layers.Count;
-        _model.NewLayer(new Layer(material, widthCenter, widthSides, heightCenter, heightSides));
+        _model.CreateNewLayer(new Layer(material, widthCenter, widthSides, heightCenter, heightSides));
         Assert.Equal(id+1,_model.Layers.Count);
         Assert.Equal(widthCenter,_model.Layers[id].WidthAtCenter);
         Assert.Equal(widthSides,_model.Layers[id].WidthOnSides);
@@ -51,7 +51,7 @@ public class LayerViewModelTests
         const double widthSides = 0.2;
         const double heightCenter = 0.02;
         const double heightSides = 0.02;
-        _model.NewMaterial(new Material("test2",23000000000));
+        _model.CreateNewMaterial(new Material("test2",23000000000));
         Material material = _model.Materials[^1];
         int count = _model.Layers.Count;
         List<Layer> layers = new(_model.Layers);
