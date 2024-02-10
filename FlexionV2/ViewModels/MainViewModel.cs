@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
 using FlexionV2.Logic;
+using FlexionV2.Setting;
 using FlexionV2.Views.Editors.Force;
 using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
@@ -22,9 +25,34 @@ public partial class MainViewModel : ObservableObject
     public decimal Force { get; set; } = 100;
 
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
-    
+
+    private ObservableCollection<string> _languages;
+
+    public ObservableCollection<string> Languages
+    {
+        get => _languages;
+        set => SetProperty(ref _languages, value);
+    }
+
+    private readonly bool _starting = true;
+    private string _language;
+    public string Language
+    {
+        get => _language;
+        set
+        {
+            SetProperty(ref _language, value);
+            SettingManager.SetLanguage(Language);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
+            if(!_starting) {ApplicationRestarter.Restart();}
+        }
+    }
+
     public MainViewModel(SQLiteConnection connection)
     {
+        Languages = new ObservableCollection<string>{"fr","en","de"};
+        Language = SettingManager.GetLanguage();
+        _starting = false;
         _connection = connection;
         SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();

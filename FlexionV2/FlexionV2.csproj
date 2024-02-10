@@ -10,6 +10,9 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
+        <EmbeddedResource Include="Setting\Settings.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
     </ItemGroup>
 
 

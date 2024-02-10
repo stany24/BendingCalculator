@@ -16,7 +16,8 @@
             Name="LblMass"
             Text="{x:Static lang:Resources.MassWithColon}"
             Grid.Column="0"
-            Grid.Row="0"></TextBlock>
+            Grid.Row="0"
+            VerticalAlignment="Center"></TextBlock>
         <NumericUpDown
             Name="NudMass"
             Minimum="1"
@@ -28,7 +29,8 @@
             Name="LblRadius"
             Text="{x:Static lang:Resources.RadiusWithColon}"
             Grid.Column="0"
-            Grid.Row="2"></TextBlock>
+            Grid.Row="2"
+            VerticalAlignment="Center"></TextBlock>
         <NumericUpDown
             Name="NudRadius"
             Minimum="1"
@@ -40,7 +42,8 @@
             Name="LblSpeed"
             Text="{x:Static lang:Resources.SpeedWithColon}"
             Grid.Column="0"
-            Grid.Row="4"></TextBlock>
+            Grid.Row="4"
+            VerticalAlignment="Center"></TextBlock>
         <NumericUpDown
             Name="NudSpeed"
             Minimum="1"
@@ -52,7 +55,8 @@
             Name="LblGravity"
             Text="{x:Static lang:Resources.GravityWithColon}"
             Grid.Column="0"
-            Grid.Row="6"></TextBlock>
+            Grid.Row="6"
+            VerticalAlignment="Center"></TextBlock>
         <NumericUpDown
             Name="NudGravity"
             Minimum="1"
@@ -64,7 +68,8 @@
             Name="LblForce"
             Text="{x:Static lang:Resources.ForceWithColon}"
             Grid.Column="0"
-            Grid.Row="8"></TextBlock>
+            Grid.Row="8"
+            VerticalAlignment="Center"></TextBlock>
         <NumericUpDown
             Name="NudForce"
             Grid.Column="2"

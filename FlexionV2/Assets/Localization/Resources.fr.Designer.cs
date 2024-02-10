@@ -212,5 +212,11 @@ namespace FlexionV2.Assets.Localization {
                 return ResourceManager.GetString("AvailableWithColon", resourceCulture);
             }
         }
+        
+        internal static string LanguageWithColon {
+            get {
+                return ResourceManager.GetString("LanguageWithColon", resourceCulture);
+            }
+        }
     }
 }

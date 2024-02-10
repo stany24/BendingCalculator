@@ -20,7 +20,7 @@
             Name="GridForce"
             Margin="5"
             ColumnDefinitions="Auto,10,Auto"
-            RowDefinitions="Auto,10,Auto"
+            RowDefinitions="Auto,10,Auto,10,Auto"
             MinHeight="150"
             Column="0"
             Row="0">
@@ -43,6 +43,17 @@
                 Grid.Column="0"
                 Command="{Binding OpenForceEditor}"
                 CommandParameter="{Binding #NudForce}"></Button>
+            <TextBlock 
+                Name="TbxLang"
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="{x:Static lang:Resources.LanguageWithColon}"></TextBlock>
+            <ComboBox 
+                Name="CbxLang"
+                Grid.Row="4"
+                Grid.Column="2"
+                ItemsSource="{Binding Languages}"
+                SelectedItem="{Binding Language}"></ComboBox>
         </Grid>
         <Grid 
             Name="GridPiece"

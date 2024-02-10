@@ -102,4 +102,7 @@
     <data name="AvailableWithColon" xml:space="preserve">
         <value>Available:</value>
     </data>
+    <data name="LanguageWithColon" xml:space="preserve">
+        <value>Language:</value>
+    </data>
 </root>
