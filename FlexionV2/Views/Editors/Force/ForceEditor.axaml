@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lang="clr-namespace:FlexionV2.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Force.ForceEditor"
         Title="ForceEditor"
@@ -13,7 +14,7 @@
         Margin="5">
         <TextBlock 
             Name="LblMass"
-            Text="Masse:"
+            Text="{x:Static lang:Resources.MassWithColon}"
             Grid.Column="0"
             Grid.Row="0"></TextBlock>
         <NumericUpDown
@@ -25,7 +26,7 @@
             Grid.Row="0"></NumericUpDown>
         <TextBlock 
             Name="LblRadius"
-            Text="Rayon:"
+            Text="{x:Static lang:Resources.RadiusWithColon}"
             Grid.Column="0"
             Grid.Row="2"></TextBlock>
         <NumericUpDown
@@ -37,7 +38,7 @@
             Grid.Row="2"></NumericUpDown>
         <TextBlock 
             Name="LblSpeed"
-            Text="Vitesse:"
+            Text="{x:Static lang:Resources.SpeedWithColon}"
             Grid.Column="0"
             Grid.Row="4"></TextBlock>
         <NumericUpDown
@@ -49,7 +50,7 @@
             Grid.Row="4"></NumericUpDown>
         <TextBlock 
             Name="LblGravity"
-            Text="Gravité:"
+            Text="{x:Static lang:Resources.GravityWithColon}"
             Grid.Column="0"
             Grid.Row="6"></TextBlock>
         <NumericUpDown
@@ -61,7 +62,7 @@
             Grid.Row="6"></NumericUpDown>
         <TextBlock 
             Name="LblForce"
-            Text="Force:"
+            Text="{x:Static lang:Resources.ForceWithColon}"
             Grid.Column="0"
             Grid.Row="8"></TextBlock>
         <NumericUpDown

@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:FlexionV2.ViewModels"
+        xmlns:lang="clr-namespace:FlexionV2.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Piece.ListLayersEditor"
         x:DataType="viewModels:MainViewModel"
@@ -17,7 +18,8 @@
         <TextBlock
             Name="LblInPiece"
             Grid.Column="0"
-            Grid.Row="0">Dans la pièce</TextBlock>
+            Grid.Row="0"
+            Text="{x:Static lang:Resources.InPieceWithColon}"></TextBlock>
         <ListBox
             Name="LbxInPiece"
             Grid.Column="0"
@@ -41,20 +43,23 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
+            Content="{x:Static lang:Resources.MoveUp}"
             IsEnabled="{Binding BtnMoveUpEnabled}"
-            Command="{Binding MoveLayerUpInPiece}">Monter</Button>
+            Command="{Binding MoveLayerUpInPiece}"></Button>
         <Button
             Name="BtnMoveDown"
             Grid.Column="2"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
+            Content="{x:Static lang:Resources.MoveDown}"
             IsEnabled="{Binding BtnMoveDownEnabled}"
-            Command="{Binding MoveLayerDownInPiece}">Descendre</Button>
+            Command="{Binding MoveLayerDownInPiece}"></Button>
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
-            Grid.Row="0">Disponible:</TextBlock>
+            Grid.Row="0"
+            Text="{x:Static lang:Resources.AvailableWithColon}"></TextBlock>
         <ListBox
             Name="LbxAvailable"
             Grid.Column="4"
@@ -76,15 +81,17 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
+            Content="{x:Static lang:Resources.Add}"
             IsEnabled="{Binding BtnAddEnabled}"
-            Command="{Binding AddLayerToPiece}">Ajouter</Button>
+            Command="{Binding AddLayerToPiece}"></Button>
         <Button
             Name="BtnRemove"
             Grid.Column="6"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
+            Content="{x:Static lang:Resources.Remove}"
             IsEnabled="{Binding BtnRemoveEnabled}"
-            Command="{Binding RemoveLayersToPiece}">Retirer</Button>
+            Command="{Binding RemoveLayersToPiece}"></Button>
     </Grid>
 </Window>

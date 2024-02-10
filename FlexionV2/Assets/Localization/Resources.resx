@@ -27,8 +27,8 @@
     <data name="PiecesWithColon" xml:space="preserve">
         <value>Pieces:</value>
     </data>
-    <data name="Force" xml:space="preserve">
-        <value>Force</value>
+    <data name="ForceWithColon" xml:space="preserve">
+        <value>Force:</value>
     </data>
     <data name="Begin" xml:space="preserve">
         <value>Begin</value>
@@ -47,5 +47,59 @@
     </data>
     <data name="No" xml:space="preserve">
         <value>No</value>
+    </data>
+    <data name="NameWithColon" xml:space="preserve">
+        <value>Name:</value>
+    </data>
+    <data name="Add" xml:space="preserve">
+        <value>Add</value>
+    </data>
+    <data name="Remove" xml:space="preserve">
+        <value>Remove</value>
+    </data>
+    <data name="MaterialWithColon" xml:space="preserve">
+        <value>Material:</value>
+    </data>
+    <data name="WidthCenterWithColon" xml:space="preserve">
+        <value>Width at center (mm):</value>
+    </data>
+    <data name="WidthSidesWithColon" xml:space="preserve">
+        <value>Width on sides (mm):</value>
+    </data>
+    <data name="HeightCenterWithColon" xml:space="preserve">
+        <value>Height at center (mm):</value>
+    </data>
+    <data name="HeightOnSidesWithColon" xml:space="preserve">
+        <value>Height on sides (mm):</value>
+    </data>
+    <data name="MassWithColon" xml:space="preserve">
+        <value>Mass:</value>
+    </data>
+    <data name="RadiusWithColon" xml:space="preserve">
+        <value>Radius:</value>
+    </data>
+    <data name="SpeedWithColon" xml:space="preserve">
+        <value>Speed:</value>
+    </data>
+    <data name="GravityWithColon" xml:space="preserve">
+        <value>Gravity:</value>
+    </data>
+    <data name="LengthWithColon" xml:space="preserve">
+        <value>Length (mm):</value>
+    </data>
+    <data name="ChangeLayers" xml:space="preserve">
+        <value>Change layers</value>
+    </data>
+    <data name="InPieceWithColon" xml:space="preserve">
+        <value>Inside the piece:</value>
+    </data>
+    <data name="MoveUp" xml:space="preserve">
+        <value>Move up</value>
+    </data>
+    <data name="MoveDown" xml:space="preserve">
+        <value>Move down</value>
+    </data>
+    <data name="AvailableWithColon" xml:space="preserve">
+        <value>Available:</value>
     </data>
 </root>

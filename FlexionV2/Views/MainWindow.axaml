@@ -28,7 +28,7 @@
                 Name="LblForce"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.Force}"
+                Text="{x:Static lang:Resources.ForceWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <NumericUpDown
                 Name="NudForce"

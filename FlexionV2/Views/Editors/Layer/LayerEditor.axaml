@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:FlexionV2.ViewModels"
+        xmlns:lang="clr-namespace:FlexionV2.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
@@ -18,7 +19,8 @@
             Name="LblWidthCenter"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="0">Largeur au centre (mm):</TextBlock>
+            Grid.Row="0"
+            Text="{x:Static lang:Resources.WidthCenterWithColon}"></TextBlock>
         <NumericUpDown 
             Name="NudWidthCenter"
             Value="{Binding WidthCenter}"
@@ -29,7 +31,8 @@
             Name="LblWidthSide"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="2">Largeur sur les cotés (mm):</TextBlock>
+            Grid.Row="2"
+            Text="{x:Static lang:Resources.WidthSidesWithColon}"></TextBlock>
         <NumericUpDown 
             Name="NudWidthSide"
             Value="{Binding WidthSide}"
@@ -40,7 +43,8 @@
             Name="LblHeightCenter"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="4">Hauteur au centre (mm):</TextBlock>
+            Grid.Row="4"
+            Text="{x:Static lang:Resources.HeightCenterWithColon}"></TextBlock>
         <NumericUpDown 
             Name="NudHeightCenter"
             Value="{Binding HeightCenter}"
@@ -51,7 +55,8 @@
             Name="LblHeightSide"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="6">Hauteur sur les cotés (mm):</TextBlock>
+            Grid.Row="6"
+            Text="{x:Static lang:Resources.HeightOnSidesWithColon}"></TextBlock>
         <NumericUpDown 
             Name="NudHeightSide"
             Value="{Binding HeightSide}"
@@ -62,7 +67,8 @@
             Name="LblMaterial"
             VerticalAlignment="Center"
             Grid.Column="2"
-            Grid.Row="8">Matière:</TextBlock>
+            Grid.Row="8"
+            Text="{x:Static lang:Resources.MaterialWithColon}"></TextBlock>
         <ComboBox 
             Name="CbxMaterial"
             Grid.Column="4"
@@ -96,13 +102,13 @@
         </ListBox>
         <Button
             Name="BtnAdd"
-            Content="Ajouter"
+            Content="{x:Static lang:Resources.Add}"
             Grid.Row="10"
             Grid.Column="2"
             Command="{Binding CreateNewLayer}"></Button>
         <Button
             Name="BtnRemove"
-            Content="Retirer"
+            Content="{x:Static lang:Resources.Remove}"
             Grid.Row="10"
             Grid.Column="4"
             Command="{Binding RemoveLayers}"></Button>

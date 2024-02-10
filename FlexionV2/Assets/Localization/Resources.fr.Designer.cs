@@ -51,9 +51,9 @@ namespace FlexionV2.Assets.Localization {
             }
         }
         
-        internal static string Force {
+        internal static string ForceWithColon {
             get {
-                return ResourceManager.GetString("Force", resourceCulture);
+                return ResourceManager.GetString("ForceWithColon", resourceCulture);
             }
         }
         
@@ -102,6 +102,114 @@ namespace FlexionV2.Assets.Localization {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        internal static string NameWithColon {
+            get {
+                return ResourceManager.GetString("NameWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        internal static string MaterialWithColon {
+            get {
+                return ResourceManager.GetString("MaterialWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string WidthCenterWithColon {
+            get {
+                return ResourceManager.GetString("WidthCenterWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string WidthSidesWithColon {
+            get {
+                return ResourceManager.GetString("WidthSidesWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string HeightCenterWithColon {
+            get {
+                return ResourceManager.GetString("HeightCenterWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string HeightOnSidesWithColon {
+            get {
+                return ResourceManager.GetString("HeightOnSidesWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string MassWithColon {
+            get {
+                return ResourceManager.GetString("MassWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string GravityWithColon {
+            get {
+                return ResourceManager.GetString("GravityWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string RadiusWithColon {
+            get {
+                return ResourceManager.GetString("RadiusWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string SpeedWithColon {
+            get {
+                return ResourceManager.GetString("SpeedWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string LengthWithColon {
+            get {
+                return ResourceManager.GetString("LengthWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string ChangeLayers {
+            get {
+                return ResourceManager.GetString("ChangeLayers", resourceCulture);
+            }
+        }
+        
+        internal static string InPieceWithColon {
+            get {
+                return ResourceManager.GetString("InPieceWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string MoveUp {
+            get {
+                return ResourceManager.GetString("MoveUp", resourceCulture);
+            }
+        }
+        
+        internal static string MoveDown {
+            get {
+                return ResourceManager.GetString("MoveDown", resourceCulture);
+            }
+        }
+        
+        internal static string AvailableWithColon {
+            get {
+                return ResourceManager.GetString("AvailableWithColon", resourceCulture);
             }
         }
     }

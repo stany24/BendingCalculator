@@ -21,8 +21,8 @@
     <data name="Begin" xml:space="preserve">
         <value>Commencer</value>
     </data>
-    <data name="Force" xml:space="preserve">
-        <value>Force</value>
+    <data name="ForceWithColon" xml:space="preserve">
+        <value>Force:</value>
     </data>
     <data name="LayersWithColon" xml:space="preserve">
         <value>Couches:</value>
@@ -47,5 +47,59 @@
     </data>
     <data name="No" xml:space="preserve">
         <value>Pas de</value>
+    </data>
+    <data name="NameWithColon" xml:space="preserve">
+        <value>Nom:</value>
+    </data>
+    <data name="Add" xml:space="preserve">
+        <value>Ajouter</value>
+    </data>
+    <data name="Remove" xml:space="preserve">
+        <value>Retirer</value>
+    </data>
+    <data name="MaterialWithColon" xml:space="preserve">
+        <value>Matière:</value>
+    </data>
+    <data name="WidthCenterWithColon" xml:space="preserve">
+        <value>Largeur au centre (mm):</value>
+    </data>
+    <data name="WidthSidesWithColon" xml:space="preserve">
+        <value>Largeur sur les cotés (mm):</value>
+    </data>
+    <data name="HeightCenterWithColon" xml:space="preserve">
+        <value>Hauteur au centre (mm):</value>
+    </data>
+    <data name="HeightOnSidesWithColon" xml:space="preserve">
+        <value>Hauteur sur les cotés (mm):</value>
+    </data>
+    <data name="MassWithColon" xml:space="preserve">
+        <value>Masse:</value>
+    </data>
+    <data name="GravityWithColon" xml:space="preserve">
+        <value>Gravité:</value>
+    </data>
+    <data name="RadiusWithColon" xml:space="preserve">
+        <value>Rayon:</value>
+    </data>
+    <data name="SpeedWithColon" xml:space="preserve">
+        <value>Vitesse:</value>
+    </data>
+    <data name="LengthWithColon" xml:space="preserve">
+        <value>Longueur (mm):</value>
+    </data>
+    <data name="ChangeLayers" xml:space="preserve">
+        <value>Changer les couches</value>
+    </data>
+    <data name="InPieceWithColon" xml:space="preserve">
+        <value>Dans la pièce:</value>
+    </data>
+    <data name="MoveUp" xml:space="preserve">
+        <value>Monter</value>
+    </data>
+    <data name="MoveDown" xml:space="preserve">
+        <value>Descendre</value>
+    </data>
+    <data name="AvailableWithColon" xml:space="preserve">
+        <value>Disponible:</value>
     </data>
 </root>
