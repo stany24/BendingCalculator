@@ -28,7 +28,6 @@ public partial class MainViewModel
     }
 
     private bool _btnMoveUpEnabled;
-
     public bool BtnMoveUpEnabled
     {
         get => _btnMoveUpEnabled;
@@ -36,7 +35,6 @@ public partial class MainViewModel
     }
     
     private bool _btnMoveDownEnabled;
-
     public bool BtnMoveDownEnabled
     {
         get => _btnMoveDownEnabled;
@@ -44,15 +42,13 @@ public partial class MainViewModel
     }
     
     private bool _btnAddEnabled;
-
     public bool BtnAddEnabled
     {
         get => _btnAddEnabled;
         set => SetProperty(ref _btnAddEnabled, value);
     }
-    
-    private bool _btnRemoveEnabled;
 
+    private bool _btnRemoveEnabled;
     public bool BtnRemoveEnabled
     {
         get => _btnRemoveEnabled;
@@ -89,14 +85,12 @@ public partial class MainViewModel
     
     private void SelectedInPieceChanged()
     {
-        BtnRemoveEnabled = SelectedLayersOfSelectedPiece.Count > 0;
-        BtnMoveUpEnabled = SelectedLayersOfSelectedPiece.Count == 1;
-        BtnMoveDownEnabled = SelectedLayersOfSelectedPiece.Count == 1;
+        BtnRemoveEnabled = BtnMoveUpEnabled = BtnMoveDownEnabled = SelectedLayersOfSelectedPiece.Count > 0;
     }
 
     private void SelectedAvailableChanged()
     {
-        BtnAddEnabled = SelectedLayersOfSelectedPiece.Count == 1;
+        BtnAddEnabled = SelectedAvailableLayers.Count == 1;
     }
     
     public void MoveLayerUpInPiece()
@@ -136,7 +130,6 @@ public partial class MainViewModel
 
     public void AddLayerToPiece()
     {
-        if (SelectedLayersOfSelectedPiece.Count > 0) {return; }
-        DataBaseUpdater.AddLayerToPiece(_connection,_pieceCurrentlyModifiedId,SelectedLayersOfSelectedPiece[0]);
+        DataBaseUpdater.AddLayerToPiece(_connection,_pieceCurrentlyModifiedId,SelectedAvailableLayers[0]);
     }
 }
