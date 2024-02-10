@@ -124,12 +124,12 @@ public partial class MainViewModel
         List<int> idToRemove = SelectedLayersOfSelectedPiece.Select(layer => LayersOfSelectedPiece.IndexOf(layer)).ToList();
         for (int i = idToRemove.Count-1; i >= 0 ; i--)
         {
-            DataBaseUpdater.RemoveLayerToPiece(_connection,_pieceCurrentlyModifiedId,idToRemove[i]);
+            DataBaseUpdater.RemoveLayerToPiece(_connection,PieceCurrentlyModifiedId,idToRemove[i]);
         }
     }
 
     public void AddLayerToPiece()
     {
-        DataBaseUpdater.AddLayerToPiece(_connection,_pieceCurrentlyModifiedId,SelectedAvailableLayers[0]);
+        DataBaseUpdater.AddLayerToPiece(_connection,PieceCurrentlyModifiedId,SelectedAvailableLayers[0]);
     }
 }

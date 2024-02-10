@@ -51,23 +51,6 @@ public static class DataBaseUpdater
         }
         DataBaseEvents.RaisePiecesChangedEvent();
     }
-
-    public static void UpdateLayersInPiece(SQLiteConnection connection, long pieceId, List<Layer> layers)
-    {
-        using SQLiteCommand cmd1 = new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId", connection);
-        cmd1.Parameters.AddWithValue("@PieceId",pieceId);
-        cmd1.ExecuteNonQuery();
-        for (int i = 0; i < layers.Count; i++)
-        {
-            using SQLiteCommand cmd2 = new("INSERT INTO PieceToLayer (PieceId,LayerId,LayerOrder) VALUES (@PieceId, @LayerId, @LayerOrder);", connection);
-            cmd2.Parameters.AddWithValue("@PieceId",pieceId);
-            cmd2.Parameters.AddWithValue("@LayerId",layers[i].LayerId);
-            cmd2.Parameters.AddWithValue("@LayerOrder",i);
-            cmd2.ExecuteNonQuery();
-        }
-        DataBaseEvents.RaiseLayerOfPieceChanged();
-        DataBaseEvents.RaisePiecesChangedEvent();
-    }
     
     public static void AddLayerToPiece(SQLiteConnection connection, long pieceId, Layer layer)
     {
