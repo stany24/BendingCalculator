@@ -9,17 +9,20 @@ namespace FlexionV2.ViewModels;
 
 public partial class MainViewModel
 {
+    private ListLayersEditor? _listLayersEditor;
+    private bool _btnChangeLayerEnabled;
+    public bool BtnChangeLayerEnabled { 
+        get => _btnChangeLayerEnabled;
+        set => SetProperty(ref _btnChangeLayerEnabled, value);
+    }
+    
     private ObservableCollection<Piece> _pieces = new();
     public ObservableCollection<Piece> Pieces { 
         get => _pieces;
         set => SetProperty(ref _pieces, value);
     }
-    
-    private ObservableCollection<Piece> _selectedPieces = new();
-    public ObservableCollection<Piece> SelectedPieces { 
-        get => _selectedPieces;
-        set => SetProperty(ref _selectedPieces, value);
-    }
+
+    public ObservableCollection<Piece> SelectedPieces { get; set; } = new();
 
     private double _pieceLength = 1;
 
@@ -41,10 +44,6 @@ public partial class MainViewModel
             PieceNameChanged();
         }
     }
-
-    public bool BtnChangeLayerEnabled { get; set; }
-    
-    private ListLayersEditor? _listLayersEditor;
 
     public void CloseLayerOfPieceEditor()
     {
@@ -117,16 +116,15 @@ public partial class MainViewModel
         BtnChangeLayerEnabled = false;
     }
 
-    private void UpdateListLayer()
+    private void SelectedPieceChanged()
     {
-        if(_selectedPieces.Count == 0)
+        if(SelectedPieces.Count == 0)
         {
             BtnChangeLayerEnabled = false;
             return;
         }
-        long pieceId = SelectedPieces[0].PieceId;
         BtnChangeLayerEnabled = true;
-        LoadLayersOfPiece(pieceId);
+        LoadLayersOfPiece(SelectedPieces[0].PieceId);
     }
 
     public void CreateNewPiece()

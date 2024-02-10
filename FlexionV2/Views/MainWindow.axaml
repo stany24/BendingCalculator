@@ -70,7 +70,7 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 MinWidth="200"
-                SelectedItems="{Binding SelectedPieces}"
+                SelectedItems="{Binding SelectedPiecesMainWindow}"
                 ItemsSource="{Binding Pieces}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

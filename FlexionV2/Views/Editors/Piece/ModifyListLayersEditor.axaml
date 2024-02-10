@@ -25,6 +25,8 @@
             Grid.Row="2"
             MinHeight="200"
             SelectionMode="Multiple"
+            SelectedItems="{Binding SelectedLayersOfSelectedPiece}"
+            SelectedIndex="{Binding SelectedIndexOfLayerInPiece}"
             ItemsSource="{Binding LayersOfSelectedPiece}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -39,14 +41,16 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            IsEnabled="False">Monter</Button>
+            IsEnabled="{Binding BtnMoveUpEnabled}"
+            Command="{Binding MoveLayerUpInPiece}">Monter</Button>
         <Button
             Name="BtnMoveDown"
             Grid.Column="2"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            IsEnabled="False">Descendre</Button>
+            IsEnabled="{Binding BtnMoveDownEnabled}"
+            Command="{Binding MoveLayerDownInPiece}">Descendre</Button>
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
@@ -57,6 +61,7 @@
             Grid.ColumnSpan="3"
             Grid.Row="2"
             SelectionMode="Multiple"
+            SelectedItems="{Binding SelectedAvailableLayers}"
             ItemsSource="{Binding Layers}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -71,13 +76,15 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            IsEnabled="False">Ajouter</Button>
+            IsEnabled="{Binding BtnAddEnabled}"
+            Command="{Binding AddLayerToPiece}">Ajouter</Button>
         <Button
             Name="BtnRemove"
             Grid.Column="6"
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            IsEnabled="False">Retirer</Button>
+            IsEnabled="{Binding BtnRemoveEnabled}"
+            Command="{Binding RemoveLayersToPiece}">Retirer</Button>
     </Grid>
 </Window>

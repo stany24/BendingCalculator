@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FlexionV2.Database.Actions;
+using FlexionV2.Logic;
 using FlexionV2.Views.Editors.Force;
 using FlexionV2.Views.Editors.Layer;
 using FlexionV2.Views.Editors.Material;
@@ -19,10 +21,14 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
 
+    public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
+    
     public MainViewModel(SQLiteConnection connection)
     {
         _connection = connection;
-        SelectedPieces.CollectionChanged += (_,_) => UpdateListLayer();
+        SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
+        SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
+        SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
