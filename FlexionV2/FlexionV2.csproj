@@ -51,6 +51,21 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.en.resx</DependentUpon>
       </Compile>
+      <Compile Update="Assets\Localization\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Resources.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Resources.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.de.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 
@@ -79,6 +94,18 @@
       <EmbeddedResource Update="Assets\Localization\Resources.en.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Assets\Localization\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Assets\Localization\Resources.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Assets\Localization\Resources.de.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 </Project>

@@ -14,21 +14,21 @@ namespace FlexionV2.Assets.Localization {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources_en {
+    internal class Resources_fr {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources_en() {
+        internal Resources_fr() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("FlexionV2.Assets.Localization.Resources_en", typeof(Resources_en).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("FlexionV2.Assets.Localization.Resources_fr", typeof(Resources_fr).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,33 +45,39 @@ namespace FlexionV2.Assets.Localization {
             }
         }
         
-        internal static string Add {
+        internal static string Begin {
             get {
-                return ResourceManager.GetString("Add", resourceCulture);
+                return ResourceManager.GetString("Begin", resourceCulture);
             }
         }
         
-        internal static string New {
+        internal static string Force {
             get {
-                return ResourceManager.GetString("New", resourceCulture);
+                return ResourceManager.GetString("Force", resourceCulture);
             }
         }
         
-        internal static string Piece {
+        internal static string LayersWithColon {
             get {
-                return ResourceManager.GetString("Piece", resourceCulture);
+                return ResourceManager.GetString("LayersWithColon", resourceCulture);
             }
         }
         
-        internal static string Layer {
+        internal static string MaterialsWithColon {
             get {
-                return ResourceManager.GetString("Layer", resourceCulture);
+                return ResourceManager.GetString("MaterialsWithColon", resourceCulture);
             }
         }
         
-        internal static string Material {
+        internal static string PiecesWithColon {
             get {
-                return ResourceManager.GetString("Material", resourceCulture);
+                return ResourceManager.GetString("PiecesWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string Modify {
+            get {
+                return ResourceManager.GetString("Modify", resourceCulture);
             }
         }
     }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:lang="clr-namespace:FlexionV2.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FlexionV2.Views.Main"
         x:DataType="vm:MainViewModel"
@@ -27,7 +28,7 @@
                 Name="LblForce"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Force:"
+                Text="{x:Static lang:Resources.Force}"
                 VerticalAlignment="Center"></TextBlock>
             <NumericUpDown
                 Name="NudForce"
@@ -37,7 +38,7 @@
                 Grid.Row="0"></NumericUpDown>
             <Button
                 Name="BtnForce"
-                Content="Modifier"
+                Content="{x:Static lang:Resources.Modify}"
                 Grid.Row="2"
                 Grid.Column="0"
                 Command="{Binding OpenForceEditor}"
@@ -54,11 +55,11 @@
                 Name="LblPiece"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Pièces:"
+                Text="{x:Static lang:Resources.PiecesWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnPiece"
-                Content="Modifier"
+                Content="{x:Static lang:Resources.Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenPieceEditor}"></Button>
@@ -91,11 +92,11 @@
                 Name="LblLayer"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Couches:"
+                Text="{x:Static lang:Resources.LayersWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnLayer"
-                Content="Modifier"
+                Content="{x:Static lang:Resources.Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenLayerEditor}"></Button>
@@ -127,11 +128,11 @@
                 Name="LblMaterial"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Matières:"
+                Text="{x:Static lang:Resources.MaterialsWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnMaterial"
-                Content="Modifier"
+                Content="{x:Static lang:Resources.Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenMaterialEditor}"></Button>
@@ -167,6 +168,7 @@
             Grid.ColumnSpan="7"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Command="{Binding CalculateFlexion}">Commencer</Button>
+            Content="{x:Static lang:Resources.Begin}"
+            Command="{Binding CalculateFlexion}"></Button>
     </Grid>
 </Window>

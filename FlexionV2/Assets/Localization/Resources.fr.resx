@@ -18,19 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Add" xml:space="preserve">
-        <value>Add</value>
+    <data name="Begin" xml:space="preserve">
+        <value>Commencer</value>
     </data>
-    <data name="New" xml:space="preserve">
-        <value>New</value>
+    <data name="Force" xml:space="preserve">
+        <value>Force</value>
     </data>
-    <data name="Piece" xml:space="preserve">
-        <value>Piece</value>
+    <data name="LayersWithColon" xml:space="preserve">
+        <value>Couches:</value>
     </data>
-    <data name="Layer" xml:space="preserve">
-        <value>Layer</value>
+    <data name="MaterialsWithColon" xml:space="preserve">
+        <value>Matières:</value>
     </data>
-    <data name="Material" xml:space="preserve">
-        <value>Material</value>
+    <data name="PiecesWithColon" xml:space="preserve">
+        <value>Pièces:</value>
+    </data>
+    <data name="Modify" xml:space="preserve">
+        <value>Modifier</value>
     </data>
 </root>

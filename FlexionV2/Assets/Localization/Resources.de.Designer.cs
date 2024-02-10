@@ -14,21 +14,21 @@ namespace FlexionV2.Assets.Localization {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Resources_de {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources_de() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("FlexionV2.Assets.Localization.Resources", typeof(Resources).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("FlexionV2.Assets.Localization.Resources_de", typeof(Resources_de).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -42,42 +42,6 @@ namespace FlexionV2.Assets.Localization {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        public static string MaterialsWithColon {
-            get {
-                return ResourceManager.GetString("MaterialsWithColon", resourceCulture);
-            }
-        }
-        
-        public static string LayersWithColon {
-            get {
-                return ResourceManager.GetString("LayersWithColon", resourceCulture);
-            }
-        }
-        
-        public static string PiecesWithColon {
-            get {
-                return ResourceManager.GetString("PiecesWithColon", resourceCulture);
-            }
-        }
-        
-        public static string Force {
-            get {
-                return ResourceManager.GetString("Force", resourceCulture);
-            }
-        }
-        
-        public static string Begin {
-            get {
-                return ResourceManager.GetString("Begin", resourceCulture);
-            }
-        }
-        
-        public static string Modify {
-            get {
-                return ResourceManager.GetString("Modify", resourceCulture);
             }
         }
     }
