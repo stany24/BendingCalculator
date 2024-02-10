@@ -80,5 +80,29 @@ namespace FlexionV2.Assets.Localization {
                 return ResourceManager.GetString("Modify", resourceCulture);
             }
         }
+        
+        internal static string Center {
+            get {
+                return ResourceManager.GetString("Center", resourceCulture);
+            }
+        }
+        
+        internal static string Sides {
+            get {
+                return ResourceManager.GetString("Sides", resourceCulture);
+            }
+        }
+        
+        internal static string Layers {
+            get {
+                return ResourceManager.GetString("Layers", resourceCulture);
+            }
+        }
+        
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
     }
 }

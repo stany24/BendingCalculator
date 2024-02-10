@@ -96,8 +96,8 @@ public class Layer:ObservableObject
     public sealed override string ToString()
     {
         return Material != null 
-            ? $"{Material.Name} Centre(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} Coté(mm)={WidthOnSides*1000}x{HeightOnSides*1000}" 
-            : $"Pas de matière Centre(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} Coté(mm)={WidthOnSides*1000}x{HeightOnSides*1000}";
+            ? $"{Material.Name} {Assets.Localization.Resources.Center}(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Resources.Sides}(mm)={WidthOnSides*1000}x{HeightOnSides*1000}" 
+            : $"{Assets.Localization.Resources.No} {Assets.Localization.Resources.MaterialsWithColon} {Assets.Localization.Resources.Center}(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Resources.Sides}(mm)={WidthOnSides*1000}x{HeightOnSides*1000}";
     }
 
     public double[] Base(double longueur, double eRef, double[] xs)

@@ -36,4 +36,16 @@
     <data name="Modify" xml:space="preserve">
         <value>Modifier</value>
     </data>
+    <data name="Center" xml:space="preserve">
+        <value>Centre</value>
+    </data>
+    <data name="Sides" xml:space="preserve">
+        <value>Cotés</value>
+    </data>
+    <data name="Layers" xml:space="preserve">
+        <value>Couches</value>
+    </data>
+    <data name="No" xml:space="preserve">
+        <value>Pas de</value>
+    </data>
 </root>
