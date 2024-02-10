@@ -1,0 +1,94 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Flexion.ViewModels"
+        xmlns:lang="clr-namespace:Flexion.Assets.Localization"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Flexion.Views.Editors.Piece.PieceEditor"
+        x:DataType="viewModels:MainViewModel"
+        Title="Éditeur de pièces"
+        SizeToContent="WidthAndHeight"
+        CanResize="False">
+    <Grid
+        Name="Grid"
+        Margin="5"
+        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+        RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,*">
+        <TextBlock 
+            Name="LblName"
+            VerticalAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="0"
+            Text="{x:Static lang:Resources.NameWithColon}"></TextBlock>
+        <TextBox 
+            Name="TbxName"
+            Text="{Binding PieceName}"
+            Grid.Column="4"
+            Grid.Row="0"></TextBox>
+        <TextBlock 
+            Name="LblLength"
+            VerticalAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="2"
+            Text="{x:Static lang:Resources.LengthWithColon}"></TextBlock>
+        <NumericUpDown 
+            Name="NudLength"
+            Value="{Binding PieceLength}"
+            Minimum="0.1"
+            Grid.Column="4"
+            Grid.Row="2"></NumericUpDown>
+        <Button
+            Name="BtnChangeLayers"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Grid.Row="4"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Content="{x:Static lang:Resources.ChangeLayers}"
+            IsEnabled="{Binding BtnChangeLayerEnabled}"
+            Command="{Binding OpenLayerOfPieceEditor}"></Button>
+        <ListBox
+            Name="LbxLayers"
+            Grid.Column="6"
+            Grid.Row="0"
+            Grid.RowSpan="8"
+            MinWidth="200"
+            ItemsSource="{Binding LayersOfSelectedPiece}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate></ListBox>
+        <ListBox
+            Name="LbxPieces"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="7"
+            MinWidth="200"
+            ItemsSource="{Binding Pieces}"
+            SelectedItems="{Binding SelectedPieces}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Display}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button
+            Name="BtnAdd"
+            Content="{x:Static lang:Resources.Add}"
+            Grid.Row="6"
+            Grid.Column="2"
+            Command="{Binding CreateNewPiece}"></Button>
+        <Button
+            Name="BtnRemove"
+            Content="{x:Static lang:Resources.Remove}"
+            Grid.Row="6"
+            Grid.Column="4"
+            Command="{Binding RemovePiece}"></Button>
+    </Grid>
+</Window>
