@@ -41,7 +41,7 @@ public class Piece:ObservableObject
         }
     }
 
-    private double _eRef;
+    private double _eRef = 69e9;
     [JsonInclude]
     public double ERef
     {
