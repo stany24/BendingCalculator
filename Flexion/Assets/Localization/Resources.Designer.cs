@@ -215,5 +215,17 @@ namespace Flexion.Assets.Localization {
                 return ResourceManager.GetString("LanguageWithColon", resourceCulture);
             }
         }
+        
+        public static string LengthWithUnit {
+            get {
+                return ResourceManager.GetString("LengthWithUnit", resourceCulture);
+            }
+        }
+        
+        public static string DeformationWithUnit {
+            get {
+                return ResourceManager.GetString("DeformationWithUnit", resourceCulture);
+            }
+        }
     }
 }

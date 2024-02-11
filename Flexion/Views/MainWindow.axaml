@@ -169,6 +169,8 @@
             Series="{Binding SeriesGraphFlexion}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
+            XAxes="{Binding XAxes}"
+            YAxes="{Binding YAxes}"
             Grid.Column="0"
             Grid.Row="2"
             Grid.ColumnSpan="7"></lvc:CartesianChart>

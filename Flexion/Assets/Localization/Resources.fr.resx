@@ -105,4 +105,10 @@
     <data name="LanguageWithColon" xml:space="preserve">
         <value>Langue:</value>
     </data>
+    <data name="LengthWithUnit" xml:space="preserve">
+        <value>Longueur (mm)</value>
+    </data>
+    <data name="DeformationWithUnit" xml:space="preserve">
+        <value>Déformation (mm)</value>
+    </data>
 </root>
