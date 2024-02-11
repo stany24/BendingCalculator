@@ -41,7 +41,7 @@ public class Piece:ObservableObject
         }
     }
 
-    private double _eRef = 69e9;
+    private double _eRef;
     [JsonInclude]
     public double ERef
     {
@@ -77,7 +77,10 @@ public class Piece:ObservableObject
     }
 
     [JsonConstructor]
-    public Piece() { }
+    public Piece()
+    {
+        _eRef = 69e9;
+    }
     
     public override string ToString()
     {

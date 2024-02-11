@@ -25,7 +25,7 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
 
-    public EventHandler<EventArgs>? ReloadLanguage;
+    public EventHandler<EventArgs>? ReloadLanguage { get; set; }
 
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
 
@@ -42,12 +42,12 @@ public partial class MainViewModel : ObservableObject
         get => _language;
         set
         {
-            SetProperty(ref _language, value);
+            _language = value;
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
-            ChangeLanguage();
-            ReloadLanguage?.Invoke(this,EventArgs.Empty);
-            ReDrawItems();
+            ChangeLanguage(); //ui bindings
+            ReloadLanguage?.Invoke(this,EventArgs.Empty); // the axes names
+            ReDrawItems(); // the items ToString() method
         }
     }
 
@@ -94,18 +94,9 @@ public partial class MainViewModel : ObservableObject
 
     private void ReDrawItems()
     {
-        foreach (Material material in Materials)
-        {
-            material.Display = "";
-        }
-        foreach (Layer layer in Layers)
-        {
-            layer.Display = "";
-        }
-        foreach (Piece piece in Pieces)
-        {
-            piece.Display = "";
-        }
+        foreach (Material material in Materials) { material.Display = ""; }
+        foreach (Layer layer in Layers) { layer.Display = ""; }
+        foreach (Piece piece in Pieces) { piece.Display = ""; }
     }
 
     public void CalculateFlexion()
@@ -115,7 +106,7 @@ public partial class MainViewModel : ObservableObject
             if(SelectedPiecesMainWindow is { Count: 0 }){return;}
             if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
-            IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateFlexion((int)Force,gap); //returns only NaN caused by CalculateI() in Piece class Caused by Height() in Layer class
+            IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateFlexion((int)Force,gap);
             List<ObservablePoint> points = values.Select((t, i) => new ObservablePoint(i, t)).ToList();
             SeriesGraphFlexion[0].Values = points;
         });
