@@ -9,6 +9,7 @@ public partial class MainViewModel
     private void ChangeLanguage()
     {
         ResourceManager resourceManager = new(typeof(Resources));
+#pragma warning disable CS8601 // Possible null reference assignment.
         AddBinding = resourceManager.GetString("Add", new CultureInfo(Language));
         AvailableWithColonBinding = resourceManager.GetString("AvailableWithColon", new CultureInfo(Language));
         BeginBinding = resourceManager.GetString("Begin", new CultureInfo(Language));
@@ -40,6 +41,7 @@ public partial class MainViewModel
         SpeedWithColonBinding = resourceManager.GetString("SpeedWithColon", new CultureInfo(Language));
         WidthCenterWithColonBinding = resourceManager.GetString("WidthCenterWithColon", new CultureInfo(Language));
         WidthSidesWithColonBinding = resourceManager.GetString("WidthSidesWithColon", new CultureInfo(Language));
+#pragma warning restore CS8601 // Possible null reference assignment.
     }
     private string _addBinding;
     public string AddBinding
