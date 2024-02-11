@@ -4,11 +4,9 @@ using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
-using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Flexion.Assets.Localization;
 using Flexion.Database.Actions;
 using Flexion.Logic;
 using Flexion.Setting;
@@ -49,6 +47,7 @@ public partial class MainViewModel : ObservableObject
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
             ChangeLanguage();
             ReloadLanguage?.Invoke(this,EventArgs.Empty);
+            ReDrawItems();
         }
     }
 
@@ -92,7 +91,22 @@ public partial class MainViewModel : ObservableObject
             }
         }
     };
-    
+
+    private void ReDrawItems()
+    {
+        foreach (Material material in Materials)
+        {
+            material.Display = "";
+        }
+        foreach (Layer layer in Layers)
+        {
+            layer.Display = "";
+        }
+        foreach (Piece piece in Pieces)
+        {
+            piece.Display = "";
+        }
+    }
 
     public void CalculateFlexion()
     {

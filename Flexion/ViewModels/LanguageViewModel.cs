@@ -15,7 +15,6 @@ public partial class MainViewModel
         BeginBinding = resourceManager.GetString("Begin", new CultureInfo(Language));
         CenterBinding = resourceManager.GetString("Center", new CultureInfo(Language));
         ChangeLayersBinding = resourceManager.GetString("ChangeLayers", new CultureInfo(Language));
-        DeformationWithUnitBinding = resourceManager.GetString("DeformationWithUnit", new CultureInfo(Language));
         ForceWithColonBinding = resourceManager.GetString("ForceWithColon", new CultureInfo(Language));
         GravityWithColonBinding = resourceManager.GetString("GravityWithColon", new CultureInfo(Language));
         HeightCenterWithColonBinding = resourceManager.GetString("HeightCenterWithColon", new CultureInfo(Language));
@@ -25,7 +24,6 @@ public partial class MainViewModel
         LayersBinding = resourceManager.GetString("Layers", new CultureInfo(Language));
         LayersWithColonBinding = resourceManager.GetString("LayersWithColon", new CultureInfo(Language));
         LengthWithColonBinding = resourceManager.GetString("LengthWithColon", new CultureInfo(Language));
-        LengthWithUnitBinding = resourceManager.GetString("LengthWithUnit", new CultureInfo(Language));
         MassWithColonBinding = resourceManager.GetString("MassWithColon", new CultureInfo(Language));
         MaterialsWithColonBinding = resourceManager.GetString("MaterialsWithColon", new CultureInfo(Language));
         MaterialWithColonBinding = resourceManager.GetString("MaterialWithColon", new CultureInfo(Language));
@@ -76,13 +74,6 @@ public partial class MainViewModel
     {
         get =>_changeLayersBinding;
         set => SetProperty(ref _changeLayersBinding, value);
-    }
-    
-    private string _deformationWithUnitBinding;
-    public string DeformationWithUnitBinding
-    {
-        get =>_deformationWithUnitBinding;
-        set => SetProperty(ref _deformationWithUnitBinding, value);
     }
     
     private string _forceWithColonBinding;
@@ -146,13 +137,6 @@ public partial class MainViewModel
     {
         get =>_lengthWithColonBinding;
         set => SetProperty(ref _lengthWithColonBinding, value);
-    }
-    
-    private string _lengthWithUnitBinding;
-    public string LengthWithUnitBinding
-    {
-        get =>_lengthWithUnitBinding;
-        set => SetProperty(ref _lengthWithUnitBinding, value);
     }
     
     private string _massWithColonBinding;

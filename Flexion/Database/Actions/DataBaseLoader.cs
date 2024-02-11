@@ -79,7 +79,7 @@ public static class DataBaseLoader
                     Layers = new List<Layer>(),
                     PieceId = pieceId,
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-                    Length = Convert.ToDouble(reader["Length"]),
+                    Length = Convert.ToDouble(reader["Length"])
                 };
                 pieces.Add(currentPiece);
             }
