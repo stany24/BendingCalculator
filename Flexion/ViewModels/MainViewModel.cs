@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.Globalization;
@@ -7,7 +8,6 @@ using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using DynamicData;
 using Flexion.Assets.Localization;
 using Flexion.Database.Actions;
 using Flexion.Logic;
@@ -27,6 +27,8 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
 
+    public EventHandler<EventArgs>? ReloadLanguage;
+
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
 
     private ObservableCollection<string> _languages;
@@ -36,8 +38,6 @@ public partial class MainViewModel : ObservableObject
         get => _languages;
         set => SetProperty(ref _languages, value);
     }
-
-    private readonly bool _starting = true;
     private string _language;
     public string Language
     {
@@ -48,6 +48,7 @@ public partial class MainViewModel : ObservableObject
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
             ChangeLanguage();
+            ReloadLanguage?.Invoke(this,EventArgs.Empty);
         }
     }
 
@@ -55,7 +56,6 @@ public partial class MainViewModel : ObservableObject
     {
         Languages = new ObservableCollection<string>{"fr","en","de"};
         Language = SettingManager.GetLanguage();
-        _starting = false;
         _connection = connection;
         SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
@@ -68,23 +68,6 @@ public partial class MainViewModel : ObservableObject
         ReloadLayers();
         ReloadPieces();
         SelectedMaterial = Materials[0];
-        
-        
-        ResourceManager resourceManager = new(typeof(Resources));
-        XAxes = new[]
-        {
-            new Axis
-            {
-                Name = resourceManager.GetString("LengthWithUnit", new CultureInfo(Language))
-            }
-        };
-        YAxes = new[]
-        {
-            new Axis
-            {
-                Name = resourceManager.GetString("DeformationWithUnit", new CultureInfo(Language))
-            }
-        };
     }
 
     public void CloseAllWindow()
@@ -94,9 +77,7 @@ public partial class MainViewModel : ObservableObject
         _pieceEditor?.Close();
         _forceEditor?.Close();
     }
-
-    public Axis[] XAxes { get; set; }
-    public Axis[] YAxes { get; set; }
+    
     public ISeries[] SeriesGraphFlexion { get; set; } =
     {
         new LineSeries<ObservablePoint>

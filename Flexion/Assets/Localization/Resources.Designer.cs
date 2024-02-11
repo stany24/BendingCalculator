@@ -216,15 +216,15 @@ namespace Flexion.Assets.Localization {
             }
         }
         
-        public static string LengthWithUnit {
+        public static string XAxisName {
             get {
-                return ResourceManager.GetString("LengthWithUnit", resourceCulture);
+                return ResourceManager.GetString("XAxisName", resourceCulture);
             }
         }
         
-        public static string DeformationWithUnit {
+        public static string YAxisName {
             get {
-                return ResourceManager.GetString("DeformationWithUnit", resourceCulture);
+                return ResourceManager.GetString("YAxisName", resourceCulture);
             }
         }
     }
