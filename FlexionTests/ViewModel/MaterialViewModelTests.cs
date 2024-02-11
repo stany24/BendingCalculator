@@ -25,6 +25,16 @@ public class MaterialViewModelTests
     [Fact]
     public void RemoveMaterialTest()
     {
-
+        Random rand = new();
+        int nbMaterial = rand.Next(1, 11);
+        for (int i = 0; i < nbMaterial; i++)
+        {
+            _model.CreateNewMaterial();
+            if (rand.Next(0, 2) != 1) continue;
+            _model.SelectedMaterials.Add(_model.Materials[^1]);
+        }
+        int finalCount = _model.Materials.Count - _model.SelectedMaterials.Count;
+        _model.RemoveMaterials();
+        Assert.Equal(finalCount,_model.Materials.Count);
     }
 }

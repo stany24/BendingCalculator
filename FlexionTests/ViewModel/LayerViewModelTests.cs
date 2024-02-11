@@ -25,6 +25,16 @@ public class LayerViewModelTests
     [Fact]
     public void RemoveLayerTest()
     {
-
+        Random rand = new();
+        int nbLayer = rand.Next(1, 11);
+        for (int i = 0; i < nbLayer; i++)
+        {
+            _model.CreateNewLayer();
+            if (rand.Next(0, 2) != 1) continue;
+            _model.SelectedLayers.Add(_model.Layers[^1]);
+        }
+        int finalCount = _model.Layers.Count - _model.SelectedLayers.Count;
+        _model.RemoveLayers();
+        Assert.Equal(finalCount,_model.Layers.Count);
     }
 }

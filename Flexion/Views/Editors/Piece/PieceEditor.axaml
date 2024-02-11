@@ -88,6 +88,6 @@
             Content="{Binding RemoveBinding}"
             Grid.Row="6"
             Grid.Column="4"
-            Command="{Binding RemovePiece}"></Button>
+            Command="{Binding RemovePieces}"></Button>
     </Grid>
 </Window>

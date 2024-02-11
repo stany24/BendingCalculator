@@ -93,7 +93,7 @@ public partial class MainViewModel
     }
 
     private int SelectedPieceIndex { get; set; }
-    public void RemovePiece()
+    public void RemovePieces()
     {
         int index = SelectedPieceIndex;
         List<long> selected = SelectedPieces.Select(x => x.PieceId).ToList();

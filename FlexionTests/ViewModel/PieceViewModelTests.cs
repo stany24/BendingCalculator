@@ -25,6 +25,16 @@ public class PieceViewModelTests
     [Fact]
     public void RemovePieceTest()
     {
-
+        Random rand = new();
+        int nbPiece = rand.Next(1, 11);
+        for (int i = 0; i < nbPiece; i++)
+        {
+            _model.CreateNewPiece();
+            if (rand.Next(0, 2) != 1) continue;
+            _model.SelectedPieces.Add(_model.Pieces[^1]);
+        }
+        int finalCount = _model.Pieces.Count - _model.SelectedPieces.Count;
+        _model.RemovePieces();
+        Assert.Equal(finalCount,_model.Pieces.Count);
     }
 }
