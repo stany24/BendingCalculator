@@ -2,9 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:lang="clr-namespace:Flexion.Assets.Localization"
+        xmlns:viewModels="clr-namespace:Flexion.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Editors.Force.ForceEditor"
+        x:DataType="viewModels:MainViewModel"
         Title="ForceEditor"
         SizeToContent="WidthAndHeight"
         CanResize="False">
@@ -14,7 +15,7 @@
         Margin="5">
         <TextBlock 
             Name="LblMass"
-            Text="{x:Static lang:Resources.MassWithColon}"
+            Text="{Binding MassWithColonBinding}"
             Grid.Column="0"
             Grid.Row="0"
             VerticalAlignment="Center"></TextBlock>
@@ -27,7 +28,7 @@
             Grid.Row="0"></NumericUpDown>
         <TextBlock 
             Name="LblRadius"
-            Text="{x:Static lang:Resources.RadiusWithColon}"
+            Text="{Binding RadiusWithColonBinding}"
             Grid.Column="0"
             Grid.Row="2"
             VerticalAlignment="Center"></TextBlock>
@@ -40,7 +41,7 @@
             Grid.Row="2"></NumericUpDown>
         <TextBlock 
             Name="LblSpeed"
-            Text="{x:Static lang:Resources.SpeedWithColon}"
+            Text="{Binding SpeedWithColonBinding}"
             Grid.Column="0"
             Grid.Row="4"
             VerticalAlignment="Center"></TextBlock>
@@ -53,7 +54,7 @@
             Grid.Row="4"></NumericUpDown>
         <TextBlock 
             Name="LblGravity"
-            Text="{x:Static lang:Resources.GravityWithColon}"
+            Text="{Binding GravityWithColonBinding}"
             Grid.Column="0"
             Grid.Row="6"
             VerticalAlignment="Center"></TextBlock>
@@ -66,7 +67,7 @@
             Grid.Row="6"></NumericUpDown>
         <TextBlock 
             Name="LblForce"
-            Text="{x:Static lang:Resources.ForceWithColon}"
+            Text="{Binding ForceWithColonBinding}"
             Grid.Column="0"
             Grid.Row="8"
             VerticalAlignment="Center"></TextBlock>

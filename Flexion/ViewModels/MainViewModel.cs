@@ -47,7 +47,7 @@ public partial class MainViewModel : ObservableObject
             SetProperty(ref _language, value);
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
-            if(!_starting) {ApplicationRestarter.Restart();}
+            ChangeLanguage();
         }
     }
 
@@ -157,7 +157,7 @@ public partial class MainViewModel : ObservableObject
     public void OpenForceEditor()
     {
         if(_forceEditor != null){return;}
-        _forceEditor = new ForceEditor();
+        _forceEditor = new ForceEditor(this);
         _forceEditor.Closing += (_, _) => Force = _forceEditor?.CalculateForce() ?? 100;
         _forceEditor.Closed += (_, _) => _forceEditor = null;
         _forceEditor.Show();

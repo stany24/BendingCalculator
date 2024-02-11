@@ -1,12 +1,14 @@
 using System;
 using Avalonia.Controls;
+using Flexion.ViewModels;
 
 namespace Flexion.Views.Editors.Force;
 
 public partial class ForceEditor : Window
 {
-    public ForceEditor()
+    public ForceEditor(MainViewModel model)
     {
+        DataContext = model;
         InitializeComponent();
         NudGravity.ValueChanged += (_, _) => CalculateForce();
         NudSpeed.ValueChanged += (_, _) => CalculateForce();

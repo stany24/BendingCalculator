@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
-        xmlns:lang="clr-namespace:Flexion.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Editors.Piece.ListLayersEditor"
         x:DataType="viewModels:MainViewModel"
@@ -19,7 +18,7 @@
             Name="LblInPiece"
             Grid.Column="0"
             Grid.Row="0"
-            Text="{x:Static lang:Resources.InPieceWithColon}"></TextBlock>
+            Text="{Binding InPieceWithColonBinding}"></TextBlock>
         <ListBox
             Name="LbxInPiece"
             Grid.Column="0"
@@ -43,7 +42,7 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{x:Static lang:Resources.MoveUp}"
+            Content="{Binding MoveUpBinding}"
             IsEnabled="{Binding BtnMoveUpEnabled}"
             Command="{Binding MoveLayerUpInPiece}"></Button>
         <Button
@@ -52,14 +51,14 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{x:Static lang:Resources.MoveDown}"
+            Content="{Binding MoveDownBinding}"
             IsEnabled="{Binding BtnMoveDownEnabled}"
             Command="{Binding MoveLayerDownInPiece}"></Button>
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
             Grid.Row="0"
-            Text="{x:Static lang:Resources.AvailableWithColon}"></TextBlock>
+            Text="{Binding AvailableWithColonBinding}"></TextBlock>
         <ListBox
             Name="LbxAvailable"
             Grid.Column="4"
@@ -81,7 +80,7 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{x:Static lang:Resources.Add}"
+            Content="{Binding AddBinding}"
             IsEnabled="{Binding BtnAddEnabled}"
             Command="{Binding AddLayerToPiece}"></Button>
         <Button
@@ -90,7 +89,7 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{x:Static lang:Resources.Remove}"
+            Content="{Binding RemoveBinding}"
             IsEnabled="{Binding BtnRemoveEnabled}"
             Command="{Binding RemoveLayersToPiece}"></Button>
     </Grid>

@@ -4,7 +4,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
-        xmlns:lang="clr-namespace:Flexion.Assets.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Main"
         x:DataType="viewModels:MainViewModel"
@@ -28,7 +27,7 @@
                 Name="LblForce"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.ForceWithColon}"
+                Text="{Binding ForceWithColonBinding}"
                 VerticalAlignment="Center"></TextBlock>
             <NumericUpDown
                 Name="NudForce"
@@ -38,7 +37,7 @@
                 Grid.Row="0"></NumericUpDown>
             <Button
                 Name="BtnForce"
-                Content="{x:Static lang:Resources.Modify}"
+                Content="{Binding ModifyBinding}"
                 Grid.Row="2"
                 Grid.Column="0"
                 Command="{Binding OpenForceEditor}"
@@ -47,7 +46,7 @@
                 Name="TbxLang"
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.LanguageWithColon}"></TextBlock>
+                Text="{Binding LanguageWithColonBinding}"></TextBlock>
             <ComboBox 
                 Name="CbxLang"
                 Grid.Row="4"
@@ -66,11 +65,11 @@
                 Name="LblPiece"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.PiecesWithColon}"
+                Text="{Binding PiecesWithColonBinding}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnPiece"
-                Content="{x:Static lang:Resources.Modify}"
+                Content="{Binding ModifyBinding}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenPieceEditor}"></Button>
@@ -103,11 +102,11 @@
                 Name="LblLayer"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.LayersWithColon}"
+                Text="{Binding LayersWithColonBinding}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnLayer"
-                Content="{x:Static lang:Resources.Modify}"
+                Content="{Binding ModifyBinding}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenLayerEditor}"></Button>
@@ -139,11 +138,11 @@
                 Name="LblMaterial"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{x:Static lang:Resources.MaterialsWithColon}"
+                Text="{Binding MaterialsWithColonBinding}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnMaterial"
-                Content="{x:Static lang:Resources.Modify}"
+                Content="{Binding ModifyBinding}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenMaterialEditor}"></Button>
@@ -181,7 +180,7 @@
             Grid.ColumnSpan="7"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{x:Static lang:Resources.Begin}"
+            Content="{Binding BeginBinding}"
             Command="{Binding CalculateFlexion}"></Button>
     </Grid>
 </Window>
