@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Resources;
 using Avalonia.Controls;
 using Flexion.Assets.Localization;
+using Flexion.Logic.Helper;
 using Flexion.ViewModels;
 using LiveChartsCore.SkiaSharpView;
 
@@ -16,6 +17,8 @@ public partial class Main : Window
         Closing += (_, _) => CloseAllWindows();
         model.ReloadLanguage += (_, _) => ReloadLanguage();
         ReloadLanguage();
+        HelperWindow window = new(HelperInfo.MainWindowModules);
+        window.Show();
     }
 
     private void CloseAllWindows()

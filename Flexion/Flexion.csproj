@@ -74,10 +74,17 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.de.resx</DependentUpon>
       </Compile>
+      <Compile Update="Logic\Helper\HelperImage.cs">
+        <DependentUpon>HelperModule.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Logic\Helper\HelperText.cs">
+        <DependentUpon>HelperModule.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 
     <ItemGroup>
+      <Folder Include="Assets\Help\MainWindow\" />
       <Folder Include="Database\" />
     </ItemGroup>
 
