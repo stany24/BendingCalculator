@@ -4,13 +4,15 @@ using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Logic.Helper;
+using Flexion.ViewModels;
 
 namespace Flexion.Views;
 
 public partial class HelperWindow : Window
 {
-    public HelperWindow(IReadOnlyList<IHelperModule> modules)
+    public HelperWindow(IReadOnlyList<IHelperModule> modules,MainViewModel model)
     {
+        DataContext = model;
         InitializeComponent();
         CreateUi(modules);
     }

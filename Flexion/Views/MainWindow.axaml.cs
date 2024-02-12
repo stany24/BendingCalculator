@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Resources;
 using Avalonia.Controls;
 using Flexion.Assets.Localization;
+using Flexion.Assets.Localization.MainLocalization;
 using Flexion.Logic.Helper;
 using Flexion.ViewModels;
 using LiveChartsCore.SkiaSharpView;
@@ -17,7 +18,7 @@ public partial class Main : Window
         Closing += (_, _) => CloseAllWindows();
         model.ReloadLanguage += (_, _) => ReloadLanguage();
         ReloadLanguage();
-        HelperWindow window = new(HelperInfo.MainWindowModules);
+        HelperWindow window = new(HelperInfo.MainWindowModules,DataContext as MainViewModel);
         window.Show();
     }
 
@@ -29,7 +30,7 @@ public partial class Main : Window
     
     private void ReloadLanguage()
     {
-        ResourceManager resourceManager = new(typeof(Resources));
+        ResourceManager resourceManager = new(typeof(MainLocalization));
         if(DataContext is not MainViewModel model){return;}
         ChartResult.XAxes = new[] {
             new Axis {

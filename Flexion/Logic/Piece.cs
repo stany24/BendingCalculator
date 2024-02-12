@@ -87,7 +87,7 @@ public class Piece:ObservableObject
         return Layers.Count switch
         {
             0 => $"{Name} / {Length*1000}mm",
-            _ => $"{Name} / {Length*1000}mm / {Layers.Count} {Assets.Localization.Resources.Layers}"
+            _ => $"{Name} / {Length*1000}mm / {Layers.Count} {Assets.Localization.Logic.LogicLocalization.Layers}"
         };
     }
 

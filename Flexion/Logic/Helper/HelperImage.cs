@@ -1,14 +1,10 @@
-using System;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
-
 namespace Flexion.Logic.Helper;
 
 public class HelperImage:IHelperModule
 {
-    public string Source { get; set; }
+    public string Source { get; }
     public HelperImage(string uri)
     {
-        Source = uri;
+        Source = "avares://Flexion/Assets/Help/"+uri;
     }
 }
