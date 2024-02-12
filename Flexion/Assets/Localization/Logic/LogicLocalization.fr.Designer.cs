@@ -7,25 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Flexion.Assets.Localization {
+namespace Flexion.Assets.Localization.Logic {
+    using System;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources_de {
+    internal class LogicLocalization_fr {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources_de() {
+        internal LogicLocalization_fr() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Flexion.Assets.Localization.Resources_de", typeof(Resources_de).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Flexion.Assets.Localization.Logic.LogicLocalization_fr", typeof(LogicLocalization_fr).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -39,6 +42,36 @@ namespace Flexion.Assets.Localization {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        internal static string Center {
+            get {
+                return ResourceManager.GetString("Center", resourceCulture);
+            }
+        }
+        
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        internal static string Sides {
+            get {
+                return ResourceManager.GetString("Sides", resourceCulture);
+            }
+        }
+        
+        internal static string MaterialWithColon {
+            get {
+                return ResourceManager.GetString("MaterialWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string Layers {
+            get {
+                return ResourceManager.GetString("Layers", resourceCulture);
             }
         }
     }
