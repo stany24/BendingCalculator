@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Logic.Helper;
 using Flexion.ViewModels;
+using HyperText.Avalonia.Controls;
 
 namespace Flexion.Views;
 
@@ -49,6 +51,19 @@ public partial class HelperWindow : Window
                 Grid.SetColumn(block,0);
                 Grid.SetRow(block,2*i);
                 MainGrid.Children.Add(block);
+            }
+            
+            if (modules[i] is HelperButton helpLink)
+            {
+                Button link = new()
+                {
+                     Content = helpLink.DisplayText,
+                     Command = (DataContext as MainViewModel).OpenLink,
+                     CommandParameter = helpLink.Link
+                };
+                Grid.SetColumn(link,0);
+                Grid.SetRow(link,2*i);
+                MainGrid.Children.Add(link);
             }
         }
     }

@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Resources;
 using Avalonia.Controls;
-using Flexion.Assets.Localization;
 using Flexion.Assets.Localization.MainLocalization;
 using Flexion.Logic.Helper;
 using Flexion.ViewModels;

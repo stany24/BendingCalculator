@@ -9,5 +9,6 @@
         Title="{Binding HelpBinding}">
     <Grid
         Name="MainGrid"
-        Margin="5"></Grid>
+        Margin="5">
+    </Grid>
 </Window>

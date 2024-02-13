@@ -6,9 +6,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Flexion.Database.Actions;
 using Flexion.Logic;
+using Flexion.Logic.Helper;
 using Flexion.Setting;
 using Flexion.Views.Editors.Force;
 using Flexion.Views.Editors.Layer;
@@ -50,9 +52,12 @@ public partial class MainViewModel : ObservableObject
             ReDrawItems(); // the items ToString() method
         }
     }
+    
+    public ICommand OpenLink { get; }
 
     public MainViewModel(SQLiteConnection connection)
     {
+        OpenLink = new OpenLinkCommand();
         Languages = new ObservableCollection<string>{"fr","en","de"};
         Language = SettingManager.GetLanguage();
         _connection = connection;

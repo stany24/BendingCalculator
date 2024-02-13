@@ -155,6 +155,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="HyperText.Avalonia" Version="2.0.0" />
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
     </ItemGroup>
@@ -349,6 +350,9 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>LogicLocalization.de.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Logic\Helper\HelperButton.cs">
+        <DependentUpon>HelperModule.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 
