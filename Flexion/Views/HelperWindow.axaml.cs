@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Avalonia.Controls;
-using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Logic.Helper;
 using Flexion.ViewModels;
-using HyperText.Avalonia.Controls;
 
 namespace Flexion.Views;
 
@@ -21,14 +20,12 @@ public partial class HelperWindow : Window
 
     private void CreateUi(IReadOnlyList<IHelperModule> modules)
     {
-        string rowDefinition = "";
+        StringBuilder rowDefinition = new();
         for (int i = 0; i < modules.Count; i++)
         {
-            rowDefinition += "Auto,10,";
+            rowDefinition.Append("Auto,10,");
         }
-
-        rowDefinition = rowDefinition.Remove(rowDefinition.Length - 4);
-        MainGrid.RowDefinitions = RowDefinitions.Parse(rowDefinition);
+        MainGrid.RowDefinitions = RowDefinitions.Parse(rowDefinition.ToString().Remove(rowDefinition.Length - 4));
         for (int i = 0; i < modules.Count; i++)
         {
             if (modules[i] is HelperImage helpImage)
@@ -52,19 +49,18 @@ public partial class HelperWindow : Window
                 Grid.SetRow(block,2*i);
                 MainGrid.Children.Add(block);
             }
-            
-            if (modules[i] is HelperButton helpLink)
+
+            if (modules[i] is not HelperButton helpLink) continue;
+            if (DataContext is not MainViewModel model) continue;
+            Button link = new()
             {
-                Button link = new()
-                {
-                     Content = helpLink.DisplayText,
-                     Command = (DataContext as MainViewModel).OpenLink,
-                     CommandParameter = helpLink.Link
-                };
-                Grid.SetColumn(link,0);
-                Grid.SetRow(link,2*i);
-                MainGrid.Children.Add(link);
-            }
+                Content = helpLink.DisplayText,
+                Command = model.OpenLink,
+                CommandParameter = helpLink.Link
+            };
+            Grid.SetColumn(link,0);
+            Grid.SetRow(link,2*i);
+            MainGrid.Children.Add(link);
         }
     }
 }

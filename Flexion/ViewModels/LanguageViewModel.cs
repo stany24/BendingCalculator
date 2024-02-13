@@ -35,9 +35,6 @@ public partial class MainViewModel
         MaterialsWithColonBinding = resourceManagerEditor.GetString("MaterialsWithColon", new CultureInfo(Language));
         PiecesWithColonBinding = resourceManagerEditor.GetString("PiecesWithColon", new CultureInfo(Language));
         
-        // Material editor
-        ResourceManager resourceManagerMaterialEditor = new(typeof(MaterialEditorLocalization));
-        
         // Layer editor
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
         HeightCenterWithColonBinding = resourceManagerLayerEditor.GetString("HeightCenterWithColon", new CultureInfo(Language));
