@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Logic.Helper;
@@ -43,7 +44,7 @@ public partial class HelperWindow : Window
             {
                 TextBlock block = new()
                 {
-                    Text = helpText.Text
+                    [!TextBlock.TextProperty] = new Binding(helpText.NameBinding)
                 };
                 Grid.SetColumn(block,0);
                 Grid.SetRow(block,2*i);
@@ -54,7 +55,7 @@ public partial class HelperWindow : Window
             if (DataContext is not MainViewModel model) continue;
             Button link = new()
             {
-                Content = helpLink.DisplayText,
+                [!ContentProperty] = new Binding(helpLink.DisplayTextBinding),
                 Command = model.OpenLink,
                 CommandParameter = helpLink.Link
             };

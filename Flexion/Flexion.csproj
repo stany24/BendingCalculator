@@ -138,6 +138,18 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>LogicLocalization.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MainHelperLocalization.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.fr.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MainHelperLocalization.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.de.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MainHelperLocalization.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
@@ -352,6 +364,21 @@
       </Compile>
       <Compile Update="Logic\Helper\HelperButton.cs">
         <DependentUpon>HelperModule.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MainHelperLocalization.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MainHelperLocalization.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MainHelperLocalization.de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

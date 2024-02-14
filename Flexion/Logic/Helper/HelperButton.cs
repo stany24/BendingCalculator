@@ -2,12 +2,12 @@ namespace Flexion.Logic.Helper;
 
 public class HelperButton:IHelperModule
 {
-    public string DisplayText { get; }
+    public string DisplayTextBinding { get; }
     public string Link { get; }
 
-    public HelperButton(string displayText, string link)
+    public HelperButton(string displayTextBinding, string link)
     {
-        DisplayText = displayText;
+        DisplayTextBinding = displayTextBinding;
         Link = link;
     }
 }

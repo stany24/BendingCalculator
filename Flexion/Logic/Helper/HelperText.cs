@@ -2,9 +2,9 @@ namespace Flexion.Logic.Helper;
 
 public class HelperText:IHelperModule
 {
-    public string Text { get; }
-    public HelperText(string text)
+    public string NameBinding { get; }
+    public HelperText(string nameBinding)
     {
-        Text = text;
+        NameBinding = nameBinding;
     }
 }

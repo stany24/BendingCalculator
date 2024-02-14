@@ -2,12 +2,13 @@ using System.Globalization;
 using System.Resources;
 using Flexion.Assets.Localization.HelperLocalization;
 using Flexion.Assets.Localization.MainLocalization;
+using Flexion.Assets.Localization.MainLocalization.Helper;
 using Flexion.Assets.Localization.EditorLocalization;
 using Flexion.Assets.Localization.Logic;
 using Flexion.Assets.Localization.EditorLocalization.ForceEditorLocalization;
-using Flexion.Assets.Localization.EditorLocalization.MaterialEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization;
+
 
 namespace Flexion.ViewModels;
 
@@ -20,6 +21,10 @@ public partial class MainViewModel
         ModifyBinding = resourceManagerMain.GetString("Modify", new CultureInfo(Language));
         LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", new CultureInfo(Language));
         BeginBinding = resourceManagerMain.GetString("Begin", new CultureInfo(Language));
+        
+        ResourceManager resourceManagerMainHelper = new(typeof(MainHelperLocalization));
+        MainWindowHelper1Binding = resourceManagerMainHelper.GetString("MainWindowHelper1", new CultureInfo(Language));
+        MainWindowHelper2Binding = resourceManagerMainHelper.GetString("MainWindowHelper2", new CultureInfo(Language));
         
         ResourceManager resourceManagerLogic = new(typeof(LogicLocalization));
         NoBinding = resourceManagerLogic.GetString("No", new CultureInfo(Language));
@@ -65,6 +70,21 @@ public partial class MainViewModel
         GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", new CultureInfo(Language));
         SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", new CultureInfo(Language));
     }
+    
+    private string _mainWindowHelper1Binding;
+    public string MainWindowHelper1Binding
+    {
+        get =>_mainWindowHelper1Binding;
+        set => SetProperty(ref _mainWindowHelper1Binding, value);
+    }
+    
+    private string _mainWindowHelper2Binding;
+    public string MainWindowHelper2Binding
+    {
+        get =>_mainWindowHelper2Binding;
+        set => SetProperty(ref _mainWindowHelper2Binding, value);
+    }
+    
     private string _addBinding;
     public string AddBinding
     {
