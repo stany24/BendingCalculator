@@ -33,4 +33,13 @@
     <data name="YAxisName" xml:space="preserve">
         <value>Deformation</value>
     </data>
+    <data name="MaterialsWithColon" xml:space="preserve">
+        <value>Materials:</value>
+    </data>
+    <data name="PiecesWithColon" xml:space="preserve">
+        <value>Pieces:</value>
+    </data>
+    <data name="LayersWithColon" xml:space="preserve">
+        <value>Layers:</value>
+    </data>
 </root>

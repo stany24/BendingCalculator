@@ -1,10 +1,10 @@
 using System;
-using Avalonia.Controls;
+using Flexion.Logic.Helper;
 using Flexion.ViewModels;
 
 namespace Flexion.Views.Editors.Force;
 
-public partial class ForceEditor : Window
+public partial class ForceEditor : WindowWithHelp
 {
     public ForceEditor(MainViewModel model)
     {
@@ -15,6 +15,7 @@ public partial class ForceEditor : Window
         NudMass.ValueChanged += (_, _) => CalculateForce();
         NudRadius.ValueChanged += (_, _) => CalculateForce();
         CalculateForce();
+        HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.ForceWindowModules);
     }
 
     public decimal CalculateForce()

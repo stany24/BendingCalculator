@@ -12,7 +12,7 @@
     <Grid 
             Name="Grid"
             RowDefinitions="Auto,10,Auto,10,Auto,*"
-            ColumnDefinitions="Auto,10,Auto,Auto,10,Auto,10,Auto"
+            ColumnDefinitions="Auto,10,Auto,Auto,10,Auto,10,Auto,10,Auto"
             Margin="5">
             <TextBlock 
                 Name="LblName"
@@ -76,5 +76,12 @@
                 Grid.Row="4"
                 Grid.Column="5"
                 Command="{Binding RemoveMaterials}"></Button>
+        <Button 
+            Name="HelpButton"
+            Grid.Row="0"
+            Grid.Column="9"
+            Content="{Binding HelpBinding}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"></Button>
         </Grid>
 </Window>

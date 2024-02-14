@@ -27,9 +27,6 @@
     <data name="InPieceWithColon" xml:space="preserve">
         <value>Im Stück:</value>
     </data>
-    <data name="LayersWithColon" xml:space="preserve">
-        <value>Schichten:</value>
-    </data>
     <data name="LengthWithColon" xml:space="preserve">
         <value>Länge:</value>
     </data>

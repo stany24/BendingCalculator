@@ -21,6 +21,9 @@ public partial class MainViewModel
         ModifyBinding = resourceManagerMain.GetString("Modify", new CultureInfo(Language));
         LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", new CultureInfo(Language));
         BeginBinding = resourceManagerMain.GetString("Begin", new CultureInfo(Language));
+        MaterialsWithColonBinding = resourceManagerMain.GetString("MaterialsWithColon", new CultureInfo(Language));
+        PiecesWithColonBinding = resourceManagerMain.GetString("PiecesWithColon", new CultureInfo(Language));
+        LayersWithColonBinding = resourceManagerMain.GetString("LayersWithColon", new CultureInfo(Language));
         
         ResourceManager resourceManagerMainHelper = new(typeof(MainHelperLocalization));
         MainWindowHelper1Binding = resourceManagerMainHelper.GetString("MainWindowHelper1", new CultureInfo(Language));
@@ -37,8 +40,6 @@ public partial class MainViewModel
         RemoveBinding = resourceManagerEditor.GetString("Remove", new CultureInfo(Language));
         NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", new CultureInfo(Language));
         LayersBinding = resourceManagerEditor.GetString("Layers", new CultureInfo(Language));
-        MaterialsWithColonBinding = resourceManagerEditor.GetString("MaterialsWithColon", new CultureInfo(Language));
-        PiecesWithColonBinding = resourceManagerEditor.GetString("PiecesWithColon", new CultureInfo(Language));
         
         // Layer editor
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
@@ -56,7 +57,6 @@ public partial class MainViewModel
         MoveDownBinding = resourceManagerPieceEditor.GetString("MoveDown", new CultureInfo(Language));
         MoveUpBinding = resourceManagerPieceEditor.GetString("MoveUp", new CultureInfo(Language));
         LengthWithColonBinding = resourceManagerPieceEditor.GetString("LengthWithColon", new CultureInfo(Language));
-        LayersWithColonBinding = resourceManagerPieceEditor.GetString("LayersWithColon", new CultureInfo(Language));
         
         // Help Window
         ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));

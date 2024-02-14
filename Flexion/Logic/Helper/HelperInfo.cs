@@ -38,4 +38,10 @@ public static class HelperInfo
         new HelperButton("MainWindowHelper2Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
         new HelperImage("MainWindow/test.png")
     };
+    public static List<IHelperModule> PieceLayerWindowModules { get; } = new()
+    {
+        new HelperText("MainWindowHelper1Binding"),
+        new HelperButton("MainWindowHelper2Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
+        new HelperImage("MainWindow/test.png")
+    };
 }

@@ -36,7 +36,4 @@
     <data name="LengthWithColon" xml:space="preserve">
         <value>Length:</value>
     </data>
-    <data name="LayersWithColon" xml:space="preserve">
-        <value>Layers:</value>
-    </data>
 </root>

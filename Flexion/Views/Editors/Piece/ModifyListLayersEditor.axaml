@@ -12,7 +12,7 @@
     <Grid
         Name="Grid"
         Margin="5"
-        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto"
         RowDefinitions="Auto,10,Auto,10,Auto">
         <TextBlock
             Name="LblInPiece"
@@ -92,5 +92,12 @@
             Content="{Binding RemoveBinding}"
             IsEnabled="{Binding BtnRemoveEnabled}"
             Command="{Binding RemoveLayersToPiece}"></Button>
+        <Button 
+            Name="HelpButton"
+            Grid.Row="0"
+            Grid.Column="8"
+            Content="{Binding HelpBinding}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"></Button>
     </Grid>
 </Window>

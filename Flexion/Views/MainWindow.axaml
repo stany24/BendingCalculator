@@ -13,7 +13,7 @@
     <Grid
         Name="MainGrid"
         Margin="5"
-        ColumnDefinitions="*,10,*,10,*,10,*"
+        ColumnDefinitions="*,10,*,10,*,10,*,10,Auto"
         RowDefinitions="1*,10,3*,10,Auto">
         <Grid 
             Name="GridForce"
@@ -170,16 +170,23 @@
             VerticalAlignment="Stretch"
             Grid.Column="0"
             Grid.Row="2"
-            Grid.ColumnSpan="7">
+            Grid.ColumnSpan="9">
         </lvc:CartesianChart>
         <Button
             Name="BtnStart"
             Grid.Row="4"
             Grid.Column="0"
-            Grid.ColumnSpan="7"
+            Grid.ColumnSpan="9"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
             Content="{Binding BeginBinding}"
             Command="{Binding CalculateFlexion}"></Button>
+        <Button 
+            Name="HelpButton"
+            Grid.Row="0"
+            Grid.Column="8"
+            Content="{Binding HelpBinding}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"></Button>
     </Grid>
 </Window>
