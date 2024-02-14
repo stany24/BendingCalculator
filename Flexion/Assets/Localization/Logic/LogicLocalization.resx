@@ -25,7 +25,7 @@
         <value>No</value>
     </data>
     <data name="Sides" xml:space="preserve">
-        <value>Sides(mm)</value>
+        <value>Sides (mm)</value>
     </data>
     <data name="MaterialWithColon" xml:space="preserve">
         <value>Material:</value>

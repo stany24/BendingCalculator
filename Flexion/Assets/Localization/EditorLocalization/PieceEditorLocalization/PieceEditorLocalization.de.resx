@@ -18,4 +18,25 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="AvailableWithColon" xml:space="preserve">
+        <value>Verfügbar:</value>
+    </data>
+    <data name="ChangeLayers" xml:space="preserve">
+        <value>Schichten ändern</value>
+    </data>
+    <data name="InPieceWithColon" xml:space="preserve">
+        <value>Im Stück:</value>
+    </data>
+    <data name="LayersWithColon" xml:space="preserve">
+        <value>Schichten:</value>
+    </data>
+    <data name="LengthWithColon" xml:space="preserve">
+        <value>Länge:</value>
+    </data>
+    <data name="MoveDown" xml:space="preserve">
+        <value>Nach unten</value>
+    </data>
+    <data name="MoveUp" xml:space="preserve">
+        <value>Montieren</value>
+    </data>
 </root>

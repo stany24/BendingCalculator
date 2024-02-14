@@ -18,4 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Begin" xml:space="preserve">
+        <value>Beginnen</value>
+    </data>
+    <data name="LanguageWithColon" xml:space="preserve">
+        <value>Sprache:</value>
+    </data>
+    <data name="Modify" xml:space="preserve">
+        <value>Ändern</value>
+    </data>
+    <data name="XAxisName" xml:space="preserve">
+        <value>Länge (mm)</value>
+    </data>
+    <data name="YAxisName" xml:space="preserve">
+        <value>Deformation (mm)</value>
+    </data>
 </root>
