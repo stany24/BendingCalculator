@@ -20,9 +20,9 @@ public static class HelperInfo
     
     public static List<IHelperModule> MaterialWindowModules { get; } = new()
     {
-        new HelperText("MainWindowHelper1Binding"),
-        new HelperButton("MainWindowHelper2Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
-        new HelperImage("MainWindow/test.png")
+        new HelperText("MaterialEditorHelper1Binding"),
+        new HelperText("MaterialEditorHelper2Binding"),
+        new HelperButton("MaterialEditorHelper3Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
     };
     
     public static List<IHelperModule> LayerWindowModules { get; } = new()

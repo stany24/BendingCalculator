@@ -7,6 +7,7 @@ using Flexion.Assets.Localization.EditorLocalization;
 using Flexion.Assets.Localization.Logic;
 using Flexion.Assets.Localization.EditorLocalization.ForceEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization;
+using Flexion.Assets.Localization.EditorLocalization.MaterialEditorLocalization.Helper;
 using Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization;
 
 
@@ -41,6 +42,11 @@ public partial class MainViewModel
         NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", new CultureInfo(Language));
         LayersBinding = resourceManagerEditor.GetString("Layers", new CultureInfo(Language));
         
+        ResourceManager resourceManagerMaterialEditorHelper = new(typeof(MaterialEditorHelperLocalization));
+        MaterialEditorHelper1Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper1", new CultureInfo(Language));
+        MaterialEditorHelper2Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper2", new CultureInfo(Language));
+        MaterialEditorHelper3Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper3", new CultureInfo(Language));
+        
         // Layer editor
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
         HeightCenterWithColonBinding = resourceManagerLayerEditor.GetString("HeightCenterWithColon", new CultureInfo(Language));
@@ -69,6 +75,27 @@ public partial class MainViewModel
         RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", new CultureInfo(Language));
         GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", new CultureInfo(Language));
         SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", new CultureInfo(Language));
+    }
+    
+    private string _materialEditorHelper1Binding;
+    public string MaterialEditorHelper1Binding
+    {
+        get =>_materialEditorHelper1Binding;
+        set => SetProperty(ref _materialEditorHelper1Binding, value);
+    }
+    
+    private string _materialEditorHelper2Binding;
+    public string MaterialEditorHelper2Binding
+    {
+        get =>_materialEditorHelper2Binding;
+        set => SetProperty(ref _materialEditorHelper2Binding, value);
+    }
+    
+    private string _materialEditorHelper3Binding;
+    public string MaterialEditorHelper3Binding
+    {
+        get =>_materialEditorHelper3Binding;
+        set => SetProperty(ref _materialEditorHelper3Binding, value);
     }
     
     private string _mainWindowHelper1Binding;

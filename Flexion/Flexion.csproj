@@ -150,6 +150,18 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>MainHelperLocalization.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MaterialEditorHelperLocalization.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.fr.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MaterialEditorHelperLocalization.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.de.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>MaterialEditorHelperLocalization.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
@@ -379,6 +391,21 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>MainHelperLocalization.de.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MaterialEditorHelperLocalization.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MaterialEditorHelperLocalization.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MaterialEditorHelperLocalization.de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
