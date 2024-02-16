@@ -19,9 +19,33 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="MainWindowHelper1" xml:space="preserve">
-        <value>C'est un test</value>
+        <value>C'est la fenêtre principale, elle est utilisée pour avoir une vue d'ensemble de l'application, les résultats et commencer la simulation</value>
     </data>
     <data name="MainWindowHelper2" xml:space="preserve">
-        <value>Lien sur la ressource</value>
+        <value>Il y a 6 différentes section dans cette fenêtre:</value>
+    </data>
+    <data name="MainWindowHelper10" xml:space="preserve">
+        <value>Vidéo ici</value>
+    </data>
+    <data name="MainWindowHelper9" xml:space="preserve">
+        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    </data>
+    <data name="MainWindowHelper3" xml:space="preserve">
+        <value>- Force: Elle est utilisée pour modifier la force et ouvrir l'éditeur de force.</value>
+    </data>
+    <data name="MainWindowHelper4" xml:space="preserve">
+        <value>- Pièce: Elle est utilisée pour modifier les pièce et ouvrir l'éditeur de pièce.</value>
+    </data>
+    <data name="MainWindowHelper5" xml:space="preserve">
+        <value>- Couche: Elle est utilisée pour modifier les couches et ouvrir l'éditeur de couche.</value>
+    </data>
+    <data name="MainWindowHelper6" xml:space="preserve">
+        <value>- Matière: Elle est utilisée pour modifier les matières et ouvrir l'éditeur de matière.</value>
+    </data>
+    <data name="MainWindowHelper7" xml:space="preserve">
+        <value>- Résultats: Le graph montre les résultats de la simulation.</value>
+    </data>
+    <data name="MainWindowHelper8" xml:space="preserve">
+        <value>- Commencer: Le boutton est utilisé pour commencer la simulation, une pièce doit être selectionnée dans la section pièce.</value>
     </data>
 </root>

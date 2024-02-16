@@ -7,8 +7,15 @@ public static class HelperInfo
     public static List<IHelperModule> MainWindowModules { get; } = new()
     {
         new HelperText("MainWindowHelper1Binding"),
-        new HelperButton("MainWindowHelper2Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
-        new HelperImage("MainWindow/test.png")
+        new HelperText("MainWindowHelper2Binding"),
+        new HelperText("MainWindowHelper3Binding"),
+        new HelperText("MainWindowHelper4Binding"),
+        new HelperText("MainWindowHelper5Binding"),
+        new HelperText("MainWindowHelper6Binding"),
+        new HelperText("MainWindowHelper7Binding"),
+        new HelperText("MainWindowHelper8Binding"),
+        new HelperText("MainWindowHelper9Binding"),
+        new HelperButton("MainWindowHelper10Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
     };
     
     public static List<IHelperModule> ForceWindowModules { get; } = new()

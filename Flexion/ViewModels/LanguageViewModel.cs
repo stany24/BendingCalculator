@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Resources;
 using Flexion.Assets.Localization.HelperLocalization;
@@ -35,7 +34,16 @@ public partial class MainViewModel
         ResourceManager resourceManagerMainHelper = new(typeof(MainHelperLocalization));
         MainWindowHelper1Binding = resourceManagerMainHelper.GetString("MainWindowHelper1", new CultureInfo(Language));
         MainWindowHelper2Binding = resourceManagerMainHelper.GetString("MainWindowHelper2", new CultureInfo(Language));
+        MainWindowHelper3Binding = resourceManagerMainHelper.GetString("MainWindowHelper3", new CultureInfo(Language));
+        MainWindowHelper4Binding = resourceManagerMainHelper.GetString("MainWindowHelper4", new CultureInfo(Language));
+        MainWindowHelper5Binding = resourceManagerMainHelper.GetString("MainWindowHelper5", new CultureInfo(Language));
+        MainWindowHelper6Binding = resourceManagerMainHelper.GetString("MainWindowHelper6", new CultureInfo(Language));
+        MainWindowHelper7Binding = resourceManagerMainHelper.GetString("MainWindowHelper7", new CultureInfo(Language));
+        MainWindowHelper8Binding = resourceManagerMainHelper.GetString("MainWindowHelper8", new CultureInfo(Language));
+        MainWindowHelper9Binding = resourceManagerMainHelper.GetString("MainWindowHelper9", new CultureInfo(Language));
+        MainWindowHelper10Binding = resourceManagerMainHelper.GetString("MainWindowHelper10", new CultureInfo(Language));
         
+        // Logic
         ResourceManager resourceManagerLogic = new(typeof(LogicLocalization));
         NoBinding = resourceManagerLogic.GetString("No", new CultureInfo(Language));
         SidesBinding = resourceManagerLogic.GetString("Sides", new CultureInfo(Language));
@@ -323,6 +331,62 @@ public partial class MainViewModel
     {
         get =>_mainWindowHelper2Binding;
         set => SetProperty(ref _mainWindowHelper2Binding, value);
+    }
+    
+    private string _mainWindowHelper3Binding;
+    public string MainWindowHelper3Binding
+    {
+        get =>_mainWindowHelper3Binding;
+        set => SetProperty(ref _mainWindowHelper3Binding, value);
+    }
+    
+    private string _mainWindowHelper4Binding;
+    public string MainWindowHelper4Binding
+    {
+        get =>_mainWindowHelper4Binding;
+        set => SetProperty(ref _mainWindowHelper4Binding, value);
+    }
+    
+    private string _mainWindowHelper5Binding;
+    public string MainWindowHelper5Binding
+    {
+        get =>_mainWindowHelper5Binding;
+        set => SetProperty(ref _mainWindowHelper5Binding, value);
+    }
+    
+    private string _mainWindowHelper6Binding;
+    public string MainWindowHelper6Binding
+    {
+        get =>_mainWindowHelper6Binding;
+        set => SetProperty(ref _mainWindowHelper6Binding, value);
+    }
+    
+    private string _mainWindowHelper7Binding;
+    public string MainWindowHelper7Binding
+    {
+        get =>_mainWindowHelper7Binding;
+        set => SetProperty(ref _mainWindowHelper7Binding, value);
+    }
+    
+    private string _mainWindowHelper8Binding;
+    public string MainWindowHelper8Binding
+    {
+        get =>_mainWindowHelper8Binding;
+        set => SetProperty(ref _mainWindowHelper8Binding, value);
+    }
+    
+    private string _mainWindowHelper9Binding;
+    public string MainWindowHelper9Binding
+    {
+        get =>_mainWindowHelper9Binding;
+        set => SetProperty(ref _mainWindowHelper9Binding, value);
+    }
+    
+    private string _mainWindowHelper10Binding;
+    public string MainWindowHelper10Binding
+    {
+        get =>_mainWindowHelper10Binding;
+        set => SetProperty(ref _mainWindowHelper10Binding, value);
     }
     
     private string _addBinding;

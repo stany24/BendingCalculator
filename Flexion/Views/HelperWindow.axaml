@@ -7,8 +7,9 @@
         x:Class="Flexion.Views.HelperWindow"
         x:DataType="viewModels:MainViewModel"
         Title="{Binding HelpBinding}"
-        SizeToContent="WidthAndHeight"
-        MaxWidth="400">
+        MinWidth="500"
+        MaxWidth="500"
+        SizeToContent="Height">
     <Grid
         Name="MainGrid"
         Margin="5">

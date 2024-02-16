@@ -19,9 +19,33 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="MainWindowHelper1" xml:space="preserve">
-        <value>This is a test</value>
+        <value>This is the main window, it is used to show an overview of the application, the results and is used to start the simulation</value>
     </data>
     <data name="MainWindowHelper2" xml:space="preserve">
-        <value>Link to ressource</value>
+        <value>Their are 6 different section in this window:</value>
+    </data>
+    <data name="MainWindowHelper3" xml:space="preserve">
+        <value>- Force: It's used to modifiy the force or open the force editor.</value>
+    </data>
+    <data name="MainWindowHelper4" xml:space="preserve">
+        <value>- Piece: It's used to show all created pieces and open the piece editor</value>
+    </data>
+    <data name="MainWindowHelper5" xml:space="preserve">
+        <value>- Layer: it's used to show all created layers and open the layer editor.</value>
+    </data>
+    <data name="MainWindowHelper6" xml:space="preserve">
+        <value>- Material: it's used to show all created pieces and open the piece editor.</value>
+    </data>
+    <data name="MainWindowHelper7" xml:space="preserve">
+        <value>- Result: The graph shows the the results of the simulation.</value>
+    </data>
+    <data name="MainWindowHelper8" xml:space="preserve">
+        <value>- Start: The button is used to start the simulation, one piece must be selected in the piece section</value>
+    </data>
+    <data name="MainWindowHelper9" xml:space="preserve">
+        <value>Here you can see a video with a demo.</value>
+    </data>
+    <data name="MainWindowHelper10" xml:space="preserve">
+        <value>Video here</value>
     </data>
 </root>
