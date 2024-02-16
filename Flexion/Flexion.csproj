@@ -162,6 +162,18 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>MaterialEditorHelperLocalization.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>LayerEditorHelperLocalization.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.fr.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>LayerEditorHelperLocalization.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.de.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>LayerEditorHelperLocalization.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
@@ -406,6 +418,21 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>MaterialEditorHelperLocalization.de.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LayerEditorHelperLocalization.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LayerEditorHelperLocalization.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LayerEditorHelperLocalization.de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

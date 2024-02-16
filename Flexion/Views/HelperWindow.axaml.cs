@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Logic.Helper;
@@ -44,7 +45,8 @@ public partial class HelperWindow : Window
             {
                 TextBlock block = new()
                 {
-                    [!TextBlock.TextProperty] = new Binding(helpText.NameBinding)
+                    [!TextBlock.TextProperty] = new Binding(helpText.NameBinding),
+                    TextWrapping = TextWrapping.Wrap,
                 };
                 Grid.SetColumn(block,0);
                 Grid.SetRow(block,2*i);
@@ -57,7 +59,7 @@ public partial class HelperWindow : Window
             {
                 [!ContentProperty] = new Binding(helpLink.DisplayTextBinding),
                 Command = model.OpenLink,
-                CommandParameter = helpLink.Link
+                CommandParameter = helpLink.Link,
             };
             Grid.SetColumn(link,0);
             Grid.SetRow(link,2*i);

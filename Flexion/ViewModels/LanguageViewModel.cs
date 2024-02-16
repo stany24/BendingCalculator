@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Resources;
 using Flexion.Assets.Localization.HelperLocalization;
@@ -7,6 +8,7 @@ using Flexion.Assets.Localization.EditorLocalization;
 using Flexion.Assets.Localization.Logic;
 using Flexion.Assets.Localization.EditorLocalization.ForceEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization;
+using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization.Helper;
 using Flexion.Assets.Localization.EditorLocalization.MaterialEditorLocalization.Helper;
 using Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization;
 
@@ -42,6 +44,7 @@ public partial class MainViewModel
         NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", new CultureInfo(Language));
         LayersBinding = resourceManagerEditor.GetString("Layers", new CultureInfo(Language));
         
+        //material editor
         ResourceManager resourceManagerMaterialEditorHelper = new(typeof(MaterialEditorHelperLocalization));
         MaterialEditorHelper1Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper1", new CultureInfo(Language));
         MaterialEditorHelper2Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper2", new CultureInfo(Language));
@@ -54,6 +57,16 @@ public partial class MainViewModel
         WidthCenterWithColonBinding = resourceManagerLayerEditor.GetString("WidthCenterWithColon", new CultureInfo(Language));
         WidthSidesWithColonBinding = resourceManagerLayerEditor.GetString("WidthSidesWithColon", new CultureInfo(Language));
         MaterialWithColonBinding = resourceManagerLayerEditor.GetString("MaterialWithColon", new CultureInfo(Language));
+        
+        ResourceManager resourceManagerLayerEditorHelper = new(typeof(LayerEditorHelperLocalization));
+        LayerEditorHelper1Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper1", new CultureInfo(Language));
+        LayerEditorHelper2Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper2", new CultureInfo(Language));
+        LayerEditorHelper3Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper3", new CultureInfo(Language));
+        LayerEditorHelper4Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper4", new CultureInfo(Language));
+        LayerEditorHelper5Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper5", new CultureInfo(Language));
+        LayerEditorHelper6Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper6", new CultureInfo(Language));
+        LayerEditorHelper7Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper7", new CultureInfo(Language));
+        LayerEditorHelper8Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper8", new CultureInfo(Language));
         
         // Piece editor
         ResourceManager resourceManagerPieceEditor = new(typeof(PieceEditorLocalization));
@@ -96,6 +109,62 @@ public partial class MainViewModel
     {
         get =>_materialEditorHelper3Binding;
         set => SetProperty(ref _materialEditorHelper3Binding, value);
+    }
+    
+    private string _layerEditorHelper1Binding;
+    public string LayerEditorHelper1Binding
+    {
+        get =>_layerEditorHelper1Binding;
+        set => SetProperty(ref _layerEditorHelper1Binding, value);
+    }
+    
+    private string _layerEditorHelper2Binding;
+    public string LayerEditorHelper2Binding
+    {
+        get =>_layerEditorHelper2Binding;
+        set => SetProperty(ref _layerEditorHelper2Binding, value);
+    }
+    
+    private string _layerEditorHelper3Binding;
+    public string LayerEditorHelper3Binding
+    {
+        get =>_layerEditorHelper3Binding;
+        set => SetProperty(ref _layerEditorHelper3Binding, value);
+    }
+    
+    private string _layerEditorHelper4Binding;
+    public string LayerEditorHelper4Binding
+    {
+        get =>_layerEditorHelper4Binding;
+        set => SetProperty(ref _layerEditorHelper4Binding, value);
+    }
+    
+    private string _layerEditorHelper5Binding;
+    public string LayerEditorHelper5Binding
+    {
+        get =>_layerEditorHelper5Binding;
+        set => SetProperty(ref _layerEditorHelper5Binding, value);
+    }
+    
+    private string _layerEditorHelper6Binding;
+    public string LayerEditorHelper6Binding
+    {
+        get =>_layerEditorHelper6Binding;
+        set => SetProperty(ref _layerEditorHelper6Binding, value);
+    }
+    
+    private string _layerEditorHelper7Binding;
+    public string LayerEditorHelper7Binding
+    {
+        get =>_layerEditorHelper7Binding;
+        set => SetProperty(ref _layerEditorHelper7Binding, value);
+    }
+    
+    private string _layerEditorHelper8Binding;
+    public string LayerEditorHelper8Binding
+    {
+        get =>_layerEditorHelper8Binding;
+        set => SetProperty(ref _layerEditorHelper8Binding, value);
     }
     
     private string _mainWindowHelper1Binding;
