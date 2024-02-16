@@ -18,4 +18,49 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="PieceEditorHelper5" xml:space="preserve">
+        <value>Hier können Sie ein Video mit einer Demo sehen.</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Hier können Sie ein Video mit einer Demo sehen.</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Video hier</value>
+    </data>
+    <data name="PieceEditorHelper6" xml:space="preserve">
+        <value>Video hier</value>
+    </data>
+    <data name="PieceEditorHelper1" xml:space="preserve">
+        <value>Dies ist der Stück-Editor, hier können Sie neue Stücke erstellen und sie ändern, die Stücke haben mehrere Eigenschaften:</value>
+    </data>
+    <data name="PieceEditorHelper10" xml:space="preserve">
+        <value>- Hinzufügen: fügt die ausgewählten Ebenen des rechten Listenfeldes zum Stück hinzu.</value>
+    </data>
+    <data name="PieceEditorHelper11" xml:space="preserve">
+        <value>- Entfernen: entfernt die in der linken Listbox ausgewählten Ebenen aus dem Stück.</value>
+    </data>
+    <data name="PieceEditorHelper12" xml:space="preserve">
+        <value>- Nach unten: verschiebt die ausgewählten Ebenen in der linken Listbox nach unten.</value>
+    </data>
+    <data name="PieceEditorHelper13" xml:space="preserve">
+        <value>- Nach oben: verschiebt die ausgewählten Ebenen der linken Listbox nach oben.</value>
+    </data>
+    <data name="PieceEditorHelper2" xml:space="preserve">
+        <value>- Der Name, damit Sie das Stück erkennen.</value>
+    </data>
+    <data name="PieceEditorHelper3" xml:space="preserve">
+        <value>- Die Länge des Stücks.</value>
+    </data>
+    <data name="PieceEditorHelper4" xml:space="preserve">
+        <value>Wenn Sie nur ein Teil in der linken Listbox auswählen, sehen Sie dessen Ebenen in der rechten Listbox und können auf die Schaltfläche "Ebenen ändern" klicken, um das Teil anzupassen.</value>
+    </data>
+    <data name="PieceEditorHelper7" xml:space="preserve">
+        <value>Dies ist der Stück-Editor, hier können Sie die Ebenen innerhalb eines Stücks ändern.</value>
+    </data>
+    <data name="PieceEditorHelper8" xml:space="preserve">
+        <value>Das linke Listenfeld enthält die Ebenen innerhalb des Stücks, das rechte Listenfeld enthält alle Ebenen, die Sie erstellt haben.</value>
+    </data>
+    <data name="PieceEditorHelper9" xml:space="preserve">
+        <value>Sie können 4 verschiedene Aktionen durchführen:</value>
+    </data>
 </root>

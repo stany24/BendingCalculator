@@ -21,4 +21,31 @@
     <data name="MainWindowHelper1" xml:space="preserve">
         <value>Es ist ein test</value>
     </data>
+    <data name="MainWindowHelper9" xml:space="preserve">
+        <value>Hier können Sie ein Video mit einer Demo sehen.</value>
+    </data>
+    <data name="MainWindowHelper10" xml:space="preserve">
+        <value>Video hier</value>
+    </data>
+    <data name="MainWindowHelper2" xml:space="preserve">
+        <value>Es gibt 6 verschiedene Abschnitte in diesem Fenster:</value>
+    </data>
+    <data name="MainWindowHelper3" xml:space="preserve">
+        <value>- Kraft: Wird verwendet, um die Kraft zu modifizieren oder den Kraft-Editor zu öffnen.</value>
+    </data>
+    <data name="MainWindowHelper4" xml:space="preserve">
+        <value>- Stück: Es wird verwendet, um alle erstellten Stücke anzuzeigen und den Stückeditor zu öffnen.</value>
+    </data>
+    <data name="MainWindowHelper5" xml:space="preserve">
+        <value>- Ebene: wird verwendet, um alle erstellten Ebenen anzuzeigen und den Ebenen-Editor zu öffnen.</value>
+    </data>
+    <data name="MainWindowHelper6" xml:space="preserve">
+        <value>- Material: wird verwendet, um alle erstellten Teile anzuzeigen und den Teile-Editor zu öffnen.</value>
+    </data>
+    <data name="MainWindowHelper7" xml:space="preserve">
+        <value>- Ergebnis: Die Grafik zeigt die Ergebnisse der Simulation.</value>
+    </data>
+    <data name="MainWindowHelper8" xml:space="preserve">
+        <value>- Starten: Die Schaltfläche dient zum Starten der Simulation, ein Stück muss im Stückbereich ausgewählt werden</value>
+    </data>
 </root>

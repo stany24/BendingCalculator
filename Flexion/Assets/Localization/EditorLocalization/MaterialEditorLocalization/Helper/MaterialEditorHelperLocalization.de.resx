@@ -18,4 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="MaterialEditorHelper4" xml:space="preserve">
+        <value>Hier können Sie ein Video mit einer Demo sehen.</value>
+    </data>
+    <data name="MaterialEditorHelper5" xml:space="preserve">
+        <value>Video hier</value>
+    </data>
+    <data name="MaterialEditorHelper1" xml:space="preserve">
+        <value>Dies ist der Material-Editor, hier können Sie neue Materialien erstellen und sie verändern, die Materialien haben mehrere Eigenschaften:</value>
+    </data>
+    <data name="MaterialEditorHelper2" xml:space="preserve">
+        <value>- Der Name, damit Sie das Material erkennen können.</value>
+    </data>
+    <data name="MaterialEditorHelper3" xml:space="preserve">
+        <value>- E die Konstante der Flexibilität.</value>
+    </data>
 </root>

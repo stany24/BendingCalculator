@@ -18,4 +18,28 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="LayerEditorHelper1" xml:space="preserve">
+        <value>Dies ist der Ebenen-Editor, hier können Sie neue Ebenen erstellen und bearbeiten. Die Ebenen haben mehrere Eigenschaften:</value>
+    </data>
+    <data name="LayerEditorHelper3" xml:space="preserve">
+        <value>- Breite des Stücks auf beiden Seiten.</value>
+    </data>
+    <data name="LayerEditorHelper2" xml:space="preserve">
+        <value>- Breite des Stücks in der Mitte.</value>
+    </data>
+    <data name="LayerEditorHelper4" xml:space="preserve">
+        <value>- Höhe des Stücks in der Mitte.</value>
+    </data>
+    <data name="LayerEditorHelper5" xml:space="preserve">
+        <value>- Höhe des Stücks auf beiden Seiten.</value>
+    </data>
+    <data name="LayerEditorHelper6" xml:space="preserve">
+        <value>- Das Material, aus dem die Schicht besteht.</value>
+    </data>
+    <data name="LayerEditorHelper7" xml:space="preserve">
+        <value>Hier können Sie ein Video mit einer Demo sehen.</value>
+    </data>
+    <data name="LayerEditorHelper8" xml:space="preserve">
+        <value>Video hier</value>
+    </data>
 </root>
