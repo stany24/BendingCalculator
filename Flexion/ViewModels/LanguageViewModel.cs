@@ -19,8 +19,11 @@ public partial class MainViewModel
 {
     private void ChangeLanguage()
     {
+        #pragma warning disable CS8601 // Possible null reference assignment.
+        
         // Main window
         ResourceManager resourceManagerMain = new(typeof(MainLocalization));
+
         ModifyBinding = resourceManagerMain.GetString("Modify", new CultureInfo(Language));
         LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", new CultureInfo(Language));
         BeginBinding = resourceManagerMain.GetString("Begin", new CultureInfo(Language));
@@ -49,6 +52,8 @@ public partial class MainViewModel
         MaterialEditorHelper1Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper1", new CultureInfo(Language));
         MaterialEditorHelper2Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper2", new CultureInfo(Language));
         MaterialEditorHelper3Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper3", new CultureInfo(Language));
+        MaterialEditorHelper4Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper4", new CultureInfo(Language));
+        MaterialEditorHelper5Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper5", new CultureInfo(Language));
         
         // Layer editor
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
@@ -88,6 +93,8 @@ public partial class MainViewModel
         RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", new CultureInfo(Language));
         GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", new CultureInfo(Language));
         SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", new CultureInfo(Language));
+        
+        #pragma warning restore CS8601 // Possible null reference assignment.
     }
     
     private string _materialEditorHelper1Binding;
@@ -109,6 +116,20 @@ public partial class MainViewModel
     {
         get =>_materialEditorHelper3Binding;
         set => SetProperty(ref _materialEditorHelper3Binding, value);
+    }
+    
+    private string _materialEditorHelper4Binding;
+    public string MaterialEditorHelper4Binding
+    {
+        get =>_materialEditorHelper4Binding;
+        set => SetProperty(ref _materialEditorHelper4Binding, value);
+    }
+    
+    private string _materialEditorHelper5Binding;
+    public string MaterialEditorHelper5Binding
+    {
+        get =>_materialEditorHelper5Binding;
+        set => SetProperty(ref _materialEditorHelper5Binding, value);
     }
     
     private string _layerEditorHelper1Binding;

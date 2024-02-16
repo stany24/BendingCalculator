@@ -19,12 +19,18 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="MaterialEditorHelper1" xml:space="preserve">
-        <value>Cette fenêtre est l'éditeur de matières, elle permet de créer de nouvelles matière et de les modifier.</value>
+        <value>Cette fenêtre est l'éditeur de matières, elle permet de créer de nouvelles matière et de les modifier, les matières ont plusieurs propriétés:</value>
     </data>
-    <data name="MaterialEditorHelper2" xml:space="preserve">
+    <data name="MaterialEditorHelper4" xml:space="preserve">
         <value>Vous pouvez voir ici une vidéo avec une démo.</value>
     </data>
-    <data name="MaterialEditorHelper3" xml:space="preserve">
+    <data name="MaterialEditorHelper5" xml:space="preserve">
         <value>Vidéo ici</value>
+    </data>
+    <data name="MaterialEditorHelper2" xml:space="preserve">
+        <value>- Le nom, pour que vous reconnaisiez la matière.</value>
+    </data>
+    <data name="MaterialEditorHelper3" xml:space="preserve">
+        <value>- E la constante de flexibilité.</value>
     </data>
 </root>
