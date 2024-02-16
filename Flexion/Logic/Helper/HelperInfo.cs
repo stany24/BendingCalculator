@@ -41,9 +41,12 @@ public static class HelperInfo
     
     public static List<IHelperModule> PieceWindowModules { get; } = new()
     {
-        new HelperText("MainWindowHelper1Binding"),
-        new HelperButton("MainWindowHelper2Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
-        new HelperImage("MainWindow/test.png")
+        new HelperText("PieceEditorHelper1Binding"),
+        new HelperText("PieceEditorHelper2Binding"),
+        new HelperText("PieceEditorHelper3Binding"),
+        new HelperText("PieceEditorHelper4Binding"),
+        new HelperText("PieceEditorHelper5Binding"),
+        new HelperButton("PieceEditorHelper6Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
     public static List<IHelperModule> PieceLayerWindowModules { get; } = new()
     {

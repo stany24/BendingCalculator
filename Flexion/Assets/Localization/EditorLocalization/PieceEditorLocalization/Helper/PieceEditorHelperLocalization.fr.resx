@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="PieceEditorHelper6" xml:space="preserve">
+        <value>Vidéo ici</value>
+    </data>
+    <data name="PieceEditorHelper5" xml:space="preserve">
+        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    </data>
+    <data name="PieceEditorHelper1" xml:space="preserve">
+        <value>Cette fenêtre est l'éditeur de pièce, elle permet de créer de nouvelles pièces et de les modifier, les pièces ont plusieurs propriétés:</value>
+    </data>
+    <data name="PieceEditorHelper2" xml:space="preserve">
+        <value>- Le nom, pour que vous reconnaisiez la pièce.</value>
+    </data>
+    <data name="PieceEditorHelper3" xml:space="preserve">
+        <value>- La longueur de la pièce.</value>
+    </data>
+    <data name="PieceEditorHelper4" xml:space="preserve">
+        <value>Quand vous selectionnez qu'une seul pièce dans la listbox de droite vous pouvez voir ses couches dans la listbox de droite et vous pouvez clicker le boutton "Changer les couches" pour customiser la pièce.</value>
+    </data>
+</root>
