@@ -90,6 +90,15 @@ public partial class MainViewModel
         PieceEditorHelper4Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper4", new CultureInfo(Language));
         PieceEditorHelper5Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper5", new CultureInfo(Language));
         PieceEditorHelper6Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper6", new CultureInfo(Language));
+        PieceEditorHelper7Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper7", new CultureInfo(Language));
+        PieceEditorHelper8Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper8", new CultureInfo(Language));
+        PieceEditorHelper9Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper9", new CultureInfo(Language));
+        PieceEditorHelper10Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper10", new CultureInfo(Language));
+        PieceEditorHelper11Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper11", new CultureInfo(Language));
+        PieceEditorHelper12Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper12", new CultureInfo(Language));
+        PieceEditorHelper13Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper13", new CultureInfo(Language));
+        PieceEditorHelper14Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper14", new CultureInfo(Language));
+        PieceEditorHelper15Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper15", new CultureInfo(Language));
         
         // Help Window
         ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));
@@ -237,6 +246,69 @@ public partial class MainViewModel
     {
         get =>_pieceEditorHelper6Binding;
         set => SetProperty(ref _pieceEditorHelper6Binding, value);
+    }
+    
+    private string _pieceEditorHelper7Binding;
+    public string PieceEditorHelper7Binding
+    {
+        get =>_pieceEditorHelper7Binding;
+        set => SetProperty(ref _pieceEditorHelper7Binding, value);
+    }
+    
+    private string _pieceEditorHelper8Binding;
+    public string PieceEditorHelper8Binding
+    {
+        get =>_pieceEditorHelper8Binding;
+        set => SetProperty(ref _pieceEditorHelper8Binding, value);
+    }
+    
+    private string _pieceEditorHelper9Binding;
+    public string PieceEditorHelper9Binding
+    {
+        get =>_pieceEditorHelper9Binding;
+        set => SetProperty(ref _pieceEditorHelper9Binding, value);
+    }
+    
+    private string _pieceEditorHelper10Binding;
+    public string PieceEditorHelper10Binding
+    {
+        get =>_pieceEditorHelper10Binding;
+        set => SetProperty(ref _pieceEditorHelper10Binding, value);
+    }
+    
+    private string _pieceEditorHelper11Binding;
+    public string PieceEditorHelper11Binding
+    {
+        get =>_pieceEditorHelper11Binding;
+        set => SetProperty(ref _pieceEditorHelper11Binding, value);
+    }
+    
+    private string _pieceEditorHelper12Binding;
+    public string PieceEditorHelper12Binding
+    {
+        get =>_pieceEditorHelper12Binding;
+        set => SetProperty(ref _pieceEditorHelper12Binding, value);
+    }
+    
+    private string _pieceEditorHelper13Binding;
+    public string PieceEditorHelper13Binding
+    {
+        get =>_pieceEditorHelper13Binding;
+        set => SetProperty(ref _pieceEditorHelper13Binding, value);
+    }
+    
+    private string _pieceEditorHelper14Binding;
+    public string PieceEditorHelper14Binding
+    {
+        get =>_pieceEditorHelper14Binding;
+        set => SetProperty(ref _pieceEditorHelper14Binding, value);
+    }
+    
+    private string _pieceEditorHelper15Binding;
+    public string PieceEditorHelper15Binding
+    {
+        get =>_pieceEditorHelper15Binding;
+        set => SetProperty(ref _pieceEditorHelper15Binding, value);
     }
     
     private string _mainWindowHelper1Binding;

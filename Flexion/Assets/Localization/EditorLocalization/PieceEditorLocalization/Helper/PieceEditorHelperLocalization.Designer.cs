@@ -81,5 +81,59 @@ namespace Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization
                 return ResourceManager.GetString("PieceEditorHelper6", resourceCulture);
             }
         }
+        
+        internal static string PieceEditorHelper7 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper7", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper8 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper8", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper9 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper9", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper10 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper10", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper11 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper11", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper12 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper12", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper13 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper13", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper15 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper15", resourceCulture);
+            }
+        }
+        
+        internal static string PieceEditorHelper14 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper14", resourceCulture);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -60,6 +61,7 @@ public partial class HelperWindow : Window
                 [!ContentProperty] = new Binding(helpLink.DisplayTextBinding),
                 Command = model.OpenLink,
                 CommandParameter = helpLink.Link,
+                HorizontalAlignment = HorizontalAlignment.Center
             };
             Grid.SetColumn(link,0);
             Grid.SetRow(link,2*i);

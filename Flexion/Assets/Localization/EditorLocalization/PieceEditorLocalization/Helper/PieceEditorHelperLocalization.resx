@@ -36,4 +36,43 @@
     <data name="PieceEditorHelper6" xml:space="preserve">
         <value>Video here</value>
     </data>
+    <data name="PieceEditorHelper7" xml:space="preserve">
+        <value>This is the piece editor, here you can change the layers inside a piece.</value>
+    </data>
+    <data name="PieceEditorHelper8" xml:space="preserve">
+        <value>The left listbox contains the layers inside the piece, the right listbox contains all the layers you have created.</value>
+    </data>
+    <data name="PieceEditorHelper9" xml:space="preserve">
+        <value>You can take 4 different actions:</value>
+    </data>
+    <data name="PieceEditorHelper10" xml:space="preserve">
+        <value>- Add: will add the selected layers of the right listbox to the piece.</value>
+    </data>
+    <data name="PieceEditorHelper11" xml:space="preserve">
+        <value>- Remove: will remove the selected layers of the left listbox to the piece.</value>
+    </data>
+    <data name="PieceEditorHelper12" xml:space="preserve">
+        <value>- Move down: will move down the selected layers of the left listbox.</value>
+    </data>
+    <data name="PieceEditorHelper13" xml:space="preserve">
+        <value>- Move up: will move up the selected layers of the left listbox.</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Video here</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Video here</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Video here</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Here you can see a video with a demo.</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Here you can see a video with a demo.</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Here you can see a video with a demo.</value>
+    </data>
 </root>

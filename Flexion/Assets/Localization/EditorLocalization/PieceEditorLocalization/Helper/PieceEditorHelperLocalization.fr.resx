@@ -36,4 +36,43 @@
     <data name="PieceEditorHelper4" xml:space="preserve">
         <value>Quand vous selectionnez qu'une seul pièce dans la listbox de droite vous pouvez voir ses couches dans la listbox de droite et vous pouvez clicker le boutton "Changer les couches" pour customiser la pièce.</value>
     </data>
+    <data name="PieceEditorHelper10" xml:space="preserve">
+        <value>- Ajouter: permet d'ajouter les couches selectionnées dans la listbox de droite à la pièce.</value>
+    </data>
+    <data name="PieceEditorHelper11" xml:space="preserve">
+        <value>- Retirer: permet de retirer les couches selectionnées dans la listbox de gauche à la pièce.</value>
+    </data>
+    <data name="PieceEditorHelper12" xml:space="preserve">
+        <value>- Descendre: permet de descendre les couches selectionnées dans la listbox de gauche.</value>
+    </data>
+    <data name="PieceEditorHelper13" xml:space="preserve">
+        <value>- Monter: permet de monter les couches selectionnées dans la listbox de gauche.</value>
+    </data>
+    <data name="PieceEditorHelper7" xml:space="preserve">
+        <value>Cette fenêtre est l'éditeur de pièce, elle permet de modifier les couches contenue dans une pièce.</value>
+    </data>
+    <data name="PieceEditorHelper9" xml:space="preserve">
+        <value>Vous pouvez faire 4 actions différentes</value>
+    </data>
+    <data name="PieceEditorHelper8" xml:space="preserve">
+        <value>La listbox de gauche contient les couches dans la pièce, la listbox de droite contient toutes les couches que vous avez créer.</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Vidéo ici</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Vidéo ici</value>
+    </data>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Vidéo ici</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    </data>
+    <data name="PieceEditorHelper14" xml:space="preserve">
+        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    </data>
 </root>
