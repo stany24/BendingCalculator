@@ -57,22 +57,10 @@
     <data name="PieceEditorHelper13" xml:space="preserve">
         <value>- Move up: will move up the selected layers of the left listbox.</value>
     </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Video here</value>
-    </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Video here</value>
-    </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Video here</value>
-    </data>
     <data name="PieceEditorHelper14" xml:space="preserve">
         <value>Here you can see a video with a demo.</value>
     </data>
-    <data name="PieceEditorHelper14" xml:space="preserve">
-        <value>Here you can see a video with a demo.</value>
-    </data>
-    <data name="PieceEditorHelper14" xml:space="preserve">
-        <value>Here you can see a video with a demo.</value>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Video here</value>
     </data>
 </root>

@@ -123,16 +123,16 @@ namespace Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization
                 return ResourceManager.GetString("PieceEditorHelper13", resourceCulture);
             }
         }
+                
+        internal static string PieceEditorHelper14 {
+            get {
+                return ResourceManager.GetString("PieceEditorHelper14", resourceCulture);
+            }
+        }
         
         internal static string PieceEditorHelper15 {
             get {
                 return ResourceManager.GetString("PieceEditorHelper15", resourceCulture);
-            }
-        }
-        
-        internal static string PieceEditorHelper14 {
-            get {
-                return ResourceManager.GetString("PieceEditorHelper14", resourceCulture);
             }
         }
     }

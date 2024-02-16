@@ -57,22 +57,10 @@
     <data name="PieceEditorHelper8" xml:space="preserve">
         <value>La listbox de gauche contient les couches dans la pièce, la listbox de droite contient toutes les couches que vous avez créer.</value>
     </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Vidéo ici</value>
-    </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Vidéo ici</value>
-    </data>
-    <data name="PieceEditorHelper15" xml:space="preserve">
-        <value>Vidéo ici</value>
-    </data>
     <data name="PieceEditorHelper14" xml:space="preserve">
         <value>Vous pouvez voir ici une vidéo avec une démo.</value>
     </data>
-    <data name="PieceEditorHelper14" xml:space="preserve">
-        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
-    </data>
-    <data name="PieceEditorHelper14" xml:space="preserve">
-        <value>Vous pouvez voir ici une vidéo avec une démo.</value>
+    <data name="PieceEditorHelper15" xml:space="preserve">
+        <value>Vidéo ici</value>
     </data>
 </root>

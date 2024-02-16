@@ -88,11 +88,7 @@ public partial class MainViewModel : ObservableObject
         {
             Values = new List<ObservablePoint>
             {
-                new(0, 4),
-                new(1, 3),
-                new(3, 8),
-                new(18, 6),
-                new(20, 12)
+                new(0, 0)
             }
         }
     };
