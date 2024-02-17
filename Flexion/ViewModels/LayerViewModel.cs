@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Flexion.Database.Actions;
 using Flexion.Logic;
 using Flexion.Logic.Preview;
-using ImageMagick;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 
 namespace Flexion.ViewModels;
@@ -41,7 +39,7 @@ public partial class MainViewModel
     private Bitmap? _imagePreviewLayer;
     public Bitmap? ImagePreviewLayer { get => _imagePreviewLayer; set => SetProperty(ref _imagePreviewLayer,value); }
 
-    private void ChangePreview(List<Layer> selectedLayers,ref Bitmap? bitmap)
+    private void ChangePreview(IReadOnlyList<Layer> selectedLayers,ref Bitmap? bitmap)
     {
         using MemoryStream memStream = new();
         if (selectedLayers.Count > 0)
@@ -143,7 +141,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.WidthOnSides = WidthSide;
+            selectedLayer.WidthOnSides = WidthSide/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -152,7 +150,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.WidthAtCenter = WidthCenter;
+            selectedLayer.WidthAtCenter = WidthCenter/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -161,7 +159,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.HeightOnSides = HeightSide;
+            selectedLayer.HeightOnSides = HeightSide/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -170,7 +168,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.HeightAtCenter = HeightCenter;
+            selectedLayer.HeightAtCenter = HeightCenter/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
