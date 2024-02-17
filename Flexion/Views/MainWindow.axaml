@@ -127,12 +127,13 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
-            <Image 
-                Name="LayerPreview"
+            <Canvas 
+                Name="LayerPreviewCanvas"
                 Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Source="{Binding ImagePreviewLayerMainWindow}"></Image>
+                Grid.RowSpan="0"
+                Grid.Column="4"
+                Width="400">
+            </Canvas>
         </Grid>
         <Grid 
             Name="GridMaterial"

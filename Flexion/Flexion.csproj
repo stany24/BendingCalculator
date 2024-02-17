@@ -467,7 +467,6 @@
 
     <ItemGroup>
       <Folder Include="Assets\Help\MainWindow\" />
-      <Folder Include="Assets\Image\" />
       <Folder Include="Database\" />
     </ItemGroup>
 

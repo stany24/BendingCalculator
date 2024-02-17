@@ -28,6 +28,7 @@ public partial class MainViewModel : ObservableObject
     public decimal Force { get; set; } = 100;
 
     public EventHandler<EventArgs>? ReloadLanguage { get; set; }
+    public EventHandler<EventArgs>? UpdatePreviewMainWindow { get; set; }
 
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
 
@@ -77,10 +78,7 @@ public partial class MainViewModel : ObservableObject
 
     private void Previews()
     {
-        /*ChangePreview(SelectedLayersMainWindow.ToList(),ref _imagePreviewLayerMainWindow);
-        ChangePreview(SelectedLayers.ToList(),ref _imagePreviewLayer);
-        SelectedLayersMainWindow.CollectionChanged += (_, _) => ChangePreview(SelectedLayersMainWindow.ToList(),ref _imagePreviewLayerMainWindow);
-        SelectedLayers.CollectionChanged += (_, _) => ChangePreview(SelectedLayers.ToList(),ref _imagePreviewLayer);*/
+        SelectedLayersMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindow?.Invoke(null, EventArgs.Empty);
     }
 
     public void CloseAllWindow()

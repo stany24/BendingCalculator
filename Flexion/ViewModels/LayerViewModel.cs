@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using Avalonia.Platform;
+using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Flexion.Database.Actions;
 using Flexion.Logic;
-using Flexion.Logic.Preview;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 
 namespace Flexion.ViewModels;
@@ -33,25 +31,8 @@ public partial class MainViewModel
     
     private double _widthSide;
 
-    private Bitmap? _imagePreviewLayerMainWindow;
-    public Bitmap? ImagePreviewLayerMainWindow { get => _imagePreviewLayerMainWindow; set => SetProperty(ref _imagePreviewLayerMainWindow,value); }
-    
-    private Bitmap? _imagePreviewLayer;
-    public Bitmap? ImagePreviewLayer { get => _imagePreviewLayer; set => SetProperty(ref _imagePreviewLayer,value); }
-
-    private void ChangePreview(IReadOnlyList<Layer> selectedLayers,ref Bitmap? bitmap)
+    private static void ChangePreview(IReadOnlyList<Layer> selectedLayers,ref Bitmap? bitmap)
     {
-        using MemoryStream memStream = new();
-        if (selectedLayers.Count > 0)
-        {
-            PreviewLayer.GetPreview(selectedLayers[0]).Write(memStream);
-            bitmap = new Bitmap(memStream);
-        }
-        else
-        {
-            Uri resourceUri = new("avares://Flexion/Assets/Image/NoPreview.png");
-            bitmap = new Bitmap(AssetLoader.Open(resourceUri));
-        }
     }
 
     public double? WidthSide
