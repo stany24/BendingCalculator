@@ -117,7 +117,7 @@ public partial class MainViewModel : ObservableObject
             if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
             IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateFlexion((int)Force,gap);
-            List<ObservablePoint> points = values.Select((t, i) => new ObservablePoint(i, t)).ToList();
+            List<ObservablePoint> points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphFlexion[0].Values = points;
         });
     }
