@@ -26,12 +26,12 @@ public partial class MainViewModel
 
     private double _pieceLength = 1;
 
-    public double PieceLength
+    public double? PieceLength
     {
         get => _pieceLength;
         set
         {
-            _pieceLength = value;
+            _pieceLength = value ?? _pieceLength;
             PieceLengthChanged();
         }
     }
@@ -78,7 +78,7 @@ public partial class MainViewModel
     {
         foreach (Piece piece in SelectedPieces)
         {
-            piece.Length = PieceLength/1000;
+            piece.Length = _pieceLength/1000;
         }
         DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
     }
@@ -129,7 +129,7 @@ public partial class MainViewModel
 
     public void CreateNewPiece()
     {
-        Piece piece = new(PieceLength/1000, "nouveau", 69e9);
+        Piece piece = new(_pieceLength/1000, "nouveau");
         DataBaseCreator.NewPiece(_connection,piece);
     }
 }

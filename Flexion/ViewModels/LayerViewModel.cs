@@ -54,48 +54,48 @@ public partial class MainViewModel
         }
     }
 
-    public double WidthSide
+    public double? WidthSide
     {
         get => _widthSide;
         set
         {
-            _widthSide = value;
+            _widthSide = value ?? _widthSide;
             ChangeWidthSide();
         }
     }
     
     private double _widthCenter;
 
-    public double WidthCenter
+    public double? WidthCenter
     {
         get => _widthCenter;
         set
         {
-            _widthCenter = value;
+            _widthCenter = value ?? _widthCenter;
             ChangeWidthCenter();
         }
     }
     
     private double _heightSide;
 
-    public double HeightSide
+    public double? HeightSide
     {
         get => _heightSide;
         set
         {
-            _heightSide = value;
+            _heightSide = value ?? _heightSide;
             ChangeHeightSide();
         }
     }
     
     private double _heightCenter;
 
-    public double HeightCenter
+    public double? HeightCenter
     {
         get => _heightCenter;
         set
         {
-            _heightCenter = value;
+            _heightCenter = value ?? _heightCenter;
             ChangeHeightCenter();
         }
     }
@@ -141,7 +141,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.WidthOnSides = WidthSide/1000;
+            selectedLayer.WidthOnSides = _widthSide/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -150,7 +150,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.WidthAtCenter = WidthCenter/1000;
+            selectedLayer.WidthAtCenter = _widthCenter/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -159,7 +159,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.HeightOnSides = HeightSide/1000;
+            selectedLayer.HeightOnSides = _heightSide/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -168,7 +168,7 @@ public partial class MainViewModel
     {
         foreach (Layer selectedLayer in SelectedLayers)
         {
-            selectedLayer.HeightAtCenter = HeightCenter/1000;
+            selectedLayer.HeightAtCenter = _heightCenter/1000;
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
@@ -197,7 +197,7 @@ public partial class MainViewModel
 
     public void CreateNewLayer()
     {
-        Layer layer = new(SelectedMaterial , WidthCenter/1000,WidthSide/1000, HeightCenter/1000, HeightSide/1000);
+        Layer layer = new(SelectedMaterial , _widthCenter/1000,_widthSide/1000, _heightCenter/1000, _heightSide/1000);
         DataBaseCreator.NewLayer(_connection,layer);
     }
 }

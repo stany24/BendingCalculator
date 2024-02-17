@@ -8,12 +8,11 @@ public static class DataBaseCreator
     public static void NewPiece(SQLiteConnection connection,Piece piece)
     {
         using SQLiteCommand cmd = new(
-            @"INSERT INTO Piece (Name,Length,IsRemoved,Eref) 
-                                VALUES (@Name, @Length, @IsRemoved,@ERef);SELECT LAST_INSERT_ROWID();", connection);
+            @"INSERT INTO Piece (Name,Length,IsRemoved) 
+                                VALUES (@Name, @Length, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
         cmd.Parameters.AddWithValue("@Name",piece.Name);
         cmd.Parameters.AddWithValue("@Length",piece.Length);
         cmd.Parameters.AddWithValue("@IsRemoved",0);
-        cmd.Parameters.AddWithValue("@ERef",piece.ERef);
         piece.PieceId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
