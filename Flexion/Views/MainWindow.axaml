@@ -14,7 +14,7 @@
         Name="MainGrid"
         Margin="5"
         ColumnDefinitions="*,10,*,10,*,10,*,10,Auto"
-        RowDefinitions="1*,10,3*,10,Auto">
+        RowDefinitions="*,10,*,10,Auto">
         <Grid 
             Name="GridForce"
             Margin="5"
@@ -94,7 +94,7 @@
         <Grid 
             Name="GridLayer"
             ColumnDefinitions="Auto,10,Auto,*"
-            RowDefinitions="Auto,10,*"
+            RowDefinitions="Auto,10,*,10,*"
             MinHeight="150"
             Column="4"
             Row="0">
@@ -118,7 +118,8 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 MinWidth="200"
-                ItemsSource="{Binding Layers}">
+                ItemsSource="{Binding Layers}"
+                SelectedItems="{Binding SelectedLayersMainWindow}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -126,6 +127,12 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
+            <Image 
+                Name="LayerPreview"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Source="{Binding ImagePreviewLayer}"></Image>
         </Grid>
         <Grid 
             Name="GridMaterial"

@@ -57,6 +57,7 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel(SQLiteConnection connection)
     {
+        ChangePreviewLayer();
         OpenLink = new OpenLinkCommand();
         Languages = new ObservableCollection<string>{"fr","en","de"};
         Language = SettingManager.GetLanguage();
@@ -64,6 +65,7 @@ public partial class MainViewModel : ObservableObject
         SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
+        SelectedLayersMainWindow.CollectionChanged += (_, _) => ChangePreviewLayer();
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();

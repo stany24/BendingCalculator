@@ -1,8 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Flexion.Database.Actions;
 using Flexion.Logic;
+using Flexion.Logic.Preview;
+using ImageMagick;
+using Bitmap = Avalonia.Media.Imaging.Bitmap;
 
 namespace Flexion.ViewModels;
 
@@ -19,8 +26,31 @@ public partial class MainViewModel
         get => _selectedLayers;
         set => SetProperty(ref _selectedLayers, value);
     }
-
+    
+    private ObservableCollection<Layer> _selectedLayersMainWindow = new();
+    public ObservableCollection<Layer> SelectedLayersMainWindow { 
+        get => _selectedLayersMainWindow;
+        set => SetProperty(ref _selectedLayersMainWindow, value);
+    }
+    
     private double _widthSide;
+
+    public Bitmap? ImagePreviewLayer { get; set; }
+
+    private void ChangePreviewLayer()
+    {
+        using MemoryStream memStream = new();
+        if (SelectedLayersMainWindow.Count > 0)
+        {
+            PreviewLayer.GetPreview(SelectedLayersMainWindow[0]).Write(memStream);
+            ImagePreviewLayer = new Bitmap(memStream);
+        }
+        else
+        {
+            Uri resourceUri = new("avares://Flexion/Assets/Image/NoPreview.png");
+            ImagePreviewLayer = new Bitmap(AssetLoader.Open(resourceUri));
+        }
+    }
 
     public double WidthSide
     {
