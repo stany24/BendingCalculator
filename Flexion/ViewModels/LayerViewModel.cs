@@ -35,20 +35,24 @@ public partial class MainViewModel
     
     private double _widthSide;
 
-    public Bitmap? ImagePreviewLayer { get; set; }
+    private Bitmap? _imagePreviewLayerMainWindow;
+    public Bitmap? ImagePreviewLayerMainWindow { get => _imagePreviewLayerMainWindow; set => SetProperty(ref _imagePreviewLayerMainWindow,value); }
+    
+    private Bitmap? _imagePreviewLayer;
+    public Bitmap? ImagePreviewLayer { get => _imagePreviewLayer; set => SetProperty(ref _imagePreviewLayer,value); }
 
-    private void ChangePreviewLayer()
+    private void ChangePreview(List<Layer> selectedLayers,ref Bitmap? bitmap)
     {
         using MemoryStream memStream = new();
-        if (SelectedLayersMainWindow.Count > 0)
+        if (selectedLayers.Count > 0)
         {
-            PreviewLayer.GetPreview(SelectedLayersMainWindow[0]).Write(memStream);
-            ImagePreviewLayer = new Bitmap(memStream);
+            PreviewLayer.GetPreview(selectedLayers[0]).Write(memStream);
+            bitmap = new Bitmap(memStream);
         }
         else
         {
             Uri resourceUri = new("avares://Flexion/Assets/Image/NoPreview.png");
-            ImagePreviewLayer = new Bitmap(AssetLoader.Open(resourceUri));
+            bitmap = new Bitmap(AssetLoader.Open(resourceUri));
         }
     }
 

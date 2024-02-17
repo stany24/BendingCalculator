@@ -132,7 +132,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Source="{Binding ImagePreviewLayer}"></Image>
+                Source="{Binding ImagePreviewLayerMainWindow}"></Image>
         </Grid>
         <Grid 
             Name="GridMaterial"

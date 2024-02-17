@@ -12,7 +12,7 @@
     <Grid 
         Name="Grid"
         RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*"
-        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto"
         Margin="5">
         <TextBlock 
             Name="LblWidthCenter"
@@ -118,5 +118,13 @@
             Content="{Binding HelpBinding}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"></Button>
+        <Image 
+            Name="LayerPreview"
+            Grid.Row="0"
+            Grid.RowSpan="12"
+            Grid.Column="8"
+            Width="400"
+            Stretch="Uniform"
+            Source="{Binding ImagePreviewLayerMainWindow}"></Image>
     </Grid>
 </Window>
