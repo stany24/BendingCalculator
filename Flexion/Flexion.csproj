@@ -204,7 +204,6 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
-        <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.6.0" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
     </ItemGroup>
 

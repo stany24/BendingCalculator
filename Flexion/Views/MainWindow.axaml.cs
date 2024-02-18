@@ -1,9 +1,9 @@
 using System.Globalization;
 using System.Resources;
 using Avalonia.Controls.Shapes;
-using Avalonia.Media;
 using Flexion.Assets.Localization.MainLocalization;
 using Flexion.Logic.Helper;
+using Flexion.Logic.Preview;
 using Flexion.ViewModels;
 using LiveChartsCore.SkiaSharpView;
 
@@ -24,14 +24,19 @@ public partial class Main : WindowWithHelp
 
     private void UpdatePreviewMainWindow()
     {
-        LayerPreviewCanvas.Background=Brushes.Yellow;
+        if((DataContext as MainViewModel).SelectedLayersMainWindow.Count < 1){return;}
         LayerPreviewCanvas.Children.Clear();
-        LayerPreviewCanvas.Children.Add(new Rectangle()
+        double width = Width-140;//margin
+        width /= 4;
+        width -= 65;
+        double height = Height - 70;//margin
+        height /= 2;
+        height -= 60;
+        height /= 2;
+        foreach (Shape shape in PreviewLayer.GetPreview((DataContext as MainViewModel).SelectedLayersMainWindow[0],width,height))
         {
-            Fill = Brushes.Blue,
-            Width = 50,
-            Height = 50
-        });
+            LayerPreviewCanvas.Children.Add(shape);
+        }
     }
 
     private void CloseAllWindows()

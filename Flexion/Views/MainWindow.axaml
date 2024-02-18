@@ -8,7 +8,9 @@
         x:Class="Flexion.Views.Main"
         x:DataType="viewModels:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Calculateur de Flexion">
+        Title="Calculateur de Flexion"
+        MinWidth="897"
+        MinHeight="355">
     
     <Grid
         Name="MainGrid"
@@ -127,15 +129,33 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
-            <Canvas 
-                Name="LayerPreviewCanvas"
+            <Grid
+                Name="GridLayerPreview"
                 Grid.Row="4"
-                Grid.RowSpan="0"
-                Grid.Column="4"
-                Width="400">
-            </Canvas>
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                ColumnDefinitions="Auto,10,*"
+                RowDefinitions="*,10,2*">
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Coté:"></TextBlock>
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Dessus:"></TextBlock>
+                <Canvas 
+                    Name="LayerPreviewCanvas"
+                    Background="White"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Grid.Column="2">
+                </Canvas>
+            </Grid>
         </Grid>
-        <Grid 
+        <Grid
             Name="GridMaterial"
             ColumnDefinitions="Auto,10,Auto,*"
             RowDefinitions="Auto,10,*"

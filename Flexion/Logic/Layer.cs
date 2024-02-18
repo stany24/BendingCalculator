@@ -97,8 +97,8 @@ public class Layer:ObservableObject
     public sealed override string ToString()
     {
         return Material != null 
-            ? $"{Material.Name} {Assets.Localization.Logic.LogicLocalization.Center}(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}(mm)={WidthOnSides*1000}x{HeightOnSides*1000}" 
-            : $"{Assets.Localization.Logic.LogicLocalization.No} {Assets.Localization.Logic.LogicLocalization.MaterialWithColon} {Assets.Localization.Logic.LogicLocalization.Center}(mm)={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}(mm)={WidthOnSides*1000}x{HeightOnSides*1000}";
+            ? $"{Material.Name} {Assets.Localization.Logic.LogicLocalization.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}" 
+            : $"{Assets.Localization.Logic.LogicLocalization.No} {Assets.Localization.Logic.LogicLocalization.MaterialWithColon} {Assets.Localization.Logic.LogicLocalization.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}";
     }
 
     public double[] Base(double longueur, double eRef, double[] xs)
