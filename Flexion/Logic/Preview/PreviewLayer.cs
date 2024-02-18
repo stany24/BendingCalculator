@@ -7,15 +7,17 @@ namespace Flexion.Logic.Preview;
 
 public static class PreviewLayer
 {
-    public static List<Shape> GetPreview(Layer layer,double width,double height)
+    public static List<Shape> GetPreviewLayer(Layer layer,double width,double height)
     {
-        List<Shape> shapes = new();
-        shapes.Add(GetHourglass(10,10,width,height/3,layer.HeightAtCenter/layer.HeightOnSides));
-        shapes.Add(GetHourglass(10,10+height/3,width,height,layer.WidthAtCenter/layer.WidthOnSides));
+        List<Shape> shapes = new()
+        {
+            GetHourGlass(10, 10, width, height / 3, layer.HeightAtCenter / layer.HeightOnSides),
+            GetHourGlass(10, 10 + height / 3, width, height, layer.WidthAtCenter / layer.WidthOnSides)
+        };
         return shapes;
     }
 
-    private static Path GetHourglass(double x,double y,double width,double height,double proportionCenterOverSides)
+    private static Path GetHourGlass(double x,double y,double width,double height,double proportionCenterOverSides)
     {
         int minusCenter = 0;
         int minusSides = 0;

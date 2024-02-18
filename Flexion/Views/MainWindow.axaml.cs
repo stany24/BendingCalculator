@@ -17,23 +17,39 @@ public partial class Main : WindowWithHelp
         InitializeComponent();
         Closing += (_, _) => CloseAllWindows();
         model.ReloadLanguage += (_, _) => ReloadLanguage();
-        model.UpdatePreviewMainWindow += (_,_) => UpdatePreviewMainWindow();
+        model.UpdatePreviewMainWindowLayer += (_,_) => UpdatePreviewLayer();
+        model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPiece();
+        Resized += (_,_) => UpdatePreviewMainWindow();
         ReloadLanguage();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
     }
 
     private void UpdatePreviewMainWindow()
     {
-        if((DataContext as MainViewModel).SelectedLayersMainWindow.Count < 1){return;}
+        UpdatePreviewLayer();
+        UpdatePreviewPiece();
+    }
+
+    private void UpdatePreviewLayer()
+    {
+        if(DataContext is not MainViewModel model){return;}
+        if(model.SelectedLayersMainWindow.Count < 1){return;}
         LayerPreviewCanvas.Children.Clear();
-        double width = Width-140;//margin
-        width /= 4;
-        width -= 65;
-        double height = Height - 70;//margin
-        height /= 2;
-        height -= 60;
-        height /= 2;
-        foreach (Shape shape in PreviewLayer.GetPreview((DataContext as MainViewModel).SelectedLayersMainWindow[0],width,height))
+        double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth-10;
+        double height = GridLayerPreview.RowDefinitions[2].ActualHeight-10;
+        foreach (Shape shape in PreviewLayer.GetPreviewLayer(model.SelectedLayersMainWindow[0],width,height))
+        {
+            LayerPreviewCanvas.Children.Add(shape);
+        }
+    }
+    private void UpdatePreviewPiece()
+    {
+        if(DataContext is not MainViewModel model){return;}
+        if(model.SelectedLayersMainWindow.Count < 1){return;}
+        LayerPreviewCanvas.Children.Clear();
+        double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth-10;
+        double height = GridLayerPreview.RowDefinitions[2].ActualHeight+GridLayerPreview.RowDefinitions[3].ActualHeight+GridLayerPreview.RowDefinitions[4].ActualHeight-10;
+        foreach (Shape shape in PreviewLayer.GetPreviewLayer(model.SelectedLayersMainWindow[0],width,height))
         {
             LayerPreviewCanvas.Children.Add(shape);
         }
