@@ -19,7 +19,7 @@ public partial class Main : WindowWithHelp
         model.ReloadLanguage += (_, _) => ReloadLanguage();
         model.UpdatePreviewMainWindowLayer += (_,_) => UpdatePreviewLayer();
         model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPiece();
-        Resized += (_,_) => UpdatePreviewMainWindow();
+        SizeChanged += (_,_) => UpdatePreviewMainWindow();
         ReloadLanguage();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
     }

@@ -81,7 +81,7 @@ public static class Preview
         Path path = new()
         {
             Fill = Brushes.Gray,
-            Data = new PathGeometry()
+            Data = new PathGeometry
             {
                 Figures = new PathFigures
                 {
@@ -90,23 +90,23 @@ public static class Preview
                         StartPoint = new Point(x,y+minusSides),
                         IsClosed = true,
                         IsFilled = true,
-                        Segments = new PathSegments()
+                        Segments = new PathSegments
                         {
-                            new QuadraticBezierSegment()
+                            new QuadraticBezierSegment
                             {
                                 Point1 = new Point(width/2,y+minusCenter),
                                 Point2 = new Point(width,y+minusSides)
                             },
-                            new LineSegment()
+                            new LineSegment
                             {
                                 Point = new Point(width,height-minusSides)
                             },
-                            new QuadraticBezierSegment()
+                            new QuadraticBezierSegment
                             {
                                 Point1 = new Point(width/2,height-minusCenter),
                                 Point2 = new Point(x,height-minusSides)
                             },
-                            new LineSegment()
+                            new LineSegment
                             {
                                 Point = new Point(x,y+minusSides)
                             },

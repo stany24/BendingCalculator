@@ -9,13 +9,13 @@
         x:DataType="viewModels:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Calculateur de Flexion"
-        MinWidth="897"
+        MinWidth="1000"
         MinHeight="355">
     
     <Grid
         Name="MainGrid"
         Margin="5"
-        ColumnDefinitions="Auto,10,*,10,*,10,*,10,Auto"
+        ColumnDefinitions="Auto,10,3*,10,3*,10,2*"
         RowDefinitions="*,10,*,10,Auto">
         <Grid 
             Name="GridForce"
@@ -35,13 +35,14 @@
                 Name="NudForce"
                 Value="{Binding Force}"
                 Minimum="0.1"
-                Grid.Column="2"
-                Grid.Row="0"></NumericUpDown>
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="3"></NumericUpDown>
             <Button
                 Name="BtnForce"
                 Content="{Binding ModifyBinding}"
-                Grid.Row="2"
-                Grid.Column="0"
+                Grid.Row="0"
+                Grid.Column="2"
                 Command="{Binding OpenForceEditor}"
                 CommandParameter="{Binding #NudForce}"></Button>
             <TextBlock 
@@ -183,7 +184,7 @@
         <Grid
             Name="GridMaterial"
             ColumnDefinitions="Auto,10,Auto,*"
-            RowDefinitions="Auto,10,*"
+            RowDefinitions="Auto,10,*,Auto"
             MinHeight="150"
             Column="6"
             Row="0">
@@ -199,6 +200,13 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenMaterialEditor}"></Button>
+            <Button 
+                Name="HelpButton"
+                Grid.Row="0"
+                Grid.Column="3"
+                Content="{Binding HelpBinding}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"></Button>
             <ListBox
                 Name="LbxMaterial"
                 Grid.Row="2"
@@ -223,23 +231,16 @@
             VerticalAlignment="Stretch"
             Grid.Column="0"
             Grid.Row="2"
-            Grid.ColumnSpan="9">
+            Grid.ColumnSpan="7">
         </lvc:CartesianChart>
         <Button
             Name="BtnStart"
             Grid.Row="4"
             Grid.Column="0"
-            Grid.ColumnSpan="9"
+            Grid.ColumnSpan="7"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
             Content="{Binding BeginBinding}"
             Command="{Binding CalculateFlexion}"></Button>
-        <Button 
-            Name="HelpButton"
-            Grid.Row="0"
-            Grid.Column="8"
-            Content="{Binding HelpBinding}"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"></Button>
     </Grid>
 </Window>
