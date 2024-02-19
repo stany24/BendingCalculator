@@ -15,7 +15,7 @@
     <Grid
         Name="MainGrid"
         Margin="5"
-        ColumnDefinitions="*,10,*,10,*,10,*,10,Auto"
+        ColumnDefinitions="Auto,10,*,10,*,10,*,10,Auto"
         RowDefinitions="*,10,*,10,Auto">
         <Grid 
             Name="GridForce"
@@ -59,7 +59,7 @@
         <Grid 
             Name="GridPiece"
             ColumnDefinitions="Auto,10,Auto,*"
-            RowDefinitions="Auto,10,*"
+            RowDefinitions="Auto,10,*,10,*"
             MinHeight="150"
             Column="2"
             Row="0">
@@ -92,6 +92,31 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
+            <Grid
+                Name="GridPiecePreview"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                ColumnDefinitions="Auto,10,*"
+                RowDefinitions="*,10,2*">
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Coté:"></TextBlock>
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Dessus:"></TextBlock>
+                <Canvas 
+                    Name="PiecePreviewCanvas"
+                    Background="White"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Grid.Column="2">
+                </Canvas>
+            </Grid>
         </Grid>
         <Grid 
             Name="GridLayer"
