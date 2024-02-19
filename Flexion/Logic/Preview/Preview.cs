@@ -7,15 +7,16 @@ namespace Flexion.Logic.Preview;
 
 public static class Preview
 {
-    private static double margin = 10;
+    private const double Margin = 10;
+
     public static List<Shape> GetPreviewLayer(Layer layer,double width,double height)
     {
-        width -= 2*margin;
-        height -= 2*margin;
+        width -= 2*Margin;
+        height -= 3*Margin;
         List<Shape> shapes = new()
         {
-            GetHourGlass(margin, margin, width, height / 3, layer.HeightAtCenter / layer.HeightOnSides),
-            GetHourGlass(margin, margin + height / 3, width, height, layer.WidthAtCenter / layer.WidthOnSides)
+            GetHourGlass(Margin, Margin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
+            GetHourGlass(Margin, 2*Margin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
         };
         return shapes;
     }
@@ -41,10 +42,10 @@ public static class Preview
         {
             double pieceWidth = width * (piece.Layers[i - 1].WidthOnSides / maxWidth);
             double horizontalMargin = (width - pieceWidth) / 2;
-            double pieceHeight = (height - margin*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
+            double pieceHeight = (height - Margin*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
             shapes.Add(GetRectangle(
-                margin+horizontalMargin,
-                margin*i+heightOfPiecesBefore,
+                Margin+horizontalMargin,
+                Margin*i+heightOfPiecesBefore,
                 pieceWidth,
                 pieceHeight));
             heightOfPiecesBefore += pieceHeight;
@@ -96,13 +97,13 @@ public static class Preview
     {
         int minusCenter = 0;
         int minusSides = 0;
-        if (proportionCenterOverSides < 1)
+        if (proportionCenterOverSides > 1)
         {
-            minusSides = (int)((height-height * proportionCenterOverSides)/2);
+            minusSides = (int)((height - height/proportionCenterOverSides)/2);
         }
         else
         {
-            minusCenter = (int)((height-height / proportionCenterOverSides)/2);
+            minusCenter = (int)((height - height*proportionCenterOverSides)/2);
         }
         Path path = new()
         {
@@ -120,17 +121,17 @@ public static class Preview
                         {
                             new QuadraticBezierSegment
                             {
-                                Point1 = new Point(width/2,y+minusCenter),
-                                Point2 = new Point(width,y+minusSides)
+                                Point1 = new Point(x+width/2,y+minusCenter),
+                                Point2 = new Point(x+width,y+minusSides)
                             },
                             new LineSegment
                             {
-                                Point = new Point(width,height-minusSides)
+                                Point = new Point(x+width,y+height-minusSides)
                             },
                             new QuadraticBezierSegment
                             {
-                                Point1 = new Point(width/2,height-minusCenter),
-                                Point2 = new Point(x,height-minusSides)
+                                Point1 = new Point(x+width/2,y+height-minusCenter),
+                                Point2 = new Point(x,y+height-minusSides)
                             },
                             new LineSegment
                             {
