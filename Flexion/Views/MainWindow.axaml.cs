@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Resources;
 using Avalonia.Controls.Shapes;
@@ -48,7 +49,7 @@ public partial class Main : WindowWithHelp
         if(model.SelectedPiecesMainWindow.Count < 1){return;}
         PiecePreviewCanvas.Children.Clear();
         double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth-10;
-        double height = GridPiecePreview.RowDefinitions[0].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight;
+        double height = GridPiecePreview.RowDefinitions[0].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight-10;
         foreach (Shape shape in Preview.GetPreviewPiece(model.SelectedPiecesMainWindow[0],width,height))
         {
             PiecePreviewCanvas.Children.Add(shape);

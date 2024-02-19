@@ -9,13 +9,13 @@
         x:DataType="viewModels:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Calculateur de Flexion"
-        MinWidth="1000"
+        MinWidth="802"
         MinHeight="355">
     
     <Grid
         Name="MainGrid"
         Margin="5"
-        ColumnDefinitions="Auto,10,3*,10,3*,10,2*"
+        ColumnDefinitions="Auto,10,*,10,*,10,Auto"
         RowDefinitions="*,10,*,10,Auto">
         <Grid 
             Name="GridForce"

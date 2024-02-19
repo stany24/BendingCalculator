@@ -19,10 +19,27 @@ public static class Preview
 
     public static List<Shape> GetPreviewPiece(Piece piece,double width,double height)
     {
-        List<Shape> shapes = new()
+        double maxWidth = 0;
+        double totalHeight = 0;
+        foreach (Layer layer in piece.Layers)
         {
-            GetRectangle(10,10,width,height)
-        };
+            totalHeight += layer.HeightOnSides;
+            if (layer.WidthOnSides > maxWidth)
+            {
+                maxWidth = layer.WidthOnSides;
+            }
+        }
+
+        List<Shape> shapes = new();
+        for (int i = 1; i <= piece.Layers.Count; i++)
+        {
+            double pieceHeight = (height - 10*(piece.Layers.Count-1)) / piece.Layers.Count ;
+            shapes.Add(GetRectangle(
+                10,
+                10*i+pieceHeight*(i-1),
+                width,
+                pieceHeight));
+        }
         return shapes;
     }
 
@@ -48,11 +65,11 @@ public static class Preview
                             },
                             new LineSegment
                             {
-                                Point = new Point(width,height)
+                                Point = new Point(width,y+height)
                             },
                             new LineSegment
                             {
-                                Point = new Point(x,height)
+                                Point = new Point(x,y+height)
                             },
                             new LineSegment
                             {
