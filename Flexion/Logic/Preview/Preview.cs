@@ -31,14 +31,16 @@ public static class Preview
         }
 
         List<Shape> shapes = new();
+        double heightOfPiecesBefore = 0;
         for (int i = 1; i <= piece.Layers.Count; i++)
         {
-            double pieceHeight = (height - 10*(piece.Layers.Count-1)) / piece.Layers.Count ;
+            double pieceHeight = (height - 10*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
             shapes.Add(GetRectangle(
                 10,
-                10*i+pieceHeight*(i-1),
+                10*i+heightOfPiecesBefore,
                 width,
                 pieceHeight));
+            heightOfPiecesBefore += pieceHeight;
         }
         return shapes;
     }
