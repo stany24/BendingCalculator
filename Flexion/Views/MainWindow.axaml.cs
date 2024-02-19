@@ -36,8 +36,8 @@ public partial class Main : WindowWithHelp
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedLayersMainWindow.Count < 1){return;}
         LayerPreviewCanvas.Children.Clear();
-        double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth-10;
-        double height = GridLayerPreview.RowDefinitions[0].ActualHeight+GridLayerPreview.RowDefinitions[2].ActualHeight;
+        double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth;
+        double height = GridLayerPreview.RowDefinitions[0].ActualHeight+GridLayerPreview.RowDefinitions[1].ActualHeight+GridLayerPreview.RowDefinitions[2].ActualHeight;
         foreach (Shape shape in Preview.GetPreviewLayer(model.SelectedLayersMainWindow[0],width,height))
         {
             LayerPreviewCanvas.Children.Add(shape);
@@ -48,8 +48,8 @@ public partial class Main : WindowWithHelp
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedPiecesMainWindow.Count < 1){return;}
         PiecePreviewCanvas.Children.Clear();
-        double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth-10;
-        double height = GridPiecePreview.RowDefinitions[0].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight-10;
+        double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth;
+        double height = GridPiecePreview.RowDefinitions[0].ActualHeight + GridPiecePreview.RowDefinitions[1].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight;
         foreach (Shape shape in Preview.GetPreviewPiece(model.SelectedPiecesMainWindow[0],width,height))
         {
             PiecePreviewCanvas.Children.Add(shape);

@@ -7,18 +7,23 @@ namespace Flexion.Logic.Preview;
 
 public static class Preview
 {
+    private static double margin = 10;
     public static List<Shape> GetPreviewLayer(Layer layer,double width,double height)
     {
+        width -= 2*margin;
+        height -= 2*margin;
         List<Shape> shapes = new()
         {
-            GetHourGlass(10, 10, width, height / 3, layer.HeightAtCenter / layer.HeightOnSides),
-            GetHourGlass(10, 10 + height / 3, width, height, layer.WidthAtCenter / layer.WidthOnSides)
+            GetHourGlass(margin, margin, width, height / 3, layer.HeightAtCenter / layer.HeightOnSides),
+            GetHourGlass(margin, margin + height / 3, width, height, layer.WidthAtCenter / layer.WidthOnSides)
         };
         return shapes;
     }
 
     public static List<Shape> GetPreviewPiece(Piece piece,double width,double height)
     {
+        width -= 20;
+        height -= 20;
         double maxWidth = 0;
         double totalHeight = 0;
         foreach (Layer layer in piece.Layers)
@@ -34,11 +39,13 @@ public static class Preview
         double heightOfPiecesBefore = 0;
         for (int i = 1; i <= piece.Layers.Count; i++)
         {
-            double pieceHeight = (height - 10*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
+            double pieceWidth = width * (piece.Layers[i - 1].WidthOnSides / maxWidth);
+            double horizontalMargin = (width - pieceWidth) / 2;
+            double pieceHeight = (height - margin*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
             shapes.Add(GetRectangle(
-                10,
-                10*i+heightOfPiecesBefore,
-                width,
+                margin+horizontalMargin,
+                margin*i+heightOfPiecesBefore,
+                pieceWidth,
                 pieceHeight));
             heightOfPiecesBefore += pieceHeight;
         }
@@ -63,11 +70,11 @@ public static class Preview
                         {
                             new LineSegment
                             {
-                                Point = new Point(width,y)
+                                Point = new Point(x+width,y)
                             },
                             new LineSegment
                             {
-                                Point = new Point(width,y+height)
+                                Point = new Point(x+width,y+height)
                             },
                             new LineSegment
                             {
