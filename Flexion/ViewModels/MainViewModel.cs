@@ -30,6 +30,7 @@ public partial class MainViewModel : ObservableObject
     public EventHandler<EventArgs>? ReloadLanguage { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewMainWindowLayer { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewMainWindowPiece { get; set; }
+    public EventHandler<EventArgs>? UpdatePreviewPiece { get; set; }
 
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
 
@@ -81,6 +82,8 @@ public partial class MainViewModel : ObservableObject
     {
         SelectedLayersMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowLayer?.Invoke(null, EventArgs.Empty);
         SelectedPiecesMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowPiece?.Invoke(null, EventArgs.Empty);
+        SelectedLayers.CollectionChanged += (_, _) => UpdatePreviewLayer?.Invoke(null, EventArgs.Empty);
+        SelectedPieces.CollectionChanged += (_, _) => UpdatePreviewPiece?.Invoke(null, EventArgs.Empty);
     }
 
     public void CloseAllWindow()

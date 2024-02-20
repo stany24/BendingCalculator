@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Resources;
 using Avalonia.Controls.Shapes;
@@ -9,7 +8,7 @@ using Flexion.ViewModels;
 using LiveChartsCore.SkiaSharpView;
 
 namespace Flexion.Views;
-
+ 
 public partial class Main : WindowWithHelp
 {
     public Main(MainViewModel model)
@@ -18,8 +17,8 @@ public partial class Main : WindowWithHelp
         InitializeComponent();
         Closing += (_, _) => CloseAllWindows();
         model.ReloadLanguage += (_, _) => ReloadLanguage();
-        model.UpdatePreviewMainWindowLayer += (_,_) => UpdatePreviewLayer();
-        model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPiece();
+        model.UpdatePreviewMainWindowLayer += (_,_) => UpdatePreviewLayerMainWindow();
+        model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPieceMainWindow();
         SizeChanged += (_,_) => UpdatePreviewMainWindow();
         ReloadLanguage();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
@@ -27,32 +26,33 @@ public partial class Main : WindowWithHelp
 
     private void UpdatePreviewMainWindow()
     {
-        UpdatePreviewLayer();
-        UpdatePreviewPiece();
+        UpdatePreviewLayerMainWindow();
+        UpdatePreviewPieceMainWindow();
     }
 
-    private void UpdatePreviewLayer()
+    private void UpdatePreviewLayerMainWindow()
     {
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedLayersMainWindow.Count < 1){return;}
-        LayerPreviewCanvas.Children.Clear();
+        LayerPreviewCanvasMainWindow.Children.Clear();
         double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth;
         double height = GridLayerPreview.RowDefinitions[0].ActualHeight+GridLayerPreview.RowDefinitions[1].ActualHeight+GridLayerPreview.RowDefinitions[2].ActualHeight;
         foreach (Shape shape in Preview.GetPreviewLayer(model.SelectedLayersMainWindow[0],width,height))
         {
-            LayerPreviewCanvas.Children.Add(shape);
+            LayerPreviewCanvasMainWindow.Children.Add(shape);
         }
     }
-    private void UpdatePreviewPiece()
+    
+    private void UpdatePreviewPieceMainWindow()
     {
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedPiecesMainWindow.Count < 1){return;}
-        PiecePreviewCanvas.Children.Clear();
+        PiecePreviewCanvasMainWindow.Children.Clear();
         double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth;
         double height = GridPiecePreview.RowDefinitions[0].ActualHeight + GridPiecePreview.RowDefinitions[1].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight;
         foreach (Shape shape in Preview.GetPreviewPiece(model.SelectedPiecesMainWindow[0],width,height))
         {
-            PiecePreviewCanvas.Children.Add(shape);
+            PiecePreviewCanvasMainWindow.Children.Add(shape);
         }
     }
 

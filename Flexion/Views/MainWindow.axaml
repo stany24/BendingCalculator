@@ -111,7 +111,7 @@
                     VerticalAlignment="Center"
                     Text="Dessus:"></TextBlock>
                 <Canvas 
-                    Name="PiecePreviewCanvas"
+                    Name="PiecePreviewCanvasMainWindow"
                     Background="White"
                     Grid.Row="0"
                     Grid.RowSpan="3"
@@ -173,7 +173,7 @@
                     VerticalAlignment="Center"
                     Text="Dessus:"></TextBlock>
                 <Canvas 
-                    Name="LayerPreviewCanvas"
+                    Name="LayerPreviewCanvasMainWindow"
                     Background="White"
                     Grid.Row="0"
                     Grid.RowSpan="3"

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
@@ -17,6 +18,7 @@ public partial class MainViewModel
         set => SetProperty(ref _layers, value);
     }
     
+    public EventHandler<EventArgs>? UpdatePreviewLayer { get; set; }
     private ObservableCollection<Layer> _selectedLayers = new();
     public ObservableCollection<Layer> SelectedLayers { 
         get => _selectedLayers;

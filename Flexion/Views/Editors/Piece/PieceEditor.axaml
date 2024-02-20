@@ -12,46 +12,79 @@
     <Grid
         Name="Grid"
         Margin="5"
-        ColumnDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto"
-        RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,*">
-        <TextBlock 
-            Name="LblName"
-            VerticalAlignment="Center"
-            Grid.Column="2"
-            Grid.Row="0"
-            Text="{Binding NameWithColonBinding}"></TextBlock>
-        <TextBox 
-            Name="TbxName"
-            Text="{Binding PieceName}"
-            Grid.Column="4"
-            Grid.Row="0"></TextBox>
-        <TextBlock 
-            Name="LblLength"
-            VerticalAlignment="Center"
-            Grid.Column="2"
-            Grid.Row="2"
-            Text="{Binding LengthWithColonBinding}"></TextBlock>
-        <NumericUpDown 
-            Name="NudLength"
-            Value="{Binding PieceLength}"
-            Minimum="0.1"
-            Grid.Column="4"
-            Grid.Row="2"></NumericUpDown>
-        <Button
-            Name="BtnChangeLayers"
-            Grid.Column="2"
-            Grid.ColumnSpan="3"
-            Grid.Row="4"
-            HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Center"
-            Content="{Binding ChangeLayersBinding}"
-            IsEnabled="{Binding BtnChangeLayerEnabled}"
-            Command="{Binding OpenLayerOfPieceEditor}"></Button>
+        ColumnDefinitions="Auto,10,Auto,10,Auto"
+        RowDefinitions="Auto,10,Auto">
+        <Grid
+            Name="GridInfo"
+            Column="2"
+            Row="0"
+            RowDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+            ColumnDefinitions="Auto,10,Auto">
+            <TextBlock 
+                Name="LblName"
+                Grid.Column="0"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                Text="{Binding NameWithColonBinding}"></TextBlock>
+            <TextBox 
+                Name="TbxName"
+                Grid.Column="2"
+                Grid.Row="0"
+                Text="{Binding PieceName}"></TextBox>
+            <TextBlock 
+                Name="LblLength"
+                Grid.Column="0"
+                Grid.Row="2"
+                VerticalAlignment="Center"
+                Text="{Binding LengthWithColonBinding}"></TextBlock>
+            <NumericUpDown 
+                Name="NudLength"
+                Grid.Column="2"
+                Grid.Row="2"
+                Value="{Binding PieceLength}"
+                Minimum="0.1"></NumericUpDown>
+            <Button
+                Name="BtnChangeLayers"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="4"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                Content="{Binding ChangeLayersBinding}"
+                IsEnabled="{Binding BtnChangeLayerEnabled}"
+                Command="{Binding OpenLayerOfPieceEditor}"></Button>
+            <Grid
+                Name="GridButton"
+                Row="6"
+                Column="0"
+                ColumnSpan="3"
+                RowDefinitions="Auto"
+                ColumnDefinitions="Auto,10,Auto,10,Auto">
+                <Button
+                    Name="BtnAdd"
+                    Content="{Binding AddBinding}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding CreateNewPiece}"></Button>
+                <Button
+                    Name="BtnRemove"
+                    Content="{Binding RemoveBinding}"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Command="{Binding RemovePieces}"></Button>
+                <Button 
+                    Name="HelpButton"
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    Content="{Binding HelpBinding}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"></Button>
+            </Grid>
+        </Grid>
         <ListBox
             Name="LbxLayers"
-            Grid.Column="6"
+            Grid.Column="4"
             Grid.Row="0"
-            Grid.RowSpan="8"
             MinWidth="200"
             ItemsSource="{Binding LayersOfSelectedPiece}">
             <ListBox.ItemTemplate>
@@ -65,7 +98,6 @@
             Name="LbxPieces"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.RowSpan="7"
             MinWidth="200"
             ItemsSource="{Binding Pieces}"
             SelectedItems="{Binding SelectedPieces}">
@@ -77,24 +109,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button
-            Name="BtnAdd"
-            Content="{Binding AddBinding}"
-            Grid.Row="6"
-            Grid.Column="2"
-            Command="{Binding CreateNewPiece}"></Button>
-        <Button
-            Name="BtnRemove"
-            Content="{Binding RemoveBinding}"
-            Grid.Row="6"
-            Grid.Column="4"
-            Command="{Binding RemovePieces}"></Button>
-        <Button 
-            Name="HelpButton"
-            Grid.Row="0"
-            Grid.Column="8"
-            Content="{Binding HelpBinding}"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"></Button>
+        <Canvas 
+            Name="PiecePreviewCanvas"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Height="300">
+        </Canvas>
     </Grid>
 </Window>
