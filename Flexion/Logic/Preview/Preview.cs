@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Avalonia;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
+using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+using PathGeometry = Avalonia.Media.PathGeometry;
 
 namespace Flexion.Logic.Preview;
 
@@ -107,7 +111,7 @@ public static class Preview
         }
         Path path = new()
         {
-            Fill = Brushes.Gray,
+            Fill = Brushes.LightBlue,
             Data = new PathGeometry
             {
                 Figures = new PathFigures
@@ -119,20 +123,12 @@ public static class Preview
                         IsFilled = true,
                         Segments = new PathSegments
                         {
-                            new QuadraticBezierSegment
-                            {
-                                Point1 = new Point(x+width/2,y+minusCenter),
-                                Point2 = new Point(x+width,y+minusSides)
-                            },
+                            CreateArcSegment(new Point(x,y+minusSides),new Point(x+width/2,y+minusCenter),new Point(x+width,y+minusSides)),
                             new LineSegment
                             {
                                 Point = new Point(x+width,y+height-minusSides)
                             },
-                            new QuadraticBezierSegment
-                            {
-                                Point1 = new Point(x+width/2,y+height-minusCenter),
-                                Point2 = new Point(x,y+height-minusSides)
-                            },
+                            CreateArcSegment(new Point(x+width,y+height-minusSides),new Point(x+width/2,y+height-minusCenter),new Point(x,y+height-minusSides)),
                             new LineSegment
                             {
                                 Point = new Point(x,y+minusSides)
@@ -143,5 +139,58 @@ public static class Preview
             }
         };
         return path;
+    }
+
+    private static PathSegment CreateArcSegment(Point point1, Point point2, Point point3)
+    {
+        if (Math.Abs(point1.Y - point2.Y) < 0.01)
+        {
+            return new LineSegment
+            {
+                Point = point3
+            };
+        }
+        // Calculate the center and radius of the circle passing through the three points
+        Point center = CalculateCenter(point1,point2,point3);
+        Point dif = new(point1.X - center.X, point1.Y - center.Y);
+        double radius = Math.Sqrt(dif.X * dif.X + dif.Y * dif.Y);
+        
+        return new ArcSegment
+        {
+            Point = point3,
+            Size = new Size(radius, radius),
+            RotationAngle = 0,
+            IsLargeArc = IsLargeArc(point1, point2, point3, center),
+            SweepDirection = CalculateSweepDirection(point1, point2, point3)
+        };
+    }
+
+    private static Point CalculateCenter(Point a, Point b, Point c)
+    {
+        double ma = (b.Y - a.Y) / (b.X - a.X);
+        double mb = (c.Y - b.Y) / (c.X - b.X);
+        double centerX = (ma * mb * (a.Y - c.Y) + mb * (a.X + b.X) - ma * (b.X + c.X)) / (2 * (mb - ma));
+        double centerY = (-1 / ma) * (centerX - (a.X + b.X) / 2) + (a.Y + b.Y) / 2;
+        Point center = new(centerX, centerY);
+        return center;
+    }
+
+    private static bool IsLargeArc(Point point1, Point point2, Point point3, Point center)
+    {
+        // Calculate the angle formed by the three points and the center
+        double angle1 = Math.Atan2(point2.Y - center.Y, point2.X - center.X);
+        double angle2 = Math.Atan2(point3.Y - center.Y, point3.X - center.X);
+        double angle3 = Math.Atan2(point1.Y - center.Y, point1.X - center.X);
+
+        // Determine if the total angle exceeds 180 degrees
+        double totalAngle = Math.Abs(angle1 - angle2) + Math.Abs(angle2 - angle3) + Math.Abs(angle3 - angle1);
+        return totalAngle > Math.PI;
+    }
+
+    private static SweepDirection CalculateSweepDirection(Point point1, Point point2, Point point3)
+    {
+        // Check if the points form a clockwise or counter-clockwise turn
+        double crossProduct = (point2.X - point1.X) * (point3.Y - point2.Y) - (point2.Y - point1.Y) * (point3.X - point2.X);
+        return crossProduct > 0 ? SweepDirection.Clockwise : SweepDirection.CounterClockwise;
     }
 }

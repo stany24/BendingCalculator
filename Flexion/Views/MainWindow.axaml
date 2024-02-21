@@ -106,7 +106,7 @@
                     Row="0"></Grid>
                 <Canvas 
                     Name="PiecePreviewCanvasMainWindow"
-                    Background="White"
+                    Background="#292929"
                     Grid.Row="0"
                     Grid.Column="2">
                 </Canvas>
