@@ -49,14 +49,14 @@ public partial class Main : WindowWithHelp
         }
     }
     
-    private readonly List<TextBlock> MaterialsName = new();
     private void UpdatePreviewPieceMainWindow()
     {
         if(DataContext is not MainViewModel model){return;}
-        if(model.SelectedPiecesMainWindow.Count < 1){return;}
-        MaterialsName.Clear();
-        Console.WriteLine(model.Pieces);
         PiecePreviewCanvasMainWindow.Children.Clear();
+        GridLayerNames.Children.Clear();
+        PiecePreviewCanvasMainWindow.Children.Clear();
+        if(model.SelectedPiecesMainWindow.Count < 1){return;}
+        if(model.SelectedPiecesMainWindow[0].Layers.Count < 1){return;}
         CreateNewTextBlocks(model.SelectedPiecesMainWindow[0]);
         double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth;
         double height = GetFullGridHeight(GridPiecePreview);
@@ -93,11 +93,9 @@ public partial class Main : WindowWithHelp
         {
             builder.Append(",10,*");
         }
-        GridPiecePreview.RowDefinitions = new RowDefinitions(builder.ToString());
+        GridLayerNames.RowDefinitions = new RowDefinitions(builder.ToString());
         for (int i = 0; i < piece.Layers.Count; i++)
         {
-            Console.WriteLine(piece.Name);
-            Console.WriteLine(piece.Layers[i].Material.Name);
             TextBlock block = new()
             {
                 Text = piece.Layers[i].Material.Display,
@@ -105,10 +103,10 @@ public partial class Main : WindowWithHelp
             };
             Grid.SetColumn(block,0);
             Grid.SetRow(block,2*i);
-            GridPiecePreview.Children.Add(block);
+            GridLayerNames.Children.Add(block);
         }
         Grid.SetRowSpan(PiecePreviewCanvasMainWindow,piece.Layers.Count*2-1);
-        GridPiecePreview.UpdateLayout();
+        GridLayerNames.UpdateLayout();
     }
 
     private void CloseAllWindows()

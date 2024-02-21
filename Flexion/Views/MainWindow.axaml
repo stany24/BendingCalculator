@@ -99,12 +99,15 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
                 ColumnDefinitions="Auto,10,*"
-                RowDefinitions="*,10,2*">
+                RowDefinitions="*">
+                <Grid
+                    Name="GridLayerNames"
+                    Column="0"
+                    Row="0"></Grid>
                 <Canvas 
                     Name="PiecePreviewCanvasMainWindow"
                     Background="White"
                     Grid.Row="0"
-                    Grid.RowSpan="3"
                     Grid.Column="2">
                 </Canvas>
             </Grid>
