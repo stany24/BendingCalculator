@@ -114,7 +114,8 @@
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            Height="300">
+            Height="300"
+            Background="#292929">
         </Canvas>
     </Grid>
 </Window>

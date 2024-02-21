@@ -61,7 +61,7 @@ public static class Preview
     {
         Path path = new()
         {
-            Fill = Brushes.Red,
+            Fill = Brushes.LightBlue,
             Data = new PathGeometry
             {
                 Figures = new PathFigures

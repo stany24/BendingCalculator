@@ -167,7 +167,7 @@
                     Text="Dessus:"></TextBlock>
                 <Canvas 
                     Name="LayerPreviewCanvasMainWindow"
-                    Background="White"
+                    Background="#292929"
                     Grid.Row="0"
                     Grid.RowSpan="3"
                     Grid.Column="2">
