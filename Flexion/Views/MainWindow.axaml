@@ -100,16 +100,6 @@
                 Grid.ColumnSpan="4"
                 ColumnDefinitions="Auto,10,*"
                 RowDefinitions="*,10,2*">
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Coté:"></TextBlock>
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Dessus:"></TextBlock>
                 <Canvas 
                     Name="PiecePreviewCanvasMainWindow"
                     Background="White"

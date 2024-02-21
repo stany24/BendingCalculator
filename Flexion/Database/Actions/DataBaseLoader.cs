@@ -56,7 +56,7 @@ public static class DataBaseLoader
     public static List<Piece> LoadPieces(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
-            @"SELECT *
+            @"SELECT p.*, l.*, m.*, p.Name AS PieceName, m.Name AS MaterialName
             FROM Piece p
             LEFT JOIN PieceToLayer pl ON p.PieceId = pl.PieceId
             LEFT JOIN Layer l ON pl.LayerId = l.LayerId
@@ -78,7 +78,7 @@ public static class DataBaseLoader
                 {
                     Layers = new List<Layer>(),
                     PieceId = pieceId,
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
+                    Name = Convert.ToString(reader["PieceName"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"])
                 };
                 pieces.Add(currentPiece);
@@ -100,7 +100,7 @@ public static class DataBaseLoader
                 {
                     MaterialId = Convert.ToInt32(reader["MaterialId"]),
                     E=Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                    Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty
                 };
             }
 

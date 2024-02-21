@@ -1,7 +1,13 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
+using System.Text;
+using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Layout;
 using Flexion.Assets.Localization.MainLocalization;
+using Flexion.Logic;
 using Flexion.Logic.Helper;
 using Flexion.Logic.Preview;
 using Flexion.ViewModels;
@@ -43,17 +49,66 @@ public partial class Main : WindowWithHelp
         }
     }
     
+    private readonly List<TextBlock> MaterialsName = new();
     private void UpdatePreviewPieceMainWindow()
     {
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedPiecesMainWindow.Count < 1){return;}
+        MaterialsName.Clear();
+        Console.WriteLine(model.Pieces);
         PiecePreviewCanvasMainWindow.Children.Clear();
+        CreateNewTextBlocks(model.SelectedPiecesMainWindow[0]);
         double width = GridPiecePreview.ColumnDefinitions[2].ActualWidth;
-        double height = GridPiecePreview.RowDefinitions[0].ActualHeight + GridPiecePreview.RowDefinitions[1].ActualHeight +GridPiecePreview.RowDefinitions[2].ActualHeight;
+        double height = GetFullGridHeight(GridPiecePreview);
         foreach (Shape shape in Preview.GetPreviewPiece(model.SelectedPiecesMainWindow[0],width,height))
         {
             PiecePreviewCanvasMainWindow.Children.Add(shape);
         }
+    }
+
+    private double GetFullGridHeight(Grid grid)
+    {
+        double height = 0;
+        int i = 0;
+        while (i < 100)
+        {
+            try
+            {
+                height += grid.RowDefinitions[i].ActualHeight;
+                i++;
+            }
+            catch (Exception e)
+            {
+                return height;
+            }
+        }
+        return height;
+    }
+
+    private void CreateNewTextBlocks(Piece piece)
+    {
+        StringBuilder builder = new();
+        builder.Append('*');
+        for (int i = 0; i < piece.Layers.Count-1; i++)
+        {
+            builder.Append(",10,*");
+        }
+        GridPiecePreview.RowDefinitions = new RowDefinitions(builder.ToString());
+        for (int i = 0; i < piece.Layers.Count; i++)
+        {
+            Console.WriteLine(piece.Name);
+            Console.WriteLine(piece.Layers[i].Material.Name);
+            TextBlock block = new()
+            {
+                Text = piece.Layers[i].Material.Display,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            Grid.SetColumn(block,0);
+            Grid.SetRow(block,2*i);
+            GridPiecePreview.Children.Add(block);
+        }
+        Grid.SetRowSpan(PiecePreviewCanvasMainWindow,piece.Layers.Count*2-1);
+        GridPiecePreview.UpdateLayout();
     }
 
     private void CloseAllWindows()
