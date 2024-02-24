@@ -133,13 +133,13 @@
             </Grid>
 
         </Grid>
-        <Canvas 
-            Name="LayerPreviewCanvas"
+        <Grid 
+            Name="GridLayerPreview"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Height="300"
             Background="#292929">
-        </Canvas>
+        </Grid>
     </Grid>
 </Window>

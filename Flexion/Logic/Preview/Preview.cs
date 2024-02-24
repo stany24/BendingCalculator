@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Layout;
 using Avalonia.Media;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 using PathGeometry = Avalonia.Media.PathGeometry;
 
 namespace Flexion.Logic.Preview;
@@ -13,16 +13,71 @@ public static class Preview
 {
     private const double Margin = 10;
 
-    public static List<Shape> GetPreviewLayer(Layer layer,double width,double height)
+    public static void GetPreviewLayer(ref Grid grid,Layer layer)
     {
-        width -= 2*Margin;
-        height -= 3*Margin;
+        grid.Children.Clear();
+        grid.ColumnDefinitions = new ColumnDefinitions("Auto,10,*");
+        grid.RowDefinitions = new RowDefinitions("*,10,*");
+        
+        TextBlock tbxSides = new()
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Text = "Coté:"
+        };
+        Grid.SetRow(tbxSides,0);
+        Grid.SetColumn(tbxSides,0);
+        grid.Children.Add(tbxSides);
+        
+        TextBlock tbxCenter = new()
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Text = "Center:"
+        };
+        Grid.SetRow(tbxCenter,2);
+        Grid.SetColumn(tbxCenter,0);
+        grid.Children.Add(tbxCenter);
+        
+
+        Canvas canvas = new()
+        {
+            Background=new SolidColorBrush(Color.Parse("#292929"))
+        };
+        Grid.SetRow(canvas,0);
+        Grid.SetRowSpan(canvas,3);
+        Grid.SetColumn(canvas,2);
+        grid.Children.Add(canvas);
+        grid.UpdateLayout();
+        
+        double width = grid.ColumnDefinitions[2].ActualWidth - 2*Margin;
+        double height = GetFullGridHeight(grid) - 3*Margin;
         List<Shape> shapes = new()
         {
             GetHourGlass(Margin, Margin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
             GetHourGlass(Margin, 2*Margin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
         };
-        return shapes;
+        foreach (Shape shape in shapes)
+        {
+            canvas.Children.Add(shape);
+        }
+    }
+    
+    private static double GetFullGridHeight(Grid grid)
+    {
+        double height = 0;
+        int i = 0;
+        while (i < 100)
+        {
+            try
+            {
+                height += grid.RowDefinitions[i].ActualHeight;
+                i++;
+            }
+            catch (Exception e)
+            {
+                return height;
+            }
+        }
+        return height;
     }
 
     public static List<Shape> GetPreviewPiece(Piece piece,double width,double height)

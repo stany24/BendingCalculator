@@ -40,13 +40,7 @@ public partial class Main : WindowWithHelp
     {
         if(DataContext is not MainViewModel model){return;}
         if(model.SelectedLayersMainWindow.Count < 1){return;}
-        LayerPreviewCanvasMainWindow.Children.Clear();
-        double width = GridLayerPreview.ColumnDefinitions[2].ActualWidth;
-        double height = GridLayerPreview.RowDefinitions[0].ActualHeight+GridLayerPreview.RowDefinitions[1].ActualHeight+GridLayerPreview.RowDefinitions[2].ActualHeight;
-        foreach (Shape shape in Preview.GetPreviewLayer(model.SelectedLayersMainWindow[0],width,height))
-        {
-            LayerPreviewCanvasMainWindow.Children.Add(shape);
-        }
+        Preview.GetPreviewLayer(ref GridLayerPreview, model.SelectedLayersMainWindow[0]);
     }
     
     private void UpdatePreviewPieceMainWindow()
