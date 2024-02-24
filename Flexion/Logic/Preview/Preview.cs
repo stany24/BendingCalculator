@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -80,10 +81,22 @@ public static class Preview
         return height;
     }
 
-    public static List<Shape> GetPreviewPiece(Piece piece,double width,double height)
+    public static void GetPreviewPiece(ref Grid grid,Piece piece)
     {
-        width -= 20;
-        height -= 20;
+        grid.ColumnDefinitions = new ColumnDefinitions("Auto,10,*");
+        Canvas canvas = new()
+        {
+            Background = new SolidColorBrush(Color.Parse("#292929"))
+        };
+        CreateNewTextBlocks(ref grid,canvas,piece);
+        Grid.SetRow(canvas,0);
+        Grid.SetColumn(canvas,2);
+        grid.Children.Add(canvas);
+        grid.UpdateLayout();
+        
+        double width = grid.ColumnDefinitions[2].ActualWidth - 2*Margin;
+        double height = GetFullGridHeight(grid) - 2*Margin;
+        
         double maxWidth = 0;
         double totalHeight = 0;
         foreach (Layer layer in piece.Layers)
@@ -109,7 +122,34 @@ public static class Preview
                 pieceHeight));
             heightOfPiecesBefore += pieceHeight;
         }
-        return shapes;
+        foreach (Shape shape in shapes)
+        {
+            canvas.Children.Add(shape);
+        }
+    }
+    
+    private static void CreateNewTextBlocks(ref Grid grid,Canvas canvas,Piece piece)
+    {
+        StringBuilder builder = new();
+        builder.Append('*');
+        for (int i = 0; i < piece.Layers.Count-1; i++)
+        {
+            builder.Append(",10,*");
+        }
+        grid.RowDefinitions = new RowDefinitions(builder.ToString());
+        for (int i = 0; i < piece.Layers.Count; i++)
+        {
+            TextBlock block = new()
+            {
+                Text = piece.Layers[i].Material.Display,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            Grid.SetColumn(block,0);
+            Grid.SetRow(block,2*i);
+            grid.Children.Add(block);
+        }
+        Grid.SetRowSpan(canvas,piece.Layers.Count*2-1);
+        grid.UpdateLayout();
     }
 
     private static Path GetRectangle(double x,double y,double width,double height)

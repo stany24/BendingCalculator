@@ -109,13 +109,13 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate></ListBox>
-        <Canvas 
-            Name="PiecePreviewCanvas"
+        <Grid 
+            Name="GridPiecePreview"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
             Height="300"
             Background="#292929">
-        </Canvas>
+        </Grid>
     </Grid>
 </Window>

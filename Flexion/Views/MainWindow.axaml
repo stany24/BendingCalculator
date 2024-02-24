@@ -98,18 +98,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                ColumnDefinitions="Auto,10,*"
-                RowDefinitions="*">
-                <Grid
-                    Name="GridLayerNames"
-                    Column="0"
-                    Row="0"></Grid>
-                <Canvas 
-                    Name="PiecePreviewCanvasMainWindow"
-                    Background="#292929"
-                    Grid.Row="0"
-                    Grid.Column="2">
-                </Canvas>
+                Background="#292929">
             </Grid>
         </Grid>
         <Grid 
@@ -152,7 +141,8 @@
                 Name="GridLayerPreview"
                 Grid.Row="4"
                 Grid.Column="0"
-                Grid.ColumnSpan="4">
+                Grid.ColumnSpan="4"
+                Background="#292929">
             </Grid>
         </Grid>
         <Grid
