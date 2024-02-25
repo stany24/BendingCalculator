@@ -13,36 +13,16 @@ public class PiecePreview:Grid
     private readonly Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
-    
-    private static double GetFullGridHeight(Grid grid)
-    {
-        double height = 0;
-        int i = 0;
-        while (i < 100)
-        {
-            try
-            {
-                height += grid.RowDefinitions[i].ActualHeight;
-                i++;
-            }
-            catch
-            {
-                return height;
-            }
-        }
-        return height;
-    }
 
     public PiecePreview(Piece? piece)
     {
-        ShowGridLines = true;
-        ColumnDefinitions = new ColumnDefinitions("Auto,*");
+        ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*");
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
         };
-        SetColumn(_preview,1);
+        SetColumn(_preview,2);
         SetRow(_preview,0);
         Children.Add(_preview);
         UpdatePreview(piece);
@@ -53,7 +33,7 @@ public class PiecePreview:Grid
         _preview.Children.Clear();
         if (piece == null) { Clear(); return;}
         CreateNewTextBlocks(piece);
-        double width = ColumnDefinitions[1].ActualWidth - 2*PreviewMargin;
+        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
         double height = GetFullGridHeight(this) - 2*PreviewMargin;
         
         double maxWidth = 0;
@@ -95,6 +75,25 @@ public class PiecePreview:Grid
         }
     }
     
+    private static double GetFullGridHeight(Grid grid)
+    {
+        double height = 0;
+        int i = 0;
+        while (i < 100)
+        {
+            try
+            {
+                height += grid.RowDefinitions[i].ActualHeight;
+                i++;
+            }
+            catch
+            {
+                return height;
+            }
+        }
+        return height;
+    }
+    
     private void CreateNewTextBlocks(Piece piece)
     {
         StringBuilder builder = new();
@@ -111,7 +110,7 @@ public class PiecePreview:Grid
                 Text = piece.Layers[i].Material.Display,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            SetColumn(block,0);
+            SetColumn(block,1);
             SetRow(block,2*i);
             Children.Add(block);
             _infos.Add(block);

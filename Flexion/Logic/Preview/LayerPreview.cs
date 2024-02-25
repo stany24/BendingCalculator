@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -17,7 +18,8 @@ public class LayerPreview:Grid
 
     public LayerPreview(Layer? layer)
     {
-        ColumnDefinitions = new ColumnDefinitions("Auto,*");
+        ShowGridLines = true;
+        ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*,10,*");
         _tbxSide = new TextBlock
         {
@@ -25,7 +27,7 @@ public class LayerPreview:Grid
             Text = "Coté:"
         };
         SetRow(_tbxSide,0);
-        SetColumn(_tbxSide,0);
+        SetColumn(_tbxSide,1);
         Children.Add(_tbxSide);
         
         _tbxAbove = new TextBlock
@@ -34,10 +36,9 @@ public class LayerPreview:Grid
             Text = "Dessus:"
         };
         SetRow(_tbxAbove,2);
-        SetColumn(_tbxAbove,0);
+        SetColumn(_tbxAbove,1);
         Children.Add(_tbxAbove);
         
-
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
@@ -55,7 +56,9 @@ public class LayerPreview:Grid
         if(layer == null) { Clear();return;}
         _tbxAbove.Text = "Dessus:";
         _tbxSide.Text = "Coté:";
-        double width = ColumnDefinitions[1].ActualWidth - 2*PreviewMargin;
+        UpdateLayout();
+        Thread.Sleep(10);
+        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
         double height = GetFullGridHeight(this) - 3*PreviewMargin;
         List<Shape> shapes = new()
         {
