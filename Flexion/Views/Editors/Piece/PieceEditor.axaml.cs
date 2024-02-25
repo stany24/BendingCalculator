@@ -1,5 +1,8 @@
+using System.Threading;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Threading;
 using Flexion.Logic.Helper;
 using Flexion.Logic.Preview;
 using Flexion.ViewModels;
@@ -31,15 +34,23 @@ public partial class PieceEditor : WindowWithHelp
 
     private void CloseLayerOfPieceEditor()
     {
+        
         if(DataContext is not MainViewModel model){return;}
         model.CloseLayerOfPieceEditor();
     }
     
     private void UpdatePreviewPiece()
     {
-        if(DataContext is not MainViewModel model){return;}
-        if (model.SelectedPieces.Count != 1) {_piecePreview.UpdatePreview(null); return; }
-        if (model.SelectedPieces[0].Layers.Count< 1) {_piecePreview.UpdatePreview(null); return; }
-        _piecePreview.UpdatePreview(model.SelectedPieces[0]);
+        Task.Run(() =>
+        {
+            Thread.Sleep(10);
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                if(DataContext is not MainViewModel model){return;}
+                if (model.SelectedPieces.Count != 1) {_piecePreview.UpdatePreview(null); return; }
+                if (model.SelectedPieces[0].Layers.Count< 1) {_piecePreview.UpdatePreview(null); return; }
+                _piecePreview.UpdatePreview(model.SelectedPieces[0]);
+            });
+        });
     }
 }

@@ -1,7 +1,10 @@
 using System.Globalization;
 using System.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Threading;
 using Flexion.Assets.Localization.MainLocalization;
 using Flexion.Logic.Helper;
 using Flexion.Logic.Preview;
@@ -60,10 +63,17 @@ public partial class Main : WindowWithHelp
     
     private void UpdatePreviewPieceMainWindow()
     {
-        if(DataContext is not MainViewModel model){return;}
-        if(model.SelectedPiecesMainWindow.Count < 1){_piecePreview.UpdatePreview(null);return;}
-        if(model.SelectedPiecesMainWindow[0].Layers.Count < 1){_piecePreview.UpdatePreview(null);return;}
-        _piecePreview.UpdatePreview(model.SelectedPiecesMainWindow[0]);
+        Task.Run(() =>
+        {
+            Thread.Sleep(10);
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                if(DataContext is not MainViewModel model){return;}
+                if(model.SelectedPiecesMainWindow.Count < 1){_piecePreview.UpdatePreview(null);return;}
+                if(model.SelectedPiecesMainWindow[0].Layers.Count < 1){_piecePreview.UpdatePreview(null);return;}
+                _piecePreview.UpdatePreview(model.SelectedPiecesMainWindow[0]);
+            });
+        });
     }
 
     private void CloseAllWindows()

@@ -35,7 +35,9 @@ public class PiecePreview:Grid
 
     public PiecePreview(Piece? piece)
     {
-        ColumnDefinitions = new ColumnDefinitions("Auto,10,*");
+        ShowGridLines = true;
+        ColumnDefinitions = new ColumnDefinitions("Auto,*");
+        RowDefinitions = new RowDefinitions("*");
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
@@ -43,7 +45,6 @@ public class PiecePreview:Grid
         SetColumn(_preview,1);
         SetRow(_preview,0);
         Children.Add(_preview);
-        if(piece == null){return;}
         UpdatePreview(piece);
     }
     
@@ -52,7 +53,7 @@ public class PiecePreview:Grid
         _preview.Children.Clear();
         if (piece == null) { Clear(); return;}
         CreateNewTextBlocks(piece);
-        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
+        double width = ColumnDefinitions[1].ActualWidth - 2*PreviewMargin;
         double height = GetFullGridHeight(this) - 2*PreviewMargin;
         
         double maxWidth = 0;
@@ -103,7 +104,6 @@ public class PiecePreview:Grid
             builder.Append(",10,*");
         }
         RowDefinitions = new RowDefinitions(builder.ToString());
-        UpdateLayout();
         for (int i = 0; i < piece.Layers.Count; i++)
         {
             TextBlock block = new()
@@ -117,6 +117,7 @@ public class PiecePreview:Grid
             _infos.Add(block);
         }
         SetRowSpan(_preview,piece.Layers.Count*2-1);
+        UpdateLayout();
     }
 
     private static Path GetRectangle(double x,double y,double width,double height)
