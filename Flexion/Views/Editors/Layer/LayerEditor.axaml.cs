@@ -31,8 +31,7 @@ public partial class LayerEditor: WindowWithHelp
     private void UpdatePreviewLayer()
     {
         if (DataContext is not MainViewModel model) { return; }
-        GridLayerPreview.Children.Clear();
-        if(model.SelectedLayers.Count < 1){return;}
+        if(model.SelectedLayers.Count < 1){_layerPreview.UpdatePreview(null);return;}
         _layerPreview.UpdatePreview(model.SelectedLayers[0]);
     }
 }

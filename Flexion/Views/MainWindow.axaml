@@ -93,13 +93,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
-            <Grid
-                Name="GridPiecePreview"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Background="#292929">
-            </Grid>
         </Grid>
         <Grid 
             Name="GridLayer"
@@ -137,13 +130,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
-            <Grid
-                Name="GridLayerPreview"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Background="#292929">
-            </Grid>
         </Grid>
         <Grid
             Name="GridMaterial"

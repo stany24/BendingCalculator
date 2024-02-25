@@ -131,15 +131,6 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"></Button>
             </Grid>
-
-        </Grid>
-        <Grid 
-            Name="GridLayerPreview"
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="300"
-            Background="#292929">
         </Grid>
     </Grid>
 </Window>

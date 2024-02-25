@@ -17,7 +17,7 @@ public class LayerPreview:Grid
 
     public LayerPreview(Layer? layer)
     {
-        ColumnDefinitions = new ColumnDefinitions("Auto,10,*");
+        ColumnDefinitions = new ColumnDefinitions("Auto,*");
         RowDefinitions = new RowDefinitions("*,10,*");
         _tbxSide = new TextBlock
         {
@@ -40,7 +40,7 @@ public class LayerPreview:Grid
 
         _preview = new Canvas
         {
-            Background=new SolidColorBrush(Color.Parse("#292929"))
+            Background = new SolidColorBrush(Color.Parse("#292929"))
         };
         SetRow(_preview,0);
         SetRowSpan(_preview,3);
@@ -52,8 +52,10 @@ public class LayerPreview:Grid
     public void UpdatePreview(Layer? layer)
     {
         _preview.Children.Clear();
-        if(layer == null){return;}
-        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
+        if(layer == null) { Clear();return;}
+        _tbxAbove.Text = "Dessus:";
+        _tbxSide.Text = "Coté:";
+        double width = ColumnDefinitions[1].ActualWidth - 2*PreviewMargin;
         double height = GetFullGridHeight(this) - 3*PreviewMargin;
         List<Shape> shapes = new()
         {
@@ -64,6 +66,13 @@ public class LayerPreview:Grid
         {
             _preview.Children.Add(shape);
         }
+    }
+
+    private void Clear()
+    {
+        _preview.Children.Clear();
+        _tbxAbove.Text = string.Empty;
+        _tbxSide.Text = string.Empty;
     }
     
     private static double GetFullGridHeight(Grid grid)
