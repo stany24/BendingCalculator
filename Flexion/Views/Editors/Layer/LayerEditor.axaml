@@ -10,7 +10,7 @@
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 
-        Name="Grid"
+        Name="MainGrid"
         RowDefinitions="Auto,10,Auto"
         ColumnDefinitions="Auto,10,Auto"
         Margin="5">

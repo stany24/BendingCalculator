@@ -1,5 +1,7 @@
 using System.Globalization;
 using System.Resources;
+using Avalonia.Controls;
+using Avalonia.Media;
 using Flexion.Assets.Localization.MainLocalization;
 using Flexion.Logic.Helper;
 using Flexion.Logic.Preview;
@@ -10,6 +12,7 @@ namespace Flexion.Views;
  
 public partial class Main : WindowWithHelp
 {
+    private readonly LayerPreview _layerPreview;
     public Main(MainViewModel model)
     {
         DataContext = model;
@@ -21,6 +24,14 @@ public partial class Main : WindowWithHelp
         SizeChanged += (_,_) => UpdatePreviewMainWindow();
         ReloadLanguage();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
+        _layerPreview = new LayerPreview(null)
+        {
+            Background= new SolidColorBrush(Color.Parse("#292929"))
+        };
+        Grid.SetColumn(_layerPreview,0);
+        Grid.SetRow(_layerPreview,4);
+        Grid.SetColumnSpan(_layerPreview,4);
+        GridLayer.Children.Add(_layerPreview);
     }
 
     private void UpdatePreviewMainWindow()
@@ -34,7 +45,7 @@ public partial class Main : WindowWithHelp
         if(DataContext is not MainViewModel model){return;}
         GridLayerPreview.Children.Clear();
         if(model.SelectedLayersMainWindow.Count < 1){return;}
-        Preview.GetPreviewLayer(ref GridLayerPreview, model.SelectedLayersMainWindow[0]);
+        _layerPreview.UpdatePreview(model.SelectedLayersMainWindow[0]);
     }
     
     private void UpdatePreviewPieceMainWindow()
