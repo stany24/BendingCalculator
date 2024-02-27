@@ -69,5 +69,7 @@ public partial class Main : WindowWithHelp
         ChartResult.YAxes = new[] {
             new Axis {
                 Name = resourceManager.GetString("YAxisName", new CultureInfo(model.Language))}};
+        if(model.SelectedLayersMainWindow.Count < 1){return;}
+        LayerPreview.UpdatePreview(model.SelectedLayersMainWindow[0]);
     }
 }

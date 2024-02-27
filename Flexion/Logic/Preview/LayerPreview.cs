@@ -52,8 +52,8 @@ public class LayerPreview:Grid
     {
         _preview.Children.Clear();
         if(layer == null) { Clear();return;}
-        _tbxAbove.Text = "Dessus:";
-        _tbxSide.Text = "Coté:";
+        _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
+        _tbxSide.Text = Assets.Localization.Logic.LogicLocalization.SideViewWithColon;
         UpdateLayout();
         Thread.Sleep(10);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
