@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
+        xmlns:preview="clr-namespace:Flexion.Logic.Preview"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Editors.Piece.PieceEditor"
         x:DataType="viewModels:MainViewModel"
@@ -109,13 +110,13 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate></ListBox>
-        <Grid 
-            Name="GridPiecePreview"
+        <preview:PiecePreview
+            Name="PiecePreview"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            Height="300"
-            Background="#292929">
-        </Grid>
+            Background="#292929"
+            Height="300">
+        </preview:PiecePreview>
     </Grid>
 </Window>

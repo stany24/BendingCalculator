@@ -16,9 +16,8 @@ public class LayerPreview:Grid
     private readonly Canvas _preview;
     private const double PreviewMargin = 10;
 
-    public LayerPreview(Layer? layer)
+    public LayerPreview()
     {
-        ShowGridLines = true;
         ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*,10,*");
         _tbxSide = new TextBlock
@@ -47,7 +46,6 @@ public class LayerPreview:Grid
         SetRowSpan(_preview,3);
         SetColumn(_preview,2);
         Children.Add(_preview);
-        UpdatePreview(layer);
     }
 
     public void UpdatePreview(Layer? layer)

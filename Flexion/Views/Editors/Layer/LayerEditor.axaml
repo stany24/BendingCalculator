@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
+        xmlns:preview="clr-namespace:Flexion.Logic.Preview"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
@@ -132,5 +133,12 @@
                     VerticalAlignment="Top"></Button>
             </Grid>
         </Grid>
+        <preview:LayerPreview
+            Name="LayerPreview"
+            Background="#292929"
+            Height="300"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"></preview:LayerPreview>
     </Grid>
 </Window>
