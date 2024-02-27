@@ -158,7 +158,7 @@ public class LayerPreview:Grid
             Point = point3,
             Size = new Size(radius, radius),
             RotationAngle = 0,
-            IsLargeArc = IsLargeArc(point1, point2, point3, center),
+            IsLargeArc = false,
             SweepDirection = CalculateSweepDirection(point1, point2, point3)
         };
     }
@@ -171,18 +171,6 @@ public class LayerPreview:Grid
         double centerY = (-1 / ma) * (centerX - (a.X + b.X) / 2) + (a.Y + b.Y) / 2;
         Point center = new(centerX, centerY);
         return center;
-    }
-
-    private static bool IsLargeArc(Point point1, Point point2, Point point3, Point center)
-    {
-        // Calculate the angle formed by the three points and the center
-        double angle1 = Math.Atan2(point2.Y - center.Y, point2.X - center.X);
-        double angle2 = Math.Atan2(point3.Y - center.Y, point3.X - center.X);
-        double angle3 = Math.Atan2(point1.Y - center.Y, point1.X - center.X);
-
-        // Determine if the total angle exceeds 180 degrees
-        double totalAngle = Math.Abs(angle1 - angle2) + Math.Abs(angle2 - angle3) + Math.Abs(angle3 - angle1);
-        return totalAngle > Math.PI;
     }
 
     private static SweepDirection CalculateSweepDirection(Point point1, Point point2, Point point3)
