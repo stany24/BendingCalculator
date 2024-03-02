@@ -33,4 +33,10 @@
     <data name="Sides" xml:space="preserve">
         <value>Seiten (mm)</value>
     </data>
+    <data name="SideViewWithColon" xml:space="preserve">
+        <value>Seitenansicht</value>
+    </data>
+    <data name="TopViewWithColon" xml:space="preserve">
+        <value>Ansicht von oben:</value>
+    </data>
 </root>

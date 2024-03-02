@@ -51,8 +51,10 @@ public partial class MainViewModel : ObservableObject
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
             ChangeLanguage(); //ui bindings
-            ReloadLanguage?.Invoke(this,EventArgs.Empty); // the axes names
+            ReloadLanguage?.Invoke(this,EventArgs.Empty); // the axes names and the previews
             ReDrawItems(); // the items ToString() method
+            if(SelectedLayers.Count < 1){return;}
+            _layerEditor?.LayerPreview.UpdatePreview(SelectedLayers[0]);
         }
     }
     

@@ -16,7 +16,7 @@ public class LayerPreview:Grid
     private readonly Canvas _preview;
     private const double PreviewMargin = 10;
 
-    public LayerPreview(Layer? layer)
+    public LayerPreview()
     {
         ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*,10,*");
@@ -46,15 +46,14 @@ public class LayerPreview:Grid
         SetRowSpan(_preview,3);
         SetColumn(_preview,2);
         Children.Add(_preview);
-        UpdatePreview(layer);
     }
 
     public void UpdatePreview(Layer? layer)
     {
         _preview.Children.Clear();
         if(layer == null) { Clear();return;}
-        _tbxAbove.Text = "Dessus:";
-        _tbxSide.Text = "Coté:";
+        _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
+        _tbxSide.Text = Assets.Localization.Logic.LogicLocalization.SideViewWithColon;
         UpdateLayout();
         Thread.Sleep(10);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
@@ -159,7 +158,7 @@ public class LayerPreview:Grid
             Point = point3,
             Size = new Size(radius, radius),
             RotationAngle = 0,
-            IsLargeArc = IsLargeArc(point1, point2, point3, center),
+            IsLargeArc = false,
             SweepDirection = CalculateSweepDirection(point1, point2, point3)
         };
     }
@@ -172,18 +171,6 @@ public class LayerPreview:Grid
         double centerY = -1 / ma * (centerX - (a.X + b.X) / 2) + (a.Y + b.Y) / 2;
         Point center = new(centerX, centerY);
         return center;
-    }
-
-    private static bool IsLargeArc(Point point1, Point point2, Point point3, Point center)
-    {
-        // Calculate the angle formed by the three points and the center
-        double angle1 = Math.Atan2(point2.Y - center.Y, point2.X - center.X);
-        double angle2 = Math.Atan2(point3.Y - center.Y, point3.X - center.X);
-        double angle3 = Math.Atan2(point1.Y - center.Y, point1.X - center.X);
-
-        // Determine if the total angle exceeds 180 degrees
-        double totalAngle = Math.Abs(angle1 - angle2) + Math.Abs(angle2 - angle3) + Math.Abs(angle3 - angle1);
-        return totalAngle > Math.PI;
     }
 
     private static SweepDirection CalculateSweepDirection(Point point1, Point point2, Point point3)

@@ -74,5 +74,17 @@ namespace Flexion.Assets.Localization.Logic {
                 return ResourceManager.GetString("Layers", resourceCulture);
             }
         }
+        
+        internal static string SideViewWithColon {
+            get {
+                return ResourceManager.GetString("SideViewWithColon", resourceCulture);
+            }
+        }
+        
+        internal static string TopViewWithColon {
+            get {
+                return ResourceManager.GetString("TopViewWithColon", resourceCulture);
+            }
+        }
     }
 }

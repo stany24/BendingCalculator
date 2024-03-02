@@ -10,11 +10,11 @@ namespace Flexion.Logic.Preview;
 
 public class PiecePreview:Grid
 {
-    private readonly Canvas _preview;
+    private Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
 
-    public PiecePreview(Piece? piece)
+    public PiecePreview()
     {
         ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*");
@@ -25,7 +25,6 @@ public class PiecePreview:Grid
         SetColumn(_preview,2);
         SetRow(_preview,0);
         Children.Add(_preview);
-        UpdatePreview(piece);
     }
     
     public void UpdatePreview(Piece? piece)

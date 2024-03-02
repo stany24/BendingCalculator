@@ -33,4 +33,10 @@
     <data name="Layers" xml:space="preserve">
         <value>Layers</value>
     </data>
+    <data name="SideViewWithColon" xml:space="preserve">
+        <value>Side view:</value>
+    </data>
+    <data name="TopViewWithColon" xml:space="preserve">
+        <value>Top view:</value>
+    </data>
 </root>

@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
+        xmlns:preview="clr-namespace:Flexion.Logic.Preview"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Main"
         x:DataType="viewModels:MainViewModel"
@@ -93,6 +94,12 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
+            <preview:PiecePreview
+                Name="PiecePreview"
+                Background="#292929"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"></preview:PiecePreview>
         </Grid>
         <Grid 
             Name="GridLayer"
@@ -130,6 +137,12 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate></ListBox>
+            <preview:LayerPreview
+                Name="LayerPreview"
+                Background="#292929"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"></preview:LayerPreview>
         </Grid>
         <Grid
             Name="GridMaterial"
