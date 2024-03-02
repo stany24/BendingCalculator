@@ -23,7 +23,6 @@ public partial class PieceEditor : WindowWithHelp
 
     private void CloseLayerOfPieceEditor()
     {
-        
         if(DataContext is not MainViewModel model){return;}
         model.CloseLayerOfPieceEditor();
     }

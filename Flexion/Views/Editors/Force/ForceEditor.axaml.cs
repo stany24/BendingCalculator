@@ -24,7 +24,7 @@ public partial class ForceEditor : WindowWithHelp
         if (NudRadius.Value is not { } radius) { return 0; }
         if (NudSpeed.Value is not { } speed) { return 0; }
         if (NudGravity.Value is not { } gravity) { return 0; }
-        decimal value = Convert.ToInt32((double)mass * Math.Sqrt(Math.Pow((double)gravity, 2) + Math.Pow((double)speed, 4) / Math.Pow((double)radius, 2)));//mass*sqrt(grav²+speed⁴/radius²) need to check
+        decimal value = Convert.ToInt32((double)mass * Math.Sqrt(Math.Pow((double)gravity, 2) + Math.Pow((double)speed, 4) / Math.Pow((double)radius, 2)));
         NudForce.Value = value;
         return value;
     }

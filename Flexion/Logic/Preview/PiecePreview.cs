@@ -10,7 +10,7 @@ namespace Flexion.Logic.Preview;
 
 public class PiecePreview:Grid
 {
-    private Canvas _preview;
+    private readonly Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
 
@@ -60,10 +60,7 @@ public class PiecePreview:Grid
                 pieceHeight));
             heightOfPiecesBefore += pieceHeight;
         }
-        foreach (Shape shape in shapes)
-        {
-            _preview.Children.Add(shape);
-        }
+        _preview.Children.AddRange(shapes);
     }
 
     private void Clear()
@@ -95,6 +92,11 @@ public class PiecePreview:Grid
     
     private void CreateNewTextBlocks(Piece piece)
     {
+        while(_infos.Count > 0)
+        {
+            Children.Remove(_infos[0]);
+            _infos.RemoveAt(0);
+        }
         StringBuilder builder = new();
         builder.Append('*');
         for (int i = 0; i < piece.Layers.Count-1; i++)

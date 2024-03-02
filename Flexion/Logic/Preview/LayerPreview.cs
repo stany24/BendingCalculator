@@ -63,10 +63,7 @@ public class LayerPreview:Grid
             GetHourGlass(PreviewMargin, PreviewMargin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
             GetHourGlass(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
         };
-        foreach (Shape shape in shapes)
-        {
-            _preview.Children.Add(shape);
-        }
+        _preview.Children.AddRange(shapes);
     }
 
     private void Clear()
@@ -148,7 +145,6 @@ public class LayerPreview:Grid
                 Point = point3
             };
         }
-        // Calculate the center and radius of the circle passing through the three points
         Point center = CalculateCenter(point1,point2,point3);
         Point dif = new(point1.X - center.X, point1.Y - center.Y);
         double radius = Math.Sqrt(dif.X * dif.X + dif.Y * dif.Y);
@@ -175,7 +171,6 @@ public class LayerPreview:Grid
 
     private static SweepDirection CalculateSweepDirection(Point point1, Point point2, Point point3)
     {
-        // Check if the points form a clockwise or counter-clockwise turn
         double crossProduct = (point2.X - point1.X) * (point3.Y - point2.Y) - (point2.Y - point1.Y) * (point3.X - point2.X);
         return crossProduct > 0 ? SweepDirection.Clockwise : SweepDirection.CounterClockwise;
     }
