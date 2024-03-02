@@ -107,7 +107,7 @@ public class PiecePreview:Grid
         {
             TextBlock block = new()
             {
-                Text = piece.Layers[i].Material.Display,
+                Text = piece.Layers[i].Material?.Display,
                 VerticalAlignment = VerticalAlignment.Center
             };
             SetColumn(block,1);
@@ -150,7 +150,7 @@ public class PiecePreview:Grid
                             new LineSegment
                             {
                                 Point = new Point(x,y)
-                            },
+                            }
                         }
                     }
                 }

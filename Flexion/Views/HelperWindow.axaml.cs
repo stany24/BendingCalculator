@@ -47,7 +47,7 @@ public partial class HelperWindow : Window
                 TextBlock block = new()
                 {
                     [!TextBlock.TextProperty] = new Binding(helpText.NameBinding),
-                    TextWrapping = TextWrapping.Wrap,
+                    TextWrapping = TextWrapping.Wrap
                 };
                 Grid.SetColumn(block,0);
                 Grid.SetRow(block,2*i);

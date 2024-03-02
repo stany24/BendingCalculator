@@ -15,7 +15,7 @@ public static class HelperInfo
         new HelperText("MainWindowHelper7Binding"),
         new HelperText("MainWindowHelper8Binding"),
         new HelperText("MainWindowHelper9Binding"),
-        new HelperButton("MainWindowHelper10Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
+        new HelperButton("MainWindowHelper10Binding","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
     
     public static List<IHelperModule> ForceWindowModules { get; } = new()

@@ -8,6 +8,11 @@ public static class SettingManager
     public static string GetLanguage()
     {
         string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
+        if (!File.Exists(settingPath))
+        {
+            string serialized = JsonSerializer.Serialize(new Setting("en"));
+            File.WriteAllText(settingPath,serialized);
+        }
         Setting? setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(settingPath));
         return setting == null ? "en" : setting.Language;
     }

@@ -41,7 +41,7 @@ public class Piece:ObservableObject
         }
     }
 
-    public double ERef { get; } = 69e9;
+    private const double ERef = 69e9;
 
     private double[] _xs;
 

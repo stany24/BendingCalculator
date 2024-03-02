@@ -18,7 +18,6 @@ public class LayerPreview:Grid
 
     public LayerPreview(Layer? layer)
     {
-        ShowGridLines = true;
         ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
         RowDefinitions = new RowDefinitions("*,10,*");
         _tbxSide = new TextBlock
@@ -132,7 +131,7 @@ public class LayerPreview:Grid
                             new LineSegment
                             {
                                 Point = new Point(x,y+minusSides)
-                            },
+                            }
                         }
                     }
                 }
@@ -170,7 +169,7 @@ public class LayerPreview:Grid
         double ma = (b.Y - a.Y) / (b.X - a.X);
         double mb = (c.Y - b.Y) / (c.X - b.X);
         double centerX = (ma * mb * (a.Y - c.Y) + mb * (a.X + b.X) - ma * (b.X + c.X)) / (2 * (mb - ma));
-        double centerY = (-1 / ma) * (centerX - (a.X + b.X) / 2) + (a.Y + b.Y) / 2;
+        double centerY = -1 / ma * (centerX - (a.X + b.X) / 2) + (a.Y + b.Y) / 2;
         Point center = new(centerX, centerY);
         return center;
     }

@@ -17,7 +17,8 @@ public class WindowWithHelp:Window
     internal void OpenHelpWindow(List<IHelperModule> modules)
     {
         if (_helperWindow != null) return;
-        _helperWindow = new HelperWindow(modules,DataContext as MainViewModel);
+        if(DataContext is not MainViewModel model){return;}
+        _helperWindow = new HelperWindow(modules,model);
         _helperWindow.Show();
         _helperWindow.Closed += (_,_) => _helperWindow = null;
     }

@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Flexion.Database.Actions;
 using Flexion.Logic;
-using Bitmap = Avalonia.Media.Imaging.Bitmap;
 
 namespace Flexion.ViewModels;
 
@@ -32,10 +29,6 @@ public partial class MainViewModel
     }
     
     private double _widthSide;
-
-    private static void ChangePreview(IReadOnlyList<Layer> selectedLayers,ref Bitmap? bitmap)
-    {
-    }
 
     public double? WidthSide
     {
