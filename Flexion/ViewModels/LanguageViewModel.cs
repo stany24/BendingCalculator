@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Resources;
 using Flexion.Assets.Localization.HelperLocalization;
@@ -17,7 +18,7 @@ namespace Flexion.ViewModels;
 
 public partial class MainViewModel
 {
-    private void ChangeLanguage()
+    private void ChangeLanguage(object? sender, EventArgs eventArgs)
     {
         #pragma warning disable CS8601 // Possible null reference assignment.
         

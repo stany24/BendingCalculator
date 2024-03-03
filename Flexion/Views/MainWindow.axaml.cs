@@ -1,9 +1,11 @@
+using System;
 using System.Globalization;
 using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Flexion.Assets.Localization.MainLocalization;
+using Flexion.Logic;
 using Flexion.Logic.Helper;
 using Flexion.ViewModels;
 using LiveChartsCore.SkiaSharpView;
@@ -17,11 +19,11 @@ public partial class Main : WindowWithHelp
         DataContext = model;
         InitializeComponent();
         Closing += (_, _) => CloseAllWindows();
-        model.ReloadLanguage += (_, _) => ReloadLanguage();
+        LanguageEvents.LanguageChanged += ReloadLanguage;
         model.UpdatePreviewMainWindowLayer += (_,_) => UpdatePreviewLayerMainWindow();
         model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPieceMainWindow();
         SizeChanged += (_,_) => UpdatePreviewMainWindow();
-        ReloadLanguage();
+        ReloadLanguage(null,EventArgs.Empty);
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
     }
 
@@ -59,7 +61,7 @@ public partial class Main : WindowWithHelp
         model.CloseAllWindow();
     }
     
-    private void ReloadLanguage()
+    private void ReloadLanguage(object? sender, EventArgs eventArgs)
     {
         ResourceManager resourceManager = new(typeof(MainLocalization));
         if(DataContext is not MainViewModel model){return;}

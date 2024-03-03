@@ -67,10 +67,24 @@ public class Piece:ObservableObject
         Layers = new List<Layer>();
         _length = length;
         _name = name;
+        LanguageEvents.LanguageChanged += UpdateDisplay;
     }
 
     [JsonConstructor]
-    public Piece() { }
+    public Piece()
+    {
+        LanguageEvents.LanguageChanged += UpdateDisplay;
+    }
+    
+    ~Piece()
+    {
+        LanguageEvents.LanguageChanged -= UpdateDisplay;
+    }
+    
+    private void UpdateDisplay(object? sender, EventArgs e)
+    {
+        Display = ToString();
+    }
     
     public override string ToString()
     {

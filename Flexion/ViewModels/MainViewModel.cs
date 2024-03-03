@@ -26,8 +26,7 @@ public partial class MainViewModel : ObservableObject
 {
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
-
-    public EventHandler<EventArgs>? ReloadLanguage { get; set; }
+    
     public EventHandler<EventArgs>? UpdatePreviewMainWindowLayer { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewMainWindowPiece { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewPiece { get; set; }
@@ -35,7 +34,6 @@ public partial class MainViewModel : ObservableObject
     public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
 
     private ObservableCollection<string> _languages;
-
     public ObservableCollection<string> Languages
     {
         get => _languages;
@@ -50,18 +48,26 @@ public partial class MainViewModel : ObservableObject
             _language = value;
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
-            ChangeLanguage(); //ui bindings
-            ReloadLanguage?.Invoke(this,EventArgs.Empty); // the axes names and the previews
-            ReDrawItems(); // the items ToString() method
-            if(SelectedLayers.Count < 1){return;}
-            _layerEditor?.LayerPreview.UpdatePreview(SelectedLayers[0]);
+            LanguageEvents.RaiseLanguageChanged(); 
         }
     }
     
     public ICommand OpenLink { get; }
+    
+    public ISeries[] SeriesGraphFlexion { get; set; } =
+    {
+        new LineSeries<ObservablePoint>
+        {
+            Values = new List<ObservablePoint>
+            {
+                new(0, 0)
+            }
+        }
+    };
 
     public MainViewModel(SQLiteConnection connection)
     {
+        LanguageEvents.LanguageChanged += ChangeLanguage;
         OpenLink = new OpenLinkCommand();
         Languages = new ObservableCollection<string>{"fr","en","de"};
         Language = SettingManager.GetLanguage();
@@ -80,6 +86,11 @@ public partial class MainViewModel : ObservableObject
         Previews();
     }
 
+    ~MainViewModel()
+    {
+        LanguageEvents.LanguageChanged -= ChangeLanguage;
+    }
+    
     private void Previews()
     {
         SelectedLayersMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowLayer?.Invoke(null, EventArgs.Empty);
@@ -94,24 +105,6 @@ public partial class MainViewModel : ObservableObject
         _layerEditor?.Close();
         _pieceEditor?.Close();
         _forceEditor?.Close();
-    }
-    
-    public ISeries[] SeriesGraphFlexion { get; set; } =
-    {
-        new LineSeries<ObservablePoint>
-        {
-            Values = new List<ObservablePoint>
-            {
-                new(0, 0)
-            }
-        }
-    };
-
-    private void ReDrawItems()
-    {
-        foreach (Material material in Materials) { material.Display = ""; }
-        foreach (Layer layer in Layers) { layer.Display = ""; }
-        foreach (Piece piece in Pieces) { piece.Display = ""; }
     }
 
     public void CalculateFlexion()

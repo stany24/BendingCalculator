@@ -81,9 +81,12 @@ public class Layer:ObservableObject
         get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
-        
+
     [JsonConstructor]
-    public Layer() { }
+    public Layer()
+    {
+        LanguageEvents.LanguageChanged += UpdateDisplay;
+    }
         
     public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
     {
@@ -92,6 +95,17 @@ public class Layer:ObservableObject
         WidthOnSides=widthSides;
         HeightAtCenter=heightCenter;
         HeightOnSides=heightSides;
+        LanguageEvents.LanguageChanged += UpdateDisplay;
+    }
+
+    ~Layer()
+    {
+        LanguageEvents.LanguageChanged -= UpdateDisplay;
+    }
+
+    private void UpdateDisplay(object? sender, EventArgs e)
+    {
+        Display = ToString();
     }
         
     public sealed override string ToString()

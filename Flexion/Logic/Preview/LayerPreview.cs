@@ -15,6 +15,7 @@ public class LayerPreview:Grid
     private readonly TextBlock _tbxSide;
     private readonly Canvas _preview;
     private const double PreviewMargin = 10;
+    private  Layer? oldLayer;
 
     public LayerPreview()
     {
@@ -46,10 +47,22 @@ public class LayerPreview:Grid
         SetRowSpan(_preview,3);
         SetColumn(_preview,2);
         Children.Add(_preview);
+        LanguageEvents.LanguageChanged += UpdateLanguage;
+    }
+
+    ~LayerPreview()
+    {
+        LanguageEvents.LanguageChanged -= UpdateLanguage;
+    }
+
+    private void UpdateLanguage(object? sender, EventArgs eventArgs)
+    {
+        UpdatePreview(oldLayer);
     }
 
     public void UpdatePreview(Layer? layer)
     {
+        oldLayer = layer;
         _preview.Children.Clear();
         if(layer == null) { Clear();return;}
         _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
