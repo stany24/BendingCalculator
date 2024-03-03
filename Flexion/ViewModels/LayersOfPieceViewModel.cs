@@ -8,12 +8,15 @@ namespace Flexion.ViewModels;
 
 public partial class MainViewModel
 {
+    #region Bindings
+
     private ObservableCollection<Layer> _layersOfSelectedPiece= new();
     public ObservableCollection<Layer> LayersOfSelectedPiece
     {
         get => _layersOfSelectedPiece;
         set => SetProperty(ref _layersOfSelectedPiece, value);
     }
+    public int SelectedIndexOfLayerInPiece { get; set; }
 
     public ObservableCollection<Layer> SelectedLayersOfSelectedPiece { get; set; } = new();
     public ObservableCollection<Layer> SelectedAvailableLayers { get; set; } = new();
@@ -54,8 +57,9 @@ public partial class MainViewModel
         get => _btnRemoveEnabled;
         set => SetProperty(ref _btnRemoveEnabled, value);
     }
+
+    #endregion
     
-    public int SelectedIndexOfLayerInPiece { get; set; }
 
     private void LoadLayersOfPiece(long id)
     {
@@ -82,7 +86,9 @@ public partial class MainViewModel
             LayersOfSelectedPiece[i].WidthOnSides = layers[i].WidthOnSides;
         }
     }
-    
+
+    #region Selection changed
+
     private void SelectedInPieceChanged()
     {
         BtnRemoveEnabled = BtnMoveUpEnabled = BtnMoveDownEnabled = SelectedLayersOfSelectedPiece.Count > 0;
@@ -92,7 +98,11 @@ public partial class MainViewModel
     {
         BtnAddEnabled = SelectedAvailableLayers.Count == 1;
     }
+
+    #endregion
     
+    #region Move Layer
+
     public void MoveLayerUpInPiece()
     {
         for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
@@ -118,7 +128,16 @@ public partial class MainViewModel
             SelectedLayersOfSelectedPiece.Add(selectedItem);
         }
     }
-    
+
+    #endregion
+
+    #region Add/Remove Layer
+
+    public void AddLayerToPiece()
+    {
+        DataBaseUpdater.AddLayerToPiece(_connection,PieceCurrentlyModifiedId,SelectedAvailableLayers[0]);
+    }
+
     public void RemoveLayersToPiece()
     {
         List<int> idToRemove = SelectedLayersOfSelectedPiece.Select(layer => LayersOfSelectedPiece.IndexOf(layer)).ToList();
@@ -127,9 +146,6 @@ public partial class MainViewModel
             DataBaseUpdater.RemoveLayerToPiece(_connection,PieceCurrentlyModifiedId,idToRemove[i]);
         }
     }
-
-    public void AddLayerToPiece()
-    {
-        DataBaseUpdater.AddLayerToPiece(_connection,PieceCurrentlyModifiedId,SelectedAvailableLayers[0]);
-    }
+    
+    #endregion
 }

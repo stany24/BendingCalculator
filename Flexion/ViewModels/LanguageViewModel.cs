@@ -22,9 +22,9 @@ public partial class MainViewModel
     {
         #pragma warning disable CS8601 // Possible null reference assignment.
         
-        // Main window
+        #region Main Window
+        
         ResourceManager resourceManagerMain = new(typeof(MainLocalization));
-
         ModifyBinding = resourceManagerMain.GetString("Modify", new CultureInfo(Language));
         LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", new CultureInfo(Language));
         BeginBinding = resourceManagerMain.GetString("Begin", new CultureInfo(Language));
@@ -32,6 +32,10 @@ public partial class MainViewModel
         PiecesWithColonBinding = resourceManagerMain.GetString("PiecesWithColon", new CultureInfo(Language));
         LayersWithColonBinding = resourceManagerMain.GetString("LayersWithColon", new CultureInfo(Language));
         
+        #endregion
+
+        #region Main Window Helper
+
         ResourceManager resourceManagerMainHelper = new(typeof(MainHelperLocalization));
         MainWindowHelper1Binding = resourceManagerMainHelper.GetString("MainWindowHelper1", new CultureInfo(Language));
         MainWindowHelper2Binding = resourceManagerMainHelper.GetString("MainWindowHelper2", new CultureInfo(Language));
@@ -43,36 +47,52 @@ public partial class MainViewModel
         MainWindowHelper8Binding = resourceManagerMainHelper.GetString("MainWindowHelper8", new CultureInfo(Language));
         MainWindowHelper9Binding = resourceManagerMainHelper.GetString("MainWindowHelper9", new CultureInfo(Language));
         MainWindowHelper10Binding = resourceManagerMainHelper.GetString("MainWindowHelper10", new CultureInfo(Language));
-        
-        // Logic
+
+        #endregion
+
+        #region Logic
+
         ResourceManager resourceManagerLogic = new(typeof(LogicLocalization));
         NoBinding = resourceManagerLogic.GetString("No", new CultureInfo(Language));
         SidesBinding = resourceManagerLogic.GetString("Sides", new CultureInfo(Language));
         CenterBinding = resourceManagerLogic.GetString("Center", new CultureInfo(Language));
-        
-        // Editors
+
+        #endregion
+
+        #region All Editors
+
         ResourceManager resourceManagerEditor = new(typeof(EditorLocalization));
         AddBinding = resourceManagerEditor.GetString("Add", new CultureInfo(Language));
         RemoveBinding = resourceManagerEditor.GetString("Remove", new CultureInfo(Language));
         NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", new CultureInfo(Language));
         LayersBinding = resourceManagerEditor.GetString("Layers", new CultureInfo(Language));
+
+        #endregion
+
+        #region Material Editor Helper
         
-        //material editor
         ResourceManager resourceManagerMaterialEditorHelper = new(typeof(MaterialEditorHelperLocalization));
         MaterialEditorHelper1Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper1", new CultureInfo(Language));
         MaterialEditorHelper2Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper2", new CultureInfo(Language));
         MaterialEditorHelper3Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper3", new CultureInfo(Language));
         MaterialEditorHelper4Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper4", new CultureInfo(Language));
         MaterialEditorHelper5Binding = resourceManagerMaterialEditorHelper.GetString("MaterialEditorHelper5", new CultureInfo(Language));
-        
-        // Layer editor
+
+        #endregion
+
+        #region Layer Editor
+
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
         HeightCenterWithColonBinding = resourceManagerLayerEditor.GetString("HeightCenterWithColon", new CultureInfo(Language));
         HeightOnSidesWithColonBinding = resourceManagerLayerEditor.GetString("HeightOnSidesWithColon", new CultureInfo(Language));
         WidthCenterWithColonBinding = resourceManagerLayerEditor.GetString("WidthCenterWithColon", new CultureInfo(Language));
         WidthSidesWithColonBinding = resourceManagerLayerEditor.GetString("WidthSidesWithColon", new CultureInfo(Language));
         MaterialWithColonBinding = resourceManagerLayerEditor.GetString("MaterialWithColon", new CultureInfo(Language));
-        
+
+        #endregion
+
+        #region Layer Editor Helper
+
         ResourceManager resourceManagerLayerEditorHelper = new(typeof(LayerEditorHelperLocalization));
         LayerEditorHelper1Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper1", new CultureInfo(Language));
         LayerEditorHelper2Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper2", new CultureInfo(Language));
@@ -82,8 +102,11 @@ public partial class MainViewModel
         LayerEditorHelper6Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper6", new CultureInfo(Language));
         LayerEditorHelper7Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper7", new CultureInfo(Language));
         LayerEditorHelper8Binding = resourceManagerLayerEditorHelper.GetString("LayerEditorHelper8", new CultureInfo(Language));
-        
-        // Piece editor
+
+        #endregion
+
+        #region Piece Editor
+
         ResourceManager resourceManagerPieceEditor = new(typeof(PieceEditorLocalization));
         ChangeLayersBinding = resourceManagerPieceEditor.GetString("ChangeLayers", new CultureInfo(Language));
         InPieceWithColonBinding = resourceManagerPieceEditor.GetString("InPieceWithColon", new CultureInfo(Language));
@@ -91,7 +114,11 @@ public partial class MainViewModel
         MoveDownBinding = resourceManagerPieceEditor.GetString("MoveDown", new CultureInfo(Language));
         MoveUpBinding = resourceManagerPieceEditor.GetString("MoveUp", new CultureInfo(Language));
         LengthWithColonBinding = resourceManagerPieceEditor.GetString("LengthWithColon", new CultureInfo(Language));
-        
+
+        #endregion
+
+        #region Piece Editor Helper
+
         ResourceManager resourceManagerPieceEditorHelper = new(typeof(PieceEditorHelperLocalization));
         PieceEditorHelper1Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper1", new CultureInfo(Language));
         PieceEditorHelper2Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper2", new CultureInfo(Language));
@@ -108,22 +135,32 @@ public partial class MainViewModel
         PieceEditorHelper13Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper13", new CultureInfo(Language));
         PieceEditorHelper14Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper14", new CultureInfo(Language));
         PieceEditorHelper15Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper15", new CultureInfo(Language));
-        
-        // Help Window
+
+        #endregion
+
+        #region All Helper
+
         ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));
         HelpBinding = resourceManagerHelper.GetString("Help", new CultureInfo(Language));
-        
-        // force window
+
+        #endregion
+
+        #region Force Editor
+
         ResourceManager resourceManagerForceEditor = new(typeof(ForceEditorLocalization));
         ForceWithColonBinding = resourceManagerForceEditor.GetString("ForceWithColon", new CultureInfo(Language));
         MassWithColonBinding = resourceManagerForceEditor.GetString("MassWithColon", new CultureInfo(Language));
         RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", new CultureInfo(Language));
         GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", new CultureInfo(Language));
         SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", new CultureInfo(Language));
+
+        #endregion
         
         #pragma warning restore CS8601 // Possible null reference assignment.
     }
-    
+
+    #region Bindings
+
     private string _materialEditorHelper1Binding;
     public string MaterialEditorHelper1Binding
     {
@@ -600,4 +637,6 @@ public partial class MainViewModel
         get =>_widthSidesWithColonBinding;
         set => SetProperty(ref _widthSidesWithColonBinding, value);
     }
+
+    #endregion
 }

@@ -9,6 +9,8 @@ namespace Flexion.ViewModels;
 
 public partial class MainViewModel
 {
+    #region Bindings
+
     private ObservableCollection<Layer> _layers = new();
     public ObservableCollection<Layer> Layers { 
         get => _layers;
@@ -16,11 +18,14 @@ public partial class MainViewModel
     }
     
     public EventHandler<EventArgs>? UpdatePreviewLayer { get; set; }
+    
     private ObservableCollection<Layer> _selectedLayers = new();
     public ObservableCollection<Layer> SelectedLayers { 
         get => _selectedLayers;
         set => SetProperty(ref _selectedLayers, value);
     }
+    
+    private int SelectedLayerIndex { get; set; }
     
     private ObservableCollection<Layer> _selectedLayersMainWindow = new();
     public ObservableCollection<Layer> SelectedLayersMainWindow { 
@@ -87,32 +92,28 @@ public partial class MainViewModel
         }
     }
 
-    private void ReloadLayers()
+    #endregion
+
+    #region Layer Edition
+
+    public void CreateNewLayer()
     {
-        List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
-        while (layers.Count != Layers.Count)
-        {
-            if (layers.Count < Layers.Count)
-            {
-                Layers.RemoveAt(0);
-            }
-            else
-            {
-                Layers.Add(new Layer());
-            }
-        }
-
-        for (int i = 0; i < layers.Count; i++)
-        {
-            Layers[i].LayerId = layers[i].LayerId;
-            Layers[i].Material = layers[i].Material;
-            Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
-            Layers[i].HeightOnSides = layers[i].HeightOnSides;
-            Layers[i].WidthAtCenter = layers[i].WidthAtCenter;
-            Layers[i].WidthOnSides = layers[i].WidthOnSides;
-        }
+        Layer layer = new(SelectedMaterial , _widthCenter/1000,_widthSide/1000, _heightCenter/1000, _heightSide/1000);
+        DataBaseCreator.NewLayer(_connection,layer);
     }
-
+    
+    public void RemoveLayers()
+    {
+        int index = SelectedLayerIndex;
+        List<long> selected = SelectedLayers.Select(x => x.LayerId).ToList();
+        foreach (long id in selected)
+        {
+            DataBaseRemover.RemoveLayer(_connection,id);
+        }
+        if (index <= 0) return;
+        SelectedLayerIndex = Layers.Count > index ? index : Layers.Count;
+    }
+    
     private void ChangeWidthSide()
     {
         foreach (Layer selectedLayer in SelectedLayers)
@@ -157,23 +158,32 @@ public partial class MainViewModel
         }
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
     }
-
-    private int SelectedLayerIndex { get; set; }
-    public void RemoveLayers()
+    
+    private void ReloadLayers()
     {
-        int index = SelectedLayerIndex;
-        List<long> selected = SelectedLayers.Select(x => x.LayerId).ToList();
-        foreach (long id in selected)
+        List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
+        while (layers.Count != Layers.Count)
         {
-            DataBaseRemover.RemoveLayer(_connection,id);
+            if (layers.Count < Layers.Count)
+            {
+                Layers.RemoveAt(0);
+            }
+            else
+            {
+                Layers.Add(new Layer());
+            }
         }
-        if (index <= 0) return;
-        SelectedLayerIndex = Layers.Count > index ? index : Layers.Count;
+
+        for (int i = 0; i < layers.Count; i++)
+        {
+            Layers[i].LayerId = layers[i].LayerId;
+            Layers[i].Material = layers[i].Material;
+            Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
+            Layers[i].HeightOnSides = layers[i].HeightOnSides;
+            Layers[i].WidthAtCenter = layers[i].WidthAtCenter;
+            Layers[i].WidthOnSides = layers[i].WidthOnSides;
+        }
     }
 
-    public void CreateNewLayer()
-    {
-        Layer layer = new(SelectedMaterial , _widthCenter/1000,_widthSide/1000, _heightCenter/1000, _heightSide/1000);
-        DataBaseCreator.NewLayer(_connection,layer);
-    }
+    #endregion
 }

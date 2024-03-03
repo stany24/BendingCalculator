@@ -9,7 +9,10 @@ namespace Flexion.ViewModels;
 
 public partial class MainViewModel
 {
+    #region Bindings
+
     private ListLayersEditor? _listLayersEditor;
+    
     private bool _btnChangeLayerEnabled;
     public bool BtnChangeLayerEnabled { 
         get => _btnChangeLayerEnabled;
@@ -23,6 +26,7 @@ public partial class MainViewModel
     }
 
     public ObservableCollection<Piece> SelectedPieces { get; set; } = new();
+    private int SelectedPieceIndex { get; set; }
 
     private double _pieceLength = 1;
 
@@ -45,9 +49,45 @@ public partial class MainViewModel
         }
     }
 
-    public void CloseLayerOfPieceEditor()
+    #endregion
+
+    #region Piece Edition
+
+    public void CreateNewPiece()
     {
-        _listLayersEditor?.Close();
+        Piece piece = new(_pieceLength/1000, "nouveau");
+        DataBaseCreator.NewPiece(_connection,piece);
+    }
+
+    public void RemovePieces()
+    {
+        int index = SelectedPieceIndex;
+        List<long> selected = SelectedPieces.Select(x => x.PieceId).ToList();
+        foreach (long id in selected)
+        {
+            DataBaseRemover.RemovePiece(_connection,id);
+        }
+
+        if (index <= 0) return;
+        SelectedPieceIndex = SelectedPieces.Count > index ? index : SelectedPieces.Count;
+    }
+    
+    private void PieceLengthChanged()
+    {
+        foreach (Piece piece in SelectedPieces)
+        {
+            piece.Length = _pieceLength/1000;
+        }
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
+    }
+
+    private void PieceNameChanged()
+    {
+        foreach (Piece piece in SelectedPieces)
+        {
+            piece.Name = PieceName;
+        }
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
     }
     
     private void ReloadPieces()
@@ -73,37 +113,14 @@ public partial class MainViewModel
             Pieces[i].Length = pieces[i].Length;
         }
     }
+    
+    #endregion
 
-    private void PieceLengthChanged()
+    #region LayerOfPieceEditor
+
+    public void CloseLayerOfPieceEditor()
     {
-        foreach (Piece piece in SelectedPieces)
-        {
-            piece.Length = _pieceLength/1000;
-        }
-        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
-    }
-
-    private void PieceNameChanged()
-    {
-        foreach (Piece piece in SelectedPieces)
-        {
-            piece.Name = PieceName;
-        }
-        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
-    }
-
-    private int SelectedPieceIndex { get; set; }
-    public void RemovePieces()
-    {
-        int index = SelectedPieceIndex;
-        List<long> selected = SelectedPieces.Select(x => x.PieceId).ToList();
-        foreach (long id in selected)
-        {
-            DataBaseRemover.RemovePiece(_connection,id);
-        }
-
-        if (index <= 0) return;
-        SelectedPieceIndex = SelectedPieces.Count > index ? index : SelectedPieces.Count;
+        _listLayersEditor?.Close();
     }
     
     public void OpenLayerOfPieceEditor()
@@ -116,6 +133,8 @@ public partial class MainViewModel
         BtnChangeLayerEnabled = false;
     }
 
+    #endregion
+    
     private void SelectedPieceChanged()
     {
         if(SelectedPieces.Count == 0)
@@ -125,11 +144,5 @@ public partial class MainViewModel
         }
         BtnChangeLayerEnabled = true;
         LoadLayersOfPiece(SelectedPieces[0].PieceId);
-    }
-
-    public void CreateNewPiece()
-    {
-        Piece piece = new(_pieceLength/1000, "nouveau");
-        DataBaseCreator.NewPiece(_connection,piece);
     }
 }

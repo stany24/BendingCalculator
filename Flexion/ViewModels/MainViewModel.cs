@@ -24,6 +24,8 @@ namespace Flexion.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
+    #region Bindings
+
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
     
@@ -65,6 +67,10 @@ public partial class MainViewModel : ObservableObject
         }
     };
 
+    #endregion
+
+    #region Constructor/Destructor
+
     public MainViewModel(SQLiteConnection connection)
     {
         LanguageEvents.LanguageChanged += ChangeLanguage;
@@ -90,21 +96,17 @@ public partial class MainViewModel : ObservableObject
     {
         LanguageEvents.LanguageChanged -= ChangeLanguage;
     }
-    
+
+    #endregion
+
+    #region Functions
+
     private void Previews()
     {
         SelectedLayersMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowLayer?.Invoke(null, EventArgs.Empty);
         SelectedPiecesMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowPiece?.Invoke(null, EventArgs.Empty);
         SelectedLayers.CollectionChanged += (_, _) => UpdatePreviewLayer?.Invoke(null, EventArgs.Empty);
         SelectedPieces.CollectionChanged += (_, _) => UpdatePreviewPiece?.Invoke(null, EventArgs.Empty);
-    }
-
-    public void CloseAllWindow()
-    {
-        _materialEditor?.Close();
-        _layerEditor?.Close();
-        _pieceEditor?.Close();
-        _forceEditor?.Close();
     }
 
     public void CalculateFlexion()
@@ -119,7 +121,11 @@ public partial class MainViewModel : ObservableObject
             SeriesGraphFlexion[0].Values = points;
         });
     }
-    
+
+    #endregion
+
+    #region Editors
+
     private MaterialEditor? _materialEditor;
     public void OpenMaterialEditor()
     {
@@ -156,4 +162,14 @@ public partial class MainViewModel : ObservableObject
         _forceEditor.Closed += (_, _) => _forceEditor = null;
         _forceEditor.Show();
     }
+
+    public void CloseAllWindow()
+    {
+        _materialEditor?.Close();
+        _layerEditor?.Close();
+        _pieceEditor?.Close();
+        _forceEditor?.Close();
+    }
+    
+    #endregion
 }
