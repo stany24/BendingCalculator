@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Flexion.Database.Actions;
-using Flexion.Logic;
+using Flexion.Logic.Math;
 
 namespace Flexion.ViewModels;
 

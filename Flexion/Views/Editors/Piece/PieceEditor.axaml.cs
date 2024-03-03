@@ -1,10 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Media;
 using Avalonia.Threading;
 using Flexion.Logic.Helper;
-using Flexion.Logic.Preview;
 using Flexion.ViewModels;
 
 namespace Flexion.Views.Editors.Piece;

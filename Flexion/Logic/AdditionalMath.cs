@@ -1,6 +1,4 @@
-﻿using System;
-
-// ReSharper disable SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+﻿// ReSharper disable SwitchStatementHandlesSomeKnownEnumValuesWithDefault
 
 namespace Flexion.Logic;
 
@@ -31,7 +29,7 @@ public static class AdditionalMath
                 Operation.Minus => array1[i] - array2[i],
                 Operation.Multiplication => array1[i] * array2[i],
                 Operation.Divided => array1[i] / array2[i],
-                Operation.Power => Math.Pow(array1[i], array2[i]),
+                Operation.Power => System.Math.Pow(array1[i], array2[i]),
                 _ => final[i]
             };
         }
@@ -50,7 +48,7 @@ public static class AdditionalMath
                 Operation.Minus => array[i] - value,
                 Operation.Multiplication => array[i] * value,
                 Operation.Divided => array[i] / value,
-                Operation.Power => Math.Pow(array[i], value),
+                Operation.Power => System.Math.Pow(array[i], value),
                 _ => final[i]
             };
         }

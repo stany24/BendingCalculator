@@ -6,10 +6,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 
-namespace Flexion.Logic;
+namespace Flexion.Logic.Math;
 
 public class Piece:ObservableObject
 {
+    #region MyRegion
+
     public long PieceId { get; set; }
     
     [JsonInclude]
@@ -62,6 +64,10 @@ public class Piece:ObservableObject
         set => SetProperty(ref _display, ToString());
     }
 
+    #endregion
+
+    #region Constructor / Destructor
+
     public Piece(double length, string name)
     {
         Layers = new List<Layer>();
@@ -80,7 +86,11 @@ public class Piece:ObservableObject
     {
         LanguageEvents.LanguageChanged -= UpdateDisplay;
     }
-    
+
+    #endregion
+
+    #region Display
+
     private void UpdateDisplay(object? sender, EventArgs e)
     {
         Display = ToString();
@@ -94,6 +104,10 @@ public class Piece:ObservableObject
             _ => $"{Name} / {Length*1000}mm / {Layers.Count} {Assets.Localization.Logic.LogicLocalization.Layers}"
         };
     }
+
+    #endregion
+
+    #region Math
 
     /// <summary>
     /// Function used to calculate the torque
@@ -257,4 +271,6 @@ public class Piece:ObservableObject
         }
         return nx;
     }
+
+    #endregion
 }

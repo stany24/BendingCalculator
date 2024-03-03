@@ -3,10 +3,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 
-namespace Flexion.Logic;
+namespace Flexion.Logic.Math;
 
 public class Material:ObservableObject
 {
+    #region Variables
+
     public long MaterialId { get; set; }
         
     private string _name;
@@ -42,7 +44,11 @@ public class Material:ObservableObject
         get => _display ?? ToString();
         set => SetProperty(ref _display, ToString());
     }
-        
+
+    #endregion
+
+    #region Constructor
+
     public Material(string name, long e)
     {
         _name = name;
@@ -51,6 +57,8 @@ public class Material:ObservableObject
 
     [JsonConstructor]
     public Material() { }
+
+    #endregion
         
     public override string ToString()
     {

@@ -14,6 +14,8 @@ namespace Flexion.Views;
  
 public partial class Main : WindowWithHelp
 {
+    #region Constructor
+
     public Main(MainViewModel model)
     {
         DataContext = model;
@@ -26,6 +28,10 @@ public partial class Main : WindowWithHelp
         ReloadLanguage(null,EventArgs.Empty);
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
     }
+
+    #endregion
+
+    #region Previews
 
     private void UpdatePreviewMainWindow()
     {
@@ -55,6 +61,8 @@ public partial class Main : WindowWithHelp
         });
     }
 
+    #endregion
+    
     private void CloseAllWindows()
     {
         if(DataContext is not MainViewModel model){return;}

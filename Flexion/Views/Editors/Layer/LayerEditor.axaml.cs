@@ -1,7 +1,4 @@
-using Avalonia.Controls;
-using Avalonia.Media;
 using Flexion.Logic.Helper;
-using Flexion.Logic.Preview;
 using Flexion.ViewModels;
 
 namespace Flexion.Views.Editors.Layer;

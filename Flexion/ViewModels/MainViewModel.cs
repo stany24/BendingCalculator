@@ -11,6 +11,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Flexion.Database.Actions;
 using Flexion.Logic;
 using Flexion.Logic.Helper;
+using Flexion.Logic.Math;
 using Flexion.Setting;
 using Flexion.Views.Editors.Force;
 using Flexion.Views.Editors.Layer;

@@ -6,10 +6,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 
-namespace Flexion.Logic;
+namespace Flexion.Logic.Math;
 
 public class Layer:ObservableObject
 {
+    #region Variables
+
     public long LayerId { get; set; }
 
     private double _widthAtCenter;
@@ -82,6 +84,10 @@ public class Layer:ObservableObject
         set => SetProperty(ref _display, ToString());
     }
 
+    #endregion
+
+    #region Constructor / Destructor
+
     [JsonConstructor]
     public Layer()
     {
@@ -103,6 +109,10 @@ public class Layer:ObservableObject
         LanguageEvents.LanguageChanged -= UpdateDisplay;
     }
 
+    #endregion
+
+    #region Display
+
     private void UpdateDisplay(object? sender, EventArgs e)
     {
         Display = ToString();
@@ -115,9 +125,13 @@ public class Layer:ObservableObject
             : $"{Assets.Localization.Logic.LogicLocalization.No} {Assets.Localization.Logic.LogicLocalization.MaterialWithColon} {Assets.Localization.Logic.LogicLocalization.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}";
     }
 
+    #endregion
+
+    #region Math
+
     public double[] Base(double longueur, double eRef, double[] xs)
     {
-        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
+        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
         double[] l2 = AdditionalMath.OperationDoubleArray(xs, longueur / 2, AdditionalMath.Operation.Minus);
         l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
         double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
@@ -128,9 +142,9 @@ public class Layer:ObservableObject
 
     private IEnumerable<double> Width(double longueur, double eRef, IEnumerable<double> xs)
     {
-        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / Math.Pow(longueur, 2);
+        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
 
-        List<double> l2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
+        List<double> l2 = xs.Select(x => System.Math.Pow(x - longueur / 2, 2)).ToList();
 
         List<double> lf = l2.Select(l => l1 * l + WidthAtCenter).ToList();
 
@@ -139,9 +153,9 @@ public class Layer:ObservableObject
 
     public List<double> Height(double longueur, IEnumerable<double> xs)
     {
-        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / Math.Pow(longueur, 2);
+        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / System.Math.Pow(longueur, 2);
 
-        List<double> e2 = xs.Select(x => Math.Pow(x - longueur / 2, 2)).ToList();
+        List<double> e2 = xs.Select(x => System.Math.Pow(x - longueur / 2, 2)).ToList();
 
         return e2.Select(l2 => e1 * l2 + HeightAtCenter).ToList();
     }
@@ -152,4 +166,6 @@ public class Layer:ObservableObject
         List<double> heights = Height(length, xs);
         return widths.Select((t, i) => t * heights[i]).ToList();
     }
+
+    #endregion
 }

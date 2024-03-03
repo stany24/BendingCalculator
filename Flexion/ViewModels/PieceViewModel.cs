@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Flexion.Database.Actions;
-using Flexion.Logic;
+using Flexion.Logic.Math;
 using Flexion.Views.Editors.Piece;
 
 namespace Flexion.ViewModels;

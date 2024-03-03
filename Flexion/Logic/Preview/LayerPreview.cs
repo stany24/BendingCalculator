@@ -6,16 +6,23 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Flexion.Logic.Math;
 
 namespace Flexion.Logic.Preview;
 
 public class LayerPreview:Grid
 {
+    #region Variables
+
     private readonly TextBlock _tbxAbove;
     private readonly TextBlock _tbxSide;
     private readonly Canvas _preview;
     private const double PreviewMargin = 10;
-    private  Layer? oldLayer;
+    private  Layer? _oldLayer;
+
+    #endregion
+
+    #region Constructor / Destructor
 
     public LayerPreview()
     {
@@ -55,14 +62,13 @@ public class LayerPreview:Grid
         LanguageEvents.LanguageChanged -= UpdateLanguage;
     }
 
-    private void UpdateLanguage(object? sender, EventArgs eventArgs)
-    {
-        UpdatePreview(oldLayer);
-    }
+    #endregion
+    
+    #region Preview Math
 
     public void UpdatePreview(Layer? layer)
     {
-        oldLayer = layer;
+        _oldLayer = layer;
         _preview.Children.Clear();
         if(layer == null) { Clear();return;}
         _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
@@ -77,32 +83,6 @@ public class LayerPreview:Grid
             GetHourGlass(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
         };
         _preview.Children.AddRange(shapes);
-    }
-
-    private void Clear()
-    {
-        _preview.Children.Clear();
-        _tbxAbove.Text = string.Empty;
-        _tbxSide.Text = string.Empty;
-    }
-    
-    private static double GetFullGridHeight(Grid grid)
-    {
-        double height = 0;
-        int i = 0;
-        while (i < 100)
-        {
-            try
-            {
-                height += grid.RowDefinitions[i].ActualHeight;
-                i++;
-            }
-            catch
-            {
-                return height;
-            }
-        }
-        return height;
     }
     
     private static Path GetHourGlass(double x,double y,double width,double height,double proportionCenterOverSides)
@@ -151,7 +131,7 @@ public class LayerPreview:Grid
     
     private static PathSegment CreateArcSegment(Point point1, Point point2, Point point3)
     {
-        if (Math.Abs(point1.Y - point2.Y) < 0.01)
+        if (System.Math.Abs(point1.Y - point2.Y) < 0.01)
         {
             return new LineSegment
             {
@@ -160,7 +140,7 @@ public class LayerPreview:Grid
         }
         Point center = CalculateCenter(point1,point2,point3);
         Point dif = new(point1.X - center.X, point1.Y - center.Y);
-        double radius = Math.Sqrt(dif.X * dif.X + dif.Y * dif.Y);
+        double radius = System.Math.Sqrt(dif.X * dif.X + dif.Y * dif.Y);
         
         return new ArcSegment
         {
@@ -186,5 +166,42 @@ public class LayerPreview:Grid
     {
         double crossProduct = (point2.X - point1.X) * (point3.Y - point2.Y) - (point2.Y - point1.Y) * (point3.X - point2.X);
         return crossProduct > 0 ? SweepDirection.Clockwise : SweepDirection.CounterClockwise;
+    }
+
+    #endregion
+
+    #region Tools
+
+    private void Clear()
+    {
+        _preview.Children.Clear();
+        _tbxAbove.Text = string.Empty;
+        _tbxSide.Text = string.Empty;
+    }
+    
+    private static double GetFullGridHeight(Grid grid)
+    {
+        double height = 0;
+        int i = 0;
+        while (i < 100)
+        {
+            try
+            {
+                height += grid.RowDefinitions[i].ActualHeight;
+                i++;
+            }
+            catch
+            {
+                return height;
+            }
+        }
+        return height;
+    }
+
+    #endregion
+    
+    private void UpdateLanguage(object? sender, EventArgs eventArgs)
+    {
+        UpdatePreview(_oldLayer);
     }
 }

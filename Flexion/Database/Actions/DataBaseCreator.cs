@@ -1,5 +1,5 @@
 using System.Data.SQLite;
-using Flexion.Logic;
+using Flexion.Logic.Math;
 
 namespace Flexion.Database.Actions;
 
