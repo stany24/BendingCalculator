@@ -76,8 +76,9 @@ public partial class MainViewModel : ObservableObject
     {
         LanguageEvents.LanguageChanged += ChangeLanguage;
         OpenLink = new OpenLinkCommand();
-        Languages = new ObservableCollection<string>{"fr","en","de"};
-        Language = SettingManager.GetLanguage();
+        _languages = new ObservableCollection<string>{"fr","en","de"};
+        _language = SettingManager.GetLanguage();
+        Language = _language;
         _connection = connection;
         SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();

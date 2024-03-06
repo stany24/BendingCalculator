@@ -155,11 +155,21 @@ public class Piece:ObservableObject
         double[] integral3 = new double[_xs.Length];
         double[] moment = MomentForce(force);
         double[] I = CalculateI();
+        // first integral
         for (int i = 0; i < moment.Length; i++)
         {
             integral1[i] = moment[i] / I[i];
         }
-        // first integral
+        // second integral
+        SecondIntegral(ref integral1,ref integral2,ref moment,gap);
+        // third integral
+        ThirdIntegral(ref integral2, ref integral3,gap);
+        
+        return integral3;
+    }
+
+    private static void SecondIntegral(ref double[] integral1,ref double[] integral2,ref double[] moment, double gap)
+    {
         for (int i = 0; i < moment.Length; i++)
         {
             if (i - 1 < 0)
@@ -171,14 +181,16 @@ public class Piece:ObservableObject
                 integral2[i] = integral2[i - 1] + integral1[i] * gap;
             }
         }
-
+        
         double offset = integral2[Convert.ToInt32(integral2.Length / 2)];
         for (int i = 0; i < integral2.Length; i++)
         {
             integral2[i] -= offset;
         }
+    }
 
-        // second integral
+    private static void ThirdIntegral(ref double[] integral2,ref double[] integral3, double gap)
+    {
         for (int i = 0; i < integral3.Length; i++)
         {
             if (i - 1 < 0)
@@ -194,7 +206,6 @@ public class Piece:ObservableObject
         {
             integral3[i] /= -ERef;
         }
-        return integral3;
     }
 
     private double[] CalculateI()

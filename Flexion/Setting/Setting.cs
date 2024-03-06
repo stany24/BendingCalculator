@@ -8,7 +8,10 @@ public class Setting
     public string Language { get; set; }
 
     [JsonConstructor]
-    public Setting(){}
+    public Setting()
+    {
+        Language = "en";
+    }
 
     public Setting(string language)
     {
