@@ -1,4 +1,5 @@
-﻿// ReSharper disable SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+﻿using System;
+using System.Linq;
 
 namespace Flexion.Logic;
 
@@ -14,45 +15,32 @@ public static class AdditionalMath
     }
     public static double[] OperationDoubleArray(double[] array1, double[] array2, Operation action)
     {
-        int length = array1.Length;
-        if (array2.Length < length)
+        if (array1.Length != array2.Length)
         {
-            length = array2.Length;
-        }
-        double[] final = new double[length];
-        
-        for (int i = 0; i < length; i++)
-        {
-            final[i] = action switch
-            {
-                Operation.Plus => array1[i] + array2[i],
-                Operation.Minus => array1[i] - array2[i],
-                Operation.Multiplication => array1[i] * array2[i],
-                Operation.Divided => array1[i] / array2[i],
-                Operation.Power => System.Math.Pow(array1[i], array2[i]),
-                _ => final[i]
-            };
+            throw new ArgumentException("Arrays must have the same length.");
         }
         
-        return final;
+        return action switch
+        {
+            Operation.Multiplication => array1.Zip(array2, (x, y) => x * y).ToArray(),
+            Operation.Divided => array1.Zip(array2, (x, y) => x / y).ToArray(),
+            Operation.Plus => array1.Zip(array2, (x, y) => x + y).ToArray(),
+            Operation.Minus => array1.Zip(array2, (x, y) => x - y).ToArray(),
+            Operation.Power => array1.Zip(array2, System.Math.Pow).ToArray(),
+            _ => array1
+        };
     }
 
     public static double[] OperationDoubleArray(double[] array, double value, Operation action)
     {
-        double[] final = new double[array.Length];
-        for (int i = 0; i < array.Length; i++)
+        return action switch
         {
-            final[i] = action switch
-            {
-                Operation.Plus => array[i] + value,
-                Operation.Minus => array[i] - value,
-                Operation.Multiplication => array[i] * value,
-                Operation.Divided => array[i] / value,
-                Operation.Power => System.Math.Pow(array[i], value),
-                _ => final[i]
-            };
-        }
-        
-        return final;
+            Operation.Multiplication => array.Select(x => x * value).ToArray(),
+            Operation.Divided => array.Select(x => x / value).ToArray(),
+            Operation.Plus => array.Select(x => x + value).ToArray(),
+            Operation.Minus => array.Select(x => x - value).ToArray(),
+            Operation.Power => array.Select(x => System.Math.Pow(x, value)).ToArray(),
+            _ => array
+        };
     }
 }
