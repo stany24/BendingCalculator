@@ -129,42 +129,48 @@ public class Layer:ObservableObject
 
     #region Math
 
-    public double[] Base(double longueur, double eRef, double[] xs)
+    public IEnumerable<double> Base(double longueur, double eRef, double[] xs)
     {
         double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
-        double[] l2 = AdditionalMath.OperationDoubleArray(xs, longueur / 2, AdditionalMath.Operation.Minus);
-        l2 = AdditionalMath.OperationDoubleArray(l2, 2, AdditionalMath.Operation.Power);
-        double[] baseArea = AdditionalMath.OperationDoubleArray(l2, l1, AdditionalMath.Operation.Multiplication);
-        baseArea = AdditionalMath.OperationDoubleArray(baseArea, WidthAtCenter, AdditionalMath.Operation.Plus);
+        
+        double[] l2 = Array.ConvertAll(xs, x=> x-longueur/2);
+        
+        l2 = Array.ConvertAll(l2,x=>x*x);
+        
+        double[] baseArea = Array.ConvertAll(l2,x=>x*l1);
+        
+        baseArea = Array.ConvertAll(baseArea, x=>x+WidthAtCenter);
+        
         double divider = eRef / (Material ?? new Material("",69000000000)).E;
-        return AdditionalMath.OperationDoubleArray(baseArea, divider, AdditionalMath.Operation.Divided);
+        
+        return Array.ConvertAll(baseArea,x=>x/divider);
     }
 
-    private IEnumerable<double> Width(double longueur, double eRef, IEnumerable<double> xs)
+    private IEnumerable<double> Width(double longueur, double eRef, double[] xs)
     {
         double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
 
-        List<double> l2 = xs.Select(x => System.Math.Pow(x - longueur / 2, 2)).ToList();
+        double[] l2 = Array.ConvertAll(xs, x => (x - longueur / 2)*(x - longueur / 2));
 
-        List<double> lf = l2.Select(l => l1 * l + WidthAtCenter).ToList();
+        double[] lf = Array.ConvertAll(l2,x=>x*l1+WidthAtCenter);
 
-        return lf.Select(l => l / eRef * (Material ?? new Material("",69000000000)).E).ToList();
+        return Array.ConvertAll(lf,x => x / eRef * (Material ?? new Material("",69000000000)).E);
     }
 
-    public List<double> Height(double longueur, IEnumerable<double> xs)
+    public double[] Height(double longueur, double[] xs)
     {
         double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / System.Math.Pow(longueur, 2);
 
-        List<double> e2 = xs.Select(x => System.Math.Pow(x - longueur / 2, 2)).ToList();
+        double[] e2 = Array.ConvertAll(xs,x => System.Math.Pow(x - longueur / 2, 2));
 
-        return e2.Select(l2 => e1 * l2 + HeightAtCenter).ToList();
+        return Array.ConvertAll(e2,x => e1 * x + HeightAtCenter);
     }
 
-    public List<double> Surface(double length, double eRef, double[] xs)
+    public IEnumerable<double> Surface(double length, double eRef, double[] xs)
     {
         IEnumerable<double> widths = Width(length, eRef, xs);
-        List<double> heights = Height(length, xs);
-        return widths.Select((t, i) => t * heights[i]).ToList();
+        double[] heights = Height(length, xs);
+        return widths.Zip(heights, (x, y) => x * y).ToArray();
     }
 
     #endregion

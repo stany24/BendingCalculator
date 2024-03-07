@@ -10,7 +10,7 @@ namespace Flexion.Logic.Math;
 
 public class Piece:ObservableObject
 {
-    #region MyRegion
+    #region Variables
 
     public long PieceId { get; set; }
     
@@ -117,19 +117,19 @@ public class Piece:ObservableObject
     private double[] MomentForce(double force)
     {
         double b1 = Length / 2;
-        double[] x = _xs;
+        double[] xs = _xs;
         double[] moments = new double[_xs.Length];
 
-        double[] mfa1 = AdditionalMath.OperationDoubleArray((double[])_xs.Clone(), -force * b1, AdditionalMath.Operation.Multiplication);
-        mfa1 = AdditionalMath.OperationDoubleArray(mfa1, Length, AdditionalMath.Operation.Divided);
+        double[] mfa1 = Array.ConvertAll(_xs, x => x * (-force * b1));
+        mfa1 = Array.ConvertAll(mfa1, x => x / Length);
 
-        double[] mfb1 = AdditionalMath.OperationDoubleArray((double[])_xs.Clone(), Length - b1, AdditionalMath.Operation.Minus);
-        mfb1 = AdditionalMath.OperationDoubleArray(mfb1, force, AdditionalMath.Operation.Multiplication);
-        mfb1 = AdditionalMath.OperationDoubleArray(mfa1, mfb1, AdditionalMath.Operation.Plus);
+        double[] mfb1 = Array.ConvertAll(_xs, x => x - Length - b1);
+        mfb1 = Array.ConvertAll(mfb1, x => x * force);
+        mfb1 = mfb1.Zip(mfa1, (x, y) => x + y).ToArray();
 
         for (int i = 0; i < _xs.Length; i++)
         {
-            if (x[i] < b1)
+            if (xs[i] < b1)
             {
                 moments[i] = mfa1[i];
             }
@@ -222,23 +222,26 @@ public class Piece:ObservableObject
         //calculate the Ix in a generalized way.
         for (int i = 0; i < Layers.Count; i++)
         {
-            double[] power = AdditionalMath.OperationDoubleArray(Layers[i].Height(Length, (double[])_xs.Clone()).ToArray(), 3, AdditionalMath.Operation.Power);
-            double[] divider = AdditionalMath.OperationDoubleArray(power, Layers[i].Base(Length, ERef, (double[])_xs.Clone()), AdditionalMath.Operation.Multiplication);
-            ix[i] = AdditionalMath.OperationDoubleArray(divider, 12, AdditionalMath.Operation.Divided);
+            double[] heights = Layers[i].Height(Length,_xs);
+            double[] power = Array.ConvertAll(heights, x => x * x * x);
+            IEnumerable<double> bases = Layers[i].Base(Length, ERef, _xs);
+            double[] divider = power.Zip(bases, (x, y) => x * y).ToArray();
+            ix[i] = Array.ConvertAll(divider, x => x / 12);
         }
 
         for (int i = 0; i < Layers.Count; i++)
         {
-            double[] p1 = AdditionalMath.OperationDoubleArray(CalculateNx(i, _xs.Length), Ns(), AdditionalMath.Operation.Minus);
-            double[] p2 = AdditionalMath.OperationDoubleArray(p1, 2, AdditionalMath.Operation.Power);
-            double[] p3 = AdditionalMath.OperationDoubleArray(Layers[i].Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), p2, AdditionalMath.Operation.Multiplication);
-            double[] p4 = AdditionalMath.OperationDoubleArray(ix[i], p3, AdditionalMath.Operation.Plus);
-            I = AdditionalMath.OperationDoubleArray(I, p4, AdditionalMath.Operation.Plus);
+            double[] p1 = CalculateNx(i, _xs.Length).Zip(Ns(), (x, y) => x - y).ToArray();
+            double[] p2 = Array.ConvertAll(p1, x => x * x);
+            IEnumerable<double> surfaces = Layers[i].Surface(Length, ERef, _xs);
+            double[] p3 = surfaces.Zip(p2, (x, y) => x * y).ToArray();
+            double[] p4 = ix[i].Zip(p3, (x, y) => x + y).ToArray();
+            I = I.Zip(p4, (x, y) => x + y).ToArray();
         }
         return I;
     }
 
-    private double[] Ns()
+    private IEnumerable<double> Ns()
     {
         double[][] nx = new double[Layers.Count][];
         double[] divided = new double[_xs.Length];
@@ -257,12 +260,28 @@ public class Piece:ObservableObject
         }
 
         //calculation of the divided
-        divided = Layers.Select((t, i) => AdditionalMath.OperationDoubleArray(t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), nx[i], AdditionalMath.Operation.Multiplication)).Aggregate(divided, (current, added) => AdditionalMath.OperationDoubleArray(current, added, AdditionalMath.Operation.Plus));
+        divided = MultiplyAndAggregate(divided, Layers, nx);
 
         // calculation of dividing
-        divider = Layers.Aggregate(divider, (current, t) => AdditionalMath.OperationDoubleArray(current, t.Surface(Length, ERef, (double[])_xs.Clone()).ToArray(), AdditionalMath.Operation.Plus));
+        divider = Layers.Aggregate(divider, CombineSurfaces);
+        
         //calculation of Ns
-        return AdditionalMath.OperationDoubleArray(divided, divider, AdditionalMath.Operation.Divided);
+        return divided.Zip(divider, (x, y) => x / y).ToArray();
+    }
+    
+    private double[] CombineSurfaces(double[] currentDivider, Layer layer)
+    {
+        IEnumerable<double> surface = layer.Surface(Length, ERef, _xs);
+        return currentDivider.Zip(surface,(x,y)=>x+y).ToArray();
+    }
+
+    private double[] MultiplyAndAggregate(double[] divided, IEnumerable<Layer> layers, IReadOnlyList<double[]> nx)
+    {
+        return layers
+            .Select((layer, i) =>
+                layer.Surface(Length, ERef, _xs).Zip(nx[i], (x, y) => x * y))
+            .Aggregate(divided, (current, added) =>
+                current.Zip(added, (x, y) => x + y).ToArray());
     }
 
     private double[] CalculateNx(int i, int length)
@@ -272,12 +291,14 @@ public class Piece:ObservableObject
         {
             if (j == i)
             {
-                double[] add = AdditionalMath.OperationDoubleArray(Layers[j].Height(Length, (double[])_xs.Clone()).ToArray(), 2, AdditionalMath.Operation.Divided);
-                nx = AdditionalMath.OperationDoubleArray(nx, add, AdditionalMath.Operation.Plus);
+                double[] heights = Layers[j].Height(Length, _xs);
+                double[] add = Array.ConvertAll(heights, x => x / 2);
+                nx = nx.Zip(add, (x, y) => x + y).ToArray();
             }
             else
             {
-                nx = AdditionalMath.OperationDoubleArray(nx, Layers[j].Height(Length, (double[])_xs.Clone()).ToArray(), AdditionalMath.Operation.Plus);
+                double[] heights = Layers[j].Height(Length,_xs);
+                nx = nx.Zip(heights,(x,y)=>x+y).ToArray();
             }
         }
         return nx;
