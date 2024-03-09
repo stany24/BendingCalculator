@@ -161,16 +161,16 @@ public class Piece:ObservableObject
             integral1[i] = moment[i] / I[i];
         }
         // second integral
-        SecondIntegral(ref integral1,ref integral2,ref moment,gap);
+        SecondIntegral(integral1,ref integral2,moment,gap);
         // third integral
-        ThirdIntegral(ref integral2, ref integral3,gap);
+        ThirdIntegral(integral2, ref integral3,gap);
         
         return integral3;
     }
 
-    private static void SecondIntegral(ref double[] integral1,ref double[] integral2,ref double[] moment, double gap)
+    private static void SecondIntegral(IReadOnlyList<double> integral1,ref double[] integral2,IReadOnlyCollection<double> moment, double gap)
     {
-        for (int i = 0; i < moment.Length; i++)
+        for (int i = 0; i < moment.Count; i++)
         {
             if (i - 1 < 0)
             {
@@ -189,7 +189,7 @@ public class Piece:ObservableObject
         }
     }
 
-    private static void ThirdIntegral(ref double[] integral2,ref double[] integral3, double gap)
+    private static void ThirdIntegral(IReadOnlyList<double> integral2,ref double[] integral3, double gap)
     {
         for (int i = 0; i < integral3.Length; i++)
         {
@@ -223,8 +223,8 @@ public class Piece:ObservableObject
         for (int i = 0; i < Layers.Count; i++)
         {
             double[] heights = Layers[i].Height(Length,_xs);
-            double[] power = Array.ConvertAll(heights, x => x * x * x);
-            IEnumerable<double> bases = Layers[i].Base(Length, ERef, _xs);
+            double[] power = Array.ConvertAll(heights, x => x * x * x );
+            IEnumerable<double> bases = Layers[i].Width(Length, ERef, _xs);
             double[] divider = power.Zip(bases, (x, y) => x * y).ToArray();
             ix[i] = Array.ConvertAll(divider, x => x / 12);
         }

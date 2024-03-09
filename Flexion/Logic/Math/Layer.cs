@@ -129,26 +129,9 @@ public class Layer:ObservableObject
 
     #region Math
 
-    public IEnumerable<double> Base(double longueur, double eRef, double[] xs)
+    public IEnumerable<double> Width(double longueur, double eRef, double[] xs)
     {
-        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
-        
-        double[] l2 = Array.ConvertAll(xs, x=> x-longueur/2);
-        
-        l2 = Array.ConvertAll(l2,x=>x*x);
-        
-        double[] baseArea = Array.ConvertAll(l2,x=>x*l1);
-        
-        baseArea = Array.ConvertAll(baseArea, x=>x+WidthAtCenter);
-        
-        double divider = eRef / (Material ?? new Material("",69000000000)).E;
-        
-        return Array.ConvertAll(baseArea,x=>x/divider);
-    }
-
-    private IEnumerable<double> Width(double longueur, double eRef, double[] xs)
-    {
-        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / System.Math.Pow(longueur, 2);
+        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / (longueur*longueur);
 
         double[] l2 = Array.ConvertAll(xs, x => (x - longueur / 2)*(x - longueur / 2));
 
@@ -159,9 +142,9 @@ public class Layer:ObservableObject
 
     public double[] Height(double longueur, double[] xs)
     {
-        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / System.Math.Pow(longueur, 2);
+        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / (longueur*longueur);
 
-        double[] e2 = Array.ConvertAll(xs,x => System.Math.Pow(x - longueur / 2, 2));
+        double[] e2 = Array.ConvertAll(xs,x => (x - longueur / 2)*(x - longueur / 2));
 
         return Array.ConvertAll(e2,x => e1 * x + HeightAtCenter);
     }
