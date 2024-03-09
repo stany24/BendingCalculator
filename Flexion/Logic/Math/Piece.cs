@@ -50,7 +50,7 @@ public class Piece:ObservableObject
     private double[] SetX(double gap)
     {
         List<double> x = new();
-        for (double i = 0; i <= Length + gap; i += gap)
+        for (double i = 0; i <= Length; i += gap)
         {
             x.Add(i);
         }
@@ -258,30 +258,20 @@ public class Piece:ObservableObject
         {
             nx[i] = CalculateNx(i, _xs.Length);
         }
-
-        //calculation of the divided
-        divided = MultiplyAndAggregate(divided, Layers, nx);
-
-        // calculation of dividing
-        divider = Layers.Aggregate(divider, CombineSurfaces);
+        
+        for (int i = 0; i < nx.Length; i++)
+        {
+            double[] ni = nx[i].Zip(Layers[i].Surface(Length, ERef, _xs), (x, y) => x * y).ToArray();
+            divided = divided.Zip(ni, (x, y) => x + y).ToArray();
+        }
+        
+        for (int i = 0; i < nx.Length; i++)
+        {
+            divider = divider.Zip(Layers[i].Surface(Length, ERef, _xs), (x, y) => x + y).ToArray();
+        }
         
         //calculation of Ns
         return divided.Zip(divider, (x, y) => x / y).ToArray();
-    }
-    
-    private double[] CombineSurfaces(double[] currentDivider, Layer layer)
-    {
-        IEnumerable<double> surface = layer.Surface(Length, ERef, _xs);
-        return currentDivider.Zip(surface,(x,y)=>x+y).ToArray();
-    }
-
-    private double[] MultiplyAndAggregate(double[] divided, IEnumerable<Layer> layers, IReadOnlyList<double[]> nx)
-    {
-        return layers
-            .Select((layer, i) =>
-                layer.Surface(Length, ERef, _xs).Zip(nx[i], (x, y) => x * y))
-            .Aggregate(divided, (current, added) =>
-                current.Zip(added, (x, y) => x + y).ToArray());
     }
 
     private double[] CalculateNx(int i, int length)
@@ -289,17 +279,9 @@ public class Piece:ObservableObject
         double[] nx = new double[length];
         for (int j = 0; j <= i; j++)
         {
-            if (j == i)
-            {
-                double[] heights = Layers[j].Height(Length, _xs);
-                double[] add = Array.ConvertAll(heights, x => x / 2);
-                nx = nx.Zip(add, (x, y) => x + y).ToArray();
-            }
-            else
-            {
-                double[] heights = Layers[j].Height(Length,_xs);
-                nx = nx.Zip(heights,(x,y)=>x+y).ToArray();
-            }
+            double[] heights = Layers[j].Height(Length, _xs);
+            if (j == i) { heights = Array.ConvertAll(heights, x => x / 2); }
+            nx = nx.Zip(heights, (x, y) => x + y).ToArray();
         }
         return nx;
     }
