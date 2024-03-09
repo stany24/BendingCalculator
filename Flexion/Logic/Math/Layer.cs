@@ -129,27 +129,47 @@ public class Layer:ObservableObject
 
     #region Math
 
-    public IEnumerable<double> Width(double longueur, double eRef, double[] xs)
+    /// <summary>
+    /// Function used to get all the width of the layer
+    /// </summary>
+    /// <param name="length">The length of the piece</param>
+    /// <param name="eRef">The E reference</param>
+    /// <param name="xs">All the distances where we should me the calculations</param>
+    /// <returns></returns>
+    public IEnumerable<double> Width(double length, double eRef, double[] xs)
     {
-        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / (longueur*longueur);
+        double l1 = (4 * WidthOnSides - 4 * WidthAtCenter) / (length*length);
 
-        double[] l2 = Array.ConvertAll(xs, x => (x - longueur / 2)*(x - longueur / 2));
+        double[] l2 = Array.ConvertAll(xs, x => (x - length / 2)*(x - length / 2));
 
         double[] lf = Array.ConvertAll(l2,x=>x*l1+WidthAtCenter);
 
         return Array.ConvertAll(lf,x => x / eRef * (Material ?? new Material("",69000000000)).E);
     }
 
-    public double[] Height(double longueur, double[] xs)
+    /// <summary>
+    /// Function used to get all the heights of the layer
+    /// </summary>
+    /// <param name="length">The length of the piece</param>
+    /// <param name="xs">All the distances where we should me the calculations</param>
+    /// <returns></returns>
+    public double[] Height(double length, double[] xs)
     {
-        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / (longueur*longueur);
+        double e1 = (4 * HeightOnSides - 4 * HeightAtCenter) / (length*length);
 
-        double[] e2 = Array.ConvertAll(xs,x => (x - longueur / 2)*(x - longueur / 2));
+        double[] e2 = Array.ConvertAll(xs,x => (x - length / 2)*(x - length / 2));
 
         return Array.ConvertAll(e2,x => e1 * x + HeightAtCenter);
     }
 
-    public IEnumerable<double> Surface(double length, double eRef, double[] xs)
+    /// <summary>
+    /// Function used to get all the surfaces of the layer
+    /// </summary>
+    /// <param name="length">The length of the piece</param>
+    /// <param name="eRef">The E reference</param>
+    /// <param name="xs">All the distances where we should me the calculations</param>
+    /// <returns></returns>
+    public IEnumerable<double> Area(double length, double eRef, double[] xs)
     {
         IEnumerable<double> widths = Width(length, eRef, xs);
         

@@ -108,31 +108,21 @@ public class Piece:ObservableObject
     #endregion
 
     #region Math
-
-    /// <summary>
-    /// Function used to calculate the torque
-    /// </summary>
-    /// <param name="force">The force applied to the piece</param>
-    /// <returns></returns>
-    private double[] MomentForce(double force)
+    
+    private IEnumerable<double> MomentForce(double force)
     {
         double[] moments = new double[_xs.Length];
-
-        double[] mfa1 = Array.ConvertAll(_xs, x => -force / 2 * x );
-
-        double[] mfb1 = Array.ConvertAll(_xs, x => force / 2 * x);
-        double offset = mfa1[mfa1.Length / 2] - mfb1[mfb1.Length / 2];
-        mfb1 = Array.ConvertAll(mfb1, x => x + offset);
+        double offset = -force / 2 * _xs[_xs.Length / 2] - force / 2 * _xs[_xs.Length / 2];
 
         for (int i = 0; i < _xs.Length; i++)
         {
             if (_xs[i] < Length/2)
             {
-                moments[i] = mfa1[i];
+                moments[i] = -force / 2 * _xs[i];
             }
             else
             {
-                moments[i] = mfb1[i];
+                moments[i] = force / 2 * _xs[i] + offset;
             }
         }
         return moments;
@@ -149,26 +139,21 @@ public class Piece:ObservableObject
         _xs = SetX(gap);
         double[] integral1 = new double[_xs.Length];
         double[] integral2 = new double[_xs.Length];
-        double[] moment = MomentForce(force);
-        double[] I = CalculateI();
-        // first integral
-        double[] fonction = moment.Zip(I, (x, y) => x / y).ToArray();
-        // second integral
-        FirstIntegral(fonction,ref integral1,gap);
-        // third integral
+        IEnumerable<double> moment = MomentForce(force);
+        IEnumerable<double> I = CalculateI();
+        double[] function = moment.Zip(I, (x, y) => x / y).ToArray();
+        FirstIntegral(function,ref integral1,gap);
         SecondIntegral(integral1, ref integral2,gap);
-        
         return integral2;
     }
-
-    private static void FirstIntegral(IReadOnlyList<double> fonction,ref double[] integral1, double gap)
+    
+    private static void FirstIntegral(IReadOnlyList<double> function,ref double[] integral1, double gap)
     {
-        integral1[0] = fonction[0] * gap;
-        for (int i = 1; i < fonction.Count; i++)
+        integral1[0] = function[0] * gap;
+        for (int i = 1; i < function.Count; i++)
         {
-            integral1[i] = integral1[i - 1] + fonction[i] * gap;
+            integral1[i] = integral1[i - 1] + function[i] * gap;
         }
-        
         double constant = integral1[integral1.Length / 2];
         integral1 = Array.ConvertAll(integral1, x => x-constant);
     }
@@ -180,21 +165,13 @@ public class Piece:ObservableObject
         {
             integral2[i] = integral2[i - 1] + integral1[i] * gap;
         }
-
         integral2 = Array.ConvertAll(integral2, x => x / -ERef);
     }
 
-    private double[] CalculateI()
+    private IEnumerable<double> CalculateI()
     {
         double[][] ix = new double[Layers.Count][];
         double[] I = new double[_xs.Length];
-
-        //initialize the arrays
-        for (int i = 0; i < ix.Length; i++)
-        {
-            ix[i] = new double[_xs.Length];
-        }
-
         //calculate the Ix in a generalized way.
         for (int i = 0; i < Layers.Count; i++)
         {
@@ -204,12 +181,12 @@ public class Piece:ObservableObject
             double[] divided = power.Zip(widths, (x, y) => x * y).ToArray();
             ix[i] = Array.ConvertAll(divided, x => x / 12);
         }
-
+        //calculate I with the Ix
         for (int i = 0; i < Layers.Count; i++)
         {
             double[] p1 = CalculateNx(i, _xs.Length).Zip(Ns(), (x, y) => x - y).ToArray();
             double[] p2 = Array.ConvertAll(p1, x => x * x);
-            IEnumerable<double> surfaces = Layers[i].Surface(Length, ERef, _xs);
+            IEnumerable<double> surfaces = Layers[i].Area(Length, ERef, _xs);
             double[] p3 = surfaces.Zip(p2, (x, y) => x * y).ToArray();
             double[] p4 = ix[i].Zip(p3, (x, y) => x + y).ToArray();
             I = I.Zip(p4, (x, y) => x + y).ToArray();
@@ -219,33 +196,18 @@ public class Piece:ObservableObject
 
     private IEnumerable<double> Ns()
     {
+        //initialize the arrays
         double[][] nx = new double[Layers.Count][];
         double[] divided = new double[_xs.Length];
         double[] divider = new double[_xs.Length];
-
-        //initialize the arrays
-        for (int i = 0; i < nx.Length; i++)
-        {
-            nx[i] = new double[_xs.Length];
-        }
-
         //calculate Nx in a generalized way.
-        for (int i = 0; i < Layers.Count; i++)
+        for (int i = 0; i < nx.Length; i++)
         {
             nx[i] = CalculateNx(i, _xs.Length);
-        }
-        
-        for (int i = 0; i < nx.Length; i++)
-        {
-            double[] ni = nx[i].Zip(Layers[i].Surface(Length, ERef, _xs), (x, y) => x * y).ToArray();
+            double[] ni = nx[i].Zip(Layers[i].Area(Length, ERef, _xs), (x, y) => x * y).ToArray();
             divided = divided.Zip(ni, (x, y) => x + y).ToArray();
+            divider = divider.Zip(Layers[i].Area(Length, ERef, _xs), (x, y) => x + y).ToArray();
         }
-        
-        for (int i = 0; i < nx.Length; i++)
-        {
-            divider = divider.Zip(Layers[i].Surface(Length, ERef, _xs), (x, y) => x + y).ToArray();
-        }
-        
         //calculation of Ns
         return divided.Zip(divider, (x, y) => x / y).ToArray();
     }
