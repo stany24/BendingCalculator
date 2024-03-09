@@ -40,9 +40,9 @@ Gabriel Raymondaz co-creator of the project.
 
 Gouvernon Stan co-creator of the project.
 
-Expert1
+Christophe  Germiquet expert when creating the project.
 
-Expert2
+Laurent Rapillard expert during the national contest.
 
 ## License
 For open source projects, say how it is licensed.
