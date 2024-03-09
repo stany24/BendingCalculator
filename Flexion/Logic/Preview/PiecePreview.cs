@@ -76,7 +76,7 @@ public class PiecePreview:Grid
 
     private static Path GetRectangle(double x,double y,double width,double height)
     {
-        Path path = new()
+        return new Path
         {
             Fill = Brushes.LightBlue,
             Data = new PathGeometry
@@ -111,7 +111,6 @@ public class PiecePreview:Grid
                 }
             }
         };
-        return path;
     }
     
     private void CreateNewTextBlocks(Piece piece)

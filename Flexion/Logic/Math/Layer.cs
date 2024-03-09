@@ -169,7 +169,9 @@ public class Layer:ObservableObject
     public IEnumerable<double> Surface(double length, double eRef, double[] xs)
     {
         IEnumerable<double> widths = Width(length, eRef, xs);
+        
         double[] heights = Height(length, xs);
+        
         return widths.Zip(heights, (x, y) => x * y).ToArray();
     }
 
