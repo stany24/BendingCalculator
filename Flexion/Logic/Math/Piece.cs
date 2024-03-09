@@ -196,7 +196,6 @@ public class Piece:ObservableObject
 
     private IEnumerable<double> Ns()
     {
-        //initialize the arrays
         double[][] nx = new double[Layers.Count][];
         double[] divided = new double[_xs.Length];
         double[] divider = new double[_xs.Length];
