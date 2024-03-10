@@ -45,14 +45,14 @@ public partial class MainViewModel
         }
     }
     
-    private double _eValue = 69;
+    private double? _eValue = 69;
 
-    public double EValue
+    public double? EValue
     {
         get => _eValue;
         set
         {
-            _eValue = value;
+            _eValue = value ?? 0;
             MaterialEChanged();
         }
     }
