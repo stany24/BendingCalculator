@@ -42,4 +42,13 @@
     <data name="PiecesWithColon" xml:space="preserve">
         <value>Stücke:</value>
     </data>
+    <data name="ValueCenterWithColon" xml:space="preserve">
+        <value>Wert in der Mitte:</value>
+    </data>
+    <data name="ValueDistanceWithColon" xml:space="preserve">
+        <value>Wert auf Distanz:</value>
+    </data>
+    <data name="DistanceWithColon" xml:space="preserve">
+        <value>Distanz:</value>
+    </data>
 </root>

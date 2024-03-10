@@ -32,6 +32,9 @@ public partial class MainViewModel
         MaterialsWithColonBinding = resourceManagerMain.GetString("MaterialsWithColon", lang);
         PiecesWithColonBinding = resourceManagerMain.GetString("PiecesWithColon", lang);
         LayersWithColonBinding = resourceManagerMain.GetString("LayersWithColon", lang);
+        DistanceWithColonBinding = resourceManagerMain.GetString("DistanceWithColon", lang);
+        ValueDistanceWithColonBinding  = resourceManagerMain.GetString("ValueDistanceWithColon", lang);
+        ValueCenterWithColonBinding = resourceManagerMain.GetString("ValueCenterWithColon", lang);
         
         #endregion
 
@@ -635,6 +638,27 @@ public partial class MainViewModel
     {
         get =>_widthSidesWithColonBinding;
         set => SetProperty(ref _widthSidesWithColonBinding, value);
+    }
+    
+    private string? _distanceWithColonBinding;
+    public string? DistanceWithColonBinding
+    {
+        get =>_distanceWithColonBinding;
+        set => SetProperty(ref _distanceWithColonBinding, value);
+    }
+    
+    private string? _valueDistanceWithColonBinding;
+    public string? ValueDistanceWithColonBinding
+    {
+        get =>_valueDistanceWithColonBinding;
+        set => SetProperty(ref _valueDistanceWithColonBinding, value);
+    }
+    
+    private string? _valueCenterWithColonBinding;
+    public string? ValueCenterWithColonBinding
+    {
+        get =>_valueCenterWithColonBinding;
+        set => SetProperty(ref _valueCenterWithColonBinding, value);
     }
 
     #endregion

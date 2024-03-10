@@ -42,4 +42,13 @@
     <data name="LayersWithColon" xml:space="preserve">
         <value>Layers:</value>
     </data>
+    <data name="ValueCenterWithColon" xml:space="preserve">
+        <value>Value at the center:</value>
+    </data>
+    <data name="ValueDistanceWithColon" xml:space="preserve">
+        <value>Distance value:</value>
+    </data>
+    <data name="DistanceWithColon" xml:space="preserve">
+        <value>Distance:</value>
+    </data>
 </root>

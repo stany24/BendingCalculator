@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
@@ -68,6 +69,44 @@ public partial class MainViewModel : ObservableObject
         }
     };
 
+    private List<ObservablePoint> _points;
+    private double? _pieceInGraphLength = 0;
+    public double? PieceInGraphLength
+    {
+        get=>_pieceInGraphLength;
+        set => SetProperty(ref _pieceInGraphLength, value);
+    }
+    
+    private double? _valueCenter = 0;
+
+    public double? ValueCenter
+    {
+        get=>_valueCenter;
+        set => SetProperty(ref _valueCenter, value);
+    }
+    private double? _valueDistance = 0;
+
+    public double? ValueDistance
+    {
+        get=>_valueDistance;
+        set => SetProperty(ref _valueDistance, value);
+    }
+    
+    private double? _distance = 0;
+    public double? Distance
+    {
+        get=>_distance;
+        set
+        {
+            _distance = value;
+            if (Distance == null) { 
+                ValueDistance = 0;
+                return;
+            }
+            ValueDistance = _points[(int)(Distance*10)].Y;
+        }
+    }
+
     #endregion
 
     #region Constructor/Destructor
@@ -118,12 +157,14 @@ public partial class MainViewModel : ObservableObject
             if(SelectedPiecesMainWindow is { Count: 0 }){return;}
             if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
+            PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
             IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateFlexion((int)Force,gap);
-            List<ObservablePoint> points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
-            SeriesGraphFlexion[0].Values = points;
+            _points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
+            SeriesGraphFlexion[0].Values = _points;
+            ValueCenter = _points[_points.Count / 2].Y*1000;
         });
     }
-
+    
     #endregion
 
     #region Editors

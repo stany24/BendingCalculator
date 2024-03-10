@@ -5,6 +5,7 @@
         xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:viewModels="clr-namespace:Flexion.ViewModels"
         xmlns:preview="clr-namespace:Flexion.Logic.Preview"
+        xmlns:converter="clr-namespace:Flexion.ViewModels.Converter"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Main"
         x:DataType="viewModels:MainViewModel"
@@ -12,91 +13,104 @@
         Title="Calculateur de Flexion"
         MinWidth="802"
         MinHeight="355">
+    <Window.Resources>
+        <converter:DoubleConverter x:Key="DoubleConverter"/>
+    </Window.Resources>
     
     <Grid
         Name="MainGrid"
         Margin="5"
         ColumnDefinitions="Auto,10,*,10,*,10,Auto"
         RowDefinitions="*,10,*,10,Auto">
-        <Grid 
-            Name="GridForce"
-            Margin="5"
-            ColumnDefinitions="Auto,10,Auto"
-            RowDefinitions="Auto,10,Auto,10,Auto"
-            MinHeight="150"
+        <Grid
+            Name="GridLeft"
+            ColumnDefinitions="*"
+            RowDefinitions="Auto,*,Auto"
+            ShowGridLines="True"
             Column="0"
             Row="0">
-            <TextBlock
-                Name="LblForce"
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="{Binding ForceWithColonBinding}"
-                VerticalAlignment="Center"></TextBlock>
-            <NumericUpDown
-                Name="NudForce"
-                Value="{Binding Force}"
-                Minimum="0.1"
-                Grid.Column="0"
-                Grid.Row="2"
-                Grid.ColumnSpan="3"></NumericUpDown>
-            <Button
-                Name="BtnForce"
-                Content="{Binding ModifyBinding}"
-                Grid.Row="0"
-                Grid.Column="2"
-                Command="{Binding OpenForceEditor}"
-                CommandParameter="{Binding #NudForce}"></Button>
-            <TextBlock 
-                Name="TbxLang"
-                Grid.Row="4"
-                Grid.Column="0"
-                Text="{Binding LanguageWithColonBinding}"></TextBlock>
-            <ComboBox 
-                Name="CbxLang"
-                Grid.Row="4"
-                Grid.Column="2"
-                ItemsSource="{Binding Languages}"
-                SelectedItem="{Binding Language}"></ComboBox>
-        </Grid>
-        <Grid 
-            Name="GridForce"
-            Margin="5"
-            ColumnDefinitions="Auto,10,Auto"
-            RowDefinitions="Auto,10,Auto,10,Auto"
-            MinHeight="150"
-            Column="0"
-            Row="0">
-            <TextBlock
-                Name="LblForce"
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="{Binding ForceWithColonBinding}"
-                VerticalAlignment="Center"></TextBlock>
-            <NumericUpDown
-                Name="NudForce"
-                Value="{Binding Force}"
-                Minimum="0.1"
-                Grid.Column="0"
-                Grid.Row="2"
-                Grid.ColumnSpan="3"></NumericUpDown>
-            <Button
-                Name="BtnForce"
-                Content="{Binding ModifyBinding}"
-                Grid.Row="0"
-                Grid.Column="2"
-                Command="{Binding OpenForceEditor}"
-                CommandParameter="{Binding #NudForce}"></Button>
-            <TextBlock 
-                Name="TbxLang"
-                Grid.Row="4"
-                Grid.Column="0"
-                Text="{Binding LanguageWithColonBinding}"></TextBlock>
-            <ComboBox 
-                Name="CbxLang"
-                Grid.Row="4"
-                Grid.Column="2"
-                ItemsSource="{Binding Languages}"
-                SelectedItem="{Binding Language}"></ComboBox>
+            <Grid 
+                Name="GridForce"
+                Margin="5"
+                ColumnDefinitions="Auto,10,Auto"
+                RowDefinitions="Auto,10,Auto,10,Auto"
+                Column="0"
+                Row="0">
+                <TextBlock
+                    Name="LblForce"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="{Binding ForceWithColonBinding}"
+                    VerticalAlignment="Center"></TextBlock>
+                <NumericUpDown
+                    Name="NudForce"
+                    Value="{Binding Force}"
+                    Minimum="0.1"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"></NumericUpDown>
+                <Button
+                    Name="BtnForce"
+                    Content="{Binding ModifyBinding}"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Command="{Binding OpenForceEditor}"
+                    CommandParameter="{Binding #NudForce}"></Button>
+                <TextBlock 
+                    Name="TbxLang"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="{Binding LanguageWithColonBinding}"></TextBlock>
+                <ComboBox 
+                    Name="CbxLang"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    ItemsSource="{Binding Languages}"
+                    SelectedItem="{Binding Language}"></ComboBox>
+            </Grid>
+            <Grid 
+                Name="GridResult"
+                Margin="5"
+                ColumnDefinitions="Auto,10,Auto"
+                RowDefinitions="Auto,10,Auto,10,Auto"
+                Column="0"
+                Row="2">
+                <TextBlock
+                    Name="LblValueCenter"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="{Binding ValueCenterWithColonBinding}"
+                    VerticalAlignment="Center"></TextBlock>
+                <TextBlock
+                    Name="TbxValueCenter"
+                    Text="{Binding ValueCenter, Converter={StaticResource DoubleConverter}}"
+                    Grid.Column="2"
+                    Grid.Row="0"></TextBlock>
+                <TextBlock
+                    Name="LblDistance"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="{Binding DistanceWithColonBinding}"
+                    VerticalAlignment="Center"></TextBlock>
+                <NumericUpDown
+                    Name="NudDistance"
+                    Minimum="0"
+                    Maximum="{Binding PieceInGraphLength}"
+                    Value="{Binding Distance}"
+                    Grid.Column="2"
+                    Grid.Row="2"></NumericUpDown>
+                <TextBlock
+                    Name="LblValueDistance"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="{Binding ValueDistanceWithColonBinding}"
+                    VerticalAlignment="Center"></TextBlock>
+                <TextBlock
+                    Name="TbxValueDistance"
+                    Text="{Binding ValueDistance, Converter={StaticResource DoubleConverter}}"
+                    Grid.Column="2"
+                    Grid.Row="4"></TextBlock>
+            </Grid>
         </Grid>
         <Grid 
             Name="GridPiece"
