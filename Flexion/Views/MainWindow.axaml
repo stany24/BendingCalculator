@@ -90,7 +90,7 @@
                     Name="LblDistance"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Text="{Binding DistanceWithColonBinding}"
+                    Text="{Binding DistanceFromLeftWithUnitWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
                 <NumericUpDown
                     Name="NudDistance"

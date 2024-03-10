@@ -77,14 +77,14 @@ public partial class MainViewModel : ObservableObject
         set => SetProperty(ref _pieceInGraphLength, value);
     }
     
-    private double? _valueCenter = 0;
+    private double? _valueCenter = -0;
 
     public double? ValueCenter
     {
         get=>_valueCenter;
         set => SetProperty(ref _valueCenter, value);
     }
-    private double? _valueDistance = 0;
+    private double? _valueDistance = -0;
 
     public double? ValueDistance
     {
@@ -103,7 +103,7 @@ public partial class MainViewModel : ObservableObject
                 ValueDistance = 0;
                 return;
             }
-            ValueDistance = _points[(int)(Distance*10)].Y;
+            ValueDistance = _points[(int)(Distance/PieceInGraphLength*10000)].Y;
         }
     }
 
@@ -161,7 +161,7 @@ public partial class MainViewModel : ObservableObject
             IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateFlexion((int)Force,gap);
             _points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphFlexion[0].Values = _points;
-            ValueCenter = _points[_points.Count / 2].Y*1000;
+            ValueCenter = _points[_points.Count / 2].Y;
         });
     }
     

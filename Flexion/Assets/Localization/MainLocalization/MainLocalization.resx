@@ -48,7 +48,7 @@
     <data name="ValueDistanceWithColon" xml:space="preserve">
         <value>Distance value:</value>
     </data>
-    <data name="DistanceWithColon" xml:space="preserve">
-        <value>Distance:</value>
+    <data name="DistanceFromLeftWithUnitWithColon" xml:space="preserve">
+        <value>Distance from the left (mm):</value>
     </data>
 </root>
