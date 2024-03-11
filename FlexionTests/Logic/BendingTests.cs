@@ -5,6 +5,7 @@ namespace FlexionTests.Logic;
 
 public class BendingTests
 {
+    // All length values are in meters except the results in millimeters
     [Fact]
     public void SingleLayerRectangularPieceBendingTest()
     {
