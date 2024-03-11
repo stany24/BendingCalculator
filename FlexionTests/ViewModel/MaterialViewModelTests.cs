@@ -4,6 +4,7 @@ using Xunit;
 
 namespace FlexionTests.ViewModel;
 
+[Collection("SettingsCollection")]
 public class MaterialViewModelTests
 {
     private readonly MainViewModel _model = new(DataBaseInitializer.InitializeDatabaseConnection());
