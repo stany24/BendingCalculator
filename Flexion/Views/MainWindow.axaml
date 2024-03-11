@@ -10,7 +10,7 @@
         x:Class="Flexion.Views.Main"
         x:DataType="viewModels:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Calculateur de Flexion"
+        Title="{Binding TitleMainWindowBinding}"
         MinWidth="802"
         MinHeight="355">
     <Window.Resources>
@@ -26,7 +26,6 @@
             Name="GridLeft"
             ColumnDefinitions="*"
             RowDefinitions="Auto,*,Auto"
-            ShowGridLines="True"
             Column="0"
             Row="0">
             <Grid 

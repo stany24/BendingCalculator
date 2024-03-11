@@ -36,4 +36,10 @@
     <data name="MoveUp" xml:space="preserve">
         <value>Monter</value>
     </data>
+    <data name="TitlePieceWindow" xml:space="preserve">
+        <value>Éditeur de pièces</value>
+    </data>
+    <data name="TitleLayerOfPieceWindow" xml:space="preserve">
+        <value>Éditeur des couches dans la pièce</value>
+    </data>
 </root>

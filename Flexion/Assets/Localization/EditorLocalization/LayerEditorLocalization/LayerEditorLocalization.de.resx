@@ -33,4 +33,7 @@
     <data name="WidthSidesWithColon" xml:space="preserve">
         <value>Breite an den Seiten:</value>
     </data>
+    <data name="TitleLayerWindow" xml:space="preserve">
+        <value>Editor für Schichten</value>
+    </data>
 </root>

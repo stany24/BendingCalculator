@@ -36,4 +36,10 @@
     <data name="LengthWithColon" xml:space="preserve">
         <value>Length:</value>
     </data>
+    <data name="TitlePieceWindow" xml:space="preserve">
+        <value>Piece editor</value>
+    </data>
+    <data name="TitleLayerOfPieceWindow" xml:space="preserve">
+        <value>Layer in piece editor</value>
+    </data>
 </root>

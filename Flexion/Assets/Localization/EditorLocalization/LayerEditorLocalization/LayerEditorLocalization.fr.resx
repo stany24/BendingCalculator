@@ -33,4 +33,7 @@
     <data name="WidthSidesWithColon" xml:space="preserve">
         <value>Largeur sur les cotés:</value>
     </data>
+    <data name="TitleLayerWindow" xml:space="preserve">
+        <value>Éditeur de couches</value>
+    </data>
 </root>

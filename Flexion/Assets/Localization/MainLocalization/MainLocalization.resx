@@ -51,4 +51,7 @@
     <data name="DistanceFromLeftWithUnitWithColon" xml:space="preserve">
         <value>Distance from the left (mm):</value>
     </data>
+    <data name="TitleMainWindow" xml:space="preserve">
+        <value>Bending calculator</value>
+    </data>
 </root>

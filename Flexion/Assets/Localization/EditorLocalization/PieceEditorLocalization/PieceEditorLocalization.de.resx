@@ -36,4 +36,10 @@
     <data name="MoveUp" xml:space="preserve">
         <value>Montieren</value>
     </data>
+    <data name="TitlePieceWindow" xml:space="preserve">
+        <value>Editor für Münzen</value>
+    </data>
+    <data name="TitleLayerOfPieceWindow" xml:space="preserve">
+        <value>Ebene im Stück editor</value>
+    </data>
 </root>

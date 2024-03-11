@@ -9,6 +9,7 @@ using Flexion.Assets.Localization.Logic;
 using Flexion.Assets.Localization.EditorLocalization.ForceEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.LayerEditorLocalization.Helper;
+using Flexion.Assets.Localization.EditorLocalization.MaterialEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.MaterialEditorLocalization.Helper;
 using Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization;
 using Flexion.Assets.Localization.EditorLocalization.PieceEditorLocalization.Helper;
@@ -26,6 +27,7 @@ public partial class MainViewModel
         #region Main Window
         
         ResourceManager resourceManagerMain = new(typeof(MainLocalization));
+        TitleMainWindowBinding = resourceManagerMain.GetString("TitleMainWindow", lang);
         ModifyBinding = resourceManagerMain.GetString("Modify", lang);
         LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", lang);
         BeginBinding = resourceManagerMain.GetString("Begin", lang);
@@ -73,6 +75,13 @@ public partial class MainViewModel
 
         #endregion
 
+        #region Material Editor
+
+        ResourceManager resourceManagerMaterialEditor = new(typeof(MaterialEditorLocalization));
+        TitleMaterialWindowBinding = resourceManagerMaterialEditor.GetString("TitleMaterialWindow", lang);
+
+        #endregion
+
         #region Material Editor Helper
         
         ResourceManager resourceManagerMaterialEditorHelper = new(typeof(MaterialEditorHelperLocalization));
@@ -87,6 +96,7 @@ public partial class MainViewModel
         #region Layer Editor
 
         ResourceManager resourceManagerLayerEditor = new(typeof(LayerEditorLocalization));
+        TitleLayerWindowBinding = resourceManagerLayerEditor.GetString("TitleLayerWindow", lang);
         HeightCenterWithColonBinding = resourceManagerLayerEditor.GetString("HeightCenterWithColon", lang);
         HeightOnSidesWithColonBinding = resourceManagerLayerEditor.GetString("HeightOnSidesWithColon", lang);
         WidthCenterWithColonBinding = resourceManagerLayerEditor.GetString("WidthCenterWithColon", lang);
@@ -112,6 +122,8 @@ public partial class MainViewModel
         #region Piece Editor
 
         ResourceManager resourceManagerPieceEditor = new(typeof(PieceEditorLocalization));
+        TitlePieceWindowBinding = resourceManagerPieceEditor.GetString("TitlePieceWindow", lang);
+        TitleLayerOfPieceWindowBinding = resourceManagerPieceEditor.GetString("TitleLayerOfPieceWindow", lang);
         ChangeLayersBinding = resourceManagerPieceEditor.GetString("ChangeLayers", lang);
         InPieceWithColonBinding = resourceManagerPieceEditor.GetString("InPieceWithColon", lang);
         AvailableWithColonBinding = resourceManagerPieceEditor.GetString("AvailableWithColon", lang);
@@ -145,6 +157,7 @@ public partial class MainViewModel
         #region All Helper
 
         ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));
+        TitleHelpWindowBinding = resourceManagerMain.GetString("TitleHelpWindow", lang);
         HelpBinding = resourceManagerHelper.GetString("Help", lang);
 
         #endregion
@@ -152,6 +165,7 @@ public partial class MainViewModel
         #region Force Editor
 
         ResourceManager resourceManagerForceEditor = new(typeof(ForceEditorLocalization));
+        TitleForceWindowBinding = resourceManagerForceEditor.GetString("TitleForceWindow", lang);
         ForceWithColonBinding = resourceManagerForceEditor.GetString("ForceWithColon", lang);
         MassWithColonBinding = resourceManagerForceEditor.GetString("MassWithColon", lang);
         RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", lang);
@@ -659,6 +673,55 @@ public partial class MainViewModel
     {
         get =>_valueCenterWithColonBinding;
         set => SetProperty(ref _valueCenterWithColonBinding, value);
+    }
+    
+    private string? _titleMainWindowBinding;
+    public string? TitleMainWindowBinding
+    {
+        get =>_titleMainWindowBinding;
+        set => SetProperty(ref _titleMainWindowBinding, value);
+    }
+    
+    private string? _titleForceWindowBinding;
+    public string? TitleForceWindowBinding
+    {
+        get =>_titleForceWindowBinding;
+        set => SetProperty(ref _titleForceWindowBinding, value);
+    }
+    
+    private string? _titlePieceWindowBinding;
+    public string? TitlePieceWindowBinding
+    {
+        get =>_titlePieceWindowBinding;
+        set => SetProperty(ref _titlePieceWindowBinding, value);
+    }
+    
+    private string? _titleLayerWindowBinding;
+    public string? TitleLayerWindowBinding
+    {
+        get =>_titleLayerWindowBinding;
+        set => SetProperty(ref _titleLayerWindowBinding, value);
+    }
+    
+    private string? _titleMaterialWindowBinding;
+    public string? TitleMaterialWindowBinding
+    {
+        get =>_titleMaterialWindowBinding;
+        set => SetProperty(ref _titleMaterialWindowBinding, value);
+    }
+    
+    private string? _titleHelpWindowBinding;
+    public string? TitleHelpWindowBinding
+    {
+        get =>_titleHelpWindowBinding;
+        set => SetProperty(ref _titleHelpWindowBinding, value);
+    }
+    
+    private string? _titleLayerOfPieceWindowBinding;
+    public string? TitleLayerOfPieceWindowBinding
+    {
+        get =>_titleLayerOfPieceWindowBinding;
+        set => SetProperty(ref _titleLayerOfPieceWindowBinding, value);
     }
 
     #endregion

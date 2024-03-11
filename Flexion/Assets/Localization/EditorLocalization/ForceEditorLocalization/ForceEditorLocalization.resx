@@ -33,4 +33,7 @@
     <data name="SpeedWithColon" xml:space="preserve">
         <value>Speed:</value>
     </data>
+    <data name="TitleForceWindow" xml:space="preserve">
+        <value>Force editor</value>
+    </data>
 </root>

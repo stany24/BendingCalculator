@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Flexion.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="Éditeur de couches"
+        Title="{Binding TitleLayerWindowBinding}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 

@@ -33,4 +33,7 @@
     <data name="MaterialWithColon" xml:space="preserve">
         <value>Material:</value>
     </data>
+    <data name="TitleLayerWindow" xml:space="preserve">
+        <value>Layer editor</value>
+    </data>
 </root>

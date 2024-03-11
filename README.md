@@ -24,7 +24,7 @@ If you have bug to report the best way is to create an issue here:https://github
 If you need some help there is an in-app help juste hit the Help button, if you still need help you can contact me on discord: stany24.
 
 ## Roadmap
-Their are no clear roadmap, we improve the project as it goes and with the help of and expert, The development is coming along creation and the improvement of the machine.
+Their are no clear roadmap, we improve the project as it goes and with the help of and expert, The development is coming along with the creation and the improvement of the machine.
 
 ## Contributing
 State if you are open to contributions and what your requirements are for accepting them.
