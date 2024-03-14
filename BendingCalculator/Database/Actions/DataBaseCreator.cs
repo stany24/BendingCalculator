@@ -5,6 +5,7 @@ namespace BendingCalculator.Database.Actions;
 
 public static class DataBaseCreator
 {
+    private const int NotRemoved = 0;
     public static void NewPiece(SQLiteConnection connection,Piece piece)
     {
         using SQLiteCommand cmd = new(
@@ -12,7 +13,7 @@ public static class DataBaseCreator
                                 VALUES (@Name, @Length, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
         cmd.Parameters.AddWithValue("@Name",piece.Name);
         cmd.Parameters.AddWithValue("@Length",piece.Length);
-        cmd.Parameters.AddWithValue("@IsRemoved",0);
+        cmd.Parameters.AddWithValue("@IsRemoved",NotRemoved);
         piece.PieceId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
@@ -26,7 +27,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@WidthOnSides",layer.WidthOnSides);
         cmd.Parameters.AddWithValue("@HeightAtCenter",layer.HeightAtCenter);
         cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
-        cmd.Parameters.AddWithValue("@IsRemoved",0);
+        cmd.Parameters.AddWithValue("@IsRemoved",NotRemoved);
         
         if (layer.Material != null)
         {
@@ -47,7 +48,7 @@ public static class DataBaseCreator
                                 VALUES (@Name, @E, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
         cmd.Parameters.AddWithValue("@Name",material.Name);
         cmd.Parameters.AddWithValue("@E",material.E);
-        cmd.Parameters.AddWithValue("@IsRemoved",0);
+        cmd.Parameters.AddWithValue("@IsRemoved",NotRemoved);
         material.MaterialId = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
