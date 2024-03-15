@@ -79,13 +79,13 @@ public class LayerPreview:Grid
         double height = GetFullGridHeight(this) - 3*PreviewMargin;
         List<Shape> shapes = new()
         {
-            GetHourGlass(PreviewMargin, PreviewMargin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
-            GetHourGlass(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
+            GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
+            GetLayerShape(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
         };
         _preview.Children.AddRange(shapes);
     }
     
-    private static Path GetHourGlass(double x,double y,double width,double height,double proportionCenterOverSides)
+    private static Path GetLayerShape(double x,double y,double width,double height,double proportionCenterOverSides)
     {
         int minusCenter = 0;
         int minusSides = 0;
@@ -97,7 +97,7 @@ public class LayerPreview:Grid
         {
             minusCenter = (int)((height - height*proportionCenterOverSides)/2);
         }
-        Path path = new()
+        return new Path()
         {
             Fill = Brushes.LightBlue,
             Data = new PathGeometry
@@ -126,7 +126,6 @@ public class LayerPreview:Grid
                 }
             }
         };
-        return path;
     }
     
     private static PathSegment CreateArcSegment(Point point1, Point point2, Point point3)

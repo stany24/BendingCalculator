@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-// ReSharper disable ValueParameterNotUsed
+// ReSharper disable ValueParameterNotUsed  
 
 namespace BendingCalculator.Logic.Math;
 
