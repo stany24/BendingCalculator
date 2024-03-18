@@ -7,20 +7,41 @@ public static class SettingManager
 {
     public static string GetLanguage()
     {
-        string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
-        if (!File.Exists(settingPath))
-        {
-            string serialized = JsonSerializer.Serialize(new Setting("en"));
-            File.WriteAllText(settingPath,serialized);
-        }
-        Setting? setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(settingPath));
-        return setting == null ? "en" : setting.Language;
+        return GetSettings().Language;
+    }
+    
+    public static bool GetWarningDisabled()
+    {
+        return GetSettings().WarningDisabled;
     }
 
     public static void SetLanguage(string language)
     {
         string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
-        string serialized = JsonSerializer.Serialize(new Setting(language));
+        Setting setting = GetSettings();
+        setting.Language = language;
+        string serialized = JsonSerializer.Serialize(setting);
         File.WriteAllText(settingPath,serialized);
+    }
+    
+    public static void SetWarningDisabled(bool warningDisabled)
+    {
+        string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
+        Setting setting = GetSettings();
+        setting.WarningDisabled = warningDisabled;
+        string serialized = JsonSerializer.Serialize(setting);
+        File.WriteAllText(settingPath,serialized);
+    }
+
+    private static Setting GetSettings()
+    {
+        string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
+        if (!File.Exists(settingPath))
+        {
+            string serialized = JsonSerializer.Serialize(new Setting("en",false));
+            File.WriteAllText(settingPath,serialized);
+        }
+        Setting? setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(settingPath));
+        return setting ?? new Setting();
     }
 }

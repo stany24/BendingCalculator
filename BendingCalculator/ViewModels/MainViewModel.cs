@@ -170,6 +170,7 @@ public partial class MainViewModel : ObservableObject
 
     private void ShowRiskWindow(object? sender,RiskOfSlidingLayersEventArgs e)
     {
+        if(SettingManager.GetWarningDisabled()){return;}
         Dispatcher.UIThread.Invoke(() =>
         {
             SlideWarning warning = new(this, e);
