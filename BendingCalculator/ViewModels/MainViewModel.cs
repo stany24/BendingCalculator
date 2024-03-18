@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Threading;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic;
 using BendingCalculator.Logic.Helper;
@@ -16,6 +17,7 @@ using BendingCalculator.Views.Editors.Force;
 using BendingCalculator.Views.Editors.Layer;
 using BendingCalculator.Views.Editors.Material;
 using BendingCalculator.Views.Editors.Piece;
+using BendingCalculator.Views.Warning;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
@@ -157,11 +159,23 @@ public partial class MainViewModel : ObservableObject
             if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
             PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
+            SelectedPiecesMainWindow[0].RiskOfSlidingLayer += ShowRiskWindow;
             IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
+            SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
             _points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphBending[0].Values = _points;
             ValueCenter = _points[_points.Count / 2].Y;
         });
+    }
+
+    private void ShowRiskWindow(object? sender,RiskOfSlidingLayersEventArgs e)
+    {
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            SlideWarning warning = new(this, e);
+            warning.Show();
+        });
+        
     }
     
     #endregion

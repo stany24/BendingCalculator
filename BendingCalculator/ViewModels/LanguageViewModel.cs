@@ -13,6 +13,7 @@ using BendingCalculator.Assets.Localization.HelperLocalization;
 using BendingCalculator.Assets.Localization.Logic;
 using BendingCalculator.Assets.Localization.MainLocalization;
 using BendingCalculator.Assets.Localization.MainLocalization.Helper;
+using BendingCalculator.Assets.Localization.Warning;
 
 namespace BendingCalculator.ViewModels;
 
@@ -170,6 +171,14 @@ public partial class MainViewModel
         RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", lang);
         GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", lang);
         SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", lang);
+
+        #endregion
+
+        #region Warnings
+
+        ResourceManager resourceWarning = new(typeof(WarningLocalization));
+        SlidingWarningTitleBinding = resourceWarning.GetString("SlidingWarningTitle", lang);
+        SlidingWarningBinding = resourceWarning.GetString("SlidingWarning", lang);
 
         #endregion
     }
@@ -721,6 +730,20 @@ public partial class MainViewModel
     {
         get =>_titleLayerOfPieceWindowBinding;
         set => SetProperty(ref _titleLayerOfPieceWindowBinding, value);
+    }
+    
+    private string? _slidingWarningTitleBinding;
+    public string? SlidingWarningTitleBinding
+    {
+        get =>_slidingWarningTitleBinding;
+        set => SetProperty(ref _slidingWarningTitleBinding, value);
+    }
+    
+    private string? _slidingWarningBinding;
+    public string? SlidingWarningBinding
+    {
+        get =>_slidingWarningBinding;
+        set => SetProperty(ref _slidingWarningBinding, value);
     }
 
     #endregion

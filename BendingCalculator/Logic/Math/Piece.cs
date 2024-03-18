@@ -13,6 +13,7 @@ public class Piece:ObservableObject
     #region Variables
 
     public long PieceId { get; set; }
+    public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer;
     
     [JsonInclude]
     public List<Layer> Layers { get; set; }
@@ -136,6 +137,7 @@ public class Piece:ObservableObject
     /// <returns></returns>
     public IEnumerable<double> CalculateBending(double force, double gap)
     {
+        CheckRisks();
         _xs = SetX(gap);
         double[] integral1 = new double[_xs.Length];
         double[] integral2 = new double[_xs.Length];
@@ -146,7 +148,21 @@ public class Piece:ObservableObject
         SecondIntegral(integral1, ref integral2,gap);
         return integral2;
     }
-    
+
+    private void CheckRisks()
+    {
+        const double maxDiff = 12e9;
+        for (int i = 1; i < Layers.Count; i++)
+        {
+            if(Layers[i-1].Material is not { } material1){return;}
+            if(Layers[i].Material is not { } material2){return;}
+            double diff = material2.E - material1.E;
+            if (diff <= System.Math.Abs(maxDiff)) continue;
+            RiskOfSlidingLayer?.Invoke(null,new RiskOfSlidingLayersEventArgs(i-1,i,Layers[i-1],Layers[i]));
+            return;
+        }
+    }
+
     private static void FirstIntegral(IReadOnlyList<double> function,ref double[] integral1, double gap)
     {
         integral1[0] = function[0] * gap;

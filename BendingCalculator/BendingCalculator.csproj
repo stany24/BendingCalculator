@@ -185,6 +185,18 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>PieceEditorHelperLocalization.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Warning.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.fr.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Warning.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.de.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Warning.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
@@ -459,6 +471,21 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>PieceEditorHelperLocalization.de.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Warning\WarningLocalization.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WarningLocalization.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Warning\WarningLocalization.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WarningLocalization.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Warning\WarningLocalization.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WarningLocalization.de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
