@@ -27,7 +27,7 @@ public class BendingTests
                 }
             }
         };
-        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000);
+        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
         Assert.Equal(-14.924,values.Min()*1000,0.001);
     }
     
@@ -76,7 +76,7 @@ public class BendingTests
                 }
             }
         };
-        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000);
+        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
         Assert.Equal(-2.609,values.Min()*1000,0.001);
     }
     
@@ -125,7 +125,7 @@ public class BendingTests
                 }
             }
         };
-        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000);
+        IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
         Assert.Equal(-1.653,values.Min()*1000,0.001);
     }
 }

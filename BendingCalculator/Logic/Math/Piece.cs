@@ -14,7 +14,6 @@ public class Piece:ObservableObject
 
     public long PieceId { get; set; }
     public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer { get; set; }
-    public EventHandler<ConstraintEventArgs>? MaxConstraint { get; set; }
     
     [JsonInclude]
     public List<Layer> Layers { get; set; }
@@ -113,7 +112,7 @@ public class Piece:ObservableObject
 
     #region Math
     
-    private IEnumerable<double> MomentForce(double force)
+    private double[] MomentForce(double force)
     {
         double[] moments = new double[_xs.Length];
         double offset = -force / 2 * _xs[_xs.Length / 2] - force / 2 * _xs[_xs.Length / 2];
@@ -138,19 +137,20 @@ public class Piece:ObservableObject
     /// <param name="force">The force applied to a piece</param>
     /// <param name="gap">The gap between measurements</param>
     /// <returns></returns>
-    public IEnumerable<double> CalculateBending(double force, double gap)
+    public BendingResult CalculateBending(double force, double gap)
     {
+        BendingResult result = new();
         CheckRisks();
         _xs = SetX(gap);
-        double[] integral1 = new double[_xs.Length];
-        double[] integral2 = new double[_xs.Length];
-        IEnumerable<double> moment = MomentForce(force);
-        IEnumerable<double> I = CalculateI();
-        double[] function = moment.Zip(I, (x, y) => x / y).ToArray();
-        MaxConstraint?.Invoke(null,new ConstraintEventArgs(function));
-        FirstIntegral(function,ref integral1,gap);
-        SecondIntegral(integral1, ref integral2,gap);
-        return integral2;
+        result.Integral1= new double[_xs.Length];
+        result.Integral2 = new double[_xs.Length];
+        result.Ns = Ns();
+        result.Moment = MomentForce(force);
+        result.I = CalculateI();
+        result.Constraint = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
+        result.Integral1 = FirstIntegral(result.Constraint,result.Integral1,gap);
+        result.Integral2 = SecondIntegral(result.Integral1, result.Integral2,gap);
+        return result;
     }
 
     private void CheckRisks()
@@ -167,7 +167,7 @@ public class Piece:ObservableObject
         }
     }
 
-    private static void FirstIntegral(IReadOnlyList<double> function,ref double[] integral1, double gap)
+    private static double[] FirstIntegral(IReadOnlyList<double> function,double[] integral1, double gap)
     {
         integral1[0] = function[0] * gap;
         for (int i = 1; i < function.Count; i++)
@@ -175,20 +175,20 @@ public class Piece:ObservableObject
             integral1[i] = integral1[i - 1] + function[i] * gap;
         }
         double constant = integral1[integral1.Length / 2];
-        integral1 = Array.ConvertAll(integral1, x => x-constant);
+        return Array.ConvertAll(integral1, x => x-constant).ToArray();
     }
 
-    private static void SecondIntegral(IReadOnlyList<double> integral1,ref double[] integral2, double gap)
+    private static double[] SecondIntegral(IReadOnlyList<double> integral1,double[] integral2, double gap)
     {
         integral2[0] = integral1[0] * gap;
         for (int i = 1; i < integral2.Length; i++)
         {
             integral2[i] = integral2[i - 1] + integral1[i] * gap;
         }
-        integral2 = Array.ConvertAll(integral2, x => x / -ERef);
+        return Array.ConvertAll(integral2, x => x / -ERef);
     }
 
-    private IEnumerable<double> CalculateI()
+    private double[] CalculateI()
     {
         double[][] ix = new double[Layers.Count][];
         double[] I = new double[_xs.Length];
@@ -214,7 +214,7 @@ public class Piece:ObservableObject
         return I;
     }
 
-    private IEnumerable<double> Ns()
+    private double[] Ns()
     {
         double[][] nx = new double[Layers.Count][];
         double[] divided = new double[_xs.Length];

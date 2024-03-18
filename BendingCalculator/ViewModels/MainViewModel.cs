@@ -167,11 +167,9 @@ public partial class MainViewModel : ObservableObject
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
             PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer += ShowRiskWindow;
-            SelectedPiecesMainWindow[0].MaxConstraint += ChangeMaxConstraint;
-            IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
+            BendingResult result = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
-            SelectedPiecesMainWindow[0].MaxConstraint -= ChangeMaxConstraint;
-            _points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
+            _points = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphBending[0].Values = _points;
             ValueCenter = _points[_points.Count / 2].Y;
         });
@@ -193,11 +191,6 @@ public partial class MainViewModel : ObservableObject
             _slideWarning.Show();
         });
         
-    }
-    
-    private void ChangeMaxConstraint(object? sender,ConstraintEventArgs e)
-    {
-        ValueConstraint = e.MaxConstraint.Min();
     }
     
     #endregion
