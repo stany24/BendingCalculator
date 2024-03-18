@@ -179,6 +179,8 @@ public partial class MainViewModel
         ResourceManager resourceWarning = new(typeof(WarningLocalization));
         SlidingWarningTitleBinding = resourceWarning.GetString("SlidingWarningTitle", lang);
         SlidingWarningBinding = resourceWarning.GetString("SlidingWarning", lang);
+        PositionHeaderBinding = resourceWarning.GetString("PositionHeader", lang);
+        LayerHeaderBinding = resourceWarning.GetString("LayerHeader", lang);
 
         #endregion
     }
@@ -744,6 +746,20 @@ public partial class MainViewModel
     {
         get =>_slidingWarningBinding;
         set => SetProperty(ref _slidingWarningBinding, value);
+    }
+    
+    private string? _positionHeaderBinding;
+    public string? PositionHeaderBinding
+    {
+        get =>_positionHeaderBinding;
+        set => SetProperty(ref _positionHeaderBinding, value);
+    }
+    
+    private string? _layerHeaderBinding;
+    public string? LayerHeaderBinding
+    {
+        get =>_layerHeaderBinding;
+        set => SetProperty(ref _layerHeaderBinding, value);
     }
 
     #endregion

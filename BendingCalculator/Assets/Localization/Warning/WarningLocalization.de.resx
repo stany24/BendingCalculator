@@ -24,4 +24,10 @@
     <data name="SlidingWarning" xml:space="preserve">
         <value>Wenn zwei sich berührende Schichten eine erhebliche Lücke in der Elastizität aufweisen, können die Schichten verrutschen und die Ergebnisse verfälschen. Die betroffenen Schichten sind:</value>
     </data>
+    <data name="PositionHeader" xml:space="preserve">
+        <value>Position im Stück</value>
+    </data>
+    <data name="LayerHeader" xml:space="preserve">
+        <value>Ebene</value>
+    </data>
 </root>

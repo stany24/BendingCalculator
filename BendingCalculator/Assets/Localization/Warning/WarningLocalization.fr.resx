@@ -24,4 +24,10 @@
     <data name="SlidingWarning" xml:space="preserve">
         <value>Deux couches qui se touchent ont un écart d'élasticité important, les couches peuvent glisser et fausser les résultats. Les couches concernées sont les suivantes :</value>
     </data>
+    <data name="PositionHeader" xml:space="preserve">
+        <value>Position dans la pièce</value>
+    </data>
+    <data name="LayerHeader" xml:space="preserve">
+        <value>Couche</value>
+    </data>
 </root>

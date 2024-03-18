@@ -24,4 +24,10 @@
     <data name="SlidingWarning" xml:space="preserve">
         <value>Two touching layers have a significant gap in elastisity, the layers could slide and false the results. The involved layers are:</value>
     </data>
+    <data name="PositionHeader" xml:space="preserve">
+        <value>Position in the piece</value>
+    </data>
+    <data name="LayerHeader" xml:space="preserve">
+        <value>Layer</value>
+    </data>
 </root>

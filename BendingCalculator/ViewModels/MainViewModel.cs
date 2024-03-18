@@ -168,13 +168,20 @@ public partial class MainViewModel : ObservableObject
         });
     }
 
+    private SlideWarning? _slideWarning;
     private void ShowRiskWindow(object? sender,RiskOfSlidingLayersEventArgs e)
     {
         if(SettingManager.GetWarningDisabled()){return;}
         Dispatcher.UIThread.Invoke(() =>
         {
-            SlideWarning warning = new(this, e);
-            warning.Show();
+            WarningSlideLayers = new ObservableCollection<KeyValuePair<int, Layer>>
+            {
+                new(e.Position1, e.Layer1),
+                new(e.Position2, e.Layer2)
+            };
+            _slideWarning?.Close();
+            _slideWarning = new SlideWarning(this);
+            _slideWarning.Show();
         });
         
     }
@@ -226,6 +233,7 @@ public partial class MainViewModel : ObservableObject
         _layerEditor?.Close();
         _pieceEditor?.Close();
         _forceEditor?.Close();
+        _slideWarning?.Close();
     }
     
     #endregion
