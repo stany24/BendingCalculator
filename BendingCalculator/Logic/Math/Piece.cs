@@ -13,7 +13,8 @@ public class Piece:ObservableObject
     #region Variables
 
     public long PieceId { get; set; }
-    public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer;
+    public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer { get; set; }
+    public EventHandler<ConstraintEventArgs>? MaxConstraint { get; set; }
     
     [JsonInclude]
     public List<Layer> Layers { get; set; }
@@ -74,6 +75,7 @@ public class Piece:ObservableObject
         Layers = new List<Layer>();
         _length = length;
         _name = name;
+        _xs = Array.Empty<double>();
         LanguageEvents.LanguageChanged += UpdateDisplay;
     }
 
@@ -81,6 +83,7 @@ public class Piece:ObservableObject
     public Piece()
     {
         LanguageEvents.LanguageChanged += UpdateDisplay;
+        _xs = Array.Empty<double>();
     }
     
     ~Piece()
@@ -144,6 +147,7 @@ public class Piece:ObservableObject
         IEnumerable<double> moment = MomentForce(force);
         IEnumerable<double> I = CalculateI();
         double[] function = moment.Zip(I, (x, y) => x / y).ToArray();
+        MaxConstraint?.Invoke(null,new ConstraintEventArgs(function));
         FirstIntegral(function,ref integral1,gap);
         SecondIntegral(integral1, ref integral2,gap);
         return integral2;

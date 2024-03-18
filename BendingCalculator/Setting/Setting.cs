@@ -12,6 +12,7 @@ public class Setting
     [JsonConstructor]
     public Setting()
     {
+        
     }
 
     public Setting(string language,bool warningDisabled)

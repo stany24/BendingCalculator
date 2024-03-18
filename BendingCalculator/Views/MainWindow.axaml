@@ -71,7 +71,7 @@
                 Name="GridResult"
                 Margin="5"
                 ColumnDefinitions="Auto,10,Auto"
-                RowDefinitions="Auto,10,Auto,10,Auto"
+                RowDefinitions="Auto,10,Auto,10,Auto,10,Auto"
                 Column="0"
                 Row="2">
                 <TextBlock
@@ -86,8 +86,19 @@
                     Grid.Column="2"
                     Grid.Row="0"></TextBlock>
                 <TextBlock
-                    Name="LblDistance"
+                    Name="LblValueConstraint"
                     Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Max:"
+                    VerticalAlignment="Center"></TextBlock>
+                <TextBlock
+                    Name="TbxValueConstraint"
+                    Text="{Binding ValueConstraint, Converter={StaticResource DoubleConverter}}"
+                    Grid.Column="2"
+                    Grid.Row="2"></TextBlock>
+                <TextBlock
+                    Name="LblDistance"
+                    Grid.Row="4"
                     Grid.Column="0"
                     Text="{Binding DistanceFromLeftWithUnitWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
@@ -97,10 +108,10 @@
                     Maximum="{Binding PieceInGraphLength}"
                     Value="{Binding Distance}"
                     Grid.Column="2"
-                    Grid.Row="2"></NumericUpDown>
+                    Grid.Row="4"></NumericUpDown>
                 <TextBlock
                     Name="LblValueDistance"
-                    Grid.Row="4"
+                    Grid.Row="6"
                     Grid.Column="0"
                     Text="{Binding ValueDistanceWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
@@ -108,7 +119,7 @@
                     Name="TbxValueDistance"
                     Text="{Binding ValueDistance, Converter={StaticResource DoubleConverter}}"
                     Grid.Column="2"
-                    Grid.Row="4"></TextBlock>
+                    Grid.Row="6"></TextBlock>
             </Grid>
         </Grid>
         <Grid 

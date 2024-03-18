@@ -488,6 +488,9 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>WarningLocalization.de.resx</DependentUpon>
       </Compile>
+      <Compile Update="Logic\Math\RiskOfSlidingLayersEventArgs.cs">
+        <DependentUpon>Piece.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 

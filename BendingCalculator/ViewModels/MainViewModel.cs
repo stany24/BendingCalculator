@@ -70,7 +70,7 @@ public partial class MainViewModel : ObservableObject
         }
     };
 
-    private List<ObservablePoint> _points;
+    private List<ObservablePoint>? _points;
     private double? _pieceInGraphLength = 0;
     public double? PieceInGraphLength
     {
@@ -92,6 +92,13 @@ public partial class MainViewModel : ObservableObject
         get=>_valueDistance;
         set => SetProperty(ref _valueDistance, value);
     }
+
+    private double? _valueConstraint;
+    public double? ValueConstraint
+    {
+        get=>_valueConstraint;
+        set => SetProperty(ref _valueConstraint, value);
+    }
     
     private double? _distance = 0;
     public double? Distance
@@ -100,11 +107,11 @@ public partial class MainViewModel : ObservableObject
         set
         {
             _distance = value;
-            if (Distance == null) { 
-                ValueDistance = 0;
+            if (Distance is not null && PieceInGraphLength is not null && _points is not null) { 
+                ValueDistance = _points[(int)(Distance/PieceInGraphLength*10000)].Y;
                 return;
             }
-            ValueDistance = _points[(int)(Distance/PieceInGraphLength*10000)].Y;
+            ValueDistance = 0;
         }
     }
 
@@ -160,8 +167,10 @@ public partial class MainViewModel : ObservableObject
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
             PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer += ShowRiskWindow;
+            SelectedPiecesMainWindow[0].MaxConstraint += ChangeMaxConstraint;
             IEnumerable<double> values = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
+            SelectedPiecesMainWindow[0].MaxConstraint -= ChangeMaxConstraint;
             _points = values.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphBending[0].Values = _points;
             ValueCenter = _points[_points.Count / 2].Y;
@@ -184,6 +193,11 @@ public partial class MainViewModel : ObservableObject
             _slideWarning.Show();
         });
         
+    }
+    
+    private void ChangeMaxConstraint(object? sender,ConstraintEventArgs e)
+    {
+        ValueConstraint = e.MaxConstraint.Min();
     }
     
     #endregion

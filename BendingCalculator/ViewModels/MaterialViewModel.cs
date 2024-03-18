@@ -113,7 +113,7 @@ public partial class MainViewModel
         List<Material> materials = new(SelectedMaterials);
         foreach (Material material in materials)
         {
-            material.E = (long)EValue*multiplication;
+            material.E = (long)(EValue ?? 69e9)*multiplication;
         }
         DataBaseUpdater.UpdateMaterials(_connection,materials);
     }
