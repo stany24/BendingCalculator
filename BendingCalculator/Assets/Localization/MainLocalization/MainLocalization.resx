@@ -42,16 +42,22 @@
     <data name="LayersWithColon" xml:space="preserve">
         <value>Layers:</value>
     </data>
-    <data name="ValueCenterWithColon" xml:space="preserve">
-        <value>Value at the center:</value>
+    <data name="DeformationCenterWithColon" xml:space="preserve">
+        <value>Deformation in the center:</value>
     </data>
-    <data name="ValueDistanceWithColon" xml:space="preserve">
-        <value>Distance value:</value>
+    <data name="DeformationDistanceWithColon" xml:space="preserve">
+        <value>Distance deformation:</value>
     </data>
     <data name="DistanceFromLeftWithUnitWithColon" xml:space="preserve">
         <value>Distance from the left (mm):</value>
     </data>
     <data name="TitleMainWindow" xml:space="preserve">
         <value>Bending calculator</value>
+    </data>
+    <data name="ConstraintDistanceWithColon" xml:space="preserve">
+        <value>Distance constraint:</value>
+    </data>
+    <data name="ConstraintCenterWithColon" xml:space="preserve">
+        <value>Constraint in the center:</value>
     </data>
 </root>

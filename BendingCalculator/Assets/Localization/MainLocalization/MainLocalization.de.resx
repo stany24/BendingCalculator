@@ -42,16 +42,22 @@
     <data name="PiecesWithColon" xml:space="preserve">
         <value>Stücke:</value>
     </data>
-    <data name="ValueCenterWithColon" xml:space="preserve">
-        <value>Wert in der Mitte:</value>
+    <data name="DeformationCenterWithColon" xml:space="preserve">
+        <value>Verformung in der Mitte:</value>
     </data>
-    <data name="ValueDistanceWithColon" xml:space="preserve">
-        <value>Wert auf Distanz:</value>
+    <data name="DeformationDistanceWithColon" xml:space="preserve">
+        <value>Verzerrung in der Entfernung:</value>
     </data>
     <data name="DistanceFromLeftWithUnitWithColon" xml:space="preserve">
         <value>Abstand von links (mm):</value>
     </data>
     <data name="TitleMainWindow" xml:space="preserve">
         <value>Biege-Rechner</value>
+    </data>
+    <data name="ConstraintDistanceWithColon" xml:space="preserve">
+        <value>Zwang hat Distanz:</value>
+    </data>
+    <data name="ConstraintCenterWithColon" xml:space="preserve">
+        <value>Zwang in der Mitte:</value>
     </data>
 </root>

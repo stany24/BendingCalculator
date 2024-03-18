@@ -35,8 +35,10 @@ public partial class MainViewModel
         PiecesWithColonBinding = resourceManagerMain.GetString("PiecesWithColon", lang);
         LayersWithColonBinding = resourceManagerMain.GetString("LayersWithColon", lang);
         DistanceFromLeftWithUnitWithColonBinding = resourceManagerMain.GetString("DistanceFromLeftWithUnitWithColon", lang);
-        ValueDistanceWithColonBinding  = resourceManagerMain.GetString("ValueDistanceWithColon", lang);
-        ValueCenterWithColonBinding = resourceManagerMain.GetString("ValueCenterWithColon", lang);
+        DeformationDistanceWithColonBinding  = resourceManagerMain.GetString("DeformationDistanceWithColon", lang);
+        DeformationCenterWithColonBinding = resourceManagerMain.GetString("DeformationCenterWithColon", lang);
+        ConstraintDistanceWithColonBinding  = resourceManagerMain.GetString("ConstraintDistanceWithColon", lang);
+        ConstraintCenterWithColonBinding = resourceManagerMain.GetString("ConstraintCenterWithColon", lang);
         
         #endregion
 
@@ -671,18 +673,32 @@ public partial class MainViewModel
         set => SetProperty(ref _distanceFromLeftWithUnitWithColonBinding, value);
     }
     
-    private string? _valueDistanceWithColonBinding;
-    public string? ValueDistanceWithColonBinding
+    private string? _constraintDistanceWithColonBinding;
+    public string? ConstraintDistanceWithColonBinding
     {
-        get =>_valueDistanceWithColonBinding;
-        set => SetProperty(ref _valueDistanceWithColonBinding, value);
+        get =>_constraintDistanceWithColonBinding;
+        set => SetProperty(ref _constraintDistanceWithColonBinding, value);
     }
     
-    private string? _valueCenterWithColonBinding;
-    public string? ValueCenterWithColonBinding
+    private string? _deformationDistanceWithColonBinding;
+    public string? DeformationDistanceWithColonBinding
     {
-        get =>_valueCenterWithColonBinding;
-        set => SetProperty(ref _valueCenterWithColonBinding, value);
+        get =>_deformationDistanceWithColonBinding;
+        set => SetProperty(ref _deformationDistanceWithColonBinding, value);
+    }
+    
+    private string? _deformationCenterWithColonBinding;
+    public string? DeformationCenterWithColonBinding
+    {
+        get =>_deformationCenterWithColonBinding;
+        set => SetProperty(ref _deformationCenterWithColonBinding, value);
+    }
+    
+    private string? _constraintCenterWithColonBinding;
+    public string? ConstraintCenterWithColonBinding
+    {
+        get =>_constraintCenterWithColonBinding;
+        set => SetProperty(ref _constraintCenterWithColonBinding, value);
     }
     
     private string? _titleMainWindowBinding;

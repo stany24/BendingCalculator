@@ -71,29 +71,29 @@
                 Name="GridResult"
                 Margin="5"
                 ColumnDefinitions="Auto,10,Auto"
-                RowDefinitions="Auto,10,Auto,10,Auto,10,Auto"
+                RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto"
                 Column="0"
                 Row="2">
                 <TextBlock
-                    Name="LblValueCenter"
+                    Name="LblDeformationCenter"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Text="{Binding ValueCenterWithColonBinding}"
+                    Text="{Binding DeformationCenterWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
-                    Name="TbxValueCenter"
-                    Text="{Binding ValueCenter, Converter={StaticResource DoubleConverter}}"
+                    Name="TbxDeformationCenter"
+                    Text="{Binding DeformationCenter, Converter={StaticResource DoubleConverter}}"
                     Grid.Column="2"
                     Grid.Row="0"></TextBlock>
                 <TextBlock
-                    Name="LblValueConstraint"
+                    Name="LblConstraintCenter"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Text="Max:"
+                    Text="{Binding ConstraintCenterWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
-                    Name="TbxValueConstraint"
-                    Text="{Binding ValueConstraint, Converter={StaticResource DoubleConverter}}"
+                    Name="TbxConstraintCenter"
+                    Text="{Binding ConstraintCenter, Converter={StaticResource DoubleConverter}}"
                     Grid.Column="2"
                     Grid.Row="2"></TextBlock>
                 <TextBlock
@@ -110,16 +110,27 @@
                     Grid.Column="2"
                     Grid.Row="4"></NumericUpDown>
                 <TextBlock
-                    Name="LblValueDistance"
+                    Name="LblDeformationDistance"
                     Grid.Row="6"
                     Grid.Column="0"
-                    Text="{Binding ValueDistanceWithColonBinding}"
+                    Text="{Binding DeformationDistanceWithColonBinding}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
-                    Name="TbxValueDistance"
-                    Text="{Binding ValueDistance, Converter={StaticResource DoubleConverter}}"
+                    Name="TbxDeformationDistance"
+                    Text="{Binding DeformationAtDistance, Converter={StaticResource DoubleConverter}}"
                     Grid.Column="2"
                     Grid.Row="6"></TextBlock>
+                <TextBlock
+                    Name="LblConstraintDistance"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Text="{Binding ConstraintDistanceWithColonBinding}"
+                    VerticalAlignment="Center"></TextBlock>
+                <TextBlock
+                    Name="TbxConstraintDistance"
+                    Text="{Binding ConstraintAtDistance, Converter={StaticResource DoubleConverter}}"
+                    Grid.Column="2"
+                    Grid.Row="8"></TextBlock>
             </Grid>
         </Grid>
         <Grid 

@@ -70,7 +70,8 @@ public partial class MainViewModel : ObservableObject
         }
     };
 
-    private List<ObservablePoint>? _points;
+    private List<ObservablePoint>? _deformationPoints;
+    private double[] _constraintsPoints;
     private double? _pieceInGraphLength = 0;
     public double? PieceInGraphLength
     {
@@ -78,26 +79,33 @@ public partial class MainViewModel : ObservableObject
         set => SetProperty(ref _pieceInGraphLength, value);
     }
     
-    private double? _valueCenter = -0;
-
-    public double? ValueCenter
+    private double? _deformationAtDistance = -0;
+    public double? DeformationAtDistance
     {
-        get=>_valueCenter;
-        set => SetProperty(ref _valueCenter, value);
+        get=>_deformationAtDistance;
+        set => SetProperty(ref _deformationAtDistance, value);
     }
-    private double? _valueDistance = -0;
-
-    public double? ValueDistance
+    
+    private double? _constraintAtDistance = -0;
+    public double? ConstraintAtDistance
     {
-        get=>_valueDistance;
-        set => SetProperty(ref _valueDistance, value);
+        get=>_constraintAtDistance;
+        set => SetProperty(ref _constraintAtDistance, value);
+    }
+    
+    private double? _deformationCenter = -0;
+
+    public double? DeformationCenter
+    {
+        get=>_deformationCenter;
+        set => SetProperty(ref _deformationCenter, value);
     }
 
-    private double? _valueConstraint;
-    public double? ValueConstraint
+    private double? _constraintCenter;
+    public double? ConstraintCenter
     {
-        get=>_valueConstraint;
-        set => SetProperty(ref _valueConstraint, value);
+        get=>_constraintCenter;
+        set => SetProperty(ref _constraintCenter, value);
     }
     
     private double? _distance = 0;
@@ -107,11 +115,12 @@ public partial class MainViewModel : ObservableObject
         set
         {
             _distance = value;
-            if (Distance is not null && PieceInGraphLength is not null && _points is not null) { 
-                ValueDistance = _points[(int)(Distance/PieceInGraphLength*10000)].Y;
+            if (Distance is not null && PieceInGraphLength is not null && _deformationPoints is not null) { 
+                DeformationAtDistance = _deformationPoints[(int)(Distance/PieceInGraphLength*10000)].Y;
+                ConstraintAtDistance = _constraintsPoints[(int)(Distance / PieceInGraphLength * 10000)];
                 return;
             }
-            ValueDistance = 0;
+            DeformationAtDistance = 0;
         }
     }
 
@@ -166,12 +175,18 @@ public partial class MainViewModel : ObservableObject
             if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
             double gap = SelectedPiecesMainWindow[0].Length / 10000;
             PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
+            
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer += ShowRiskWindow;
             BendingResult result = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
-            _points = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
-            SeriesGraphBending[0].Values = _points;
-            ValueCenter = _points[_points.Count / 2].Y;
+            
+            _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
+            _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
+            _constraintsPoints = _constraintsPoints.Zip(result.Ns, (x, y) => x * y).ToArray();
+            SeriesGraphBending[0].Values = _deformationPoints;
+            DeformationCenter = _deformationPoints[_deformationPoints.Count / 2].Y;
+            ConstraintCenter = _constraintsPoints[_constraintsPoints.Length / 2];
+            DeformationAtDistance = _deformationPoints[0].Y;
         });
     }
 
