@@ -10,14 +10,5 @@ public partial class LayerEditor: WindowWithHelp
         DataContext = model;
         InitializeComponent();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.LayerWindowModules);
-        model.UpdatePreviewLayer += (_,_) => UpdatePreviewLayer();
-        SizeChanged += (_,_) => UpdatePreviewLayer();
-    }
-    
-    private void UpdatePreviewLayer()
-    {
-        if (DataContext is not MainViewModel model) { return; }
-        if(model.SelectedLayers.Count < 1){LayerPreview.UpdatePreview(null);return;}
-        LayerPreview.UpdatePreview(model.SelectedLayers[0]);
     }
 }

@@ -137,6 +137,7 @@
             Name="LayerPreview"
             Background="#292929"
             Height="300"
+            DisplayedLayer="{Binding SelectedLayers}"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"></preview:LayerPreview>

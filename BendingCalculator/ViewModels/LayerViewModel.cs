@@ -17,8 +17,6 @@ public partial class MainViewModel
         set => SetProperty(ref _layers, value);
     }
     
-    public EventHandler<EventArgs>? UpdatePreviewLayer { get; set; }
-    
     private ObservableCollection<Layer> _selectedLayers = new();
     public ObservableCollection<Layer> SelectedLayers { 
         get => _selectedLayers;
@@ -27,12 +25,13 @@ public partial class MainViewModel
     
     private int SelectedLayerIndex { get; set; }
     
-    private ObservableCollection<Layer> _selectedLayersMainWindow = new();
-    public ObservableCollection<Layer> SelectedLayersMainWindow { 
-        get => _selectedLayersMainWindow;
-        set => SetProperty(ref _selectedLayersMainWindow, value);
+    private Layer? _selectedLayerMainWindow;
+    public Layer? SelectedLayerMainWindow
+    {
+        get => _selectedLayerMainWindow;
+        set => SetProperty(ref _selectedLayerMainWindow, value);
     }
-    
+
     private double _widthSide;
 
     public double? WidthSide

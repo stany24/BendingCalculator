@@ -15,7 +15,6 @@ public partial class PieceEditor : WindowWithHelp
         Closing += (_, _) => CloseLayerOfPieceEditor();
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.PieceWindowModules);
         model.UpdatePreviewPiece += (_,_) => UpdatePreviewPiece();
-        SizeChanged += (_,_) => UpdatePreviewPiece();
     }
 
     private void CloseLayerOfPieceEditor()
@@ -26,16 +25,9 @@ public partial class PieceEditor : WindowWithHelp
     
     private void UpdatePreviewPiece()
     {
-        Task.Run(() =>
-        {
-            Thread.Sleep(10);
-            Dispatcher.UIThread.Invoke(() =>
-            {
-                if(DataContext is not MainViewModel model){return;}
-                if (model.SelectedPieces.Count != 1) {PiecePreview.UpdatePreview(null); return; }
-                if (model.SelectedPieces[0].Layers.Count< 1) {PiecePreview.UpdatePreview(null); return; }
-                PiecePreview.UpdatePreview(model.SelectedPieces[0]);
-            });
-        });
+        if(DataContext is not MainViewModel model){return;}
+        if (model.SelectedPieces.Count != 1) {PiecePreview.UpdatePreview(null); return; }
+        if (model.SelectedPieces[0].Layers.Count< 1) {PiecePreview.UpdatePreview(null); return; }
+        PiecePreview.UpdatePreview(model.SelectedPieces[0]);
     }
 }

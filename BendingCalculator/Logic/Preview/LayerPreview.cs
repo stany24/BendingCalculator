@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -18,7 +17,15 @@ public class LayerPreview:Grid
     private readonly TextBlock _tbxSide;
     private readonly Canvas _preview;
     private const double PreviewMargin = 10;
-    private  Layer? _oldLayer;
+
+    //Needs to be public
+    public static readonly StyledProperty<Layer?> DisplayedLayerProperty =
+        AvaloniaProperty.Register<LayerPreview,Layer?>(nameof(DisplayedLayer), defaultValue: null);
+    public Layer? DisplayedLayer
+    {
+        get => GetValue(DisplayedLayerProperty);
+        set => SetValue(DisplayedLayerProperty, value);
+    }
 
     #endregion
 
@@ -54,7 +61,9 @@ public class LayerPreview:Grid
         SetRowSpan(_preview,3);
         SetColumn(_preview,2);
         Children.Add(_preview);
+        SizeChanged += (_, _) => UpdatePreview();
         LanguageEvents.LanguageChanged += UpdateLanguage;
+        this.GetObservable(DisplayedLayerProperty).Subscribe((_) =>UpdatePreview());
     }
 
     ~LayerPreview()
@@ -66,21 +75,19 @@ public class LayerPreview:Grid
     
     #region Preview Math
 
-    public void UpdatePreview(Layer? layer)
+    private void UpdatePreview()
     {
-        _oldLayer = layer;
         _preview.Children.Clear();
-        if(layer == null) { Clear();return;}
+        if(DisplayedLayer == null) { Clear();return;}
         _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
         _tbxSide.Text = Assets.Localization.Logic.LogicLocalization.SideViewWithColon;
         UpdateLayout();
-        Thread.Sleep(10);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
-        double height = GetFullGridHeight(this) - 3*PreviewMargin;
+        double height = Bounds.Size.Height - 3*PreviewMargin;
         List<Shape> shapes = new()
         {
-            GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2, layer.HeightAtCenter / layer.HeightOnSides),
-            GetLayerShape(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, layer.WidthAtCenter / layer.WidthOnSides)
+            GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2, DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides),
+            GetLayerShape(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides)
         };
         _preview.Children.AddRange(shapes);
     }
@@ -177,30 +184,11 @@ public class LayerPreview:Grid
         _tbxAbove.Text = string.Empty;
         _tbxSide.Text = string.Empty;
     }
-    
-    private static double GetFullGridHeight(Grid grid)
-    {
-        double height = 0;
-        int i = 0;
-        while (i < 100)
-        {
-            try
-            {
-                height += grid.RowDefinitions[i].ActualHeight;
-                i++;
-            }
-            catch
-            {
-                return height;
-            }
-        }
-        return height;
-    }
 
     #endregion
     
     private void UpdateLanguage(object? sender, EventArgs eventArgs)
     {
-        UpdatePreview(_oldLayer);
+        UpdatePreview();
     }
 }

@@ -32,7 +32,6 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
     
-    public EventHandler<EventArgs>? UpdatePreviewMainWindowLayer { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewMainWindowPiece { get; set; }
     public EventHandler<EventArgs>? UpdatePreviewPiece { get; set; }
 
@@ -147,7 +146,6 @@ public partial class MainViewModel : ObservableObject
         ReloadLayers();
         ReloadPieces();
         SelectedMaterial = Materials[0];
-        Previews();
     }
 
     ~MainViewModel()
@@ -158,14 +156,6 @@ public partial class MainViewModel : ObservableObject
     #endregion
 
     #region Functions
-
-    private void Previews()
-    {
-        SelectedLayersMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowLayer?.Invoke(null, EventArgs.Empty);
-        SelectedPiecesMainWindow.CollectionChanged += (_, _) => UpdatePreviewMainWindowPiece?.Invoke(null, EventArgs.Empty);
-        SelectedLayers.CollectionChanged += (_, _) => UpdatePreviewLayer?.Invoke(null, EventArgs.Empty);
-        SelectedPieces.CollectionChanged += (_, _) => UpdatePreviewPiece?.Invoke(null, EventArgs.Empty);
-    }
 
     public void CalculateBending()
     {
@@ -181,12 +171,14 @@ public partial class MainViewModel : ObservableObject
             SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
             
             _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
-            _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
-            _constraintsPoints = _constraintsPoints.Zip(result.Ns, (x, y) => x * y).ToArray();
             SeriesGraphBending[0].Values = _deformationPoints;
             DeformationCenter = _deformationPoints[_deformationPoints.Count / 2].Y;
-            ConstraintCenter = _constraintsPoints[_constraintsPoints.Length / 2];
             DeformationAtDistance = _deformationPoints[0].Y;
+            
+            _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
+            _constraintsPoints = _constraintsPoints.Zip(result.Ns, (x, y) => x * y).ToArray();
+            _constraintsPoints = Array.ConvertAll(_constraintsPoints, x => x / 10000).ToArray();
+            ConstraintCenter = _constraintsPoints[_constraintsPoints.Length / 2];
         });
     }
 

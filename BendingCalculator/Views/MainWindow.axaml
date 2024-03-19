@@ -200,11 +200,12 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
+                SelectionMode="Single"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 MinWidth="200"
                 ItemsSource="{Binding Layers}"
-                SelectedItems="{Binding SelectedLayersMainWindow}">
+                SelectedItem="{Binding SelectedLayerMainWindow,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -215,6 +216,7 @@
             <preview:LayerPreview
                 Name="LayerPreview"
                 Background="#292929"
+                DisplayedLayer="{Binding SelectedLayerMainWindow,Mode=OneWay}"
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"></preview:LayerPreview>

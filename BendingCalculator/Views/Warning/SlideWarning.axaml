@@ -7,6 +7,7 @@
         x:Class="BendingCalculator.Views.Warning.SlideWarning"
         x:DataType="viewModels:MainViewModel"
         SizeToContent="Height"
+        CanResize="False"
         Width="500"
         Title="{Binding SlidingWarningTitleBinding}">
     <Grid

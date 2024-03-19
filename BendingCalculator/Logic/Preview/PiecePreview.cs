@@ -16,6 +16,7 @@ public class PiecePreview:Grid
     private readonly Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
+    private Piece? _oldPiece;
 
     #endregion
 
@@ -32,6 +33,7 @@ public class PiecePreview:Grid
         SetColumn(_preview,2);
         SetRow(_preview,0);
         Children.Add(_preview);
+        SizeChanged += (_, _) => UpdatePreview(_oldPiece);
     }
 
     #endregion
@@ -40,11 +42,12 @@ public class PiecePreview:Grid
 
     public void UpdatePreview(Piece? piece)
     {
+        _oldPiece = piece;
         _preview.Children.Clear();
         if (piece == null) { Clear(); return;}
         CreateNewTextBlocks(piece);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
-        double height = GetFullGridHeight(this) - 2*PreviewMargin;
+        double height = Bounds.Size.Height - 2*PreviewMargin;
         
         double maxWidth = 0;
         double totalHeight = 0;
@@ -153,25 +156,6 @@ public class PiecePreview:Grid
         {
             textBlock.Text = string.Empty;
         }
-    }
-    
-    private static double GetFullGridHeight(Grid grid)
-    {
-        double height = 0;
-        int i = 0;
-        while (i < 100)
-        {
-            try
-            {
-                height += grid.RowDefinitions[i].ActualHeight;
-                i++;
-            }
-            catch
-            {
-                return height;
-            }
-        }
-        return height;
     }
 
     #endregion
