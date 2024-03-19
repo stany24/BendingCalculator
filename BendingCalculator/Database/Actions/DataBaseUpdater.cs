@@ -20,20 +20,17 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
     
-    public static void UpdateLayers(SQLiteConnection connection,List<Layer> layers)
+    public static void UpdateLayers(SQLiteConnection connection,Layer layer)
     {
-        foreach (Layer? layer in layers)
-        {
-            using SQLiteCommand cmd = new(
-                "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;", connection);
-            cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
-            cmd.Parameters.AddWithValue("@WidthOnSides",layer.WidthOnSides);
-            cmd.Parameters.AddWithValue("@HeightAtCenter",layer.HeightAtCenter);
-            cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
-            cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.MaterialId);
-            cmd.Parameters.AddWithValue("@Id",layer.LayerId);
-            cmd.ExecuteNonQuery();
-        }
+        using SQLiteCommand cmd = new(
+            "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;", connection);
+        cmd.Parameters.AddWithValue("@WidthAtCenter",layer.WidthAtCenter);
+        cmd.Parameters.AddWithValue("@WidthOnSides",layer.WidthOnSides);
+        cmd.Parameters.AddWithValue("@HeightAtCenter",layer.HeightAtCenter);
+        cmd.Parameters.AddWithValue("@HeightOnSides",layer.HeightOnSides);
+        cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.MaterialId);
+        cmd.Parameters.AddWithValue("@Id",layer.LayerId);
+        cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseLayersChangedEvent();
     }
     

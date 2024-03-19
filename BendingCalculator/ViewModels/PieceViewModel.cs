@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -14,10 +12,10 @@ public partial class MainViewModel
 
     private ListLayersEditor? _listLayersEditor;
     
-    private bool _uiEnabled;
-    public bool UiEnabled { 
-        get => _uiEnabled;
-        set => SetProperty(ref _uiEnabled, value);
+    private bool _uiEnabledPieceEditor;
+    public bool UiEnabledPieceEditor { 
+        get => _uiEnabledPieceEditor;
+        set => SetProperty(ref _uiEnabledPieceEditor, value);
     }
     
     private ObservableCollection<Piece> _pieces = new();
@@ -130,10 +128,10 @@ public partial class MainViewModel
         
         if(_listLayersEditor != null){return;}
         _listLayersEditor = new ListLayersEditor(this,SelectedPiece.PieceId);
-        _listLayersEditor.Closing += (_, _) => UiEnabled = true;
+        _listLayersEditor.Closing += (_, _) => UiEnabledPieceEditor = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
-        UiEnabled = false;
+        UiEnabledPieceEditor = false;
     }
 
     #endregion
@@ -142,12 +140,12 @@ public partial class MainViewModel
     {
         if(SelectedPiece == null)
         {
-            UiEnabled = false;
+            UiEnabledPieceEditor = false;
             PieceName = string.Empty;
             PieceLength = 0;
             return;
         }
-        UiEnabled = true;
+        UiEnabledPieceEditor = true;
         PieceName = SelectedPiece.Name;
         PieceLength = SelectedPiece.Length*1000;
         LoadLayersOfPiece(SelectedPiece.PieceId);

@@ -51,7 +51,7 @@
                 Name="TbxName"
                 Grid.Column="2"
                 Grid.Row="0"
-                IsEnabled="{Binding UiEnabled}"
+                IsEnabled="{Binding UiEnabledPieceEditor}"
                 Text="{Binding PieceName}"></TextBox>
             <TextBlock 
                 Name="LblLength"
@@ -63,7 +63,7 @@
                 Name="NudLength"
                 Grid.Column="2"
                 Grid.Row="2"
-                IsEnabled="{Binding UiEnabled}"
+                IsEnabled="{Binding UiEnabledPieceEditor}"
                 Value="{Binding PieceLength}"
                 Minimum="0.1"></NumericUpDown>
             <Button
@@ -74,7 +74,7 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 Content="{Binding ChangeLayersBinding}"
-                IsEnabled="{Binding UiEnabled}"
+                IsEnabled="{Binding UiEnabledPieceEditor}"
                 Command="{Binding OpenLayerOfPieceEditor}"></Button>
             <Grid
                 Name="GridButton"
@@ -94,7 +94,7 @@
                     Content="{Binding RemoveBinding}"
                     Grid.Row="0"
                     Grid.Column="2"
-                    IsEnabled="{Binding UiEnabled}"
+                    IsEnabled="{Binding UiEnabledPieceEditor}"
                     Command="{Binding RemovePieces}"></Button>
                 <Button 
                     Name="HelpButton"

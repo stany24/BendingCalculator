@@ -20,9 +20,9 @@
             Grid.Row="0"
             Grid.Column="0"
             MinWidth="200"
-            SelectionMode="Multiple"
-            SelectedItems="{Binding SelectedLayers}"
-            ItemsSource="{Binding Layers}">
+            SelectionMode="Single"
+            ItemsSource="{Binding Layers}"
+            SelectedItem="{Binding SelectedLayer}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -46,6 +46,7 @@
             <NumericUpDown 
                 Name="NudWidthCenter"
                 Value="{Binding WidthCenter}"
+                IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="0"></NumericUpDown>
@@ -58,6 +59,7 @@
             <NumericUpDown 
                 Name="NudWidthSide"
                 Value="{Binding WidthSide}"
+                IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="2"></NumericUpDown>
@@ -70,6 +72,7 @@
             <NumericUpDown 
                 Name="NudHeightCenter"
                 Value="{Binding HeightCenter}"
+                IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="4"></NumericUpDown>
@@ -82,6 +85,7 @@
             <NumericUpDown 
                 Name="NudHeightSide"
                 Value="{Binding HeightSide}"
+                IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
                 Grid.Row="6"></NumericUpDown>
@@ -95,7 +99,8 @@
                 Name="CbxMaterial"
                 Grid.Column="2"
                 Grid.Row="8"
-                SelectedItem="{Binding SelectedMaterial}"
+                IsEnabled="{Binding UiEnabledLayerEditor}"
+                SelectedItem="{Binding SelectedMaterial,Mode=TwoWay}"
                 ItemsSource="{Binding Materials}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -121,6 +126,7 @@
                 <Button
                     Name="BtnRemove"
                     Content="{Binding RemoveBinding}"
+                    IsEnabled="{Binding UiEnabledLayerEditor}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding RemoveLayers}"></Button>
@@ -137,7 +143,7 @@
             Name="LayerPreview"
             Background="#292929"
             Height="300"
-            DisplayedLayer="{Binding SelectedLayers}"
+            DisplayedLayer="{Binding SelectedLayer}"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"></preview:LayerPreview>

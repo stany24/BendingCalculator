@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
@@ -17,58 +16,67 @@ public partial class MainViewModel
         set => SetProperty(ref _layers, value);
     }
     
-    private ObservableCollection<Layer> _selectedLayers = new();
-    public ObservableCollection<Layer> SelectedLayers { 
-        get => _selectedLayers;
-        set => SetProperty(ref _selectedLayers, value);
+    private Layer? _selectedLayer;
+    public Layer? SelectedLayer
+    {
+        get => _selectedLayer;
+        set
+        {
+            SetProperty(ref _selectedLayer, value);
+            SelectedLayerChanged();
+        }
     }
-    
-    private int SelectedLayerIndex { get; set; }
+
+    private bool _uiEnabledLayerEditor;
+    public bool UiEnabledLayerEditor { 
+        get => _uiEnabledLayerEditor;
+        set => SetProperty(ref _uiEnabledLayerEditor, value);
+    }
 
     private double _widthSide;
 
-    public double? WidthSide
+    public double WidthSide
     {
         get => _widthSide;
         set
         {
-            _widthSide = value ?? _widthSide;
+            SetProperty(ref _widthSide, value);
             ChangeWidthSide();
         }
     }
     
     private double _widthCenter;
 
-    public double? WidthCenter
+    public double WidthCenter
     {
         get => _widthCenter;
         set
         {
-            _widthCenter = value ?? _widthCenter;
+            SetProperty(ref _widthCenter, value);
             ChangeWidthCenter();
         }
     }
     
     private double _heightSide;
 
-    public double? HeightSide
+    public double HeightSide
     {
         get => _heightSide;
         set
         {
-            _heightSide = value ?? _heightSide;
+            SetProperty(ref _heightSide, value);
             ChangeHeightSide();
         }
     }
     
     private double _heightCenter;
 
-    public double? HeightCenter
+    public double HeightCenter
     {
         get => _heightCenter;
         set
         {
-            _heightCenter = value ?? _heightCenter;
+            SetProperty(ref _heightCenter, value);
             ChangeHeightCenter();
         }
     }
@@ -79,7 +87,7 @@ public partial class MainViewModel
         get => _selectedMaterial;
         set
         {
-            _selectedMaterial = value;
+            SetProperty(ref _selectedMaterial, value);
             MaterialChanged();
         }
     }
@@ -90,65 +98,63 @@ public partial class MainViewModel
 
     public void CreateNewLayer()
     {
-        Layer layer = new(SelectedMaterial , _widthCenter/1000,_widthSide/1000, _heightCenter/1000, _heightSide/1000);
+        Material? material = null;
+        if (SelectedMaterial is not null)
+        {
+            material = SelectedMaterial;
+        }
+        else
+        {
+            if (Materials.Count > 0)
+            {
+                material = Materials[0];
+            }
+        }
+        Layer layer = new(material , 0.045,0.045, 0.01, 0.01);
         DataBaseCreator.NewLayer(_connection,layer);
+        SelectedLayer = Layers[^1];
     }
     
     public void RemoveLayers()
     {
-        int index = SelectedLayerIndex;
-        List<long> selected = SelectedLayers.Select(x => x.LayerId).ToList();
-        foreach (long id in selected)
-        {
-            DataBaseRemover.RemoveLayer(_connection,id);
-        }
-        if (index <= 0) return;
-        SelectedLayerIndex = Layers.Count > index ? index : Layers.Count;
+        if(SelectedLayer == null){return;}
+        DataBaseRemover.RemoveLayer(_connection,SelectedLayer.LayerId);
+        SelectedLayer = null;
     }
     
     private void ChangeWidthSide()
     {
-        foreach (Layer selectedLayer in SelectedLayers)
-        {
-            selectedLayer.WidthOnSides = _widthSide/1000;
-        }
-        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+        if(SelectedLayer == null){return;}
+        SelectedLayer.WidthOnSides = WidthSide / 1000;
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
 
     private void ChangeWidthCenter()
     {
-        foreach (Layer selectedLayer in SelectedLayers)
-        {
-            selectedLayer.WidthAtCenter = _widthCenter/1000;
-        }
-        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+        if(SelectedLayer == null){return;}
+        SelectedLayer.WidthAtCenter = WidthCenter/ 1000;
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
 
     private void ChangeHeightSide()
     {
-        foreach (Layer selectedLayer in SelectedLayers)
-        {
-            selectedLayer.HeightOnSides = _heightSide/1000;
-        }
-        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+        if(SelectedLayer == null){return;}
+        SelectedLayer.HeightOnSides = HeightSide/ 1000;
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
 
     private void ChangeHeightCenter()
     {
-        foreach (Layer selectedLayer in SelectedLayers)
-        {
-            selectedLayer.HeightAtCenter = _heightCenter/1000;
-        }
-        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+        if(SelectedLayer == null){return;}
+        SelectedLayer.HeightAtCenter = HeightCenter/ 1000;
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
 
     private void MaterialChanged()
     {
-        foreach (Layer layer in SelectedLayers)
-        {
-            layer.Material = SelectedMaterial;
-        }
-        DataBaseUpdater.UpdateLayers(_connection,SelectedLayers.ToList());
+        if(SelectedLayer == null){return;}
+        SelectedLayer.Material = SelectedMaterial;
+        DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
     
     private void ReloadLayers()
@@ -175,6 +181,26 @@ public partial class MainViewModel
             Layers[i].WidthAtCenter = layers[i].WidthAtCenter;
             Layers[i].WidthOnSides = layers[i].WidthOnSides;
         }
+    }
+    
+    private void SelectedLayerChanged()
+    {
+        if(SelectedLayer == null)
+        {
+            UiEnabledLayerEditor = false;
+            HeightCenter = 0;
+            HeightSide = 0;
+            WidthCenter = 0;
+            WidthSide = 0;
+            SelectedMaterial = null;
+            return;
+        }
+        UiEnabledLayerEditor = true;
+        SelectedMaterial = SelectedLayer.Material is not null ? Materials.FirstOrDefault(m => m.MaterialId == SelectedLayer.Material.MaterialId) : null;
+        HeightCenter = SelectedLayer.HeightAtCenter*1000;
+        HeightSide = SelectedLayer.HeightOnSides*1000;
+        WidthCenter = SelectedLayer.WidthAtCenter*1000;
+        WidthSide = SelectedLayer.WidthOnSides*1000;
     }
 
     #endregion
