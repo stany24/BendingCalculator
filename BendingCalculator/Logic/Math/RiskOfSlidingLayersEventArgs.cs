@@ -4,10 +4,10 @@ namespace BendingCalculator.Logic.Math;
 
 public class RiskOfSlidingLayersEventArgs:EventArgs
 {
-    public int Position1 { get; init; }
-    public int Position2 { get; init; }
-    public Layer Layer1 { get; init; }
-    public Layer Layer2 { get; init; }
+    public int Position1 { get; }
+    public int Position2 { get; }
+    public Layer Layer1 { get; }
+    public Layer Layer2 { get; }
     
     public RiskOfSlidingLayersEventArgs(int position1, int position2, Layer layer1, Layer layer2)
     {

@@ -104,7 +104,7 @@ public class LayerPreview:Grid
         {
             minusCenter = (int)((height - height*proportionCenterOverSides)/2);
         }
-        return new Path()
+        return new Path
         {
             Fill = Brushes.LightBlue,
             Data = new PathGeometry

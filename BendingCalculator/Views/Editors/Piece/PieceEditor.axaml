@@ -4,16 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         xmlns:preview="clr-namespace:BendingCalculator.Logic.Preview"
-        xmlns:converter="clr-namespace:BendingCalculator.ViewModels.Converter"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Piece.PieceEditor"
         x:DataType="viewModels:MainViewModel"
         Title="{Binding TitlePieceWindowBinding}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
-    <Window.Resources>
-        <converter:DoubleMeterToMilliMeter x:Key="doubleConverter"/>
-    </Window.Resources>
     <Grid
         Name="MainGrid"
         Margin="5"

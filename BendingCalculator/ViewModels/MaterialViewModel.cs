@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 
@@ -149,12 +147,12 @@ public partial class MainViewModel
         Name = SelectedMaterial.Name;
         if (SelectedMaterial.E >= 1000000000)
         {
-            EValue = SelectedMaterial.E / 1000000000;
+            EValue = (double)SelectedMaterial.E / 1000000000;
             SelectedUnit = "GPa";
         }
         else
         {
-            EValue = SelectedMaterial.E / 1000000;
+            EValue = (double)SelectedMaterial.E / 1000000;
             SelectedUnit = "MPa";
         }
     }

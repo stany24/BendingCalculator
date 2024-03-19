@@ -1,9 +1,6 @@
 using System;
 using System.Globalization;
 using System.Resources;
-using System.Threading;
-using System.Threading.Tasks;
-using Avalonia.Threading;
 using BendingCalculator.Assets.Localization.MainLocalization;
 using BendingCalculator.Logic;
 using BendingCalculator.Logic.Helper;

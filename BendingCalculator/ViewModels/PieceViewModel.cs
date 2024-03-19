@@ -124,7 +124,7 @@ public partial class MainViewModel
     
     public void OpenLayerOfPieceEditor()
     {
-        
+        if(SelectedPiece is null){return;}   
         if(_listLayersEditor != null){return;}
         _listLayersEditor = new ListLayersEditor(this,SelectedPiece.PieceId);
         _listLayersEditor.Closing += (_, _) => UiEnabledPieceEditor = true;
