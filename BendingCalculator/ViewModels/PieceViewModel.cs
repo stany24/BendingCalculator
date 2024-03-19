@@ -63,7 +63,7 @@ public partial class MainViewModel
 
     public void CreateNewPiece()
     {
-        Piece piece = new(1, "nouveau");
+        Piece piece = new(1, "new");
         DataBaseCreator.NewPiece(_connection,piece);
         SelectedPiece = Pieces[^1];
     }

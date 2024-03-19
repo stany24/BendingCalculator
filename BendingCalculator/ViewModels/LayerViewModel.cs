@@ -81,13 +81,13 @@ public partial class MainViewModel
         }
     }
 
-    private Material? _selectedMaterial;
-    public Material? SelectedMaterial
+    private Material? _selectedMaterialForLayer;
+    public Material? SelectedMaterialForLayer
     {
-        get => _selectedMaterial;
+        get => _selectedMaterialForLayer;
         set
         {
-            SetProperty(ref _selectedMaterial, value);
+            SetProperty(ref _selectedMaterialForLayer, value);
             MaterialChanged();
         }
     }
@@ -99,9 +99,9 @@ public partial class MainViewModel
     public void CreateNewLayer()
     {
         Material? material = null;
-        if (SelectedMaterial is not null)
+        if (SelectedMaterialForLayer is not null)
         {
-            material = SelectedMaterial;
+            material = SelectedMaterialForLayer;
         }
         else
         {
@@ -153,7 +153,7 @@ public partial class MainViewModel
     private void MaterialChanged()
     {
         if(SelectedLayer == null){return;}
-        SelectedLayer.Material = SelectedMaterial;
+        SelectedLayer.Material = SelectedMaterialForLayer;
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
     
@@ -192,11 +192,11 @@ public partial class MainViewModel
             HeightSide = 0;
             WidthCenter = 0;
             WidthSide = 0;
-            SelectedMaterial = null;
+            SelectedMaterialForLayer = null;
             return;
         }
         UiEnabledLayerEditor = true;
-        SelectedMaterial = SelectedLayer.Material is not null ? Materials.FirstOrDefault(m => m.MaterialId == SelectedLayer.Material.MaterialId) : null;
+        SelectedMaterialForLayer = SelectedLayer.Material is not null ? Materials.FirstOrDefault(m => m.MaterialId == SelectedLayer.Material.MaterialId) : null;
         HeightCenter = SelectedLayer.HeightAtCenter*1000;
         HeightSide = SelectedLayer.HeightOnSides*1000;
         WidthCenter = SelectedLayer.WidthAtCenter*1000;

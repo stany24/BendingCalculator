@@ -100,7 +100,7 @@
                 Grid.Column="2"
                 Grid.Row="8"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
-                SelectedItem="{Binding SelectedMaterial,Mode=TwoWay}"
+                SelectedItem="{Binding SelectedMaterialForLayer,Mode=TwoWay}"
                 ItemsSource="{Binding Materials}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

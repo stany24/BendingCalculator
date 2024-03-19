@@ -24,6 +24,7 @@
                 Name="TbxName"
                 Grid.Column="5"
                 Grid.Row="0"
+                IsEnabled="{Binding UiEnabledMaterialEditor}"
                 Text="{Binding Name}">
             </TextBox>
             <TextBlock 
@@ -36,9 +37,11 @@
                 Grid.Column="3"
                 Grid.Row="2"
                 ItemsSource="{Binding Unit}"
+                IsEnabled="{Binding UiEnabledMaterialEditor}"
                 SelectedItem="{Binding SelectedUnit}"></ComboBox>
             <NumericUpDown 
                 Name="NudE"
+                IsEnabled="{Binding UiEnabledMaterialEditor}"
                 Value="{Binding EValue}"
                 Increment="10"
                 Minimum="1"
@@ -52,8 +55,7 @@
                 Grid.RowSpan="6"
                 SelectionMode="Multiple"
                 MinWidth="200"
-                SelectedIndex="{Binding SelectedMaterialIndex}"
-                SelectedItems="{Binding SelectedMaterials}"
+                SelectedItem="{Binding SelectedMaterial}"
                 ItemsSource="{Binding Materials}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -75,6 +77,7 @@
                 Content="{Binding RemoveBinding}"
                 Grid.Row="4"
                 Grid.Column="5"
+                IsEnabled="{Binding UiEnabledMaterialEditor}"
                 Command="{Binding RemoveMaterials}"></Button>
         <Button 
             Name="HelpButton"

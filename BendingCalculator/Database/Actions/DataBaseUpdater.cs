@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Data.SQLite;
 using BendingCalculator.Logic.Math;
 
@@ -6,17 +5,14 @@ namespace BendingCalculator.Database.Actions;
 
 public static class DataBaseUpdater
 {
-    public static void UpdateMaterials(SQLiteConnection connection,List<Material> materials)
+    public static void UpdateMaterials(SQLiteConnection connection,Material material)
     {
-        foreach (Material? material in materials)
-        {
-            using SQLiteCommand cmd = new(
-                "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", connection);
-            cmd.Parameters.AddWithValue("@WidthAtCenter",material.Name);
-            cmd.Parameters.AddWithValue("@WidthOnSides",material.E);
-            cmd.Parameters.AddWithValue("@Id",material.MaterialId);
-            cmd.ExecuteNonQuery();
-        }
+        using SQLiteCommand cmd = new(
+            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", connection);
+        cmd.Parameters.AddWithValue("@WidthAtCenter",material.Name);
+        cmd.Parameters.AddWithValue("@WidthOnSides",material.E);
+        cmd.Parameters.AddWithValue("@Id",material.MaterialId);
+        cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
     

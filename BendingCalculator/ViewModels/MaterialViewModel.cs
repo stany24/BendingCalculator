@@ -17,12 +17,16 @@ public partial class MainViewModel
         set => SetProperty(ref _materials, value);
     }
     
-    private ObservableCollection<Material> _selectedMaterials = new();
-    public ObservableCollection<Material> SelectedMaterials { 
-        get => _selectedMaterials;
-        set => SetProperty(ref _selectedMaterials, value);
+    private Material? _selectedMaterial;
+    public Material? SelectedMaterial
+    {
+        get => _selectedMaterial;
+        set
+        {
+            SetProperty(ref _selectedMaterial, value);
+            SelectedMaterialChanged();
+        }
     }
-    public int SelectedMaterialIndex { get; set; }
     
     private ObservableCollection<string> _unit = new(){"GPa","MPa"};
     public ObservableCollection<string> Unit { 
@@ -30,29 +34,40 @@ public partial class MainViewModel
         set => SetProperty(ref _unit, value);
     }
     
+    private bool _uiEnabledMaterialEditor;
+    public bool UiEnabledMaterialEditor { 
+        get => _uiEnabledMaterialEditor;
+        set => SetProperty(ref _uiEnabledMaterialEditor, value);
+    }
+    
     private string _selectedUnit = "GPa";
-    public string SelectedUnit { 
+    public string SelectedUnit
+    {
         get => _selectedUnit;
-        set => SetProperty(ref _selectedUnit, value);
+        set
+        {
+            SetProperty(ref _selectedUnit, value);
+            MaterialEChanged();
+        }
     }
 
     private string _materialName = string.Empty;
     public string Name { get => _materialName;
         set
         {
-            _materialName = value;
+            SetProperty(ref _materialName, value);
             MaterialNameChanged();
         }
     }
     
-    private double? _eValue = 69;
+    private double _eValue ;
 
-    public double? EValue
+    public double EValue
     {
         get => _eValue;
         set
         {
-            _eValue = value ?? 0;
+            SetProperty(ref _eValue, value);
             MaterialEChanged();
         }
     }
@@ -63,43 +78,28 @@ public partial class MainViewModel
 
     public void CreateNewMaterial()
     {
-        int multiplication;
-        switch (SelectedUnit)
-        {
-            case "GPa" : multiplication = 1000000000;
-                break;
-            case "MPa" : multiplication = 1000000;
-                break;
-            default: return;
-        }
-        Material material = new(Name,Convert.ToInt64(EValue*multiplication));
+        Material material = new("new",69000000000);
         DataBaseCreator.NewMaterial(_connection,material);
+        SelectedMaterial = Materials[^1];
     }
     
     public void RemoveMaterials()
     {
-        int index = SelectedMaterialIndex;
-        List<long> selected = SelectedMaterials.Select(x => x.MaterialId).ToList();
-        foreach (long id in selected)
-        {
-            DataBaseRemover.RemoveMaterial(_connection,id);
-        }
-        if (index <= 0) return;
-        SelectedMaterialIndex = _materials.Count > index ? index : _materials.Count;
+        if(SelectedMaterial is null){return;}
+        DataBaseRemover.RemoveMaterial(_connection,SelectedMaterial.MaterialId);
+        SelectedMaterial = null;
     }
     
     private void MaterialNameChanged()
     {
-        List<Material> materials = new(SelectedMaterials);
-        foreach (Material material in materials)
-        {
-            material.Name = Name;
-        }
-        DataBaseUpdater.UpdateMaterials(_connection,materials);
+        if(SelectedMaterial is null){return;}
+        SelectedMaterial.Name = Name;
+        DataBaseUpdater.UpdateMaterials(_connection,SelectedMaterial);
     }
     
     private void MaterialEChanged()
     {
+        if(SelectedMaterial is null){return;}
         int multiplication;
         switch (SelectedUnit)
         {
@@ -109,13 +109,8 @@ public partial class MainViewModel
                 break;
             default: return;
         }
-
-        List<Material> materials = new(SelectedMaterials);
-        foreach (Material material in materials)
-        {
-            material.E = (long)(EValue ?? 69e9)*multiplication;
-        }
-        DataBaseUpdater.UpdateMaterials(_connection,materials);
+        SelectedMaterial.E = (long)EValue*multiplication;
+        DataBaseUpdater.UpdateMaterials(_connection,SelectedMaterial);
     }
     
     private void ReloadMaterials()
@@ -138,6 +133,29 @@ public partial class MainViewModel
             Materials[i].MaterialId = materials[i].MaterialId;
             Materials[i].Name = materials[i].Name;
             Materials[i].E = materials[i].E;
+        }
+    }
+    
+    private void SelectedMaterialChanged()
+    {
+        if(SelectedMaterial == null)
+        {
+            UiEnabledMaterialEditor = false;
+            Name = string.Empty;
+            EValue = 0;
+            return;
+        }
+        UiEnabledMaterialEditor = true;
+        Name = SelectedMaterial.Name;
+        if (SelectedMaterial.E >= 1000000000)
+        {
+            EValue = SelectedMaterial.E / 1000000000;
+            SelectedUnit = "GPa";
+        }
+        else
+        {
+            EValue = SelectedMaterial.E / 1000000;
+            SelectedUnit = "MPa";
         }
     }
 
