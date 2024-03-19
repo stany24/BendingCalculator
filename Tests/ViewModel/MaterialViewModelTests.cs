@@ -32,9 +32,9 @@ public class MaterialViewModelTests
         {
             _model.CreateNewMaterial();
             if (rand.Next(0, 2) != 1) continue;
-            _model.SelectedMaterial.Add(_model.Materials[^1]);
+            _model.SelectedMaterial = _model.Materials[^1];
         }
-        int finalCount = _model.Materials.Count - _model.SelectedMaterial.Count;
+        int finalCount = _model.Materials.Count - 1;
         _model.RemoveMaterials();
         Assert.Equal(finalCount,_model.Materials.Count);
     }

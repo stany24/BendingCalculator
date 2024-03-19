@@ -32,9 +32,9 @@ public class LayerViewModelTests
         {
             _model.CreateNewLayer();
             if (rand.Next(0, 2) != 1) continue;
-            _model.SelectedLayer.Add(_model.Layers[^1]);
+            _model.SelectedLayer = _model.Layers[^1];
         }
-        int finalCount = _model.Layers.Count - _model.SelectedLayer.Count;
+        int finalCount = _model.Layers.Count - 1;
         _model.RemoveLayers();
         Assert.Equal(finalCount,_model.Layers.Count);
     }

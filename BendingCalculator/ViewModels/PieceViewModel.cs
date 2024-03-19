@@ -72,7 +72,6 @@ public partial class MainViewModel
     {
         if(SelectedPiece == null){return;}
         DataBaseRemover.RemovePiece(_connection,SelectedPiece.PieceId);
-        Pieces.Remove(SelectedPiece);
         SelectedPiece = null;
     }
     
