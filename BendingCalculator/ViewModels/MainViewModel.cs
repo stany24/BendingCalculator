@@ -31,11 +31,20 @@ public partial class MainViewModel : ObservableObject
 
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
-    
-    public EventHandler<EventArgs>? UpdatePreviewMainWindowPiece { get; set; }
-    public EventHandler<EventArgs>? UpdatePreviewPiece { get; set; }
 
-    public ObservableCollection<Piece> SelectedPiecesMainWindow { get; set; } = new();
+    private Piece? _selectedPieceMainWindow;
+    public Piece? SelectedPieceMainWindow
+    {
+        get => _selectedPieceMainWindow;
+        set => SetProperty(ref _selectedPieceMainWindow, value);
+    }
+    
+    private Layer? _selectedLayerMainWindow;
+    public Layer? SelectedLayerMainWindow
+    {
+        get => _selectedLayerMainWindow;
+        set => SetProperty(ref _selectedLayerMainWindow, value);
+    }
 
     private ObservableCollection<string> _languages;
     public ObservableCollection<string> Languages
@@ -161,14 +170,13 @@ public partial class MainViewModel : ObservableObject
     {
         Task.Run(() =>
         {
-            if(SelectedPiecesMainWindow is { Count: 0 }){return;}
-            if(SelectedPiecesMainWindow[0].Layers.Count == 0){return;}
-            double gap = SelectedPiecesMainWindow[0].Length / 10000;
-            PieceInGraphLength = SelectedPiecesMainWindow[0].Length*1000;
+            if(SelectedPieceMainWindow is null){return;}
+            double gap = SelectedPieceMainWindow.Length / 10000;
+            PieceInGraphLength = SelectedPieceMainWindow.Length*1000;
             
-            SelectedPiecesMainWindow[0].RiskOfSlidingLayer += ShowRiskWindow;
-            BendingResult result = SelectedPiecesMainWindow[0].CalculateBending((int)Force,gap);
-            SelectedPiecesMainWindow[0].RiskOfSlidingLayer -= ShowRiskWindow;
+            SelectedPieceMainWindow.RiskOfSlidingLayer += ShowRiskWindow;
+            BendingResult result = SelectedPieceMainWindow.CalculateBending((int)Force,gap);
+            SelectedPieceMainWindow.RiskOfSlidingLayer -= ShowRiskWindow;
             
             _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphBending[0].Values = _deformationPoints;

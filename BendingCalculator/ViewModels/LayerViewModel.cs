@@ -24,13 +24,6 @@ public partial class MainViewModel
     }
     
     private int SelectedLayerIndex { get; set; }
-    
-    private Layer? _selectedLayerMainWindow;
-    public Layer? SelectedLayerMainWindow
-    {
-        get => _selectedLayerMainWindow;
-        set => SetProperty(ref _selectedLayerMainWindow, value);
-    }
 
     private double _widthSide;
 

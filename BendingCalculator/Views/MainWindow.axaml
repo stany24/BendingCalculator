@@ -159,8 +159,9 @@
                 Grid.ColumnSpan="4"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
+                SelectionMode="Single"
                 MinWidth="200"
-                SelectedItems="{Binding SelectedPiecesMainWindow}"
+                SelectedItem="{Binding SelectedPieceMainWindow,Mode=TwoWay}"
                 ItemsSource="{Binding Pieces}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -172,6 +173,7 @@
             <preview:PiecePreview
                 Name="PiecePreview"
                 Background="#292929"
+                DisplayedPiece="{Binding SelectedPieceMainWindow,Mode=OneWay}"
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"></preview:PiecePreview>

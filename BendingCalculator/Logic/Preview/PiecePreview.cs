@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Avalonia;
@@ -16,7 +17,14 @@ public class PiecePreview:Grid
     private readonly Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
-    private Piece? _oldPiece;
+    
+    public static readonly StyledProperty<Piece?> DisplayedPieceProperty =
+        AvaloniaProperty.Register<PiecePreview,Piece?>(nameof(DisplayedPiece), defaultValue: null);
+    public Piece? DisplayedPiece
+    {
+        get => GetValue(DisplayedPieceProperty);
+        set => SetValue(DisplayedPieceProperty, value);
+    }
 
     #endregion
 
@@ -33,25 +41,25 @@ public class PiecePreview:Grid
         SetColumn(_preview,2);
         SetRow(_preview,0);
         Children.Add(_preview);
-        SizeChanged += (_, _) => UpdatePreview(_oldPiece);
+        SizeChanged += (_, _) => UpdatePreview();
+        this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview());
     }
 
     #endregion
 
     #region Preview Math
 
-    public void UpdatePreview(Piece? piece)
+    private void UpdatePreview()
     {
-        _oldPiece = piece;
         _preview.Children.Clear();
-        if (piece == null) { Clear(); return;}
-        CreateNewTextBlocks(piece);
+        if (DisplayedPiece == null) { Clear(); return;}
+        CreateNewTextBlocks(DisplayedPiece);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
         double height = Bounds.Size.Height - 2*PreviewMargin;
         
         double maxWidth = 0;
         double totalHeight = 0;
-        foreach (Layer layer in piece.Layers)
+        foreach (Layer layer in DisplayedPiece.Layers)
         {
             totalHeight += layer.HeightOnSides;
             if (layer.WidthOnSides > maxWidth)
@@ -62,11 +70,11 @@ public class PiecePreview:Grid
 
         List<Shape> shapes = new();
         double heightOfPiecesBefore = 0;
-        for (int i = 1; i <= piece.Layers.Count; i++)
+        for (int i = 1; i <= DisplayedPiece.Layers.Count; i++)
         {
-            double pieceWidth = width * (piece.Layers[i - 1].WidthOnSides / maxWidth);
+            double pieceWidth = width * (DisplayedPiece.Layers[i - 1].WidthOnSides / maxWidth);
             double horizontalMargin = (width - pieceWidth) / 2;
-            double pieceHeight = (height - PreviewMargin*(piece.Layers.Count-1)) * (piece.Layers[i-1].HeightOnSides/totalHeight) ;
+            double pieceHeight = (height - PreviewMargin*(DisplayedPiece.Layers.Count-1)) * (DisplayedPiece.Layers[i-1].HeightOnSides/totalHeight) ;
             shapes.Add(GetRectangle(
                 PreviewMargin+horizontalMargin,
                 PreviewMargin*i+heightOfPiecesBefore,

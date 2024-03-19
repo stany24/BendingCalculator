@@ -115,6 +115,7 @@
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
+            DisplayedPiece="{Binding SelectedPieces}"
             Background="#292929"
             Height="300">
         </preview:PiecePreview>

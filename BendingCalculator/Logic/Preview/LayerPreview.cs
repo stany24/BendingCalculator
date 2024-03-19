@@ -63,7 +63,7 @@ public class LayerPreview:Grid
         Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         LanguageEvents.LanguageChanged += UpdateLanguage;
-        this.GetObservable(DisplayedLayerProperty).Subscribe((_) =>UpdatePreview());
+        this.GetObservable(DisplayedLayerProperty).Subscribe(_ =>UpdatePreview());
     }
 
     ~LayerPreview()

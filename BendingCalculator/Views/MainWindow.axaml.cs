@@ -22,21 +22,8 @@ public partial class Main : WindowWithHelp
         InitializeComponent();
         Closing += (_, _) => CloseAllWindows();
         LanguageEvents.LanguageChanged += ReloadLanguage;
-        model.UpdatePreviewMainWindowPiece += (_,_) => UpdatePreviewPieceMainWindow();
         ReloadLanguage(null,EventArgs.Empty);
         HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MainWindowModules);
-    }
-
-    #endregion
-
-    #region Previews
-    
-    private void UpdatePreviewPieceMainWindow()
-    {
-        if(DataContext is not MainViewModel model){return;}
-        if(model.SelectedPiecesMainWindow.Count < 1){PiecePreview.UpdatePreview(null);return;}
-        if(model.SelectedPiecesMainWindow[0].Layers.Count < 1){PiecePreview.UpdatePreview(null);return;}
-        PiecePreview.UpdatePreview(model.SelectedPiecesMainWindow[0]);
     }
 
     #endregion
