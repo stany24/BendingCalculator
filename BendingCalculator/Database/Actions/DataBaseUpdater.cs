@@ -37,17 +37,14 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseLayersChangedEvent();
     }
     
-    public static void UpdatePieces(SQLiteConnection connection,List<Piece> pieces)
+    public static void UpdatePieces(SQLiteConnection connection,Piece piece)
     {
-        foreach (Piece? piece in pieces)
-        {
-            using SQLiteCommand cmd1 = new(
-                "UPDATE Piece SET Name = @Name, Length = @Length WHERE PieceId= @Id;", connection);
-            cmd1.Parameters.AddWithValue("@Name",piece.Name);
-            cmd1.Parameters.AddWithValue("@Length",piece.Length);
-            cmd1.Parameters.AddWithValue("@Id",piece.PieceId);
-            cmd1.ExecuteNonQuery();
-        }
+        using SQLiteCommand cmd1 = new(
+            "UPDATE Piece SET Name = @Name, Length = @Length WHERE PieceId= @Id;", connection);
+        cmd1.Parameters.AddWithValue("@Name",piece.Name);
+        cmd1.Parameters.AddWithValue("@Length",piece.Length);
+        cmd1.Parameters.AddWithValue("@Id",piece.PieceId);
+        cmd1.ExecuteNonQuery();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
     

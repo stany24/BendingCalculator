@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -13,10 +13,10 @@ public partial class MainViewModel
 
     private ListLayersEditor? _listLayersEditor;
     
-    private bool _btnChangeLayerEnabled;
-    public bool BtnChangeLayerEnabled { 
-        get => _btnChangeLayerEnabled;
-        set => SetProperty(ref _btnChangeLayerEnabled, value);
+    private bool _uiEnabled;
+    public bool UiEnabled { 
+        get => _uiEnabled;
+        set => SetProperty(ref _uiEnabled, value);
     }
     
     private ObservableCollection<Piece> _pieces = new();
@@ -25,26 +25,36 @@ public partial class MainViewModel
         set => SetProperty(ref _pieces, value);
     }
 
-    public ObservableCollection<Piece> SelectedPieces { get; set; } = new();
-    private int SelectedPieceIndex { get; set; }
+    private Piece? _selectedPiece;
+    public Piece? SelectedPiece
+    {
+        get => _selectedPiece;
+        set
+        {
+            SetProperty(ref _selectedPiece, value);
+            SelectedPieceChanged();
+        }
+    }
 
-    private double _pieceLength = 1;
-
-    public double? PieceLength
+    private double _pieceLength;
+    public double PieceLength
     {
         get => _pieceLength;
         set
         {
-            _pieceLength = value ?? _pieceLength;
+            SetProperty(ref _pieceLength, value);
+            Console.WriteLine("Changed");
             PieceLengthChanged();
         }
     }
 
-    private string _pieceName = string.Empty;
-    public string PieceName { get => _pieceName;
+    private string _pieceName;
+    public string PieceName 
+    { 
+        get => _pieceName;
         set
         {
-            _pieceName = value;
+            SetProperty(ref _pieceName, value);
             PieceNameChanged();
         }
     }
@@ -55,39 +65,30 @@ public partial class MainViewModel
 
     public void CreateNewPiece()
     {
-        Piece piece = new(_pieceLength/1000, "nouveau");
+        Piece piece = new(1, "nouveau");
         DataBaseCreator.NewPiece(_connection,piece);
     }
 
     public void RemovePieces()
     {
-        int index = SelectedPieceIndex;
-        List<long> selected = SelectedPieces.Select(x => x.PieceId).ToList();
-        foreach (long id in selected)
-        {
-            DataBaseRemover.RemovePiece(_connection,id);
-        }
-
-        if (index <= 0) return;
-        SelectedPieceIndex = SelectedPieces.Count > index ? index : SelectedPieces.Count;
+        if(SelectedPiece == null){return;}
+        Pieces.Remove(SelectedPiece);
+        DataBaseRemover.RemovePiece(_connection,SelectedPiece.PieceId);
+        SelectedPiece = null;
     }
     
     private void PieceLengthChanged()
     {
-        foreach (Piece piece in SelectedPieces)
-        {
-            piece.Length = _pieceLength/1000;
-        }
-        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
+        if(SelectedPiece == null){return;}
+        SelectedPiece.Length = PieceLength;
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPiece);
     }
 
     private void PieceNameChanged()
     {
-        foreach (Piece piece in SelectedPieces)
-        {
-            piece.Name = PieceName;
-        }
-        DataBaseUpdater.UpdatePieces(_connection,SelectedPieces.ToList());
+        if(SelectedPiece == null){return;}
+        SelectedPiece.Name = PieceName;
+        DataBaseUpdater.UpdatePieces(_connection,SelectedPiece);
     }
     
     private void ReloadPieces()
@@ -125,24 +126,29 @@ public partial class MainViewModel
     
     public void OpenLayerOfPieceEditor()
     {
+        
         if(_listLayersEditor != null){return;}
-        _listLayersEditor = new ListLayersEditor(this,SelectedPieces[0].PieceId);
-        _listLayersEditor.Closing += (_, _) => BtnChangeLayerEnabled = true;
+        _listLayersEditor = new ListLayersEditor(this,SelectedPiece.PieceId);
+        _listLayersEditor.Closing += (_, _) => UiEnabled = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
-        BtnChangeLayerEnabled = false;
+        UiEnabled = false;
     }
 
     #endregion
     
     private void SelectedPieceChanged()
     {
-        if(SelectedPieces.Count == 0)
+        if(SelectedPiece == null)
         {
-            BtnChangeLayerEnabled = false;
+            UiEnabled = false;
+            PieceName = string.Empty;
+            PieceLength = 0;
             return;
         }
-        BtnChangeLayerEnabled = true;
-        LoadLayersOfPiece(SelectedPieces[0].PieceId);
+        UiEnabled = true;
+        PieceName = SelectedPiece.Name;
+        PieceLength = SelectedPiece.Length;
+        LoadLayersOfPiece(SelectedPiece.PieceId);
     }
 }

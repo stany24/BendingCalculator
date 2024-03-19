@@ -144,13 +144,12 @@ public partial class MainViewModel : ObservableObject
         _language = SettingManager.GetLanguage();
         Language = _language;
         _connection = connection;
-        SelectedPieces.CollectionChanged += (_,_) => SelectedPieceChanged();
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
-        DataBaseEvents.LayerOfPieceChanged += (_, _) => LoadLayersOfPiece(SelectedPieces[0].PieceId);
+        DataBaseEvents.LayerOfPieceChanged += (_, _) => LoadLayersOfPiece(SelectedPiece.PieceId);
         ReloadMaterials();
         ReloadLayers();
         ReloadPieces();

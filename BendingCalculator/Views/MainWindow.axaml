@@ -13,10 +13,6 @@
         Title="{Binding TitleMainWindowBinding}"
         MinWidth="802"
         MinHeight="355">
-    <Window.Resources>
-        <converter:DoubleConverter x:Key="DoubleConverter"/>
-    </Window.Resources>
-    
     <Grid
         Name="MainGrid"
         Margin="5"
@@ -82,7 +78,7 @@
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxDeformationCenter"
-                    Text="{Binding DeformationCenter, Converter={StaticResource DoubleConverter}}"
+                    Text="{Binding DeformationCenter, Converter={x:Static converter:Converters.DoubleMilliMeterWithUnits}}"
                     Grid.Column="2"
                     Grid.Row="0"></TextBlock>
                 <TextBlock
@@ -93,7 +89,7 @@
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxConstraintCenter"
-                    Text="{Binding ConstraintCenter, Converter={StaticResource DoubleConverter}}"
+                    Text="{Binding ConstraintCenter, Converter={x:Static converter:Converters.DoubleMegaPascal}}"
                     Grid.Column="2"
                     Grid.Row="2"></TextBlock>
                 <TextBlock
@@ -117,7 +113,7 @@
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxDeformationDistance"
-                    Text="{Binding DeformationAtDistance, Converter={StaticResource DoubleConverter}}"
+                    Text="{Binding DeformationAtDistance, Converter={x:Static converter:Converters.DoubleMilliMeterWithUnits}}"
                     Grid.Column="2"
                     Grid.Row="6"></TextBlock>
                 <TextBlock
@@ -128,7 +124,7 @@
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxConstraintDistance"
-                    Text="{Binding ConstraintAtDistance, Converter={StaticResource DoubleConverter}}"
+                    Text="{Binding ConstraintAtDistance, Converter={x:Static converter:Converters.DoubleMegaPascal}}"
                     Grid.Column="2"
                     Grid.Row="8"></TextBlock>
             </Grid>

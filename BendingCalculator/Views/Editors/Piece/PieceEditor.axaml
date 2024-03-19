@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         xmlns:preview="clr-namespace:BendingCalculator.Logic.Preview"
+        xmlns:converter="clr-namespace:BendingCalculator.ViewModels.Converter"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Piece.PieceEditor"
         x:DataType="viewModels:MainViewModel"
@@ -20,8 +21,9 @@
             Grid.Row="0"
             Grid.Column="0"
             MinWidth="200"
+            SelectionMode="Single"
             ItemsSource="{Binding Pieces}"
-            SelectedItems="{Binding SelectedPieces}">
+            SelectedItem="{Binding SelectedPiece}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -46,6 +48,7 @@
                 Name="TbxName"
                 Grid.Column="2"
                 Grid.Row="0"
+                IsEnabled="{Binding UiEnabled}"
                 Text="{Binding PieceName}"></TextBox>
             <TextBlock 
                 Name="LblLength"
@@ -57,7 +60,8 @@
                 Name="NudLength"
                 Grid.Column="2"
                 Grid.Row="2"
-                Value="{Binding PieceLength}"
+                IsEnabled="{Binding UiEnabled}"
+                Value="{Binding PieceLength,Mode=TwoWay, Converter={x:Static converter:Converters.DoubleMeterToMilliMeter}}"
                 Minimum="0.1"></NumericUpDown>
             <Button
                 Name="BtnChangeLayers"
@@ -67,7 +71,7 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 Content="{Binding ChangeLayersBinding}"
-                IsEnabled="{Binding BtnChangeLayerEnabled}"
+                IsEnabled="{Binding UiEnabled}"
                 Command="{Binding OpenLayerOfPieceEditor}"></Button>
             <Grid
                 Name="GridButton"
@@ -87,6 +91,7 @@
                     Content="{Binding RemoveBinding}"
                     Grid.Row="0"
                     Grid.Column="2"
+                    IsEnabled="{Binding UiEnabled}"
                     Command="{Binding RemovePieces}"></Button>
                 <Button 
                     Name="HelpButton"
@@ -115,7 +120,7 @@
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            DisplayedPiece="{Binding SelectedPieces}"
+            DisplayedPiece="{Binding SelectedPiece}"
             Background="#292929"
             Height="300">
         </preview:PiecePreview>

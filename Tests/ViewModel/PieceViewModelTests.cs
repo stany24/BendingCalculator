@@ -32,9 +32,9 @@ public class PieceViewModelTests
         {
             _model.CreateNewPiece();
             if (rand.Next(0, 2) != 1) continue;
-            _model.SelectedPieces.Add(_model.Pieces[^1]);
+            _model.SelectedPiece.Add(_model.Pieces[^1]);
         }
-        int finalCount = _model.Pieces.Count - _model.SelectedPieces.Count;
+        int finalCount = _model.Pieces.Count - _model.SelectedPiece.Count;
         _model.RemovePieces();
         Assert.Equal(finalCount,_model.Pieces.Count);
     }
