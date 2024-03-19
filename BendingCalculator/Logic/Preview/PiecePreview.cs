@@ -53,6 +53,7 @@ public class PiecePreview:Grid
     {
         _preview.Children.Clear();
         if (DisplayedPiece == null) { Clear(); return;}
+        if(DisplayedPiece.Layers.Count == 0){ Clear(); return;}
         CreateNewTextBlocks(DisplayedPiece);
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
         double height = Bounds.Size.Height - 2*PreviewMargin;

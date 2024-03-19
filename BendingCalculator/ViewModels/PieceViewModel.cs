@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -43,7 +44,6 @@ public partial class MainViewModel
         set
         {
             SetProperty(ref _pieceLength, value);
-            Console.WriteLine("Changed");
             PieceLengthChanged();
         }
     }
@@ -67,20 +67,21 @@ public partial class MainViewModel
     {
         Piece piece = new(1, "nouveau");
         DataBaseCreator.NewPiece(_connection,piece);
+        SelectedPiece = Pieces[^1];
     }
 
     public void RemovePieces()
     {
         if(SelectedPiece == null){return;}
-        Pieces.Remove(SelectedPiece);
         DataBaseRemover.RemovePiece(_connection,SelectedPiece.PieceId);
+        Pieces.Remove(SelectedPiece);
         SelectedPiece = null;
     }
     
     private void PieceLengthChanged()
     {
         if(SelectedPiece == null){return;}
-        SelectedPiece.Length = PieceLength;
+        SelectedPiece.Length = PieceLength/1000;
         DataBaseUpdater.UpdatePieces(_connection,SelectedPiece);
     }
 
@@ -148,7 +149,7 @@ public partial class MainViewModel
         }
         UiEnabled = true;
         PieceName = SelectedPiece.Name;
-        PieceLength = SelectedPiece.Length;
+        PieceLength = SelectedPiece.Length*1000;
         LoadLayersOfPiece(SelectedPiece.PieceId);
     }
 }
