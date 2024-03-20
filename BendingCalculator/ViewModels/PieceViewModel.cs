@@ -68,7 +68,7 @@ public partial class MainViewModel
         SelectedPiece = Pieces[^1];
     }
 
-    public void RemovePieces()
+    public void RemovePiece()
     {
         if(SelectedPiece == null){return;}
         DataBaseRemover.RemovePiece(_connection,SelectedPiece.PieceId);

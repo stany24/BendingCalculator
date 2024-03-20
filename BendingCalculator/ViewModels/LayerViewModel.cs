@@ -115,7 +115,7 @@ public partial class MainViewModel
         SelectedLayer = Layers[^1];
     }
     
-    public void RemoveLayers()
+    public void RemoveLayer()
     {
         if(SelectedLayer == null){return;}
         DataBaseRemover.RemoveLayer(_connection,SelectedLayer.LayerId);

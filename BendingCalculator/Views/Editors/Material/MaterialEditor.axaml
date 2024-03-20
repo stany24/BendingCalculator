@@ -25,7 +25,7 @@
                 Grid.Column="5"
                 Grid.Row="0"
                 IsEnabled="{Binding UiEnabledMaterialEditor}"
-                Text="{Binding Name}">
+                Text="{Binding MaterialName}">
             </TextBox>
             <TextBlock 
                 Name="LblE"
@@ -78,7 +78,7 @@
                 Grid.Row="4"
                 Grid.Column="5"
                 IsEnabled="{Binding UiEnabledMaterialEditor}"
-                Command="{Binding RemoveMaterials}"></Button>
+                Command="{Binding RemoveMaterial}"></Button>
         <Button 
             Name="HelpButton"
             Grid.Row="0"

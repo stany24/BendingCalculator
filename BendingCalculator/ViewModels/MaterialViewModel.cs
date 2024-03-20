@@ -50,7 +50,7 @@ public partial class MainViewModel
     }
 
     private string _materialName = string.Empty;
-    public string Name { get => _materialName;
+    public string MaterialName { get => _materialName;
         set
         {
             SetProperty(ref _materialName, value);
@@ -81,7 +81,7 @@ public partial class MainViewModel
         SelectedMaterial = Materials[^1];
     }
     
-    public void RemoveMaterials()
+    public void RemoveMaterial()
     {
         if(SelectedMaterial is null){return;}
         DataBaseRemover.RemoveMaterial(_connection,SelectedMaterial.MaterialId);
@@ -91,7 +91,7 @@ public partial class MainViewModel
     private void MaterialNameChanged()
     {
         if(SelectedMaterial is null){return;}
-        SelectedMaterial.Name = Name;
+        SelectedMaterial.Name = MaterialName;
         DataBaseUpdater.UpdateMaterials(_connection,SelectedMaterial);
     }
     
@@ -139,12 +139,12 @@ public partial class MainViewModel
         if(SelectedMaterial == null)
         {
             UiEnabledMaterialEditor = false;
-            Name = string.Empty;
+            MaterialName = string.Empty;
             EValue = 0;
             return;
         }
         UiEnabledMaterialEditor = true;
-        Name = SelectedMaterial.Name;
+        MaterialName = SelectedMaterial.Name;
         if (SelectedMaterial.E >= 1000000000)
         {
             EValue = (double)SelectedMaterial.E / 1000000000;

@@ -129,7 +129,7 @@
                     IsEnabled="{Binding UiEnabledLayerEditor}"
                     Grid.Row="0"
                     Grid.Column="2"
-                    Command="{Binding RemoveLayers}"></Button>
+                    Command="{Binding RemoveLayer}"></Button>
                 <Button 
                     Name="HelpButton"
                     Grid.Row="0"

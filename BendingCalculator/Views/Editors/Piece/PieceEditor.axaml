@@ -91,7 +91,7 @@
                     Grid.Row="0"
                     Grid.Column="2"
                     IsEnabled="{Binding UiEnabledPieceEditor}"
-                    Command="{Binding RemovePieces}"></Button>
+                    Command="{Binding RemovePiece}"></Button>
                 <Button 
                     Name="HelpButton"
                     Grid.Row="0"
