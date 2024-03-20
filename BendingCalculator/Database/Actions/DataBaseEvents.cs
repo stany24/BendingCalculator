@@ -7,7 +7,6 @@ public static class DataBaseEvents
     public static event EventHandler<EventArgs>? MaterialsChanged;
     public static event EventHandler<EventArgs>? LayersChanged;
     public static event EventHandler<EventArgs>? PiecesChanged;
-    public static event EventHandler<EventArgs>? LayerOfPieceChanged;
 
     public static void RaiseMaterialsChangedEvent()
     {
@@ -25,10 +24,5 @@ public static class DataBaseEvents
     public static void RaisePiecesChangedEvent()
     {
         PiecesChanged?.Invoke(null,EventArgs.Empty);
-    }
-
-    public static void RaiseLayerOfPieceChanged()
-    {
-        LayerOfPieceChanged?.Invoke(null,EventArgs.Empty);
     }
 }

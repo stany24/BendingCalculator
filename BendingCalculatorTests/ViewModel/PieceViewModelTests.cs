@@ -1,6 +1,7 @@
 ﻿using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.ViewModels;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BendingCalculatorTests.ViewModel;
 

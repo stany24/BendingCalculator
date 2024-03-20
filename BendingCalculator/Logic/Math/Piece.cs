@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,8 +16,14 @@ public class Piece:ObservableObject
     public long PieceId { get; set; }
     public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer { get; set; }
     
+    
+    private ObservableCollection<Layer> _layers;
     [JsonInclude]
-    public List<Layer> Layers { get; set; }
+    public ObservableCollection<Layer> Layers
+    {
+        get => _layers;
+        set => SetProperty(ref _layers, value);
+    }
 
     private string _name;
     [JsonInclude]
@@ -71,7 +78,7 @@ public class Piece:ObservableObject
 
     public Piece(double length, string name)
     {
-        Layers = new List<Layer>();
+        Layers = new ObservableCollection<Layer>();
         _length = length;
         _name = name;
         _xs = Array.Empty<double>();

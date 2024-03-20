@@ -10,14 +10,6 @@ public partial class MainViewModel
 {
     #region Bindings
 
-    private ObservableCollection<Layer> _layersOfSelectedPiece= new();
-    public ObservableCollection<Layer> LayersOfSelectedPiece
-    {
-        get => _layersOfSelectedPiece;
-        set => SetProperty(ref _layersOfSelectedPiece, value);
-    }
-    public int SelectedIndexOfLayerInPiece { get; set; }
-
     public ObservableCollection<Layer> SelectedLayersOfSelectedPiece { get; set; } = new();
     public ObservableCollection<Layer> SelectedAvailableLayers { get; set; } = new();
 
@@ -63,27 +55,27 @@ public partial class MainViewModel
 
     private void LoadLayersOfPiece(long id)
     {
-        List<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id);
-        while (layers.Count != LayersOfSelectedPiece.Count)
+        ObservableCollection<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id);
+        while (layers.Count != SelectedPiece.Layers.Count)
         {
-            if (layers.Count < LayersOfSelectedPiece.Count)
+            if (layers.Count < SelectedPiece.Layers.Count)
             {
-                LayersOfSelectedPiece.RemoveAt(0);
+                SelectedPiece.Layers.RemoveAt(0);
             }
             else
             {
-                LayersOfSelectedPiece.Add(new Layer());
+                SelectedPiece.Layers.Add(new Layer());
             }
         }
 
         for (int i = 0; i < layers.Count; i++)
         {
-            LayersOfSelectedPiece[i].LayerId = layers[i].LayerId;
-            LayersOfSelectedPiece[i].Material = layers[i].Material;
-            LayersOfSelectedPiece[i].HeightAtCenter = layers[i].HeightAtCenter;
-            LayersOfSelectedPiece[i].HeightOnSides = layers[i].HeightOnSides;
-            LayersOfSelectedPiece[i].WidthAtCenter = layers[i].WidthAtCenter;
-            LayersOfSelectedPiece[i].WidthOnSides = layers[i].WidthOnSides;
+            SelectedPiece.Layers[i].LayerId = layers[i].LayerId;
+            SelectedPiece.Layers[i].Material = layers[i].Material;
+            SelectedPiece.Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
+            SelectedPiece.Layers[i].HeightOnSides = layers[i].HeightOnSides;
+            SelectedPiece.Layers[i].WidthAtCenter = layers[i].WidthAtCenter;
+            SelectedPiece.Layers[i].WidthOnSides = layers[i].WidthOnSides;
         }
     }
 
@@ -108,10 +100,10 @@ public partial class MainViewModel
         for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
-            int index = LayersOfSelectedPiece.IndexOf(selectedItem);
+            int index = SelectedPiece.Layers.IndexOf(selectedItem);
             if (index <= 0) continue;
-            LayersOfSelectedPiece.RemoveAt(index);
-            LayersOfSelectedPiece.Insert(index - 1, selectedItem);
+            SelectedPiece.Layers.RemoveAt(index);
+            SelectedPiece.Layers.Insert(index - 1, selectedItem);
             SelectedLayersOfSelectedPiece.Add(selectedItem);
         }
     }
@@ -121,10 +113,10 @@ public partial class MainViewModel
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
-            int index = LayersOfSelectedPiece.IndexOf(selectedItem);
-            if (index == LayersOfSelectedPiece.Count - 1) continue;
-            LayersOfSelectedPiece.RemoveAt(index);
-            LayersOfSelectedPiece.Insert(index + 1, selectedItem);
+            int index = SelectedPiece.Layers.IndexOf(selectedItem);
+            if (index == SelectedPiece.Layers.Count - 1) continue;
+            SelectedPiece.Layers.RemoveAt(index);
+            SelectedPiece.Layers.Insert(index + 1, selectedItem);
             SelectedLayersOfSelectedPiece.Add(selectedItem);
         }
     }
@@ -140,10 +132,12 @@ public partial class MainViewModel
 
     public void RemoveLayersToPiece()
     {
-        List<int> idToRemove = SelectedLayersOfSelectedPiece.Select(layer => LayersOfSelectedPiece.IndexOf(layer)).ToList();
-        for (int i = idToRemove.Count-1; i >= 0 ; i--)
+        int[] idToRemove = SelectedLayersOfSelectedPiece.Select(layer => SelectedPiece.Layers.IndexOf(layer)).ToArray();
+        int nbLayer = SelectedPiece.Layers.Count;
+        for (int i = idToRemove.Length-1; i >= 0; i--)
         {
-            DataBaseUpdater.RemoveLayerToPiece(_connection,PieceCurrentlyModifiedId,idToRemove[i]);
+            DataBaseUpdater.RemoveLayerToPiece(_connection,SelectedPiece.PieceId,nbLayer,idToRemove[i]);
+            nbLayer--;
         }
     }
     

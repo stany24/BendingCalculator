@@ -53,35 +53,24 @@ public static class DataBaseUpdater
         cmd2.Parameters.AddWithValue("@LayerId",layer.LayerId);
         cmd2.Parameters.AddWithValue("@LayerOrder",id);
         cmd2.ExecuteNonQuery();
-        DataBaseEvents.RaiseLayerOfPieceChanged();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
     
-    public static void RemoveLayerToPiece(SQLiteConnection connection, long pieceId, long order)
+    public static void RemoveLayerToPiece(SQLiteConnection connection, long pieceId,int nbLayer, long idToRemove)
     {
         using SQLiteCommand remove = new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId and LayerOrder = @LayerOrder", connection);
         remove.Parameters.AddWithValue("@PieceId",pieceId);
-        remove.Parameters.AddWithValue("@LayerOrder",order);
+        remove.Parameters.AddWithValue("@LayerOrder",idToRemove);
         remove.ExecuteNonQuery();
-        
-        
-        using SQLiteCommand allLayers = new("SELECT * FROM PieceToLayer WHERE PieceId = @PieceId", connection);
-        allLayers.Parameters.AddWithValue("@PieceId",pieceId);
-        using SQLiteDataReader reader = allLayers.ExecuteReader();
-        
-        int id = 0;
-        while (reader.Read())
+        for (long i = idToRemove; i < nbLayer-1; i++)
         {
-            if(id<=order){id++;continue;}
             using SQLiteCommand changeOrder = new(
                 "UPDATE PieceToLayer SET LayerOrder = @NewLayerOrder WHERE PieceId= @Id And LayerOrder = @OldLayerOrder;", connection);
-            changeOrder.Parameters.AddWithValue("@NewLayerOrder",id);
-            changeOrder.Parameters.AddWithValue("@OldLayerOrder",id+1);
+            changeOrder.Parameters.AddWithValue("@NewLayerOrder",i);
+            changeOrder.Parameters.AddWithValue("@OldLayerOrder",i+1);
             changeOrder.Parameters.AddWithValue("@Id",pieceId);
             changeOrder.ExecuteNonQuery();
-            id++;
         }
-        DataBaseEvents.RaiseLayerOfPieceChanged();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
 }

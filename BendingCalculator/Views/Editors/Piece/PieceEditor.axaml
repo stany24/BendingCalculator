@@ -106,7 +106,7 @@
             Grid.Column="4"
             Grid.Row="0"
             MinWidth="200"
-            ItemsSource="{Binding LayersOfSelectedPiece}">
+            ItemsSource="{Binding SelectedPiece.Layers}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

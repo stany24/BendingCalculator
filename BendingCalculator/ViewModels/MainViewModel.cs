@@ -149,7 +149,6 @@ public partial class MainViewModel : ObservableObject
         DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
         DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
         DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
-        DataBaseEvents.LayerOfPieceChanged += (_, _) => LoadLayersOfPiece(SelectedPiece.PieceId);
         ReloadMaterials();
         ReloadLayers();
         ReloadPieces();

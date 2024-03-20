@@ -1,4 +1,6 @@
-﻿using BendingCalculator.Logic.Math;
+﻿using System.Collections.ObjectModel;
+using BendingCalculator.Logic.Math;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BendingCalculatorTests.Logic;
 
@@ -11,7 +13,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new List<Layer>
+            Layers = new ObservableCollection<Layer>()
             {
                 new()
                 {
@@ -36,7 +38,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new List<Layer>
+            Layers = new ObservableCollection<Layer>()
             {
                 new()
                 {
@@ -85,7 +87,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new List<Layer>
+            Layers = new ObservableCollection<Layer>()
             {
                 new()
                 {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using BendingCalculator.Logic.Math;
 
@@ -7,7 +8,7 @@ namespace BendingCalculator.Database.Actions;
 
 public static class DataBaseLoader
 {
-    public static List<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
+    public static ObservableCollection<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
     {
         using SQLiteCommand cmd = new(
             @"SELECT *
@@ -26,7 +27,7 @@ public static class DataBaseLoader
             currentPiece ??= new Piece
             {
                 PieceId = pieceId,
-                Layers = new List<Layer>()
+                Layers = new ObservableCollection<Layer>()
             };
             if (reader["LayerId"] == DBNull.Value) continue;
             Layer layer = new()
@@ -50,7 +51,7 @@ public static class DataBaseLoader
             currentPiece.Layers.Add(layer);
         }
 
-        return currentPiece?.Layers ?? new List<Layer>();
+        return currentPiece?.Layers ?? new ObservableCollection<Layer>();
     }
     
     public static List<Piece> LoadPieces(SQLiteConnection connection)
@@ -76,7 +77,7 @@ public static class DataBaseLoader
             {
                 currentPiece = new Piece
                 {
-                    Layers = new List<Layer>(),
+                    Layers = new ObservableCollection<Layer>(),
                     PieceId = pieceId,
                     Name = Convert.ToString(reader["PieceName"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"])
