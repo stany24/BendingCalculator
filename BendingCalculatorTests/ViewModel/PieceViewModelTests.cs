@@ -8,7 +8,7 @@ namespace BendingCalculatorTests.ViewModel;
 [TestClass]
 public class PieceViewModelTests
 {
-    private readonly MainViewModel _model = new(DataBaseInitializer.InitializeDatabaseConnection());
+    private readonly MainViewModel _model = new(DataBaseInitializer.InitializeDatabaseConnection() ?? throw new InvalidOperationException());
     
     [TestInitialize]
     public void Clear()

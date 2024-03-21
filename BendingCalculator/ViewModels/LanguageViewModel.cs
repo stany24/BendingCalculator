@@ -10,7 +10,6 @@ using BendingCalculator.Assets.Localization.EditorLocalization.MaterialEditorLoc
 using BendingCalculator.Assets.Localization.EditorLocalization.PieceEditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.PieceEditorLocalization.Helper;
 using BendingCalculator.Assets.Localization.HelperLocalization;
-using BendingCalculator.Assets.Localization.Logic;
 using BendingCalculator.Assets.Localization.MainLocalization;
 using BendingCalculator.Assets.Localization.MainLocalization.Helper;
 using BendingCalculator.Assets.Localization.Warning;
@@ -58,22 +57,12 @@ public partial class MainViewModel
 
         #endregion
 
-        #region Logic
-
-        ResourceManager resourceManagerLogic = new(typeof(LogicLocalization));
-        NoBinding = resourceManagerLogic.GetString("No", lang);
-        SidesBinding = resourceManagerLogic.GetString("Sides", lang);
-        CenterBinding = resourceManagerLogic.GetString("Center", lang);
-
-        #endregion
-
         #region All Editors
 
         ResourceManager resourceManagerEditor = new(typeof(EditorLocalization));
         AddBinding = resourceManagerEditor.GetString("Add", lang);
         RemoveBinding = resourceManagerEditor.GetString("Remove", lang);
         NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", lang);
-        LayersBinding = resourceManagerEditor.GetString("Layers", lang);
 
         #endregion
 
@@ -476,13 +465,6 @@ public partial class MainViewModel
         set => SetProperty(ref _beginBinding, value);
     }
     
-    private string? _centerBinding;
-    public string? CenterBinding
-    {
-        get =>_centerBinding;
-        set => SetProperty(ref _centerBinding, value);
-    }
-    
     private string? _changeLayersBinding;
     public string? ChangeLayersBinding
     {
@@ -537,13 +519,6 @@ public partial class MainViewModel
     {
         get =>_languageWithColonBinding;
         set => SetProperty(ref _languageWithColonBinding, value);
-    }
-    
-    private string? _layersBinding;
-    public string? LayersBinding
-    {
-        get =>_layersBinding;
-        set => SetProperty(ref _layersBinding, value);
     }
     
     private string? _layersWithColonBinding;
@@ -609,13 +584,6 @@ public partial class MainViewModel
         set => SetProperty(ref _nameWithColonBinding, value);
     }
     
-    private string? _noBinding;
-    public string? NoBinding
-    {
-        get =>_noBinding;
-        set => SetProperty(ref _noBinding, value);
-    }
-    
     private string? _piecesWithColonBinding;
     public string? PiecesWithColonBinding
     {
@@ -635,14 +603,6 @@ public partial class MainViewModel
     {
         get =>_removeBinding;
         set => SetProperty(ref _removeBinding, value);
-    }
-
-    
-    private string? _sidesBinding;
-    public string? SidesBinding
-    {
-        get =>_sidesBinding;
-        set => SetProperty(ref _sidesBinding, value);
     }
     
     private string? _speedWithColonBinding;

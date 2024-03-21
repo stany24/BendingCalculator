@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed  
@@ -15,7 +14,6 @@ public class Layer:ObservableObject
     public long LayerId { get; set; }
 
     private double _widthAtCenter;
-    [JsonInclude]
     public double WidthAtCenter
     {
         get =>_widthAtCenter;
@@ -28,7 +26,6 @@ public class Layer:ObservableObject
     }
 
     private double _widthOnSides;
-    [JsonInclude]
     public double WidthOnSides
     {
         get =>_widthOnSides;
@@ -41,7 +38,6 @@ public class Layer:ObservableObject
     }
 
     private double _heightAtCenter;
-    [JsonInclude]
     public double HeightAtCenter
     {
         get =>_heightAtCenter;
@@ -54,7 +50,6 @@ public class Layer:ObservableObject
     }
 
     private double _heightOnSides;
-    [JsonInclude]
     public double HeightOnSides
     {
         get =>_heightOnSides;
@@ -67,7 +62,6 @@ public class Layer:ObservableObject
     }
 
     private Material? _material;
-    [JsonInclude]
     public Material? Material { get => _material;
         set
         {
@@ -87,8 +81,7 @@ public class Layer:ObservableObject
     #endregion
 
     #region Constructor / Destructor
-
-    [JsonConstructor]
+    
     public Layer()
     {
         LanguageEvents.LanguageChanged += UpdateDisplay;

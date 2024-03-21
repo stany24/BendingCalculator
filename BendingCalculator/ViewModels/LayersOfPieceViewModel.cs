@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
@@ -52,9 +51,9 @@ public partial class MainViewModel
 
     #endregion
     
-
     private void LoadLayersOfPiece(long id)
     {
+        if(SelectedPiece == null){return;}
         ObservableCollection<Layer> layers = DataBaseLoader.LoadLayersOfPiece(_connection,id);
         while (layers.Count != SelectedPiece.Layers.Count)
         {
@@ -97,6 +96,7 @@ public partial class MainViewModel
 
     public void MoveLayerUpInPiece()
     {
+        if(SelectedPiece == null){return;}
         for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
@@ -110,6 +110,7 @@ public partial class MainViewModel
     
     public void MoveLayerDownInPiece()
     {
+        if(SelectedPiece == null){return;}
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
@@ -132,6 +133,7 @@ public partial class MainViewModel
 
     public void RemoveLayersToPiece()
     {
+        if(SelectedPiece == null){return;}
         int[] idToRemove = SelectedLayersOfSelectedPiece.Select(layer => SelectedPiece.Layers.IndexOf(layer)).ToArray();
         int nbLayer = SelectedPiece.Layers.Count;
         for (int i = idToRemove.Length-1; i >= 0; i--)

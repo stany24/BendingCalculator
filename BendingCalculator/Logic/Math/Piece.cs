@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
@@ -16,9 +15,7 @@ public class Piece:ObservableObject
     public long PieceId { get; set; }
     public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer { get; set; }
     
-    
     private ObservableCollection<Layer> _layers;
-    [JsonInclude]
     public ObservableCollection<Layer> Layers
     {
         get => _layers;
@@ -26,7 +23,6 @@ public class Piece:ObservableObject
     }
 
     private string _name;
-    [JsonInclude]
     public string Name
     {
         get => _name;
@@ -39,7 +35,6 @@ public class Piece:ObservableObject
     }
 
     private double _length;
-    [JsonInclude]
     public double Length
     {
         get => _length;
@@ -78,16 +73,17 @@ public class Piece:ObservableObject
 
     public Piece(double length, string name)
     {
-        Layers = new ObservableCollection<Layer>();
+        _layers = new ObservableCollection<Layer>();
         _length = length;
         _name = name;
         _xs = Array.Empty<double>();
         LanguageEvents.LanguageChanged += UpdateDisplay;
     }
-
-    [JsonConstructor]
+    
     public Piece()
     {
+        _layers = new ObservableCollection<Layer>();
+        _name = string.Empty;
         LanguageEvents.LanguageChanged += UpdateDisplay;
         _xs = Array.Empty<double>();
     }

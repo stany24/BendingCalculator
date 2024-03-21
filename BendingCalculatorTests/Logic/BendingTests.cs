@@ -13,7 +13,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new ObservableCollection<Layer>()
+            Layers = new ObservableCollection<Layer>
             {
                 new()
                 {
@@ -38,7 +38,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new ObservableCollection<Layer>()
+            Layers = new ObservableCollection<Layer>
             {
                 new()
                 {
@@ -87,7 +87,7 @@ public class BendingTests
     {
         Piece piece = new(0.77,"Test")
         {
-            Layers = new ObservableCollection<Layer>()
+            Layers = new ObservableCollection<Layer>
             {
                 new()
                 {

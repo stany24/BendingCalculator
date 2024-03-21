@@ -23,15 +23,6 @@ public static class SettingManager
         string serialized = JsonSerializer.Serialize(setting);
         File.WriteAllText(settingPath,serialized);
     }
-    
-    public static void SetWarningDisabled(bool warningDisabled)
-    {
-        string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
-        Setting setting = GetSettings();
-        setting.WarningDisabled = warningDisabled;
-        string serialized = JsonSerializer.Serialize(setting);
-        File.WriteAllText(settingPath,serialized);
-    }
 
     private static Setting GetSettings()
     {

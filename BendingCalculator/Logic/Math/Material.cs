@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 
@@ -12,8 +11,7 @@ public class Material:ObservableObject
     public long MaterialId { get; set; }
         
     private string _name;
-
-    [JsonInclude]
+    
     public string Name
     {
         get => _name;
@@ -26,7 +24,6 @@ public class Material:ObservableObject
     }
 
     private long _e;
-    [JsonInclude]
     public long E
     {
         get => _e;
@@ -55,8 +52,10 @@ public class Material:ObservableObject
         _e = e;
     }
 
-    [JsonConstructor]
-    public Material() { }
+    public Material()
+    {
+        _name = "new";
+    }
 
     #endregion
         
