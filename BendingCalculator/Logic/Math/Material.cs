@@ -39,7 +39,7 @@ public class Material:ObservableObject
     public string Display
     {
         get => _display ?? ToString();
-        set => SetProperty(ref _display, ToString());
+        set => SetProperty(ref _display, value);
     }
 
     #endregion
