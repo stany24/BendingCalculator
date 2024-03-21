@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
@@ -89,7 +90,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdatePieces(_connection,SelectedPiece);
     }
     
-    private void ReloadPieces()
+    private void ReloadPieces(object? sender, EventArgs eventArgs)
     {
         List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);
         while (pieces.Count != Pieces.Count)

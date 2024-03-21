@@ -146,17 +146,20 @@ public partial class MainViewModel : ObservableObject
         _connection = connection;
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
-        DataBaseEvents.LayersChanged += (_, _) => ReloadLayers();
-        DataBaseEvents.MaterialsChanged += (_, _) => ReloadMaterials();
-        DataBaseEvents.PiecesChanged += (_, _) => ReloadPieces();
-        ReloadMaterials();
-        ReloadLayers();
-        ReloadPieces();
+        DataBaseEvents.LayersChanged +=  ReloadLayers;
+        DataBaseEvents.MaterialsChanged +=  ReloadMaterials;
+        DataBaseEvents.PiecesChanged += ReloadPieces;
+        ReloadMaterials(null,EventArgs.Empty);
+        ReloadLayers(null,EventArgs.Empty);
+        ReloadPieces(null,EventArgs.Empty);
     }
 
     ~MainViewModel()
     {
         LanguageEvents.LanguageChanged -= ChangeLanguage;
+        DataBaseEvents.LayersChanged -= ReloadLayers;
+        DataBaseEvents.MaterialsChanged -= ReloadMaterials;
+        DataBaseEvents.PiecesChanged -= ReloadPieces;
     }
 
     #endregion

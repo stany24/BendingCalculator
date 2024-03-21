@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
@@ -157,7 +158,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateLayers(_connection,SelectedLayer);
     }
     
-    private void ReloadLayers()
+    private void ReloadLayers(object? sender, EventArgs eventArgs)
     {
         List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
         while (layers.Count != Layers.Count)
