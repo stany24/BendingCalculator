@@ -168,8 +168,8 @@ public partial class MainViewModel
         #region Warnings
 
         ResourceManager resourceWarning = new(typeof(WarningLocalization));
-        SlidingWarningTitleBinding = resourceWarning.GetString("SlidingWarningTitle", lang);
-        SlidingWarningBinding = resourceWarning.GetString("SlidingWarning", lang);
+        DetachmentWarningTitleBinding = resourceWarning.GetString("DetachmentWarningTitle", lang);
+        DetachmentWarningBinding = resourceWarning.GetString("DetachmentWarning", lang);
         PositionHeaderBinding = resourceWarning.GetString("PositionHeader", lang);
         LayerHeaderBinding = resourceWarning.GetString("LayerHeader", lang);
 
@@ -710,18 +710,18 @@ public partial class MainViewModel
         set => SetProperty(ref _titleLayerOfPieceWindowBinding, value);
     }
     
-    private string? _slidingWarningTitleBinding;
-    public string? SlidingWarningTitleBinding
+    private string? _detachmentWarningTitleBinding;
+    public string? DetachmentWarningTitleBinding
     {
-        get =>_slidingWarningTitleBinding;
-        set => SetProperty(ref _slidingWarningTitleBinding, value);
+        get =>_detachmentWarningTitleBinding;
+        set => SetProperty(ref _detachmentWarningTitleBinding, value);
     }
     
-    private string? _slidingWarningBinding;
-    public string? SlidingWarningBinding
+    private string? _detachmentWarningBinding;
+    public string? DetachmentWarningBinding
     {
-        get =>_slidingWarningBinding;
-        set => SetProperty(ref _slidingWarningBinding, value);
+        get =>_detachmentWarningBinding;
+        set => SetProperty(ref _detachmentWarningBinding, value);
     }
     
     private string? _positionHeaderBinding;

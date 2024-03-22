@@ -18,11 +18,11 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="SlidingWarningTitle" xml:space="preserve">
-        <value>Schiebewarnung</value>
+    <data name="DetachmentWarningTitle" xml:space="preserve">
+        <value>Warnung vor Ablösung</value>
     </data>
-    <data name="SlidingWarning" xml:space="preserve">
-        <value>Wenn zwei sich berührende Schichten eine erhebliche Lücke in der Elastizität aufweisen, können die Schichten verrutschen und die Ergebnisse verfälschen. Die betroffenen Schichten sind:</value>
+    <data name="DetachmentWarning" xml:space="preserve">
+        <value>Zwei Schichten, die sich berühren, haben einen großen Unterschied in der Elastizität. In der Realität können sich die Schichten ablösen und beschädigen und die Ergebnisse verfälschen. Die betroffenen Schichten sind folgende:</value>
     </data>
     <data name="PositionHeader" xml:space="preserve">
         <value>Position im Stück</value>

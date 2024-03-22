@@ -13,7 +13,7 @@ public class Piece:ObservableObject
     #region Variables
 
     public long PieceId { get; set; }
-    public EventHandler<RiskOfSlidingLayersEventArgs>? RiskOfSlidingLayer { get; set; }
+    public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
     
     private ObservableCollection<Layer> _layers;
     public ObservableCollection<Layer> Layers
@@ -158,14 +158,21 @@ public class Piece:ObservableObject
 
     private void CheckRisks()
     {
-        const double maxDiff = 12e9;
         for (int i = 1; i < Layers.Count; i++)
         {
             if(Layers[i-1].Material is not { } material1){return;}
             if(Layers[i].Material is not { } material2){return;}
-            double diff = material2.E - material1.E;
-            if (diff <= System.Math.Abs(maxDiff)) continue;
-            RiskOfSlidingLayer?.Invoke(null,new RiskOfSlidingLayersEventArgs(i-1,i,Layers[i-1],Layers[i]));
+            double ratio;
+            if (material1.E > material2.E)
+            {
+                ratio = (double)material1.E / material2.E;
+            }
+            else
+            {
+                ratio = (double)material2.E / material1.E;
+            }
+            if (ratio <= 100) continue;
+            RiskOfDetachmentBetweenLayer?.Invoke(null,new RiskOfDetachmentOfLayersEventArgs(i-1,i,Layers[i-1],Layers[i]));
             return;
         }
     }

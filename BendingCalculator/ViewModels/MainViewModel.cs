@@ -174,9 +174,9 @@ public partial class MainViewModel : ObservableObject
             double gap = SelectedPieceMainWindow.Length / 10000;
             PieceInGraphLength = SelectedPieceMainWindow.Length*1000;
             
-            SelectedPieceMainWindow.RiskOfSlidingLayer += ShowRiskWindow;
+            SelectedPieceMainWindow.RiskOfDetachmentBetweenLayer += ShowRiskWindow;
             BendingResult result = SelectedPieceMainWindow.CalculateBending((int)Force,gap);
-            SelectedPieceMainWindow.RiskOfSlidingLayer -= ShowRiskWindow;
+            SelectedPieceMainWindow.RiskOfDetachmentBetweenLayer -= ShowRiskWindow;
             
             _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
             SeriesGraphBending[0].Values = _deformationPoints;
@@ -189,20 +189,20 @@ public partial class MainViewModel : ObservableObject
         });
     }
 
-    private SlideWarning? _slideWarning;
-    private void ShowRiskWindow(object? sender,RiskOfSlidingLayersEventArgs e)
+    private DetachmentWarning? _detachmentWarning;
+    private void ShowRiskWindow(object? sender,RiskOfDetachmentOfLayersEventArgs e)
     {
         if(SettingManager.GetWarningDisabled()){return;}
         Dispatcher.UIThread.Invoke(() =>
         {
-            WarningSlideLayers = new ObservableCollection<KeyValuePair<int, Layer>>
+            WarningDetachmentOfLayers = new ObservableCollection<KeyValuePair<int, Layer>>
             {
                 new(e.Position1, e.Layer1),
                 new(e.Position2, e.Layer2)
             };
-            _slideWarning?.Close();
-            _slideWarning = new SlideWarning(this);
-            _slideWarning.Show();
+            _detachmentWarning?.Close();
+            _detachmentWarning = new DetachmentWarning(this);
+            _detachmentWarning.Show();
         });
         
     }
@@ -254,7 +254,7 @@ public partial class MainViewModel : ObservableObject
         _layerEditor?.Close();
         _pieceEditor?.Close();
         _forceEditor?.Close();
-        _slideWarning?.Close();
+        _detachmentWarning?.Close();
     }
     
     #endregion

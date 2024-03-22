@@ -45,15 +45,15 @@ namespace BendingCalculator.Assets.Localization.Warning {
             }
         }
         
-        internal static string SlidingWarningTitle {
+        internal static string DetachmentWarningTitle {
             get {
-                return ResourceManager.GetString("SlidingWarningTitle", resourceCulture);
+                return ResourceManager.GetString("DetachmentWarningTitle", resourceCulture);
             }
         }
         
-        internal static string SlidingWarning {
+        internal static string DetachmentWarning {
             get {
-                return ResourceManager.GetString("SlidingWarning", resourceCulture);
+                return ResourceManager.GetString("DetachmentWarning", resourceCulture);
             }
         }
     }

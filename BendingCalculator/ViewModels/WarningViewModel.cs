@@ -6,9 +6,9 @@ namespace BendingCalculator.ViewModels;
 
 public partial class MainViewModel
 {
-    private ObservableCollection<KeyValuePair<int, Layer>> _warningSlideLayers = new();
-    public ObservableCollection<KeyValuePair<int, Layer>> WarningSlideLayers { 
-        get => _warningSlideLayers;
-        set => SetProperty(ref _warningSlideLayers, value);
+    private ObservableCollection<KeyValuePair<int, Layer>> _warningDetachmentOfLayers = new();
+    public ObservableCollection<KeyValuePair<int, Layer>> WarningDetachmentOfLayers { 
+        get => _warningDetachmentOfLayers;
+        set => SetProperty(ref _warningDetachmentOfLayers, value);
     }
 }

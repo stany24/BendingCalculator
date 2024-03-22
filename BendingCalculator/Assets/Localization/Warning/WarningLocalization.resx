@@ -18,11 +18,11 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="SlidingWarningTitle" xml:space="preserve">
-        <value>Slide Warning</value>
+    <data name="DetachmentWarningTitle" xml:space="preserve">
+        <value>Detachment Warning</value>
     </data>
-    <data name="SlidingWarning" xml:space="preserve">
-        <value>Two touching layers have a significant gap in elastisity, the layers could slide and false the results. The involved layers are:</value>
+    <data name="DetachmentWarning" xml:space="preserve">
+        <value>Two layers touching each other have a large elasticity gap, and in reality the layers could detachment and be damaged the piece, falsing the results. The layers concerned are as follows:</value>
     </data>
     <data name="PositionHeader" xml:space="preserve">
         <value>Position in the piece</value>

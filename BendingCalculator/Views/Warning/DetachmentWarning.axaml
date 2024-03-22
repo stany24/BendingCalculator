@@ -4,12 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="BendingCalculator.Views.Warning.SlideWarning"
+        x:Class="BendingCalculator.Views.Warning.DetachmentWarning"
         x:DataType="viewModels:MainViewModel"
         SizeToContent="Height"
         CanResize="False"
         Width="500"
-        Title="{Binding SlidingWarningTitleBinding}">
+        Title="{Binding DetachmentWarningTitleBinding}">
     <Grid
         ColumnDefinitions="*"
         RowDefinitions="Auto,10,Auto"
@@ -19,7 +19,7 @@
             TextWrapping="Wrap"
             Grid.Column="0"
             Grid.Row="0"
-            Text="{Binding SlidingWarningBinding}"></TextBlock>
+            Text="{Binding DetachmentWarningBinding}"></TextBlock>
         <DataGrid
             Name="DataGrid"
             Grid.Column="0"
@@ -27,7 +27,7 @@
             CanUserResizeColumns="True"
             IsReadOnly="True"
             GridLinesVisibility="All"
-            ItemsSource="{Binding WarningSlideLayers}">
+            ItemsSource="{Binding WarningDetachmentOfLayers}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="auto" Header="{Binding PositionHeaderBinding}"  Binding="{Binding Key}"/>
                 <DataGridTextColumn Width="*" Header="{Binding LayerHeaderBinding}" Binding="{Binding Value}" />

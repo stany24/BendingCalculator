@@ -18,11 +18,11 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="SlidingWarningTitle" xml:space="preserve">
-        <value>Avertissement de glissement</value>
+    <data name="DetachmentWarningTitle" xml:space="preserve">
+        <value>Avertissement de décollement</value>
     </data>
-    <data name="SlidingWarning" xml:space="preserve">
-        <value>Deux couches qui se touchent ont un écart d'élasticité important, les couches peuvent glisser et fausser les résultats. Les couches concernées sont les suivantes :</value>
+    <data name="DetachmentWarning" xml:space="preserve">
+        <value>Deux couches qui se touchent ont un écart d'élasticité important, dans la réalité les couches pourrais se décoller et s'abimer ainsi que fausser les résulats. Les couches concernées sont les suivantes :</value>
     </data>
     <data name="PositionHeader" xml:space="preserve">
         <value>Position dans la pièce</value>
