@@ -185,7 +185,6 @@ public partial class MainViewModel : ObservableObject
             
             _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
             _constraintsPoints = _constraintsPoints.Zip(result.Ns, (x, y) => x * y).ToArray();
-            _constraintsPoints = Array.ConvertAll(_constraintsPoints, x => x / 10000).ToArray();
             ConstraintCenter = _constraintsPoints[_constraintsPoints.Length / 2];
         });
     }

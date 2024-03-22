@@ -9,6 +9,7 @@
         Title="{Binding HelpBinding}"
         MinWidth="500"
         MaxWidth="500"
+        CanResize="False"
         SizeToContent="Height">
     <Grid
         Name="MainGrid"
