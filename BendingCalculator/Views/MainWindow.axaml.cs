@@ -1,7 +1,6 @@
 using System;
-using System.Globalization;
-using System.Resources;
-using BendingCalculator.Assets.Localization.MainLocalization;
+using Avalonia;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using BendingCalculator.Logic;
 using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
@@ -35,13 +34,11 @@ public partial class Main : WindowWithHelp
     
     private void ReloadLanguage(object? sender, EventArgs eventArgs)
     {
-        ResourceManager resourceManager = new(typeof(MainLocalization));
-        if(DataContext is not MainViewModel model){return;}
         ChartResult.XAxes = new[] {
             new Axis {
-                Name = resourceManager.GetString("XAxisName", new CultureInfo(model.Language))}};
+                Name = Assets.Localization.Static.Static.XAxisName}};
         ChartResult.YAxes = new[] {
             new Axis {
-                Name = resourceManager.GetString("YAxisName", new CultureInfo(model.Language))}};
+                Name = Assets.Localization.Static.Static.YAxisName}};
     }
 }

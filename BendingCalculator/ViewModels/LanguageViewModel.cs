@@ -15,9 +15,9 @@ public partial class MainViewModel
             Application.Current?.Resources.MergedDictionaries.Remove(translations);
             
         Application.Current?.Resources.MergedDictionaries.Add(
-            new ResourceInclude(new Uri($"avares://BendingCalculator/Assets/Lang/{Language}.axaml"))
+            new ResourceInclude(new Uri($"avares://BendingCalculator/Assets/Localization/Dynamic/{Language}.axaml"))
             {
-                Source = new Uri($"avares://BendingCalculator/Assets/Lang/{Language}.axaml")
+                Source = new Uri($"avares://BendingCalculator/Assets/Localization/Dynamic/{Language}.axaml")
             });
     }
 }

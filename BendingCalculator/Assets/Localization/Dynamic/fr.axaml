@@ -115,4 +115,5 @@
     <system:String x:Key="PieceEditorHelper14">Vous pouvez voir ici une vidéo avec une démo.</system:String>
     <system:String x:Key="PieceEditorHelper15">Vidéo ici</system:String>
     <!-- End Piece editor helper section -->
+    
 </ResourceDictionary>

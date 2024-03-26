@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
@@ -107,7 +108,7 @@ public class Piece:ObservableObject
         return Layers.Count switch
         {
             0 => $"{Name} / {Length*1000}mm",
-            _ => $"{Name} / {Length*1000}mm / {Layers.Count} {Assets.Localization.Logic.LogicLocalization.Layers}"
+            _ => $"{Name} / {Length*1000}mm / {Layers.Count} {Assets.Localization.Static.Static.Layers}"
         };
     }
 

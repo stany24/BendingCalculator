@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using BendingCalculator.Logic.Math;
 
@@ -37,8 +38,8 @@ public class LayerPreview:Grid
         RowDefinitions = new RowDefinitions("*,10,*");
         _tbxSide = new TextBlock
         {
+            [!TextBlock.TextProperty] = new DynamicResourceExtension("SideViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center,
-            Text = "Coté:"
         };
         SetRow(_tbxSide,0);
         SetColumn(_tbxSide,1);
@@ -46,8 +47,8 @@ public class LayerPreview:Grid
         
         _tbxAbove = new TextBlock
         {
+            [!TextBlock.TextProperty] = new DynamicResourceExtension("TopViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center,
-            Text = "Dessus:"
         };
         SetRow(_tbxAbove,2);
         SetColumn(_tbxAbove,1);
@@ -79,8 +80,6 @@ public class LayerPreview:Grid
     {
         _preview.Children.Clear();
         if(DisplayedLayer == null) { Clear();return;}
-        _tbxAbove.Text = Assets.Localization.Logic.LogicLocalization.TopViewWithColon;
-        _tbxSide.Text = Assets.Localization.Logic.LogicLocalization.SideViewWithColon;
         UpdateLayout();
         double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
         double height = Bounds.Size.Height - 3*PreviewMargin;

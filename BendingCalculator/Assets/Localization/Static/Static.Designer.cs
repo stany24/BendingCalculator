@@ -7,26 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLocalization {
+namespace BendingCalculator.Assets.Localization.Static {
+    using System;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LayerEditorLocalization_fr {
+    public class Static {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LayerEditorLocalization_fr() {
+        internal Static() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLocalization.LayerEdito" +
-                            "rLocalization_fr", typeof(LayerEditorLocalization_fr).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("BendingCalculator.Assets.Localization.Static.Static", typeof(Static).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -34,7 +36,7 @@ namespace BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLo
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -43,33 +45,56 @@ namespace BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLo
             }
         }
         
-        internal static string HeightCenterWithColon {
+        public static string SideViewWithColon {
             get {
-                return ResourceManager.GetString("HeightCenterWithColon", resourceCulture);
+                return ResourceManager.GetString("SideViewWithColon", resourceCulture); 
             }
         }
         
-        internal static string HeightOnSidesWithColon {
+        public static string TopViewWithColon {
             get {
-                return ResourceManager.GetString("HeightOnSidesWithColon", resourceCulture);
+                return ResourceManager.GetString("TopViewWithColon", resourceCulture); 
             }
         }
         
-        internal static string MaterialWithColon {
+        public static string Center {
             get {
-                return ResourceManager.GetString("MaterialWithColon", resourceCulture);
+                return ResourceManager.GetString("Center", resourceCulture); 
             }
         }
         
-        internal static string WidthCenterWithColon {
+        public static string Sides {
             get {
-                return ResourceManager.GetString("WidthCenterWithColon", resourceCulture);
+                return ResourceManager.GetString("Sides", resourceCulture); 
             }
         }
         
-        internal static string WidthSidesWithColon {
+        public static string No {
             get {
-                return ResourceManager.GetString("WidthSidesWithColon", resourceCulture);
+                return ResourceManager.GetString("No", resourceCulture); 
+            }
+        }
+        
+        public static string Layers {
+            get {
+                return ResourceManager.GetString("Layers", resourceCulture); 
+            }
+        }
+        
+        public static string Material {
+            get {
+                return ResourceManager.GetString("Material", resourceCulture); 
+            }
+        }
+        public static string XAxisName {
+            get {
+                return ResourceManager.GetString("XAxisName", resourceCulture); 
+            }
+        }
+        
+        public static string YAxisName {
+            get {
+                return ResourceManager.GetString("YAxisName", resourceCulture); 
             }
         }
     }

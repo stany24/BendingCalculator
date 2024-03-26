@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed  
@@ -114,8 +115,8 @@ public class Layer:ObservableObject
     public sealed override string ToString()
     {
         return Material != null 
-            ? $"{Material.Name} {Assets.Localization.Logic.LogicLocalization.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}" 
-            : $"{Assets.Localization.Logic.LogicLocalization.No} {Assets.Localization.Logic.LogicLocalization.MaterialWithColon} {Assets.Localization.Logic.LogicLocalization.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Logic.LogicLocalization.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}";
+            ? $"{Material.Name} {Assets.Localization.Static.Static.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Static.Static.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}" 
+            : $"{Assets.Localization.Static.Static.No} {Assets.Localization.Static.Static.Material} {Assets.Localization.Static.Static.Center}={WidthAtCenter*1000}x{HeightAtCenter*1000} {Assets.Localization.Static.Static.Sides}={WidthOnSides*1000}x{HeightOnSides*1000}";
     }
 
     #endregion

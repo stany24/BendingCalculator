@@ -18,28 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ChangeLayers" xml:space="preserve">
-        <value>Change layers</value>
+    <data name="Center" xml:space="preserve">
+        <value>Zentrum</value>
     </data>
-    <data name="InPieceWithColon" xml:space="preserve">
-        <value>In piece:</value>
+    <data name="Sides" xml:space="preserve">
+        <value>Seiten</value>
     </data>
-    <data name="AvailableWithColon" xml:space="preserve">
-        <value>Available:</value>
+    <data name="No" xml:space="preserve">
+        <value>Keine</value>
     </data>
-    <data name="MoveDown" xml:space="preserve">
-        <value>Move down</value>
+    <data name="Layers" xml:space="preserve">
+        <value>Schichten</value>
     </data>
-    <data name="MoveUp" xml:space="preserve">
-        <value>Move up</value>
+    <data name="Material" xml:space="preserve">
+        <value>Material</value>
     </data>
-    <data name="LengthWithColon" xml:space="preserve">
-        <value>Length:</value>
+    <data name="SideViewWithColon" xml:space="preserve">
+        <value>Seite:</value>
     </data>
-    <data name="TitlePieceWindow" xml:space="preserve">
-        <value>Piece editor</value>
+    <data name="TopViewWithColon" xml:space="preserve">
+        <value>Oben:</value>
     </data>
-    <data name="TitleLayerOfPieceWindow" xml:space="preserve">
-        <value>Layer in piece editor</value>
+    <data name="XAxisName" xml:space="preserve">
+        <value>Länge (mm)</value>
+    </data>
+    <data name="YAxisName" xml:space="preserve">
+        <value>Deformation (mm)</value>
     </data>
 </root>

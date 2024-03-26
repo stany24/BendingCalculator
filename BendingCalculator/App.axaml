@@ -12,11 +12,11 @@
      <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                 <ResourceInclude Source="/Assets/Lang/en.axaml" />
+                 <ResourceInclude Source="/Assets/Localization/Dynamic/en.axaml" />
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
-
      </Application.Resources>
+             
   
     <Application.Styles>
         <FluentTheme />

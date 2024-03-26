@@ -18,22 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ForceWithColon" xml:space="preserve">
-        <value>Force:</value>
+    <data name="SideViewWithColon" xml:space="preserve">
+        <value>Side:</value>
     </data>
-    <data name="MassWithColon" xml:space="preserve">
-        <value>Mass:</value>
+    <data name="TopViewWithColon" xml:space="preserve">
+        <value>Top:</value>
     </data>
-    <data name="RadiusWithColon" xml:space="preserve">
-        <value>Radius:</value>
+    <data name="Center" xml:space="preserve">
+        <value>Center</value>
     </data>
-    <data name="GravityWithColon" xml:space="preserve">
-        <value>Gravity:</value>
+    <data name="Sides" xml:space="preserve">
+        <value>Sides</value>
     </data>
-    <data name="SpeedWithColon" xml:space="preserve">
-        <value>Speed:</value>
+    <data name="No" xml:space="preserve">
+        <value>No</value>
     </data>
-    <data name="TitleForceWindow" xml:space="preserve">
-        <value>Force editor</value>
+    <data name="Layers" xml:space="preserve">
+        <value>Layers</value>
+    </data>
+    <data name="Material" xml:space="preserve">
+        <value>Material</value>
+    </data>
+    <data name="XAxisName" xml:space="preserve">
+        <value>Length (mm)</value>
+    </data>
+    <data name="YAxisName" xml:space="preserve">
+        <value>Deformation (mm)</value>
     </data>
 </root>

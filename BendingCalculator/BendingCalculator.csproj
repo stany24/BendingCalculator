@@ -197,6 +197,27 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>Warning.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>static.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.fr.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>static.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.de.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>static.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.resx">
+          <LastGenOutput>Static.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.de.resx">
+          <LastGenOutput>Static.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Assets\Localization\Static\Static.fr.resx">
+          <LastGenOutput>Static.fr.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
@@ -493,6 +514,21 @@
       </Compile>
       <Compile Update="Logic\Math\BendingResult.cs">
         <DependentUpon>Piece.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Static\Static.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Static.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Static\Static.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Static.fr.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Assets\Localization\Static\Static.de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Static.de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
