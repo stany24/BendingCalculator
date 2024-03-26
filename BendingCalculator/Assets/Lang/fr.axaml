@@ -34,4 +34,24 @@
     <system:String x:Key="SpeedWithColon">Vitesse:</system:String>
     <system:String x:Key="TitleForceWindow">Éditeur de force</system:String>
     <!-- End Force window section -->
+        
+    <!-- Begin Layer editor window section -->
+    <system:String x:Key="HeightCenterWithColon">Hauteur au centre:</system:String>
+    <system:String x:Key="HeightOnSidesWithColon">Hauteur sur les cotés:</system:String>
+    <system:String x:Key="WidthCenterWithColon">Largeur au centre:</system:String>
+    <system:String x:Key="WidthSidesWithColon">Largeur sur les cotés:</system:String>
+    <system:String x:Key="MaterialWithColon">Matière:</system:String>
+    <system:String x:Key="TitleLayerWindow">Éditeur de couches</system:String>
+    <!-- End Layer editor window section -->
+    
+    <!-- Begin Layer editor window section -->
+    <system:String x:Key="ChangeLayers">Changer les couches</system:String>
+    <system:String x:Key="InPieceWithColon">Dans la pièce:</system:String>
+    <system:String x:Key="AvailableWithColon">Disponible:</system:String>
+    <system:String x:Key="MoveDown">Descendre</system:String>
+    <system:String x:Key="MoveUp">Monter</system:String>
+    <system:String x:Key="LengthWithColon">Longueur:</system:String>
+    <system:String x:Key="TitlePieceWindow">Éditeur de pièces</system:String>
+    <system:String x:Key="TitleLayerOfPieceWindow">Éditeur des couches dans la pièce</system:String>
+    <!-- End Layer editor window section -->
 </ResourceDictionary>

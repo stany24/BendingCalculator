@@ -35,4 +35,24 @@
     <system:String x:Key="SpeedWithColon">Speed:</system:String>
     <system:String x:Key="TitleForceWindow">Force editor</system:String>
     <!-- End Force window section -->
+        
+    <!-- Begin Layer editor window section -->
+    <system:String x:Key="HeightCenterWithColon">Height at center:</system:String>
+    <system:String x:Key="HeightOnSidesWithColon">Height on sides:</system:String>
+    <system:String x:Key="WidthCenterWithColon">Width at center:</system:String>
+    <system:String x:Key="WidthSidesWithColon">Width on sides:</system:String>
+    <system:String x:Key="MaterialWithColon">Material:</system:String>
+    <system:String x:Key="TitleLayerWindow">Layer editor</system:String>
+    <!-- End Layer editor window section -->
+        
+    <!-- Begin Layer editor window section -->
+    <system:String x:Key="ChangeLayers">Change layers</system:String>
+    <system:String x:Key="InPieceWithColon">In piece:</system:String>
+    <system:String x:Key="AvailableWithColon">Available:</system:String>
+    <system:String x:Key="MoveDown">Move down</system:String>
+    <system:String x:Key="MoveUp">Move up</system:String>
+    <system:String x:Key="LengthWithColon">Length:</system:String>
+    <system:String x:Key="TitlePieceWindow">Piece editor</system:String>
+    <system:String x:Key="TitleLayerOfPieceWindow">Layer in piece editor</system:String>
+    <!-- End Layer editor window section -->
 </ResourceDictionary>

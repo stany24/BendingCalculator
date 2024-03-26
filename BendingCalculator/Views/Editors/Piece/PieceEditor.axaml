@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Piece.PieceEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="{Binding TitlePieceWindowBinding}"
+        Title="{DynamicResource TitlePieceWindow}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid
@@ -42,7 +42,7 @@
                 Grid.Column="0"
                 Grid.Row="0"
                 VerticalAlignment="Center"
-                Text="{Binding NameWithColonBinding}"></TextBlock>
+                Text="{DynamicResource NameWithColon}"></TextBlock>
             <TextBox 
                 Name="TbxName"
                 Grid.Column="2"
@@ -54,7 +54,7 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 VerticalAlignment="Center"
-                Text="{Binding LengthWithColonBinding}"></TextBlock>
+                Text="{DynamicResource LengthWithColon}"></TextBlock>
             <NumericUpDown 
                 Name="NudLength"
                 Grid.Column="2"
@@ -69,7 +69,7 @@
                 Grid.Row="4"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
-                Content="{Binding ChangeLayersBinding}"
+                Content="{DynamicResource ChangeLayers}"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
                 Command="{Binding OpenLayerOfPieceEditor}"></Button>
             <Grid

@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Piece.ListLayersEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="{Binding TitleLayerOfPieceWindowBinding}"
+        Title="{DynamicResource TitleLayerOfPieceWindow}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid
@@ -18,7 +18,7 @@
             Name="LblInPiece"
             Grid.Column="0"
             Grid.Row="0"
-            Text="{Binding InPieceWithColonBinding}"></TextBlock>
+            Text="{DynamicResource InPieceWithColon}"></TextBlock>
         <ListBox
             Name="LbxInPiece"
             Grid.Column="0"
@@ -41,7 +41,7 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{Binding MoveUpBinding}"
+            Content="{DynamicResource MoveUp}"
             IsEnabled="{Binding BtnMoveUpEnabled}"
             Command="{Binding MoveLayerUpInPiece}"></Button>
         <Button
@@ -50,14 +50,14 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{Binding MoveDownBinding}"
+            Content="{DynamicResource MoveDown}"
             IsEnabled="{Binding BtnMoveDownEnabled}"
             Command="{Binding MoveLayerDownInPiece}"></Button>
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
             Grid.Row="0"
-            Text="{Binding AvailableWithColonBinding}"></TextBlock>
+            Text="{DynamicResource AvailableWithColon}"></TextBlock>
         <ListBox
             Name="LbxAvailable"
             Grid.Column="4"

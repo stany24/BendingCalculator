@@ -25,7 +25,7 @@
         <value>Hauteur sur les cotés:</value>
     </data>
     <data name="MaterialWithColon" xml:space="preserve">
-        <value>Matière</value>
+        <value>Matière:</value>
     </data>
     <data name="WidthCenterWithColon" xml:space="preserve">
         <value>Largeur au centre:</value>

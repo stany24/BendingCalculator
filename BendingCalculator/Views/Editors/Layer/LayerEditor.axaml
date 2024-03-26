@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="{Binding TitleLayerWindowBinding}"
+        Title="{DynamicResource TitleLayerWindow}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 
@@ -42,7 +42,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="0"
-                Text="{Binding WidthCenterWithColonBinding}"></TextBlock>
+                Text="{DynamicResource WidthCenterWithColon}"></TextBlock>
             <NumericUpDown 
                 Name="NudWidthCenter"
                 Value="{Binding WidthCenter}"
@@ -55,7 +55,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="2"
-                Text="{Binding WidthSidesWithColonBinding}"></TextBlock>
+                Text="{DynamicResource WidthSidesWithColon}"></TextBlock>
             <NumericUpDown 
                 Name="NudWidthSide"
                 Value="{Binding WidthSide}"
@@ -68,7 +68,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="4"
-                Text="{Binding HeightCenterWithColonBinding}"></TextBlock>
+                Text="{DynamicResource HeightCenterWithColon}"></TextBlock>
             <NumericUpDown 
                 Name="NudHeightCenter"
                 Value="{Binding HeightCenter}"
@@ -81,7 +81,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="6"
-                Text="{Binding HeightOnSidesWithColonBinding}"></TextBlock>
+                Text="{DynamicResource HeightOnSidesWithColon}"></TextBlock>
             <NumericUpDown 
                 Name="NudHeightSide"
                 Value="{Binding HeightSide}"
@@ -94,7 +94,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="8"
-                Text="{Binding MaterialWithColonBinding}"></TextBlock>
+                Text="{DynamicResource MaterialWithColon}"></TextBlock>
             <ComboBox 
                 Name="CbxMaterial"
                 Grid.Column="2"
