@@ -79,7 +79,7 @@
             Name="HelpButton"
             Grid.Row="0"
             Grid.Column="4"
-            Content="{Binding HelpBinding}"
+            Content="{DynamicResource Help}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"></Button>
     </Grid>

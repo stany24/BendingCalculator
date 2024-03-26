@@ -243,7 +243,7 @@
                 Name="HelpButton"
                 Grid.Row="0"
                 Grid.Column="3"
-                Content="{Binding HelpBinding}"
+                Content="{DynamicResource Help}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"></Button>
             <ListBox

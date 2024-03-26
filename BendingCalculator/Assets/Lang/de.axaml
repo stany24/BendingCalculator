@@ -36,6 +36,10 @@
     <!-- End Force window section -->
     
     <!-- Begin Layer editor window section -->
+    <system:String x:Key="TitleMaterialWindow">Editor für Materialien</system:String>
+    <!-- End Layer editor window section -->
+    
+    <!-- Begin Layer editor window section -->
     <system:String x:Key="HeightCenterWithColon">Höhe in der Mitte:</system:String>
     <system:String x:Key="HeightOnSidesWithColon">Höhe an den Seiten:</system:String>
     <system:String x:Key="WidthCenterWithColon">Breite in der Mitte:</system:String>
@@ -54,4 +58,11 @@
     <system:String x:Key="TitlePieceWindow">Editor für Münzen</system:String>
     <system:String x:Key="TitleLayerOfPieceWindow">Ebene im Stück editor</system:String>
     <!-- End Layer editor window section -->
+    
+    <!-- Begin Multiple window section -->
+    <system:String x:Key="Add">Hinzufügen</system:String>
+    <system:String x:Key="Remove">Entfernen</system:String>
+    <system:String x:Key="NameWithColon">Name:</system:String>
+    <system:String x:Key="Help">Hilfe</system:String>
+    <!-- End Multiple window section -->
 </ResourceDictionary>

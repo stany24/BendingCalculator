@@ -81,13 +81,13 @@
                 ColumnDefinitions="Auto,10,Auto,10,Auto">
                 <Button
                     Name="BtnAdd"
-                    Content="{Binding AddBinding}"
+                    Content="{DynamicResource Add}"
                     Grid.Row="0"
                     Grid.Column="0"
                     Command="{Binding CreateNewPiece}"></Button>
                 <Button
                     Name="BtnRemove"
-                    Content="{Binding RemoveBinding}"
+                    Content="{DynamicResource Remove}"
                     Grid.Row="0"
                     Grid.Column="2"
                     IsEnabled="{Binding UiEnabledPieceEditor}"
@@ -96,7 +96,7 @@
                     Name="HelpButton"
                     Grid.Row="0"
                     Grid.Column="4"
-                    Content="{Binding HelpBinding}"
+                    Content="{DynamicResource Help}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"></Button>
             </Grid>

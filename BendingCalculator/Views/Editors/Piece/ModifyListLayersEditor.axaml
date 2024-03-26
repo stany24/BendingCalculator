@@ -79,7 +79,7 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{Binding AddBinding}"
+            Content="{DynamicResource Add}"
             IsEnabled="{Binding BtnAddEnabled}"
             Command="{Binding AddLayerToPiece}"></Button>
         <Button
@@ -88,14 +88,14 @@
             Grid.Row="4"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{Binding RemoveBinding}"
+            Content="{DynamicResource Remove}"
             IsEnabled="{Binding BtnRemoveEnabled}"
             Command="{Binding RemoveLayersToPiece}"></Button>
         <Button 
             Name="HelpButton"
             Grid.Row="0"
             Grid.Column="8"
-            Content="{Binding HelpBinding}"
+            Content="{DynamicResource Help}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"></Button>
     </Grid>

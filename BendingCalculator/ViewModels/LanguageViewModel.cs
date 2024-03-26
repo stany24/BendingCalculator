@@ -4,14 +4,9 @@ using System.Linq;
 using System.Resources;
 using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
-using BendingCalculator.Assets.Localization.EditorLocalization;
-using BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLocalization.Helper;
-using BendingCalculator.Assets.Localization.EditorLocalization.MaterialEditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.MaterialEditorLocalization.Helper;
-using BendingCalculator.Assets.Localization.EditorLocalization.PieceEditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.PieceEditorLocalization.Helper;
-using BendingCalculator.Assets.Localization.HelperLocalization;
 using BendingCalculator.Assets.Localization.MainLocalization.Helper;
 
 namespace BendingCalculator.ViewModels;
@@ -20,7 +15,7 @@ public partial class MainViewModel
 {
     private static void Translate(string targetLanguage)
     {
-        ResourceInclude? translations = Application.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Lang/") ?? false);
+        ResourceInclude? translations = Application.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(x => x.Source?.OriginalString.Contains("/Lang/") ?? false);
 
         if (translations != null)
             Application.Current?.Resources.MergedDictionaries.Remove(translations);
@@ -50,22 +45,6 @@ public partial class MainViewModel
         MainWindowHelper8Binding = resourceManagerMainHelper.GetString("MainWindowHelper8", lang);
         MainWindowHelper9Binding = resourceManagerMainHelper.GetString("MainWindowHelper9", lang);
         MainWindowHelper10Binding = resourceManagerMainHelper.GetString("MainWindowHelper10", lang);
-
-        #endregion
-
-        #region All Editors
-
-        ResourceManager resourceManagerEditor = new(typeof(EditorLocalization));
-        AddBinding = resourceManagerEditor.GetString("Add", lang);
-        RemoveBinding = resourceManagerEditor.GetString("Remove", lang);
-        NameWithColonBinding = resourceManagerEditor.GetString("NameWithColon", lang);
-
-        #endregion
-
-        #region Material Editor
-
-        ResourceManager resourceManagerMaterialEditor = new(typeof(MaterialEditorLocalization));
-        TitleMaterialWindowBinding = resourceManagerMaterialEditor.GetString("TitleMaterialWindow", lang);
 
         #endregion
 
@@ -112,13 +91,6 @@ public partial class MainViewModel
         PieceEditorHelper13Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper13", lang);
         PieceEditorHelper14Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper14", lang);
         PieceEditorHelper15Binding = resourceManagerPieceEditorHelper.GetString("PieceEditorHelper15", lang);
-
-        #endregion
-
-        #region All Helper
-
-        ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));
-        HelpBinding = resourceManagerHelper.GetString("Help", lang);
 
         #endregion
     }
@@ -389,41 +361,6 @@ public partial class MainViewModel
     {
         get =>_mainWindowHelper10Binding;
         set => SetProperty(ref _mainWindowHelper10Binding, value);
-    }
-    
-    private string? _addBinding;
-    public string? AddBinding
-    {
-        get =>_addBinding;
-        set => SetProperty(ref _addBinding, value);
-    }
-    
-    private string? _helpBinding;
-    public string? HelpBinding
-    {
-        get =>_helpBinding;
-        set => SetProperty(ref _helpBinding, value);
-    }
-    
-    private string? _nameWithColonBinding;
-    public string? NameWithColonBinding
-    {
-        get =>_nameWithColonBinding;
-        set => SetProperty(ref _nameWithColonBinding, value);
-    }
-
-    private string? _removeBinding;
-    public string? RemoveBinding
-    {
-        get =>_removeBinding;
-        set => SetProperty(ref _removeBinding, value);
-    }
-    
-    private string? _titleMaterialWindowBinding;
-    public string? TitleMaterialWindowBinding
-    {
-        get =>_titleMaterialWindowBinding;
-        set => SetProperty(ref _titleMaterialWindowBinding, value);
     }
 
     #endregion

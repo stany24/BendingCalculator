@@ -34,6 +34,10 @@
     <system:String x:Key="SpeedWithColon">Vitesse:</system:String>
     <system:String x:Key="TitleForceWindow">Éditeur de force</system:String>
     <!-- End Force window section -->
+    
+    <!-- Begin Layer editor window section -->
+    <system:String x:Key="TitleMaterialWindow">Éditeur de matières</system:String>
+    <!-- End Layer editor window section -->
         
     <!-- Begin Layer editor window section -->
     <system:String x:Key="HeightCenterWithColon">Hauteur au centre:</system:String>
@@ -54,4 +58,11 @@
     <system:String x:Key="TitlePieceWindow">Éditeur de pièces</system:String>
     <system:String x:Key="TitleLayerOfPieceWindow">Éditeur des couches dans la pièce</system:String>
     <!-- End Layer editor window section -->
+    
+    <!-- Begin Multiple window section -->
+    <system:String x:Key="Add">Ajouter</system:String>
+    <system:String x:Key="Remove">Retirer</system:String>
+    <system:String x:Key="NameWithColon">Nom:</system:String>
+    <system:String x:Key="Help">Aide</system:String>
+    <!-- End Multiple window section -->
 </ResourceDictionary>

@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Material.MaterialEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="{Binding TitleMaterialWindowBinding}"
+        Title="{DynamicResource TitleMaterialWindow}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 
@@ -19,7 +19,7 @@
                 VerticalAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="0"
-                Text="{Binding NameWithColonBinding}"></TextBlock>
+                Text="{DynamicResource NameWithColon}"></TextBlock>
             <TextBox 
                 Name="TbxName"
                 Grid.Column="5"
@@ -67,14 +67,14 @@
             </ListBox>
             <Button
                 Name="BtnAdd"
-                Content="{Binding AddBinding}"
+                Content="{DynamicResource Add}"
                 Grid.Row="4"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Command="{Binding CreateNewMaterial}"></Button>
             <Button
                 Name="BtnRemove"
-                Content="{Binding RemoveBinding}"
+                Content="{DynamicResource Remove}"
                 Grid.Row="4"
                 Grid.Column="5"
                 IsEnabled="{Binding UiEnabledMaterialEditor}"
@@ -83,7 +83,7 @@
             Name="HelpButton"
             Grid.Row="0"
             Grid.Column="9"
-            Content="{Binding HelpBinding}"
+            Content="{DynamicResource Help}"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"></Button>
         </Grid>
