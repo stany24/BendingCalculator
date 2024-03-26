@@ -13,6 +13,8 @@ public partial class Main : WindowWithHelp
 {
     #region Constructor
 
+    public Main() { } // used for compiled bindings
+    
     public Main(MainViewModel model)
     {
         DataContext = model;

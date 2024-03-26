@@ -9,8 +9,9 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Main"
         x:DataType="viewModels:MainViewModel"
+        x:CompileBindings="True"
         Icon="/Assets/avalonia-logo.ico"
-        Title="{Binding TitleMainWindowBinding}"
+        Title="{DynamicResource TitleMainWindow}"
         MinWidth="802"
         MinHeight="355">
     <Grid
@@ -46,7 +47,7 @@
                     Grid.ColumnSpan="3"></NumericUpDown>
                 <Button
                     Name="BtnForce"
-                    Content="{Binding ModifyBinding}"
+                    Content="{DynamicResource Modify}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding OpenForceEditor}"
@@ -55,7 +56,7 @@
                     Name="TbxLang"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Text="{Binding LanguageWithColonBinding}"></TextBlock>
+                    Text="{DynamicResource LanguageWithColon}"></TextBlock>
                 <ComboBox 
                     Name="CbxLang"
                     Grid.Row="4"
@@ -74,7 +75,7 @@
                     Name="LblDeformationCenter"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Text="{Binding DeformationCenterWithColonBinding}"
+                    Text="{DynamicResource DeformationCenterWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxDeformationCenter"
@@ -85,7 +86,7 @@
                     Name="LblConstraintCenter"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Text="{Binding ConstraintCenterWithColonBinding}"
+                    Text="{DynamicResource ConstraintCenterWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxConstraintCenter"
@@ -96,7 +97,7 @@
                     Name="LblDistance"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Text="{Binding DistanceFromLeftWithUnitWithColonBinding}"
+                    Text="{DynamicResource DistanceFromLeftWithUnitWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <NumericUpDown
                     Name="NudDistance"
@@ -109,7 +110,7 @@
                     Name="LblDeformationDistance"
                     Grid.Row="6"
                     Grid.Column="0"
-                    Text="{Binding DeformationDistanceWithColonBinding}"
+                    Text="{DynamicResource DeformationDistanceWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxDeformationDistance"
@@ -120,7 +121,7 @@
                     Name="LblConstraintDistance"
                     Grid.Row="8"
                     Grid.Column="0"
-                    Text="{Binding ConstraintDistanceWithColonBinding}"
+                    Text="{DynamicResource ConstraintDistanceWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <TextBlock
                     Name="TbxConstraintDistance"
@@ -140,11 +141,11 @@
                 Name="LblPiece"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{Binding PiecesWithColonBinding}"
+                Text="{DynamicResource PiecesWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnPiece"
-                Content="{Binding ModifyBinding}"
+                Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenPieceEditor}"></Button>
@@ -185,11 +186,11 @@
                 Name="LblLayer"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{Binding LayersWithColonBinding}"
+                Text="{DynamicResource LayersWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnLayer"
-                Content="{Binding ModifyBinding}"
+                Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenLayerEditor}"></Button>
@@ -230,11 +231,11 @@
                 Name="LblMaterial"
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="{Binding MaterialsWithColonBinding}"
+                Text="{DynamicResource MaterialsWithColon}"
                 VerticalAlignment="Center"></TextBlock>
             <Button
                 Name="BtnMaterial"
-                Content="{Binding ModifyBinding}"
+                Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding OpenMaterialEditor}"></Button>
@@ -278,7 +279,7 @@
             Grid.ColumnSpan="7"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
-            Content="{Binding BeginBinding}"
+            Content="{DynamicResource Begin}"
             Command="{Binding CalculateBending}"></Button>
     </Grid>
 </Window>

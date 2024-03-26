@@ -502,7 +502,7 @@
       <Folder Include="Database\" />
     </ItemGroup>
 
-
+    
     <ItemGroup>
       <None Update="Database\Database.db">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -512,6 +512,7 @@
 
     <ItemGroup>
       <UpToDateCheckInput Remove="Views\Editors\Material2\MaterialEditor.axaml" />
+      <UpToDateCheckInput Remove="Views\Temp\MainWindow.axaml" />
     </ItemGroup>
 
 

@@ -1,0 +1,22 @@
+﻿
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Begin Main window section -->
+    <system:String x:Key="Begin">Begin</system:String>
+    <system:String x:Key="ConstraintCenterWithColon">Constraint in the center:</system:String>
+    <system:String x:Key="ConstraintDistanceWithColon">Distance constraint:</system:String>
+    <system:String x:Key="DeformationCenterWithColon">Deformation in the center:</system:String>
+    <system:String x:Key="DeformationDistanceWithColon">Distance deformation:</system:String>
+    <system:String x:Key="DistanceFromLeftWithUnitWithColon">Distance from the left (mm):</system:String>
+    <system:String x:Key="LanguageWithColon">Language:</system:String>
+    <system:String x:Key="LayersWithColon">Layers:</system:String>
+    <system:String x:Key="MaterialsWithColon">Materials:</system:String>
+    <system:String x:Key="Modify">Modify</system:String>
+    <system:String x:Key="PiecesWithColon">Pieces:</system:String>
+    <system:String x:Key="TitleMainWindow">Bending calculator</system:String>
+    <system:String x:Key="XAxisName">Length (mm)</system:String>
+    <system:String x:Key="YAxisName">Deformation (mm)</system:String>
+    <system:String x:Key="TitleHelpWindow">Help</system:String>
+    <!-- End Main window section -->
+</ResourceDictionary>

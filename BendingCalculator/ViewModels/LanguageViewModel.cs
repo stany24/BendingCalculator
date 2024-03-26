@@ -1,6 +1,9 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
+using Avalonia;
+using Avalonia.Markup.Xaml.Styling;
 using BendingCalculator.Assets.Localization.EditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.ForceEditorLocalization;
 using BendingCalculator.Assets.Localization.EditorLocalization.LayerEditorLocalization;
@@ -18,28 +21,26 @@ namespace BendingCalculator.ViewModels;
 
 public partial class MainViewModel
 {
+    private static void Translate(string targetLanguage)
+    {
+        ResourceInclude? translations = Application.Current.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Lang/") ?? false);
+
+        if (translations != null)
+            Application.Current.Resources.MergedDictionaries.Remove(translations);
+
+        // var resource = AssetLoader.Open(new Uri($"avares://LocalizationSample/Assets/Lang/{targetLanguage}.axaml"));
+            
+        Application.Current.Resources.MergedDictionaries.Add(
+            new ResourceInclude(new Uri($"avares://BendingCalculator/Assets/Lang/{targetLanguage}.axaml"))
+            {
+                Source = new Uri($"avares://BendingCalculator/Assets/Lang/{targetLanguage}.axaml")
+            });
+    }
+    
     private void ChangeLanguage(object? sender, EventArgs eventArgs)
     {
-
+        Translate(Language);
         CultureInfo lang = new(Language);
-        
-        #region Main Window
-        
-        ResourceManager resourceManagerMain = new(typeof(MainLocalization));
-        TitleMainWindowBinding = resourceManagerMain.GetString("TitleMainWindow", lang);
-        ModifyBinding = resourceManagerMain.GetString("Modify", lang);
-        LanguageWithColonBinding = resourceManagerMain.GetString("LanguageWithColon", lang);
-        BeginBinding = resourceManagerMain.GetString("Begin", lang);
-        MaterialsWithColonBinding = resourceManagerMain.GetString("MaterialsWithColon", lang);
-        PiecesWithColonBinding = resourceManagerMain.GetString("PiecesWithColon", lang);
-        LayersWithColonBinding = resourceManagerMain.GetString("LayersWithColon", lang);
-        DistanceFromLeftWithUnitWithColonBinding = resourceManagerMain.GetString("DistanceFromLeftWithUnitWithColon", lang);
-        DeformationDistanceWithColonBinding  = resourceManagerMain.GetString("DeformationDistanceWithColon", lang);
-        DeformationCenterWithColonBinding = resourceManagerMain.GetString("DeformationCenterWithColon", lang);
-        ConstraintDistanceWithColonBinding  = resourceManagerMain.GetString("ConstraintDistanceWithColon", lang);
-        ConstraintCenterWithColonBinding = resourceManagerMain.GetString("ConstraintCenterWithColon", lang);
-        
-        #endregion
 
         #region Main Window Helper
 
@@ -148,7 +149,6 @@ public partial class MainViewModel
         #region All Helper
 
         ResourceManager resourceManagerHelper = new(typeof(HelperLocalization));
-        TitleHelpWindowBinding = resourceManagerMain.GetString("TitleHelpWindow", lang);
         HelpBinding = resourceManagerHelper.GetString("Help", lang);
 
         #endregion
@@ -458,13 +458,6 @@ public partial class MainViewModel
         set => SetProperty(ref _availableWithColonBinding, value);
     }
     
-    private string? _beginBinding;
-    public string? BeginBinding
-    {
-        get =>_beginBinding;
-        set => SetProperty(ref _beginBinding, value);
-    }
-    
     private string? _changeLayersBinding;
     public string? ChangeLayersBinding
     {
@@ -514,20 +507,6 @@ public partial class MainViewModel
         set => SetProperty(ref _inPieceWithColonBinding, value);
     }
     
-    private string? _languageWithColonBinding;
-    public string? LanguageWithColonBinding
-    {
-        get =>_languageWithColonBinding;
-        set => SetProperty(ref _languageWithColonBinding, value);
-    }
-    
-    private string? _layersWithColonBinding;
-    public string? LayersWithColonBinding
-    {
-        get =>_layersWithColonBinding;
-        set => SetProperty(ref _layersWithColonBinding, value);
-    }
-    
     private string? _lengthWithColonBinding;
     public string? LengthWithColonBinding
     {
@@ -542,25 +521,11 @@ public partial class MainViewModel
         set => SetProperty(ref _massWithColonBinding, value);
     }
     
-    private string? _materialsWithColonBinding;
-    public string? MaterialsWithColonBinding
-    {
-        get =>_materialsWithColonBinding;
-        set => SetProperty(ref _materialsWithColonBinding, value);
-    }
-    
     private string? _materialWithColonBinding;
     public string? MaterialWithColonBinding
     {
         get =>_materialWithColonBinding;
         set => SetProperty(ref _materialWithColonBinding, value);
-    }
-    
-    private string? _modifyBinding;
-    public string? ModifyBinding
-    {
-        get =>_modifyBinding;
-        set => SetProperty(ref _modifyBinding, value);
     }
     
     private string? _moveDownBinding;
@@ -582,13 +547,6 @@ public partial class MainViewModel
     {
         get =>_nameWithColonBinding;
         set => SetProperty(ref _nameWithColonBinding, value);
-    }
-    
-    private string? _piecesWithColonBinding;
-    public string? PiecesWithColonBinding
-    {
-        get =>_piecesWithColonBinding;
-        set => SetProperty(ref _piecesWithColonBinding, value);
     }
 
     private string? _radiusWithColonBinding;
@@ -626,48 +584,6 @@ public partial class MainViewModel
         set => SetProperty(ref _widthSidesWithColonBinding, value);
     }
     
-    private string? _distanceFromLeftWithUnitWithColonBinding;
-    public string? DistanceFromLeftWithUnitWithColonBinding
-    {
-        get =>_distanceFromLeftWithUnitWithColonBinding;
-        set => SetProperty(ref _distanceFromLeftWithUnitWithColonBinding, value);
-    }
-    
-    private string? _constraintDistanceWithColonBinding;
-    public string? ConstraintDistanceWithColonBinding
-    {
-        get =>_constraintDistanceWithColonBinding;
-        set => SetProperty(ref _constraintDistanceWithColonBinding, value);
-    }
-    
-    private string? _deformationDistanceWithColonBinding;
-    public string? DeformationDistanceWithColonBinding
-    {
-        get =>_deformationDistanceWithColonBinding;
-        set => SetProperty(ref _deformationDistanceWithColonBinding, value);
-    }
-    
-    private string? _deformationCenterWithColonBinding;
-    public string? DeformationCenterWithColonBinding
-    {
-        get =>_deformationCenterWithColonBinding;
-        set => SetProperty(ref _deformationCenterWithColonBinding, value);
-    }
-    
-    private string? _constraintCenterWithColonBinding;
-    public string? ConstraintCenterWithColonBinding
-    {
-        get =>_constraintCenterWithColonBinding;
-        set => SetProperty(ref _constraintCenterWithColonBinding, value);
-    }
-    
-    private string? _titleMainWindowBinding;
-    public string? TitleMainWindowBinding
-    {
-        get =>_titleMainWindowBinding;
-        set => SetProperty(ref _titleMainWindowBinding, value);
-    }
-    
     private string? _titleForceWindowBinding;
     public string? TitleForceWindowBinding
     {
@@ -694,13 +610,6 @@ public partial class MainViewModel
     {
         get =>_titleMaterialWindowBinding;
         set => SetProperty(ref _titleMaterialWindowBinding, value);
-    }
-    
-    private string? _titleHelpWindowBinding;
-    public string? TitleHelpWindowBinding
-    {
-        get =>_titleHelpWindowBinding;
-        set => SetProperty(ref _titleHelpWindowBinding, value);
     }
     
     private string? _titleLayerOfPieceWindowBinding;

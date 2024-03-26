@@ -8,6 +8,15 @@
     <Application.DataTemplates>
         <bendingCalculator:ViewLocator/>
     </Application.DataTemplates>
+             
+     <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceInclude Source="/Assets/Lang/en.axaml" />
+             </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
+
+     </Application.Resources>
   
     <Application.Styles>
         <FluentTheme />
