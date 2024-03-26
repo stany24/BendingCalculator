@@ -4,6 +4,7 @@ using System.Text;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Layout;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -46,7 +47,7 @@ public partial class HelperWindow : Window
             {
                 TextBlock block = new()
                 {
-                    [!TextBlock.TextProperty] = new Binding(helpText.NameBinding),
+                    [!TextBlock.TextProperty] = new DynamicResourceExtension(helpText.NameBinding),
                     TextWrapping = TextWrapping.Wrap
                 };
                 Grid.SetColumn(block,0);
@@ -58,7 +59,7 @@ public partial class HelperWindow : Window
             if (DataContext is not MainViewModel model) continue;
             Button link = new()
             {
-                [!ContentProperty] = new Binding(helpLink.DisplayTextBinding),
+                [!ContentProperty] = new DynamicResourceExtension(helpLink.DisplayTextBinding),
                 Command = model.OpenLink,
                 CommandParameter = helpLink.Link,
                 HorizontalAlignment = HorizontalAlignment.Center

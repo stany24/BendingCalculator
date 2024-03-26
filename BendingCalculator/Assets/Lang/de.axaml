@@ -65,4 +65,54 @@
     <system:String x:Key="NameWithColon">Name:</system:String>
     <system:String x:Key="Help">Hilfe</system:String>
     <!-- End Multiple window section -->
+        
+    <!-- Begin Main window helper section -->
+    <system:String x:Key="MainWindowHelper1">Dies ist das Hauptfenster, es zeigt einen Überblick über die Anwendung, die Ergebnisse und wird zum Starten der Simulation verwendet.</system:String>
+    <system:String x:Key="MainWindowHelper2">Es gibt 6 verschiedene Abschnitte in diesem Fenster:</system:String>
+    <system:String x:Key="MainWindowHelper3">- Kraft: Wird verwendet, um die Kraft zu modifizieren oder den Kraft-Editor zu öffnen.</system:String>
+    <system:String x:Key="MainWindowHelper4">- Stück: Es wird verwendet, um alle erstellten Stücke anzuzeigen und den Stückeditor zu öffnen.</system:String>
+    <system:String x:Key="MainWindowHelper5">- Ebene: wird verwendet, um alle erstellten Ebenen anzuzeigen und den Ebenen-Editor zu öffnen.</system:String>
+    <system:String x:Key="MainWindowHelper6">- Material: wird verwendet, um alle erstellten Teile anzuzeigen und den Teile-Editor zu öffnen.</system:String>
+    <system:String x:Key="MainWindowHelper7">- Ergebnis: Die Grafik zeigt die Ergebnisse der Simulation.</system:String>
+    <system:String x:Key="MainWindowHelper8">- Starten: Die Schaltfläche dient zum Starten der Simulation, ein Stück muss im Stückbereich ausgewählt werden</system:String>
+    <system:String x:Key="MainWindowHelper9">Hier können Sie ein Video mit einer Demo sehen.</system:String>
+    <system:String x:Key="MainWindowHelper10">Video hier</system:String>
+    <!-- End Main window helper section -->
+        
+    <!-- Begin Material editor helper section -->
+    <system:String x:Key="MaterialEditorHelper1">Dies ist der Material-Editor, hier können Sie neue Materialien erstellen und sie verändern, die Materialien haben mehrere Eigenschaften:</system:String>
+    <system:String x:Key="MaterialEditorHelper2">- Der Name, damit Sie das Material erkennen können.</system:String>
+    <system:String x:Key="MaterialEditorHelper3">- E die Konstante der Flexibilität.</system:String>
+    <system:String x:Key="MaterialEditorHelper4">Hier können Sie ein Video mit einer Demo sehen.</system:String>
+    <system:String x:Key="MaterialEditorHelper5">Video hier</system:String>
+    <!-- End Material editor helper section -->
+    
+    <!-- Begin Layer editor helper section -->
+    <system:String x:Key="LayerEditorHelper1">Dies ist der Ebenen-Editor, hier können Sie neue Ebenen erstellen und bearbeiten. Die Ebenen haben mehrere Eigenschaften:</system:String>
+    <system:String x:Key="LayerEditorHelper2">- Breite des Stücks in der Mitte.</system:String>
+    <system:String x:Key="LayerEditorHelper3">- Breite des Stücks auf beiden Seiten.</system:String>
+    <system:String x:Key="LayerEditorHelper4">- Höhe des Stücks in der Mitte.</system:String>
+    <system:String x:Key="LayerEditorHelper5">- Höhe des Stücks auf beiden Seiten.</system:String>
+    <system:String x:Key="LayerEditorHelper6">- Das Material, aus dem die Schicht besteht.</system:String>
+    <system:String x:Key="LayerEditorHelper7">Hier können Sie ein Video mit einer Demo sehen.</system:String>
+    <system:String x:Key="LayerEditorHelper8">Video hier</system:String>
+    <!-- End Layer editor helper section -->
+        
+    <!-- Begin Piece editor helper section -->
+    <system:String x:Key="PieceEditorHelper1">Dies ist der Stück-Editor, hier können Sie neue Stücke erstellen und sie ändern, die Stücke haben mehrere Eigenschaften:</system:String>
+    <system:String x:Key="PieceEditorHelper2">- Der Name, damit Sie das Stück erkennen.</system:String>
+    <system:String x:Key="PieceEditorHelper3">- Die Länge des Stücks.</system:String>
+    <system:String x:Key="PieceEditorHelper4">Wenn Sie nur ein Teil in der linken Listbox auswählen, sehen Sie dessen Ebenen in der rechten Listbox und können auf die Schaltfläche "Ebenen ändern" klicken, um das Teil anzupassen.</system:String>
+    <system:String x:Key="PieceEditorHelper5">Hier können Sie ein Video mit einer Demo sehen.</system:String>
+    <system:String x:Key="PieceEditorHelper6">Video hier</system:String>
+    <system:String x:Key="PieceEditorHelper7">Dies ist der Stück-Editor, hier können Sie die Ebenen innerhalb eines Stücks ändern.</system:String>
+    <system:String x:Key="PieceEditorHelper8">Das linke Listenfeld enthält die Ebenen innerhalb des Stücks, das rechte Listenfeld enthält alle Ebenen, die Sie erstellt haben.</system:String>
+    <system:String x:Key="PieceEditorHelper9">Sie können 4 verschiedene Aktionen durchführen:</system:String>
+    <system:String x:Key="PieceEditorHelper10">- Hinzufügen: fügt die ausgewählten Ebenen des rechten Listenfeldes zum Stück hinzu.</system:String>
+    <system:String x:Key="PieceEditorHelper11">- Entfernen: entfernt die in der linken Listbox ausgewählten Ebenen aus dem Stück.</system:String>
+    <system:String x:Key="PieceEditorHelper12">- Nach unten: verschiebt die ausgewählten Ebenen in der linken Listbox nach unten.</system:String>
+    <system:String x:Key="PieceEditorHelper13">- Nach oben: verschiebt die ausgewählten Ebenen der linken Listbox nach oben.</system:String>
+    <system:String x:Key="PieceEditorHelper14">Hier können Sie ein Video mit einer Demo sehen.</system:String>
+    <system:String x:Key="PieceEditorHelper15">Video hier</system:String>
+    <!-- End Piece editor helper section -->
 </ResourceDictionary>

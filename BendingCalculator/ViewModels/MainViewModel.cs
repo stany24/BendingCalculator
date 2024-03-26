@@ -138,7 +138,7 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel(SQLiteConnection connection)
     {
-        LanguageEvents.LanguageChanged += ChangeLanguage;
+        LanguageEvents.LanguageChanged += Translate;
         OpenLink = new OpenLinkCommand();
         _languages = new ObservableCollection<string>{"fr","en","de"};
         _language = SettingManager.GetLanguage();
@@ -156,7 +156,7 @@ public partial class MainViewModel : ObservableObject
 
     ~MainViewModel()
     {
-        LanguageEvents.LanguageChanged -= ChangeLanguage;
+        LanguageEvents.LanguageChanged -= Translate;
         DataBaseEvents.LayersChanged -= ReloadLayers;
         DataBaseEvents.MaterialsChanged -= ReloadMaterials;
         DataBaseEvents.PiecesChanged -= ReloadPieces;
