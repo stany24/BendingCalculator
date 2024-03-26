@@ -8,7 +8,6 @@
         x:DataType="viewModels:MainViewModel"
         SizeToContent="Height"
         CanResize="False"
-        x:CompileBindings="True"
         Width="500"
         Title="{DynamicResource DetachmentWarningTitle}">
     <Grid

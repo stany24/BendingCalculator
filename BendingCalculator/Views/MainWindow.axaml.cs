@@ -1,6 +1,4 @@
 using System;
-using Avalonia;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 using BendingCalculator.Logic;
 using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
@@ -11,8 +9,6 @@ namespace BendingCalculator.Views;
 public partial class Main : WindowWithHelp
 {
     #region Constructor
-
-    public Main() { } // used for compiled bindings
     
     public Main(MainViewModel model)
     {

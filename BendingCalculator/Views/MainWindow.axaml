@@ -9,7 +9,6 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Main"
         x:DataType="viewModels:MainViewModel"
-        x:CompileBindings="True"
         Icon="/Assets/avalonia-logo.ico"
         Title="{DynamicResource TitleMainWindow}"
         MinWidth="802"

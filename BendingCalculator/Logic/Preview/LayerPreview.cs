@@ -39,7 +39,7 @@ public class LayerPreview:Grid
         _tbxSide = new TextBlock
         {
             [!TextBlock.TextProperty] = new DynamicResourceExtension("SideViewWithColon"),
-            VerticalAlignment = VerticalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center
         };
         SetRow(_tbxSide,0);
         SetColumn(_tbxSide,1);
@@ -48,7 +48,7 @@ public class LayerPreview:Grid
         _tbxAbove = new TextBlock
         {
             [!TextBlock.TextProperty] = new DynamicResourceExtension("TopViewWithColon"),
-            VerticalAlignment = VerticalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center
         };
         SetRow(_tbxAbove,2);
         SetColumn(_tbxAbove,1);

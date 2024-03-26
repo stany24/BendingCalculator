@@ -138,6 +138,8 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel(SQLiteConnection connection)
     {
+        _pieceName = string.Empty;
+        _constraintsPoints = Array.Empty<double>();
         LanguageEvents.LanguageChanged += Translate;
         OpenLink = new OpenLinkCommand();
         _languages = new ObservableCollection<string>{"fr","en","de"};
