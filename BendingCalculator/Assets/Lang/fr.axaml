@@ -18,4 +18,20 @@
     <system:String x:Key="YAxisName">Déformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Aide</system:String>
     <!-- End Main window section -->
+    
+    <!-- Begin Warning section -->
+    <system:String x:Key="DetachmentWarningTitle">Avertissement de décollement</system:String>
+    <system:String x:Key="DetachmentWarning">Deux couches qui se touchent ont un écart d'élasticité important, dans la réalité les couches pourrais se décoller et s'abimer ainsi que fausser les résulats. Les couches concernées sont les suivantes :</system:String>
+    <system:String x:Key="PositionHeader">Position dans la pièce</system:String>
+    <system:String x:Key="LayerHeader">Couche</system:String>
+    <!-- End Warning section -->
+        
+    <!-- Begin Force window section -->
+    <system:String x:Key="ForceWithColon">Force:</system:String>
+    <system:String x:Key="MassWithColon">Masse:</system:String>
+    <system:String x:Key="RadiusWithColon">Rayon:</system:String>
+    <system:String x:Key="GravityWithColon">Gravité:</system:String>
+    <system:String x:Key="SpeedWithColon">Vitesse:</system:String>
+    <system:String x:Key="TitleForceWindow">Éditeur de force</system:String>
+    <!-- End Force window section -->
 </ResourceDictionary>

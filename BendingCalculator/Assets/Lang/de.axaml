@@ -18,4 +18,20 @@
     <system:String x:Key="YAxisName">Deformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Hilfe</system:String>
     <!-- End Main window section -->
+        
+    <!-- Begin Warning section -->
+    <system:String x:Key="DetachmentWarningTitle">Warnung vor Ablösung</system:String>
+    <system:String x:Key="DetachmentWarning">Zwei Schichten, die sich berühren, haben einen großen Unterschied in der Elastizität. In der Realität können sich die Schichten ablösen und beschädigen und die Ergebnisse verfälschen. Die betroffenen Schichten sind folgende:</system:String>
+    <system:String x:Key="PositionHeader">Position im Stück</system:String>
+    <system:String x:Key="LayerHeader">Ebene</system:String>
+    <!-- End Warning section -->
+    
+    <!-- Begin Force window section -->
+    <system:String x:Key="ForceWithColon">Kraft:</system:String>
+    <system:String x:Key="MassWithColon">Masse:</system:String>
+    <system:String x:Key="RadiusWithColon">Strahl:</system:String>
+    <system:String x:Key="GravityWithColon">Schwerkraft:</system:String>
+    <system:String x:Key="SpeedWithColon">Geschwindigkeit:</system:String>
+    <system:String x:Key="TitleForceWindow">Stärke-Editor</system:String>
+    <!-- End Force window section -->
 </ResourceDictionary>

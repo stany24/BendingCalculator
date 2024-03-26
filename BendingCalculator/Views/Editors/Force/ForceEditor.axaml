@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Force.ForceEditor"
         x:DataType="viewModels:MainViewModel"
-        Title="{Binding TitleForceWindowBinding}"
+        Title="{DynamicResource TitleForceWindow}"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid
@@ -15,7 +15,7 @@
         Margin="5">
         <TextBlock 
             Name="LblMass"
-            Text="{Binding MassWithColonBinding}"
+            Text="{DynamicResource MassWithColon}"
             Grid.Column="0"
             Grid.Row="0"
             VerticalAlignment="Center"></TextBlock>
@@ -28,7 +28,7 @@
             Grid.Row="0"></NumericUpDown>
         <TextBlock 
             Name="LblRadius"
-            Text="{Binding RadiusWithColonBinding}"
+            Text="{DynamicResource RadiusWithColon}"
             Grid.Column="0"
             Grid.Row="2"
             VerticalAlignment="Center"></TextBlock>
@@ -41,7 +41,7 @@
             Grid.Row="2"></NumericUpDown>
         <TextBlock 
             Name="LblSpeed"
-            Text="{Binding SpeedWithColonBinding}"
+            Text="{DynamicResource SpeedWithColon}"
             Grid.Column="0"
             Grid.Row="4"
             VerticalAlignment="Center"></TextBlock>
@@ -54,7 +54,7 @@
             Grid.Row="4"></NumericUpDown>
         <TextBlock 
             Name="LblGravity"
-            Text="{Binding GravityWithColonBinding}"
+            Text="{DynamicResource GravityWithColon}"
             Grid.Column="0"
             Grid.Row="6"
             VerticalAlignment="Center"></TextBlock>
@@ -67,7 +67,7 @@
             Grid.Row="6"></NumericUpDown>
         <TextBlock 
             Name="LblForce"
-            Text="{Binding ForceWithColonBinding}"
+            Text="{DynamicResource ForceWithColon}"
             Grid.Column="0"
             Grid.Row="8"
             VerticalAlignment="Center"></TextBlock>

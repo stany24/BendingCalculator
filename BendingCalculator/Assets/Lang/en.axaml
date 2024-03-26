@@ -19,4 +19,20 @@
     <system:String x:Key="YAxisName">Deformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Help</system:String>
     <!-- End Main window section -->
+        
+    <!-- Begin Warning section -->
+    <system:String x:Key="DetachmentWarningTitle">Detachment Warning</system:String>
+    <system:String x:Key="DetachmentWarning">Two layers touching each other have a large elasticity gap, and in reality the layers could detachment and be damaged the piece, falsing the results. The layers concerned are as follows:</system:String>
+    <system:String x:Key="PositionHeader">Position in the piece</system:String>
+    <system:String x:Key="LayerHeader">Layer</system:String>
+    <!-- End Warning section -->
+    
+    <!-- Begin Force window section -->
+    <system:String x:Key="ForceWithColon">Force:</system:String>
+    <system:String x:Key="MassWithColon">Mass:</system:String>
+    <system:String x:Key="RadiusWithColon">Radius:</system:String>
+    <system:String x:Key="GravityWithColon">Gravity:</system:String>
+    <system:String x:Key="SpeedWithColon">Speed:</system:String>
+    <system:String x:Key="TitleForceWindow">Force editor</system:String>
+    <!-- End Force window section -->
 </ResourceDictionary>

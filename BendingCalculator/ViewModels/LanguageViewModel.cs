@@ -152,28 +152,6 @@ public partial class MainViewModel
         HelpBinding = resourceManagerHelper.GetString("Help", lang);
 
         #endregion
-
-        #region Force Editor
-
-        ResourceManager resourceManagerForceEditor = new(typeof(ForceEditorLocalization));
-        TitleForceWindowBinding = resourceManagerForceEditor.GetString("TitleForceWindow", lang);
-        ForceWithColonBinding = resourceManagerForceEditor.GetString("ForceWithColon", lang);
-        MassWithColonBinding = resourceManagerForceEditor.GetString("MassWithColon", lang);
-        RadiusWithColonBinding = resourceManagerForceEditor.GetString("RadiusWithColon", lang);
-        GravityWithColonBinding = resourceManagerForceEditor.GetString("GravityWithColon", lang);
-        SpeedWithColonBinding = resourceManagerForceEditor.GetString("SpeedWithColon", lang);
-
-        #endregion
-
-        #region Warnings
-
-        ResourceManager resourceWarning = new(typeof(WarningLocalization));
-        DetachmentWarningTitleBinding = resourceWarning.GetString("DetachmentWarningTitle", lang);
-        DetachmentWarningBinding = resourceWarning.GetString("DetachmentWarning", lang);
-        PositionHeaderBinding = resourceWarning.GetString("PositionHeader", lang);
-        LayerHeaderBinding = resourceWarning.GetString("LayerHeader", lang);
-
-        #endregion
     }
 
     #region Bindings
@@ -465,20 +443,6 @@ public partial class MainViewModel
         set => SetProperty(ref _changeLayersBinding, value);
     }
     
-    private string? _forceWithColonBinding;
-    public string? ForceWithColonBinding
-    {
-        get =>_forceWithColonBinding;
-        set => SetProperty(ref _forceWithColonBinding, value);
-    }
-    
-    private string? _gravityWithColonBinding;
-    public string? GravityWithColonBinding
-    {
-        get =>_gravityWithColonBinding;
-        set => SetProperty(ref _gravityWithColonBinding, value);
-    }
-    
     private string? _heightCenterWithColonBinding;
     public string? HeightCenterWithColonBinding
     {
@@ -514,13 +478,6 @@ public partial class MainViewModel
         set => SetProperty(ref _lengthWithColonBinding, value);
     }
     
-    private string? _massWithColonBinding;
-    public string? MassWithColonBinding
-    {
-        get =>_massWithColonBinding;
-        set => SetProperty(ref _massWithColonBinding, value);
-    }
-    
     private string? _materialWithColonBinding;
     public string? MaterialWithColonBinding
     {
@@ -549,25 +506,11 @@ public partial class MainViewModel
         set => SetProperty(ref _nameWithColonBinding, value);
     }
 
-    private string? _radiusWithColonBinding;
-    public string? RadiusWithColonBinding
-    {
-        get =>_radiusWithColonBinding;
-        set => SetProperty(ref _radiusWithColonBinding, value);
-    }
-
     private string? _removeBinding;
     public string? RemoveBinding
     {
         get =>_removeBinding;
         set => SetProperty(ref _removeBinding, value);
-    }
-    
-    private string? _speedWithColonBinding;
-    public string? SpeedWithColonBinding
-    {
-        get =>_speedWithColonBinding;
-        set => SetProperty(ref _speedWithColonBinding, value);
     }
     
     private string? _widthCenterWithColonBinding;
@@ -582,13 +525,6 @@ public partial class MainViewModel
     {
         get =>_widthSidesWithColonBinding;
         set => SetProperty(ref _widthSidesWithColonBinding, value);
-    }
-    
-    private string? _titleForceWindowBinding;
-    public string? TitleForceWindowBinding
-    {
-        get =>_titleForceWindowBinding;
-        set => SetProperty(ref _titleForceWindowBinding, value);
     }
     
     private string? _titlePieceWindowBinding;
@@ -617,34 +553,6 @@ public partial class MainViewModel
     {
         get =>_titleLayerOfPieceWindowBinding;
         set => SetProperty(ref _titleLayerOfPieceWindowBinding, value);
-    }
-    
-    private string? _detachmentWarningTitleBinding;
-    public string? DetachmentWarningTitleBinding
-    {
-        get =>_detachmentWarningTitleBinding;
-        set => SetProperty(ref _detachmentWarningTitleBinding, value);
-    }
-    
-    private string? _detachmentWarningBinding;
-    public string? DetachmentWarningBinding
-    {
-        get =>_detachmentWarningBinding;
-        set => SetProperty(ref _detachmentWarningBinding, value);
-    }
-    
-    private string? _positionHeaderBinding;
-    public string? PositionHeaderBinding
-    {
-        get =>_positionHeaderBinding;
-        set => SetProperty(ref _positionHeaderBinding, value);
-    }
-    
-    private string? _layerHeaderBinding;
-    public string? LayerHeaderBinding
-    {
-        get =>_layerHeaderBinding;
-        set => SetProperty(ref _layerHeaderBinding, value);
     }
 
     #endregion

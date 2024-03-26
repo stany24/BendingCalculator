@@ -36,7 +36,7 @@
                     Name="LblForce"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Text="{Binding ForceWithColonBinding}"
+                    Text="{DynamicResource ForceWithColon}"
                     VerticalAlignment="Center"></TextBlock>
                 <NumericUpDown
                     Name="NudForce"
