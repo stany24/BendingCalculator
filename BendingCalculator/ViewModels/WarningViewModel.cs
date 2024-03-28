@@ -4,11 +4,12 @@ using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.ViewModels;
 
-public partial class MainViewModel
+public class WarningViewModel
 {
-    private ObservableCollection<KeyValuePair<int, Layer>> _warningDetachmentOfLayers = new();
-    public ObservableCollection<KeyValuePair<int, Layer>> WarningDetachmentOfLayers { 
-        get => _warningDetachmentOfLayers;
-        set => SetProperty(ref _warningDetachmentOfLayers, value);
+    public ObservableCollection<KeyValuePair<int, Layer>> WarningDetachmentOfLayers { get; set; }
+
+    public WarningViewModel(ObservableCollection<KeyValuePair<int, Layer>> layers)
+    {
+        WarningDetachmentOfLayers = layers;
     }
 }

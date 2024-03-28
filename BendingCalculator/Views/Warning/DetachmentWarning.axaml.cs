@@ -5,7 +5,7 @@ namespace BendingCalculator.Views.Warning;
 
 public partial class DetachmentWarning : Window
 {
-    public DetachmentWarning(MainViewModel model)
+    public DetachmentWarning(WarningViewModel model)
     {
         DataContext = model;
         InitializeComponent();

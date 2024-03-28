@@ -47,7 +47,7 @@ public partial class MainViewModel
         }
     }
 
-    private string _pieceName;
+    private string _pieceName = string.Empty;
     public string PieceName 
     { 
         get => _pieceName;

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Threading;
@@ -45,25 +43,6 @@ public partial class MainViewModel : ObservableObject
         get => _selectedLayerMainWindow;
         set => SetProperty(ref _selectedLayerMainWindow, value);
     }
-
-    private ObservableCollection<string> _languages;
-    public ObservableCollection<string> Languages
-    {
-        get => _languages;
-        set => SetProperty(ref _languages, value);
-    }
-    private string _language;
-    public string Language
-    {
-        get => _language;
-        set
-        {
-            _language = value;
-            SettingManager.SetLanguage(Language);
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
-            LanguageEvents.RaiseLanguageChanged(); 
-        }
-    }
     
     public ICommand OpenLink { get; }
     
@@ -73,13 +52,13 @@ public partial class MainViewModel : ObservableObject
         {
             Values = new List<ObservablePoint>
             {
-                new(0, 0)
+                new(null, null)
             }
         }
     };
 
     private List<ObservablePoint>? _deformationPoints;
-    private double[] _constraintsPoints;
+    private double[] _constraintsPoints = Array.Empty<double>();
     private double? _pieceInGraphLength = 0;
     public double? PieceInGraphLength
     {
@@ -102,14 +81,13 @@ public partial class MainViewModel : ObservableObject
     }
     
     private double? _deformationCenter = -0;
-
     public double? DeformationCenter
     {
         get=>_deformationCenter;
         set => SetProperty(ref _deformationCenter, value);
     }
 
-    private double? _constraintCenter;
+    private double? _constraintCenter = -0;
     public double? ConstraintCenter
     {
         get=>_constraintCenter;
@@ -122,6 +100,8 @@ public partial class MainViewModel : ObservableObject
         get=>_distance;
         set
         {
+            if (value > PieceInGraphLength) { value = PieceInGraphLength; }
+            if (value < 0) { value = 0; }
             _distance = value;
             if (Distance is not null && PieceInGraphLength is not null && _deformationPoints is not null) { 
                 DeformationAtDistance = _deformationPoints[(int)(Distance/PieceInGraphLength*10000)].Y;
@@ -129,6 +109,7 @@ public partial class MainViewModel : ObservableObject
                 return;
             }
             DeformationAtDistance = 0;
+            ConstraintAtDistance = 0;
         }
     }
 
@@ -138,19 +119,14 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel(SQLiteConnection connection)
     {
-        _pieceName = string.Empty;
-        _constraintsPoints = Array.Empty<double>();
-        LanguageEvents.LanguageChanged += Translate;
-        OpenLink = new OpenLinkCommand();
-        _languages = new ObservableCollection<string>{"fr","en","de"};
-        _language = SettingManager.GetLanguage();
-        Language = _language;
         _connection = connection;
+        LanguageEvents.LanguageChanged += Translate;
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
         DataBaseEvents.LayersChanged +=  ReloadLayers;
         DataBaseEvents.MaterialsChanged +=  ReloadMaterials;
         DataBaseEvents.PiecesChanged += ReloadPieces;
+        OpenLink = new OpenLinkCommand();
         ReloadMaterials(null,EventArgs.Empty);
         ReloadLayers(null,EventArgs.Empty);
         ReloadPieces(null,EventArgs.Empty);
@@ -197,13 +173,16 @@ public partial class MainViewModel : ObservableObject
         if(SettingManager.GetWarningDisabled()){return;}
         Dispatcher.UIThread.Invoke(() =>
         {
-            WarningDetachmentOfLayers = new ObservableCollection<KeyValuePair<int, Layer>>
-            {
-                new(e.Position1, e.Layer1),
-                new(e.Position2, e.Layer2)
-            };
             _detachmentWarning?.Close();
-            _detachmentWarning = new DetachmentWarning(this);
+            _detachmentWarning = new DetachmentWarning(
+                new WarningViewModel(
+                    new ObservableCollection<KeyValuePair<int, Layer>>
+                    {
+                        new(e.Position1,e.Layer1),
+                        new(e.Position2,e.Layer2)
+                    }
+                )
+            );
             _detachmentWarning.Show();
         });
         

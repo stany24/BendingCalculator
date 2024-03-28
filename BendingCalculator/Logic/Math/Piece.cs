@@ -15,7 +15,7 @@ public class Piece:ObservableObject
     public long PieceId { get; set; }
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
     
-    private ObservableCollection<Layer> _layers;
+    private ObservableCollection<Layer> _layers = new();
     public ObservableCollection<Layer> Layers
     {
         get => _layers;
@@ -48,7 +48,7 @@ public class Piece:ObservableObject
 
     private const double ERef = 69e9;
 
-    private double[] _xs;
+    private double[] _xs = Array.Empty<double>();
 
     private double[] SetX(double gap)
     {
@@ -73,19 +73,15 @@ public class Piece:ObservableObject
 
     public Piece(double length, string name)
     {
-        _layers = new ObservableCollection<Layer>();
         _length = length;
         _name = name;
-        _xs = Array.Empty<double>();
         LanguageEvents.LanguageChanged += UpdateDisplay;
     }
     
     public Piece()
     {
-        _layers = new ObservableCollection<Layer>();
         _name = string.Empty;
         LanguageEvents.LanguageChanged += UpdateDisplay;
-        _xs = Array.Empty<double>();
     }
     
     ~Piece()

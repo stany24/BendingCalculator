@@ -5,7 +5,7 @@
         xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Warning.DetachmentWarning"
-        x:DataType="viewModels:MainViewModel"
+        x:DataType="viewModels:WarningViewModel"
         SizeToContent="Height"
         CanResize="False"
         Width="500"
