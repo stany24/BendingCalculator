@@ -12,6 +12,8 @@
      <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
+                 <ResourceInclude Source="/Assets/Localization/Dynamic/de.axaml" />
+                 <ResourceInclude Source="/Assets/Localization/Dynamic/fr.axaml" />
                  <ResourceInclude Source="/Assets/Localization/Dynamic/en.axaml" />
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>

@@ -10,192 +10,14 @@
         <Product>Bending Calculator</Product>
         <NeutralLanguage>en-001</NeutralLanguage>
         <PackageId>BendingCalculator</PackageId>
+        <PublishSingleFile>true</PublishSingleFile>
+        <PublishTrimmed>true</PublishTrimmed>
     </PropertyGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
         <EmbeddedResource Include="Setting\Settings.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Force\ForceEditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditor.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Force\ForceEditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditor.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Force\ForceEditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditor.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Editor\EditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Editor.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Editor\EditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Editor.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Editor\EditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Editor.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\MainLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MainLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\MainLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>EditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\MainLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MainLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\HelperLocalization\HelperLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>HelperLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\HelperLocalization\HelperLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>HelperLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\HelperLocalization\HelperLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>HelperLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\EditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>EditorLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\EditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>EditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\EditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>EditorLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\PieceEditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\PieceEditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\PieceEditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\MaterialEditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\MaterialEditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\MaterialEditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\LayerEditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\LayerEditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\LayerEditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\ForceEditorLocalization\ForceEditorLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditorLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\ForceEditorLocalization\ForceEditorLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditorLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\ForceEditorLocalization\ForceEditorLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>ForceEditorLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Logic\LogicLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LogicLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Logic\LogicLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LogicLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Logic\LogicLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LogicLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MainHelperLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MainHelperLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MainHelperLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorHelperLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorHelperLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\MaterialEditorLocalization\Helper\MaterialEditorHelperLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>MaterialEditorHelperLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorHelperLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorHelperLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\LayerEditorLocalization\Helper\LayerEditorHelperLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>LayerEditorHelperLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\Helper\PieceEditorHelperLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorHelperLocalization.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\Helper\PieceEditorHelperLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorHelperLocalization.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\EditorLocalization\PieceEditorLocalization\Helper\PieceEditorHelperLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>PieceEditorHelperLocalization.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Warning.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.fr.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Warning.fr.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Warning\WarningLocalization.de.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Warning.de.Designer.cs</LastGenOutput>
         </EmbeddedResource>
         <EmbeddedResource Update="Assets\Localization\Static\Static.resx">
           <Generator>ResXFileCodeGenerator</Generator>
@@ -208,15 +30,6 @@
         <EmbeddedResource Update="Assets\Localization\Static\Static.de.resx">
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>static.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Static\Static.resx">
-          <LastGenOutput>Static.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Static\Static.de.resx">
-          <LastGenOutput>Static.de.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Assets\Localization\Static\Static.fr.resx">
-          <LastGenOutput>Static.fr.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
 
@@ -234,7 +47,6 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
           <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc2" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
