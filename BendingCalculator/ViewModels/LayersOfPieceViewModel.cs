@@ -2,6 +2,7 @@
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.ViewModels;
 
@@ -21,33 +22,14 @@ public partial class MainViewModel
         }
     }
 
+    [ObservableProperty]
     private bool _btnMoveUpEnabled;
-    public bool BtnMoveUpEnabled
-    {
-        get => _btnMoveUpEnabled;
-        set => SetProperty(ref _btnMoveUpEnabled, value);
-    }
-    
+    [ObservableProperty]
     private bool _btnMoveDownEnabled;
-    public bool BtnMoveDownEnabled
-    {
-        get => _btnMoveDownEnabled;
-        set => SetProperty(ref _btnMoveDownEnabled, value);
-    }
-    
+    [ObservableProperty]
     private bool _btnAddEnabled;
-    public bool BtnAddEnabled
-    {
-        get => _btnAddEnabled;
-        set => SetProperty(ref _btnAddEnabled, value);
-    }
-
+    [ObservableProperty]
     private bool _btnRemoveEnabled;
-    public bool BtnRemoveEnabled
-    {
-        get => _btnRemoveEnabled;
-        set => SetProperty(ref _btnRemoveEnabled, value);
-    }
 
     #endregion
     

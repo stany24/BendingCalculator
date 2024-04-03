@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.ViewModels;
 
@@ -13,17 +14,10 @@ public partial class MainViewModel
 
     private ListLayersEditor? _listLayersEditor;
     
+    [ObservableProperty]
     private bool _uiEnabledPieceEditor;
-    public bool UiEnabledPieceEditor { 
-        get => _uiEnabledPieceEditor;
-        set => SetProperty(ref _uiEnabledPieceEditor, value);
-    }
-    
+    [ObservableProperty]
     private ObservableCollection<Piece> _pieces = new();
-    public ObservableCollection<Piece> Pieces { 
-        get => _pieces;
-        set => SetProperty(ref _pieces, value);
-    }
 
     private Piece? _selectedPiece;
     public Piece? SelectedPiece

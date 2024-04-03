@@ -265,7 +265,7 @@
         </Grid>
         <lvc:CartesianChart 
             Name="ChartResult"
-            Series="{Binding SeriesGraphBending}"
+            Series="{Binding SeriesDeformationPoints}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Grid.Column="0"

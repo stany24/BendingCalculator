@@ -30,69 +30,37 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
 
+    [ObservableProperty]
     private Piece? _selectedPieceMainWindow;
-    public Piece? SelectedPieceMainWindow
-    {
-        get => _selectedPieceMainWindow;
-        set => SetProperty(ref _selectedPieceMainWindow, value);
-    }
-    
+    [ObservableProperty]
     private Layer? _selectedLayerMainWindow;
-    public Layer? SelectedLayerMainWindow
-    {
-        get => _selectedLayerMainWindow;
-        set => SetProperty(ref _selectedLayerMainWindow, value);
-    }
     
     public ICommand OpenLink { get; }
     
-    public ISeries[] SeriesGraphBending { get; set; } =
+    private double[] _constraintsPoints = Array.Empty<double>();
+    private ObservablePoint[] _deformationPoints = Array.Empty<ObservablePoint>();
+    public ISeries[] SeriesDeformationPoints { get; set; } =
     {
         new LineSeries<ObservablePoint>
         {
             Values = new List<ObservablePoint>
             {
-                new(null, null)
+                new(0,0),
+                new(1,0)
             }
         }
     };
 
-    private List<ObservablePoint>? _deformationPoints;
-    private double[] _constraintsPoints = Array.Empty<double>();
+    [ObservableProperty]
     private double? _pieceInGraphLength = 0;
-    public double? PieceInGraphLength
-    {
-        get=>_pieceInGraphLength;
-        set => SetProperty(ref _pieceInGraphLength, value);
-    }
-    
+    [ObservableProperty]
     private double? _deformationAtDistance = -0;
-    public double? DeformationAtDistance
-    {
-        get=>_deformationAtDistance;
-        set => SetProperty(ref _deformationAtDistance, value);
-    }
-    
+    [ObservableProperty]
     private double? _constraintAtDistance = -0;
-    public double? ConstraintAtDistance
-    {
-        get=>_constraintAtDistance;
-        set => SetProperty(ref _constraintAtDistance, value);
-    }
-    
+    [ObservableProperty]
     private double? _deformationCenter = -0;
-    public double? DeformationCenter
-    {
-        get=>_deformationCenter;
-        set => SetProperty(ref _deformationCenter, value);
-    }
-
+    [ObservableProperty]
     private double? _constraintCenter = -0;
-    public double? ConstraintCenter
-    {
-        get=>_constraintCenter;
-        set => SetProperty(ref _constraintCenter, value);
-    }
     
     private double? _distance = 0;
     public double? Distance
@@ -103,7 +71,7 @@ public partial class MainViewModel : ObservableObject
             if (value > PieceInGraphLength) { value = PieceInGraphLength; }
             if (value < 0) { value = 0; }
             _distance = value;
-            if (Distance is not null && PieceInGraphLength is not null && _deformationPoints is not null) { 
+            if (Distance is not null && PieceInGraphLength is not null) { 
                 DeformationAtDistance = _deformationPoints[(int)(Distance/PieceInGraphLength*10000)].Y;
                 ConstraintAtDistance = _constraintsPoints[(int)(Distance / PieceInGraphLength * 10000)];
                 return;
@@ -156,9 +124,9 @@ public partial class MainViewModel : ObservableObject
             BendingResult result = SelectedPieceMainWindow.CalculateBending((int)Force,gap);
             SelectedPieceMainWindow.RiskOfDetachmentBetweenLayer -= ShowRiskWindow;
             
-            _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToList();
-            SeriesGraphBending[0].Values = _deformationPoints;
-            DeformationCenter = _deformationPoints[_deformationPoints.Count / 2].Y;
+            _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToArray();
+            SeriesDeformationPoints[0].Values = _deformationPoints;
+            DeformationCenter = _deformationPoints[_deformationPoints.Length / 2].Y;
             DeformationAtDistance = _deformationPoints[0].Y;
             
             _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.ViewModels;
 
@@ -11,11 +12,8 @@ public partial class MainViewModel
 {
     #region Bindings
 
+    [ObservableProperty]
     private ObservableCollection<Layer> _layers = new();
-    public ObservableCollection<Layer> Layers { 
-        get => _layers;
-        set => SetProperty(ref _layers, value);
-    }
     
     private Layer? _selectedLayer;
     public Layer? SelectedLayer
@@ -28,11 +26,8 @@ public partial class MainViewModel
         }
     }
 
+    [ObservableProperty]
     private bool _uiEnabledLayerEditor;
-    public bool UiEnabledLayerEditor { 
-        get => _uiEnabledLayerEditor;
-        set => SetProperty(ref _uiEnabledLayerEditor, value);
-    }
 
     private double _widthSide;
 

@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.ViewModels;
 
 public partial class MainViewModel
 {
     #region Bindings
-
+    [ObservableProperty]
     private ObservableCollection<Material> _materials = new();
-    public ObservableCollection<Material> Materials { 
-        get => _materials;
-        set => SetProperty(ref _materials, value);
-    }
     
     private Material? _selectedMaterial;
     public Material? SelectedMaterial
@@ -27,17 +24,10 @@ public partial class MainViewModel
         }
     }
     
+    [ObservableProperty]
     private ObservableCollection<string> _unit = new(){"GPa","MPa"};
-    public ObservableCollection<string> Unit { 
-        get => _unit;
-        set => SetProperty(ref _unit, value);
-    }
-    
+    [ObservableProperty]
     private bool _uiEnabledMaterialEditor;
-    public bool UiEnabledMaterialEditor { 
-        get => _uiEnabledMaterialEditor;
-        set => SetProperty(ref _uiEnabledMaterialEditor, value);
-    }
     
     private string _selectedUnit = "GPa";
     public string SelectedUnit
