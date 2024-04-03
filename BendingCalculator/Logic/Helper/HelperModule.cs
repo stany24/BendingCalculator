@@ -1,6 +1,8 @@
+using Avalonia.Controls;
+
 namespace BendingCalculator.Logic.Helper;
 
-public interface IHelperModule
+public interface IHelperControl
 {
-    
+    Control GetControl();
 }

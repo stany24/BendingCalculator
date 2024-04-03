@@ -1,10 +1,23 @@
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Media;
+
 namespace BendingCalculator.Logic.Helper;
 
-public class HelperText:IHelperModule
+public class HelperText:IHelperControl
 {
-    public string NameBinding { get; }
+    private readonly string _nameBinding;
     public HelperText(string nameBinding)
     {
-        NameBinding = nameBinding;
+        _nameBinding = nameBinding;
+    }
+
+    public Control GetControl()
+    {
+        return new TextBlock
+        {
+            [!TextBlock.TextProperty] = new DynamicResourceExtension(_nameBinding),
+            TextWrapping = TextWrapping.Wrap
+        };
     }
 }
