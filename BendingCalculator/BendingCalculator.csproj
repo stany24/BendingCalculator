@@ -10,8 +10,6 @@
         <Product>Bending Calculator</Product>
         <NeutralLanguage>en-001</NeutralLanguage>
         <PackageId>BendingCalculator</PackageId>
-        <PublishSingleFile>true</PublishSingleFile>
-        <PublishTrimmed>true</PublishTrimmed>
     </PropertyGroup>
 
     <ItemGroup>

@@ -7,7 +7,7 @@ public class Setting
     [JsonInclude]
     public string Language { get; set; }
 
-    public bool WarningDisabled { get; set; }
+    public bool WarningDisabled { get; init; }
 
     [JsonConstructor]
     public Setting()
