@@ -112,7 +112,7 @@ public partial class MainViewModel
     public void RemoveLayer()
     {
         if (SelectedLayer == null) return;
-        DataBaseRemover.RemoveLayer(_connection, SelectedLayer.LayerId);
+        DataBaseRemover.RemoveLayer(_connection, SelectedLayer.Id);
         SelectedLayer = null;
     }
 
@@ -162,7 +162,7 @@ public partial class MainViewModel
 
         for (int i = 0; i < layers.Count; i++)
         {
-            Layers[i].LayerId = layers[i].LayerId;
+            Layers[i].Id = layers[i].Id;
             Layers[i].Material = layers[i].Material;
             Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
             Layers[i].HeightOnSides = layers[i].HeightOnSides;
@@ -186,7 +186,7 @@ public partial class MainViewModel
 
         UiEnabledLayerEditor = true;
         SelectedMaterialForLayer = SelectedLayer.Material is not null
-            ? Materials.FirstOrDefault(m => m.MaterialId == SelectedLayer.Material.MaterialId)
+            ? Materials.FirstOrDefault(m => m.Id == SelectedLayer.Material.Id)
             : null;
         HeightCenter = SelectedLayer.HeightAtCenter * 1000;
         HeightSide = SelectedLayer.HeightOnSides * 1000;

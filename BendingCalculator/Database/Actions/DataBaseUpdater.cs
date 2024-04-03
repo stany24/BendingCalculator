@@ -11,7 +11,7 @@ public static class DataBaseUpdater
             "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", connection);
         cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
         cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
-        cmd.Parameters.AddWithValue("@Id", material.MaterialId);
+        cmd.Parameters.AddWithValue("@Id", material.Id);
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
@@ -25,8 +25,8 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@WidthOnSides", layer.WidthOnSides);
         cmd.Parameters.AddWithValue("@HeightAtCenter", layer.HeightAtCenter);
         cmd.Parameters.AddWithValue("@HeightOnSides", layer.HeightOnSides);
-        cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.MaterialId);
-        cmd.Parameters.AddWithValue("@Id", layer.LayerId);
+        cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.Id);
+        cmd.Parameters.AddWithValue("@Id", layer.Id);
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseLayersChangedEvent();
     }
@@ -37,7 +37,7 @@ public static class DataBaseUpdater
             "UPDATE Piece SET Name = @Name, Length = @Length WHERE PieceId= @Id;", connection);
         cmd1.Parameters.AddWithValue("@Name", piece.Name);
         cmd1.Parameters.AddWithValue("@Length", piece.Length);
-        cmd1.Parameters.AddWithValue("@Id", piece.PieceId);
+        cmd1.Parameters.AddWithValue("@Id", piece.Id);
         cmd1.ExecuteNonQuery();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
@@ -53,7 +53,7 @@ public static class DataBaseUpdater
             new("INSERT INTO PieceToLayer (PieceId,LayerId,LayerOrder) VALUES (@PieceId, @LayerId, @LayerOrder);",
                 connection);
         cmd2.Parameters.AddWithValue("@PieceId", pieceId);
-        cmd2.Parameters.AddWithValue("@LayerId", layer.LayerId);
+        cmd2.Parameters.AddWithValue("@LayerId", layer.Id);
         cmd2.Parameters.AddWithValue("@LayerOrder", id);
         cmd2.ExecuteNonQuery();
         DataBaseEvents.RaisePiecesChangedEvent();

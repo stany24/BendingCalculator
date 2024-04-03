@@ -79,7 +79,7 @@ public partial class MainViewModel
     public void RemoveMaterial()
     {
         if (SelectedMaterial is null) return;
-        DataBaseRemover.RemoveMaterial(_connection, SelectedMaterial.MaterialId);
+        DataBaseRemover.RemoveMaterial(_connection, SelectedMaterial.Id);
         SelectedMaterial = null;
     }
 
@@ -120,7 +120,7 @@ public partial class MainViewModel
 
         for (int i = 0; i < materials.Count; i++)
         {
-            Materials[i].MaterialId = materials[i].MaterialId;
+            Materials[i].Id = materials[i].Id;
             Materials[i].Name = materials[i].Name;
             Materials[i].E = materials[i].E;
         }

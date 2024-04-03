@@ -1,10 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-// ReSharper disable ValueParameterNotUsed
+﻿// ReSharper disable ValueParameterNotUsed
 
 namespace BendingCalculator.Logic.Math;
 
-public class Material : ObservableObject
+public class Material : Element
 {
     public override string ToString()
     {
@@ -12,21 +10,6 @@ public class Material : ObservableObject
     }
 
     #region Variables
-
-    public long MaterialId { get; set; }
-
-    private string _name;
-
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            if (value == "") return;
-            _name = value;
-            Display = ToString();
-        }
-    }
 
     private long _e;
 
@@ -41,27 +24,19 @@ public class Material : ObservableObject
         }
     }
 
-    private string? _display;
-
-    public string Display
-    {
-        get => _display ?? ToString();
-        set => SetProperty(ref _display, value);
-    }
-
     #endregion
 
     #region Constructor
 
     public Material(string name, long e)
     {
-        _name = name;
+        Name = name;
         _e = e;
     }
 
     public Material()
     {
-        _name = "new";
+        Name = "new";
     }
 
     #endregion

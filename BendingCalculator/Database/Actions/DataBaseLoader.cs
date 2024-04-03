@@ -26,13 +26,13 @@ public static class DataBaseLoader
         {
             currentPiece ??= new Piece
             {
-                PieceId = pieceId,
+                Id = pieceId,
                 Layers = new ObservableCollection<Layer>()
             };
             if (reader["LayerId"] == DBNull.Value) continue;
             Layer layer = new()
             {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
+                Id = Convert.ToInt32(reader["LayerId"]),
                 WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
                 WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
                 HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
@@ -41,7 +41,7 @@ public static class DataBaseLoader
             if (reader["MaterialId"] != DBNull.Value)
                 layer.Material = new Material
                 {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                    Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty
                 };
@@ -71,12 +71,12 @@ public static class DataBaseLoader
         {
             int pieceId = Convert.ToInt32(reader["PieceId"]);
 
-            if (currentPiece == null || currentPiece.PieceId != pieceId)
+            if (currentPiece == null || currentPiece.Id != pieceId)
             {
                 currentPiece = new Piece
                 {
                     Layers = new ObservableCollection<Layer>(),
-                    PieceId = pieceId,
+                    Id = pieceId,
                     Name = Convert.ToString(reader["PieceName"]) ?? string.Empty,
                     Length = Convert.ToDouble(reader["Length"])
                 };
@@ -86,7 +86,7 @@ public static class DataBaseLoader
             if (reader["LayerId"] == DBNull.Value) continue;
             Layer layer = new()
             {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
+                Id = Convert.ToInt32(reader["LayerId"]),
                 WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
                 WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
                 HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
@@ -96,7 +96,7 @@ public static class DataBaseLoader
             if (reader["MaterialId"] != DBNull.Value)
                 layer.Material = new Material
                 {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                    Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty
                 };
@@ -121,7 +121,7 @@ public static class DataBaseLoader
         {
             Layer layer = new()
             {
-                LayerId = Convert.ToInt32(reader["LayerId"]),
+                Id = Convert.ToInt32(reader["LayerId"]),
                 WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
                 WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
                 HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
@@ -131,7 +131,7 @@ public static class DataBaseLoader
             if (reader["MaterialId"] != DBNull.Value)
                 layer.Material = new Material
                 {
-                    MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                    Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty
                 };
@@ -154,7 +154,7 @@ public static class DataBaseLoader
         {
             Material material = new()
             {
-                MaterialId = Convert.ToInt32(reader["MaterialId"]),
+                Id = Convert.ToInt32(reader["MaterialId"]),
                 E = Convert.ToInt64(reader["E"]),
                 Name = Convert.ToString(reader["Name"]) ?? string.Empty
             };

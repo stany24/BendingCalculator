@@ -23,7 +23,7 @@ public partial class MainViewModel
         UiEnabledPieceEditor = true;
         PieceName = SelectedPiece.Name;
         PieceLength = SelectedPiece.Length * 1000;
-        LoadLayersOfPiece(SelectedPiece.PieceId);
+        LoadLayersOfPiece(SelectedPiece.Id);
     }
 
     #region Bindings
@@ -84,7 +84,7 @@ public partial class MainViewModel
     public void RemovePiece()
     {
         if (SelectedPiece == null) return;
-        DataBaseRemover.RemovePiece(_connection, SelectedPiece.PieceId);
+        DataBaseRemover.RemovePiece(_connection, SelectedPiece.Id);
         SelectedPiece = null;
     }
 
@@ -114,7 +114,7 @@ public partial class MainViewModel
         for (int i = 0; i < pieces.Count; i++)
         {
             Pieces[i].Layers = pieces[i].Layers;
-            Pieces[i].PieceId = pieces[i].PieceId;
+            Pieces[i].Id = pieces[i].Id;
             Pieces[i].Name = pieces[i].Name;
             Pieces[i].Length = pieces[i].Length;
         }
@@ -133,7 +133,7 @@ public partial class MainViewModel
     {
         if (SelectedPiece is null) return;
         if (_listLayersEditor != null) return;
-        _listLayersEditor = new ListLayersEditor(this, SelectedPiece.PieceId);
+        _listLayersEditor = new ListLayersEditor(this, SelectedPiece.Id);
         _listLayersEditor.Closing += (_, _) => UiEnabledPieceEditor = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();

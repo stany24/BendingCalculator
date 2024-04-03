@@ -20,7 +20,7 @@ public partial class MainViewModel
 
         for (int i = 0; i < layers.Count; i++)
         {
-            SelectedPiece.Layers[i].LayerId = layers[i].LayerId;
+            SelectedPiece.Layers[i].Id = layers[i].Id;
             SelectedPiece.Layers[i].Material = layers[i].Material;
             SelectedPiece.Layers[i].HeightAtCenter = layers[i].HeightAtCenter;
             SelectedPiece.Layers[i].HeightOnSides = layers[i].HeightOnSides;
@@ -116,7 +116,7 @@ public partial class MainViewModel
         int nbLayer = SelectedPiece.Layers.Count;
         for (int i = idToRemove.Length - 1; i >= 0; i--)
         {
-            DataBaseUpdater.RemoveLayerToPiece(_connection, SelectedPiece.PieceId, nbLayer, idToRemove[i]);
+            DataBaseUpdater.RemoveLayerToPiece(_connection, SelectedPiece.Id, nbLayer, idToRemove[i]);
             nbLayer--;
         }
     }

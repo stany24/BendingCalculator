@@ -2,17 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BendingCalculator.Assets.Localization.Static;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed  
 
 namespace BendingCalculator.Logic.Math;
 
-public class Layer : ObservableObject
+public class Layer : Element
 {
     #region Variables
-
-    public long LayerId { get; set; }
 
     private double _widthAtCenter;
 
@@ -76,14 +73,6 @@ public class Layer : ObservableObject
             _material = value;
             Display = ToString();
         }
-    }
-
-    private string? _display;
-
-    public string Display
-    {
-        get => _display ?? ToString();
-        set => SetProperty(ref _display, value);
     }
 
     #endregion

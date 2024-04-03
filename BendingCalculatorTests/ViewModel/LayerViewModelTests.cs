@@ -60,7 +60,7 @@ public class LayerViewModelTests
         Assert.AreEqual(layer.HeightOnSides, _model.SelectedLayer.HeightOnSides);
         Assert.AreEqual(layer.Material?.Name, _model.SelectedLayer.Material?.Name);
         Assert.AreEqual(layer.Material?.E, _model.SelectedLayer.Material?.E);
-        Assert.AreEqual(layer.Material?.MaterialId, _model.SelectedLayer.Material?.MaterialId);
+        Assert.AreEqual(layer.Material?.Id, _model.SelectedLayer.Material?.Id);
     }
 
     [TestMethod]

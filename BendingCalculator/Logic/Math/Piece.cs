@@ -9,33 +9,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public class Piece : ObservableObject
+public partial class Piece : Element
 {
     #region Variables
-
-    public long PieceId { get; set; }
+    
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
 
+    [ObservableProperty]
     private ObservableCollection<Layer> _layers = new();
-
-    public ObservableCollection<Layer> Layers
-    {
-        get => _layers;
-        set => SetProperty(ref _layers, value);
-    }
-
-    private string _name;
-
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            if (value == "") return;
-            _name = value;
-            Display = ToString();
-        }
-    }
 
     private double _length;
 
@@ -61,14 +42,6 @@ public class Piece : ObservableObject
         return x.ToArray();
     }
 
-    private string? _display;
-
-    public string Display
-    {
-        get => _display ?? ToString();
-        set => SetProperty(ref _display, value);
-    }
-
     #endregion
 
     #region Constructor / Destructor
@@ -76,13 +49,13 @@ public class Piece : ObservableObject
     public Piece(double length, string name)
     {
         _length = length;
-        _name = name;
+        Name = name;
         LanguageEvents.LanguageChanged += UpdateDisplay;
     }
 
     public Piece()
     {
-        _name = string.Empty;
+        Name = string.Empty;
         LanguageEvents.LanguageChanged += UpdateDisplay;
     }
 

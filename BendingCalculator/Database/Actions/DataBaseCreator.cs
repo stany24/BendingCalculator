@@ -15,7 +15,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@Name", piece.Name);
         cmd.Parameters.AddWithValue("@Length", piece.Length);
         cmd.Parameters.AddWithValue("@IsRemoved", NotRemoved);
-        piece.PieceId = (long)cmd.ExecuteScalar();
+        piece.Id = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaisePiecesChangedEvent();
     }
 
@@ -32,10 +32,10 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@IsRemoved", NotRemoved);
 
         if (layer.Material != null)
-            cmd.Parameters.AddWithValue("@MaterialId", layer.Material!.MaterialId);
+            cmd.Parameters.AddWithValue("@MaterialId", layer.Material!.Id);
         else
             cmd.Parameters.AddWithValue("@MaterialId", null);
-        layer.LayerId = (long)cmd.ExecuteScalar();
+        layer.Id = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseLayersChangedEvent();
     }
 
@@ -47,7 +47,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@Name", material.Name);
         cmd.Parameters.AddWithValue("@E", material.E);
         cmd.Parameters.AddWithValue("@IsRemoved", NotRemoved);
-        material.MaterialId = (long)cmd.ExecuteScalar();
+        material.Id = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
 }
