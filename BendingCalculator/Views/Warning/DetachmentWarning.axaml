@@ -9,7 +9,8 @@
         SizeToContent="Height"
         CanResize="False"
         Width="500"
-        Title="{DynamicResource DetachmentWarningTitle}">
+        Title="{DynamicResource DetachmentWarningTitle}"
+        Icon="/Assets/avalonia-logo.ico">
     <Grid
         ColumnDefinitions="*"
         RowDefinitions="Auto,10,Auto"

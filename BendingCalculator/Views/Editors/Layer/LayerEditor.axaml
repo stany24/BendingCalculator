@@ -8,6 +8,7 @@
         x:Class="BendingCalculator.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
         Title="{DynamicResource TitleLayerWindow}"
+        Icon="/Assets/avalonia-logo.ico"
         SizeToContent="WidthAndHeight"
         CanResize="False">
     <Grid 
