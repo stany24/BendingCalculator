@@ -3,25 +3,25 @@
              x:Class="BendingCalculator.App"
              xmlns:bendingCalculator="clr-namespace:BendingCalculator"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <bendingCalculator:ViewLocator/>
+        <bendingCalculator:ViewLocator />
     </Application.DataTemplates>
-             
-     <Application.Resources>
-         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
-                 <ResourceInclude Source="/Assets/Localization/Dynamic/de.axaml" />
-                 <ResourceInclude Source="/Assets/Localization/Dynamic/fr.axaml" />
-                 <ResourceInclude Source="/Assets/Localization/Dynamic/en.axaml" />
-             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
-     </Application.Resources>
-             
-  
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Assets/Localization/Dynamic/de.axaml" />
+                <ResourceInclude Source="/Assets/Localization/Dynamic/fr.axaml" />
+                <ResourceInclude Source="/Assets/Localization/Dynamic/en.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
     </Application.Styles>
 </Application>

@@ -11,7 +11,7 @@
         Icon="/Assets/avalonia-logo.ico"
         SizeToContent="WidthAndHeight"
         CanResize="False">
-    <Grid 
+    <Grid
         Name="MainGrid"
         RowDefinitions="Auto,10,Auto"
         ColumnDefinitions="Auto,10,Auto"
@@ -27,7 +27,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}"/>
+                        <TextBlock Text="{Binding Display}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -38,65 +38,65 @@
             Column="2"
             RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto,10,Auto"
             ColumnDefinitions="Auto,10,Auto">
-            <TextBlock 
+            <TextBlock
                 Name="LblWidthCenter"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="0"
-                Text="{DynamicResource WidthCenterWithColon}"></TextBlock>
-            <NumericUpDown 
+                Text="{DynamicResource WidthCenterWithColon}" />
+            <NumericUpDown
                 Name="NudWidthCenter"
                 Value="{Binding WidthCenter}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
-                Grid.Row="0"></NumericUpDown>
-            <TextBlock 
+                Grid.Row="0" />
+            <TextBlock
                 Name="LblWidthSide"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="2"
-                Text="{DynamicResource WidthSidesWithColon}"></TextBlock>
-            <NumericUpDown 
+                Text="{DynamicResource WidthSidesWithColon}" />
+            <NumericUpDown
                 Name="NudWidthSide"
                 Value="{Binding WidthSide}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
-                Grid.Row="2"></NumericUpDown>
-            <TextBlock 
+                Grid.Row="2" />
+            <TextBlock
                 Name="LblHeightCenter"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="4"
-                Text="{DynamicResource HeightCenterWithColon}"></TextBlock>
-            <NumericUpDown 
+                Text="{DynamicResource HeightCenterWithColon}" />
+            <NumericUpDown
                 Name="NudHeightCenter"
                 Value="{Binding HeightCenter}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
-                Grid.Row="4"></NumericUpDown>
-            <TextBlock 
+                Grid.Row="4" />
+            <TextBlock
                 Name="LblHeightSide"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="6"
-                Text="{DynamicResource HeightOnSidesWithColon}"></TextBlock>
-            <NumericUpDown 
+                Text="{DynamicResource HeightOnSidesWithColon}" />
+            <NumericUpDown
                 Name="NudHeightSide"
                 Value="{Binding HeightSide}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
-                Grid.Row="6"></NumericUpDown>
-            <TextBlock 
+                Grid.Row="6" />
+            <TextBlock
                 Name="LblMaterial"
                 VerticalAlignment="Center"
                 Grid.Column="0"
                 Grid.Row="8"
-                Text="{DynamicResource MaterialWithColon}"></TextBlock>
-            <ComboBox 
+                Text="{DynamicResource MaterialWithColon}" />
+            <ComboBox
                 Name="CbxMaterial"
                 Grid.Column="2"
                 Grid.Row="8"
@@ -106,7 +106,7 @@
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}"/>
+                            <TextBlock Text="{Binding Display}" />
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
@@ -123,21 +123,21 @@
                     Content="{DynamicResource Add}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Command="{Binding CreateNewLayer}"></Button>
+                    Command="{Binding CreateNewLayer}" />
                 <Button
                     Name="BtnRemove"
                     Content="{DynamicResource Remove}"
                     IsEnabled="{Binding UiEnabledLayerEditor}"
                     Grid.Row="0"
                     Grid.Column="2"
-                    Command="{Binding RemoveLayer}"></Button>
-                <Button 
+                    Command="{Binding RemoveLayer}" />
+                <Button
                     Name="HelpButton"
                     Grid.Row="0"
                     Grid.Column="4"
                     Content="{DynamicResource Help}"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"></Button>
+                    VerticalAlignment="Top" />
             </Grid>
         </Grid>
         <preview:LayerPreview
@@ -147,6 +147,6 @@
             DisplayedLayer="{Binding SelectedLayer}"
             Grid.Row="2"
             Grid.Column="0"
-            Grid.ColumnSpan="3"></preview:LayerPreview>
+            Grid.ColumnSpan="3" />
     </Grid>
 </Window>

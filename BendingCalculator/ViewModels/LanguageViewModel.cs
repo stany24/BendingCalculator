@@ -12,8 +12,9 @@ namespace BendingCalculator.ViewModels;
 
 public partial class MainViewModel
 {
-    public List<string> Languages { get; set; } = new() { "en", "fr", "de" };
     private string _language = SettingManager.GetLanguage();
+    public List<string> Languages { get; set; } = new() { "en", "fr", "de" };
+
     public string Language
     {
         get => _language;
@@ -22,17 +23,18 @@ public partial class MainViewModel
             _language = value;
             SettingManager.SetLanguage(Language);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Language);
-            LanguageEvents.RaiseLanguageChanged(); 
+            LanguageEvents.RaiseLanguageChanged();
         }
     }
-    
+
     private void Translate(object? sender, EventArgs e)
     {
-        ResourceInclude? translations = Application.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(x => x.Source?.OriginalString.Contains("/Lang/") ?? false);
+        ResourceInclude? translations = Application.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>()
+            .FirstOrDefault(x => x.Source?.OriginalString.Contains("/Lang/") ?? false);
 
         if (translations != null)
             Application.Current?.Resources.MergedDictionaries.Remove(translations);
-            
+
         Application.Current?.Resources.MergedDictionaries.Add(
             new ResourceInclude(new Uri($"avares://BendingCalculator/Assets/Localization/Dynamic/{Language}.axaml"))
             {

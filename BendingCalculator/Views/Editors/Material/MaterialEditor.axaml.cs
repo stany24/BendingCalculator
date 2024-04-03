@@ -9,6 +9,6 @@ public partial class MaterialEditor : WindowWithHelp
     {
         DataContext = model;
         InitializeComponent();
-        HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.MaterialWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.MaterialWindowModules);
     }
 }

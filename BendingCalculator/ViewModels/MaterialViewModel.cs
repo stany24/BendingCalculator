@@ -10,10 +10,11 @@ namespace BendingCalculator.ViewModels;
 public partial class MainViewModel
 {
     #region Bindings
-    [ObservableProperty]
-    private ObservableCollection<Material> _materials = new();
-    
+
+    [ObservableProperty] private ObservableCollection<Material> _materials = new();
+
     private Material? _selectedMaterial;
+
     public Material? SelectedMaterial
     {
         get => _selectedMaterial;
@@ -23,13 +24,13 @@ public partial class MainViewModel
             SelectedMaterialChanged();
         }
     }
-    
-    [ObservableProperty]
-    private ObservableCollection<string> _unit = new(){"GPa","MPa"};
-    [ObservableProperty]
-    private bool _uiEnabledMaterialEditor;
-    
+
+    [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
+
+    [ObservableProperty] private bool _uiEnabledMaterialEditor;
+
     private string _selectedUnit = "GPa";
+
     public string SelectedUnit
     {
         get => _selectedUnit;
@@ -41,15 +42,18 @@ public partial class MainViewModel
     }
 
     private string _materialName = string.Empty;
-    public string MaterialName { get => _materialName;
+
+    public string MaterialName
+    {
+        get => _materialName;
         set
         {
             SetProperty(ref _materialName, value);
             MaterialNameChanged();
         }
     }
-    
-    private double _eValue ;
+
+    private double _eValue;
 
     public double EValue
     {
@@ -60,62 +64,59 @@ public partial class MainViewModel
             MaterialEChanged();
         }
     }
-    
+
     #endregion
 
     #region Material Edition
 
     public void CreateNewMaterial()
     {
-        Material material = new("new",69000000000);
-        DataBaseCreator.NewMaterial(_connection,material);
+        Material material = new("new", 69000000000);
+        DataBaseCreator.NewMaterial(_connection, material);
         SelectedMaterial = Materials[^1];
     }
-    
+
     public void RemoveMaterial()
     {
-        if(SelectedMaterial is null){return;}
-        DataBaseRemover.RemoveMaterial(_connection,SelectedMaterial.MaterialId);
+        if (SelectedMaterial is null) return;
+        DataBaseRemover.RemoveMaterial(_connection, SelectedMaterial.MaterialId);
         SelectedMaterial = null;
     }
-    
+
     private void MaterialNameChanged()
     {
-        if(SelectedMaterial is null){return;}
+        if (SelectedMaterial is null) return;
         SelectedMaterial.Name = MaterialName;
-        DataBaseUpdater.UpdateMaterials(_connection,SelectedMaterial);
+        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
-    
+
     private void MaterialEChanged()
     {
-        if(SelectedMaterial is null){return;}
+        if (SelectedMaterial is null) return;
         int multiplication;
         switch (SelectedUnit)
         {
-            case "GPa" : multiplication = 1000000000;
+            case "GPa":
+                multiplication = 1000000000;
                 break;
-            case "MPa" : multiplication = 1000000;
+            case "MPa":
+                multiplication = 1000000;
                 break;
             default: return;
         }
-        SelectedMaterial.E = (long)EValue*multiplication;
-        DataBaseUpdater.UpdateMaterials(_connection,SelectedMaterial);
+
+        SelectedMaterial.E = (long)EValue * multiplication;
+        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
-    
+
     private void ReloadMaterials(object? sender, EventArgs eventArgs)
     {
         List<Material> materials = DataBaseLoader.LoadMaterials(_connection);
         while (materials.Count != Materials.Count)
-        {
             if (materials.Count < Materials.Count)
-            {
                 Materials.RemoveAt(0);
-            }
             else
-            {
                 Materials.Add(new Material());
-            }
-        }
 
         for (int i = 0; i < materials.Count; i++)
         {
@@ -124,16 +125,17 @@ public partial class MainViewModel
             Materials[i].E = materials[i].E;
         }
     }
-    
+
     private void SelectedMaterialChanged()
     {
-        if(SelectedMaterial == null)
+        if (SelectedMaterial == null)
         {
             UiEnabledMaterialEditor = false;
             MaterialName = string.Empty;
             EValue = 0;
             return;
         }
+
         UiEnabledMaterialEditor = true;
         MaterialName = SelectedMaterial.Name;
         if (SelectedMaterial.E >= 1000000000)

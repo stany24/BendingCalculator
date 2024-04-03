@@ -5,12 +5,13 @@ using Avalonia.Platform;
 
 namespace BendingCalculator.Logic.Helper;
 
-public class HelperImage:IHelperControl
+public class HelperImage : IHelperControl
 {
     private readonly string _source;
+
     public HelperImage(string uri)
     {
-        _source = "avares://BendingCalculator/Assets/Help/"+uri;
+        _source = "avares://BendingCalculator/Assets/Help/" + uri;
     }
 
     public Control GetControl()

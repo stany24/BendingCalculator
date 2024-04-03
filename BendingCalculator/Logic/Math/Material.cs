@@ -4,26 +4,32 @@
 
 namespace BendingCalculator.Logic.Math;
 
-public class Material:ObservableObject
+public class Material : ObservableObject
 {
+    public override string ToString()
+    {
+        return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";
+    }
+
     #region Variables
 
     public long MaterialId { get; set; }
-        
+
     private string _name;
-    
+
     public string Name
     {
         get => _name;
         set
         {
             if (value == "") return;
-            _name= value;
+            _name = value;
             Display = ToString();
         }
     }
 
     private long _e;
+
     public long E
     {
         get => _e;
@@ -34,8 +40,9 @@ public class Material:ObservableObject
             Display = ToString();
         }
     }
-    
+
     private string? _display;
+
     public string Display
     {
         get => _display ?? ToString();
@@ -58,9 +65,4 @@ public class Material:ObservableObject
     }
 
     #endregion
-        
-    public override string ToString()
-    {
-        return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";
-    }
 }

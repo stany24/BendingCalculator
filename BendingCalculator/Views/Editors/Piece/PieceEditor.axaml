@@ -27,7 +27,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}"/>
+                        <TextBlock Text="{Binding Display}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -38,31 +38,31 @@
             Row="0"
             RowDefinitions="Auto,10,Auto,10,Auto,10,Auto"
             ColumnDefinitions="Auto,10,Auto">
-            <TextBlock 
+            <TextBlock
                 Name="LblName"
                 Grid.Column="0"
                 Grid.Row="0"
                 VerticalAlignment="Center"
-                Text="{DynamicResource NameWithColon}"></TextBlock>
-            <TextBox 
+                Text="{DynamicResource NameWithColon}" />
+            <TextBox
                 Name="TbxName"
                 Grid.Column="2"
                 Grid.Row="0"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
-                Text="{Binding PieceName}"></TextBox>
-            <TextBlock 
+                Text="{Binding PieceName}" />
+            <TextBlock
                 Name="LblLength"
                 Grid.Column="0"
                 Grid.Row="2"
                 VerticalAlignment="Center"
-                Text="{DynamicResource LengthWithColon}"></TextBlock>
-            <NumericUpDown 
+                Text="{DynamicResource LengthWithColon}" />
+            <NumericUpDown
                 Name="NudLength"
                 Grid.Column="2"
                 Grid.Row="2"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
                 Value="{Binding PieceLength}"
-                Minimum="0.1"></NumericUpDown>
+                Minimum="0.1" />
             <Button
                 Name="BtnChangeLayers"
                 Grid.Column="0"
@@ -72,7 +72,7 @@
                 HorizontalContentAlignment="Center"
                 Content="{DynamicResource ChangeLayers}"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
-                Command="{Binding OpenLayerOfPieceEditor}"></Button>
+                Command="{Binding OpenLayerOfPieceEditor}" />
             <Grid
                 Name="GridButton"
                 Row="6"
@@ -85,21 +85,21 @@
                     Content="{DynamicResource Add}"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Command="{Binding CreateNewPiece}"></Button>
+                    Command="{Binding CreateNewPiece}" />
                 <Button
                     Name="BtnRemove"
                     Content="{DynamicResource Remove}"
                     Grid.Row="0"
                     Grid.Column="2"
                     IsEnabled="{Binding UiEnabledPieceEditor}"
-                    Command="{Binding RemovePiece}"></Button>
-                <Button 
+                    Command="{Binding RemovePiece}" />
+                <Button
                     Name="HelpButton"
                     Grid.Row="0"
                     Grid.Column="4"
                     Content="{DynamicResource Help}"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"></Button>
+                    VerticalAlignment="Top" />
             </Grid>
         </Grid>
         <ListBox
@@ -111,10 +111,11 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}"/>
+                        <TextBlock Text="{Binding Display}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate></ListBox>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <preview:PiecePreview
             Name="PiecePreview"
             Grid.Row="2"
@@ -122,7 +123,6 @@
             Grid.ColumnSpan="5"
             DisplayedPiece="{Binding SelectedPiece}"
             Background="#292929"
-            Height="300">
-        </preview:PiecePreview>
+            Height="300" />
     </Grid>
 </Window>

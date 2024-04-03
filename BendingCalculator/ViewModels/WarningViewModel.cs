@@ -6,10 +6,10 @@ namespace BendingCalculator.ViewModels;
 
 public class WarningViewModel
 {
-    public ObservableCollection<KeyValuePair<int, Layer>> WarningDetachmentOfLayers { get; set; }
-
     public WarningViewModel(ObservableCollection<KeyValuePair<int, Layer>> layers)
     {
         WarningDetachmentOfLayers = layers;
     }
+
+    public ObservableCollection<KeyValuePair<int, Layer>> WarningDetachmentOfLayers { get; set; }
 }

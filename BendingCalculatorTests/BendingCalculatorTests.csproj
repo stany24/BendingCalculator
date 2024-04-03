@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BendingCalculator\BendingCalculator.csproj" />
+        <ProjectReference Include="..\BendingCalculator\BendingCalculator.csproj"/>
     </ItemGroup>
 
 </Project>

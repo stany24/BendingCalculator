@@ -17,11 +17,9 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            desktop.MainWindow = new Main(new MainViewModel(DataBaseInitializer.InitializeDatabaseConnection() ?? throw new InvalidOperationException()));
-        }
+            desktop.MainWindow = new Main(new MainViewModel(DataBaseInitializer.InitializeDatabaseConnection() ??
+                                                            throw new InvalidOperationException()));
 
         base.OnFrameworkInitializationCompleted();
     }

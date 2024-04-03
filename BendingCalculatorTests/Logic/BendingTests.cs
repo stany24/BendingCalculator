@@ -11,7 +11,7 @@ public class BendingTests
     [TestMethod]
     public void SingleLayerRectangularPieceBendingTest()
     {
-        Piece piece = new(0.77,"Test")
+        Piece piece = new(0.77, "Test")
         {
             Layers = new ObservableCollection<Layer>
             {
@@ -30,13 +30,13 @@ public class BendingTests
             }
         };
         IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
-        Assert.AreEqual(-14.924,values.Min()*1000,0.001);
+        Assert.AreEqual(-14.924, values.Min() * 1000, 0.001);
     }
-    
+
     [TestMethod]
     public void MultiLayerRectangularPieceBendingTest()
     {
-        Piece piece = new(0.77,"Test")
+        Piece piece = new(0.77, "Test")
         {
             Layers = new ObservableCollection<Layer>
             {
@@ -79,13 +79,13 @@ public class BendingTests
             }
         };
         IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
-        Assert.AreEqual(-2.609,values.Min()*1000,0.001);
+        Assert.AreEqual(-2.609, values.Min() * 1000, 0.001);
     }
-    
+
     [TestMethod]
     public void MultiLayerPieceBendingTest()
     {
-        Piece piece = new(0.77,"Test")
+        Piece piece = new(0.77, "Test")
         {
             Layers = new ObservableCollection<Layer>
             {
@@ -128,6 +128,6 @@ public class BendingTests
             }
         };
         IEnumerable<double> values = piece.CalculateBending(100, piece.Length / 10000).Integral2;
-        Assert.AreEqual(-1.653,values.Min()*1000,0.001);
+        Assert.AreEqual(-1.653, values.Min() * 1000, 0.001);
     }
 }

@@ -4,18 +4,17 @@ namespace BendingCalculator.Setting;
 
 public class Setting
 {
-    [JsonInclude]
-    public string Language { get; set; }
+    [JsonInclude] public string Language { get; set; }
 
-    public bool WarningDisabled { get; init; }
-
+    [JsonInclude] public bool WarningDisabled { get; init; }
+    
     [JsonConstructor]
     public Setting()
     {
         Language = string.Empty;
     }
 
-    public Setting(string language,bool warningDisabled)
+    public Setting(string language, bool warningDisabled)
     {
         Language = language;
         WarningDisabled = warningDisabled;

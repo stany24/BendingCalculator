@@ -8,6 +8,6 @@ public static class LanguageEvents
 
     public static void RaiseLanguageChanged()
     {
-        LanguageChanged?.Invoke(null,EventArgs.Empty);
+        LanguageChanged?.Invoke(null, EventArgs.Empty);
     }
 }

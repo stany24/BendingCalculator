@@ -21,7 +21,7 @@ public static class DataBaseLoader
 
         using SQLiteDataReader reader = cmd.ExecuteReader();
         Piece? currentPiece = null;
-        
+
         while (reader.Read())
         {
             currentPiece ??= new Piece
@@ -39,21 +39,19 @@ public static class DataBaseLoader
                 HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
             };
             if (reader["MaterialId"] != DBNull.Value)
-            {
                 layer.Material = new Material
                 {
                     MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
+                    E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty
                 };
-            }
 
             currentPiece.Layers.Add(layer);
         }
 
         return currentPiece?.Layers ?? new ObservableCollection<Layer>();
     }
-    
+
     public static List<Piece> LoadPieces(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
@@ -64,15 +62,15 @@ public static class DataBaseLoader
             LEFT JOIN Material m on l.MaterialId = m.MaterialId
             WHERE p.IsRemoved = 0
             ORDER BY p.PieceId, pl.LayerOrder;", connection);
-        
+
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Piece> pieces = new();
         Piece? currentPiece = null;
-        
+
         while (reader.Read())
         {
             int pieceId = Convert.ToInt32(reader["PieceId"]);
-            
+
             if (currentPiece == null || currentPiece.PieceId != pieceId)
             {
                 currentPiece = new Piece
@@ -84,7 +82,7 @@ public static class DataBaseLoader
                 };
                 pieces.Add(currentPiece);
             }
-            
+
             if (reader["LayerId"] == DBNull.Value) continue;
             Layer layer = new()
             {
@@ -94,23 +92,21 @@ public static class DataBaseLoader
                 HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
                 HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
             };
-            
+
             if (reader["MaterialId"] != DBNull.Value)
-            {
                 layer.Material = new Material
                 {
                     MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
+                    E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty
                 };
-            }
 
             currentPiece.Layers.Add(layer);
         }
 
         return pieces;
     }
-    
+
     public static List<Layer> LoadLayers(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
@@ -118,7 +114,7 @@ public static class DataBaseLoader
           FROM Layer
           LEFT JOIN Material ON Layer.MaterialId = Material.MaterialId
           WHERE Layer.IsRemoved = 0;", connection);
-        
+
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Layer> layers = new();
         while (reader.Read())
@@ -131,29 +127,27 @@ public static class DataBaseLoader
                 HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
                 HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
             };
-            
+
             if (reader["MaterialId"] != DBNull.Value)
-            {
                 layer.Material = new Material
                 {
                     MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                    E=Convert.ToInt64(reader["E"]),
+                    E = Convert.ToInt64(reader["E"]),
                     Name = Convert.ToString(reader["Name"]) ?? string.Empty
                 };
-            }
             layers.Add(layer);
         }
 
         return layers;
     }
-    
+
     public static List<Material> LoadMaterials(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
             @"SELECT Material.*
           FROM Material
           WHERE Material.IsRemoved = 0;", connection);
-        
+
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Material> materials = new();
         while (reader.Read())
@@ -161,7 +155,7 @@ public static class DataBaseLoader
             Material material = new()
             {
                 MaterialId = Convert.ToInt32(reader["MaterialId"]),
-                E=Convert.ToInt64(reader["E"]),
+                E = Convert.ToInt64(reader["E"]),
                 Name = Convert.ToString(reader["Name"]) ?? string.Empty
             };
             materials.Add(material);

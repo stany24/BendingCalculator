@@ -14,6 +14,5 @@
         SizeToContent="Height">
     <Grid
         Name="MainGrid"
-        Margin="5">
-    </Grid>
+        Margin="5" />
 </Window>

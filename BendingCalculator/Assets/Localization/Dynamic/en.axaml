@@ -1,5 +1,4 @@
-﻿
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <!-- Begin Main window section -->
@@ -19,14 +18,14 @@
     <system:String x:Key="YAxisName">Deformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Help</system:String>
     <!-- End Main window section -->
-        
+
     <!-- Begin Warning section -->
     <system:String x:Key="DetachmentWarningTitle">Detachment Warning</system:String>
     <system:String x:Key="DetachmentWarning">Two layers touching each other have a large elasticity gap, and in reality the layers could detachment and be damaged the piece, falsing the results. The layers concerned are as follows:</system:String>
     <system:String x:Key="PositionHeader">Position in the piece</system:String>
     <system:String x:Key="LayerHeader">Layer</system:String>
     <!-- End Warning section -->
-    
+
     <!-- Begin Force window section -->
     <system:String x:Key="ForceWithColon">Force:</system:String>
     <system:String x:Key="MassWithColon">Mass:</system:String>
@@ -35,11 +34,11 @@
     <system:String x:Key="SpeedWithColon">Speed:</system:String>
     <system:String x:Key="TitleForceWindow">Force editor</system:String>
     <!-- End Force window section -->
-    
+
     <!-- Begin Material editor window section -->
     <system:String x:Key="TitleMaterialWindow">Material editor</system:String>
     <!-- End Material editor window section -->
-        
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="HeightCenterWithColon">Height at center:</system:String>
     <system:String x:Key="HeightOnSidesWithColon">Height on sides:</system:String>
@@ -48,7 +47,7 @@
     <system:String x:Key="MaterialWithColon">Material:</system:String>
     <system:String x:Key="TitleLayerWindow">Layer editor</system:String>
     <!-- End Layer editor window section -->
-        
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="ChangeLayers">Change layers</system:String>
     <system:String x:Key="InPieceWithColon">In piece:</system:String>
@@ -59,14 +58,14 @@
     <system:String x:Key="TitlePieceWindow">Piece editor</system:String>
     <system:String x:Key="TitleLayerOfPieceWindow">Layer in piece editor</system:String>
     <!-- End Layer editor window section -->
-    
+
     <!-- Begin Multiple window section -->
     <system:String x:Key="Add">Add</system:String>
     <system:String x:Key="Remove">Remove</system:String>
     <system:String x:Key="NameWithColon">Name:</system:String>
     <system:String x:Key="Help">Help</system:String>
     <!-- End Multiple window section -->
-    
+
     <!-- Begin Main window helper section -->
     <system:String x:Key="MainWindowHelper1">This is the main window, it is used to show an overview of the application, the results and is used to start the simulation</system:String>
     <system:String x:Key="MainWindowHelper2">Their are 6 different section in this window:</system:String>
@@ -79,7 +78,7 @@
     <system:String x:Key="MainWindowHelper9">Here you can see a video with a demo.</system:String>
     <system:String x:Key="MainWindowHelper10">Video here</system:String>
     <!-- End Main window helper section -->
-    
+
     <!-- Begin Main window helper section -->
     <system:String x:Key="MaterialEditorHelper1">This is the material editor, here you can create new materials and modify them, the materials have multiple properties:</system:String>
     <system:String x:Key="MaterialEditorHelper2">- The name, for you to recognise the material.</system:String>
@@ -87,7 +86,7 @@
     <system:String x:Key="MaterialEditorHelper4">Here you can see a video with a demo.</system:String>
     <system:String x:Key="MaterialEditorHelper5">Video here</system:String>
     <!-- End Main window helper section -->
-        
+
     <!-- Begin Layer editor helper section -->
     <system:String x:Key="LayerEditorHelper1">This is the layer editor, here you can create new layers and modify them The layers have multiple properies:</system:String>
     <system:String x:Key="LayerEditorHelper2">- Width of the piece at the center.</system:String>
@@ -98,7 +97,7 @@
     <system:String x:Key="LayerEditorHelper7">Here you can see a video with a demo.</system:String>
     <system:String x:Key="LayerEditorHelper8">Video here</system:String>
     <!-- End Layer editor helper section -->
-        
+
     <!-- Begin Piece editor helper section -->
     <system:String x:Key="PieceEditorHelper1">This is the piece editor, here you can create new pieces and modify them, the pieces have multiple properties:</system:String>
     <system:String x:Key="PieceEditorHelper2">- The Name, for you to recognise the piece.</system:String>

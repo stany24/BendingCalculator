@@ -7,14 +7,14 @@ namespace BendingCalculator.Logic.Helper;
 
 public class OpenLinkCommand : ICommand
 {
-    public bool CanExecute(object? parameter) => true;
+    public bool CanExecute(object? parameter)
+    {
+        return true;
+    }
 
     public void Execute(object? parameter)
     {
-        if (parameter is string url)
-        {
-            OpenUrl(url);
-        }
+        if (parameter is string url) OpenUrl(url);
     }
 
     public event EventHandler? CanExecuteChanged;

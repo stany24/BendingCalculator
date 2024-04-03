@@ -4,9 +4,10 @@ using Avalonia.Media;
 
 namespace BendingCalculator.Logic.Helper;
 
-public class HelperText:IHelperControl
+public class HelperText : IHelperControl
 {
     private readonly string _nameBinding;
+
     public HelperText(string nameBinding)
     {
         _nameBinding = nameBinding;

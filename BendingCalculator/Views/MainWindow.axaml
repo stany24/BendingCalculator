@@ -24,7 +24,7 @@
             RowDefinitions="Auto,*,Auto"
             Column="0"
             Row="0">
-            <Grid 
+            <Grid
                 Name="GridForce"
                 Margin="5"
                 ColumnDefinitions="Auto,10,Auto"
@@ -36,34 +36,34 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{DynamicResource ForceWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <NumericUpDown
                     Name="NudForce"
                     Value="{Binding Force}"
                     Minimum="0.1"
                     Grid.Column="0"
                     Grid.Row="2"
-                    Grid.ColumnSpan="3"></NumericUpDown>
+                    Grid.ColumnSpan="3" />
                 <Button
                     Name="BtnForce"
                     Content="{DynamicResource Modify}"
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding OpenForceEditor}"
-                    CommandParameter="{Binding #NudForce}"></Button>
-                <TextBlock 
+                    CommandParameter="{Binding #NudForce}" />
+                <TextBlock
                     Name="TbxLang"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Text="{DynamicResource LanguageWithColon}"></TextBlock>
-                <ComboBox 
+                    Text="{DynamicResource LanguageWithColon}" />
+                <ComboBox
                     Name="CbxLang"
                     Grid.Row="4"
                     Grid.Column="2"
                     ItemsSource="{Binding Languages}"
-                    SelectedItem="{Binding Language}"></ComboBox>
+                    SelectedItem="{Binding Language}" />
             </Grid>
-            <Grid 
+            <Grid
                 Name="GridResult"
                 Margin="5"
                 ColumnDefinitions="Auto,10,Auto"
@@ -75,29 +75,29 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{DynamicResource DeformationCenterWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <TextBlock
                     Name="TbxDeformationCenter"
                     Text="{Binding DeformationCenter, Converter={x:Static converter:Converters.DoubleMilliMeterWithUnits}}"
                     Grid.Column="2"
-                    Grid.Row="0"></TextBlock>
+                    Grid.Row="0" />
                 <TextBlock
                     Name="LblConstraintCenter"
                     Grid.Row="2"
                     Grid.Column="0"
                     Text="{DynamicResource ConstraintCenterWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <TextBlock
                     Name="TbxConstraintCenter"
                     Text="{Binding ConstraintCenter, Converter={x:Static converter:Converters.DoubleMegaPascal}}"
                     Grid.Column="2"
-                    Grid.Row="2"></TextBlock>
+                    Grid.Row="2" />
                 <TextBlock
                     Name="LblDistance"
                     Grid.Row="4"
                     Grid.Column="0"
                     Text="{DynamicResource DistanceFromLeftWithUnitWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <NumericUpDown
                     Name="NudDistance"
                     Minimum="0"
@@ -105,32 +105,32 @@
                     ClipValueToMinMax="True"
                     Value="{Binding Distance}"
                     Grid.Column="2"
-                    Grid.Row="4"></NumericUpDown>
+                    Grid.Row="4" />
                 <TextBlock
                     Name="LblDeformationDistance"
                     Grid.Row="6"
                     Grid.Column="0"
                     Text="{DynamicResource DeformationDistanceWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <TextBlock
                     Name="TbxDeformationDistance"
                     Text="{Binding DeformationAtDistance, Converter={x:Static converter:Converters.DoubleMilliMeterWithUnits}}"
                     Grid.Column="2"
-                    Grid.Row="6"></TextBlock>
+                    Grid.Row="6" />
                 <TextBlock
                     Name="LblConstraintDistance"
                     Grid.Row="8"
                     Grid.Column="0"
                     Text="{DynamicResource ConstraintDistanceWithColon}"
-                    VerticalAlignment="Center"></TextBlock>
+                    VerticalAlignment="Center" />
                 <TextBlock
                     Name="TbxConstraintDistance"
                     Text="{Binding ConstraintAtDistance, Converter={x:Static converter:Converters.DoubleMegaPascal}}"
                     Grid.Column="2"
-                    Grid.Row="8"></TextBlock>
+                    Grid.Row="8" />
             </Grid>
         </Grid>
-        <Grid 
+        <Grid
             Name="GridPiece"
             ColumnDefinitions="Auto,10,Auto,*"
             RowDefinitions="Auto,10,*,10,*"
@@ -142,13 +142,13 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{DynamicResource PiecesWithColon}"
-                VerticalAlignment="Center"></TextBlock>
+                VerticalAlignment="Center" />
             <Button
                 Name="BtnPiece"
                 Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
-                Command="{Binding OpenPieceEditor}"></Button>
+                Command="{Binding OpenPieceEditor}" />
             <ListBox
                 Name="LbxPiece"
                 Grid.Row="2"
@@ -163,19 +163,20 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}"/>
+                            <TextBlock Text="{Binding Display}" />
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate></ListBox>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <preview:PiecePreview
                 Name="PiecePreview"
                 Background="#292929"
                 DisplayedPiece="{Binding SelectedPieceMainWindow,Mode=OneWay}"
                 Grid.Row="4"
                 Grid.Column="0"
-                Grid.ColumnSpan="4"></preview:PiecePreview>
+                Grid.ColumnSpan="4" />
         </Grid>
-        <Grid 
+        <Grid
             Name="GridLayer"
             ColumnDefinitions="Auto,10,Auto,*"
             RowDefinitions="Auto,10,*,10,*"
@@ -187,13 +188,13 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{DynamicResource LayersWithColon}"
-                VerticalAlignment="Center"></TextBlock>
+                VerticalAlignment="Center" />
             <Button
                 Name="BtnLayer"
                 Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
-                Command="{Binding OpenLayerEditor}"></Button>
+                Command="{Binding OpenLayerEditor}" />
             <ListBox
                 Name="LbxLayer"
                 Grid.Row="2"
@@ -208,17 +209,18 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}"/>
+                            <TextBlock Text="{Binding Display}" />
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate></ListBox>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <preview:LayerPreview
                 Name="LayerPreview"
                 Background="#292929"
                 DisplayedLayer="{Binding SelectedLayerMainWindow,Mode=OneWay}"
                 Grid.Row="4"
                 Grid.Column="0"
-                Grid.ColumnSpan="4"></preview:LayerPreview>
+                Grid.ColumnSpan="4" />
         </Grid>
         <Grid
             Name="GridMaterial"
@@ -232,20 +234,20 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{DynamicResource MaterialsWithColon}"
-                VerticalAlignment="Center"></TextBlock>
+                VerticalAlignment="Center" />
             <Button
                 Name="BtnMaterial"
                 Content="{DynamicResource Modify}"
                 Grid.Row="0"
                 Grid.Column="2"
-                Command="{Binding OpenMaterialEditor}"></Button>
-            <Button 
+                Command="{Binding OpenMaterialEditor}" />
+            <Button
                 Name="HelpButton"
                 Grid.Row="0"
                 Grid.Column="3"
                 Content="{DynamicResource Help}"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Top"></Button>
+                VerticalAlignment="Top" />
             <ListBox
                 Name="LbxMaterial"
                 Grid.Row="2"
@@ -258,20 +260,20 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}"/>
+                            <TextBlock Text="{Binding Display}" />
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate></ListBox>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
-        <lvc:CartesianChart 
+        <lvc:CartesianChart
             Name="ChartResult"
             Series="{Binding SeriesDeformationPoints}"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Grid.Column="0"
             Grid.Row="2"
-            Grid.ColumnSpan="7">
-        </lvc:CartesianChart>
+            Grid.ColumnSpan="7" />
         <Button
             Name="BtnStart"
             Grid.Row="4"
@@ -280,6 +282,6 @@
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Center"
             Content="{DynamicResource Begin}"
-            Command="{Binding CalculateBending}"></Button>
+            Command="{Binding CalculateBending}" />
     </Grid>
 </Window>

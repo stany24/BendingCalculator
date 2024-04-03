@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace BendingCalculator.Logic.Helper;
 
-public class HelperButton:IHelperControl
+public class HelperButton : IHelperControl
 {
     private readonly string _displayTextBinding;
     private readonly string _link;

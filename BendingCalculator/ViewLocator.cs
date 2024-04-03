@@ -19,7 +19,6 @@ public class ViewLocator : IDataTemplate
         Control control = (Control)Activator.CreateInstance(type)!;
         control.DataContext = data;
         return control;
-
     }
 
     public bool Match(object? data)

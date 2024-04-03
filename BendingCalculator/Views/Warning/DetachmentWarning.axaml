@@ -15,12 +15,12 @@
         ColumnDefinitions="*"
         RowDefinitions="Auto,10,Auto"
         Margin="5">
-        <TextBlock 
+        <TextBlock
             Name="TbxWarning"
             TextWrapping="Wrap"
             Grid.Column="0"
             Grid.Row="0"
-            Text="{DynamicResource DetachmentWarning}"></TextBlock>
+            Text="{DynamicResource DetachmentWarning}" />
         <DataGrid
             Name="DataGrid"
             Grid.Column="0"
@@ -30,7 +30,7 @@
             GridLinesVisibility="All"
             ItemsSource="{Binding WarningDetachmentOfLayers}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="auto" Header="{DynamicResource PositionHeader}"  Binding="{Binding Key}"/>
+                <DataGridTextColumn Width="auto" Header="{DynamicResource PositionHeader}" Binding="{Binding Key}" />
                 <DataGridTextColumn Width="*" Header="{DynamicResource LayerHeader}" Binding="{Binding Value}" />
             </DataGrid.Columns>
         </DataGrid>

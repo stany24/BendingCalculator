@@ -15,25 +15,26 @@ public static class HelperInfo
         new HelperText("MainWindowHelper7"),
         new HelperText("MainWindowHelper8"),
         new HelperText("MainWindowHelper9"),
-        new HelperButton("MainWindowHelper10","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
+        new HelperButton("MainWindowHelper10", "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
-    
+
     public static List<IHelperControl> ForceWindowModules { get; } = new()
     {
         new HelperText("MainWindowHelper1"),
-        new HelperButton("MainWindowHelper2","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
+        new HelperButton("MainWindowHelper2", "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code"),
         new HelperImage("MainWindow/test.png")
     };
-    
+
     public static List<IHelperControl> MaterialWindowModules { get; } = new()
     {
         new HelperText("MaterialEditorHelper1"),
         new HelperText("MaterialEditorHelper2"),
         new HelperText("MaterialEditorHelper3"),
         new HelperText("MaterialEditorHelper4"),
-        new HelperButton("MaterialEditorHelper5","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
+        new HelperButton("MaterialEditorHelper5",
+            "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
-    
+
     public static List<IHelperControl> LayerWindowModules { get; } = new()
     {
         new HelperText("LayerEditorHelper1"),
@@ -43,9 +44,9 @@ public static class HelperInfo
         new HelperText("LayerEditorHelper5"),
         new HelperText("LayerEditorHelper6"),
         new HelperText("LayerEditorHelper7"),
-        new HelperButton("LayerEditorHelper8","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
+        new HelperButton("LayerEditorHelper8", "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
-    
+
     public static List<IHelperControl> PieceWindowModules { get; } = new()
     {
         new HelperText("PieceEditorHelper1"),
@@ -53,8 +54,9 @@ public static class HelperInfo
         new HelperText("PieceEditorHelper3"),
         new HelperText("PieceEditorHelper4"),
         new HelperText("PieceEditorHelper5"),
-        new HelperButton("PieceEditorHelper6","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
+        new HelperButton("PieceEditorHelper6", "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
+
     public static List<IHelperControl> PieceLayerWindowModules { get; } = new()
     {
         new HelperText("PieceEditorHelper7"),
@@ -65,6 +67,7 @@ public static class HelperInfo
         new HelperText("PieceEditorHelper12"),
         new HelperText("PieceEditorHelper13"),
         new HelperText("PieceEditorHelper14"),
-        new HelperButton("PieceEditorHelper15","https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
+        new HelperButton("PieceEditorHelper15",
+            "https://docs.avaloniaui.net/docs/guides/data-binding/binding-from-code")
     };
 }

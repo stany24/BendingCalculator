@@ -9,7 +9,7 @@ public static class SettingManager
     {
         return GetSettings().Language;
     }
-    
+
     public static bool GetWarningDisabled()
     {
         return GetSettings().WarningDisabled;
@@ -21,7 +21,7 @@ public static class SettingManager
         Setting setting = GetSettings();
         setting.Language = language;
         string serialized = JsonSerializer.Serialize(setting);
-        File.WriteAllText(settingPath,serialized);
+        File.WriteAllText(settingPath, serialized);
     }
 
     private static Setting GetSettings()
@@ -29,9 +29,10 @@ public static class SettingManager
         string settingPath = Path.Combine(Directory.GetCurrentDirectory(), "Setting/Settings.json");
         if (!File.Exists(settingPath))
         {
-            string serialized = JsonSerializer.Serialize(new Setting("en",false));
-            File.WriteAllText(settingPath,serialized);
+            string serialized = JsonSerializer.Serialize(new Setting("en", false));
+            File.WriteAllText(settingPath, serialized);
         }
+
         Setting? setting = JsonSerializer.Deserialize<Setting>(File.ReadAllText(settingPath));
         return setting ?? new Setting();
     }

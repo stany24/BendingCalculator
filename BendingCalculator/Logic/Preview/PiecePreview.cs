@@ -10,24 +10,8 @@ using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
 
-public class PiecePreview:Grid
+public class PiecePreview : Grid
 {
-    #region Variables
-
-    private readonly Canvas _preview;
-    private readonly List<TextBlock> _infos = new();
-    private const double PreviewMargin = 10;
-    
-    public static readonly StyledProperty<Piece?> DisplayedPieceProperty =
-        AvaloniaProperty.Register<PiecePreview,Piece?>(nameof(DisplayedPiece), defaultValue: null);
-    public Piece? DisplayedPiece
-    {
-        get => GetValue(DisplayedPieceProperty);
-        set => SetValue(DisplayedPieceProperty, value);
-    }
-
-    #endregion
-
     #region Constructor / Destructor
 
     public PiecePreview()
@@ -38,11 +22,37 @@ public class PiecePreview:Grid
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
         };
-        SetColumn(_preview,2);
-        SetRow(_preview,0);
+        SetColumn(_preview, 2);
+        SetRow(_preview, 0);
         Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview());
+    }
+
+    #endregion
+
+    #region Tools
+
+    private void Clear()
+    {
+        foreach (TextBlock textBlock in _infos) textBlock.Text = string.Empty;
+    }
+
+    #endregion
+
+    #region Variables
+
+    private readonly Canvas _preview;
+    private readonly List<TextBlock> _infos = new();
+    private const double PreviewMargin = 10;
+
+    public static readonly StyledProperty<Piece?> DisplayedPieceProperty =
+        AvaloniaProperty.Register<PiecePreview, Piece?>(nameof(DisplayedPiece), null);
+
+    public Piece? DisplayedPiece
+    {
+        get => GetValue(DisplayedPieceProperty);
+        set => SetValue(DisplayedPieceProperty, value);
     }
 
     #endregion
@@ -52,21 +62,28 @@ public class PiecePreview:Grid
     private void UpdatePreview()
     {
         _preview.Children.Clear();
-        if (DisplayedPiece == null) { Clear(); return;}
-        if(DisplayedPiece.Layers.Count == 0){ Clear(); return;}
+        if (DisplayedPiece == null)
+        {
+            Clear();
+            return;
+        }
+
+        if (DisplayedPiece.Layers.Count == 0)
+        {
+            Clear();
+            return;
+        }
+
         CreateNewTextBlocks(DisplayedPiece);
-        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
-        double height = Bounds.Size.Height - 2*PreviewMargin;
-        
+        double width = ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
+        double height = Bounds.Size.Height - 2 * PreviewMargin;
+
         double maxWidth = 0;
         double totalHeight = 0;
         foreach (Layer layer in DisplayedPiece.Layers)
         {
             totalHeight += layer.HeightOnSides;
-            if (layer.WidthOnSides > maxWidth)
-            {
-                maxWidth = layer.WidthOnSides;
-            }
+            if (layer.WidthOnSides > maxWidth) maxWidth = layer.WidthOnSides;
         }
 
         List<Shape> shapes = new();
@@ -75,18 +92,20 @@ public class PiecePreview:Grid
         {
             double pieceWidth = width * (DisplayedPiece.Layers[i - 1].WidthOnSides / maxWidth);
             double horizontalMargin = (width - pieceWidth) / 2;
-            double pieceHeight = (height - PreviewMargin*(DisplayedPiece.Layers.Count-1)) * (DisplayedPiece.Layers[i-1].HeightOnSides/totalHeight) ;
+            double pieceHeight = (height - PreviewMargin * (DisplayedPiece.Layers.Count - 1)) *
+                                 (DisplayedPiece.Layers[i - 1].HeightOnSides / totalHeight);
             shapes.Add(GetRectangle(
-                PreviewMargin+horizontalMargin,
-                PreviewMargin*i+heightOfPiecesBefore,
+                PreviewMargin + horizontalMargin,
+                PreviewMargin * i + heightOfPiecesBefore,
                 pieceWidth,
                 pieceHeight));
             heightOfPiecesBefore += pieceHeight;
         }
+
         _preview.Children.AddRange(shapes);
     }
 
-    private static Path GetRectangle(double x,double y,double width,double height)
+    private static Path GetRectangle(double x, double y, double width, double height)
     {
         return new Path
         {
@@ -97,26 +116,26 @@ public class PiecePreview:Grid
                 {
                     new()
                     {
-                        StartPoint = new Point(x,y),
+                        StartPoint = new Point(x, y),
                         IsClosed = true,
                         IsFilled = true,
                         Segments = new PathSegments
                         {
                             new LineSegment
                             {
-                                Point = new Point(x+width,y)
+                                Point = new Point(x + width, y)
                             },
                             new LineSegment
                             {
-                                Point = new Point(x+width,y+height)
+                                Point = new Point(x + width, y + height)
                             },
                             new LineSegment
                             {
-                                Point = new Point(x,y+height)
+                                Point = new Point(x, y + height)
                             },
                             new LineSegment
                             {
-                                Point = new Point(x,y)
+                                Point = new Point(x, y)
                             }
                         }
                     }
@@ -124,20 +143,18 @@ public class PiecePreview:Grid
             }
         };
     }
-    
+
     private void CreateNewTextBlocks(Piece piece)
     {
-        while(_infos.Count > 0)
+        while (_infos.Count > 0)
         {
             Children.Remove(_infos[0]);
             _infos.RemoveAt(0);
         }
+
         StringBuilder builder = new();
         builder.Append('*');
-        for (int i = 0; i < piece.Layers.Count-1; i++)
-        {
-            builder.Append(",10,*");
-        }
+        for (int i = 0; i < piece.Layers.Count - 1; i++) builder.Append(",10,*");
         RowDefinitions = new RowDefinitions(builder.ToString());
         for (int i = 0; i < piece.Layers.Count; i++)
         {
@@ -146,25 +163,14 @@ public class PiecePreview:Grid
                 Text = piece.Layers[i].Material?.Display,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            SetColumn(block,1);
-            SetRow(block,2*i);
+            SetColumn(block, 1);
+            SetRow(block, 2 * i);
             Children.Add(block);
             _infos.Add(block);
         }
-        SetRowSpan(_preview,piece.Layers.Count*2-1);
+
+        SetRowSpan(_preview, piece.Layers.Count * 2 - 1);
         UpdateLayout();
-    }
-    
-    #endregion
-
-    #region Tools
-
-    private void Clear()
-    {
-        foreach (TextBlock textBlock in _infos)
-        {
-            textBlock.Text = string.Empty;
-        }
     }
 
     #endregion

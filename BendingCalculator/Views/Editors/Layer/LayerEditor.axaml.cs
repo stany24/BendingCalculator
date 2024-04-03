@@ -3,12 +3,12 @@ using BendingCalculator.ViewModels;
 
 namespace BendingCalculator.Views.Editors.Layer;
 
-public partial class LayerEditor: WindowWithHelp
+public partial class LayerEditor : WindowWithHelp
 {
     public LayerEditor(MainViewModel model)
     {
         DataContext = model;
         InitializeComponent();
-        HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.LayerWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.LayerWindowModules);
     }
 }

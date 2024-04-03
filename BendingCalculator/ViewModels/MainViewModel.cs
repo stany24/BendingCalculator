@@ -30,52 +30,54 @@ public partial class MainViewModel : ObservableObject
     private readonly SQLiteConnection _connection;
     public decimal Force { get; set; } = 100;
 
-    [ObservableProperty]
-    private Piece? _selectedPieceMainWindow;
-    [ObservableProperty]
-    private Layer? _selectedLayerMainWindow;
-    
+    [ObservableProperty] private Piece? _selectedPieceMainWindow;
+
+    [ObservableProperty] private Layer? _selectedLayerMainWindow;
+
     public ICommand OpenLink { get; }
-    
+
     private double[] _constraintsPoints = Array.Empty<double>();
     private ObservablePoint[] _deformationPoints = Array.Empty<ObservablePoint>();
+
     public ISeries[] SeriesDeformationPoints { get; set; } =
     {
         new LineSeries<ObservablePoint>
         {
             Values = new List<ObservablePoint>
             {
-                new(0,0),
-                new(1,0)
+                new(0, 0),
+                new(1, 0)
             }
         }
     };
 
-    [ObservableProperty]
-    private double? _pieceInGraphLength = 0;
-    [ObservableProperty]
-    private double? _deformationAtDistance = -0;
-    [ObservableProperty]
-    private double? _constraintAtDistance = -0;
-    [ObservableProperty]
-    private double? _deformationCenter = -0;
-    [ObservableProperty]
-    private double? _constraintCenter = -0;
-    
+    [ObservableProperty] private double? _pieceInGraphLength = 0;
+
+    [ObservableProperty] private double? _deformationAtDistance = -0;
+
+    [ObservableProperty] private double? _constraintAtDistance = -0;
+
+    [ObservableProperty] private double? _deformationCenter = -0;
+
+    [ObservableProperty] private double? _constraintCenter = -0;
+
     private double? _distance = 0;
+
     public double? Distance
     {
-        get=>_distance;
+        get => _distance;
         set
         {
-            if (value > PieceInGraphLength) { value = PieceInGraphLength; }
-            if (value < 0) { value = 0; }
+            if (value > PieceInGraphLength) value = PieceInGraphLength;
+            if (value < 0) value = 0;
             _distance = value;
-            if (Distance is not null && PieceInGraphLength is not null) { 
-                DeformationAtDistance = _deformationPoints[(int)(Distance/PieceInGraphLength*10000)].Y;
+            if (Distance is not null && PieceInGraphLength is not null)
+            {
+                DeformationAtDistance = _deformationPoints[(int)(Distance / PieceInGraphLength * 10000)].Y;
                 ConstraintAtDistance = _constraintsPoints[(int)(Distance / PieceInGraphLength * 10000)];
                 return;
             }
+
             DeformationAtDistance = 0;
             ConstraintAtDistance = 0;
         }
@@ -91,13 +93,13 @@ public partial class MainViewModel : ObservableObject
         LanguageEvents.LanguageChanged += Translate;
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
-        DataBaseEvents.LayersChanged +=  ReloadLayers;
-        DataBaseEvents.MaterialsChanged +=  ReloadMaterials;
+        DataBaseEvents.LayersChanged += ReloadLayers;
+        DataBaseEvents.MaterialsChanged += ReloadMaterials;
         DataBaseEvents.PiecesChanged += ReloadPieces;
         OpenLink = new OpenLinkCommand();
-        ReloadMaterials(null,EventArgs.Empty);
-        ReloadLayers(null,EventArgs.Empty);
-        ReloadPieces(null,EventArgs.Empty);
+        ReloadMaterials(null, EventArgs.Empty);
+        ReloadLayers(null, EventArgs.Empty);
+        ReloadPieces(null, EventArgs.Empty);
     }
 
     ~MainViewModel()
@@ -116,19 +118,19 @@ public partial class MainViewModel : ObservableObject
     {
         Task.Run(() =>
         {
-            if(SelectedPieceMainWindow is null){return;}
+            if (SelectedPieceMainWindow is null) return;
             double gap = SelectedPieceMainWindow.Length / 10000;
-            PieceInGraphLength = SelectedPieceMainWindow.Length*1000;
-            
+            PieceInGraphLength = SelectedPieceMainWindow.Length * 1000;
+
             SelectedPieceMainWindow.RiskOfDetachmentBetweenLayer += ShowRiskWindow;
-            BendingResult result = SelectedPieceMainWindow.CalculateBending((int)Force,gap);
+            BendingResult result = SelectedPieceMainWindow.CalculateBending((int)Force, gap);
             SelectedPieceMainWindow.RiskOfDetachmentBetweenLayer -= ShowRiskWindow;
-            
-            _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t*1000)).ToArray();
+
+            _deformationPoints = result.Integral2.Select((t, i) => new ObservablePoint(i, t * 1000)).ToArray();
             SeriesDeformationPoints[0].Values = _deformationPoints;
             DeformationCenter = _deformationPoints[_deformationPoints.Length / 2].Y;
             DeformationAtDistance = _deformationPoints[0].Y;
-            
+
             _constraintsPoints = result.Moment.Zip(result.I, (x, y) => x / y).ToArray();
             _constraintsPoints = _constraintsPoints.Zip(result.Ns, (x, y) => x * y).ToArray();
             ConstraintCenter = _constraintsPoints[_constraintsPoints.Length / 2];
@@ -136,9 +138,10 @@ public partial class MainViewModel : ObservableObject
     }
 
     private DetachmentWarning? _detachmentWarning;
-    private void ShowRiskWindow(object? sender,RiskOfDetachmentOfLayersEventArgs e)
+
+    private void ShowRiskWindow(object? sender, RiskOfDetachmentOfLayersEventArgs e)
     {
-        if(SettingManager.GetWarningDisabled()){return;}
+        if (SettingManager.GetWarningDisabled()) return;
         Dispatcher.UIThread.Invoke(() =>
         {
             _detachmentWarning?.Close();
@@ -146,51 +149,54 @@ public partial class MainViewModel : ObservableObject
                 new WarningViewModel(
                     new ObservableCollection<KeyValuePair<int, Layer>>
                     {
-                        new(e.Position1,e.Layer1),
-                        new(e.Position2,e.Layer2)
+                        new(e.Position1, e.Layer1),
+                        new(e.Position2, e.Layer2)
                     }
                 )
             );
             _detachmentWarning.Show();
         });
-        
     }
-    
+
     #endregion
 
     #region Editors
 
     private MaterialEditor? _materialEditor;
+
     public void OpenMaterialEditor()
     {
-        if(_materialEditor != null){return;}
+        if (_materialEditor != null) return;
         _materialEditor = new MaterialEditor(this);
         _materialEditor.Closed += (_, _) => _materialEditor = null;
         _materialEditor.Show();
     }
-    
+
     private LayerEditor? _layerEditor;
+
     public void OpenLayerEditor()
     {
-        if(_layerEditor != null){return;}
+        if (_layerEditor != null) return;
         _layerEditor = new LayerEditor(this);
         _layerEditor.Closed += (_, _) => _layerEditor = null;
         _layerEditor.Show();
     }
-    
+
     private PieceEditor? _pieceEditor;
+
     public void OpenPieceEditor()
     {
-        if(_pieceEditor != null){return;}
+        if (_pieceEditor != null) return;
         _pieceEditor = new PieceEditor(this);
         _pieceEditor.Closed += (_, _) => _pieceEditor = null;
         _pieceEditor.Show();
     }
-    
+
     private ForceEditor? _forceEditor;
+
     public void OpenForceEditor()
     {
-        if(_forceEditor != null){return;}
+        if (_forceEditor != null) return;
         _forceEditor = new ForceEditor(this);
         _forceEditor.Closing += (_, _) => Force = _forceEditor?.CalculateForce() ?? 100;
         _forceEditor.Closed += (_, _) => _forceEditor = null;
@@ -205,6 +211,6 @@ public partial class MainViewModel : ObservableObject
         _forceEditor?.Close();
         _detachmentWarning?.Close();
     }
-    
+
     #endregion
 }

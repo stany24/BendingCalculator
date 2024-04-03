@@ -12,7 +12,8 @@ public static class DataBaseInitializer
         string connectionString = $"Data Source={databasePath};";
         try
         {
-            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory", AppContext.BaseDirectory); // used to correct an issue with the last version of sqlite
+            Environment.SetEnvironmentVariable("SQLite_ConfigureDirectory",
+                AppContext.BaseDirectory); // used to correct an issue with the last version of sqlite
             SQLiteConnection connection = new(connectionString);
             connection.Open();
             return connection;
@@ -21,5 +22,5 @@ public static class DataBaseInitializer
         {
             return null;
         }
-    } 
+    }
 }

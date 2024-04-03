@@ -18,14 +18,14 @@
     <system:String x:Key="YAxisName">Deformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Hilfe</system:String>
     <!-- End Main window section -->
-        
+
     <!-- Begin Warning section -->
     <system:String x:Key="DetachmentWarningTitle">Warnung vor Ablösung</system:String>
     <system:String x:Key="DetachmentWarning">Zwei Schichten, die sich berühren, haben einen großen Unterschied in der Elastizität. In der Realität können sich die Schichten ablösen und beschädigen und die Ergebnisse verfälschen. Die betroffenen Schichten sind folgende:</system:String>
     <system:String x:Key="PositionHeader">Position im Stück</system:String>
     <system:String x:Key="LayerHeader">Ebene</system:String>
     <!-- End Warning section -->
-    
+
     <!-- Begin Force window section -->
     <system:String x:Key="ForceWithColon">Kraft:</system:String>
     <system:String x:Key="MassWithColon">Masse:</system:String>
@@ -34,11 +34,11 @@
     <system:String x:Key="SpeedWithColon">Geschwindigkeit:</system:String>
     <system:String x:Key="TitleForceWindow">Stärke-Editor</system:String>
     <!-- End Force window section -->
-    
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="TitleMaterialWindow">Editor für Materialien</system:String>
     <!-- End Layer editor window section -->
-    
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="HeightCenterWithColon">Höhe in der Mitte:</system:String>
     <system:String x:Key="HeightOnSidesWithColon">Höhe an den Seiten:</system:String>
@@ -47,7 +47,7 @@
     <system:String x:Key="MaterialWithColon">Material:</system:String>
     <system:String x:Key="TitleLayerWindow">Editor für Schichten</system:String>
     <!-- End Layer editor window section -->
-        
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="ChangeLayers">Schichten ändern</system:String>
     <system:String x:Key="InPieceWithColon">Im Stück:</system:String>
@@ -58,14 +58,14 @@
     <system:String x:Key="TitlePieceWindow">Editor für Münzen</system:String>
     <system:String x:Key="TitleLayerOfPieceWindow">Ebene im Stück editor</system:String>
     <!-- End Layer editor window section -->
-    
+
     <!-- Begin Multiple window section -->
     <system:String x:Key="Add">Hinzufügen</system:String>
     <system:String x:Key="Remove">Entfernen</system:String>
     <system:String x:Key="NameWithColon">Name:</system:String>
     <system:String x:Key="Help">Hilfe</system:String>
     <!-- End Multiple window section -->
-        
+
     <!-- Begin Main window helper section -->
     <system:String x:Key="MainWindowHelper1">Dies ist das Hauptfenster, es zeigt einen Überblick über die Anwendung, die Ergebnisse und wird zum Starten der Simulation verwendet.</system:String>
     <system:String x:Key="MainWindowHelper2">Es gibt 6 verschiedene Abschnitte in diesem Fenster:</system:String>
@@ -78,7 +78,7 @@
     <system:String x:Key="MainWindowHelper9">Hier können Sie ein Video mit einer Demo sehen.</system:String>
     <system:String x:Key="MainWindowHelper10">Video hier</system:String>
     <!-- End Main window helper section -->
-        
+
     <!-- Begin Material editor helper section -->
     <system:String x:Key="MaterialEditorHelper1">Dies ist der Material-Editor, hier können Sie neue Materialien erstellen und sie verändern, die Materialien haben mehrere Eigenschaften:</system:String>
     <system:String x:Key="MaterialEditorHelper2">- Der Name, damit Sie das Material erkennen können.</system:String>
@@ -86,7 +86,7 @@
     <system:String x:Key="MaterialEditorHelper4">Hier können Sie ein Video mit einer Demo sehen.</system:String>
     <system:String x:Key="MaterialEditorHelper5">Video hier</system:String>
     <!-- End Material editor helper section -->
-    
+
     <!-- Begin Layer editor helper section -->
     <system:String x:Key="LayerEditorHelper1">Dies ist der Ebenen-Editor, hier können Sie neue Ebenen erstellen und bearbeiten. Die Ebenen haben mehrere Eigenschaften:</system:String>
     <system:String x:Key="LayerEditorHelper2">- Breite des Stücks in der Mitte.</system:String>
@@ -97,7 +97,7 @@
     <system:String x:Key="LayerEditorHelper7">Hier können Sie ein Video mit einer Demo sehen.</system:String>
     <system:String x:Key="LayerEditorHelper8">Video hier</system:String>
     <!-- End Layer editor helper section -->
-        
+
     <!-- Begin Piece editor helper section -->
     <system:String x:Key="PieceEditorHelper1">Dies ist der Stück-Editor, hier können Sie neue Stücke erstellen und sie ändern, die Stücke haben mehrere Eigenschaften:</system:String>
     <system:String x:Key="PieceEditorHelper2">- Der Name, damit Sie das Stück erkennen.</system:String>

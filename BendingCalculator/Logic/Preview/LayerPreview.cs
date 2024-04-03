@@ -10,8 +10,24 @@ using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
 
-public class LayerPreview:Grid
+public class LayerPreview : Grid
 {
+    #region Tools
+
+    private void Clear()
+    {
+        _preview.Children.Clear();
+        _tbxAbove.Text = string.Empty;
+        _tbxSide.Text = string.Empty;
+    }
+
+    #endregion
+
+    private void UpdateLanguage(object? sender, EventArgs eventArgs)
+    {
+        UpdatePreview();
+    }
+
     #region Variables
 
     private readonly TextBlock _tbxAbove;
@@ -21,7 +37,8 @@ public class LayerPreview:Grid
 
     //Needs to be public
     public static readonly StyledProperty<Layer?> DisplayedLayerProperty =
-        AvaloniaProperty.Register<LayerPreview,Layer?>(nameof(DisplayedLayer), defaultValue: null);
+        AvaloniaProperty.Register<LayerPreview, Layer?>(nameof(DisplayedLayer));
+
     public Layer? DisplayedLayer
     {
         get => GetValue(DisplayedLayerProperty);
@@ -41,30 +58,30 @@ public class LayerPreview:Grid
             [!TextBlock.TextProperty] = new DynamicResourceExtension("SideViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center
         };
-        SetRow(_tbxSide,0);
-        SetColumn(_tbxSide,1);
+        SetRow(_tbxSide, 0);
+        SetColumn(_tbxSide, 1);
         Children.Add(_tbxSide);
-        
+
         _tbxAbove = new TextBlock
         {
             [!TextBlock.TextProperty] = new DynamicResourceExtension("TopViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center
         };
-        SetRow(_tbxAbove,2);
-        SetColumn(_tbxAbove,1);
+        SetRow(_tbxAbove, 2);
+        SetColumn(_tbxAbove, 1);
         Children.Add(_tbxAbove);
-        
+
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
         };
-        SetRow(_preview,0);
-        SetRowSpan(_preview,3);
-        SetColumn(_preview,2);
+        SetRow(_preview, 0);
+        SetRowSpan(_preview, 3);
+        SetColumn(_preview, 2);
         Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         LanguageEvents.LanguageChanged += UpdateLanguage;
-        this.GetObservable(DisplayedLayerProperty).Subscribe(_ =>UpdatePreview());
+        this.GetObservable(DisplayedLayerProperty).Subscribe(_ => UpdatePreview());
     }
 
     ~LayerPreview()
@@ -73,36 +90,39 @@ public class LayerPreview:Grid
     }
 
     #endregion
-    
+
     #region Preview Math
 
     private void UpdatePreview()
     {
         _preview.Children.Clear();
-        if(DisplayedLayer == null) { Clear();return;}
+        if (DisplayedLayer == null)
+        {
+            Clear();
+            return;
+        }
+
         UpdateLayout();
-        double width = ColumnDefinitions[2].ActualWidth - 2*PreviewMargin;
-        double height = Bounds.Size.Height - 3*PreviewMargin;
+        double width = ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
+        double height = Bounds.Size.Height - 3 * PreviewMargin;
         List<Shape> shapes = new()
         {
-            GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2, DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides),
-            GetLayerShape(PreviewMargin, 2*PreviewMargin + height / 2, width, height/2, DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides)
+            GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2,
+                DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides),
+            GetLayerShape(PreviewMargin, 2 * PreviewMargin + height / 2, width, height / 2,
+                DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides)
         };
         _preview.Children.AddRange(shapes);
     }
-    
-    private static Path GetLayerShape(double x,double y,double width,double height,double proportionCenterOverSides)
+
+    private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides)
     {
         int minusCenter = 0;
         int minusSides = 0;
         if (proportionCenterOverSides > 1)
-        {
-            minusSides = (int)((height - height/proportionCenterOverSides)/2);
-        }
+            minusSides = (int)((height - height / proportionCenterOverSides) / 2);
         else
-        {
-            minusCenter = (int)((height - height*proportionCenterOverSides)/2);
-        }
+            minusCenter = (int)((height - height * proportionCenterOverSides) / 2);
         return new Path
         {
             Fill = Brushes.LightBlue,
@@ -112,20 +132,23 @@ public class LayerPreview:Grid
                 {
                     new()
                     {
-                        StartPoint = new Point(x,y+minusSides),
+                        StartPoint = new Point(x, y + minusSides),
                         IsClosed = true,
                         IsFilled = true,
                         Segments = new PathSegments
                         {
-                            CreateArcSegment(new Point(x,y+minusSides),new Point(x+width/2,y+minusCenter),new Point(x+width,y+minusSides)),
+                            CreateArcSegment(new Point(x, y + minusSides), new Point(x + width / 2, y + minusCenter),
+                                new Point(x + width, y + minusSides)),
                             new LineSegment
                             {
-                                Point = new Point(x+width,y+height-minusSides)
+                                Point = new Point(x + width, y + height - minusSides)
                             },
-                            CreateArcSegment(new Point(x+width,y+height-minusSides),new Point(x+width/2,y+height-minusCenter),new Point(x,y+height-minusSides)),
+                            CreateArcSegment(new Point(x + width, y + height - minusSides),
+                                new Point(x + width / 2, y + height - minusCenter),
+                                new Point(x, y + height - minusSides)),
                             new LineSegment
                             {
-                                Point = new Point(x,y+minusSides)
+                                Point = new Point(x, y + minusSides)
                             }
                         }
                     }
@@ -133,20 +156,18 @@ public class LayerPreview:Grid
             }
         };
     }
-    
+
     private static PathSegment CreateArcSegment(Point point1, Point point2, Point point3)
     {
         if (System.Math.Abs(point1.Y - point2.Y) < 0.01)
-        {
             return new LineSegment
             {
                 Point = point3
             };
-        }
-        Point center = CalculateCenter(point1,point2,point3);
+        Point center = CalculateCenter(point1, point2, point3);
         Point dif = new(point1.X - center.X, point1.Y - center.Y);
         double radius = System.Math.Sqrt(dif.X * dif.X + dif.Y * dif.Y);
-        
+
         return new ArcSegment
         {
             Point = point3,
@@ -169,25 +190,10 @@ public class LayerPreview:Grid
 
     private static SweepDirection CalculateSweepDirection(Point point1, Point point2, Point point3)
     {
-        double crossProduct = (point2.X - point1.X) * (point3.Y - point2.Y) - (point2.Y - point1.Y) * (point3.X - point2.X);
+        double crossProduct = (point2.X - point1.X) * (point3.Y - point2.Y) -
+                              (point2.Y - point1.Y) * (point3.X - point2.X);
         return crossProduct > 0 ? SweepDirection.Clockwise : SweepDirection.CounterClockwise;
     }
 
     #endregion
-
-    #region Tools
-
-    private void Clear()
-    {
-        _preview.Children.Clear();
-        _tbxAbove.Text = string.Empty;
-        _tbxSide.Text = string.Empty;
-    }
-
-    #endregion
-    
-    private void UpdateLanguage(object? sender, EventArgs eventArgs)
-    {
-        UpdatePreview();
-    }
 }

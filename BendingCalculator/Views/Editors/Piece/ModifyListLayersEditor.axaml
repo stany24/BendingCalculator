@@ -19,7 +19,7 @@
             Name="LblInPiece"
             Grid.Column="0"
             Grid.Row="0"
-            Text="{DynamicResource InPieceWithColon}"></TextBlock>
+            Text="{DynamicResource InPieceWithColon}" />
         <ListBox
             Name="LbxInPiece"
             Grid.Column="0"
@@ -32,10 +32,11 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}"/>
+                        <TextBlock Text="{Binding Display}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate></ListBox>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button
             Name="BtnMoveUp"
             Grid.Column="0"
@@ -44,7 +45,7 @@
             HorizontalContentAlignment="Center"
             Content="{DynamicResource MoveUp}"
             IsEnabled="{Binding BtnMoveUpEnabled}"
-            Command="{Binding MoveLayerUpInPiece}"></Button>
+            Command="{Binding MoveLayerUpInPiece}" />
         <Button
             Name="BtnMoveDown"
             Grid.Column="2"
@@ -53,12 +54,12 @@
             HorizontalContentAlignment="Center"
             Content="{DynamicResource MoveDown}"
             IsEnabled="{Binding BtnMoveDownEnabled}"
-            Command="{Binding MoveLayerDownInPiece}"></Button>
+            Command="{Binding MoveLayerDownInPiece}" />
         <TextBlock
             Name="LblAvailable"
             Grid.Column="4"
             Grid.Row="0"
-            Text="{DynamicResource AvailableWithColon}"></TextBlock>
+            Text="{DynamicResource AvailableWithColon}" />
         <ListBox
             Name="LbxAvailable"
             Grid.Column="4"
@@ -70,10 +71,11 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}"/>
+                        <TextBlock Text="{Binding Display}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate></ListBox>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button
             Name="BtnAdd"
             Grid.Column="4"
@@ -82,7 +84,7 @@
             HorizontalContentAlignment="Center"
             Content="{DynamicResource Add}"
             IsEnabled="{Binding BtnAddEnabled}"
-            Command="{Binding AddLayerToPiece}"></Button>
+            Command="{Binding AddLayerToPiece}" />
         <Button
             Name="BtnRemove"
             Grid.Column="6"
@@ -91,13 +93,13 @@
             HorizontalContentAlignment="Center"
             Content="{DynamicResource Remove}"
             IsEnabled="{Binding BtnRemoveEnabled}"
-            Command="{Binding RemoveLayersToPiece}"></Button>
-        <Button 
+            Command="{Binding RemoveLayersToPiece}" />
+        <Button
             Name="HelpButton"
             Grid.Row="0"
             Grid.Column="8"
             Content="{DynamicResource Help}"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"></Button>
+            VerticalAlignment="Top" />
     </Grid>
 </Window>

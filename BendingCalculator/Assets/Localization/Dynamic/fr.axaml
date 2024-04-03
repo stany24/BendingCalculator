@@ -18,14 +18,14 @@
     <system:String x:Key="YAxisName">Déformation (mm)</system:String>
     <system:String x:Key="TitleHelpWindow">Aide</system:String>
     <!-- End Main window section -->
-    
+
     <!-- Begin Warning section -->
     <system:String x:Key="DetachmentWarningTitle">Avertissement de décollement</system:String>
     <system:String x:Key="DetachmentWarning">Deux couches qui se touchent ont un écart d'élasticité important, dans la réalité les couches pourrais se décoller et s'abimer ainsi que fausser les résulats. Les couches concernées sont les suivantes :</system:String>
     <system:String x:Key="PositionHeader">Position dans la pièce</system:String>
     <system:String x:Key="LayerHeader">Couche</system:String>
     <!-- End Warning section -->
-        
+
     <!-- Begin Force window section -->
     <system:String x:Key="ForceWithColon">Force:</system:String>
     <system:String x:Key="MassWithColon">Masse:</system:String>
@@ -34,11 +34,11 @@
     <system:String x:Key="SpeedWithColon">Vitesse:</system:String>
     <system:String x:Key="TitleForceWindow">Éditeur de force</system:String>
     <!-- End Force window section -->
-    
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="TitleMaterialWindow">Éditeur de matières</system:String>
     <!-- End Layer editor window section -->
-        
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="HeightCenterWithColon">Hauteur au centre:</system:String>
     <system:String x:Key="HeightOnSidesWithColon">Hauteur sur les cotés:</system:String>
@@ -47,7 +47,7 @@
     <system:String x:Key="MaterialWithColon">Matière:</system:String>
     <system:String x:Key="TitleLayerWindow">Éditeur de couches</system:String>
     <!-- End Layer editor window section -->
-    
+
     <!-- Begin Layer editor window section -->
     <system:String x:Key="ChangeLayers">Changer les couches</system:String>
     <system:String x:Key="InPieceWithColon">Dans la pièce:</system:String>
@@ -58,14 +58,14 @@
     <system:String x:Key="TitlePieceWindow">Éditeur de pièces</system:String>
     <system:String x:Key="TitleLayerOfPieceWindow">Éditeur des couches dans la pièce</system:String>
     <!-- End Layer editor window section -->
-    
+
     <!-- Begin Multiple window section -->
     <system:String x:Key="Add">Ajouter</system:String>
     <system:String x:Key="Remove">Retirer</system:String>
     <system:String x:Key="NameWithColon">Nom:</system:String>
     <system:String x:Key="Help">Aide</system:String>
     <!-- End Multiple window section -->
-        
+
     <!-- Begin Main window helper section -->
     <system:String x:Key="MainWindowHelper1">C'est la fenêtre principale, elle est utilisée pour avoir une vue d'ensemble de l'application, les résultats et commencer la simulation</system:String>
     <system:String x:Key="MainWindowHelper2">Il y a 6 différentes section dans cette fenêtre:</system:String>
@@ -78,7 +78,7 @@
     <system:String x:Key="MainWindowHelper9">Vous pouvez voir ici une vidéo avec une démo.</system:String>
     <system:String x:Key="MainWindowHelper10">Vidéo ici</system:String>
     <!-- End Main window helper section -->
-        
+
     <!-- Begin Main window helper section -->
     <system:String x:Key="MaterialEditorHelper1">Cette fenêtre est l'éditeur de matières, elle permet de créer de nouvelles matière et de les modifier, les matières ont plusieurs propriétés:</system:String>
     <system:String x:Key="MaterialEditorHelper2">- Le nom, pour que vous reconnaisiez la matière.</system:String>
@@ -86,7 +86,7 @@
     <system:String x:Key="MaterialEditorHelper4">Vous pouvez voir ici une vidéo avec une démo.</system:String>
     <system:String x:Key="MaterialEditorHelper5">Vidéo ici</system:String>
     <!-- End Main window helper section -->
-        
+
     <!-- Begin Layer editor helper section -->
     <system:String x:Key="LayerEditorHelper1">Cette fenêtre est l'éditeur de couche, elle permet de créer de nouvelles couche et de les modifier, les couches ont plusieurs propriétés:</system:String>
     <system:String x:Key="LayerEditorHelper2">- Largueur de la pièce au centre.</system:String>
@@ -97,7 +97,7 @@
     <system:String x:Key="LayerEditorHelper7">Vous pouvez voir ici une vidéo avec une démo.</system:String>
     <system:String x:Key="LayerEditorHelper8">Vidéo ici</system:String>
     <!-- End Layer editor helper section -->
-    
+
     <!-- Begin Piece editor helper section -->
     <system:String x:Key="PieceEditorHelper1">Cette fenêtre est l'éditeur de pièce, elle permet de créer de nouvelles pièces et de les modifier, les pièces ont plusieurs propriétés:</system:String>
     <system:String x:Key="PieceEditorHelper2">- Le nom, pour que vous reconnaisiez la pièce.</system:String>
@@ -115,5 +115,5 @@
     <system:String x:Key="PieceEditorHelper14">Vous pouvez voir ici une vidéo avec une démo.</system:String>
     <system:String x:Key="PieceEditorHelper15">Vidéo ici</system:String>
     <!-- End Piece editor helper section -->
-    
+
 </ResourceDictionary>

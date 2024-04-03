@@ -10,12 +10,12 @@ public partial class PieceEditor : WindowWithHelp
         DataContext = model;
         InitializeComponent();
         Closing += (_, _) => CloseLayerOfPieceEditor();
-        HelpButton.Click += (_,_) => OpenHelpWindow(HelperInfo.PieceWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.PieceWindowModules);
     }
 
     private void CloseLayerOfPieceEditor()
     {
-        if(DataContext is not MainViewModel model){return;}
+        if (DataContext is not MainViewModel model) return;
         model.CloseLayerOfPieceEditor();
     }
 }
