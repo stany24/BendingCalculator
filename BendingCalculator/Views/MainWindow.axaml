@@ -157,7 +157,6 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 SelectionMode="Single"
-                MinWidth="200"
                 SelectedItem="{Binding SelectedPieceMainWindow,Mode=TwoWay}"
                 ItemsSource="{Binding Pieces}">
                 <ListBox.ItemTemplate>
@@ -203,7 +202,6 @@
                 SelectionMode="Single"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                MinWidth="200"
                 ItemsSource="{Binding Layers}"
                 SelectedItem="{Binding SelectedLayerMainWindow,Mode=TwoWay}">
                 <ListBox.ItemTemplate>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
+using Avalonia.Media;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -10,6 +12,11 @@ namespace BendingCalculator.ViewModels;
 public partial class MainViewModel
 {
     #region Bindings
+
+    [ObservableProperty] private Color _color;
+    [ObservableProperty] private HsvColor _hsvColor;
+    [ObservableProperty] private ColorModel _colorModel;
+    [ObservableProperty] private IColorPalette _palette = new MaterialColorPalette();
 
     [ObservableProperty] private ObservableCollection<Material> _materials = new();
 
@@ -28,6 +35,8 @@ public partial class MainViewModel
     [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
 
     [ObservableProperty] private bool _uiEnabledMaterialEditor;
+    
+    [ObservableProperty] private IColorPalette _colorPalette = new MaterialColorPalette();
 
     private string _selectedUnit = "GPa";
 
@@ -74,6 +83,7 @@ public partial class MainViewModel
         Material material = new("new", 69000000000);
         DataBaseCreator.NewMaterial(_connection, material);
         SelectedMaterial = Materials[^1];
+        ColorPicker colorPicker = new();
     }
 
     public void RemoveMaterial()
@@ -128,6 +138,7 @@ public partial class MainViewModel
 
     private void SelectedMaterialChanged()
     {
+        
         if (SelectedMaterial == null)
         {
             UiEnabledMaterialEditor = false;
