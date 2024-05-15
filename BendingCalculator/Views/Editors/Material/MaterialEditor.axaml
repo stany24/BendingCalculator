@@ -36,10 +36,7 @@
         <ColorPicker
             Grid.Column="5"
             Grid.Row="2"
-            IsVisible="True"
             IsEnabled="True"
-            SelectedIndex="1"
-            Background="Red"
             Color="{Binding Color, Mode=TwoWay}"/>
         <TextBlock
             Name="LblE"

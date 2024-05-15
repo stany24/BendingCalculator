@@ -12,16 +12,22 @@ namespace BendingCalculator.ViewModels;
 public partial class MainViewModel
 {
     #region Bindings
-
-    [ObservableProperty] private Color _color;
-    [ObservableProperty] private HsvColor _hsvColor;
-    [ObservableProperty] private ColorModel _colorModel;
-    [ObservableProperty] private IColorPalette _palette = new MaterialColorPalette();
-
+    [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
+    [ObservableProperty] private bool _uiEnabledMaterialEditor;
     [ObservableProperty] private ObservableCollection<Material> _materials = new();
 
-    private Material? _selectedMaterial;
+    private Color _color;
+    public Color Color
+    {
+        get => _color;
+        set
+        {
+            SetProperty(ref _color, value);
+            MaterialColorChanged();
+        }
+    }
 
+    private Material? _selectedMaterial;
     public Material? SelectedMaterial
     {
         get => _selectedMaterial;
@@ -31,12 +37,6 @@ public partial class MainViewModel
             SelectedMaterialChanged();
         }
     }
-
-    [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
-
-    [ObservableProperty] private bool _uiEnabledMaterialEditor;
-    
-    [ObservableProperty] private IColorPalette _colorPalette = new MaterialColorPalette();
 
     private string _selectedUnit = "GPa";
 
@@ -83,7 +83,6 @@ public partial class MainViewModel
         Material material = new("new", 69000000000);
         DataBaseCreator.NewMaterial(_connection, material);
         SelectedMaterial = Materials[^1];
-        ColorPicker colorPicker = new();
     }
 
     public void RemoveMaterial()
@@ -97,6 +96,13 @@ public partial class MainViewModel
     {
         if (SelectedMaterial is null) return;
         SelectedMaterial.Name = MaterialName;
+        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
+    }
+    
+    private void MaterialColorChanged()
+    {
+        if (SelectedMaterial is null) return;
+        SelectedMaterial.Color= Color;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
 

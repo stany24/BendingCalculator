@@ -1,5 +1,6 @@
 ﻿// ReSharper disable ValueParameterNotUsed
 
+using System;
 using Avalonia.Media;
 
 namespace BendingCalculator.Logic.Math;
@@ -22,7 +23,7 @@ public class Material : Element
         {
             if (value <= 0) return;
             _e = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -33,7 +34,7 @@ public class Material : Element
         set
         {
             _color = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 

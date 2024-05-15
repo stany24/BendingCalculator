@@ -1,11 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public abstract partial class Element: ObservableObject
+public abstract class Element: ObservableObject
 {
-    [ObservableProperty] private long _id = -1;
-    [ObservableProperty] private string _display = string.Empty;
+    internal EventHandler? ElementChanged { get; set; }
+    public long Id { get; set; } = -1;
+    public string Display { get; set; } = string.Empty;
     
     private string _name = string.Empty;
     public string Name
@@ -15,7 +17,19 @@ public abstract partial class Element: ObservableObject
         {
             if (value == string.Empty) return;
             _name = value;
-            Display = ToString() ?? string.Empty;
+            UpdateDisplay();
         }
+    }
+    
+    public void UpdateDisplay()
+    {
+        Display = ToString() ?? string.Empty;
+        ElementChanged?.Invoke(this, EventArgs.Empty);
+    }
+    
+    public void UpdateDisplay(object? sender,EventArgs e)
+    {
+        Display = ToString() ?? string.Empty;
+        ElementChanged?.Invoke(this, EventArgs.Empty);
     }
 }

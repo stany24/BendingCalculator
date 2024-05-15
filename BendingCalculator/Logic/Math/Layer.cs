@@ -20,7 +20,7 @@ public class Layer : Element
         {
             if (value <= 0) return;
             _widthAtCenter = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -33,7 +33,7 @@ public class Layer : Element
         {
             if (value <= 0) return;
             _widthOnSides = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -46,7 +46,7 @@ public class Layer : Element
         {
             if (value <= 0) return;
             _heightAtCenter = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -59,7 +59,7 @@ public class Layer : Element
         {
             if (value <= 0) return;
             _heightOnSides = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -71,7 +71,7 @@ public class Layer : Element
         set
         {
             _material = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -102,11 +102,6 @@ public class Layer : Element
     #endregion
 
     #region Display
-
-    private void UpdateDisplay(object? sender, EventArgs e)
-    {
-        Display = ToString();
-    }
 
     public sealed override string ToString()
     {

@@ -9,14 +9,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public partial class Piece : Element
+public class Piece : Element
 {
     #region Variables
     
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
-
-    [ObservableProperty]
-    private ObservableCollection<Layer> _layers = new();
+    
+    public ObservableCollection<Layer> Layers { get; set; } = new();
 
     private double _length;
 
@@ -27,7 +26,7 @@ public partial class Piece : Element
         {
             if (value <= 0) return;
             _length = value;
-            Display = ToString();
+            UpdateDisplay();
         }
     }
 
@@ -67,11 +66,6 @@ public partial class Piece : Element
     #endregion
 
     #region Display
-
-    private void UpdateDisplay(object? sender, EventArgs e)
-    {
-        Display = ToString();
-    }
 
     public override string ToString()
     {
