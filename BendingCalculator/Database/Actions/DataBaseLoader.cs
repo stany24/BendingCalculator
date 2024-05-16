@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using Avalonia.Media;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Database.Actions;
@@ -39,12 +40,19 @@ public static class DataBaseLoader
                 HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
             };
             if (reader["MaterialId"] != DBNull.Value)
+            {
+                long colorValue64 = (long)reader["Color"];
+                if (colorValue64 < 0) { colorValue64 = 0; }
+                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
+                uint colorValue32 = (uint)(colorValue64); 
                 layer.Material = new Material
                 {
                     Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
+                    Color = Color.FromUInt32(colorValue32)
                 };
+            }
 
             currentPiece.Layers.Add(layer);
         }
@@ -94,12 +102,19 @@ public static class DataBaseLoader
             };
 
             if (reader["MaterialId"] != DBNull.Value)
+            {
+                long colorValue64 = (long)reader["Color"];
+                if (colorValue64 < 0) { colorValue64 = 0; }
+                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
+                uint colorValue32 = (uint)(colorValue64); 
                 layer.Material = new Material
                 {
                     Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty
+                    Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty,
+                    Color = Color.FromUInt32(colorValue32)
                 };
+            }
 
             currentPiece.Layers.Add(layer);
         }
@@ -129,12 +144,19 @@ public static class DataBaseLoader
             };
 
             if (reader["MaterialId"] != DBNull.Value)
+            {
+                long colorValue64 = (long)reader["Color"];
+                if (colorValue64 < 0) { colorValue64 = 0; }
+                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
+                uint colorValue32 = (uint)(colorValue64); 
                 layer.Material = new Material
                 {
                     Id = Convert.ToInt32(reader["MaterialId"]),
                     E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
+                    Color = Color.FromUInt32(colorValue32)
                 };
+            }
             layers.Add(layer);
         }
 
@@ -152,11 +174,16 @@ public static class DataBaseLoader
         List<Material> materials = new();
         while (reader.Read())
         {
+            long colorValue64 = (long)reader["Color"];
+            if (colorValue64 < 0) { colorValue64 = 0; }
+            if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
+            uint colorValue32 = (uint)(colorValue64); 
             Material material = new()
             {
                 Id = Convert.ToInt32(reader["MaterialId"]),
                 E = Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"]) ?? string.Empty
+                Name = Convert.ToString(reader["Name"]) ?? string.Empty,
+                Color = Color.FromUInt32(colorValue32)
             };
             materials.Add(material);
         }

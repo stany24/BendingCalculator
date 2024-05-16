@@ -8,10 +8,11 @@ public static class DataBaseUpdater
     public static void UpdateMaterials(SQLiteConnection connection, Material material)
     {
         using SQLiteCommand cmd = new(
-            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides WHERE MaterialId= @Id;", connection);
+            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides, Color = @Color WHERE MaterialId= @Id;", connection);
         cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
         cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
+        cmd.Parameters.AddWithValue("@Color", material.Color.ToUInt32());
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }

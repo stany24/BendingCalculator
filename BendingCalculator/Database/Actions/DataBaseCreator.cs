@@ -42,11 +42,12 @@ public static class DataBaseCreator
     public static void NewMaterial(SQLiteConnection connection, Material material)
     {
         using SQLiteCommand cmd = new(
-            @"INSERT INTO Material (Name,E,IsRemoved) 
-                                VALUES (@Name, @E, @IsRemoved);SELECT LAST_INSERT_ROWID();", connection);
+            @"INSERT INTO Material (Name,E,IsRemoved,Color) 
+                                VALUES (@Name, @E, @IsRemoved, @Color);SELECT LAST_INSERT_ROWID();", connection);
         cmd.Parameters.AddWithValue("@Name", material.Name);
         cmd.Parameters.AddWithValue("@E", material.E);
         cmd.Parameters.AddWithValue("@IsRemoved", NotRemoved);
+        cmd.Parameters.AddWithValue("@Color", 0);
         material.Id = (long)cmd.ExecuteScalar();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }

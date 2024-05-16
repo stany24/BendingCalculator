@@ -150,11 +150,13 @@ public partial class MainViewModel
             UiEnabledMaterialEditor = false;
             MaterialName = string.Empty;
             EValue = 0;
+            Color = Color.FromArgb(0,0,0,0);
             return;
         }
 
         UiEnabledMaterialEditor = true;
         MaterialName = SelectedMaterial.Name;
+        Color = SelectedMaterial.Color;
         if (SelectedMaterial.E >= 1000000000)
         {
             EValue = (double)SelectedMaterial.E / 1000000000;
