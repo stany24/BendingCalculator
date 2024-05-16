@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.SQLite;
 using Avalonia.Media;
 using BendingCalculator.Logic.Math;
@@ -9,6 +10,10 @@ namespace BendingCalculator.Database.Actions;
 
 public static class DataBaseLoader
 {
+    private const string PieceId = "PieceId";
+    private const string LayerId = "LayerId";
+    private const string MaterialId = "MaterialId";
+    
     public static ObservableCollection<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
     {
         using SQLiteCommand cmd = new(
@@ -21,43 +26,18 @@ public static class DataBaseLoader
         cmd.Parameters.AddWithValue("@PieceId", pieceId);
 
         using SQLiteDataReader reader = cmd.ExecuteReader();
-        Piece? currentPiece = null;
+        ObservableCollection<Layer> layers = new();
 
         while (reader.Read())
         {
-            currentPiece ??= new Piece
-            {
-                Id = pieceId,
-                Layers = new ObservableCollection<Layer>()
-            };
-            if (reader["LayerId"] == DBNull.Value) continue;
-            Layer layer = new()
-            {
-                Id = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
-            if (reader["MaterialId"] != DBNull.Value)
-            {
-                long colorValue64 = (long)reader["Color"];
-                if (colorValue64 < 0) { colorValue64 = 0; }
-                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-                uint colorValue32 = (uint)(colorValue64); 
-                layer.Material = new Material
-                {
-                    Id = Convert.ToInt32(reader["MaterialId"]),
-                    E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-                    Color = Color.FromUInt32(colorValue32)
-                };
-            }
-
-            currentPiece.Layers.Add(layer);
+            if (reader[LayerId] == DBNull.Value) continue;
+            Layer layer = LoadLayer(reader);
+            if (reader[MaterialId] == DBNull.Value) continue;
+            layer.Material = LoadMaterial(reader);
+            layers.Add(layer);
         }
 
-        return currentPiece?.Layers ?? new ObservableCollection<Layer>();
+        return layers;
     }
 
     public static List<Piece> LoadPieces(SQLiteConnection connection)
@@ -77,46 +57,15 @@ public static class DataBaseLoader
 
         while (reader.Read())
         {
-            int pieceId = Convert.ToInt32(reader["PieceId"]);
+            int pieceId = Convert.ToInt32(reader[PieceId]);
 
             if (currentPiece == null || currentPiece.Id != pieceId)
             {
-                currentPiece = new Piece
-                {
-                    Layers = new ObservableCollection<Layer>(),
-                    Id = pieceId,
-                    Name = Convert.ToString(reader["PieceName"]) ?? string.Empty,
-                    Length = Convert.ToDouble(reader["Length"])
-                };
+                currentPiece = LoadPiece(reader);
                 pieces.Add(currentPiece);
             }
 
-            if (reader["LayerId"] == DBNull.Value) continue;
-            Layer layer = new()
-            {
-                Id = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
-
-            if (reader["MaterialId"] != DBNull.Value)
-            {
-                long colorValue64 = (long)reader["Color"];
-                if (colorValue64 < 0) { colorValue64 = 0; }
-                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-                uint colorValue32 = (uint)(colorValue64); 
-                layer.Material = new Material
-                {
-                    Id = Convert.ToInt32(reader["MaterialId"]),
-                    E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["MaterialName"]) ?? string.Empty,
-                    Color = Color.FromUInt32(colorValue32)
-                };
-            }
-
-            currentPiece.Layers.Add(layer);
+            currentPiece.Layers = LoadLayersOfPiece(connection, pieceId);
         }
 
         return pieces;
@@ -134,28 +83,11 @@ public static class DataBaseLoader
         List<Layer> layers = new();
         while (reader.Read())
         {
-            Layer layer = new()
-            {
-                Id = Convert.ToInt32(reader["LayerId"]),
-                WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
-                WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
-                HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
-                HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
-            };
+            Layer layer = LoadLayer(reader);
 
-            if (reader["MaterialId"] != DBNull.Value)
+            if (reader[MaterialId] != DBNull.Value)
             {
-                long colorValue64 = (long)reader["Color"];
-                if (colorValue64 < 0) { colorValue64 = 0; }
-                if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-                uint colorValue32 = (uint)(colorValue64); 
-                layer.Material = new Material
-                {
-                    Id = Convert.ToInt32(reader["MaterialId"]),
-                    E = Convert.ToInt64(reader["E"]),
-                    Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-                    Color = Color.FromUInt32(colorValue32)
-                };
+                layer.Material = LoadMaterial(reader);
             }
             layers.Add(layer);
         }
@@ -174,20 +106,47 @@ public static class DataBaseLoader
         List<Material> materials = new();
         while (reader.Read())
         {
-            long colorValue64 = (long)reader["Color"];
-            if (colorValue64 < 0) { colorValue64 = 0; }
-            if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-            uint colorValue32 = (uint)(colorValue64); 
-            Material material = new()
-            {
-                Id = Convert.ToInt32(reader["MaterialId"]),
-                E = Convert.ToInt64(reader["E"]),
-                Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-                Color = Color.FromUInt32(colorValue32)
-            };
-            materials.Add(material);
+            materials.Add(LoadMaterial(reader));
         }
 
         return materials;
+    }
+
+    private static Material LoadMaterial(IDataRecord reader)
+    {
+        long colorValue64 = (long)reader["Color"];
+        if (colorValue64 < 0) { colorValue64 = 0; }
+        if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
+        uint colorValue32 = (uint)(colorValue64); 
+        return new Material
+        {
+            Id = Convert.ToInt32(reader[MaterialId]),
+            E = Convert.ToInt64(reader["E"]),
+            Name = Convert.ToString(reader["Name"]) ?? string.Empty,
+            Color = Color.FromUInt32(colorValue32)
+        };
+    }
+
+    private static Layer LoadLayer(IDataRecord reader)
+    {
+        return new Layer
+        {
+            Id = Convert.ToInt32(reader[LayerId]),
+            WidthAtCenter = Convert.ToDouble(reader["WidthAtCenter"]),
+            WidthOnSides = Convert.ToDouble(reader["WidthOnSides"]),
+            HeightAtCenter = Convert.ToDouble(reader["HeightAtCenter"]),
+            HeightOnSides = Convert.ToDouble(reader["HeightOnSides"])
+        };
+    }
+
+    private static Piece LoadPiece(IDataRecord reader)
+    {
+        return new Piece
+        {
+            Layers = new ObservableCollection<Layer>(),
+            Id = Convert.ToInt64(reader[PieceId]),
+            Name = Convert.ToString(reader["PieceName"]) ?? string.Empty,
+            Length = Convert.ToDouble(reader["Length"])
+        };
     }
 }
