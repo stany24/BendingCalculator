@@ -47,6 +47,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc3.3" />
+        <PackageReference Include="Markdown.Avalonia" Version="11.0.3-a1" />
         <PackageReference Include="SukiUI" Version="6.0.0-beta8" />
         <PackageReference Include="System.Data.SQLite" Version="1.0.118"/>
     </ItemGroup>
@@ -85,12 +86,6 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.de.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Logic\Helper\HelperImage.cs">
-            <DependentUpon>HelperModule.cs</DependentUpon>
-        </Compile>
-        <Compile Update="Logic\Helper\HelperText.cs">
-            <DependentUpon>HelperModule.cs</DependentUpon>
         </Compile>
         <Compile Update="Assets\Localization\Force\ForceEditorLocalization.Designer.cs">
             <DesignTime>True</DesignTime>
@@ -241,9 +236,6 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>LogicLocalization.de.resx</DependentUpon>
-        </Compile>
-        <Compile Update="Logic\Helper\HelperButton.cs">
-            <DependentUpon>HelperModule.cs</DependentUpon>
         </Compile>
         <Compile Update="Assets\Localization\MainLocalization\Helper\MainHelperLocalization.Designer.cs">
             <DesignTime>True</DesignTime>

@@ -67,52 +67,49 @@
     <!-- End Multiple window section -->
 
     <!-- Begin Main window helper section -->
-    <system:String x:Key="MainWindowHelper1">This is the main window, it is used to show an overview of the application, the results and is used to start the simulation</system:String>
-    <system:String x:Key="MainWindowHelper2">Their are 6 different section in this window:</system:String>
-    <system:String x:Key="MainWindowHelper3">- Force: It's used to modifiy the force or open the force editor.</system:String>
-    <system:String x:Key="MainWindowHelper4">- Piece: It's used to show all created pieces and open the piece editor</system:String>
-    <system:String x:Key="MainWindowHelper5">- Layer: it's used to show all created layers and open the layer editor.</system:String>
-    <system:String x:Key="MainWindowHelper6">- Material: it's used to show all created pieces and open the piece editor.</system:String>
-    <system:String x:Key="MainWindowHelper7">- Result: The graph shows the the results of the simulation.</system:String>
-    <system:String x:Key="MainWindowHelper8">- Start: The button is used to start the simulation, one piece must be selected in the piece section</system:String>
-    <system:String x:Key="MainWindowHelper9">Here you can see a video with a demo.</system:String>
-    <system:String x:Key="MainWindowHelper10">Video here</system:String>
+    <system:String x:Key="MainWindowHelper"># Main window
+        It is used to show an overview of the application, the results and is used to start the simulation
+        There are 6 different section in this window:
+        - Force: It's used to modify the force or open the force editor.
+        - Piece: It's used to show all created pieces and open the piece editor
+        - Layer: it's used to show all created layers and open the layer editor.
+        - Material: it's used to show all created pieces and open the piece editor.
+        - Result: The graph shows the results of the simulation.
+        - Start: The button is used to start the simulation, one piece must be selected in the piece section
+        Here you can see a video with a demo.
+        Video here</system:String>
+
     <!-- End Main window helper section -->
 
     <!-- Begin Main window helper section -->
-    <system:String x:Key="MaterialEditorHelper1">This is the material editor, here you can create new materials and modify them, the materials have multiple properties:</system:String>
-    <system:String x:Key="MaterialEditorHelper2">- The name, for you to recognise the material.</system:String>
-    <system:String x:Key="MaterialEditorHelper3">- E the constant of flexibility.</system:String>
-    <system:String x:Key="MaterialEditorHelper4">Here you can see a video with a demo.</system:String>
-    <system:String x:Key="MaterialEditorHelper5">Video here</system:String>
+    <system:String x:Key="MaterialEditorHelper">This is the material editor, here you can create new materials and modify them, the materials have multiple properties:
+        - The name, for you to recognise the material.
+        - E the constant of flexibility.</system:String>
+
     <!-- End Main window helper section -->
 
     <!-- Begin Layer editor helper section -->
-    <system:String x:Key="LayerEditorHelper1">This is the layer editor, here you can create new layers and modify them The layers have multiple properies:</system:String>
-    <system:String x:Key="LayerEditorHelper2">- Width of the piece at the center.</system:String>
-    <system:String x:Key="LayerEditorHelper3">- Width of the piece on both sides.</system:String>
-    <system:String x:Key="LayerEditorHelper4">- Height of the piece at the center.</system:String>
-    <system:String x:Key="LayerEditorHelper5">- Height of the piece on both sides.</system:String>
-    <system:String x:Key="LayerEditorHelper6">- The material the layer is made of.</system:String>
-    <system:String x:Key="LayerEditorHelper7">Here you can see a video with a demo.</system:String>
-    <system:String x:Key="LayerEditorHelper8">Video here</system:String>
+    <system:String x:Key="LayerEditorHelper">This is the layer editor, here you can create new layers and modify them The layers have multiple properies:
+        - Width of the piece at the center.
+        - Width of the piece on both sides.
+        - Height of the piece at the center.
+        - Height of the piece on both sides.
+        - The material the layer is made of.</system:String>
+
     <!-- End Layer editor helper section -->
 
     <!-- Begin Piece editor helper section -->
-    <system:String x:Key="PieceEditorHelper1">This is the piece editor, here you can create new pieces and modify them, the pieces have multiple properties:</system:String>
-    <system:String x:Key="PieceEditorHelper2">- The Name, for you to recognise the piece.</system:String>
-    <system:String x:Key="PieceEditorHelper3">- The length of the piece.</system:String>
-    <system:String x:Key="PieceEditorHelper4">When you select only one piece on the left listbox you can see it's layers on the right listbox and you can click the "Change layers" button to customize the piece.</system:String>
-    <system:String x:Key="PieceEditorHelper5">Here you can see a video with a demo.</system:String>
-    <system:String x:Key="PieceEditorHelper6">Video here</system:String>
-    <system:String x:Key="PieceEditorHelper7">This is the piece editor, here you can change the layers inside a piece.</system:String>
-    <system:String x:Key="PieceEditorHelper8">The left listbox contains the layers inside the piece, the right listbox contains all the layers you have created.</system:String>
-    <system:String x:Key="PieceEditorHelper9">You can take 4 different actions:</system:String>
-    <system:String x:Key="PieceEditorHelper10">- Add: will add the selected layers of the right listbox to the piece.</system:String>
-    <system:String x:Key="PieceEditorHelper11">- Remove: will remove the selected layers of the left listbox to the piece.</system:String>
-    <system:String x:Key="PieceEditorHelper12">- Move down: will move down the selected layers of the left listbox.</system:String>
-    <system:String x:Key="PieceEditorHelper13">- Move up: will move up the selected layers of the left listbox.</system:String>
-    <system:String x:Key="PieceEditorHelper14">Here you can see a video with a demo.</system:String>
-    <system:String x:Key="PieceEditorHelper15">Video here</system:String>
+    <system:String x:Key="PieceEditorHelper1">This is the piece editor, here you can create new pieces and modify them, the pieces have multiple properties:
+        - The Name, for you to recognise the piece.
+        - The length of the piece.
+        When you select only one piece on the left listbox you can see it's layers on the right listbox and you can click the "Change layers" button to customize the piece.
+        This is the piece editor, here you can change the layers inside a piece.
+        The left listbox contains the layers inside the piece, the right listbox contains all the layers you have created.
+        You can take 4 different actions:
+        - Add: will add the selected layers of the right listbox to the piece.
+        - Remove: will remove the selected layers of the left listbox to the piece.
+        - Move down: will move down the selected layers of the left listbox.
+        - Move up: will move up the selected layers of the left listbox.</system:String>
+
     <!-- End Piece editor helper section -->
 </ResourceDictionary>

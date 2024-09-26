@@ -15,7 +15,7 @@ public partial class ForceEditor : WindowWithHelp
         NudMass.ValueChanged += (_, _) => CalculateForce();
         NudRadius.ValueChanged += (_, _) => CalculateForce();
         CalculateForce();
-        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.ForceWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow("ForceEditorHelper");
     }
 
     public decimal CalculateForce()

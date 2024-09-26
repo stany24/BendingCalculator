@@ -1,6 +1,5 @@
 ﻿// ReSharper disable ValueParameterNotUsed
 
-using System;
 using Avalonia.Media;
 
 namespace BendingCalculator.Logic.Math;

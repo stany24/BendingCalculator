@@ -132,7 +132,7 @@ public class LayerPreview : Border
             {
                 Figures = new PathFigures
                 {
-                    new()
+                    new PathFigure
                     {
                         StartPoint = new Point(x, y + minusSides),
                         IsClosed = true,

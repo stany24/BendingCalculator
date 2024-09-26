@@ -10,6 +10,6 @@ public partial class ListLayersEditor : WindowWithHelp
         InitializeComponent();
         DataContext = model;
         model.PieceCurrentlyModifiedId = pieceCurrentlyModifiedId;
-        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.PieceLayerWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow("ModifyListLayersEditorHelper");
     }
 }

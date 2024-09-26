@@ -49,7 +49,7 @@ public class PiecePreview : Border
     private const double PreviewMargin = 10;
 
     public static readonly StyledProperty<Piece?> DisplayedPieceProperty =
-        AvaloniaProperty.Register<PiecePreview, Piece?>(nameof(DisplayedPiece), null);
+        AvaloniaProperty.Register<PiecePreview, Piece?>(nameof(DisplayedPiece));
 
     public Piece? DisplayedPiece
     {
@@ -116,7 +116,7 @@ public class PiecePreview : Border
             {
                 Figures = new PathFigures
                 {
-                    new()
+                    new PathFigure
                     {
                         StartPoint = new Point(x, y),
                         IsClosed = true,

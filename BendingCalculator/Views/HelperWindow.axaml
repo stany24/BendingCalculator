@@ -2,17 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.HelperWindow"
-        x:DataType="viewModels:MainViewModel"
         Title="{DynamicResource Help}"
         Icon="/Assets/avalonia-logo.ico"
         MinWidth="500"
         MaxWidth="500"
         CanResize="False"
         SizeToContent="Height">
-    <Grid
-        Name="MainGrid"
-        Margin="5" />
 </Window>

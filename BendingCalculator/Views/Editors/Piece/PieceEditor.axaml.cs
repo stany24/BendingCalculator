@@ -10,7 +10,7 @@ public partial class PieceEditor : WindowWithHelp
         DataContext = model;
         InitializeComponent();
         Closing += (_, _) => CloseLayerOfPieceEditor();
-        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.PieceWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow("PieceEditorHelper");
     }
 
     private void CloseLayerOfPieceEditor()

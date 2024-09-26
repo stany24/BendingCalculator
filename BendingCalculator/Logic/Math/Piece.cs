@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Assets.Localization.Static;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 

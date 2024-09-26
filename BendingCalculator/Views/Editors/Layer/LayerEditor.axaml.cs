@@ -9,6 +9,6 @@ public partial class LayerEditor : WindowWithHelp
     {
         DataContext = model;
         InitializeComponent();
-        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.LayerWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow("LayerEditorHelper");
     }
 }

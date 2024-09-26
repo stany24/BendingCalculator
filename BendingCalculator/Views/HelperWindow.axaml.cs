@@ -1,31 +1,22 @@
 using System.Collections.Generic;
 using System.Text;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Markdown.Avalonia.Full;
 
 namespace BendingCalculator.Views;
 
 public partial class HelperWindow : Window
 {
-    public HelperWindow(IReadOnlyList<IHelperControl> modules, MainViewModel model)
+    public HelperWindow(string ressource)
     {
-        DataContext = model;
-        InitializeComponent();
-        CreateUi(modules);
-    }
-
-    private void CreateUi(IReadOnlyList<IHelperControl> modules)
-    {
-        StringBuilder rowDefinition = new();
-        for (int i = 0; i < modules.Count; i++) rowDefinition.Append("Auto,10,");
-        MainGrid.RowDefinitions = RowDefinitions.Parse(rowDefinition.ToString().Remove(rowDefinition.Length - 4));
-        for (int i = 0; i < modules.Count; i++)
+        MarkdownScrollViewer md = new()
         {
-            Control control = modules[i].GetControl();
-            Grid.SetColumn(control, 0);
-            Grid.SetRow(control, 2 * i);
-            MainGrid.Children.Add(control);
-        }
+            [!Markdown.Avalonia.MarkdownScrollViewer.MarkdownProperty] = new DynamicResourceExtension(ressource)
+        };
+        Content = md;
     }
 }

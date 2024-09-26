@@ -34,7 +34,7 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty] private Layer? _selectedLayerMainWindow;
 
-    public ICommand OpenLink { get; }
+    [ObservableProperty] private ICommand _openLink;
 
     private double[] _constraintsPoints = Array.Empty<double>();
     private ObservablePoint[] _deformationPoints = Array.Empty<ObservablePoint>();

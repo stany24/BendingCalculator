@@ -18,7 +18,7 @@ public partial class Main : WindowWithHelp
         Closing += (_, _) => CloseAllWindows();
         LanguageEvents.LanguageChanged += ReloadLanguage;
         ReloadLanguage(null, EventArgs.Empty);
-        HelpButton.Click += (_, _) => OpenHelpWindow(HelperInfo.MainWindowModules);
+        HelpButton.Click += (_, _) => OpenHelpWindow("MainWindowHelper");
     }
 
     #endregion
