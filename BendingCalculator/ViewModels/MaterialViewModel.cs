@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Avalonia.Controls;
 using Avalonia.Media;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;

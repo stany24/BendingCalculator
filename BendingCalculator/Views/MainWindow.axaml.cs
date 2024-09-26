@@ -1,7 +1,6 @@
 using System;
 using BendingCalculator.Assets.Localization.Static;
 using BendingCalculator.Logic;
-using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
 using LiveChartsCore.SkiaSharpView;
 

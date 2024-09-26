@@ -1,4 +1,3 @@
-using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
 
 namespace BendingCalculator.Views.Editors.Material;

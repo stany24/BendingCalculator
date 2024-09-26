@@ -1,5 +1,4 @@
 using System;
-using BendingCalculator.Logic.Helper;
 using BendingCalculator.ViewModels;
 
 namespace BendingCalculator.Views.Editors.Force;

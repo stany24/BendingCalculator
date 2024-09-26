@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using Avalonia.Controls;
-using BendingCalculator.Logic.Helper;
-using BendingCalculator.ViewModels;
 
 namespace BendingCalculator.Views;
 

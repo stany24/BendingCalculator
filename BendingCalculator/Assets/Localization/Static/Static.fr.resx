@@ -23,6 +23,7 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <!-- ReSharper disable once DuplicateResource -->
     <data name="Center" xml:space="preserve">
         <value>Centre</value>
     </data>
