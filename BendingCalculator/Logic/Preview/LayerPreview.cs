@@ -10,7 +10,7 @@ using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
 
-public class LayerPreview : Grid
+public class LayerPreview : Border
 {
     #region Tools
 
@@ -30,6 +30,7 @@ public class LayerPreview : Grid
 
     #region Variables
 
+    private readonly Grid _grid = new();
     private readonly TextBlock _tbxAbove;
     private readonly TextBlock _tbxSide;
     private readonly Canvas _preview;
@@ -51,34 +52,35 @@ public class LayerPreview : Grid
 
     public LayerPreview()
     {
-        ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
-        RowDefinitions = new RowDefinitions("*,10,*");
+        _grid.ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
+        _grid.RowDefinitions = new RowDefinitions("*,10,*");
+        Child = _grid;
         _tbxSide = new TextBlock
         {
             [!TextBlock.TextProperty] = new DynamicResourceExtension("SideViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center
         };
-        SetRow(_tbxSide, 0);
-        SetColumn(_tbxSide, 1);
-        Children.Add(_tbxSide);
+        Grid.SetRow(_tbxSide, 0);
+        Grid.SetColumn(_tbxSide, 1);
+        _grid.Children.Add(_tbxSide);
 
         _tbxAbove = new TextBlock
         {
             [!TextBlock.TextProperty] = new DynamicResourceExtension("TopViewWithColon"),
             VerticalAlignment = VerticalAlignment.Center
         };
-        SetRow(_tbxAbove, 2);
-        SetColumn(_tbxAbove, 1);
-        Children.Add(_tbxAbove);
+        Grid.SetRow(_tbxAbove, 2);
+        Grid.SetColumn(_tbxAbove, 1);
+        _grid.Children.Add(_tbxAbove);
 
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
         };
-        SetRow(_preview, 0);
-        SetRowSpan(_preview, 3);
-        SetColumn(_preview, 2);
-        Children.Add(_preview);
+        Grid.SetRow(_preview, 0);
+        Grid.SetRowSpan(_preview, 3);
+        Grid.SetColumn(_preview, 2);
+        _grid.Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         LanguageEvents.LanguageChanged += UpdateLanguage;
         this.GetObservable(DisplayedLayerProperty).Subscribe(_ => UpdatePreview());
@@ -103,7 +105,7 @@ public class LayerPreview : Grid
         }
 
         UpdateLayout();
-        double width = ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
+        double width = _grid.ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
         double height = Bounds.Size.Height - 3 * PreviewMargin;
         List<Shape> shapes = new()
         {

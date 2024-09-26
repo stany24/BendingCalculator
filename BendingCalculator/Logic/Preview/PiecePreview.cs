@@ -10,21 +10,22 @@ using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
 
-public class PiecePreview : Grid
+public class PiecePreview : Border
 {
     #region Constructor / Destructor
 
     public PiecePreview()
     {
-        ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
-        RowDefinitions = new RowDefinitions("*");
+        Child = _grid;
+        _grid.ColumnDefinitions = new ColumnDefinitions("10,Auto,*");
+        _grid.RowDefinitions = new RowDefinitions("*");
         _preview = new Canvas
         {
             Background = new SolidColorBrush(Color.Parse("#292929"))
         };
-        SetColumn(_preview, 2);
-        SetRow(_preview, 0);
-        Children.Add(_preview);
+        Grid.SetColumn(_preview, 2);
+        Grid.SetRow(_preview, 0);
+        _grid.Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview());
     }
@@ -42,6 +43,7 @@ public class PiecePreview : Grid
 
     #region Variables
 
+    private readonly Grid _grid = new();
     private readonly Canvas _preview;
     private readonly List<TextBlock> _infos = new();
     private const double PreviewMargin = 10;
@@ -75,7 +77,7 @@ public class PiecePreview : Grid
         }
 
         CreateNewTextBlocks(DisplayedPiece);
-        double width = ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
+        double width = _grid.ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
         double height = Bounds.Size.Height - 2 * PreviewMargin;
 
         double maxWidth = 0;
@@ -148,14 +150,14 @@ public class PiecePreview : Grid
     {
         while (_infos.Count > 0)
         {
-            Children.Remove(_infos[0]);
+            _grid.Children.Remove(_infos[0]);
             _infos.RemoveAt(0);
         }
 
         StringBuilder builder = new();
         builder.Append('*');
         for (int i = 0; i < piece.Layers.Count - 1; i++) builder.Append(",10,*");
-        RowDefinitions = new RowDefinitions(builder.ToString());
+        _grid.RowDefinitions = new RowDefinitions(builder.ToString());
         for (int i = 0; i < piece.Layers.Count; i++)
         {
             TextBlock block = new()
@@ -163,13 +165,13 @@ public class PiecePreview : Grid
                 Text = piece.Layers[i].Material?.Display,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            SetColumn(block, 1);
-            SetRow(block, 2 * i);
-            Children.Add(block);
+            Grid.SetColumn(block, 1);
+            Grid.SetRow(block, 2 * i);
+            _grid.Children.Add(block);
             _infos.Add(block);
         }
 
-        SetRowSpan(_preview, piece.Layers.Count * 2 - 1);
+        Grid.SetRowSpan(_preview, piece.Layers.Count * 2 - 1);
         UpdateLayout();
     }
 

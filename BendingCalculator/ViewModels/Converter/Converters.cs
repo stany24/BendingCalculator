@@ -17,7 +17,6 @@ public static class Converters
 
     private static SolidColorBrush GetColor(Color color)
     {
-        Console.WriteLine(color);
         return new SolidColorBrush(color);
     }
 }
