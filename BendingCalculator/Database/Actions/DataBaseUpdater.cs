@@ -1,3 +1,4 @@
+using System;
 using System.Data.SQLite;
 using BendingCalculator.Logic.Math;
 
@@ -12,7 +13,7 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
         cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
-        cmd.Parameters.AddWithValue("@Color", material.Color.ToUInt32());
+        cmd.Parameters.AddWithValue("@Color", Convert.ToInt64(material.Color.ToUInt32()));
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }

@@ -20,14 +20,14 @@ public abstract class Element: ObservableObject
             UpdateDisplay();
         }
     }
-    
-    public void UpdateDisplay()
+
+    protected void UpdateDisplay()
     {
         Display = ToString() ?? string.Empty;
         ElementChanged?.Invoke(this, EventArgs.Empty);
     }
-    
-    public void UpdateDisplay(object? sender,EventArgs e)
+
+    protected void UpdateDisplay(object? sender,EventArgs e)
     {
         Display = ToString() ?? string.Empty;
         ElementChanged?.Invoke(this, EventArgs.Empty);

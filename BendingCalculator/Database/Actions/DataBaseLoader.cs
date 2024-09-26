@@ -117,7 +117,7 @@ public static class DataBaseLoader
         long colorValue64 = (long)reader["Color"];
         if (colorValue64 < 0) { colorValue64 = 0; }
         if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-        uint colorValue32 = (uint)(colorValue64); 
+        uint colorValue32 = (uint)colorValue64; 
         return new Material
         {
             Id = Convert.ToInt32(reader[MaterialId]),

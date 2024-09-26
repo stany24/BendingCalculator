@@ -100,6 +100,10 @@ public partial class MainViewModel : ObservableObject
         ReloadMaterials(null, EventArgs.Empty);
         ReloadLayers(null, EventArgs.Empty);
         ReloadPieces(null, EventArgs.Empty);
+        foreach (Material material in Materials)
+        {
+            Console.WriteLine(material.Color);
+        }
     }
 
     ~MainViewModel()

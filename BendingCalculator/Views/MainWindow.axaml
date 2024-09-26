@@ -258,7 +258,12 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}" />
+                            <TextBlock>
+                                <Run Text="{Binding Display}"></Run>
+                                <Span Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
+                                    [■]
+                                </Span>
+                            </TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
