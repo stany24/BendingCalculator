@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Assets.Localization.Static;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed
 
 namespace BendingCalculator.Logic.Math;
 
-public class Piece : Element
+public partial class Piece : Element
 {
     #region Variables
     
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
     
     public ObservableCollection<Layer> Layers { get; set; } = new();
+    
+    [ObservableProperty]private string _name = string.Empty;
 
     private double _length;
 

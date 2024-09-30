@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Media;
+using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
@@ -28,6 +29,7 @@ public class PiecePreview : Border
         _grid.Children.Add(_preview);
         SizeChanged += (_, _) => UpdatePreview();
         this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview());
+        DataBaseEvents.PiecesChanged += (_, _) => UpdatePreview();
     }
 
     #endregion

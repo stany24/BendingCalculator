@@ -6,6 +6,7 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
@@ -84,6 +85,7 @@ public class LayerPreview : Border
         SizeChanged += (_, _) => UpdatePreview();
         LanguageEvents.LanguageChanged += UpdateLanguage;
         this.GetObservable(DisplayedLayerProperty).Subscribe(_ => UpdatePreview());
+        DataBaseEvents.LayersChanged += (_, _) => UpdatePreview();
     }
 
     ~LayerPreview()

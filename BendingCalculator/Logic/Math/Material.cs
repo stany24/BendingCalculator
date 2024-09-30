@@ -1,11 +1,14 @@
 ﻿// ReSharper disable ValueParameterNotUsed
 
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public class Material : Element
+public partial class Material : Element
 {
+    
+    [ObservableProperty]private string _name = string.Empty;
     public override string ToString()
     {
         return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";

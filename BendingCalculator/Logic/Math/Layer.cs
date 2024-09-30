@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BendingCalculator.Assets.Localization.Static;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 // ReSharper disable ValueParameterNotUsed  
 
 namespace BendingCalculator.Logic.Math;
 
-public class Layer : Element
+public partial class Layer : Element
 {
     #region Variables
+    
+    [ObservableProperty] private string _name = string.Empty;
 
     private double _widthAtCenter;
 
@@ -81,7 +84,7 @@ public class Layer : Element
 
     public Layer()
     {
-        LanguageEvents.LanguageChanged += UpdateDisplay;
+        LanguageEvents.LanguageChanged += (_,_) => UpdateDisplay();
     }
 
     public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
