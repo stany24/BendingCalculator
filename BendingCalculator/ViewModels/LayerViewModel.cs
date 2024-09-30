@@ -77,6 +77,7 @@ public partial class MainViewModel
     }
 
     private Material? _selectedMaterialForLayer;
+    private const double Tolerance = 0.00001;
 
     public Material? SelectedMaterialForLayer
     {
@@ -119,6 +120,7 @@ public partial class MainViewModel
     private void ChangeWidthSide()
     {
         if (SelectedLayer == null) return;
+        if(Math.Abs(SelectedLayer.WidthOnSides - WidthSide / 1000) < Tolerance) return;
         SelectedLayer.WidthOnSides = WidthSide / 1000;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
@@ -126,6 +128,7 @@ public partial class MainViewModel
     private void ChangeWidthCenter()
     {
         if (SelectedLayer == null) return;
+        if(Math.Abs(SelectedLayer.WidthAtCenter - WidthCenter / 1000) < Tolerance) return;
         SelectedLayer.WidthAtCenter = WidthCenter / 1000;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
@@ -133,6 +136,7 @@ public partial class MainViewModel
     private void ChangeHeightSide()
     {
         if (SelectedLayer == null) return;
+        if(Math.Abs(SelectedLayer.HeightOnSides - HeightSide / 1000) < Tolerance) return;
         SelectedLayer.HeightOnSides = HeightSide / 1000;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
@@ -140,6 +144,7 @@ public partial class MainViewModel
     private void ChangeHeightCenter()
     {
         if (SelectedLayer == null) return;
+        if(Math.Abs(SelectedLayer.HeightAtCenter - HeightCenter / 1000) < Tolerance) return;
         SelectedLayer.HeightAtCenter = HeightCenter / 1000;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
@@ -147,6 +152,7 @@ public partial class MainViewModel
     private void MaterialChanged()
     {
         if (SelectedLayer == null) return;
+        if(SelectedLayer.Material.Id == SelectedMaterialForLayer.Id) return;
         SelectedLayer.Material = SelectedMaterialForLayer;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }

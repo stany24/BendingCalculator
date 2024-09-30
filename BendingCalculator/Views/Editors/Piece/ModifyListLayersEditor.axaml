@@ -28,7 +28,7 @@
             MinHeight="200"
             SelectionMode="Multiple"
             SelectedItems="{Binding SelectedLayersOfSelectedPiece}"
-            ItemsSource="{Binding SelectedPiece.Layers}">
+            ItemsSource="{Binding LayersOfSelectedPiece}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

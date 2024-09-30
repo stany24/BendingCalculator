@@ -91,6 +91,7 @@ public partial class MainViewModel
     private void PieceLengthChanged()
     {
         if (SelectedPiece == null) return;
+        if (Math.Abs(SelectedPiece.Length - PieceLength / 1000) < Tolerance) return;
         SelectedPiece.Length = PieceLength / 1000;
         DataBaseUpdater.UpdatePieces(_connection, SelectedPiece);
     }
@@ -98,6 +99,7 @@ public partial class MainViewModel
     private void PieceNameChanged()
     {
         if (SelectedPiece == null) return;
+        if (SelectedPiece.Name == PieceName) return;
         SelectedPiece.Name = PieceName;
         DataBaseUpdater.UpdatePieces(_connection, SelectedPiece);
     }
@@ -138,6 +140,7 @@ public partial class MainViewModel
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
         UiEnabledPieceEditor = false;
+        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     #endregion

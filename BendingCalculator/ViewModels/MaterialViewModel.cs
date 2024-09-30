@@ -94,6 +94,7 @@ public partial class MainViewModel
     private void MaterialNameChanged()
     {
         if (SelectedMaterial is null) return;
+        if(SelectedMaterial.Name == MaterialName) return;
         SelectedMaterial.Name = MaterialName;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
@@ -101,6 +102,7 @@ public partial class MainViewModel
     private void MaterialColorChanged()
     {
         if (SelectedMaterial is null) return;
+        if(SelectedMaterial.Color == Color) return;
         SelectedMaterial.Color= Color;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
@@ -120,6 +122,7 @@ public partial class MainViewModel
             default: return;
         }
 
+        if (Math.Abs(SelectedMaterial.E - EValue * multiplication) < 0.000001) return;
         SelectedMaterial.E = (long)EValue * multiplication;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }

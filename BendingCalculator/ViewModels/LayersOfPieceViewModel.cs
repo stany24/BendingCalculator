@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
@@ -32,6 +33,15 @@ public partial class MainViewModel
     #region Bindings
 
     public ObservableCollection<Layer> SelectedLayersOfSelectedPiece { get; set; } = new();
+    
+    private ObservableCollection<Layer> _layersOfSelectedPiece = new();
+
+    public ObservableCollection<Layer> LayersOfSelectedPiece
+    {
+        get => _layersOfSelectedPiece;
+        set => SetProperty(ref _layersOfSelectedPiece, value);
+    }
+    
     public ObservableCollection<Layer> SelectedAvailableLayers { get; set; } = new();
 
     private long _pieceCurrentlyModifiedId;
@@ -107,6 +117,7 @@ public partial class MainViewModel
     public void AddLayerToPiece()
     {
         DataBaseUpdater.AddLayerToPiece(_connection, PieceCurrentlyModifiedId, SelectedAvailableLayers[0]);
+        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     public void RemoveLayersToPiece()
@@ -119,6 +130,7 @@ public partial class MainViewModel
             DataBaseUpdater.RemoveLayerToPiece(_connection, SelectedPiece.Id, nbLayer, idToRemove[i]);
             nbLayer--;
         }
+        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     #endregion
