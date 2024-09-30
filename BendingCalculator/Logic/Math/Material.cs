@@ -29,16 +29,7 @@ public partial class Material : Element
         }
     }
 
-    private Color _color;
-    public Color Color
-    {
-        get => _color;
-        set
-        {
-            _color = value;
-            UpdateDisplay();
-        }
-    }
+    [ObservableProperty] private Color _color;
 
     #endregion
 

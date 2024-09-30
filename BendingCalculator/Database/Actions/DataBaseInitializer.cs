@@ -11,7 +11,7 @@ public static class DataBaseInitializer
                                                 MaterialId integer not null constraint MaterialId primary key autoincrement,
                                                 Name TEXT, E BIGINT not null,
                                                 IsRemoved BOOL not null,
-                                                Color integer default 0 not null);";
+                                                Color TEXT(6) default 0 not null);";
     private const string CreateLayerTable = @"create table Layer(
                                             LayerId integer not null constraint LayerId primary key autoincrement,
                                             MaterialId integer constraint MaterialId references Material,

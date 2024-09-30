@@ -1,5 +1,6 @@
 using System;
 using System.Data.SQLite;
+using Avalonia.Media;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Database.Actions;
@@ -13,7 +14,8 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
         cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
-        cmd.Parameters.AddWithValue("@Color", Convert.ToInt64(material.Color.ToUInt32()));
+        string color = material.Color.R.ToString("X2")+material.Color.G.ToString("X2")+material.Color.B.ToString("X2");
+        cmd.Parameters.AddWithValue("@Color", color );
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }

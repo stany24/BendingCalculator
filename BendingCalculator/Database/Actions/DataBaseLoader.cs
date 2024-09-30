@@ -114,16 +114,17 @@ public static class DataBaseLoader
 
     private static Material LoadMaterial(IDataRecord reader)
     {
-        long colorValue64 = (long)reader["Color"];
-        if (colorValue64 < 0) { colorValue64 = 0; }
-        if (colorValue64 > uint.MaxValue) { colorValue64 = uint.MaxValue; }
-        uint colorValue32 = (uint)colorValue64; 
-        return new Material
+        string? colorHexadecimal = Convert.ToString(reader["Color"]);
+        byte r = byte.Parse(colorHexadecimal?.Substring(0, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
+        byte g = byte.Parse(colorHexadecimal?.Substring(2, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
+        byte b = byte.Parse(colorHexadecimal?.Substring(4, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
+        Color color = Color.FromRgb(r, g, b);
+            return new Material
         {
             Id = Convert.ToInt32(reader[MaterialId]),
             E = Convert.ToInt64(reader["E"]),
             Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-            Color = Color.FromUInt32(colorValue32)
+            Color = color
         };
     }
 

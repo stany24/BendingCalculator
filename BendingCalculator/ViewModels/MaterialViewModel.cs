@@ -141,6 +141,7 @@ public partial class MainViewModel
             Materials[i].Id = materials[i].Id;
             Materials[i].Name = materials[i].Name;
             Materials[i].E = materials[i].E;
+            Materials[i].Color = materials[i].Color;
         }
     }
 
@@ -152,7 +153,7 @@ public partial class MainViewModel
             UiEnabledMaterialEditor = false;
             MaterialName = string.Empty;
             EValue = 0;
-            Color = Color.FromArgb(0,0,0,0);
+            Color = Color.FromRgb(1,2,3);
             return;
         }
 
