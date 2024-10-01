@@ -109,17 +109,18 @@ public class LayerPreview : Border
         UpdateLayout();
         double width = _grid.ColumnDefinitions[2].ActualWidth - 2 * PreviewMargin;
         double height = Bounds.Size.Height - 3 * PreviewMargin;
+        Color color = (DisplayedLayer.Material ?? new Material()).Color;
         List<Shape> shapes = new()
         {
             GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2,
-                DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides),
+                DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides,color),
             GetLayerShape(PreviewMargin, 2 * PreviewMargin + height / 2, width, height / 2,
-                DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides)
+                DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides,color)
         };
         _preview.Children.AddRange(shapes);
     }
 
-    private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides)
+    private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides,Color color)
     {
         int minusCenter = 0;
         int minusSides = 0;
@@ -129,7 +130,7 @@ public class LayerPreview : Border
             minusCenter = (int)((height - height * proportionCenterOverSides) / 2);
         return new Path
         {
-            Fill = Brushes.LightBlue,
+            Fill = new SolidColorBrush(color),
             Data = new PathGeometry
             {
                 Figures = new PathFigures

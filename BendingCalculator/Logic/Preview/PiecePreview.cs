@@ -98,22 +98,24 @@ public class PiecePreview : Border
             double horizontalMargin = (width - pieceWidth) / 2;
             double pieceHeight = (height - PreviewMargin * (DisplayedPiece.Layers.Count - 1)) *
                                  (DisplayedPiece.Layers[i - 1].HeightOnSides / totalHeight);
+            Color color = (DisplayedPiece.Layers[i - 1].Material ?? new Material()).Color;
             shapes.Add(GetRectangle(
                 PreviewMargin + horizontalMargin,
                 PreviewMargin * i + heightOfPiecesBefore,
                 pieceWidth,
-                pieceHeight));
+                pieceHeight,
+                color));
             heightOfPiecesBefore += pieceHeight;
         }
 
         _preview.Children.AddRange(shapes);
     }
 
-    private static Path GetRectangle(double x, double y, double width, double height)
+    private static Path GetRectangle(double x, double y, double width, double height,Color color)
     {
         return new Path
         {
-            Fill = Brushes.LightBlue,
+            Fill = new SolidColorBrush(color),
             Data = new PathGeometry
             {
                 Figures = new PathFigures
