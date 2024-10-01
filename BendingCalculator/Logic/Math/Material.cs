@@ -39,11 +39,13 @@ public partial class Material : Element
     {
         Name = name;
         _e = e;
+        Color = Colors.White;
     }
 
     public Material()
     {
         Name = "new";
+        Color = Colors.White;
     }
 
     #endregion

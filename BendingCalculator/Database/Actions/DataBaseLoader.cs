@@ -114,10 +114,11 @@ public static class DataBaseLoader
 
     private static Material LoadMaterial(IDataRecord reader)
     {
-        string? colorHexadecimal = Convert.ToString(reader["Color"]);
-        byte r = byte.Parse(colorHexadecimal?.Substring(0, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
-        byte g = byte.Parse(colorHexadecimal?.Substring(2, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
-        byte b = byte.Parse(colorHexadecimal?.Substring(4, 2) ?? "00", System.Globalization.NumberStyles.HexNumber);
+        string colorHexadecimal = Convert.ToString(reader["Color"]) ?? "ffffff";
+        if(colorHexadecimal.Length < 6) colorHexadecimal = "ffffff";
+        byte r = byte.Parse(colorHexadecimal.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+        byte g = byte.Parse(colorHexadecimal.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        byte b = byte.Parse(colorHexadecimal.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
         Color color = Color.FromRgb(r, g, b);
             return new Material
         {
