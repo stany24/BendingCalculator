@@ -94,6 +94,8 @@ public partial class MainViewModel
             SelectedPiece.Layers.Insert(index - 1, selectedItem);
             SelectedLayersOfSelectedPiece.Add(selectedItem);
         }
+        DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
+        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     public void MoveLayerDownInPiece()
@@ -108,6 +110,8 @@ public partial class MainViewModel
             SelectedPiece.Layers.Insert(index + 1, selectedItem);
             SelectedLayersOfSelectedPiece.Add(selectedItem);
         }
+        DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
+        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     #endregion

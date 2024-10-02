@@ -83,4 +83,18 @@ public static class DataBaseUpdater
 
         DataBaseEvents.RaisePiecesChangedEvent();
     }
+
+    public static void MoveLayerInPiece(SQLiteConnection connection, Piece piece)
+    {
+        using SQLiteCommand remove =
+            new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId", connection);
+        remove.Parameters.AddWithValue("@PieceId", piece.Id);
+        remove.ExecuteNonQuery();
+        
+        foreach (Layer pieceLayer in piece.Layers)
+        {
+            AddLayerToPiece(connection, piece.Id, pieceLayer);
+        }
+        DataBaseEvents.RaisePiecesChangedEvent();
+    }
 }
