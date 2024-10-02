@@ -94,18 +94,31 @@ public partial class MainViewModel
     public void MoveLayerUpInPiece()
     {
         if (SelectedPiece == null) return;
-        List<int> ids = new();
-        for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
+        List<int> idsToReselect = new();
+        List<int> idsToMove = new();
+        
+        // Find all ids of the layers we need to move
+        for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
             int index = SelectedPiece.Layers.IndexOf(selectedItem);
-            if (index <= 0) continue;
-            SelectedPiece.Layers.Move(index,index - 1);
-            ids.Add(index -1);
+            if (index-1 < 0 ) continue;
+            idsToMove.Add(index);
         }
+        
+        // Sort the ids and move the layers
+        idsToMove.Sort();
+        foreach (int index in idsToMove)
+        {
+            SelectedPiece.Layers.Move(index,index-1);
+            idsToReselect.Add(index-1);
+        }
+        
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
+        
+        // Reselect the layers
         LayersOfSelectedPiece = SelectedPiece.Layers;
-        foreach (int id in ids)
+        foreach (int id in idsToReselect)
         {
             SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
         }
@@ -114,18 +127,30 @@ public partial class MainViewModel
     public void MoveLayerDownInPiece()
     {
         if (SelectedPiece == null) return;
-        List<int> ids = new();
+        List<int> idsToReselect = new();
+        List<int> idsToMove = new();
+        
+        // Find all ids of the layers we need to move
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
             int index = SelectedPiece.Layers.IndexOf(selectedItem);
             if (index == SelectedPiece.Layers.Count - 1) continue;
-            SelectedPiece.Layers.Move(index,index +1);
-            ids.Add(index+1);
+            idsToMove.Add(index);
         }
+
+        // Sort the ids and move the layers
+        idsToMove = idsToMove.OrderByDescending(c => c).ToList();
+        foreach (int index in idsToMove)
+        {
+            SelectedPiece.Layers.Move(index,index+1);
+            idsToReselect.Add(index+1);
+        }
+        
+        // Reselect the layers
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
         LayersOfSelectedPiece = SelectedPiece.Layers;
-        foreach (int id in ids)
+        foreach (int id in idsToReselect)
         {
             SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
         }
