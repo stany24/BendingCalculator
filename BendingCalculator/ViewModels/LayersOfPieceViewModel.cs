@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DynamicData;
 
 namespace BendingCalculator.ViewModels;
 
@@ -31,8 +33,15 @@ public partial class MainViewModel
     }
 
     #region Bindings
+    
+    private ObservableCollection<Layer> _selectedLayersOfSelectedPiece = new();
 
-    public ObservableCollection<Layer> SelectedLayersOfSelectedPiece { get; set; } = new();
+    public ObservableCollection<Layer> SelectedLayersOfSelectedPiece
+    {
+        get => _selectedLayersOfSelectedPiece;
+        set => SetProperty(ref _selectedLayersOfSelectedPiece, value);
+    }
+    
     
     private ObservableCollection<Layer> _layersOfSelectedPiece = new();
 
@@ -85,33 +94,41 @@ public partial class MainViewModel
     public void MoveLayerUpInPiece()
     {
         if (SelectedPiece == null) return;
+        List<int> ids = new();
         for (int i = 0; i < SelectedLayersOfSelectedPiece.Count; i++)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
             int index = SelectedPiece.Layers.IndexOf(selectedItem);
             if (index <= 0) continue;
-            SelectedPiece.Layers.RemoveAt(index);
-            SelectedPiece.Layers.Insert(index - 1, selectedItem);
-            SelectedLayersOfSelectedPiece.Add(selectedItem);
+            SelectedPiece.Layers.Move(index,index - 1);
+            ids.Add(index -1);
         }
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
         LayersOfSelectedPiece = SelectedPiece.Layers;
+        foreach (int id in ids)
+        {
+            SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
+        }
     }
 
     public void MoveLayerDownInPiece()
     {
         if (SelectedPiece == null) return;
+        List<int> ids = new();
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
             int index = SelectedPiece.Layers.IndexOf(selectedItem);
             if (index == SelectedPiece.Layers.Count - 1) continue;
-            SelectedPiece.Layers.RemoveAt(index);
-            SelectedPiece.Layers.Insert(index + 1, selectedItem);
-            SelectedLayersOfSelectedPiece.Add(selectedItem);
+            SelectedPiece.Layers.Move(index,index +1);
+            ids.Add(index+1);
         }
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
         LayersOfSelectedPiece = SelectedPiece.Layers;
+        foreach (int id in ids)
+        {
+            SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
+        }
     }
 
     #endregion
