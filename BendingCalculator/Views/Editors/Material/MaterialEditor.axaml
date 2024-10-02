@@ -33,12 +33,12 @@
             VerticalAlignment="Center"
             Grid.Column="2"
             Grid.Row="2"
-            Text="Color:"/>
+            Text="Color:" />
         <ColorPicker
             Grid.Column="5"
             Grid.Row="2"
             IsEnabled="True"
-            Color="{Binding Color, Mode=TwoWay}"/>
+            Color="{Binding Color, Mode=TwoWay}" />
         <TextBlock
             Name="LblE"
             VerticalAlignment="Center"
@@ -75,8 +75,9 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                            <Run Text="{Binding Display}"></Run>
-                            <Span Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
+                            <Run Text="{Binding Display}" />
+                            <Span
+                                Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
                                 [■]
                             </Span>
                         </TextBlock>

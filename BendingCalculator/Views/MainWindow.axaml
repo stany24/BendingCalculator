@@ -67,7 +67,7 @@
                 </Grid>
                 <Separator
                     Grid.Row="1"
-                    Grid.Column="0"></Separator>
+                    Grid.Column="0" />
                 <Grid
                     Name="GridResult"
                     Margin="5"
@@ -230,7 +230,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Border>
-                
+
                 <preview:LayerPreview
                     Name="LayerPreview"
                     Classes="border thin"
@@ -284,8 +284,9 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock>
-                                        <Run Text="{Binding Display}"></Run>
-                                        <Span Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
+                                        <Run Text="{Binding Display}" />
+                                        <Span
+                                            Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
                                             [■]
                                         </Span>
                                     </TextBlock>
@@ -296,7 +297,7 @@
                 </Border>
             </Grid>
         </Border>
-        
+
         <Border
             Grid.Column="0"
             Grid.Row="2"
@@ -310,7 +311,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Grid.Column="0"
-                    Grid.Row=""/>
+                    Grid.Row="" />
                 <Button
                     Name="BtnStart"
                     Grid.Row="2"

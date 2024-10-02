@@ -11,11 +11,13 @@ namespace BendingCalculator.ViewModels;
 public partial class MainViewModel
 {
     #region Bindings
+
     [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
     [ObservableProperty] private bool _uiEnabledMaterialEditor;
     [ObservableProperty] private ObservableCollection<Material> _materials = new();
 
     private Color _color;
+
     public Color Color
     {
         get => _color;
@@ -27,6 +29,7 @@ public partial class MainViewModel
     }
 
     private Material? _selectedMaterial;
+
     public Material? SelectedMaterial
     {
         get => _selectedMaterial;
@@ -94,16 +97,16 @@ public partial class MainViewModel
     private void MaterialNameChanged()
     {
         if (SelectedMaterial is null) return;
-        if(SelectedMaterial.Name == MaterialName) return;
+        if (SelectedMaterial.Name == MaterialName) return;
         SelectedMaterial.Name = MaterialName;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
-    
+
     private void MaterialColorChanged()
     {
         if (SelectedMaterial is null) return;
-        if(SelectedMaterial.Color == Color) return;
-        SelectedMaterial.Color= Color;
+        if (SelectedMaterial.Color == Color) return;
+        SelectedMaterial.Color = Color;
         DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
     }
 
@@ -147,13 +150,12 @@ public partial class MainViewModel
 
     private void SelectedMaterialChanged()
     {
-        
         if (SelectedMaterial == null)
         {
             UiEnabledMaterialEditor = false;
             MaterialName = string.Empty;
             EValue = 0;
-            Color = Color.FromRgb(1,2,3);
+            Color = Color.FromRgb(1, 2, 3);
             return;
         }
 

@@ -5,28 +5,27 @@
              xmlns:preview="clr-namespace:BendingCalculator.Logic.Preview"
              RequestedThemeVariant="Default">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-    
+
     <Application.Styles>
         <FluentTheme />
         <StyleInclude
             Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
         <Style>
             <Style Selector="Border.border,preview|PiecePreview.border,preview|LayerPreview.border">
-                <Setter Property="CornerRadius" Value="4"/>
-                <Setter Property="BorderBrush" Value="Gray"/>
-                <Setter Property="Padding" Value="4"/>
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Padding" Value="4" />
             </Style>
             <Style Selector="Border.thick">
-                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderThickness" Value="2" />
             </Style>
             <Style Selector="Border.thin,preview|PiecePreview.thin,preview|LayerPreview.thin">
-                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderThickness" Value="1" />
             </Style>
         </Style>
     </Application.Styles>
-    
-    
-    
+
+
     <Application.DataTemplates>
         <bendingCalculator:ViewLocator />
     </Application.DataTemplates>

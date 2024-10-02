@@ -111,7 +111,7 @@ public class PiecePreview : Border
         _preview.Children.AddRange(shapes);
     }
 
-    private static Path GetRectangle(double x, double y, double width, double height,Color color)
+    private static Path GetRectangle(double x, double y, double width, double height, Color color)
     {
         return new Path
         {

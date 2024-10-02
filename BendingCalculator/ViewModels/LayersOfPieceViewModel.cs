@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using CommunityToolkit.Mvvm.ComponentModel;
-using DynamicData;
 
 namespace BendingCalculator.ViewModels;
 
@@ -33,7 +31,7 @@ public partial class MainViewModel
     }
 
     #region Bindings
-    
+
     private ObservableCollection<Layer> _selectedLayersOfSelectedPiece = new();
 
     public ObservableCollection<Layer> SelectedLayersOfSelectedPiece
@@ -41,8 +39,8 @@ public partial class MainViewModel
         get => _selectedLayersOfSelectedPiece;
         set => SetProperty(ref _selectedLayersOfSelectedPiece, value);
     }
-    
-    
+
+
     private ObservableCollection<Layer> _layersOfSelectedPiece = new();
 
     public ObservableCollection<Layer> LayersOfSelectedPiece
@@ -50,7 +48,7 @@ public partial class MainViewModel
         get => _layersOfSelectedPiece;
         set => SetProperty(ref _layersOfSelectedPiece, value);
     }
-    
+
     public ObservableCollection<Layer> SelectedAvailableLayers { get; set; } = new();
 
     private long _pieceCurrentlyModifiedId;
@@ -96,32 +94,29 @@ public partial class MainViewModel
         if (SelectedPiece == null) return;
         List<int> idsToReselect = new();
         List<int> idsToMove = new();
-        
+
         // Find all ids of the layers we need to move
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
             Layer selectedItem = SelectedLayersOfSelectedPiece[i];
             int index = SelectedPiece.Layers.IndexOf(selectedItem);
-            if (index-1 < 0 ) continue;
+            if (index - 1 < 0) continue;
             idsToMove.Add(index);
         }
-        
+
         // Sort the ids and move the layers
         idsToMove.Sort();
         foreach (int index in idsToMove)
         {
-            SelectedPiece.Layers.Move(index,index-1);
-            idsToReselect.Add(index-1);
+            SelectedPiece.Layers.Move(index, index - 1);
+            idsToReselect.Add(index - 1);
         }
-        
+
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
-        
+
         // Reselect the layers
         LayersOfSelectedPiece = SelectedPiece.Layers;
-        foreach (int id in idsToReselect)
-        {
-            SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
-        }
+        foreach (int id in idsToReselect) SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
     }
 
     public void MoveLayerDownInPiece()
@@ -129,7 +124,7 @@ public partial class MainViewModel
         if (SelectedPiece == null) return;
         List<int> idsToReselect = new();
         List<int> idsToMove = new();
-        
+
         // Find all ids of the layers we need to move
         for (int i = SelectedLayersOfSelectedPiece.Count - 1; i >= 0; i--)
         {
@@ -143,17 +138,14 @@ public partial class MainViewModel
         idsToMove = idsToMove.OrderByDescending(c => c).ToList();
         foreach (int index in idsToMove)
         {
-            SelectedPiece.Layers.Move(index,index+1);
-            idsToReselect.Add(index+1);
+            SelectedPiece.Layers.Move(index, index + 1);
+            idsToReselect.Add(index + 1);
         }
-        
+
         // Reselect the layers
         DataBaseUpdater.MoveLayerInPiece(_connection, SelectedPiece);
         LayersOfSelectedPiece = SelectedPiece.Layers;
-        foreach (int id in idsToReselect)
-        {
-            SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
-        }
+        foreach (int id in idsToReselect) SelectedLayersOfSelectedPiece.Add(LayersOfSelectedPiece[id]);
     }
 
     #endregion
@@ -162,6 +154,7 @@ public partial class MainViewModel
 
     public void AddLayerToPiece()
     {
+        if (SelectedPiece == null) return;
         DataBaseUpdater.AddLayerToPiece(_connection, PieceCurrentlyModifiedId, SelectedAvailableLayers[0]);
         LayersOfSelectedPiece = SelectedPiece.Layers;
     }
@@ -176,6 +169,7 @@ public partial class MainViewModel
             DataBaseUpdater.RemoveLayerToPiece(_connection, SelectedPiece.Id, nbLayer, idToRemove[i]);
             nbLayer--;
         }
+
         LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 

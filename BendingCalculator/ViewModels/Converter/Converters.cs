@@ -1,7 +1,5 @@
 ﻿using Avalonia.Data.Converters;
 using Avalonia.Media;
-using BendingCalculator.Assets.Localization.Static;
-using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.ViewModels.Converter;
 
@@ -20,8 +18,4 @@ public static class Converters
     {
         return new SolidColorBrush(color);
     }
-    
-    public static FuncValueConverter<Layer?, string> LayerToString { get; } = 
-        new(layer => $"{layer.HeightOnSides * 1000}");
-
 }

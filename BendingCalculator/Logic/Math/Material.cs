@@ -7,8 +7,8 @@ namespace BendingCalculator.Logic.Math;
 
 public partial class Material : Element
 {
-    
-    [ObservableProperty]private string _name = string.Empty;
+    [ObservableProperty] private string _name = string.Empty;
+
     public override string ToString()
     {
         return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";

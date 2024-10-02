@@ -113,14 +113,15 @@ public class LayerPreview : Border
         List<Shape> shapes = new()
         {
             GetLayerShape(PreviewMargin, PreviewMargin, width, height / 2,
-                DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides,color),
+                DisplayedLayer.HeightAtCenter / DisplayedLayer.HeightOnSides, color),
             GetLayerShape(PreviewMargin, 2 * PreviewMargin + height / 2, width, height / 2,
-                DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides,color)
+                DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides, color)
         };
         _preview.Children.AddRange(shapes);
     }
 
-    private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides,Color color)
+    private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides,
+        Color color)
     {
         int minusCenter = 0;
         int minusSides = 0;

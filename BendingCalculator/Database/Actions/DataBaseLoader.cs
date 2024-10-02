@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using Avalonia.Media;
 using BendingCalculator.Logic.Math;
 
@@ -13,7 +14,7 @@ public static class DataBaseLoader
     private const string PieceId = "PieceId";
     private const string LayerId = "LayerId";
     private const string MaterialId = "MaterialId";
-    
+
     public static ObservableCollection<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
     {
         using SQLiteCommand cmd = new(
@@ -85,10 +86,7 @@ public static class DataBaseLoader
         {
             Layer layer = LoadLayer(reader);
 
-            if (reader[MaterialId] != DBNull.Value)
-            {
-                layer.Material = LoadMaterial(reader);
-            }
+            if (reader[MaterialId] != DBNull.Value) layer.Material = LoadMaterial(reader);
             layers.Add(layer);
         }
 
@@ -104,10 +102,7 @@ public static class DataBaseLoader
 
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Material> materials = new();
-        while (reader.Read())
-        {
-            materials.Add(LoadMaterial(reader));
-        }
+        while (reader.Read()) materials.Add(LoadMaterial(reader));
 
         return materials;
     }
@@ -115,12 +110,12 @@ public static class DataBaseLoader
     private static Material LoadMaterial(IDataRecord reader)
     {
         string colorHexadecimal = Convert.ToString(reader["Color"]) ?? "ffffff";
-        if(colorHexadecimal.Length < 6) colorHexadecimal = "ffffff";
-        byte r = byte.Parse(colorHexadecimal.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-        byte g = byte.Parse(colorHexadecimal.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-        byte b = byte.Parse(colorHexadecimal.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+        if (colorHexadecimal.Length < 6) colorHexadecimal = "ffffff";
+        byte r = byte.Parse(colorHexadecimal[..2], NumberStyles.HexNumber);
+        byte g = byte.Parse(colorHexadecimal.Substring(2, 2), NumberStyles.HexNumber);
+        byte b = byte.Parse(colorHexadecimal.Substring(4, 2), NumberStyles.HexNumber);
         Color color = Color.FromRgb(r, g, b);
-            return new Material
+        return new Material
         {
             Id = Convert.ToInt32(reader[MaterialId]),
             E = Convert.ToInt64(reader["E"]),

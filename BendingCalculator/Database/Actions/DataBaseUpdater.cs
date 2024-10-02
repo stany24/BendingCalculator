@@ -1,6 +1,4 @@
-using System;
 using System.Data.SQLite;
-using Avalonia.Media;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Database.Actions;
@@ -10,12 +8,14 @@ public static class DataBaseUpdater
     public static void UpdateMaterials(SQLiteConnection connection, Material material)
     {
         using SQLiteCommand cmd = new(
-            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides, Color = @Color WHERE MaterialId= @Id;", connection);
+            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides, Color = @Color WHERE MaterialId= @Id;",
+            connection);
         cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
         cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
-        string color = material.Color.R.ToString("X2")+material.Color.G.ToString("X2")+material.Color.B.ToString("X2");
-        cmd.Parameters.AddWithValue("@Color", color );
+        string color = material.Color.R.ToString("X2") + material.Color.G.ToString("X2") +
+                       material.Color.B.ToString("X2");
+        cmd.Parameters.AddWithValue("@Color", color);
         cmd.ExecuteNonQuery();
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
@@ -90,11 +90,8 @@ public static class DataBaseUpdater
             new("DELETE FROM PieceToLayer WHERE PieceId = @PieceId", connection);
         remove.Parameters.AddWithValue("@PieceId", piece.Id);
         remove.ExecuteNonQuery();
-        
-        foreach (Layer pieceLayer in piece.Layers)
-        {
-            AddLayerToPiece(connection, piece.Id, pieceLayer);
-        }
+
+        foreach (Layer pieceLayer in piece.Layers) AddLayerToPiece(connection, piece.Id, pieceLayer);
         DataBaseEvents.RaisePiecesChangedEvent();
     }
 }

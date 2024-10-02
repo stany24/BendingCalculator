@@ -10,8 +10,19 @@ namespace BendingCalculator.Logic.Math;
 
 public partial class Layer : Element
 {
+    #region Display
+
+    public sealed override string ToString()
+    {
+        return Material != null
+            ? $"{Material.Name} {Static.Center}={WidthAtCenter * 1000}x{HeightAtCenter * 1000} {Static.Sides}={WidthOnSides * 1000}x{HeightOnSides * 1000}"
+            : $"{Static.No} {Static.Material} {Static.Center}={WidthAtCenter * 1000}x{HeightAtCenter * 1000} {Static.Sides}={WidthOnSides * 1000}x{HeightOnSides * 1000}";
+    }
+
+    #endregion
+
     #region Variables
-    
+
     [ObservableProperty] private string _name = string.Empty;
 
     private double _widthAtCenter;
@@ -84,7 +95,7 @@ public partial class Layer : Element
 
     public Layer()
     {
-        LanguageEvents.LanguageChanged += (_,_) => UpdateDisplay();
+        LanguageEvents.LanguageChanged += (_, _) => UpdateDisplay();
     }
 
     public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
@@ -100,17 +111,6 @@ public partial class Layer : Element
     ~Layer()
     {
         LanguageEvents.LanguageChanged -= UpdateDisplay;
-    }
-
-    #endregion
-
-    #region Display
-
-    public sealed override string ToString()
-    {
-        return Material != null
-            ? $"{Material.Name} {Static.Center}={WidthAtCenter * 1000}x{HeightAtCenter * 1000} {Static.Sides}={WidthOnSides * 1000}x{HeightOnSides * 1000}"
-            : $"{Static.No} {Static.Material} {Static.Center}={WidthAtCenter * 1000}x{HeightAtCenter * 1000} {Static.Sides}={WidthOnSides * 1000}x{HeightOnSides * 1000}";
     }
 
     #endregion

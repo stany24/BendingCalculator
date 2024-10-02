@@ -17,7 +17,6 @@ using BendingCalculator.Views.Editors.Material;
 using BendingCalculator.Views.Editors.Piece;
 using BendingCalculator.Views.Warning;
 using CommunityToolkit.Mvvm.ComponentModel;
-using DynamicData.Binding;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;

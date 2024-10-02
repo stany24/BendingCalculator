@@ -67,7 +67,8 @@
     <!-- End Multiple window section -->
 
     <!-- Begin Main window helper section -->
-    <system:String x:Key="MainWindowHelper"># fenêtre principale
+    <system:String x:Key="MainWindowHelper">
+        # fenêtre principale
         Elle est utilisée pour avoir une vue d'ensemble de l'application, les résultats et commencer la simulation
         Il y a 6 différentes section dans cette fenêtre:
         - Force: Elle est utilisée pour modifier la force et ouvrir l'éditeur de force.
@@ -77,27 +78,33 @@
         - Résultats: Le graph montre les résultats de la simulation.
         - Commencer: Le boutton est utilisé pour commencer la simulation, une pièce doit être selectionnée dans la section pièce.
         Vous pouvez voir ici une vidéo avec une démo.
-        Vidéo ici</system:String>
+        Vidéo ici
+    </system:String>
     <!-- End Main window helper section -->
 
     <!-- Begin Main window helper section -->
-    <system:String x:Key="MaterialEditorHelper">Cette fenêtre est l'éditeur de matières, elle permet de créer de nouvelles matières et de les modifier, les matières ont plusieurs propriétés:
+    <system:String x:Key="MaterialEditorHelper">
+        Cette fenêtre est l'éditeur de matières, elle permet de créer de nouvelles matières et de les modifier, les matières ont plusieurs propriétés:
         - Le nom, pour que vous reconnaissiez la matière.
-        - E la constante de flexibilité.</system:String>
+        - E la constante de flexibilité.
+    </system:String>
 
     <!-- End Main window helper section -->
 
     <!-- Begin Layer editor helper section -->
-    <system:String x:Key="LayerEditorHelper">Cette fenêtre est l'éditeur de couche, elle permet de créer de nouvelles couches et de les modifier, les couches ont plusieurs propriétés:
+    <system:String x:Key="LayerEditorHelper">
+        Cette fenêtre est l'éditeur de couche, elle permet de créer de nouvelles couches et de les modifier, les couches ont plusieurs propriétés:
         - Largueur de la pièce au centre.
         - Largueur de la pièce des deux cotés.
         - Hauteur de la pièce au centre.
         - Hauteur de la pièce des deux cotés.
-        - La matière dont la couche est faite.</system:String>
+        - La matière dont la couche est faite.
+    </system:String>
     <!-- End Layer editor helper section -->
 
     <!-- Begin Piece editor helper section -->
-    <system:String x:Key="PieceEditorHelper">Cette fenêtre est l'éditeur de pièce, elle permet de créer de nouvelles pièces et de les modifier, les pièces ont plusieurs propriétés:
+    <system:String x:Key="PieceEditorHelper">
+        Cette fenêtre est l'éditeur de pièce, elle permet de créer de nouvelles pièces et de les modifier, les pièces ont plusieurs propriétés:
         - Le nom, pour que vous reconnaissiez la pièce.
         - La longueur de la pièce.
         Quand vous sélectionnez qu'une seule pièce dans la listbox de droite vous pouvez voir ses couches dans la listbox de droite et vous pouvez clicker le boutton "Changer les couches" pour customiser la pièce.
@@ -107,7 +114,8 @@
         - Ajouter: permet d'ajouter les couches selectionnées dans la listbox de droite à la pièce.
         - Retirer: permet de retirer les couches selectionnées dans la listbox de gauche à la pièce.
         - Descendre: permet de descendre les couches selectionnées dans la listbox de gauche.
-        - Monter: permet de monter les couches selectionnées dans la listbox de gauche.</system:String>
+        - Monter: permet de monter les couches selectionnées dans la listbox de gauche.
+    </system:String>
     <!-- End Piece editor helper section -->
 
 </ResourceDictionary>

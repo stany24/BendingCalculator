@@ -11,13 +11,26 @@ namespace BendingCalculator.Logic.Math;
 
 public partial class Piece : Element
 {
+    #region Display
+
+    public override string ToString()
+    {
+        return Layers.Count switch
+        {
+            0 => $"{Name} / {Length * 1000}mm",
+            _ => $"{Name} / {Length * 1000}mm / {Layers.Count} {Static.Layers}"
+        };
+    }
+
+    #endregion
+
     #region Variables
-    
+
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
-    
+
     public ObservableCollection<Layer> Layers { get; set; } = new();
-    
-    [ObservableProperty]private string _name = string.Empty;
+
+    [ObservableProperty] private string _name = string.Empty;
 
     private double _length;
 
@@ -63,19 +76,6 @@ public partial class Piece : Element
     ~Piece()
     {
         LanguageEvents.LanguageChanged -= UpdateDisplay;
-    }
-
-    #endregion
-
-    #region Display
-
-    public override string ToString()
-    {
-        return Layers.Count switch
-        {
-            0 => $"{Name} / {Length * 1000}mm",
-            _ => $"{Name} / {Length * 1000}mm / {Layers.Count} {Static.Layers}"
-        };
     }
 
     #endregion
