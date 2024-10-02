@@ -11,8 +11,8 @@
         x:DataType="viewModels:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="{DynamicResource TitleMainWindow}"
-        MinWidth="802"
-        MinHeight="355">
+        MinWidth="850"
+        MinHeight="600">
     <Grid
         Name="MainGrid"
         Margin="5"
@@ -142,7 +142,7 @@
             Classes="border thick">
             <Grid
                 Name="GridPiece"
-                ColumnDefinitions="Auto,10,Auto,*"
+                ColumnDefinitions="Auto,*,Auto"
                 RowDefinitions="Auto,10,*,10,*"
                 MinHeight="150">
                 <TextBlock
@@ -161,7 +161,7 @@
                     Classes="border thin"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Grid.ColumnSpan="4">
+                    Grid.ColumnSpan="3">
                     <ListBox
                         Name="LbxPiece"
                         VerticalAlignment="Stretch"
@@ -185,7 +185,7 @@
                     DisplayedPiece="{Binding SelectedPieceMainWindow,Mode=OneWay}"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Grid.ColumnSpan="4" />
+                    Grid.ColumnSpan="3" />
             </Grid>
         </Border>
         <Border
@@ -194,7 +194,7 @@
             Classes="border thick">
             <Grid
                 Name="GridLayer"
-                ColumnDefinitions="Auto,10,Auto,*"
+                ColumnDefinitions="Auto,*,Auto"
                 RowDefinitions="Auto,10,*,10,*"
                 MinHeight="150">
                 <TextBlock
@@ -213,7 +213,7 @@
                     Classes="border thin"
                     Grid.Row="2"
                     Grid.Column="0"
-                    Grid.ColumnSpan="4">
+                    Grid.ColumnSpan="3">
                     <ListBox
                         Name="LbxLayer"
                         SelectionMode="Single"
@@ -238,7 +238,7 @@
                     DisplayedLayer="{Binding SelectedLayerMainWindow,Mode=OneWay}"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Grid.ColumnSpan="4" />
+                    Grid.ColumnSpan="3" />
             </Grid>
         </Border>
         <Border
