@@ -21,7 +21,7 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseMaterialsChangedEvent();
     }
 
-    public static void UpdateLayers(SQLiteConnection connection, Layer layer)
+    public static void UpdateLayer(SQLiteConnection connection, Layer layer)
     {
         using SQLiteCommand cmd = new(
             "UPDATE Layer SET WidthAtCenter = @WidthAtCenter, WidthOnSides = @WidthOnSides, HeightAtCenter = @HeightAtCenter , HeightOnSides = @HeightOnSides , MaterialId = @MaterialId WHERE LayerId= @Id;",
@@ -36,7 +36,7 @@ public static class DataBaseUpdater
         DataBaseEvents.RaiseLayersChangedEvent();
     }
 
-    public static void UpdatePieces(SQLiteConnection connection, Piece piece)
+    public static void UpdatePiece(SQLiteConnection connection, Piece piece)
     {
         using SQLiteCommand cmd1 = new(
             "UPDATE Piece SET Name = @Name, Length = @Length WHERE PieceId= @Id;", connection);

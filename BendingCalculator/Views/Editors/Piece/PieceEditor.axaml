@@ -111,7 +111,17 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}" />
+                        <TextBlock>
+                            <Run Text="{Binding Material.Name}" />
+                            <Run Text="{DynamicResource CenterWithUnitWithColon}" />
+                            <Run Text="{Binding WidthAtCenter, Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="x" />
+                            <Run Text="{Binding WidthOnSides , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="{DynamicResource SidesWithUnitWithColon}" />
+                            <Run Text="{Binding HeightAtCenter , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="x" />
+                            <Run Text="{Binding HeightOnSides , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

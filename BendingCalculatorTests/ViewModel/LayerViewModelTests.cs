@@ -48,19 +48,21 @@ public class LayerViewModelTests
         _model.CreateNewMaterial();
         _model.CreateNewLayer();
         _model.SelectedLayer = _model.Layers[0];
-        Layer layer = new(_model.Materials[0], 1, 1, 1, 1);
-        _model.WidthCenter = 1000;
-        _model.WidthSide = 1000;
-        _model.HeightCenter = 1000;
-        _model.HeightSide = 1000;
-        _model.SelectedMaterialForLayer = _model.Materials[0];
-        Assert.AreEqual(layer.WidthAtCenter, _model.SelectedLayer.WidthAtCenter);
-        Assert.AreEqual(layer.WidthOnSides, _model.SelectedLayer.WidthOnSides);
-        Assert.AreEqual(layer.HeightAtCenter, _model.SelectedLayer.HeightAtCenter);
-        Assert.AreEqual(layer.HeightOnSides, _model.SelectedLayer.HeightOnSides);
-        Assert.AreEqual(layer.Material?.Name, _model.SelectedLayer.Material?.Name);
-        Assert.AreEqual(layer.Material?.E, _model.SelectedLayer.Material?.E);
-        Assert.AreEqual(layer.Material?.Id, _model.SelectedLayer.Material?.Id);
+        Material material = _model.Materials[0];
+        const int value = 1000;
+        _model.SelectedLayer.WidthAtCenter = 1000;
+        _model.SelectedLayer.WidthOnSides = 1000;
+        _model.SelectedLayer.HeightAtCenter = 1000;
+        _model.SelectedLayer.HeightOnSides = 1000;
+        _model.SelectedLayer.Material = _model.Materials[0];
+        Assert.AreEqual(value, _model.SelectedLayer.WidthAtCenter);
+        Assert.AreEqual(value, _model.SelectedLayer.WidthOnSides);
+        Assert.AreEqual(value, _model.SelectedLayer.HeightAtCenter);
+        Assert.AreEqual(value, _model.SelectedLayer.HeightOnSides);
+        Assert.AreEqual(material.Name, _model.SelectedLayer.Material?.Name);
+        Assert.AreEqual(material.E, _model.SelectedLayer.Material?.E);
+        Assert.AreEqual(material.Id, _model.SelectedLayer.Material?.Id);
+        Assert.AreEqual(material.Unit, _model.SelectedLayer.Material?.Unit);
     }
 
     [TestMethod]

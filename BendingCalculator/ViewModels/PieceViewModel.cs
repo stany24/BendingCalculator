@@ -93,7 +93,7 @@ public partial class MainViewModel
         if (SelectedPiece == null) return;
         if (Math.Abs(SelectedPiece.Length - PieceLength / 1000) < Tolerance) return;
         SelectedPiece.Length = PieceLength / 1000;
-        DataBaseUpdater.UpdatePieces(_connection, SelectedPiece);
+        DataBaseUpdater.UpdatePiece(_connection, SelectedPiece);
     }
 
     private void PieceNameChanged()
@@ -101,7 +101,7 @@ public partial class MainViewModel
         if (SelectedPiece == null) return;
         if (SelectedPiece.Name == PieceName) return;
         SelectedPiece.Name = PieceName;
-        DataBaseUpdater.UpdatePieces(_connection, SelectedPiece);
+        DataBaseUpdater.UpdatePiece(_connection, SelectedPiece);
     }
 
     private void ReloadPieces(object? sender, EventArgs eventArgs)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -14,7 +13,7 @@ public partial class MainViewModel
     #region Bindings
     
     private const double Tolerance = 0.00001;
-    private bool _locked = false;
+    private bool _locked;
 
     [ObservableProperty] private ObservableCollection<Layer> _layers = new();
     [ObservableProperty] private bool _uiEnabledLayerEditor;
@@ -55,13 +54,13 @@ public partial class MainViewModel
     private void LenghtChanged()
     {
         if (SelectedLayer == null) return;
-        DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
+        DataBaseUpdater.UpdateLayer(_connection, SelectedLayer);
     }
 
     private void MaterialChanged()
     {
         if (SelectedLayer?.Material == null) return;
-        DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
+        DataBaseUpdater.UpdateLayer(_connection, SelectedLayer);
     }
 
     private void ReloadLayers(object? sender, EventArgs eventArgs)

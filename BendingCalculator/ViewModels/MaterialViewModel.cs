@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Avalonia.Media;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -47,19 +46,7 @@ public partial class MainViewModel
         SelectedMaterial = null;
     }
 
-    private void MaterialNameChanged()
-    {
-        if (SelectedMaterial is null) return;
-        DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
-    }
-
-    private void MaterialColorChanged()
-    {
-        if (SelectedMaterial is null) return;
-        DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
-    }
-
-    private void MaterialEChanged()
+    private void SelectedMaterialPropertyChanged()
     {
         if (SelectedMaterial is null) return;
         DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
@@ -99,15 +86,10 @@ public partial class MainViewModel
         switch (e.PropertyName)
         {
             case nameof(SelectedMaterial.Name):
-                MaterialNameChanged();
-                break;
-            
             case nameof(SelectedMaterial.Color):
-                MaterialColorChanged();
-                break;
             case nameof(SelectedMaterial.E):
             case nameof(SelectedMaterial.Unit):
-                MaterialEChanged();
+                SelectedMaterialPropertyChanged();
                 break;
         }
     }

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Avalonia.Data.Converters;
+﻿using Avalonia.Data.Converters;
 using Avalonia.Media;
-using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.ViewModels.Converter;
 

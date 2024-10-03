@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public partial class Layer : Element
+public partial class Layer : ObservableObject
 {
     #region Display
 
@@ -23,6 +23,7 @@ public partial class Layer : Element
 
     #region Variables
 
+    public long Id { get; set; } = -1;
     [ObservableProperty] private string _name = string.Empty;
     [ObservableProperty] private double _widthAtCenter;
     [ObservableProperty] private double _widthOnSides;
@@ -32,13 +33,9 @@ public partial class Layer : Element
     
     #endregion
 
-    #region Constructor / Destructor
+    #region Constructor
 
-    public Layer()
-    {
-        LanguageEvents.LanguageChanged += (_, _) => UpdateDisplay();
-    }
-
+    public Layer(){}
     public Layer(Material? material, double widthCenter, double widthSides, double heightCenter, double heightSides)
     {
         Material = material;
@@ -46,12 +43,6 @@ public partial class Layer : Element
         WidthOnSides = widthSides;
         HeightAtCenter = heightCenter;
         HeightOnSides = heightSides;
-        LanguageEvents.LanguageChanged += UpdateDisplay;
-    }
-
-    ~Layer()
-    {
-        LanguageEvents.LanguageChanged -= UpdateDisplay;
     }
 
     #endregion

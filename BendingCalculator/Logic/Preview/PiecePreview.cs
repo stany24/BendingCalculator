@@ -166,7 +166,7 @@ public class PiecePreview : Border
         {
             TextBlock block = new()
             {
-                Text = piece.Layers[i].Material?.Display,
+                Text = piece.Layers[i].Material?.Name,
                 VerticalAlignment = VerticalAlignment.Center
             };
             Grid.SetColumn(block, 1);

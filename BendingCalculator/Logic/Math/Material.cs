@@ -1,12 +1,14 @@
 ﻿// ReSharper disable ValueParameterNotUsed
 
+using System;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BendingCalculator.Logic.Math;
 
-public partial class Material : Element
+public partial class Material: ObservableObject
 {
+    public long Id { get; set; } = -1;
     [ObservableProperty] private string _name = string.Empty;
     [ObservableProperty] private Unit _unit;
     [ObservableProperty] private long _e;
@@ -46,6 +48,11 @@ public partial class Material : Element
             return Id == other.Id;
         }
         return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, (int)Unit, E, Color);
     }
 
     #endregion

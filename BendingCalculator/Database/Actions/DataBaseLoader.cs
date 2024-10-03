@@ -44,13 +44,13 @@ public static class DataBaseLoader
     public static List<Piece> LoadPieces(SQLiteConnection connection)
     {
         using SQLiteCommand cmd = new(
-            @"SELECT p.*, l.*, m.*, p.Name AS PieceName, m.Name AS MaterialName
-            FROM Piece p
-            LEFT JOIN PieceToLayer pl ON p.PieceId = pl.PieceId
-            LEFT JOIN Layer l ON pl.LayerId = l.LayerId
-            LEFT JOIN Material m on l.MaterialId = m.MaterialId
-            WHERE p.IsRemoved = 0
-            ORDER BY p.PieceId, pl.LayerOrder;", connection);
+            @"SELECT piece.*, layer.*, material.*, piece.Name AS PieceName, material.Name AS MaterialName
+            FROM Piece piece
+            LEFT JOIN PieceToLayer pieceOfLayer ON piece.PieceId = pieceOfLayer.PieceId
+            LEFT JOIN Layer layer ON pieceOfLayer.LayerId = layer.LayerId
+            LEFT JOIN Material material on layer.MaterialId = material.MaterialId
+            WHERE piece.IsRemoved = 0
+            ORDER BY piece.PieceId, pieceOfLayer.LayerOrder;", connection);
 
         using SQLiteDataReader reader = cmd.ExecuteReader();
         List<Piece> pieces = new();
