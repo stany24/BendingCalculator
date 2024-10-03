@@ -93,21 +93,15 @@ public partial class MainViewModel : ObservableObject
         LanguageEvents.LanguageChanged += Translate;
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
-        DataBaseEvents.LayersChanged += ReloadLayers;
-        DataBaseEvents.MaterialsChanged += ReloadMaterials;
-        DataBaseEvents.PiecesChanged += ReloadPieces;
         OpenLink = new OpenLinkCommand();
-        ReloadMaterials(null, EventArgs.Empty);
-        ReloadLayers(null, EventArgs.Empty);
-        ReloadPieces(null, EventArgs.Empty);
+        LoadMaterials(null, EventArgs.Empty);
+        LoadLayers(null, EventArgs.Empty);
+        LoadPieces(null, EventArgs.Empty);
     }
 
     ~MainViewModel()
     {
         LanguageEvents.LanguageChanged -= Translate;
-        DataBaseEvents.LayersChanged -= ReloadLayers;
-        DataBaseEvents.MaterialsChanged -= ReloadMaterials;
-        DataBaseEvents.PiecesChanged -= ReloadPieces;
     }
 
     #endregion

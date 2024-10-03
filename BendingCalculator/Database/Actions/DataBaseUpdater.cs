@@ -13,7 +13,8 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@Name", material.Name);
         cmd.Parameters.AddWithValue("@E", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
-        cmd.Parameters.AddWithValue("@Unit", (int)material.Unit);
+        long val = (long)material.Unit;
+        cmd.Parameters.AddWithValue("@Unit", val);
         string color = material.Color.R.ToString("X2") + material.Color.G.ToString("X2") +
                        material.Color.B.ToString("X2");
         cmd.Parameters.AddWithValue("@Color", color);

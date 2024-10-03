@@ -62,7 +62,7 @@ public partial class MainViewModel
         PropertyChanged += (_,e) => SelectedPiecePropertyChanged(e);
     }
 
-    private void ReloadPieces(object? sender, EventArgs eventArgs)
+    private void LoadPieces(object? sender, EventArgs eventArgs)
     {
         List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);
         Pieces = new ObservableCollection<Piece>(pieces);
