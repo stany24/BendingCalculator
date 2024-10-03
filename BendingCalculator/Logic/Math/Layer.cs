@@ -24,71 +24,12 @@ public partial class Layer : Element
     #region Variables
 
     [ObservableProperty] private string _name = string.Empty;
-
-    private double _widthAtCenter;
-
-    public double WidthAtCenter
-    {
-        get => _widthAtCenter;
-        set
-        {
-            if (value <= 0) return;
-            _widthAtCenter = value;
-            UpdateDisplay();
-        }
-    }
-
-    private double _widthOnSides;
-
-    public double WidthOnSides
-    {
-        get => _widthOnSides;
-        set
-        {
-            if (value <= 0) return;
-            _widthOnSides = value;
-            UpdateDisplay();
-        }
-    }
-
-    private double _heightAtCenter;
-
-    public double HeightAtCenter
-    {
-        get => _heightAtCenter;
-        set
-        {
-            if (value <= 0) return;
-            _heightAtCenter = value;
-            UpdateDisplay();
-        }
-    }
-
-    private double _heightOnSides;
-
-    public double HeightOnSides
-    {
-        get => _heightOnSides;
-        set
-        {
-            if (value <= 0) return;
-            _heightOnSides = value;
-            UpdateDisplay();
-        }
-    }
-
-    private Material? _material;
-
-    public Material? Material
-    {
-        get => _material;
-        set
-        {
-            _material = value;
-            UpdateDisplay();
-        }
-    }
-
+    [ObservableProperty] private double _widthAtCenter;
+    [ObservableProperty] private double _widthOnSides;
+    [ObservableProperty] private double _heightAtCenter;
+    [ObservableProperty] private double _heightOnSides;
+    [ObservableProperty] private Material? _material;
+    
     #endregion
 
     #region Constructor / Destructor

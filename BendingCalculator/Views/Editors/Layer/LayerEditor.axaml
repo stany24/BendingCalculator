@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BendingCalculator.ViewModels"
         xmlns:preview="clr-namespace:BendingCalculator.Logic.Preview"
+        xmlns:converter="clr-namespace:BendingCalculator.ViewModels.Converter"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BendingCalculator.Views.Editors.Layer.LayerEditor"
         x:DataType="viewModels:MainViewModel"
@@ -27,7 +28,17 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}" />
+                        <TextBlock>
+                            <Run Text="{Binding Material.Name}" />
+                            <Run Text="{DynamicResource CenterWithUnitWithColon}" />
+                            <Run Text="{Binding WidthAtCenter, Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="x" />
+                            <Run Text="{Binding WidthOnSides , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="{DynamicResource SidesWithUnitWithColon}" />
+                            <Run Text="{Binding HeightAtCenter , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="x" />
+                            <Run Text="{Binding HeightOnSides , Converter={StaticResource MeterToMilliMeterConverter}}" />
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -46,7 +57,7 @@
                 Text="{DynamicResource WidthCenterWithColon}" />
             <NumericUpDown
                 Name="NudWidthCenter"
-                Value="{Binding WidthCenter}"
+                Value="{Binding SelectedLayer.WidthAtCenter , Converter={StaticResource MeterToMilliMeterConverter}}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
@@ -59,7 +70,7 @@
                 Text="{DynamicResource WidthSidesWithColon}" />
             <NumericUpDown
                 Name="NudWidthSide"
-                Value="{Binding WidthSide}"
+                Value="{Binding SelectedLayer.WidthOnSides , Converter={StaticResource MeterToMilliMeterConverter}}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
@@ -72,7 +83,7 @@
                 Text="{DynamicResource HeightCenterWithColon}" />
             <NumericUpDown
                 Name="NudHeightCenter"
-                Value="{Binding HeightCenter}"
+                Value="{Binding SelectedLayer.HeightAtCenter , Converter={StaticResource MeterToMilliMeterConverter}}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
@@ -85,7 +96,7 @@
                 Text="{DynamicResource HeightOnSidesWithColon}" />
             <NumericUpDown
                 Name="NudHeightSide"
-                Value="{Binding HeightSide}"
+                Value="{Binding SelectedLayer.HeightOnSides , Converter={StaticResource MeterToMilliMeterConverter}}"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
                 Minimum="0.1"
                 Grid.Column="2"
@@ -100,13 +111,23 @@
                 Name="CbxMaterial"
                 Grid.Column="2"
                 Grid.Row="8"
+                HorizontalAlignment="Stretch"
                 IsEnabled="{Binding UiEnabledLayerEditor}"
-                SelectedItem="{Binding SelectedMaterialForLayer,Mode=TwoWay}"
+                SelectedItem="{Binding SelectedLayer.Material}"
                 ItemsSource="{Binding Materials}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Display}" />
+                            <TextBlock>
+                                <Run Text="{Binding Name}" />
+                                <Run Text=":" />
+                                <Run Text="{Binding E}" />
+                                <Run Text="{Binding Unit}" />
+                                <Span
+                                    Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
+                                    [■]
+                                </Span>
+                            </TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

@@ -38,6 +38,15 @@ public partial class Material : Element
         Color = Colors.White;
         Unit = Unit.GPa;
     }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj is Material other)
+        {
+            return Id == other.Id;
+        }
+        return false;
+    }
 
     #endregion
 }

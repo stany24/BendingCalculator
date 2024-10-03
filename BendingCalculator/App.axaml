@@ -3,6 +3,7 @@
              x:Class="BendingCalculator.App"
              xmlns:bendingCalculator="clr-namespace:BendingCalculator"
              xmlns:preview="clr-namespace:BendingCalculator.Logic.Preview"
+             xmlns:converter="clr-namespace:BendingCalculator.ViewModels.Converter"
              RequestedThemeVariant="Default">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -38,6 +39,7 @@
                 <ResourceInclude Source="/Assets/Localization/Dynamic/en.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        <converter:MeterToMilliMeterConverter x:Key="MeterToMilliMeterConverter"/>
     </Application.Resources>
 
 

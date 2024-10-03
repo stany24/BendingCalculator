@@ -117,5 +117,10 @@
         - Monter: permet de monter les couches selectionnées dans la listbox de gauche.
     </system:String>
     <!-- End Piece editor helper section -->
+    
+    <!-- Begin Layer display section -->
+    <system:String x:Key="CenterWithUnitWithColon">Centre(mm):</system:String>
+    <system:String x:Key="SidesWithUnitWithColon">Cotés(mm):</system:String>
+    <!-- End Warning section -->
 
 </ResourceDictionary>

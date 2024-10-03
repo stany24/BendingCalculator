@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
@@ -11,8 +12,12 @@ namespace BendingCalculator.ViewModels;
 public partial class MainViewModel
 {
     #region Bindings
+    
+    private const double Tolerance = 0.00001;
+    private bool _locked = false;
 
     [ObservableProperty] private ObservableCollection<Layer> _layers = new();
+    [ObservableProperty] private bool _uiEnabledLayerEditor;
 
     private Layer? _selectedLayer;
 
@@ -25,70 +30,7 @@ public partial class MainViewModel
             SelectedLayerChanged();
         }
     }
-
-    [ObservableProperty] private bool _uiEnabledLayerEditor;
-
-    private double _widthSide;
-
-    public double WidthSide
-    {
-        get => _widthSide;
-        set
-        {
-            SetProperty(ref _widthSide, value);
-            ChangeWidthSide();
-        }
-    }
-
-    private double _widthCenter;
-
-    public double WidthCenter
-    {
-        get => _widthCenter;
-        set
-        {
-            SetProperty(ref _widthCenter, value);
-            ChangeWidthCenter();
-        }
-    }
-
-    private double _heightSide;
-
-    public double HeightSide
-    {
-        get => _heightSide;
-        set
-        {
-            SetProperty(ref _heightSide, value);
-            ChangeHeightSide();
-        }
-    }
-
-    private double _heightCenter;
-
-    public double HeightCenter
-    {
-        get => _heightCenter;
-        set
-        {
-            SetProperty(ref _heightCenter, value);
-            ChangeHeightCenter();
-        }
-    }
-
-    private Material? _selectedMaterialForLayer;
-    private const double Tolerance = 0.00001;
-
-    public Material? SelectedMaterialForLayer
-    {
-        get => _selectedMaterialForLayer;
-        set
-        {
-            SetProperty(ref _selectedMaterialForLayer, value);
-            MaterialChanged();
-        }
-    }
-
+    
     #endregion
 
     #region Layer Edition
@@ -96,14 +38,7 @@ public partial class MainViewModel
     public void CreateNewLayer()
     {
         Material? material = null;
-        if (SelectedMaterialForLayer is not null)
-        {
-            material = SelectedMaterialForLayer;
-        }
-        else
-        {
-            if (Materials.Count > 0) material = Materials[0];
-        }
+        if (Materials.Count > 0) material = Materials[0];
 
         Layer layer = new(material, 0.045, 0.045, 0.01, 0.01);
         DataBaseCreator.NewLayer(_connection, layer);
@@ -117,44 +52,15 @@ public partial class MainViewModel
         SelectedLayer = null;
     }
 
-    private void ChangeWidthSide()
+    private void LenghtChanged()
     {
         if (SelectedLayer == null) return;
-        if (Math.Abs(SelectedLayer.WidthOnSides - WidthSide / 1000) < Tolerance) return;
-        SelectedLayer.WidthOnSides = WidthSide / 1000;
-        DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
-    }
-
-    private void ChangeWidthCenter()
-    {
-        if (SelectedLayer == null) return;
-        if (Math.Abs(SelectedLayer.WidthAtCenter - WidthCenter / 1000) < Tolerance) return;
-        SelectedLayer.WidthAtCenter = WidthCenter / 1000;
-        DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
-    }
-
-    private void ChangeHeightSide()
-    {
-        if (SelectedLayer == null) return;
-        if (Math.Abs(SelectedLayer.HeightOnSides - HeightSide / 1000) < Tolerance) return;
-        SelectedLayer.HeightOnSides = HeightSide / 1000;
-        DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
-    }
-
-    private void ChangeHeightCenter()
-    {
-        if (SelectedLayer == null) return;
-        if (Math.Abs(SelectedLayer.HeightAtCenter - HeightCenter / 1000) < Tolerance) return;
-        SelectedLayer.HeightAtCenter = HeightCenter / 1000;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
 
     private void MaterialChanged()
     {
         if (SelectedLayer?.Material == null) return;
-        if (SelectedMaterialForLayer == null) return;
-        if (SelectedLayer.Material.Id == SelectedMaterialForLayer.Id) return;
-        SelectedLayer.Material = SelectedMaterialForLayer;
         DataBaseUpdater.UpdateLayers(_connection, SelectedLayer);
     }
 
@@ -183,22 +89,30 @@ public partial class MainViewModel
         if (SelectedLayer == null)
         {
             UiEnabledLayerEditor = false;
-            HeightCenter = 0;
-            HeightSide = 0;
-            WidthCenter = 0;
-            WidthSide = 0;
-            SelectedMaterialForLayer = null;
             return;
         }
 
         UiEnabledLayerEditor = true;
-        SelectedMaterialForLayer = SelectedLayer.Material is not null
-            ? Materials.FirstOrDefault(m => m.Id == SelectedLayer.Material.Id)
-            : null;
-        HeightCenter = SelectedLayer.HeightAtCenter * 1000;
-        HeightSide = SelectedLayer.HeightOnSides * 1000;
-        WidthCenter = SelectedLayer.WidthAtCenter * 1000;
-        WidthSide = SelectedLayer.WidthOnSides * 1000;
+        SelectedLayer.PropertyChanged += (_, e) => SelectedLayerPropertyChanged(e);
+    }
+    
+    private void SelectedLayerPropertyChanged(PropertyChangedEventArgs e)
+    {
+        if(_locked){return;}
+        _locked = true;
+        switch (e.PropertyName)
+        {
+            case nameof(SelectedLayer.Material):
+                MaterialChanged();
+                break;
+            case nameof(SelectedLayer.WidthOnSides):
+            case nameof(SelectedLayer.WidthAtCenter):
+            case nameof(SelectedLayer.HeightAtCenter):
+            case nameof(SelectedLayer.HeightOnSides):
+                LenghtChanged();
+                break;
+        }
+        _locked = false;
     }
 
     #endregion

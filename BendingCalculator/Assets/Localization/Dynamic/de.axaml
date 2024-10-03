@@ -122,4 +122,9 @@
         - Nach oben: verschiebt die ausgewählten Ebenen der linken Listbox nach oben.
     </system:String>
     <!-- End Piece editor helper section -->
+    
+    <!-- Begin Layer display section -->
+    <system:String x:Key="CenterWithUnitWithColon">Zentrum(mm):</system:String>
+    <system:String x:Key="SidesWithUnitWithColon">Seiten(mm):</system:String>
+    <!-- End Warning section -->
 </ResourceDictionary>

@@ -120,4 +120,9 @@
     </system:String>
 
     <!-- End Piece editor helper section -->
+    
+    <!-- Begin Layer display section -->
+    <system:String x:Key="CenterWithUnitWithColon">Center(mm):</system:String>
+    <system:String x:Key="SidesWithUnitWithColon">Sides(mm):</system:String>
+    <!-- End Warning section -->
 </ResourceDictionary>
