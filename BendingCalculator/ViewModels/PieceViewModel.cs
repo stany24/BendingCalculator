@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -10,22 +11,6 @@ namespace BendingCalculator.ViewModels;
 
 public partial class MainViewModel
 {
-    private void SelectedPieceChanged()
-    {
-        if (SelectedPiece == null)
-        {
-            UiEnabledPieceEditor = false;
-            PieceName = string.Empty;
-            PieceLength = 0;
-            return;
-        }
-
-        UiEnabledPieceEditor = true;
-        PieceName = SelectedPiece.Name;
-        PieceLength = SelectedPiece.Length * 1000;
-        LoadLayersOfPiece(SelectedPiece.Id);
-    }
-
     #region Bindings
 
     private ListLayersEditor? _listLayersEditor;
@@ -46,30 +31,6 @@ public partial class MainViewModel
         }
     }
 
-    private double _pieceLength;
-
-    public double PieceLength
-    {
-        get => _pieceLength;
-        set
-        {
-            SetProperty(ref _pieceLength, value);
-            PieceLengthChanged();
-        }
-    }
-
-    private string _pieceName = string.Empty;
-
-    public string PieceName
-    {
-        get => _pieceName;
-        set
-        {
-            SetProperty(ref _pieceName, value);
-            PieceNameChanged();
-        }
-    }
-
     #endregion
 
     #region Piece Edition
@@ -87,21 +48,18 @@ public partial class MainViewModel
         DataBaseRemover.RemovePiece(_connection, SelectedPiece.Id);
         SelectedPiece = null;
     }
-
-    private void PieceLengthChanged()
+    
+    private void SelectedPieceChanged()
     {
-        if (SelectedPiece == null) return;
-        if (Math.Abs(SelectedPiece.Length - PieceLength / 1000) < Tolerance) return;
-        SelectedPiece.Length = PieceLength / 1000;
-        DataBaseUpdater.UpdatePiece(_connection, SelectedPiece);
-    }
+        if (SelectedPiece == null)
+        {
+            UiEnabledPieceEditor = false;
+            return;
+        }
 
-    private void PieceNameChanged()
-    {
-        if (SelectedPiece == null) return;
-        if (SelectedPiece.Name == PieceName) return;
-        SelectedPiece.Name = PieceName;
-        DataBaseUpdater.UpdatePiece(_connection, SelectedPiece);
+        UiEnabledPieceEditor = true;
+        PropertyChanged += (_,e) => SelectedPiecePropertyChanged(e);
+        LoadLayersOfPiece(SelectedPiece.Id);
     }
 
     private void ReloadPieces(object? sender, EventArgs eventArgs)
@@ -119,6 +77,18 @@ public partial class MainViewModel
             Pieces[i].Id = pieces[i].Id;
             Pieces[i].Name = pieces[i].Name;
             Pieces[i].Length = pieces[i].Length;
+        }
+    }
+    
+    private void SelectedPiecePropertyChanged(PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(SelectedPiece.Name):
+            case nameof(SelectedPiece.Length):
+                if (SelectedPiece == null) return;
+                DataBaseUpdater.UpdatePiece(_connection, SelectedPiece);
+                break;
         }
     }
 

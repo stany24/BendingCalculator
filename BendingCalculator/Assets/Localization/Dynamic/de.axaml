@@ -123,8 +123,12 @@
     </system:String>
     <!-- End Piece editor helper section -->
     
-    <!-- Begin Layer display section -->
+    <!-- Begin layer display section -->
     <system:String x:Key="CenterWithUnitWithColon">Zentrum(mm):</system:String>
     <system:String x:Key="SidesWithUnitWithColon">Seiten(mm):</system:String>
+    <!-- End Warning section -->
+    
+    <!-- Begin piece display section -->
+    <system:String x:Key="Layers">Schichten</system:String>
     <!-- End Warning section -->
 </ResourceDictionary>

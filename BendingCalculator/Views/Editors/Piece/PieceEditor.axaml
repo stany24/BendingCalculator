@@ -27,7 +27,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Display}" />
+                        <TextBlock>
+                            <Run Text="{Binding Name}" />
+                            <Run Text="{Binding Length, Converter={StaticResource MeterToMilliMeterConverter}}" />
+                            <Run Text="mm" />
+                            <Run Text="{Binding Layers.Count}" />
+                            <Run Text="{DynamicResource Layers}" />
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -49,7 +55,7 @@
                 Grid.Column="2"
                 Grid.Row="0"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
-                Text="{Binding PieceName}" />
+                Text="{Binding SelectedPiece.Name}" />
             <TextBlock
                 Name="LblLength"
                 Grid.Column="0"
@@ -61,7 +67,7 @@
                 Grid.Column="2"
                 Grid.Row="2"
                 IsEnabled="{Binding UiEnabledPieceEditor}"
-                Value="{Binding PieceLength}"
+                Value="{Binding SelectedPiece.Length}"
                 Minimum="0.1" />
             <Button
                 Name="BtnChangeLayers"

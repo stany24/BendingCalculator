@@ -118,9 +118,13 @@
     </system:String>
     <!-- End Piece editor helper section -->
     
-    <!-- Begin Layer display section -->
+    <!-- Begin layer display section -->
     <system:String x:Key="CenterWithUnitWithColon">Centre(mm):</system:String>
     <system:String x:Key="SidesWithUnitWithColon">Cotés(mm):</system:String>
+    <!-- End Warning section -->
+    
+    <!-- Begin piece display section -->
+    <system:String x:Key="Layers">Couches</system:String>
     <!-- End Warning section -->
 
 </ResourceDictionary>

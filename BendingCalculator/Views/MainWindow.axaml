@@ -172,7 +172,13 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Display}" />
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="{Binding Length, Converter={StaticResource MeterToMilliMeterConverter}}" />
+                                        <Run Text="mm" />
+                                        <Run Text="{Binding Layers.Count}" />
+                                        <Run Text="{DynamicResource Layers}" />
+                                    </TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

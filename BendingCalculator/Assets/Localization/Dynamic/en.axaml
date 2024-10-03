@@ -121,8 +121,12 @@
 
     <!-- End Piece editor helper section -->
     
-    <!-- Begin Layer display section -->
+    <!-- Begin layer display section -->
     <system:String x:Key="CenterWithUnitWithColon">Center(mm):</system:String>
     <system:String x:Key="SidesWithUnitWithColon">Sides(mm):</system:String>
+    <!-- End Warning section -->
+    
+    <!-- Begin piece display section -->
+    <system:String x:Key="Layers">Layers</system:String>
     <!-- End Warning section -->
 </ResourceDictionary>
