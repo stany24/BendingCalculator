@@ -61,6 +61,20 @@ public partial class Piece : ObservableObject
         Name = string.Empty;
         Length = 1;
     }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj is Piece other)
+        {
+            return Id == other.Id;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, Length);
+    }
 
     #endregion
 

@@ -4,11 +4,10 @@ namespace BendingCalculator.Views.Editors.Piece;
 
 public partial class ListLayersEditor : WindowWithHelp
 {
-    public ListLayersEditor(MainViewModel model, long pieceCurrentlyModifiedId)
+    public ListLayersEditor(MainViewModel model)
     {
         InitializeComponent();
         DataContext = model;
-        model.PieceCurrentlyModifiedId = pieceCurrentlyModifiedId;
         HelpButton.Click += (_, _) => OpenHelpWindow("ModifyListLayersEditorHelper");
     }
 }

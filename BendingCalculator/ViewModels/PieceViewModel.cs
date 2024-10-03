@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -59,25 +60,12 @@ public partial class MainViewModel
 
         UiEnabledPieceEditor = true;
         PropertyChanged += (_,e) => SelectedPiecePropertyChanged(e);
-        LoadLayersOfPiece(SelectedPiece.Id);
     }
 
     private void ReloadPieces(object? sender, EventArgs eventArgs)
     {
         List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);
-        while (pieces.Count != Pieces.Count)
-            if (pieces.Count < Pieces.Count)
-                Pieces.RemoveAt(0);
-            else
-                Pieces.Add(new Piece());
-
-        for (int i = 0; i < pieces.Count; i++)
-        {
-            Pieces[i].Layers = pieces[i].Layers;
-            Pieces[i].Id = pieces[i].Id;
-            Pieces[i].Name = pieces[i].Name;
-            Pieces[i].Length = pieces[i].Length;
-        }
+        Pieces = new ObservableCollection<Piece>(pieces);
     }
     
     private void SelectedPiecePropertyChanged(PropertyChangedEventArgs e)
@@ -105,12 +93,11 @@ public partial class MainViewModel
     {
         if (SelectedPiece is null) return;
         if (_listLayersEditor != null) return;
-        _listLayersEditor = new ListLayersEditor(this, SelectedPiece.Id);
+        _listLayersEditor = new ListLayersEditor(this);
         _listLayersEditor.Closing += (_, _) => UiEnabledPieceEditor = true;
         _listLayersEditor.Closed += (_, _) => _listLayersEditor = null;
         _listLayersEditor.Show();
         UiEnabledPieceEditor = false;
-        LayersOfSelectedPiece = SelectedPiece.Layers;
     }
 
     #endregion

@@ -47,24 +47,24 @@ public class PieceViewModelTests
         _model.CreateNewPiece();
         _model.CreateNewLayer();
         _model.SelectedPiece = _model.Pieces[^1];
-        _model.PieceCurrentlyModifiedId = _model.SelectedPiece.Id;
-        Piece piece = new(0.77, "test");
-        piece.Layers.Add(_model.Layers[^1]);
         _model.SelectedAvailableLayers.Add(_model.Layers[^1]);
+        Layer layer = _model.Layers[^1];
         _model.AddLayerToPiece();
-        _model.PieceLength = 770;
-        _model.PieceName = "test";
-        Assert.AreEqual(piece.Name, _model.SelectedPiece.Name);
-        Assert.AreEqual(piece.Length, _model.SelectedPiece.Length);
-        Assert.AreEqual(piece.Layers.Count, _model.SelectedPiece.Layers.Count);
-        Assert.AreEqual(piece.Layers[^1].WidthAtCenter, _model.SelectedPiece.Layers[0].WidthAtCenter);
-        Assert.AreEqual(piece.Layers[^1].WidthOnSides, _model.SelectedPiece.Layers[0].WidthOnSides);
-        Assert.AreEqual(piece.Layers[^1].HeightAtCenter, _model.SelectedPiece.Layers[0].HeightAtCenter);
-        Assert.AreEqual(piece.Layers[^1].HeightOnSides, _model.SelectedPiece.Layers[0].HeightOnSides);
-        Assert.AreEqual(piece.Layers[^1].Id, _model.SelectedPiece.Layers[0].Id);
-        Assert.AreEqual(piece.Layers[^1].Material?.Name, _model.SelectedPiece.Layers[0].Material?.Name);
-        Assert.AreEqual(piece.Layers[^1].Material?.E, _model.SelectedPiece.Layers[0].Material?.E);
-        Assert.AreEqual(piece.Layers[^1].Material?.Id, _model.SelectedPiece.Layers[0].Material?.Id);
+        const int length = 770;
+        const string name = "test";
+        _model.SelectedPiece.Length = length;
+        _model.SelectedPiece.Name = name;
+        Assert.AreEqual(name, _model.SelectedPiece.Name);
+        Assert.AreEqual(length, _model.SelectedPiece.Length);
+        Assert.AreEqual(1, _model.SelectedPiece.Layers.Count);
+        Assert.AreEqual(layer.WidthAtCenter, _model.SelectedPiece.Layers[0].WidthAtCenter);
+        Assert.AreEqual(layer.WidthOnSides, _model.SelectedPiece.Layers[0].WidthOnSides);
+        Assert.AreEqual(layer.HeightAtCenter, _model.SelectedPiece.Layers[0].HeightAtCenter);
+        Assert.AreEqual(layer.HeightOnSides, _model.SelectedPiece.Layers[0].HeightOnSides);
+        Assert.AreEqual(layer.Id, _model.SelectedPiece.Layers[0].Id);
+        Assert.AreEqual(layer.Material?.Name, _model.SelectedPiece.Layers[0].Material?.Name);
+        Assert.AreEqual(layer.Material?.E, _model.SelectedPiece.Layers[0].Material?.E);
+        Assert.AreEqual(layer.Material?.Id, _model.SelectedPiece.Layers[0].Material?.Id);
     }
 
     [TestMethod]
