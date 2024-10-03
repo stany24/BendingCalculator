@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using BendingCalculator.Database.Actions;
@@ -12,7 +11,6 @@ public partial class MainViewModel
 {
     #region Bindings
     
-    private const double Tolerance = 0.00001;
     private bool _locked;
 
     [ObservableProperty] private ObservableCollection<Layer> _layers = new();
@@ -63,7 +61,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateLayer(_connection, SelectedLayer);
     }
 
-    private void LoadLayers(object? sender, EventArgs eventArgs)
+    private void LoadLayers()
     {
         List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
         while (layers.Count != Layers.Count)

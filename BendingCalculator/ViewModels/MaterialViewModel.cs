@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using BendingCalculator.Database.Actions;
@@ -52,7 +51,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
     }
 
-    private void LoadMaterials(object? sender, EventArgs eventArgs)
+    private void LoadMaterials()
     {
         List<Material> materials = DataBaseLoader.LoadMaterials(_connection);
         while (materials.Count != Materials.Count)

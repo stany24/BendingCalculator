@@ -29,7 +29,7 @@ public partial class Piece : ObservableObject
     public long Id { get; set; } = -1;
     public EventHandler<RiskOfDetachmentOfLayersEventArgs>? RiskOfDetachmentBetweenLayer { get; set; }
 
-    public ObservableCollection<Layer> Layers { get; set; } = new();
+    [ObservableProperty] private ObservableCollection<Layer> _layers = new();
 
     [ObservableProperty] private string _name = string.Empty;
 

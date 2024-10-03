@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
-using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
@@ -26,7 +26,7 @@ public class LayerPreview : Border
 
     private void UpdateLanguage(object? sender, EventArgs eventArgs)
     {
-        UpdatePreview();
+        UpdatePreview(null, null);
     }
 
     #region Variables
@@ -82,10 +82,9 @@ public class LayerPreview : Border
         Grid.SetRowSpan(_preview, 3);
         Grid.SetColumn(_preview, 2);
         _grid.Children.Add(_preview);
-        SizeChanged += (_, _) => UpdatePreview();
+        SizeChanged += (_, _) => UpdatePreview(null, null);
         LanguageEvents.LanguageChanged += UpdateLanguage;
-        this.GetObservable(DisplayedLayerProperty).Subscribe(_ => UpdatePreview());
-        DataBaseEvents.LayersChanged += (_, _) => UpdatePreview();
+        this.GetObservable(DisplayedLayerProperty).Subscribe(_ => UpdatePreview(null, null));
     }
 
     ~LayerPreview()
@@ -97,7 +96,7 @@ public class LayerPreview : Border
 
     #region Preview Math
 
-    private void UpdatePreview()
+    private void UpdatePreview(object? sender, PropertyChangedEventArgs e)
     {
         _preview.Children.Clear();
         if (DisplayedLayer == null)
@@ -118,6 +117,8 @@ public class LayerPreview : Border
                 DisplayedLayer.WidthAtCenter / DisplayedLayer.WidthOnSides, color)
         };
         _preview.Children.AddRange(shapes);
+        DisplayedLayer.PropertyChanged -= UpdatePreview;
+        DisplayedLayer.PropertyChanged += UpdatePreview;
     }
 
     private static Path GetLayerShape(double x, double y, double width, double height, double proportionCenterOverSides,

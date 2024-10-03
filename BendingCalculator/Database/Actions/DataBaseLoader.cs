@@ -15,7 +15,7 @@ public static class DataBaseLoader
     private const string LayerId = "LayerId";
     private const string MaterialId = "MaterialId";
 
-    public static ObservableCollection<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
+    private static ObservableCollection<Layer> LoadLayersOfPiece(SQLiteConnection connection, long pieceId)
     {
         using SQLiteCommand cmd = new(
             @"SELECT *

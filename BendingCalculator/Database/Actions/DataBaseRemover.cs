@@ -13,7 +13,6 @@ public static class DataBaseRemover
         cmd.Parameters.AddWithValue("@Id", materialId);
         cmd.Parameters.AddWithValue("@Removed", Removed);
         cmd.ExecuteNonQuery();
-        DataBaseEvents.RaiseMaterialsChangedEvent();
     }
 
     public static void RemoveLayer(SQLiteConnection connection, long layerId)
@@ -23,7 +22,6 @@ public static class DataBaseRemover
         cmd.Parameters.AddWithValue("@Id", layerId);
         cmd.Parameters.AddWithValue("@Removed", Removed);
         cmd.ExecuteNonQuery();
-        DataBaseEvents.RaiseLayersChangedEvent();
     }
 
     public static void RemovePiece(SQLiteConnection connection, long pieceId)
@@ -33,6 +31,5 @@ public static class DataBaseRemover
         cmd.Parameters.AddWithValue("@Id", pieceId);
         cmd.Parameters.AddWithValue("@Removed", Removed);
         cmd.ExecuteNonQuery();
-        DataBaseEvents.RaisePiecesChangedEvent();
     }
 }
