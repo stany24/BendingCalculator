@@ -1,5 +1,7 @@
-﻿using Avalonia.Data.Converters;
+﻿using System.Collections.Generic;
+using Avalonia.Data.Converters;
 using Avalonia.Media;
+using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.ViewModels.Converter;
 
@@ -10,7 +12,7 @@ public static class Converters
 
     public static FuncValueConverter<double?, string> DoubleMegaPascal { get; } =
         new(num => num is not null ? $"{num / 1000000:F3} MPa" : "0 MPa");
-
+    
     public static FuncValueConverter<Color, IBrush> ColorToBrushConverter { get; } =
         new(GetColor);
 
@@ -18,4 +20,5 @@ public static class Converters
     {
         return new SolidColorBrush(color);
     }
+
 }

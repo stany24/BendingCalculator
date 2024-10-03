@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Avalonia.Media;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
@@ -12,21 +13,9 @@ public partial class MainViewModel
 {
     #region Bindings
 
-    [ObservableProperty] private ObservableCollection<string> _unit = new() { "GPa", "MPa" };
+    [ObservableProperty] private ObservableCollection<Unit> _unit = new() { Logic.Math.Unit.GPa, Logic.Math.Unit.MPa };
     [ObservableProperty] private bool _uiEnabledMaterialEditor;
     [ObservableProperty] private ObservableCollection<Material> _materials = new();
-
-    private Color _color;
-
-    public Color Color
-    {
-        get => _color;
-        set
-        {
-            SetProperty(ref _color, value);
-            MaterialColorChanged();
-        }
-    }
 
     private Material? _selectedMaterial;
 
@@ -40,49 +29,13 @@ public partial class MainViewModel
         }
     }
 
-    private string _selectedUnit = "GPa";
-
-    public string SelectedUnit
-    {
-        get => _selectedUnit;
-        set
-        {
-            SetProperty(ref _selectedUnit, value);
-            MaterialEChanged();
-        }
-    }
-
-    private string _materialName = string.Empty;
-
-    public string MaterialName
-    {
-        get => _materialName;
-        set
-        {
-            SetProperty(ref _materialName, value);
-            MaterialNameChanged();
-        }
-    }
-
-    private double _eValue;
-
-    public double EValue
-    {
-        get => _eValue;
-        set
-        {
-            SetProperty(ref _eValue, value);
-            MaterialEChanged();
-        }
-    }
-
     #endregion
 
     #region Material Edition
 
     public void CreateNewMaterial()
     {
-        Material material = new("new", 69000000000);
+        Material material = new("new", 69);
         DataBaseCreator.NewMaterial(_connection, material);
         SelectedMaterial = Materials[^1];
     }
@@ -97,37 +50,19 @@ public partial class MainViewModel
     private void MaterialNameChanged()
     {
         if (SelectedMaterial is null) return;
-        if (SelectedMaterial.Name == MaterialName) return;
-        SelectedMaterial.Name = MaterialName;
-        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
+        DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
     }
 
     private void MaterialColorChanged()
     {
         if (SelectedMaterial is null) return;
-        if (SelectedMaterial.Color == Color) return;
-        SelectedMaterial.Color = Color;
-        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
+        DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
     }
 
     private void MaterialEChanged()
     {
         if (SelectedMaterial is null) return;
-        int multiplication;
-        switch (SelectedUnit)
-        {
-            case "GPa":
-                multiplication = 1000000000;
-                break;
-            case "MPa":
-                multiplication = 1000000;
-                break;
-            default: return;
-        }
-
-        if (Math.Abs(SelectedMaterial.E - EValue * multiplication) < 0.000001) return;
-        SelectedMaterial.E = (long)EValue * multiplication;
-        DataBaseUpdater.UpdateMaterials(_connection, SelectedMaterial);
+        DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
     }
 
     private void ReloadMaterials(object? sender, EventArgs eventArgs)
@@ -153,24 +88,27 @@ public partial class MainViewModel
         if (SelectedMaterial == null)
         {
             UiEnabledMaterialEditor = false;
-            MaterialName = string.Empty;
-            EValue = 0;
-            Color = Color.FromRgb(1, 2, 3);
             return;
         }
-
+        SelectedMaterial.PropertyChanged += (_, e) => SelectedMaterialPropertyChanged(e);
         UiEnabledMaterialEditor = true;
-        MaterialName = SelectedMaterial.Name;
-        Color = SelectedMaterial.Color;
-        if (SelectedMaterial.E >= 1000000000)
+    }
+    
+    private void SelectedMaterialPropertyChanged(PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
         {
-            EValue = (double)SelectedMaterial.E / 1000000000;
-            SelectedUnit = "GPa";
-        }
-        else
-        {
-            EValue = (double)SelectedMaterial.E / 1000000;
-            SelectedUnit = "MPa";
+            case nameof(SelectedMaterial.Name):
+                MaterialNameChanged();
+                break;
+            
+            case nameof(SelectedMaterial.Color):
+                MaterialColorChanged();
+                break;
+            case nameof(SelectedMaterial.E):
+            case nameof(SelectedMaterial.Unit):
+                MaterialEChanged();
+                break;
         }
     }
 

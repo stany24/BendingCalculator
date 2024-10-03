@@ -44,14 +44,17 @@ public class MaterialViewModelTests
     [TestMethod]
     public void UpdateMaterialTest()
     {
-        _model.SelectedUnit = "GPa";
+        const string newName = "newName";
+        const long newE = 55;
+        const Unit newUnit = Unit.MPa;
         _model.CreateNewMaterial();
-        _model.SelectedMaterial = _model.Materials[0];
-        Material material = new("test", 33000000000);
-        _model.MaterialName = "test";
-        _model.EValue = 33;
-        Assert.AreEqual(material.Name, _model.SelectedMaterial.Name);
-        Assert.AreEqual(material.E, _model.SelectedMaterial.E);
+        _model.SelectedMaterial = _model.Materials[^1];
+        _model.SelectedMaterial.Name = newName;
+        _model.SelectedMaterial.E = newE;
+        _model.SelectedMaterial.Unit = newUnit;
+        Assert.AreEqual(newName, _model.SelectedMaterial.Name);
+        Assert.AreEqual(newE, _model.SelectedMaterial.E);
+        Assert.AreEqual(newUnit, _model.SelectedMaterial.Unit);
     }
 
     [TestMethod]

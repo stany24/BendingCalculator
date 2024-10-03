@@ -9,6 +9,7 @@ public static class DataBaseInitializer
     private const string CreateMaterialTable = @"create table Material(
                                                 MaterialId integer not null constraint MaterialId primary key autoincrement,
                                                 Name TEXT, E BIGINT not null,
+                                                Unit interger default 1000000000 not null,
                                                 IsRemoved BOOL not null,
                                                 Color TEXT(6) default 0 not null);";
 

@@ -124,10 +124,10 @@ public partial class Piece : Element
             if (Layers[i - 1].Material is not { } material1) return;
             if (Layers[i].Material is not { } material2) return;
             double ratio;
-            if (material1.E > material2.E)
-                ratio = (double)material1.E / material2.E;
+            if (material1.E*(int)material1.Unit > material2.E*(int)material2.Unit)
+                ratio = (double)material1.E*(int)material1.Unit / material2.E*(int)material2.Unit;
             else
-                ratio = (double)material2.E / material1.E;
+                ratio = (double)material2.E*(int)material1.Unit / material1.E*(int)material2.Unit;
             if (ratio <= 100) continue;
             RiskOfDetachmentBetweenLayer?.Invoke(null,
                 new RiskOfDetachmentOfLayersEventArgs(i - 1, i, Layers[i - 1], Layers[i]));

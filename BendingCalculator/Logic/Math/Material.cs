@@ -8,26 +8,15 @@ namespace BendingCalculator.Logic.Math;
 public partial class Material : Element
 {
     [ObservableProperty] private string _name = string.Empty;
+    [ObservableProperty] private Unit _unit;
+    [ObservableProperty] private long _e;
 
     public override string ToString()
     {
-        return E > 1e9 - 1 ? $"{Name}:{E / 1e9} GPa" : $"{Name}:{E / 1e6} MPa";
+        return $"{Name}:{E} {Unit}";
     }
 
     #region Variables
-
-    private long _e;
-
-    public long E
-    {
-        get => _e;
-        set
-        {
-            if (value <= 0) return;
-            _e = value;
-            UpdateDisplay();
-        }
-    }
 
     [ObservableProperty] private Color _color;
 
@@ -40,12 +29,14 @@ public partial class Material : Element
         Name = name;
         _e = e;
         Color = Colors.White;
+        Unit = Unit.GPa;
     }
 
     public Material()
     {
         Name = "new";
         Color = Colors.White;
+        Unit = Unit.GPa;
     }
 
     #endregion

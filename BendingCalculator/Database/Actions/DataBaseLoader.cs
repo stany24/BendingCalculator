@@ -120,7 +120,8 @@ public static class DataBaseLoader
             Id = Convert.ToInt32(reader[MaterialId]),
             E = Convert.ToInt64(reader["E"]),
             Name = Convert.ToString(reader["Name"]) ?? string.Empty,
-            Color = color
+            Color = color,
+            Unit = (Unit)Convert.ToInt64(reader["Unit"])
         };
     }
 

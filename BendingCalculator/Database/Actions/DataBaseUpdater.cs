@@ -5,14 +5,15 @@ namespace BendingCalculator.Database.Actions;
 
 public static class DataBaseUpdater
 {
-    public static void UpdateMaterials(SQLiteConnection connection, Material material)
+    public static void UpdateMaterial(SQLiteConnection connection, Material material)
     {
         using SQLiteCommand cmd = new(
-            "UPDATE Material SET Name = @WidthAtCenter, E = @WidthOnSides, Color = @Color WHERE MaterialId= @Id;",
+            "UPDATE Material SET Name = @Name, E = @E, Unit = @Unit, Color = @Color WHERE MaterialId= @Id;",
             connection);
-        cmd.Parameters.AddWithValue("@WidthAtCenter", material.Name);
-        cmd.Parameters.AddWithValue("@WidthOnSides", material.E);
+        cmd.Parameters.AddWithValue("@Name", material.Name);
+        cmd.Parameters.AddWithValue("@E", material.E);
         cmd.Parameters.AddWithValue("@Id", material.Id);
+        cmd.Parameters.AddWithValue("@Unit", (int)material.Unit);
         string color = material.Color.R.ToString("X2") + material.Color.G.ToString("X2") +
                        material.Color.B.ToString("X2");
         cmd.Parameters.AddWithValue("@Color", color);

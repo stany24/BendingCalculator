@@ -24,7 +24,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Bois",
-                        E = 17000000000
+                        E = 17
                     }
                 }
             }
@@ -49,7 +49,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Alu",
-                        E = 69000000000
+                        E = 69
                     }
                 },
                 new()
@@ -61,7 +61,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Bois",
-                        E = 17000000000
+                        E = 17
                     }
                 },
                 new()
@@ -73,7 +73,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Alu",
-                        E = 69000000000
+                        E = 69
                     }
                 }
             }
@@ -98,7 +98,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Alu",
-                        E = 69000000000
+                        E = 69
                     }
                 },
                 new()
@@ -110,7 +110,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Bois",
-                        E = 17000000000
+                        E = 17
                     }
                 },
                 new()
@@ -122,7 +122,7 @@ public class BendingTests
                     Material = new Material
                     {
                         Name = "Alu",
-                        E = 69000000000
+                        E = 69
                     }
                 }
             }

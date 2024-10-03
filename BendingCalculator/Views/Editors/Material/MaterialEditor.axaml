@@ -27,7 +27,7 @@
             Grid.Column="5"
             Grid.Row="0"
             IsEnabled="{Binding UiEnabledMaterialEditor}"
-            Text="{Binding MaterialName}" />
+            Text="{Binding SelectedMaterial.Name}" />
         <TextBlock
             Name="LblColor"
             VerticalAlignment="Center"
@@ -38,7 +38,7 @@
             Grid.Column="5"
             Grid.Row="2"
             IsEnabled="True"
-            Color="{Binding Color, Mode=TwoWay}" />
+            Color="{Binding SelectedMaterial.Color, Mode=TwoWay}" />
         <TextBlock
             Name="LblE"
             VerticalAlignment="Center"
@@ -52,11 +52,11 @@
             Grid.Row="4"
             ItemsSource="{Binding Unit}"
             IsEnabled="{Binding UiEnabledMaterialEditor}"
-            SelectedItem="{Binding SelectedUnit}" />
+            SelectedItem="{Binding SelectedMaterial.Unit}" />
         <NumericUpDown
             Name="NudE"
             IsEnabled="{Binding UiEnabledMaterialEditor}"
-            Value="{Binding EValue}"
+            Value="{Binding SelectedMaterial.E}"
             Increment="10"
             Minimum="1"
             Maximum="999"
@@ -75,7 +75,10 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                            <Run Text="{Binding Display}" />
+                            <Run Text="{Binding Name}" />
+                            <Run Text=":" />
+                            <Run Text="{Binding E}" />
+                            <Run Text="{Binding Unit}" />
                             <Span
                                 Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
                                 [■]

@@ -284,7 +284,10 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock>
-                                        <Run Text="{Binding Display}" />
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text=":" />
+                                        <Run Text="{Binding E}" />
+                                        <Run Text="{Binding Unit}" />
                                         <Span
                                             Foreground="{Binding Color, Converter={x:Static converter:Converters.ColorToBrushConverter}}">
                                             [■]

@@ -131,8 +131,8 @@ public partial class Layer : Element
         double[] l2 = Array.ConvertAll(xs, x => (x - length / 2) * (x - length / 2));
 
         double[] lf = Array.ConvertAll(l2, x => x * l1 + WidthAtCenter);
-
-        return Array.ConvertAll(lf, x => x / eRef * (Material ?? new Material("", 69000000000)).E);
+        Material ??= new Material("", 69);
+        return Array.ConvertAll(lf, x => x / eRef * Material.E*(int)Material.Unit);
     }
 
     /// <summary>
