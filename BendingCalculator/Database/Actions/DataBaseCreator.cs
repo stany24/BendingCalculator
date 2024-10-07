@@ -16,6 +16,7 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@Length", piece.Length);
         cmd.Parameters.AddWithValue("@IsRemoved", NotRemoved);
         piece.Id = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 
     public static void NewLayer(SQLiteConnection connection, Layer layer)
@@ -35,6 +36,7 @@ public static class DataBaseCreator
         else
             cmd.Parameters.AddWithValue("@MaterialId", null);
         layer.Id = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaiseLayersChangedEvent();
     }
 
     public static void NewMaterial(SQLiteConnection connection, Material material)
@@ -48,5 +50,6 @@ public static class DataBaseCreator
         cmd.Parameters.AddWithValue("@Color", 0);
         cmd.Parameters.AddWithValue("@Unit", material.Unit);
         material.Id = (long)cmd.ExecuteScalar();
+        DataBaseEvents.RaiseMaterialsChangedEvent();
     }
 }

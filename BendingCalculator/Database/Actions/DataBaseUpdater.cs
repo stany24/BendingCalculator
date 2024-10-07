@@ -19,6 +19,7 @@ public static class DataBaseUpdater
                        material.Color.B.ToString("X2");
         cmd.Parameters.AddWithValue("@Color", color);
         cmd.ExecuteNonQuery();
+        DataBaseEvents.RaiseMaterialsChangedEvent();
     }
 
     public static void UpdateLayer(SQLiteConnection connection, Layer layer)
@@ -33,6 +34,7 @@ public static class DataBaseUpdater
         cmd.Parameters.AddWithValue("@MaterialId", layer.Material?.Id);
         cmd.Parameters.AddWithValue("@Id", layer.Id);
         cmd.ExecuteNonQuery();
+        DataBaseEvents.RaiseLayersChangedEvent();
     }
 
     public static void UpdatePiece(SQLiteConnection connection, Piece piece)
@@ -43,6 +45,7 @@ public static class DataBaseUpdater
         cmd1.Parameters.AddWithValue("@Length", piece.Length);
         cmd1.Parameters.AddWithValue("@Id", piece.Id);
         cmd1.ExecuteNonQuery();
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 
     public static void AddLayerToPiece(SQLiteConnection connection, long pieceId, Layer layer)
@@ -59,6 +62,7 @@ public static class DataBaseUpdater
         cmd2.Parameters.AddWithValue("@LayerId", layer.Id);
         cmd2.Parameters.AddWithValue("@LayerOrder", id);
         cmd2.ExecuteNonQuery();
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 
     public static void RemoveLayerToPiece(SQLiteConnection connection, long pieceId, int nbLayer, long idToRemove)
@@ -78,6 +82,8 @@ public static class DataBaseUpdater
             changeOrder.Parameters.AddWithValue("@Id", pieceId);
             changeOrder.ExecuteNonQuery();
         }
+
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 
     public static void MoveLayerInPiece(SQLiteConnection connection, Piece piece)
@@ -88,5 +94,6 @@ public static class DataBaseUpdater
         remove.ExecuteNonQuery();
 
         foreach (Layer pieceLayer in piece.Layers) AddLayerToPiece(connection, piece.Id, pieceLayer);
+        DataBaseEvents.RaisePiecesChangedEvent();
     }
 }

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
 using Avalonia.Media;
+using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 
 namespace BendingCalculator.Logic.Preview;
@@ -28,8 +27,9 @@ public class PiecePreview : Border
         Grid.SetColumn(_preview, 2);
         Grid.SetRow(_preview, 0);
         _grid.Children.Add(_preview);
-        SizeChanged += (_, _) => UpdatePreview(null,new PropertyChangedEventArgs("null"));
-        this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview(null,new PropertyChangedEventArgs("null")));
+        SizeChanged += (_, _) => UpdatePreview();
+        this.GetObservable(DisplayedPieceProperty).Subscribe(_ => UpdatePreview());
+        DataBaseEvents.PiecesChanged += (_, _) => UpdatePreview();
     }
 
     #endregion
@@ -58,17 +58,12 @@ public class PiecePreview : Border
         get => GetValue(DisplayedPieceProperty);
         set => SetValue(DisplayedPieceProperty, value);
     }
-    
+
     #endregion
 
     #region Preview Math
-    
-    private void UpdatePreview(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        UpdatePreview(null,new PropertyChangedEventArgs("null"));
-    }
 
-    private void UpdatePreview(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
+    private void UpdatePreview()
     {
         _preview.Children.Clear();
         if (DisplayedPiece == null)
@@ -114,10 +109,6 @@ public class PiecePreview : Border
         }
 
         _preview.Children.AddRange(shapes);
-        DisplayedPiece.PropertyChanged -= UpdatePreview;
-        DisplayedPiece.Layers.CollectionChanged -= UpdatePreview;
-        DisplayedPiece.PropertyChanged += UpdatePreview;
-        DisplayedPiece.Layers.CollectionChanged += UpdatePreview;
     }
 
     private static Path GetRectangle(double x, double y, double width, double height, Color color)

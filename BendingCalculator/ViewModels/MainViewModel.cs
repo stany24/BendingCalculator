@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Threading;
+using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic;
 using BendingCalculator.Logic.Helper;
 using BendingCalculator.Logic.Math;
@@ -93,9 +94,9 @@ public partial class MainViewModel : ObservableObject
         SelectedLayersOfSelectedPiece.CollectionChanged += (_, _) => SelectedInPieceChanged();
         SelectedAvailableLayers.CollectionChanged += (_, _) => SelectedAvailableChanged();
         OpenLink = new OpenLinkCommand();
-        LoadMaterials();
-        LoadLayers();
-        LoadPieces();
+        LoadMaterials(null, EventArgs.Empty);
+        LoadLayers(null, EventArgs.Empty);
+        LoadPieces(null, EventArgs.Empty);
     }
 
     ~MainViewModel()

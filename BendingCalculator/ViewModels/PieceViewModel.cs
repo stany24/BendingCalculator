@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using BendingCalculator.Database.Actions;
 using BendingCalculator.Logic.Math;
 using BendingCalculator.Views.Editors.Piece;
@@ -60,7 +62,7 @@ public partial class MainViewModel
         PropertyChanged += (_,e) => SelectedPiecePropertyChanged(e);
     }
 
-    private void LoadPieces()
+    private void LoadPieces(object? sender, EventArgs eventArgs)
     {
         List<Piece> pieces = DataBaseLoader.LoadPieces(_connection);
         Pieces = new ObservableCollection<Piece>(pieces);
