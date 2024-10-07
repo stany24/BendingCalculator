@@ -128,7 +128,6 @@ public partial class MainViewModel
     public void AddLayerToPiece()
     {
         if (SelectedPiece == null) return;
-        SelectedPiece.Layers.Add(SelectedAvailableLayers[0]);
         DataBaseUpdater.AddLayerToPiece(_connection, SelectedPiece.Id, SelectedAvailableLayers[0]);
     }
 
@@ -139,7 +138,6 @@ public partial class MainViewModel
         int nbLayer = SelectedPiece.Layers.Count;
         for (int i = idToRemove.Length - 1; i >= 0; i--)
         {
-            SelectedPiece.Layers.RemoveAt(idToRemove[i]);
             DataBaseUpdater.RemoveLayerToPiece(_connection, SelectedPiece.Id, nbLayer, idToRemove[i]);
             nbLayer--;
         }

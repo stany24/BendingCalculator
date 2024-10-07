@@ -52,7 +52,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateMaterial(_connection, SelectedMaterial);
     }
 
-    private void LoadMaterials(object? sender, EventArgs eventArgs)
+    private void ReloadMaterials(object? sender, EventArgs eventArgs)
     {
         List<Material> materials = DataBaseLoader.LoadMaterials(_connection);
         while (materials.Count != Materials.Count)
@@ -67,7 +67,6 @@ public partial class MainViewModel
             Materials[i].Name = materials[i].Name;
             Materials[i].E = materials[i].E;
             Materials[i].Color = materials[i].Color;
-            Materials[i].Unit = materials[i].Unit;
         }
     }
 

@@ -115,14 +115,13 @@ public static class DataBaseLoader
         byte g = byte.Parse(colorHexadecimal.Substring(2, 2), NumberStyles.HexNumber);
         byte b = byte.Parse(colorHexadecimal.Substring(4, 2), NumberStyles.HexNumber);
         Color color = Color.FromRgb(r, g, b);
-        long val = Convert.ToInt64(reader["Unit"]);
         return new Material
         {
             Id = Convert.ToInt32(reader[MaterialId]),
             E = Convert.ToInt64(reader["E"]),
             Name = Convert.ToString(reader["Name"]) ?? string.Empty,
             Color = color,
-            Unit = (Unit)val
+            Unit = (Unit)Convert.ToInt64(reader["Unit"])
         };
     }
 

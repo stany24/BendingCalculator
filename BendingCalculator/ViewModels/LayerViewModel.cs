@@ -63,7 +63,7 @@ public partial class MainViewModel
         DataBaseUpdater.UpdateLayer(_connection, SelectedLayer);
     }
 
-    private void LoadLayers(object? sender, EventArgs eventArgs)
+    private void ReloadLayers(object? sender, EventArgs eventArgs)
     {
         List<Layer> layers = DataBaseLoader.LoadLayers(_connection);
         while (layers.Count != Layers.Count)
