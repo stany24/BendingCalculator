@@ -16,22 +16,18 @@ and assemble them to make the piece you desire. You can then launch the calculat
 The installation is easy you can go in the release page: https://github.com/stany24/Flexion/releases and download the executable for your os, currently only windows and linux are supported.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+You could use this application to predict the bending of your skis, by cutting your ski in half and measuring the different layer inside. Then you can insert the data in the software to get the result.
 
 ## Support
 If you have bug to report the best way is to create an issue here:https://github.com/stany24/Flexion/issues/new.
 
-If you need some help there is an in-app help juste hit the Help button, if you still need help you can contact me on discord: stany24.
+If you need some help there is an in-app help juste hit the Help button, if you still need help you can contact me on GitHub.
 
 ## Roadmap
-Their are no clear roadmap, we improve the project as it goes and with the help of and expert, The development is coming along with the creation and the improvement of the machine.
+There are no clear roadmap, we improve the project as it goes and with the help of and expert, The development is coming along with the creation and the improvement of the machine.
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+If you want to contribute to the project you can make a pull request, and we will review it. Keep your commits simple and focused on one thing.
 
 ## Authors and acknowledgment
 Dimitri Benoit co-creator of the project.
@@ -54,4 +50,4 @@ The copyright notices in the Software and this entire statement, including the a
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Project status
-The project is running smoothly and is currently in the national contest for science and youth in Switzerland  https://sjf.ch/fr/agenda/58-concours-national-2024/
+The project is being worked on and is not yet finished, we improve it as we use it and discover bugs and new features we need.
